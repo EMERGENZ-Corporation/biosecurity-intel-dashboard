@@ -190,25 +190,28 @@ export default function Genomics() {
       />
 
       {/*
-        G3 FIX: Genomic Segments
-        - S/M/L technical descriptions (what each segment encodes) are standard hantavirus
-          taxonomy from WHO/CDC, NOT from the SMC expert statement
-        - Block now split: standard taxonomy attributed to WHO/CDC; Piet Maes quote attributed to SMC
-        - Primary source changed to WHO DON600 / CDC for the taxonomic content
+        G3 FIX (revision 2): Genomic Segments
+        - cdc.gov/hantavirus/about/index.html is a general public overview page and does NOT
+          contain S/M/L segment protein descriptions — removed as primary source
+        - S/M/L technical descriptions are standard hantavirus taxonomy per ICTV (International
+          Committee on Taxonomy of Viruses) Hantaviridae family report and recognized virology
+          literature — attributed as standard taxonomy rather than to a single web page
+        - Piet Maes quote remains attributed to SMC as primary source (verified live)
+        - ICTV cited via additionalSources for the segment encoding descriptions
       */}
       <ContentBlock
         title="Genomic Segments (S, M, L)"
-        content={`Andes virus, like all hantaviruses, has a trisegmented negative-sense single-stranded RNA genome (source: WHO/CDC hantavirus taxonomy):\n\n• S segment (Small): Encodes the nucleocapsid (N) protein — primary target for serological diagnostics (IgM/IgG ELISA).\n• M segment (Medium): Encodes the glycoprotein precursor (GPC), cleaved into Gn and Gc surface glycoproteins that mediate viral entry and are targets for neutralizing antibodies.\n• L segment (Large): Encodes the RNA-dependent RNA polymerase (RdRp).\n\nFrom the Science Media Centre expert statement (Prof. Piet Maes, University of Brussels):\n\n"Across all three genomic segments (S, M, and L), the virus clusters consistently with known South American Andes virus strains." This tri-segment phylogenetic consistency supports a single, established reservoir origin rather than recombination or reassortment events.`}
-        authorityName="CDC"
-        documentTitle="About Hantaviruses"
-        publicationDate="2024"
-        sourceUrl="https://www.cdc.gov/hantavirus/about/index.html"
+        content={`Andes virus, like all hantaviruses, has a trisegmented negative-sense single-stranded RNA genome. The following segment descriptions reflect standard Hantaviridae taxonomy as classified by the International Committee on Taxonomy of Viruses (ICTV):\n\n• S segment (Small): Encodes the nucleocapsid (N) protein — primary target for serological diagnostics (IgM/IgG ELISA).\n• M segment (Medium): Encodes the glycoprotein precursor (GPC), cleaved into Gn and Gc surface glycoproteins that mediate viral entry and are targets for neutralizing antibodies.\n• L segment (Large): Encodes the RNA-dependent RNA polymerase (RdRp).\n\nFrom the Science Media Centre expert statement (Prof. Piet Maes, University of Brussels):\n\n"Across all three genomic segments (S, M, and L), the virus clusters consistently with known South American Andes virus strains." This tri-segment phylogenetic consistency supports a single, established reservoir origin rather than recombination or reassortment events.`}
+        authorityName="SMC"
+        documentTitle="Expert reaction to cases of hantavirus on a cruise ship (Prof. Piet Maes — tri-segment phylogenetic consistency)"
+        publicationDate="2026-05-06"
+        sourceUrl="https://www.sciencemediacentre.org/expert-reaction-to-first-complete-sequence-of-the-hantavirus-from-the-current-cluster-from-mv-hondius-from-the-swiss-patient-with-confirmed-andes-strain-uploaded-to-the-virological-org-platform-by-t/"
         additionalSources={[
           {
-            authority: 'SMC',
-            documentTitle: 'Expert reaction to cases of hantavirus on a cruise ship (Prof. Piet Maes — tri-segment phylogenetic consistency)',
-            date: '2026-05-06',
-            url: 'https://www.sciencemediacentre.org/expert-reaction-to-first-complete-sequence-of-the-hantavirus-from-the-current-cluster-from-mv-hondius-from-the-swiss-patient-with-confirmed-andes-strain-uploaded-to-the-virological-org-platform-by-t/',
+            authority: 'ICTV',
+            documentTitle: 'Family Hantaviridae — Virus Taxonomy: 2022 Release (S/M/L segment encoding descriptions)',
+            date: '2022',
+            url: 'https://ictv.global/taxonomy/taxondetails?taxnode_id=202204715',
           },
         ]}
       />

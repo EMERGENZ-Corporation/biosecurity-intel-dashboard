@@ -198,26 +198,29 @@ export default function PPE() {
 
       <ContentBlock
         title="Donning and Doffing"
-        content={`CDC Isolation Precautions Appendix A provides the authoritative sequence for donning (putting on) and doffing (removing) personal protective equipment for airborne and contact precautions. The full illustrated sequence is available at the source URL below.\n\nKey principles applicable to ANDV patient encounters:\n• Perform hand hygiene before donning and after each doffing step.\n• Don PPE in order: gown → mask/respirator → eye protection → gloves.\n• Doff in order: gloves → eye protection → gown → mask/respirator.\n• Do not touch the outside of any PPE item with ungloved hands during removal.\n• Discard all single-use PPE immediately into appropriate waste containers.\n\nConsult the full CDC Appendix A document at the source URL for the complete sequence with illustrations.`}
+        content={`The following donning and doffing sequence is reproduced from the CDC Isolation Precautions Appendix A: Figure — Example of Safe Donning and Removal of Personal Protective Equipment (PPE).\n\nDonning sequence (put on in this order):\n1. Gown — Fully cover torso from neck to knees, arms to end of wrists, and wrap around the back. Fasten in back of neck and waist.\n2. Mask or respirator — Secure ties or elastic bands at middle of head and neck. Fit flexible band to nose bridge. Fit snug to face and below chin. Fit-check respirator.\n3. Goggles or face shield — Place over face and eyes and adjust to fit.\n4. Gloves — Extend to cover wrist of isolation gown.\n\nDoffing sequence (remove in this order):\n1. Gloves — Using a glove-to-glove / skin-to-skin technique, grasp outside of glove with opposite gloved hand and peel off. Hold removed glove in gloved hand. Slide fingers of ungloved hand under remaining glove at wrist and peel off over first glove. Discard gloves in waste container.\n2. Goggles or face shield — Remove from the back by lifting head band or ear pieces. If the item is reusable, place in designated receptacle for reprocessing; otherwise discard.\n3. Gown — Unfasten ties, taking care that sleeves don't contact body when reaching for ties. Pull gown away from neck and shoulders, touching inside of gown only. Turn gown inside out. Fold or roll into a bundle and discard.\n4. Mask or respirator — Grasp bottom ties or elastics of mask/respirator, then the ones at top, and remove without touching front. Discard in waste container.\n5. Hand hygiene — Perform immediately after removing all PPE.\n\nNote: Perform hand hygiene between doffing steps if hands become contaminated.`}
         authorityName="CDC"
-        documentTitle="Isolation Precautions Appendix A — Type and Duration of Precautions"
+        documentTitle="Appendix A: Figure. Example of Safe Donning and Removal of Personal Protective Equipment (PPE)"
         publicationDate="2007 (current)"
-        sourceUrl="https://www.cdc.gov/infection-control/hcp/isolation-precautions/appendix-a-type-duration.html"
+        sourceUrl="https://www.cdc.gov/infection-control/hcp/isolation-precautions/appendix-a-figure.html"
       />
 
       {/*
-        P3 FIX: Decontamination block
-        - Removed "EPA List N (COVID-19) also effective against ANDV" — inferential claim not in CDC source
-        - Removed ambulance-specific guidance (editorial synthesis, not from CDC Hantavirus Prevention)
-        - Content now limited to what CDC Hantavirus Prevention page covers
+        P3 FIX (revision 2): Decontamination block
+        - Primary source corrected to CDC rodent cleanup page (contains verbatim bleach guidance)
+        - hantavirus/prevention/index.html does NOT contain specific decontamination protocols
+        - hantavirus/hcp/infection-control/index.html returns 404
+        - Verbatim bleach dilution and contact time sourced from CDC healthy-pets/rodent-control/clean-up.html
+        - Critical "no vacuum/sweep" warning added verbatim from source
+        - Healthcare-specific protocol note added as operational guidance
       */}
       <ContentBlock
         title="Decontamination"
-        content={`Andes virus is an enveloped RNA virus. Enveloped viruses are susceptible to a wide range of EPA-registered disinfectants.\n\nSurface decontamination:\n• Use EPA-registered disinfectants effective against enveloped viruses.\n• Follow manufacturer instructions for contact time and dilution.\n• Clean visibly soiled surfaces before applying disinfectant.\n• Dispose of single-use items as regulated medical waste per applicable jurisdiction.\n\nFor ambulance and equipment decontamination protocols specific to suspected infectious disease patients, follow your agency's established infection control procedures and local health department guidance. Contact your local or state health department for pathogen-specific decontamination guidance for ANDV cases.`}
+        content={`The following environmental decontamination guidance is reproduced from the CDC "How to Clean Up After Rodents" page, which provides specific hantavirus environmental decontamination protocols.\n\nCritical warning: "Don't vacuum or sweep rodent urine, droppings, or nesting materials." Vacuuming or sweeping can aerosolize virus particles.\n\nSurface disinfection (verbatim CDC guidance):\n• "Combine 1.5 cups of household bleach in 1 gallon of water (or 1 part bleach to 9 parts water)."\n• "Spray materials until very wet then allow them to soak for 5 minutes."\n• Use rubber or plastic gloves when cleaning. When finished, discard gloves or disinfect reusable gloves with bleach solution.\n• Mop floors and wipe countertops with bleach solution after removing all droppings, urine, and nesting material.\n• Wash hands thoroughly with soap and water after cleanup.\n\nFor healthcare facility and transport vehicle decontamination following a suspected or confirmed ANDV patient contact, follow your agency's established infection control procedures and contact your local or state health department for pathogen-specific guidance.`}
         authorityName="CDC"
-        documentTitle="Hantavirus: Prevention"
+        documentTitle="How to Clean Up After Rodents"
         publicationDate="2024"
-        sourceUrl="https://www.cdc.gov/hantavirus/prevention/index.html"
+        sourceUrl="https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html"
       />
 
       {/*

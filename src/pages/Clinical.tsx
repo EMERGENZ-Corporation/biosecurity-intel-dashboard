@@ -99,7 +99,7 @@ export default function Clinical() {
 
       <ContentBlock
         title="Clinical Phase I — Prodrome (Days 1–5)"
-        content="The prodromic phase of Hantavirus Pulmonary Syndrome (HPS) typically lasts 3 to 5 days and may resemble an influenza-like illness. Clinical features include: fever, fatigue, myalgia (especially large muscle groups: thighs, hips, back, shoulders), headache, and dizziness/chills. Gastrointestinal symptoms — nausea, vomiting, diarrhea, and abdominal pain — occur in about half of all HPS patients. There is no respiratory distress during this phase. The prodrome is indistinguishable from many other viral illnesses without laboratory confirmation and an exposure history."
+        content="The prodromic phase of Hantavirus Pulmonary Syndrome (HPS) typically lasts 3 to 5 days and may resemble an influenza-like illness. Clinical features include: fever, fatigue, myalgia (especially large muscle groups: thighs, hips, back, shoulders), headache, and dizziness/chills. Gastrointestinal symptoms — nausea, vomiting, diarrhea, and abdominal pain — may also occur. There is no respiratory distress during this phase. The prodrome is indistinguishable from many other viral illnesses without laboratory confirmation and an exposure history."
         authorityName="CDC"
         documentTitle="Hantavirus Pulmonary Syndrome: Clinical Overview for Clinicians"
         publicationDate="2024"
@@ -135,7 +135,7 @@ export default function Clinical() {
 
       <ContentBlock
         title="Differential Diagnosis"
-        content="HPS must be differentiated from other causes of acute respiratory failure, particularly in patients with a relevant exposure history. Conditions in the differential diagnosis include: influenza and other respiratory viruses, Legionnaire's disease (Legionella pneumophila), leptospirosis, mycoplasma pneumonia, Q fever (Coxiella burnetii), and other causes of ARDS. Key distinguishing features favoring HPS include: exposure to rodents or environments with rodent activity (or, in the 2026 context, close contact with a confirmed or probable case), rapid progression from prodromal illness to severe respiratory failure, and thrombocytopenia on complete blood count."
+        content="HPS must be differentiated from other causes of acute respiratory failure, particularly in patients with a relevant exposure history. Conditions in the differential diagnosis include: influenza and other respiratory viruses, Legionnaire's disease (Legionella pneumophila), leptospirosis, mycoplasma pneumonia, Q fever (Coxiella burnetii), and other causes of ARDS. Key distinguishing features favoring HPS include: exposure to rodents or environments with rodent activity (or, in the 2026 context, close contact with a confirmed or probable case), and rapid progression from a prodromal illness to severe respiratory failure."
         authorityName="CDC"
         documentTitle="Hantavirus Pulmonary Syndrome: Clinical Overview for Clinicians"
         publicationDate="2024"
@@ -167,14 +167,6 @@ export default function Clinical() {
         documentTitle="Hantavirus Pulmonary Syndrome: Clinical Overview for Clinicians"
         publicationDate="2024"
         sourceUrl="https://www.cdc.gov/hantavirus/hcp/clinical-overview/hps.html"
-        additionalSources={[
-          {
-            authority: 'CDC',
-            documentTitle: 'Hantavirus: Treatment',
-            date: '2024',
-            url: 'https://www.cdc.gov/hantavirus/treatment/index.html',
-          },
-        ]}
       />
 
       {/*
