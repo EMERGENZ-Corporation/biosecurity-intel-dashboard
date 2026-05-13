@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react'
-import { getCached, setCache } from '../utils/sessionCache'
-
-const CACHE_KEY = 'news_feed_cache'
-const CACHE_TTL = 2 * 60 * 60 * 1000 // 2 hours
+import { Link } from 'react-router-dom'
+import newsItems from '../data/news.json'
 
 interface FeedItem {
   id: string
@@ -125,29 +122,9 @@ function NewsCard({ item }: { item: FeedItem }) {
 }
 
 export default function News() {
-  const [items, setItems] = useState<FeedItem[]>(getCached<FeedItem[]>(CACHE_KEY) ?? [])
-  const [loading, setLoading] = useState(items.length === 0)
-  const [error, setError] = useState<string | null>(null)
-  const [fetchedAt, setFetchedAt] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (items.length > 0) return
-    async function load() {
-      try {
-        const res = await fetch('/api/feeds?type=news')
-        if (!res.ok) throw new Error(`API ${res.status}`)
-        const data = (await res.json()) as { items: FeedItem[]; fetchedAt: string }
-        setItems(data.items)
-        setFetchedAt(data.fetchedAt)
-        setCache(CACHE_KEY, data.items, CACHE_TTL)
-      } catch (err) {
-        setError(String(err))
-      } finally {
-        setLoading(false)
-      }
-    }
-    load()
-  }, [items.length])
+  // Items are populated by the GitHub Actions pipeline every 12 hours.
+  // Sorted newest-first by timestamp.
+  const items = [...(newsItems as FeedItem[])].sort((a, b) => b.timestamp - a.timestamp)
 
   return (
     <div style={{ maxWidth: '860px' }}>
@@ -170,8 +147,8 @@ export default function News() {
           margin: '0 0 0.25rem 0',
         }}
       >
-        General media and public health agency coverage aggregated for situational awareness. Live
-        feed sourced from WHO, CDC, and ECDC RSS.
+        Public health agency coverage aggregated for situational awareness. Sourced from WHO, CDC,
+        and ECDC. Updated every 12 hours via automated pipeline.
       </p>
       <p
         style={{
@@ -181,12 +158,10 @@ export default function News() {
           margin: '0 0 1rem 0',
         }}
       >
-        {fetchedAt
-          ? `Feed last fetched: ${new Date(fetchedAt).toLocaleString()}`
-          : 'Cached — refresh by reloading page'}
+        Auto-updated every 12h · {items.length} item{items.length !== 1 ? 's' : ''}
       </p>
 
-      {/* Prominent disclaimer */}
+      {/* Disclaimer */}
       <div
         style={{
           padding: '0.75rem 1rem',
@@ -204,43 +179,13 @@ export default function News() {
         <strong style={{ color: 'var(--color-accent-yellow)' }}>Note:</strong> News feeds contain
         media coverage and may include analysis, opinion, or unverified information. For authoritative
         clinical and public health guidance, see{' '}
-        <a href="/protocols" style={{ color: 'var(--color-accent-blue)' }}>
+        <Link to="/protocols" style={{ color: 'var(--color-accent-blue)' }}>
           Protocols &amp; Guidance
-        </a>
+        </Link>
         .
       </div>
 
-      {loading && (
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.75rem',
-            color: 'var(--color-text-muted)',
-            padding: '1.5rem 0',
-          }}
-        >
-          Fetching news feeds…
-        </div>
-      )}
-
-      {error && (
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.75rem',
-            color: 'var(--color-accent-yellow)',
-            padding: '0.75rem',
-            backgroundColor: 'var(--color-bg-secondary)',
-            border: '1px solid var(--color-border)',
-            borderRadius: '4px',
-            marginBottom: '1rem',
-          }}
-        >
-          Live feed unavailable: {error}. Check back shortly.
-        </div>
-      )}
-
-      {!loading && !error && items.length === 0 && (
+      {items.length === 0 ? (
         <div
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
@@ -251,13 +196,13 @@ export default function News() {
         >
           No news feed items available at this time.
         </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          {items.map((item) => (
+            <NewsCard key={item.id} item={item} />
+          ))}
+        </div>
       )}
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        {items.map((item) => (
-          <NewsCard key={item.id} item={item} />
-        ))}
-      </div>
     </div>
   )
 }

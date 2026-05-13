@@ -18,8 +18,10 @@ const GEMINI_KEY = process.env.GEMINI_API_KEY
 const BD_KEY = process.env.BRIGHT_DATA_API_KEY
 const BD_ZONE = process.env.BRIGHT_DATA_ZONE || 'web_unlocker1'
 
-const META_PATH      = 'src/data/meta.json'
-const TIMELINE_PATH  = 'src/data/timeline.json'
+const META_PATH          = 'src/data/meta.json'
+const TIMELINE_PATH      = 'src/data/timeline.json'
+const NEWS_PATH          = 'src/data/news.json'
+const PROTOCOLS_PATH     = 'src/data/protocols.json'
 
 // RSS feeds fetched for free — no Bright Data needed
 const RSS_FEEDS = [
@@ -288,6 +290,37 @@ Rules:
   }
 
   writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+
+  // ─── Update news.json with new RSS items ─────────────────────────────────────
+  // Merge new items into existing news.json; deduplicate by link; cap at 50 items
+  if (newItems.length > 0) {
+    const existingNews = JSON.parse(readFileSync(NEWS_PATH, 'utf8'))
+    const existingLinks = new Set(existingNews.map(n => n.link))
+    let newsChanged = false
+    for (const item of newItems) {
+      if (!item.link || existingLinks.has(item.link)) continue
+      const pubTs = item.pubDate ? new Date(item.pubDate).getTime() : Date.now()
+      existingNews.push({
+        id: `rss-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        authority: item.authority,
+        title: item.title,
+        description: item.description,
+        link: item.link,
+        pubDate: item.pubDate,
+        timestamp: isNaN(pubTs) ? Date.now() : pubTs,
+      })
+      existingLinks.add(item.link)
+      newsChanged = true
+    }
+    if (newsChanged) {
+      // Sort newest first, cap at 50
+      existingNews.sort((a, b) => b.timestamp - a.timestamp)
+      writeFileSync(NEWS_PATH, JSON.stringify(existingNews.slice(0, 50), null, 2))
+      dataChanged = true
+      console.log('[update-data] Updated news.json.')
+    }
+  }
+
   console.log('[update-data] Done.')
 }
 

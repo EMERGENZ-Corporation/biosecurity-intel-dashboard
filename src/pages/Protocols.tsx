@@ -1,8 +1,4 @@
-import { useState, useEffect } from 'react'
-import { getCached, setCache } from '../utils/sessionCache'
-
-const CACHE_KEY = 'protocols_feed_cache'
-const CACHE_TTL = 2 * 60 * 60 * 1000 // 2 hours
+import protocolItems from '../data/protocols.json'
 
 interface FeedItem {
   id: string
@@ -139,32 +135,10 @@ function FeedCard({ item }: { item: FeedItem }) {
 }
 
 export default function Protocols() {
-  const [items, setItems] = useState<FeedItem[]>(getCached<FeedItem[]>(CACHE_KEY) ?? [])
-  const [loading, setLoading] = useState(items.length === 0)
-  const [error, setError] = useState<string | null>(null)
-  const [fetchedAt, setFetchedAt] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (items.length > 0) return // use cache
-    async function load() {
-      try {
-        const res = await fetch('/api/feeds?type=protocols')
-        if (!res.ok) throw new Error(`API ${res.status}`)
-        const data = (await res.json()) as { items: FeedItem[]; fetchedAt: string }
-        setItems(data.items)
-        setFetchedAt(data.fetchedAt)
-        setCache(CACHE_KEY, data.items, CACHE_TTL)
-      } catch (err) {
-        setError(String(err))
-      } finally {
-        setLoading(false)
-      }
-    }
-    load()
-  }, [items.length])
-
-  const pinned = items.filter((i) => i.pinned)
-  const live = items.filter((i) => !i.pinned)
+  // Items are sourced from protocols.json, populated/updated by GitHub Actions pipeline.
+  const allItems = protocolItems as FeedItem[]
+  const pinned = allItems.filter((i) => i.pinned).sort((a, b) => b.timestamp - a.timestamp)
+  const live = allItems.filter((i) => !i.pinned).sort((a, b) => b.timestamp - a.timestamp)
 
   return (
     <div style={{ maxWidth: '860px' }}>
@@ -188,7 +162,8 @@ export default function Protocols() {
         }}
       >
         EMS, emergency management, and public health protocol releases. Pinned documents are the
-        primary authoritative guidance for this outbreak. Live feed sourced from CDC HAN and ECDC RSS.
+        primary authoritative guidance for this outbreak. Updated every 12 hours via automated
+        pipeline.
       </p>
       <p
         style={{
@@ -198,9 +173,7 @@ export default function Protocols() {
           margin: '0 0 1.5rem 0',
         }}
       >
-        {fetchedAt
-          ? `Feed last fetched: ${new Date(fetchedAt).toLocaleString()}`
-          : 'Feed cached · refresh by reopening page'}
+        Auto-updated every 12h · {allItems.length} document{allItems.length !== 1 ? 's' : ''}
       </p>
 
       <div
@@ -223,7 +196,7 @@ export default function Protocols() {
         <a href="/ppe" style={{ color: 'var(--color-accent-blue)' }}>
           PPE &amp; Infection Control
         </a>{' '}
-        pages. This feed covers new protocol releases only.
+        pages. This feed covers protocol and guidance document releases only.
       </div>
 
       {/* Pinned documents */}
@@ -241,74 +214,44 @@ export default function Protocols() {
         Pinned — Primary Guidance Documents
       </h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', marginBottom: '1.5rem' }}>
-        {pinned.map((item) => (
-          <FeedCard key={item.id} item={item} />
-        ))}
+        {pinned.length > 0 ? (
+          pinned.map((item) => <FeedCard key={item.id} item={item} />)
+        ) : (
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.75rem',
+              color: 'var(--color-text-muted)',
+              padding: '0.75rem 0',
+            }}
+          >
+            No pinned documents at this time.
+          </div>
+        )}
       </div>
 
-      {/* Live feed */}
-      <h2
-        style={{
-          fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: '0.6875rem',
-          fontWeight: 600,
-          color: 'var(--color-text-muted)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.1em',
-          margin: '0 0 0.75rem 0',
-        }}
-      >
-        Live Feed — CDC HAN &amp; ECDC Publications
-      </h2>
-
-      {loading && (
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.75rem',
-            color: 'var(--color-text-muted)',
-            padding: '1.5rem 0',
-          }}
-        >
-          Fetching feeds…
-        </div>
-      )}
-
-      {error && (
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.75rem',
-            color: 'var(--color-accent-yellow)',
-            padding: '0.75rem',
-            backgroundColor: 'var(--color-bg-secondary)',
-            border: '1px solid var(--color-border)',
-            borderRadius: '4px',
-          }}
-        >
-          Live feed unavailable — {error}. Pinned documents above are unaffected.
-        </div>
-      )}
-
-      {!loading && !error && live.length === 0 && (
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace',",
-            fontSize: '0.75rem',
-            color: 'var(--color-text-muted)',
-            padding: '0.75rem',
-          }}
-        >
-          No additional live feed items at this time. Pinned documents above are current.
-        </div>
-      )}
-
+      {/* Live feed — additional items from pipeline */}
       {live.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          {live.map((item) => (
-            <FeedCard key={item.id} item={item} />
-          ))}
-        </div>
+        <>
+          <h2
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.6875rem',
+              fontWeight: 600,
+              color: 'var(--color-text-muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              margin: '0 0 0.75rem 0',
+            }}
+          >
+            Additional Publications
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            {live.map((item) => (
+              <FeedCard key={item.id} item={item} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   )

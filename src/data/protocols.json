@@ -1,0 +1,57 @@
+[
+  {
+    "id": "cdc-han-528",
+    "authority": "CDC",
+    "title": "HAN 528 — Andes Virus Infection Associated with Cruise Ship Voyage",
+    "description": "CDC Health Alert Network advisory for clinicians and public health officials. Includes case definitions, clinical guidance, HCW infection control precautions, and reporting requirements.",
+    "link": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "pubDate": "2026-05-08",
+    "timestamp": 1746748800000,
+    "type": "guidance",
+    "pinned": true
+  },
+  {
+    "id": "nyc-doh-han8",
+    "authority": "NYC DOH",
+    "title": "HAN Advisory #8 — Andes Strain Hantavirus",
+    "description": "Recommends airborne infection isolation precautions for ALL suspected or confirmed Andes virus patient contacts. Includes EMS, hospital, and laboratory guidance specific to NYC providers.",
+    "link": "https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf",
+    "pubDate": "2026-05-08",
+    "timestamp": 1746748800000,
+    "type": "guidance",
+    "pinned": true
+  },
+  {
+    "id": "ecdc-rra-may6",
+    "authority": "ECDC",
+    "title": "Rapid Risk Assessment — Hantavirus Disease, Cruise Ship Cluster",
+    "description": "ECDC assessment for EU/EEA countries. Risk for general population very low; risk for unprotected HCW contacts elevated. Provides PPE and IPC guidance.",
+    "link": "https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and",
+    "pubDate": "2026-05-06",
+    "timestamp": 1746576000000,
+    "type": "risk-assessment",
+    "pinned": true
+  },
+  {
+    "id": "who-don600",
+    "authority": "WHO",
+    "title": "Disease Outbreak News DON600 — Hantavirus Disease, Update",
+    "description": "WHO update reporting expanded case counts and geographic spread across multiple countries. Investigations into exposure source and transmission dynamics ongoing.",
+    "link": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON600",
+    "pubDate": "2026-05-11",
+    "timestamp": 1746921600000,
+    "type": "outbreak-news",
+    "pinned": true
+  },
+  {
+    "id": "who-don599",
+    "authority": "WHO",
+    "title": "Disease Outbreak News DON599 — Hantavirus Disease, Cruise Ship Cluster",
+    "description": "Initial WHO DON confirming Andes virus (Orthohantavirus andesense) as causative agent following genomic sequencing at NICD South Africa and PCR at Geneva University Hospitals.",
+    "link": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599",
+    "pubDate": "2026-05-04",
+    "timestamp": 1746403200000,
+    "type": "outbreak-news",
+    "pinned": true
+  }
+]
