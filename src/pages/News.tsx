@@ -1,3 +1,263 @@
+import { useState, useEffect } from 'react'
+import { getCached, setCache } from '../utils/sessionCache'
+
+const CACHE_KEY = 'news_feed_cache'
+const CACHE_TTL = 2 * 60 * 60 * 1000 // 2 hours
+
+interface FeedItem {
+  id: string
+  authority: string
+  title: string
+  description: string
+  link: string
+  pubDate: string
+  timestamp: number
+}
+
+const AUTHORITY_COLORS: Record<string, string> = {
+  WHO: 'var(--color-accent-blue)',
+  CDC: 'var(--color-accent-red)',
+  ECDC: 'var(--color-accent-orange)',
+  Reuters: '#FF8C00',
+  AP: '#C0C0C0',
+}
+
+function NewsCard({ item }: { item: FeedItem }) {
+  const color = AUTHORITY_COLORS[item.authority] ?? 'var(--color-text-muted)'
+  const date = item.pubDate
+    ? new Date(item.pubDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : ''
+
+  return (
+    <div
+      style={{
+        backgroundColor: 'var(--color-bg-secondary)',
+        border: '1px solid var(--color-border)',
+        borderRadius: '4px',
+        padding: '0.875rem 1rem',
+        display: 'flex',
+        gap: '0.875rem',
+      }}
+    >
+      {/* Authority stripe */}
+      <div
+        style={{
+          width: '3px',
+          borderRadius: '2px',
+          backgroundColor: color,
+          flexShrink: 0,
+          alignSelf: 'stretch',
+          minHeight: '40px',
+        }}
+      />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '0.375rem',
+            flexWrap: 'wrap',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              fontWeight: 700,
+              color,
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+            }}
+          >
+            {item.authority}
+          </span>
+          {date && (
+            <span
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.625rem',
+                color: 'var(--color-text-muted)',
+              }}
+            >
+              {date}
+            </span>
+          )}
+        </div>
+        <a
+          href={item.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            color: 'var(--color-text-primary)',
+            textDecoration: 'none',
+            display: 'block',
+            lineHeight: 1.4,
+            marginBottom: item.description ? '0.375rem' : 0,
+          }}
+        >
+          {item.title} ↗
+        </a>
+        {item.description && (
+          <p
+            style={{
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: '0.8125rem',
+              color: 'var(--color-text-secondary)',
+              lineHeight: 1.5,
+              margin: 0,
+            }}
+          >
+            {item.description.slice(0, 200)}
+            {item.description.length > 200 ? '…' : ''}
+          </p>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function News() {
-  return <div>News</div>
+  const [items, setItems] = useState<FeedItem[]>(getCached<FeedItem[]>(CACHE_KEY) ?? [])
+  const [loading, setLoading] = useState(items.length === 0)
+  const [error, setError] = useState<string | null>(null)
+  const [fetchedAt, setFetchedAt] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (items.length > 0) return
+    async function load() {
+      try {
+        const res = await fetch('/api/feeds?type=news')
+        if (!res.ok) throw new Error(`API ${res.status}`)
+        const data = (await res.json()) as { items: FeedItem[]; fetchedAt: string }
+        setItems(data.items)
+        setFetchedAt(data.fetchedAt)
+        setCache(CACHE_KEY, data.items, CACHE_TTL)
+      } catch (err) {
+        setError(String(err))
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [items.length])
+
+  return (
+    <div style={{ maxWidth: '860px' }}>
+      <h1
+        style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '1.25rem',
+          fontWeight: 700,
+          color: 'var(--color-text-primary)',
+          margin: '0 0 0.25rem 0',
+        }}
+      >
+        NEWS FEED
+      </h1>
+      <p
+        style={{
+          fontFamily: "'IBM Plex Sans', sans-serif",
+          fontSize: '0.8125rem',
+          color: 'var(--color-text-muted)',
+          margin: '0 0 0.25rem 0',
+        }}
+      >
+        General media and public health agency coverage aggregated for situational awareness. Live
+        feed sourced from WHO, CDC, and ECDC RSS.
+      </p>
+      <p
+        style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '0.625rem',
+          color: 'var(--color-text-muted)',
+          margin: '0 0 1rem 0',
+        }}
+      >
+        {fetchedAt
+          ? `Feed last fetched: ${new Date(fetchedAt).toLocaleString()}`
+          : 'Cached — refresh by reloading page'}
+      </p>
+
+      {/* Prominent disclaimer */}
+      <div
+        style={{
+          padding: '0.75rem 1rem',
+          backgroundColor: 'var(--color-bg-secondary)',
+          border: '1px solid var(--color-border)',
+          borderLeft: '3px solid var(--color-accent-yellow)',
+          borderRadius: '4px',
+          marginBottom: '1.25rem',
+          fontFamily: "'IBM Plex Sans', sans-serif",
+          fontSize: '0.8125rem',
+          color: 'var(--color-text-secondary)',
+          lineHeight: 1.5,
+        }}
+      >
+        <strong style={{ color: 'var(--color-accent-yellow)' }}>Note:</strong> News feeds contain
+        media coverage and may include analysis, opinion, or unverified information. For authoritative
+        clinical and public health guidance, see{' '}
+        <a href="/protocols" style={{ color: 'var(--color-accent-blue)' }}>
+          Protocols &amp; Guidance
+        </a>
+        .
+      </div>
+
+      {loading && (
+        <div
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            color: 'var(--color-text-muted)',
+            padding: '1.5rem 0',
+          }}
+        >
+          Fetching news feeds…
+        </div>
+      )}
+
+      {error && (
+        <div
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            color: 'var(--color-accent-yellow)',
+            padding: '0.75rem',
+            backgroundColor: 'var(--color-bg-secondary)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '4px',
+            marginBottom: '1rem',
+          }}
+        >
+          Live feed unavailable: {error}. Check back shortly.
+        </div>
+      )}
+
+      {!loading && !error && items.length === 0 && (
+        <div
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            color: 'var(--color-text-muted)',
+            padding: '1rem 0',
+          }}
+        >
+          No news feed items available at this time.
+        </div>
+      )}
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {items.map((item) => (
+          <NewsCard key={item.id} item={item} />
+        ))}
+      </div>
+    </div>
+  )
 }
