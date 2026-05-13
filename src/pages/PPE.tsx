@@ -212,11 +212,48 @@ export default function PPE() {
 
       <ContentBlock
         title="Donning and Doffing"
-        content={`The following donning and doffing sequence is reproduced from the CDC Isolation Precautions Appendix A: Figure — Example of Safe Donning and Removal of Personal Protective Equipment (PPE).\n\nDonning sequence (put on in this order):\n1. Gown — Fully cover torso from neck to knees, arms to end of wrists, and wrap around the back. Fasten in back of neck and waist.\n2. Mask or respirator — Secure ties or elastic bands at middle of head and neck. Fit flexible band to nose bridge. Fit snug to face and below chin. Fit-check respirator.\n3. Goggles or face shield — Place over face and eyes and adjust to fit.\n4. Gloves — Extend to cover wrist of isolation gown.\n\nDoffing sequence (remove in this order):\n1. Gloves — Using a glove-to-glove / skin-to-skin technique, grasp outside of glove with opposite gloved hand and peel off. Hold removed glove in gloved hand. Slide fingers of ungloved hand under remaining glove at wrist and peel off over first glove. Discard gloves in waste container.\n2. Goggles or face shield — Remove from the back by lifting head band or ear pieces. If the item is reusable, place in designated receptacle for reprocessing; otherwise discard.\n3. Gown — Unfasten ties, taking care that sleeves don't contact body when reaching for ties. Pull gown away from neck and shoulders, touching inside of gown only. Turn gown inside out. Fold or roll into a bundle and discard.\n4. Mask or respirator — Grasp bottom ties or elastics of mask/respirator, then the ones at top, and remove without touching front. Discard in waste container.\n5. Hand hygiene — Perform immediately after removing all PPE.\n\nNote: Perform hand hygiene between doffing steps if hands become contaminated.`}
+        content={`The following donning and doffing sequence is reproduced from the CDC Isolation Precautions Appendix A: Figure — Example of Safe Donning and Removal of Personal Protective Equipment (PPE).\n\nDonning sequence (put on in this order):\n1. Gown — Fully cover torso from neck to knees, arms to end of wrists, and wrap around the back. Fasten in back of neck and waist.\n2. Mask or respirator — Secure ties or elastic bands at middle of head and neck. Fit flexible band to nose bridge. Fit snug to face and below chin. Fit-check respirator.\n3. Goggles or face shield — Place over face and eyes and adjust to fit.\n4. Gloves — Extend to cover wrist of isolation gown.\n\nDoffing sequence (remove in this order):\n1. Gloves — Using a glove-to-glove / skin-to-skin technique, grasp outside of glove with opposite gloved hand and peel off. Hold removed glove in gloved hand. Slide fingers of ungloved hand under remaining glove at wrist and peel off over first glove. Discard gloves in waste container.\n2. Goggles or face shield — Remove from the back by lifting head band or ear pieces. If the item is reusable, place in designated receptacle for reprocessing; otherwise discard.\n3. Gown — Unfasten ties, taking care that sleeves don't contact body when reaching for ties. Pull gown away from neck and shoulders, touching inside of gown only. Turn gown inside out. Fold or roll into a bundle and discard.\n4. Mask or respirator — Grasp bottom ties or elastics of mask/respirator, then the ones at top, and remove without touching front. Discard in waste container.\n5. Hand hygiene — Perform immediately after removing all PPE.\n\nNote: Perform hand hygiene between doffing steps if hands become contaminated.\n\nFor VHF-specific EMS donning and doffing sequences (with and without active bleeding/vomiting/diarrhea), see the NETEC EMS Model PPE procedures linked in the Protocols & Guidance feed.`}
         authorityName="CDC"
         documentTitle="Appendix A: Figure. Example of Safe Donning and Removal of Personal Protective Equipment (PPE)"
         publicationDate="2007 (current)"
         sourceUrl="https://www.cdc.gov/infection-control/hcp/isolation-precautions/appendix-a-figure.html"
+        additionalSources={[
+          {
+            authority: 'NETEC',
+            documentTitle: 'VHF PPE Matrix — Final Updated 2024 (PPE selection by scenario; AAMI Level 3/4; N95/PAPR)',
+            date: '2024-10-29',
+            url: 'https://repository.netecweb.org/items/show/1693',
+          },
+          {
+            authority: 'NETEC',
+            documentTitle: 'EMS Model PPE Donning/Doffing — VHF Without Active Bleeding/Vomiting/Diarrhea',
+            date: '2024-10-29',
+            url: 'https://repository.netecweb.org/items/show/1807',
+          },
+          {
+            authority: 'NETEC',
+            documentTitle: 'EMS Model PPE Donning/Doffing — VHF With Active Bleeding/Vomiting/Diarrhea',
+            date: '2024-10-29',
+            url: 'https://repository.netecweb.org/items/show/1806',
+          },
+        ]}
+      />
+
+      <ContentBlock
+        title="Laboratory & Specimen Handling"
+        content={`Clinical specimens that have the potential to contain Hantavirus should be handled using BSL-3 precautions. Utilize a biosafety cabinet to process samples whenever possible. Aerosol-generating procedures and cultures should be avoided. Risk assessments should be done to determine appropriate PPE for each task.\n\nCentrifugation risk: "Centrifugation can cause aerosols. For serum samples, use a centrifuge with sealed rotor or sealed safety cups."\n\nDiagnostic testing: Some public health laboratories have the ability to test for Hantaviruses. Contact your public health LRN (Laboratory Response Network) for testing capabilities and specific specimen requirements. Pre-approval may be required before shipment.\n\nPackaging and shipping: Clinical specimens containing or suspected of containing Hantavirus are classified as UN2814, Category A Infectious Substance. Personnel must be trained and certified to ship Category A Infectious Substances.`}
+        authorityName="NETEC"
+        documentTitle="Laboratory Resources: Hantavirus"
+        publicationDate="2026-05-06"
+        sourceUrl="https://repository.netecweb.org/exhibits/show/hantavirus/hantavirus"
+        additionalSources={[
+          {
+            authority: 'CDC',
+            documentTitle: 'LRN Test Directory — Hantavirus testing capabilities by jurisdiction',
+            date: '2026-05-06',
+            url: 'https://www.cdc.gov/lrn/testdirectory.html',
+          },
+        ]}
       />
 
       {/*

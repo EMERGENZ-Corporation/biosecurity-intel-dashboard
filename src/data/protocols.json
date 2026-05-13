@@ -1,5 +1,27 @@
 [
   {
+    "id": "netec-repository-hub",
+    "authority": "NETEC",
+    "title": "NETEC Hantavirus Resource Hub — Outbreak Timeline, Guidance Documents, Training",
+    "description": "NETEC repository aggregating authoritative hantavirus resources for the 2026 outbreak: selected publications, outbreak timeline (MV Hondius → repatriation → NQU monitoring), PPE matrices, EMS donning/doffing procedures, and links to NETEC training webinars. Curated for HCW and EMS operational use.",
+    "link": "https://repository.netecweb.org/exhibits/show/hantavirus/hantavirus",
+    "pubDate": "2026-05-06",
+    "timestamp": 1746576000000,
+    "type": "resource-hub",
+    "pinned": true
+  },
+  {
+    "id": "netec-vhf-ppe-matrix",
+    "authority": "NETEC",
+    "title": "VHF PPE Matrix — Final Updated 2024 (Applicable to Andes Virus)",
+    "description": "NETEC VHF PPE selection matrix specifying minimum PPE by scenario: routine contact, AGPs, patient care, donning/doffing. Specifies AAMI Level 3/4 gown or coverall, fit-tested N95 or PAPR. Applicable to Andes virus given documented person-to-person transmission and airborne isolation requirement.",
+    "link": "https://repository.netecweb.org/items/show/1693",
+    "pubDate": "2024-10-29",
+    "timestamp": 1730160000000,
+    "type": "ppe-guidance",
+    "pinned": true
+  },
+  {
     "id": "netec-hantavirus-clinical",
     "authority": "NETEC",
     "title": "Hantavirus: Clinical Insights, Emerging Evidence, and What Every Healthcare Worker Should Know",
@@ -11,11 +33,11 @@
     "pinned": true
   },
   {
-    "id": "nebraskamed-biocontainment",
+    "id": "nebraskamed-nqu-activation",
     "authority": "Nebraska Medicine",
-    "title": "What You Need to Know About Hantavirus — Biocontainment Unit",
-    "description": "Nebraska Medicine Biocontainment Unit (National Quarantine Unit at UNMC) — the designated NQU facility receiving repatriated MV Hondius passengers for monitoring. Nebraska has reported fewer than 10 hantavirus cases since 1993.",
-    "link": "https://www.nebraskamed.com/health/infectious-diseases/biocontainment-unit/what-you-need-to-know-about-hantavirus",
+    "title": "Nebraska Medicine / UNMC Asked to Monitor U.S. Repatriates — National Quarantine Unit Activation",
+    "description": "Nebraska Medicine / UNMC National Quarantine Unit (NQU) — only federally funded quarantine unit in the US — activated to monitor repatriated MV Hondius passengers. 20-room unit with individual negative-pressure systems, all-volunteer staff with quarterly training, previously activated for Ebola (2014) and COVID (2020).",
+    "link": "https://www.nebraskamed.com/health/nebraska-medicine-news/biocontainment-unit/nebraska-medicineunmc-asked-to-monitor-us",
     "pubDate": "2026-05-11",
     "timestamp": 1746921600000,
     "type": "guidance",
@@ -75,5 +97,46 @@
     "timestamp": 1746403200000,
     "type": "outbreak-news",
     "pinned": true
+  },
+  {
+    "id": "netec-lab-resources",
+    "authority": "NETEC",
+    "title": "Laboratory Resources: Hantavirus — BSL-3, Centrifuge Safety, Specimen Shipping (UN2814)",
+    "description": "NETEC laboratory quick reference (May 6, 2026): BSL-3 precautions for clinical specimens, biosafety cabinet requirement, avoid aerosol-generating procedures and cultures, centrifuge sealed rotor requirement, LRN contact for testing, UN2814 Category A shipping classification with certified-personnel requirement.",
+    "link": "https://repository.netecweb.org/exhibits/show/hantavirus/hantavirus",
+    "pubDate": "2026-05-06",
+    "timestamp": 1746576000000,
+    "type": "lab-guidance",
+    "pinned": true
+  },
+  {
+    "id": "cdc-hantavirus-training",
+    "authority": "CDC",
+    "title": "Hantavirus Training for Healthcare Providers",
+    "description": "CDC online training module for HCPs covering hantavirus clinical recognition, infection control precautions, laboratory testing, and reporting requirements. Free CE/CME credit available.",
+    "link": "https://www.cdc.gov/hantavirus/hcp/training/index.html",
+    "pubDate": "2024-01-01",
+    "timestamp": 1704067200000,
+    "type": "training"
+  },
+  {
+    "id": "netec-ems-ppe-no-abvd",
+    "authority": "NETEC",
+    "title": "EMS Model PPE Donning/Doffing — VHF Patient Without Active Bleeding/Vomiting/Diarrhea",
+    "description": "NETEC step-by-step EMS donning and doffing sequence for VHF patients without active bleeding, vomiting, or diarrhea. Applicable to Andes virus EMS transport scenarios.",
+    "link": "https://repository.netecweb.org/items/show/1807",
+    "pubDate": "2024-10-29",
+    "timestamp": 1730160000000,
+    "type": "ppe-guidance"
+  },
+  {
+    "id": "netec-ems-ppe-abvd",
+    "authority": "NETEC",
+    "title": "EMS Model PPE Donning/Doffing — VHF Patient With Active Bleeding/Vomiting/Diarrhea",
+    "description": "NETEC step-by-step EMS donning and doffing sequence for VHF patients with active bleeding, vomiting, or diarrhea. Enhanced PPE requirements. Applicable to Andes virus EMS transport with symptomatic patients.",
+    "link": "https://repository.netecweb.org/items/show/1806",
+    "pubDate": "2024-10-29",
+    "timestamp": 1730160000000,
+    "type": "ppe-guidance"
   }
 ]
