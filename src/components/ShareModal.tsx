@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { getCached } from '../utils/sessionCache'
+import emsBriefing from '../data/ems-briefing.json'
 
 interface Props {
   onClose: () => void
@@ -12,42 +12,80 @@ interface Props {
   }
 }
 
-interface EmailDraft {
-  subject: string
-  body: string
+function buildDraft(caseStats?: Props['caseStats']) {
+  const date = new Date().toLocaleDateString('en-US', {
+    month: 'long', day: 'numeric', year: 'numeric',
+  })
+  const updatedDate = caseStats?.lastUpdated
+    ? new Date(caseStats.lastUpdated).toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric',
+      })
+    : date
+
+  const subject = `SITUATIONAL ALERT: Andes Hantavirus (MV Hondius) — ${date}`
+
+  const statsBlock = caseStats
+    ? `CURRENT SITUATION (as of ${updatedDate}):
+  • Confirmed + probable cases: ${caseStats.confirmed}
+  • Deaths: ${caseStats.deaths}
+  • Countries with cases: ${caseStats.countries}
+  • U.S. states monitoring: ${caseStats.usStatesMonitoring}
+
+Sources: WHO Disease Outbreak News DON600 · CDC HAN 528 · ECDC Rapid Risk Assessment`
+    : ''
+
+  const bulletsBlock = emsBriefing.bullets
+    .map((b, i) => `  ${i + 1}. ${b}`)
+    .join('\n\n')
+
+  const body = `SITUATIONAL ALERT — ANDES HANTAVIRUS (MV HONDIUS OUTBREAK)
+Issued: ${date} | EMERGENZ Intelligence Dashboard
+${'-'.repeat(60)}
+
+${statsBlock}
+${'-'.repeat(60)}
+
+EMS & CLINICAL OPERATIONAL GUIDANCE:
+Sources: ${emsBriefing.sources.join(' + ')}
+
+${bulletsBlock}
+
+${'-'.repeat(60)}
+
+RESOURCES:
+  • CDC HAN 528: https://www.cdc.gov/han/php/notices/han00528.html
+  • WHO DON600: https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON600
+  • ECDC RRA: https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and
+  • NYC DOH HAN #8: https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf
+  • EMERGENZ Dashboard: https://hantavirus.emergenz.org
+
+This alert was generated from authoritative public health sources via EMERGENZ.
+Review and edit before sending. Do not forward unedited.`
+
+  return { subject, body }
 }
 
-const SESSION_DRAFT_COUNT = 'email_draft_count'
-const MAX_DRAFTS_PER_SESSION = 10
-
 export default function ShareModal({ onClose, caseStats }: Props) {
-  const cachedSummary = getCached<{ bullets: string[] }>('gemini_ems_summary_cache')
+  const { subject: initSubject, body: initBody } = buildDraft(caseStats)
 
-  const [subject, setSubject] = useState('')
-  const [body, setBody] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [generated, setGenerated] = useState(false)
-
-  const draftCount = parseInt(sessionStorage.getItem(SESSION_DRAFT_COUNT) || '0', 10)
-  const atLimit = draftCount >= MAX_DRAFTS_PER_SESSION
+  const [subject, setSubject] = useState(initSubject)
+  const [body, setBody] = useState(initBody)
 
   const dialogRef = useRef<HTMLDivElement>(null)
   const closeBtnRef = useRef<HTMLButtonElement>(null)
 
-  // Focus the close button on mount
+  // Focus close button on mount
   useEffect(() => {
     closeBtnRef.current?.focus()
   }, [])
 
-  // Escape key closes modal
+  // Escape closes; Tab focus trap
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         onClose()
         return
       }
-      // Focus trap — Tab / Shift+Tab
       if (e.key !== 'Tab' || !dialogRef.current) return
       const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
         'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -56,51 +94,17 @@ export default function ShareModal({ onClose, caseStats }: Props) {
       const first = focusable[0]
       const last = focusable[focusable.length - 1]
       if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault()
-          last.focus()
-        }
+        if (document.activeElement === first) { e.preventDefault(); last.focus() }
       } else {
-        if (document.activeElement === last) {
-          e.preventDefault()
-          first.focus()
-        }
+        if (document.activeElement === last) { e.preventDefault(); first.focus() }
       }
     }
     document.addEventListener('keydown', handleKey)
     return () => document.removeEventListener('keydown', handleKey)
   }, [onClose])
 
-  async function generateDraft() {
-    if (atLimit) return
-    setLoading(true)
-    setError(null)
-    try {
-      const res = await fetch('/api/email-draft', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          caseStats,
-          emsBullets: cachedSummary?.bullets ?? [],
-        }),
-      })
-      if (!res.ok) throw new Error(`API ${res.status}`)
-      const draft = (await res.json()) as EmailDraft
-      setSubject(draft.subject)
-      setBody(draft.body)
-      setGenerated(true)
-      sessionStorage.setItem(SESSION_DRAFT_COUNT, (draftCount + 1).toString())
-    } catch (err) {
-      setError(String(err))
-    } finally {
-      setLoading(false)
-    }
-  }
-
   function openMailto() {
-    const encodedSubject = encodeURIComponent(subject)
-    const encodedBody = encodeURIComponent(body)
-    window.location.href = `mailto:?subject=${encodedSubject}&body=${encodedBody}`
+    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   return (
@@ -115,9 +119,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
         justifyContent: 'center',
         padding: '1rem',
       }}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose()
-      }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
     >
       <div
         ref={dialogRef}
@@ -161,7 +163,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
                 marginTop: '0.125rem',
               }}
             >
-              AI-drafted situational alert · Editable before sending · Opens your default email client
+              Situational alert · Edit before sending · Opens your default email client
             </div>
           </div>
           <button
@@ -182,135 +184,86 @@ export default function ShareModal({ onClose, caseStats }: Props) {
           </button>
         </div>
 
-        {/* Generate button */}
-        {!generated && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {atLimit && (
-              <div
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.6875rem',
-                  color: 'var(--color-accent-yellow)',
-                }}
-              >
-                Session limit reached ({MAX_DRAFTS_PER_SESSION} drafts). Start a new session to
-                generate more.
-              </div>
-            )}
-            <button
-              onClick={generateDraft}
-              disabled={loading || atLimit}
+        {/* Edit fields */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, overflow: 'hidden' }}>
+          <div>
+            <label
+              htmlFor="share-subject"
               style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.625rem',
+                color: 'var(--color-text-muted)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                display: 'block',
+                marginBottom: '0.25rem',
+              }}
+            >
+              Subject
+            </label>
+            <input
+              id="share-subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              style={{
+                width: '100%',
+                fontFamily: "'IBM Plex Sans', sans-serif",
+                fontSize: '0.875rem',
+                padding: '0.5rem 0.75rem',
+                backgroundColor: 'var(--color-bg-tertiary)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '4px',
+                color: 'var(--color-text-primary)',
+                boxSizing: 'border-box',
+              }}
+            />
+          </div>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <label
+              htmlFor="share-body"
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.625rem',
+                color: 'var(--color-text-muted)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                display: 'block',
+                marginBottom: '0.25rem',
+              }}
+            >
+              Body
+            </label>
+            <textarea
+              id="share-body"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              style={{
+                flex: 1,
+                minHeight: '240px',
                 fontFamily: "'IBM Plex Mono', monospace",
                 fontSize: '0.75rem',
-                padding: '0.5rem 1rem',
-                backgroundColor: atLimit ? 'var(--color-bg-tertiary)' : 'var(--color-emergenz)',
-                border: 'none',
+                padding: '0.5rem 0.75rem',
+                backgroundColor: 'var(--color-bg-tertiary)',
+                border: '1px solid var(--color-border)',
                 borderRadius: '4px',
-                color: atLimit ? 'var(--color-text-muted)' : '#000',
-                cursor: loading || atLimit ? 'not-allowed' : 'pointer',
-                fontWeight: 700,
-                alignSelf: 'flex-start',
+                color: 'var(--color-text-secondary)',
+                lineHeight: 1.6,
+                resize: 'vertical',
+                boxSizing: 'border-box',
+                width: '100%',
               }}
-            >
-              {loading ? 'Drafting…' : 'Generate Draft Email'}
-            </button>
-            {error && (
-              <div
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.6875rem',
-                  color: 'var(--color-accent-red)',
-                }}
-              >
-                {error}
-              </div>
-            )}
+            />
           </div>
-        )}
-
-        {/* Edit fields */}
-        {generated && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, overflow: 'hidden' }}>
-            <div>
-              <label
-                htmlFor="share-subject"
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.625rem',
-                  color: 'var(--color-text-muted)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  display: 'block',
-                  marginBottom: '0.25rem',
-                }}
-              >
-                Subject
-              </label>
-              <input
-                id="share-subject"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                style={{
-                  width: '100%',
-                  fontFamily: "'IBM Plex Sans', sans-serif",
-                  fontSize: '0.875rem',
-                  padding: '0.5rem 0.75rem',
-                  backgroundColor: 'var(--color-bg-tertiary)',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: '4px',
-                  color: 'var(--color-text-primary)',
-                  boxSizing: 'border-box',
-                }}
-              />
-            </div>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-              <label
-                htmlFor="share-body"
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.625rem',
-                  color: 'var(--color-text-muted)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  display: 'block',
-                  marginBottom: '0.25rem',
-                }}
-              >
-                Body
-              </label>
-              <textarea
-                id="share-body"
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                style={{
-                  flex: 1,
-                  minHeight: '240px',
-                  fontFamily: "'IBM Plex Sans', sans-serif",
-                  fontSize: '0.8125rem',
-                  padding: '0.5rem 0.75rem',
-                  backgroundColor: 'var(--color-bg-tertiary)',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: '4px',
-                  color: 'var(--color-text-secondary)',
-                  lineHeight: 1.6,
-                  resize: 'vertical',
-                  boxSizing: 'border-box',
-                  width: '100%',
-                }}
-              />
-            </div>
-            <div
-              style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: '0.5625rem',
-                color: 'var(--color-text-muted)',
-              }}
-            >
-              AI-generated from CDC HAN 528 + ECDC RRA · Edit before sending · Gemini 2.0 Flash
-            </div>
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.5625rem',
+              color: 'var(--color-text-muted)',
+            }}
+          >
+            Sourced from: {emsBriefing.sources.join(' + ')} · Edit before sending
           </div>
-        )}
+        </div>
 
         {/* Actions */}
         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
@@ -329,25 +282,23 @@ export default function ShareModal({ onClose, caseStats }: Props) {
           >
             Cancel
           </button>
-          {generated && (
-            <button
-              onClick={openMailto}
-              disabled={!subject || !body}
-              style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: '0.75rem',
-                fontWeight: 700,
-                padding: '0.5rem 1rem',
-                backgroundColor: 'var(--color-emergenz)',
-                border: 'none',
-                borderRadius: '4px',
-                color: '#000',
-                cursor: 'pointer',
-              }}
-            >
-              Open in Email Client →
-            </button>
-          )}
+          <button
+            onClick={openMailto}
+            disabled={!subject || !body}
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              padding: '0.5rem 1rem',
+              backgroundColor: 'var(--color-emergenz)',
+              border: 'none',
+              borderRadius: '4px',
+              color: '#000',
+              cursor: 'pointer',
+            }}
+          >
+            Open in Email Client →
+          </button>
         </div>
       </div>
     </div>
