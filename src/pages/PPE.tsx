@@ -73,11 +73,24 @@ export default function PPE() {
             color: 'var(--color-text-primary)',
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
-            margin: '0 0 0.75rem 0',
+            margin: '0 0 0.375rem 0',
           }}
         >
           PPE Selection Table
         </h2>
+        <p
+          style={{
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: '0.75rem',
+            color: 'var(--color-text-muted)',
+            margin: '0 0 0.75rem 0',
+            lineHeight: 1.5,
+          }}
+        >
+          Note: Row 1 reflects ECDC minimum for routine contact. NYC DOH HAN Advisory #8 recommends
+          airborne precautions (Row 3 standard) for <em>all</em> contacts with suspected or confirmed
+          ANDV patients — not limited to AGPs. When in doubt, apply the more protective standard.
+        </p>
         <div style={{ overflowX: 'auto' }}>
           <table
             style={{

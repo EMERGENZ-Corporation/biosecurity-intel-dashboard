@@ -54,7 +54,10 @@ export default function Sources() {
             color: 'var(--color-text-muted)',
           }}
         >
-          Last verified: May 12, 2026 · {sources.length} sources indexed
+          {sources.length} sources indexed · Registry last updated:{' '}
+          {new Date(
+            Math.max(...sources.map((s) => new Date(s.lastVerified).getTime()).filter(Boolean))
+          ).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
         </p>
       </div>
 

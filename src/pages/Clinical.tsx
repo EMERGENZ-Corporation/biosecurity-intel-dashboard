@@ -35,7 +35,7 @@ export default function Clinical() {
         documentTitle="About Andes Virus"
         publicationDate="2024"
         sourceUrl="https://www.cdc.gov/hantavirus/about/andesvirus.html"
-        license="CC BY-NC-SA 3.0 IGO (WHO content)"
+        license="U.S. Government Work (CDC) / CC BY-NC-SA 3.0 IGO (WHO DON599)"
         additionalSources={[
           {
             authority: 'WHO',
@@ -103,7 +103,7 @@ export default function Clinical() {
             authority: 'Nebraska Medicine',
             documentTitle: 'What You Need to Know About Hantavirus — Biocontainment Unit',
             date: '2026-05-11',
-            url: 'https://www.nebraskamed.com/health/infectious-diseases/biocontainment-unit/what-you-need-to-know-about-hantavirus',
+            url: 'https://www.nebraskamed.com/health/nebraska-medicine-news/biocontainment-unit/nebraska-medicineunmc-asked-to-monitor-us',
           },
         ]}
       />
@@ -137,7 +137,7 @@ export default function Clinical() {
 
       <ContentBlock
         title="Clinical Phase III — Convalescent"
-        content="In survivors of the cardiopulmonary phase, recovery begins with diuresis of the accumulated pulmonary fluid, typically within 48 hours of the clinical nadir. Recovery can be rapid once the acute phase has resolved. Survivors may experience fatigue and reduced exercise tolerance for weeks to months. Full pulmonary recovery is the expected outcome in survivors."
+        content="In survivors of the cardiopulmonary phase, recovery begins with diuresis of the accumulated pulmonary fluid, typically within 48 hours of the clinical nadir. Recovery can be rapid once the acute phase has resolved. Survivors may experience fatigue and reduced exercise tolerance for weeks to months. Most survivors recover full pulmonary function, though the duration of recovery is variable."
         authorityName="CDC"
         documentTitle="Hantavirus Pulmonary Syndrome: Clinical Overview for Clinicians"
         publicationDate="2024"

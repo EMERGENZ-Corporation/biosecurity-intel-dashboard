@@ -73,12 +73,12 @@ export default function About() {
             <>
               The full codebase is open-source under the MIT license. Contributions are welcome via{' '}
               <a
-                href="https://github.com/emergenz-corp/hantavirus-intel-dashboard"
+                href="https://github.com/EMERGENZ-Corporation/hantavirus-intel-dashboard"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: 'var(--color-accent-blue)' }}
               >
-                github.com/emergenz-corp/hantavirus-intel-dashboard
+                github.com/EMERGENZ-Corporation/hantavirus-intel-dashboard
               </a>
               . See CONTRIBUTING.md in the repository for contribution guidelines.
             </>
@@ -149,29 +149,24 @@ export default function About() {
             }}
           >
             The EMERGENZ Hantavirus Outbreak Intelligence Dashboard is provided for informational
-            purposes only. Content is aggregated from publicly available sources including the World
-            Health Organization, U.S. Centers for Disease Control and Prevention, European Centre
-            for Disease Prevention and Control, and other public health authorities. EMERGENZ
-            Corporation makes no representations or warranties regarding the accuracy, completeness,
-            timeliness, or fitness for any particular purpose of the information presented. This
-            dashboard does not constitute medical advice, clinical guidance, or official public
-            health direction. EMS providers, emergency managers, and public safety personnel must
-            follow their agency's established protocols and the directives of their medical director.
-            EMERGENZ Corporation, its officers, employees, volunteers, and affiliates shall not be
-            liable for any clinical, operational, or legal outcome arising from use of or reliance
-            on this dashboard. All source content remains the property of the originating authority
-            and is reproduced under applicable license terms as documented in the Sources Registry.
-          </p>
-          <p
-            style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.6875rem',
-              color: 'var(--color-text-muted)',
-              marginTop: '0.75rem',
-              marginBottom: 0,
-            }}
-          >
-            Note: Disclaimer language to be reviewed by healthcare attorney before public launch.
+            and situational awareness purposes only. Content is aggregated from publicly available
+            sources including the World Health Organization, U.S. Centers for Disease Control and
+            Prevention, European Centre for Disease Prevention and Control, and other public health
+            authorities. EMERGENZ Corporation makes no representations or warranties of any kind,
+            express or implied, regarding the accuracy, completeness, timeliness, currency, or
+            fitness for any particular purpose of the information presented. This dashboard does not
+            constitute medical advice, clinical guidance, treatment recommendations, or official
+            public health direction. It is not a substitute for professional medical judgment, agency
+            protocols, or the directives of a licensed medical director. EMS providers, emergency
+            managers, clinicians, and public safety personnel must follow their agency's established
+            protocols and the directives of their medical director or supervising physician.
+            To the maximum extent permitted by applicable law, EMERGENZ Corporation, its officers,
+            directors, employees, contractors, and affiliates shall not be liable for any direct,
+            indirect, incidental, consequential, clinical, operational, or legal outcome arising from
+            use of or reliance on this dashboard or the information it contains. Use of this
+            dashboard constitutes acceptance of these terms. All source content remains the property
+            of the originating authority and is reproduced under applicable license terms as
+            documented in the Sources Registry.
           </p>
         </>
       )}
