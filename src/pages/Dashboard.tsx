@@ -1,8 +1,13 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Timeline from '../components/Timeline'
 import USMonitoringTable from '../components/USMonitoringTable'
 import FlightTracingPanel from '../components/FlightTracingPanel'
 import SourceChip from '../components/SourceChip'
+import GlobalMap from '../components/GlobalMap'
+import MapLayerToggle from '../components/MapLayerToggle'
+
+const ALL_TYPES = ['ship-route', 'case', 'death', 'monitoring', 'us-monitoring', 'flight', 'us-facility']
 
 function Section({ children }: { children: React.ReactNode }) {
   return (
@@ -21,6 +26,14 @@ function Section({ children }: { children: React.ReactNode }) {
 }
 
 export default function Dashboard() {
+  const [visibleTypes, setVisibleTypes] = useState<string[]>(ALL_TYPES)
+
+  function handleToggle(type: string) {
+    setVisibleTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    )
+  }
+
   return (
     <div style={{ maxWidth: '1200px' }}>
       {/* Page title */}
@@ -344,37 +357,10 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Map placeholder */}
-      <div
-        style={{
-          backgroundColor: 'var(--color-bg-secondary)',
-          border: '1px dashed var(--color-border)',
-          borderRadius: '6px',
-          padding: '3rem',
-          textAlign: 'center',
-          marginBottom: '1rem',
-        }}
-      >
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.875rem',
-            color: 'var(--color-text-muted)',
-          }}
-        >
-          GLOBAL MAP — Phase 3 (Leaflet.js + OpenStreetMap)
-        </div>
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.6875rem',
-            color: 'var(--color-text-muted)',
-            marginTop: '0.375rem',
-          }}
-        >
-          {/* show marker count from JSON */}
-          Marker dataset loaded · 34 coordinate entries ready
-        </div>
+      {/* Global Map */}
+      <div style={{ marginBottom: '1rem' }}>
+        <MapLayerToggle visibleTypes={visibleTypes} onToggle={handleToggle} />
+        <GlobalMap visibleTypes={visibleTypes} />
       </div>
     </div>
   )
