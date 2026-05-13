@@ -1,5 +1,13 @@
 import SourceChip from './SourceChip'
 
+interface SourceRef {
+  authority: string
+  documentTitle: string
+  date: string
+  url: string
+  license?: string
+}
+
 interface Props {
   title: string
   content: string
@@ -8,6 +16,7 @@ interface Props {
   publicationDate: string
   sourceUrl: string
   license?: string
+  additionalSources?: SourceRef[]
   children?: React.ReactNode
 }
 
@@ -19,6 +28,7 @@ export default function ContentBlock({
   publicationDate,
   sourceUrl,
   license,
+  additionalSources,
   children,
 }: Props) {
   return (
@@ -65,44 +75,88 @@ export default function ContentBlock({
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          flexWrap: 'wrap',
+          alignItems: 'flex-start',
+          flexDirection: 'column',
+          gap: '0.375rem',
           marginTop: content || children ? '1rem' : 0,
           paddingTop: '0.75rem',
           borderTop: '1px solid var(--color-border)',
         }}
       >
-        <span
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.6875rem',
-            color: 'var(--color-text-muted)',
-          }}
-        >
-          SOURCE:
-        </span>
-        <SourceChip
-          authority={authorityName}
-          documentTitle={documentTitle}
-          date={publicationDate}
-          url={sourceUrl}
-        />
-        {license && (
+        {/* Primary source */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           <span
             style={{
-              padding: '0.125rem 0.375rem',
-              borderRadius: '3px',
-              backgroundColor: 'var(--color-bg-tertiary)',
-              border: '1px solid var(--color-border)',
               fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.625rem',
+              fontSize: '0.6875rem',
               color: 'var(--color-text-muted)',
-              letterSpacing: '0.03em',
             }}
           >
-            {license}
+            SOURCE:
           </span>
+          <SourceChip
+            authority={authorityName}
+            documentTitle={documentTitle}
+            date={publicationDate}
+            url={sourceUrl}
+          />
+          {license && (
+            <span
+              style={{
+                padding: '0.125rem 0.375rem',
+                borderRadius: '3px',
+                backgroundColor: 'var(--color-bg-tertiary)',
+                border: '1px solid var(--color-border)',
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.625rem',
+                color: 'var(--color-text-muted)',
+                letterSpacing: '0.03em',
+              }}
+            >
+              {license}
+            </span>
+          )}
+        </div>
+
+        {/* Additional sources */}
+        {additionalSources && additionalSources.length > 0 && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+            {additionalSources.map((s) => (
+              <div key={s.url} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <span
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: '0.6875rem',
+                    color: 'var(--color-text-muted)',
+                  }}
+                >
+                  ALSO:
+                </span>
+                <SourceChip
+                  authority={s.authority}
+                  documentTitle={s.documentTitle}
+                  date={s.date}
+                  url={s.url}
+                />
+                {s.license && (
+                  <span
+                    style={{
+                      padding: '0.125rem 0.375rem',
+                      borderRadius: '3px',
+                      backgroundColor: 'var(--color-bg-tertiary)',
+                      border: '1px solid var(--color-border)',
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontSize: '0.625rem',
+                      color: 'var(--color-text-muted)',
+                      letterSpacing: '0.03em',
+                    }}
+                  >
+                    {s.license}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </section>
