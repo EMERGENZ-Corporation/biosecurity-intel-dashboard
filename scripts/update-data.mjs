@@ -25,9 +25,16 @@ const PROTOCOLS_PATH     = 'src/data/protocols.json'
 
 // RSS feeds fetched for free — no Bright Data needed
 const RSS_FEEDS = [
-  { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss', authority: 'CDC' },
-  { url: 'https://www.who.int/feeds/entity/csr/don/en/rss.xml',     authority: 'WHO' },
-  { url: 'https://www.ecdc.europa.eu/en/rss.xml',                    authority: 'ECDC' },
+  // Official public health feeds
+  { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss',                                    authority: 'CDC' },
+  { url: 'https://www.who.int/feeds/entity/csr/don/en/rss.xml',                                        authority: 'WHO' },
+  { url: 'https://www.ecdc.europa.eu/en/rss.xml',                                                      authority: 'ECDC' },
+  // General media — filtered by RELEVANT_KEYWORDS
+  { url: 'https://news.google.com/rss/search?q=hantavirus&hl=en-US&gl=US&ceid=US:en',                  authority: 'Google News' },
+  { url: 'https://www.wired.com/feed/rss',                                                             authority: 'Wired' },
+  { url: 'https://feeds.reuters.com/reuters/healthNews',                                               authority: 'Reuters' },
+  { url: 'https://apnews.com/rss/apf-Health',                                                          authority: 'AP News' },
+  { url: 'https://www.statnews.com/feed/',                                                             authority: 'STAT News' },
 ]
 
 // Keywords to filter RSS items relevant to this outbreak
