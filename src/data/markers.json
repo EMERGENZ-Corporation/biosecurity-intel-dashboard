@@ -8,7 +8,11 @@
     "status": "Departure point — April 1, 2026",
     "description": "MV Hondius departed Ushuaia with 147 passengers and crew from 23 nationalities on April 1, 2026.",
     "source": "Wikipedia / Oceanwide Expeditions",
-    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius"
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius",
+    "sources": [
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" },
+      { "label": "Oceanwide Expeditions", "url": "https://oceanwide-expeditions.com/" }
+    ]
   },
   {
     "id": "ship-southgeorgia",
@@ -19,7 +23,11 @@
     "status": "Ship route waypoint",
     "description": "MV Hondius waypoint during Antarctic expedition route.",
     "source": "Wikipedia / Oceanwide Expeditions",
-    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius"
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius",
+    "sources": [
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" },
+      { "label": "Oceanwide Expeditions", "url": "https://oceanwide-expeditions.com/" }
+    ]
   },
   {
     "id": "ship-tristanda",
@@ -73,8 +81,12 @@
     "type": "ship_route",
     "status": "Final stop — May 10–11, 2026",
     "description": "MV Hondius arrived Tenerife May 10. All passengers disembarked May 11. UK passengers flown to Manchester; U.S. passengers to Offutt AFB. WHO DG Tedros present.",
-    "source": "Wikipedia / BBC",
-    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius"
+    "source": "Wikipedia / UKHSA",
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius",
+    "sources": [
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" },
+      { "label": "UKHSA — Hantavirus Cruise Ship Update", "url": "https://www.gov.uk/government/news/ukhsa-update-on-the-hantavirus-cruise-ship-outbreak" }
+    ]
   },
   {
     "id": "ship-rotterdam",
@@ -151,7 +163,11 @@
     "status": "Confirmed — KLM flight attendant",
     "description": "KLM flight attendant from KL592 (Johannesburg → Amsterdam) hospitalized at Amsterdam UMC. Attendant was on the flight when Case 2 was aboard for 45 minutes before removal.",
     "source": "NL Times / ECDC",
-    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger"
+    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger",
+    "sources": [
+      { "label": "NL Times — KLM Flight Attendant", "url": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger" },
+      { "label": "ECDC — Epidemiological Update", "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak" }
+    ]
   },
   {
     "id": "case-paris",
@@ -162,7 +178,11 @@
     "status": "Confirmed — May 11, 2026",
     "description": "French female passenger confirmed positive for Andes virus. ANRS France activated Level 1 Emergency Response on May 7.",
     "source": "ECDC / Al Jazeera",
-    "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak"
+    "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+    "sources": [
+      { "label": "ECDC — Epidemiological Update", "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak" },
+      { "label": "Al Jazeera — May 11, 2026", "url": "https://www.aljazeera.com/news/2026/5/11/two-more-cruise-ship-passengers-test-positive-for-hantavirus" }
+    ]
   },
   {
     "id": "case-madrid",
@@ -183,8 +203,12 @@
     "type": "monitoring_facility",
     "status": "Quarantine facility — May 10, 2026",
     "description": "22 UK passengers and crew (19 passengers, 3 crew) flown from Tenerife to Manchester and placed in 72-hour quarantine at Arrowe Park Hospital, followed by 45-day home isolation.",
-    "source": "Wikipedia / BBC",
-    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius"
+    "source": "Wikipedia / UKHSA",
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius",
+    "sources": [
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" },
+      { "label": "UKHSA — Hantavirus Cruise Ship Update", "url": "https://www.gov.uk/government/news/ukhsa-update-on-the-hantavirus-cruise-ship-outbreak" }
+    ]
   },
   {
     "id": "facility-unmc",
@@ -194,8 +218,12 @@
     "type": "monitoring_facility",
     "status": "Active — 15 quarantine, 1 biocontainment",
     "description": "U.S. repatriation passengers transferred to UNMC: 15 to quarantine unit, 1 confirmed positive to biocontainment unit. Part of 18 total U.S. passengers from repatriation flight.",
-    "source": "CDC / Nebraska Medicine",
-    "sourceUrl": "https://www.nebraskamed.com/health/nebraska-medicine-news/biocontainment-unit/nebraska-medicineunmc-asked-to-monitor-us"
+    "source": "CDC HAN 528 / Nebraska Medicine",
+    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "Nebraska Medicine", "url": "https://www.nebraskamed.com/health/nebraska-medicine-news/biocontainment-unit/nebraska-medicineunmc-asked-to-monitor-us" }
+    ]
   },
   {
     "id": "facility-emory",
@@ -205,8 +233,13 @@
     "type": "monitoring_facility",
     "status": "Active — 2 passengers; 1 tested negative May 12",
     "description": "2 U.S. repatriation passengers transferred to Emory University Hospital. On May 12, Emory patient (mildly symptomatic) tested NEGATIVE for hantavirus.",
-    "source": "CDC / Emory / ABC News",
-    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html"
+    "source": "CDC HAN 528 / GA DPH / ABC News",
+    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "GA DPH Press Release", "url": "https://dph.georgia.gov/press-releases/2026-05-11/two-individuals-being-transported-emory-universitys-serious-communicable" },
+      { "label": "ABC News", "url": "https://abcnews.com/International/live-updates/hantavirus-live-updates-mv-hondius-canary-islands/?id=132746955" }
+    ]
   },
   {
     "id": "usmon-arizona",
@@ -238,8 +271,12 @@
     "type": "us_state_monitoring",
     "status": "2 persons under monitoring",
     "description": "Georgia monitoring 2 repatriated passengers. 1 Emory patient tested negative May 12.",
-    "source": "CDC / Emory University Hospital",
-    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html"
+    "source": "CDC HAN 528 / GA DPH",
+    "sourceUrl": "https://dph.georgia.gov/press-releases/2026-05-11/two-individuals-being-transported-emory-universitys-serious-communicable",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "GA DPH Press Release", "url": "https://dph.georgia.gov/press-releases/2026-05-11/two-individuals-being-transported-emory-universitys-serious-communicable" }
+    ]
   },
   {
     "id": "usmon-kansas",
@@ -271,8 +308,12 @@
     "type": "us_state_monitoring",
     "status": "16 persons monitoring; 1 confirmed positive",
     "description": "Nebraska monitoring 16 repatriated passengers. 1 confirmed asymptomatic positive in UNMC biocontainment unit.",
-    "source": "CDC / Nebraska Medicine",
-    "sourceUrl": "https://www.nebraskamed.com/health/nebraska-medicine-news/biocontainment-unit/nebraska-medicineunmc-asked-to-monitor-us"
+    "source": "CDC HAN 528 / Nebraska Medicine",
+    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "Nebraska Medicine", "url": "https://www.nebraskamed.com/health/nebraska-medicine-news/biocontainment-unit/nebraska-medicineunmc-asked-to-monitor-us" }
+    ]
   },
   {
     "id": "usmon-newjersey",
@@ -315,8 +356,12 @@
     "type": "us_state_monitoring",
     "status": "3 persons under monitoring",
     "description": "Washington State DOH and King County monitoring 3 residents: 2 flight contacts and 1 passenger.",
-    "source": "Washington State DOH / King County",
-    "sourceUrl": "https://doh.wa.gov/you-and-your-family/illness-and-disease-z/hantavirus"
+    "source": "WA DOH / King County DPH",
+    "sourceUrl": "https://doh.wa.gov/you-and-your-family/illness-and-disease-z/hantavirus",
+    "sources": [
+      { "label": "WA DOH — Hantavirus", "url": "https://doh.wa.gov/you-and-your-family/illness-and-disease-z/hantavirus" },
+      { "label": "King County DPH — May 12, 2026", "url": "https://kingcounty.gov/en/dept/dph/about-king-county/about-public-health/news/news-archive-2026/05-12-hantavirus" }
+    ]
   },
   {
     "id": "usmon-newyork",
@@ -337,8 +382,12 @@
     "type": "flight_tracing",
     "status": "Airlink flight — April 25, 2026",
     "description": "Airlink flight departed Saint Helena Airport with 82 passengers and 6 crew on April 25. Case 2 (confirmed ANDV, died April 26) was aboard. South African health ministry conducted full passenger contact tracing.",
-    "source": "CNN / WHO DON599",
-    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+    "source": "WHO DON599 / CNN",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599",
+    "sources": [
+      { "label": "WHO DON599", "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599" },
+      { "label": "CNN — Hantavirus Cruise Outbreak", "url": "https://www.cnn.com/2026/05/11/us/live-news/hantavirus-cruise-outbreak" }
+    ]
   },
   {
     "id": "flight-klm-origin",
@@ -349,7 +398,12 @@
     "status": "KLM KL592 — April 25, 2026",
     "description": "KLM KL592 (also codeshare AF8282 / DL9560 / SK6855) departed Johannesburg OR Tambo at 11:15 PM April 25. Case 2 was aboard for 45 minutes before removal. Dutch GGD contacted all passengers.",
     "source": "NL Times / CNN / Wikipedia",
-    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger"
+    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger",
+    "sources": [
+      { "label": "NL Times — KLM Flight Attendant", "url": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger" },
+      { "label": "CNN — Hantavirus Cruise Outbreak", "url": "https://www.cnn.com/2026/05/11/us/live-news/hantavirus-cruise-outbreak" },
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" }
+    ]
   },
   {
     "id": "flight-klm-destination",
@@ -360,7 +414,11 @@
     "status": "KLM KL592 arrival — April 26, 2026",
     "description": "KLM KL592 arrived Amsterdam Schiphol. KLM flight attendant subsequently hospitalized at Amsterdam UMC with mild symptoms.",
     "source": "NL Times / CNN",
-    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger"
+    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger",
+    "sources": [
+      { "label": "NL Times — KLM Flight Attendant", "url": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger" },
+      { "label": "CNN — Hantavirus Cruise Outbreak", "url": "https://www.cnn.com/2026/05/11/us/live-news/hantavirus-cruise-outbreak" }
+    ]
   },
   {
     "id": "flight-usrepatriation",
@@ -370,7 +428,12 @@
     "type": "flight_tracing",
     "status": "U.S. Gov charter — May 11, 2026",
     "description": "U.S. Government charter flight from Tenerife arrived Offutt Air Force Base May 11 with 18 passengers (17 Americans + 1 British dual national). 1 mildly positive and 1 mildly symptomatic traveled in aircraft biocontainment units.",
-    "source": "CDC / NPR / ABC News",
-    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html"
+    "source": "CDC HAN 528 / NPR / ABC News",
+    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "NPR — U.S. Passengers Land at Offutt AFB", "url": "https://www.npr.org/2026/05/10/nx-s1-5817578/hantavirus-cruise-ship-nebraska-us-passengers" },
+      { "label": "ABC News — Live Updates", "url": "https://abcnews.com/International/live-updates/hantavirus-live-updates-mv-hondius-canary-islands/?id=132746955" }
+    ]
   }
 ]

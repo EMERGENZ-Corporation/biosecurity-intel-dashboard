@@ -1,3 +1,8 @@
+export interface MarkerSource {
+  label: string
+  url: string
+}
+
 export interface Marker {
   id: string
   name: string
@@ -8,6 +13,7 @@ export interface Marker {
   description: string
   source: string
   sourceUrl: string
+  sources?: MarkerSource[]
 }
 
 export interface TimelineEvent {

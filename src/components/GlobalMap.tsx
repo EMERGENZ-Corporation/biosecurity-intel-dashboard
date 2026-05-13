@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet'
-import type { Marker } from '../types'
+import type { Marker, MarkerSource } from '../types'
 import markersData from '../data/markers.json'
 
 const markers = markersData as Marker[]
@@ -105,19 +105,40 @@ export default function GlobalMap({ visibleTypes }: Props) {
                   >
                     {marker.description}
                   </div>
-                  <a
-                    href={marker.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontFamily: "'IBM Plex Mono', monospace",
-                      fontSize: '0.6875rem',
-                      color: '#388BFD',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    {marker.source} ↗
-                  </a>
+                  {marker.sources && marker.sources.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      {marker.sources.map((s: MarkerSource) => (
+                        <a
+                          key={s.url}
+                          href={s.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            fontFamily: "'IBM Plex Mono', monospace",
+                            fontSize: '0.6875rem',
+                            color: '#388BFD',
+                            textDecoration: 'none',
+                          }}
+                        >
+                          {s.label} ↗
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
+                    <a
+                      href={marker.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontFamily: "'IBM Plex Mono', monospace",
+                        fontSize: '0.6875rem',
+                        color: '#388BFD',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {marker.source} ↗
+                    </a>
+                  )}
                 </div>
               </Popup>
             </CircleMarker>
