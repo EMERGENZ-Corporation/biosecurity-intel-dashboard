@@ -21,7 +21,7 @@ const ALL_TYPES = [
   'return_destination',
 ]
 
-function Section({ children }: { children: React.ReactNode }) {
+function Section({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <div
       style={{
@@ -29,7 +29,7 @@ function Section({ children }: { children: React.ReactNode }) {
         border: '1px solid var(--color-border)',
         borderRadius: '6px',
         padding: '1.25rem 1.5rem',
-        marginBottom: '1rem',
+        ...style,
       }}
     >
       {children}
@@ -407,10 +407,11 @@ export default function Dashboard() {
           gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(0, 1fr)',
           gap: '1rem',
           marginBottom: '1rem',
+          alignItems: 'stretch',
         }}
       >
-        {/* Left: Timeline */}
-        <Section>
+        {/* Left: Timeline — fills full row height */}
+        <Section style={{ display: 'flex', flexDirection: 'column', height: '100%', boxSizing: 'border-box' }}>
           <Timeline />
         </Section>
 

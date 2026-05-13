@@ -13,7 +13,7 @@ const CATEGORY_COLORS: Record<TimelineEvent['category'], string> = {
 
 export default function Timeline() {
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <h2
         style={{
           fontFamily: "'IBM Plex Mono', monospace",
@@ -23,6 +23,7 @@ export default function Timeline() {
           textTransform: 'uppercase',
           letterSpacing: '0.1em',
           margin: '0 0 1rem 0',
+          flexShrink: 0,
         }}
       >
         Outbreak Timeline
@@ -32,8 +33,10 @@ export default function Timeline() {
           display: 'flex',
           flexDirection: 'column',
           gap: '0.5rem',
-          maxHeight: '600px',
+          flex: 1,
+          minHeight: 0,
           overflowY: 'auto',
+          overflowX: 'hidden',
           paddingRight: '0.25rem',
         }}
       >
@@ -48,6 +51,7 @@ export default function Timeline() {
               borderLeft: `3px solid ${CATEGORY_COLORS[event.category]}`,
               borderRadius: '4px',
               padding: '0.75rem',
+              minWidth: 0,
             }}
           >
             <div
@@ -58,11 +62,12 @@ export default function Timeline() {
                 whiteSpace: 'nowrap',
                 minWidth: '80px',
                 paddingTop: '0.125rem',
+                flexShrink: 0,
               }}
             >
               {event.date}
             </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
               <div
                 style={{
                   fontFamily: "'IBM Plex Sans', sans-serif",
@@ -85,12 +90,14 @@ export default function Timeline() {
               >
                 {event.description}
               </div>
-              <SourceChip
-                authority={event.source.split('/')[0].trim()}
-                documentTitle={event.source}
-                date={event.date}
-                url={event.sourceUrl}
-              />
+              <div style={{ overflow: 'hidden', maxWidth: '100%' }}>
+                <SourceChip
+                  authority={event.source.split('/')[0].trim()}
+                  documentTitle={event.source}
+                  date={event.date}
+                  url={event.sourceUrl}
+                />
+              </div>
             </div>
           </div>
         ))}
