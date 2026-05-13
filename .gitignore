@@ -144,3 +144,6 @@ vite.config.ts.timestamp-*
 
 # Claude Code internal
 .claude/
+
+node_modules/
+dist/
