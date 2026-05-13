@@ -10,6 +10,7 @@ import MapLayerToggle from '../components/MapLayerToggle'
 import EMSBriefingCard from '../components/EMSBriefingCard'
 import ShareModal from '../components/ShareModal'
 import { getCached, setCache, isFresh } from '../utils/sessionCache'
+import metaJson from '../data/meta.json'
 
 const ALL_TYPES = [
   'ship_route',
@@ -35,16 +36,6 @@ interface SituationData {
   live: boolean
 }
 
-const STATIC_DATA: SituationData = {
-  confirmed: 11,
-  deaths: 3,
-  countries: 8,
-  usStatesMonitoring: 11,
-  lastUpdated: '2026-05-12T00:00:00Z',
-  source: 'WHO / ECDC / CDC',
-  live: false,
-}
-
 function Section({ children }: { children: React.ReactNode }) {
   return (
     <div
@@ -61,11 +52,26 @@ function Section({ children }: { children: React.ReactNode }) {
   )
 }
 
+function fmt(iso: string) {
+  return new Date(iso).toLocaleString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric',
+    hour: '2-digit', minute: '2-digit', timeZoneName: 'short',
+  })
+}
+
 export default function Dashboard() {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const [visibleTypes, setVisibleTypes] = useState<string[]>(ALL_TYPES)
   const [data, setData] = useState<SituationData>(
-    getCached<SituationData>(REFRESH_CACHE_KEY) ?? STATIC_DATA
+    getCached<SituationData>(REFRESH_CACHE_KEY) ?? {
+      confirmed: metaJson.confirmed,
+      deaths: metaJson.deaths,
+      countries: metaJson.countries,
+      usStatesMonitoring: metaJson.usStatesMonitoring,
+      lastUpdated: metaJson.lastUpdated,
+      source: metaJson.source,
+      live: false,
+    }
   )
   const [refreshing, setRefreshing] = useState(false)
   const [showShare, setShowShare] = useState(false)
@@ -93,7 +99,6 @@ export default function Dashboard() {
     }
   }
 
-  // Fetch on mount if cache is stale
   useEffect(() => {
     if (!isFresh(REFRESH_TS_KEY)) {
       handleRefresh()
@@ -101,6 +106,27 @@ export default function Dashboard() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const canRefresh = !isFresh(REFRESH_TS_KEY) && !refreshing
+
+  const statusBadges = [
+    {
+      label: 'WHO Global Risk',
+      value: metaJson.whoGlobalRisk,
+      color: metaJson.whoGlobalRisk === 'LOW' ? 'var(--color-accent-green)' : 'var(--color-accent-orange)',
+      url: metaJson.whoGlobalRiskUrl,
+    },
+    {
+      label: 'CDC Response',
+      value: metaJson.cdcResponseLevel,
+      color: 'var(--color-accent-orange)',
+      url: metaJson.cdcResponseLevelUrl,
+    },
+    {
+      label: 'ECDC EU/EEA Risk',
+      value: metaJson.ecdcRisk,
+      color: metaJson.ecdcRisk === 'VERY LOW' || metaJson.ecdcRisk === 'LOW' ? 'var(--color-accent-green)' : 'var(--color-accent-orange)',
+      url: metaJson.ecdcRiskUrl,
+    },
+  ]
 
   const tiles = [
     {
@@ -136,6 +162,8 @@ export default function Dashboard() {
       color: 'var(--color-accent-blue)',
     },
   ]
+
+  const hcw = metaJson.hcwAlert
 
   return (
     <div style={{ maxWidth: '1200px' }}>
@@ -178,26 +206,7 @@ export default function Dashboard() {
           borderRadius: '6px',
         }}
       >
-        {[
-          {
-            label: 'WHO Global Risk',
-            value: 'LOW',
-            color: 'var(--color-accent-green)',
-            url: 'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON600',
-          },
-          {
-            label: 'CDC Response',
-            value: 'Level 3',
-            color: 'var(--color-accent-orange)',
-            url: 'https://www.cdc.gov/han/php/notices/han00528.html',
-          },
-          {
-            label: 'ECDC EU/EEA Risk',
-            value: 'VERY LOW',
-            color: 'var(--color-accent-green)',
-            url: 'https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak',
-          },
-        ].map((badge) => (
+        {statusBadges.map((badge) => (
           <a
             key={badge.label}
             href={badge.url}
@@ -240,26 +249,10 @@ export default function Dashboard() {
 
         <div style={{ marginLeft: isMobile ? 0 : 'auto', display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           {data.live && (
-            <span
-              style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: '0.5625rem',
-                color: 'var(--color-accent-green)',
-              }}
-            >
+            <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-accent-green)' }}>
               ● LIVE
             </span>
           )}
-          <span
-            style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.5625rem',
-              color: 'var(--color-text-muted)',
-            }}
-          >
-            {data.source} ·{' '}
-            {new Date(data.lastUpdated).toLocaleString()}
-          </span>
           <button
             onClick={handleRefresh}
             disabled={!canRefresh}
@@ -278,6 +271,42 @@ export default function Dashboard() {
             {refreshing ? 'Refreshing…' : 'Refresh Data ↻'}
           </button>
         </div>
+      </div>
+
+      {/* Auto-update status row */}
+      <div
+        style={{
+          display: 'flex',
+          gap: '1.5rem',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          marginBottom: '1.25rem',
+          padding: '0.5rem 1rem',
+          backgroundColor: 'var(--color-bg-secondary)',
+          border: '1px solid var(--color-border)',
+          borderRadius: '4px',
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.5625rem',
+            color: 'var(--color-accent-green)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}
+        >
+          ● Auto-update: every 12h
+        </span>
+        <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-text-muted)' }}>
+          Last checked: {fmt(metaJson.lastChecked)}
+        </span>
+        <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-text-muted)' }}>
+          Data updated: {fmt(metaJson.lastUpdated)}
+        </span>
+        <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-text-muted)' }}>
+          {metaJson.source}
+        </span>
       </div>
 
       {/* Case counter row */}
@@ -346,90 +375,83 @@ export default function Dashboard() {
       <EMSBriefingCard />
 
       {/* HEALTHCARE WORKER ALERT CARD */}
-      <div
-        style={{
-          backgroundColor: 'var(--color-bg-secondary)',
-          border: '1px solid var(--color-border)',
-          borderLeft: '4px solid var(--color-accent-red)',
-          borderRadius: '4px',
-          padding: '1rem 1.25rem',
-          marginBottom: '1.25rem',
-        }}
-      >
+      {hcw && (
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            flexWrap: 'wrap',
-            gap: '0.5rem',
-            marginBottom: '0.625rem',
+            backgroundColor: 'var(--color-bg-secondary)',
+            border: '1px solid var(--color-border)',
+            borderLeft: '4px solid var(--color-accent-red)',
+            borderRadius: '4px',
+            padding: '1rem 1.25rem',
+            marginBottom: '1.25rem',
           }}
         >
           <div
             style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              color: 'var(--color-accent-red)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              flexWrap: 'wrap',
+              gap: '0.5rem',
+              marginBottom: '0.625rem',
             }}
           >
-            ⚠ HEALTHCARE WORKER EXPOSURE EVENT — Netherlands
+            <div
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                color: 'var(--color-accent-red)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+              }}
+            >
+              ⚠ {hcw.title}
+            </div>
+            <span
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.625rem',
+                color: 'var(--color-text-muted)',
+              }}
+            >
+              {hcw.date}
+            </span>
           </div>
-          <span
+
+          <p
             style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.625rem',
-              color: 'var(--color-text-muted)',
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: '0.9375rem',
+              color: 'var(--color-text-primary)',
+              lineHeight: 1.65,
+              margin: '0 0 0.75rem 0',
             }}
           >
-            May 12, 2026
-          </span>
-        </div>
+            {hcw.content}
+          </p>
 
-        <p
-          style={{
-            fontFamily: "'IBM Plex Sans', sans-serif",
-            fontSize: '0.9375rem',
-            color: 'var(--color-text-primary)',
-            lineHeight: 1.65,
-            margin: '0 0 0.75rem 0',
-          }}
-        >
-          12 staff at Radboud UMC university medical centre in Nijmegen placed in precautionary
-          quarantine after an incorrect blood sampling procedure was followed with a confirmed Andes
-          hantavirus patient. May 12, 2026.
-        </p>
-
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            flexWrap: 'wrap',
-          }}
-        >
-          <SourceChip
-            authority="Euronews"
-            documentTitle="Dutch hospital workers quarantined after faulty procedure"
-            date="May 12, 2026"
-            url="https://www.euronews.com/health/2026/05/12/dutch-hospital-workers-quarantined-after-faulty-procedure-treating-hantavirus-patient"
-          />
-          <Link
-            to="/ppe"
-            style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.75rem',
-              color: 'var(--color-accent-red)',
-              textDecoration: 'none',
-            }}
-          >
-            Review PPE &amp; IPC Guidance →
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <SourceChip
+              authority={hcw.sourceLabel}
+              documentTitle={hcw.title}
+              date={hcw.date}
+              url={hcw.sourceUrl}
+            />
+            <Link
+              to="/ppe"
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.75rem',
+                color: 'var(--color-accent-red)',
+                textDecoration: 'none',
+              }}
+            >
+              Review PPE &amp; IPC Guidance →
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Main two-column grid */}
       <div

@@ -1,0 +1,22 @@
+{
+  "confirmed": 11,
+  "deaths": 3,
+  "countries": 8,
+  "usStatesMonitoring": 11,
+  "source": "WHO / ECDC / CDC",
+  "lastUpdated": "2026-05-12T00:00:00Z",
+  "lastChecked": "2026-05-12T00:00:00Z",
+  "whoGlobalRisk": "LOW",
+  "whoGlobalRiskUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON600",
+  "cdcResponseLevel": "Level 3",
+  "cdcResponseLevelUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+  "ecdcRisk": "VERY LOW",
+  "ecdcRiskUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+  "hcwAlert": {
+    "title": "HEALTHCARE WORKER EXPOSURE EVENT — Netherlands",
+    "content": "12 staff at Radboud UMC university medical centre in Nijmegen placed in precautionary quarantine after an incorrect blood sampling procedure was followed with a confirmed Andes hantavirus patient. May 12, 2026.",
+    "date": "2026-05-12",
+    "sourceLabel": "Euronews",
+    "sourceUrl": "https://www.euronews.com/health/2026/05/12/dutch-hospital-workers-quarantined-after-faulty-procedure-treating-hantavirus-patient"
+  }
+}
