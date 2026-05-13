@@ -446,17 +446,19 @@ export default function Dashboard() {
         />
       )}
 
-      {/* Share button — fixed bottom-right */}
+      {/* Share button — fixed bottom-right; bottom accounts for iOS home-indicator safe area */}
       <button
         onClick={() => setShowShare(true)}
+        aria-label="Share outbreak alert"
         style={{
           position: 'fixed',
-          bottom: '1.5rem',
+          bottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))',
           right: '1.5rem',
           fontFamily: "'IBM Plex Mono', monospace",
           fontSize: '0.75rem',
           fontWeight: 700,
-          padding: '0.625rem 1rem',
+          padding: '0.75rem 1rem',
+          minHeight: '44px',
           backgroundColor: 'var(--color-emergenz)',
           border: 'none',
           borderRadius: '4px',

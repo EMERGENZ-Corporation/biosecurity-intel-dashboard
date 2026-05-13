@@ -45,7 +45,8 @@ export default function Timeline() {
           {' — '}Early outbreak entries (grey) sourced from news media and Wikipedia for situational awareness only. Not clinical guidance.
         </p>
       </div>
-      <div
+      <ul
+        aria-label="Outbreak timeline events"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -55,10 +56,13 @@ export default function Timeline() {
           overflowY: 'auto',
           overflowX: 'hidden',
           paddingRight: '0.25rem',
+          listStyle: 'none',
+          margin: 0,
+          padding: 0,
         }}
       >
         {events.map((event) => (
-          <div
+          <li
             key={event.id}
             style={{
               display: 'flex',
@@ -116,9 +120,9 @@ export default function Timeline() {
                 />
               </div>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   )
 }

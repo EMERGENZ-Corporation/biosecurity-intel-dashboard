@@ -264,7 +264,7 @@ export default function PPE() {
             authority: 'CDC',
             documentTitle: 'LRN Test Directory — Hantavirus testing capabilities by jurisdiction',
             date: '2026-05-06',
-            url: 'https://www.cdc.gov/lrn/testdirectory.html',
+            url: 'https://www.cdc.gov/laboratory-response-network/php/biological/index.html',
           },
         ]}
       />

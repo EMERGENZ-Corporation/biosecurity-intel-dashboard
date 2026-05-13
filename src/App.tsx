@@ -36,9 +36,53 @@ export default function App() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {!acknowledged && <AcknowledgmentModal onAcknowledge={() => setAcknowledged(true)} />}
+
+      {/* Skip-to-content link — visually hidden until focused (WCAG 2.4.1) */}
+      <a
+        href="#main-content"
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          top: 'auto',
+          width: '1px',
+          height: '1px',
+          overflow: 'hidden',
+          zIndex: 10000,
+        }}
+        onFocus={(e) => {
+          const el = e.currentTarget
+          el.style.left = '1rem'
+          el.style.top = '1rem'
+          el.style.width = 'auto'
+          el.style.height = 'auto'
+          el.style.overflow = 'visible'
+          el.style.backgroundColor = 'var(--color-emergenz)'
+          el.style.color = '#000'
+          el.style.padding = '0.5rem 1rem'
+          el.style.borderRadius = '4px'
+          el.style.fontFamily = "'IBM Plex Mono', monospace"
+          el.style.fontSize = '0.875rem'
+          el.style.fontWeight = '700'
+        }}
+        onBlur={(e) => {
+          const el = e.currentTarget
+          el.style.left = '-9999px'
+          el.style.top = 'auto'
+          el.style.width = '1px'
+          el.style.height = '1px'
+          el.style.overflow = 'hidden'
+          el.style.backgroundColor = ''
+          el.style.color = ''
+          el.style.padding = ''
+          el.style.borderRadius = ''
+        }}
+      >
+        Skip to main content
+      </a>
+
       <NavBar />
       <DisclaimerBanner />
-      <main style={{ flex: 1, padding: '1.5rem 1rem', maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
+      <main id="main-content" style={{ flex: 1, padding: '1.5rem 1rem', maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Dashboard />} />

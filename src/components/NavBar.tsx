@@ -159,8 +159,11 @@ export default function NavBar() {
               onClick={closeMenu}
               style={({ isActive }) => ({
                 ...linkStyle(isActive),
-                padding: '0.625rem 0.75rem',
+                padding: '0.75rem 0.875rem',
                 fontSize: '0.9375rem',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
               })}
             >
               {label}
