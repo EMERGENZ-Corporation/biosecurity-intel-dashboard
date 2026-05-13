@@ -33,6 +33,7 @@ export default function Clinical() {
         documentTitle="About Andes Virus / WHO DON599"
         publicationDate="2024 / 2026-05-04"
         sourceUrl="https://www.cdc.gov/hantavirus/about/andesvirus.html"
+        license="CC BY-NC-SA 3.0 IGO (WHO content)"
       />
 
       <ContentBlock
