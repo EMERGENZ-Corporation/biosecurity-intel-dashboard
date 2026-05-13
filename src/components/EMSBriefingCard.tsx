@@ -56,7 +56,7 @@ export default function EMSBriefingCard() {
         ))}
       </ul>
 
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', marginBottom: '0.5rem' }}>
         <span
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
@@ -64,7 +64,7 @@ export default function EMSBriefingCard() {
             color: 'var(--color-text-muted)',
           }}
         >
-          Updated{' '}
+          Manually curated · Last reviewed{' '}
           {new Date(emsBriefing.updatedAt).toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',
@@ -85,6 +85,18 @@ export default function EMSBriefingCard() {
           View Source Documents ↗
         </a>
       </div>
+      <p
+        style={{
+          fontFamily: "'IBM Plex Mono', monospace',",
+          fontSize: '0.5625rem',
+          color: 'var(--color-text-muted)',
+          margin: 0,
+          lineHeight: 1.4,
+        }}
+      >
+        ⚠ Verify contact numbers (CDC EOC 770-488-7100 · NYC DOH 866-692-3641) directly with
+        issuing authority before operational use. Reproduced from May 2026 source documents.
+      </p>
     </div>
   )
 }

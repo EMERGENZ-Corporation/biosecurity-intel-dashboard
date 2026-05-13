@@ -14,20 +14,37 @@ const CATEGORY_COLORS: Record<TimelineEvent['category'], string> = {
 export default function Timeline() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <h2
-        style={{
-          fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: '0.75rem',
-          fontWeight: 600,
-          color: 'var(--color-text-secondary)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.1em',
-          margin: '0 0 1rem 0',
-          flexShrink: 0,
-        }}
-      >
-        Outbreak Timeline
-      </h2>
+      <div style={{ flexShrink: 0, marginBottom: '0.75rem' }}>
+        <h2
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 600,
+            color: 'var(--color-text-secondary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            margin: '0 0 0.375rem 0',
+          }}
+        >
+          Outbreak Timeline
+        </h2>
+        <p
+          style={{
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: '0.6875rem',
+            color: 'var(--color-text-muted)',
+            margin: 0,
+            lineHeight: 1.4,
+          }}
+        >
+          Color-coded by authority:{' '}
+          <span style={{ color: 'var(--color-accent-blue)' }}>WHO</span>{' · '}
+          <span style={{ color: 'var(--color-accent-red)' }}>CDC</span>{' · '}
+          <span style={{ color: 'var(--color-accent-orange)' }}>ECDC</span>{' · '}
+          <span style={{ color: 'var(--color-text-muted)' }}>News/other</span>
+          {' — '}Early outbreak entries (grey) sourced from news media and Wikipedia for situational awareness only. Not clinical guidance.
+        </p>
+      </div>
       <div
         style={{
           display: 'flex',
