@@ -62,27 +62,69 @@ export default function NavBar() {
           style={{ textDecoration: 'none' }}
           aria-label="EMERGENZ Hantavirus Intel Dashboard — home"
         >
-          <span
-            style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontWeight: 600,
-              fontSize: isMobile ? '0.875rem' : '1rem',
-              color: 'var(--color-emergenz)',
-              letterSpacing: '0.05em',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            EMERGENZ
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', whiteSpace: 'nowrap' }}>
+            {/* Wordmark — Singapore Sling font */}
             <span
               style={{
-                color: 'var(--color-text-secondary)',
-                fontWeight: 400,
-                marginLeft: '0.5rem',
+                fontFamily: "'Singapore Sling', sans-serif",
+                fontSize: isMobile ? '1.375rem' : '1.625rem',
+                lineHeight: 1,
+                letterSpacing: '0.02em',
               }}
             >
-              {isMobile ? 'HANTA INTEL' : 'HANTAVIRUS INTEL'}
+              <span style={{ color: '#E52222' }}>EMERGEN</span>
+              <span style={{ color: '#2E86DE' }}>Z</span>
             </span>
-          </span>
+
+            {/* Star of Life — outlined, matches logo treatment */}
+            <svg
+              width={isMobile ? 16 : 20}
+              height={isMobile ? 16 : 20}
+              viewBox="0 0 100 100"
+              fill="none"
+              aria-hidden="true"
+              style={{ flexShrink: 0 }}
+            >
+              {/* Six-arm star shape */}
+              <path
+                d="M42 5h16v26l22.6-13 8 13.9L66 45h22v16H66l22.6 13.1-8 13.9L58 75v26H42V75L19.4 88.1l-8-13.9L34 61H12V45h22L11.4 31.9l8-13.9L42 31V5z"
+                stroke="#2E86DE"
+                strokeWidth="3"
+                fill="none"
+              />
+              {/* Rod of Asclepius — staff */}
+              <line x1="50" y1="20" x2="50" y2="80" stroke="#2E86DE" strokeWidth="3.5" strokeLinecap="round" />
+              {/* Serpent — simplified S-curve around staff */}
+              <path
+                d="M50 30 C62 30, 62 42, 50 42 C38 42, 38 54, 50 54 C62 54, 62 66, 50 66"
+                stroke="#2E86DE"
+                strokeWidth="3"
+                fill="none"
+                strokeLinecap="round"
+              />
+              {/* Serpent head */}
+              <circle cx="50" cy="26" r="3.5" fill="#2E86DE" />
+            </svg>
+
+            {/* Subtitle — IBM Plex Mono */}
+            {!isMobile && (
+              <span
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: '0.6875rem',
+                  fontWeight: 400,
+                  color: 'var(--color-text-muted)',
+                  letterSpacing: '0.08em',
+                  paddingLeft: '0.25rem',
+                  borderLeft: '1px solid var(--color-border)',
+                  marginLeft: '0.125rem',
+                  lineHeight: 1.2,
+                }}
+              >
+                HANTAVIRUS<br />INTEL DASHBOARD
+              </span>
+            )}
+          </div>
         </NavLink>
 
         {/* Desktop links */}
