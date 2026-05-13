@@ -52,6 +52,51 @@ export default function App() {
           </Routes>
         </Suspense>
       </main>
+
+      <footer
+        style={{
+          borderTop: '1px solid var(--color-border)',
+          backgroundColor: 'var(--color-bg-secondary)',
+          padding: '0.875rem 1rem',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: '1400px',
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '0.5rem',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              color: 'var(--color-text-muted)',
+              letterSpacing: '0.04em',
+            }}
+          >
+            © {new Date().getFullYear()} EMERGENZ Corporation · 501(c)(3) Nonprofit · All rights reserved
+          </span>
+          <a
+            href="https://www.emergenz.us"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              color: 'var(--color-emergenz)',
+              textDecoration: 'none',
+              letterSpacing: '0.04em',
+            }}
+          >
+            www.emergenz.us ↗
+          </a>
+        </div>
+      </footer>
     </div>
   )
 }
