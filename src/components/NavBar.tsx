@@ -76,53 +76,33 @@ export default function NavBar() {
               <span style={{ color: '#2E86DE' }}>Z</span>
             </span>
 
-            {/* Star of Life — correct 12-vertex polygon + Rod of Asclepius */}
-            {/*
-              Geometry (100×100 viewBox, center 50,50):
-              Arm half-width=12, outer radius=48, inner-corner radius=24
-              Tips at angles   –90°,–30°,30°,90°,150°,210° → r=48
-              Inner corners at –60°,  0°,60°,120°,180°,240° → r=24
-            */}
+            {/* Star of Life — three overlapping filled rects (union = correct star shape)
+                + white Rod of Asclepius on top */}
             <svg
               width={isMobile ? 16 : 20}
               height={isMobile ? 16 : 20}
               viewBox="0 0 100 100"
-              fill="none"
               aria-hidden="true"
               style={{ flexShrink: 0 }}
             >
-              <polygon
-                points="
-                  50,2
-                  62,29.2
-                  91.6,26
-                  74,50
-                  91.6,74
-                  62,70.8
-                  50,98
-                  38,70.8
-                  8.4,74
-                  26,50
-                  8.4,26
-                  38,29.2
-                "
-                stroke="#2E86DE"
-                strokeWidth="3.5"
-                strokeLinejoin="round"
-                fill="none"
-              />
+              {/* Arm 1 — vertical */}
+              <rect x="33" y="2" width="34" height="96" rx="5" fill="#2E86DE" />
+              {/* Arm 2 — rotated 60° */}
+              <rect x="33" y="2" width="34" height="96" rx="5" fill="#2E86DE" transform="rotate(60 50 50)" />
+              {/* Arm 3 — rotated 120° */}
+              <rect x="33" y="2" width="34" height="96" rx="5" fill="#2E86DE" transform="rotate(120 50 50)" />
               {/* Rod of Asclepius — staff */}
-              <line x1="50" y1="14" x2="50" y2="86" stroke="#2E86DE" strokeWidth="4" strokeLinecap="round" />
+              <line x1="50" y1="11" x2="50" y2="89" stroke="white" strokeWidth="4" strokeLinecap="round" />
               {/* Serpent — S-curve winding around staff */}
               <path
-                d="M50 26 C63 31 63 45 50 50 C37 55 37 69 50 74"
-                stroke="#2E86DE"
+                d="M50 27 C63 32 63 46 50 50 C37 54 37 68 50 73"
+                stroke="white"
                 strokeWidth="3"
                 fill="none"
                 strokeLinecap="round"
               />
               {/* Serpent head */}
-              <ellipse cx="50" cy="21" rx="4" ry="3" fill="#2E86DE" />
+              <ellipse cx="50" cy="22" rx="4.5" ry="4" fill="white" />
             </svg>
 
             {/* Subtitle — IBM Plex Mono */}
