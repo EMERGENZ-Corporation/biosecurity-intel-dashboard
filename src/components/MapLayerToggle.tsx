@@ -1,7 +1,7 @@
 const LAYERS: { type: string; label: string; color: string }[] = [
   { type: 'ship_route', label: 'Ship Route', color: '#388BFD' },
   { type: 'case_confirmed', label: 'Confirmed Cases', color: '#F85149' },
-  { type: 'death', label: 'Deaths', color: '#D29922' },
+  { type: 'death', label: 'Deaths', color: '#FF6B35' },
   { type: 'monitoring_facility', label: 'Monitoring Facilities', color: '#E3B341' },
   { type: 'us_state_monitoring', label: 'U.S. State Monitoring', color: '#3FB950' },
   { type: 'flight_tracing', label: 'Flight Tracing', color: '#BC8CFF' },

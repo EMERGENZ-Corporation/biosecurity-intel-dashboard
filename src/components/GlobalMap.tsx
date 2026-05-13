@@ -6,13 +6,13 @@ import markersData from '../data/markers.json'
 const markers = markersData as Marker[]
 
 const TYPE_COLORS: Record<string, string> = {
-  ship_route: '#388BFD',
-  case_confirmed: '#F85149',
-  death: '#D29922',
-  monitoring_facility: '#E3B341',
+  ship_route:          '#388BFD',
+  case_confirmed:      '#F85149',
+  death:               '#FF6B35',  // orange — distinct from yellow monitoring facilities
+  monitoring_facility: '#E3B341',  // amber/gold
   us_state_monitoring: '#3FB950',
-  flight_tracing: '#BC8CFF',
-  return_destination: '#8B949E',
+  flight_tracing:      '#BC8CFF',
+  return_destination:  '#8B949E',
 }
 
 const LARGE_RADIUS_TYPES = new Set(['case_confirmed', 'death', 'monitoring_facility', 'flight_tracing'])
@@ -22,6 +22,7 @@ interface Props {
 }
 
 const popupStyle = `
+  /* Popup */
   .hantavirus-popup .leaflet-popup-content-wrapper {
     background: #21262D;
     color: #E6EDF3;
@@ -38,6 +39,28 @@ const popupStyle = `
     font-size: 0.8125rem;
     line-height: 1.5;
   }
+  /* Dark mode zoom controls */
+  .leaflet-bar a,
+  .leaflet-bar a:hover {
+    background-color: #21262D;
+    border-color: #30363D;
+    color: #E6EDF3;
+  }
+  .leaflet-bar a:hover {
+    background-color: #30363D;
+  }
+  .leaflet-bar {
+    border: 1px solid #30363D !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  /* Dark mode attribution */
+  .leaflet-control-attribution {
+    background: rgba(13,17,23,0.85) !important;
+    color: #8B949E !important;
+  }
+  .leaflet-control-attribution a {
+    color: #388BFD !important;
+  }
 `
 
 export default function GlobalMap({ visibleTypes }: Props) {
@@ -53,8 +76,10 @@ export default function GlobalMap({ visibleTypes }: Props) {
         scrollWheelZoom
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          subdomains="abcd"
+          maxZoom={20}
         />
         {visible.map((marker) => {
           const color = TYPE_COLORS[marker.type] ?? '#FFFFFF'
