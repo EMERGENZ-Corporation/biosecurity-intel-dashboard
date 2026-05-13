@@ -1,0 +1,90 @@
+[
+  {
+    "state": "Nebraska",
+    "personsMonitored": 16,
+    "exposureCategory": "Repatriated passengers",
+    "confirmedCases": 1,
+    "confirmedCasesNote": "1 asymptomatic positive in UNMC biocontainment unit",
+    "sourceUrl": "https://www.nebraskamed.com/newsroom/nebraska-medicine-treating-hantavirus-patient"
+  },
+  {
+    "state": "Georgia",
+    "personsMonitored": 2,
+    "exposureCategory": "Repatriated passengers",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "1 Emory patient tested negative May 12",
+    "sourceUrl": "https://emergency.cdc.gov/han/2026/han00528.asp"
+  },
+  {
+    "state": "California",
+    "personsMonitored": 4,
+    "exposureCategory": "3 passengers + 1 flight contact",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "",
+    "sourceUrl": "https://www.cdph.ca.gov/"
+  },
+  {
+    "state": "New York",
+    "personsMonitored": 3,
+    "exposureCategory": "Passengers (NYC, Orange County, Westchester)",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "",
+    "sourceUrl": "https://health.ny.gov/"
+  },
+  {
+    "state": "New Jersey",
+    "personsMonitored": 2,
+    "exposureCategory": "Flight contacts (KLM KL592)",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "",
+    "sourceUrl": "https://www.nj.gov/health/cd/topics/hantavirus.shtml"
+  },
+  {
+    "state": "Texas",
+    "personsMonitored": 2,
+    "exposureCategory": "Passengers (pre-outbreak return)",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "",
+    "sourceUrl": "https://www.dshs.texas.gov/"
+  },
+  {
+    "state": "Arizona",
+    "personsMonitored": 1,
+    "exposureCategory": "Passenger (disembarked Saint Helena Apr 24)",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "",
+    "sourceUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/hantavirus/"
+  },
+  {
+    "state": "Virginia",
+    "personsMonitored": null,
+    "exposureCategory": "Passengers and contacts",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "Number TBD",
+    "sourceUrl": "https://www.vdh.virginia.gov/"
+  },
+  {
+    "state": "Maryland",
+    "personsMonitored": 2,
+    "exposureCategory": "Flight contacts",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "",
+    "sourceUrl": "https://health.maryland.gov/"
+  },
+  {
+    "state": "Kansas",
+    "personsMonitored": 3,
+    "exposureCategory": "High-risk close contacts",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "",
+    "sourceUrl": "https://www.kdhe.ks.gov/"
+  },
+  {
+    "state": "Washington",
+    "personsMonitored": 3,
+    "exposureCategory": "2 flight contacts + 1 passenger",
+    "confirmedCases": 0,
+    "confirmedCasesNote": "",
+    "sourceUrl": "https://doh.wa.gov/"
+  }
+]
