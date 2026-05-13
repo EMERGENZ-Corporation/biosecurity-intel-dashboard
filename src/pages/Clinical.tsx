@@ -79,10 +79,9 @@ export default function Clinical() {
         ]}
       />
 
-      {/* C4 FIX: NYC DOH reference sentence removed; CDC source is authoritative for the 4–42 day window */}
       <ContentBlock
         title="Incubation Period"
-        content="Signs and symptoms of HPS due to Andes virus appear 4 to 42 days after exposure. The wide incubation window has significant implications for contact tracing and monitoring decisions, as persons exposed during the MV Hondius voyage may develop symptoms well beyond the initial identification period."
+        content={`Signs and symptoms of HPS due to Andes virus appear 4 to 42 days after exposure. The wide incubation window has significant implications for contact tracing and monitoring decisions, as persons exposed during the MV Hondius voyage may develop symptoms well beyond the initial identification period.\n\nClinical screening note (NETEC): Most clinical screening protocols inquire about exposures within 7–30 days; for hantavirus, clinicians should ask about the past 6 weeks given the extended incubation window. Nebraska Medicine similarly cites symptom onset of "one to six weeks" after exposure.`}
         authorityName="CDC"
         documentTitle="About Andes Virus"
         publicationDate="2024"
@@ -93,6 +92,18 @@ export default function Clinical() {
             documentTitle: 'HAN Advisory #8 — Andes Strain Hantavirus (also cites 4–42 day window)',
             date: '2026-05-08',
             url: 'https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf',
+          },
+          {
+            authority: 'NETEC',
+            documentTitle: 'Hantavirus: Clinical Insights, Emerging Evidence, and What Every Healthcare Worker Should Know (6-week screening window)',
+            date: '2026-05-06',
+            url: 'https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/',
+          },
+          {
+            authority: 'Nebraska Medicine',
+            documentTitle: 'What You Need to Know About Hantavirus — Biocontainment Unit',
+            date: '2026-05-11',
+            url: 'https://www.nebraskamed.com/health/infectious-diseases/biocontainment-unit/what-you-need-to-know-about-hantavirus',
           },
         ]}
       />
@@ -161,12 +172,44 @@ export default function Clinical() {
       />
 
       <ContentBlock
+        title='Laboratory Diagnostic Indicators — "The Classic Five"'
+        content={`Dr. Maria Frank (Johns Hopkins Hospital, Director of Special Pathogens Center; RESPTIC Director), via NETEC Clinical Insights (updated May 2026), identifies five laboratory findings that strongly suggest HCPS when clustered together:\n\n1. Thrombocytopenia\n2. Hemoconcentration\n3. Left shift without toxic granulation\n4. More than 10% immunoblasts on peripheral smear\n5. Rapid onset of respiratory compromise\n\n"The presence of four or more of these strongly suggests HCPS."\n\nTwo primary diagnostic testing approaches:\n• PCR: useful because viremia persists throughout illness\n• Serology: IgM typically positive at symptom onset\n\nA confirmed case requires compatible illness plus: positive IgM, rising IgG titers, positive immunohistochemistry, or positive PCR. HCPS is a nationally notifiable condition — report suspected cases promptly to local or state health departments. Contact CDC Emergency Operations Center at 770-488-7100 for consultation, testing support, and confirmatory diagnostics.`}
+        authorityName="NETEC"
+        documentTitle='Hantavirus: Clinical Insights, Emerging Evidence, and What Every Healthcare Worker Should Know (Dr. Maria Frank — "The Classic Five")'
+        publicationDate="2026-05-06"
+        sourceUrl="https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/"
+      />
+
+      <ContentBlock
         title="Treatment"
-        content="There is no specific treatment for hantavirus infection. If HPS is suspected, the patient needs emergency medical care immediately, preferably in the intensive care unit. Supportive care is the mainstay of treatment and should be initiated even before diagnostic confirmation. Management priorities include: aggressive management of pulmonary edema and respiratory failure; early intubation and mechanical ventilation with low tidal volume (lung-protective) strategy; hemodynamic support with vasopressors for cardiogenic shock; careful fluid management to avoid exacerbating pulmonary edema; and ECMO as a bridge to recovery in refractory cardiopulmonary failure where available. There is no approved antiviral therapy for hantavirus. Ribavirin has been studied but has not demonstrated efficacy in controlled trials for HPS."
+        content={`There is no specific treatment for hantavirus infection. If HPS is suspected, the patient needs emergency medical care immediately, preferably in the intensive care unit. Supportive care is the mainstay of treatment and should be initiated even before diagnostic confirmation.\n\nManagement priorities include:\n• Aggressive management of pulmonary edema and respiratory failure\n• Early intubation and mechanical ventilation with low tidal volume (lung-protective) strategy\n• Hemodynamic support with vasopressors for cardiogenic shock — avoid fluid boluses for hypotension\n• Careful fluid management to avoid exacerbating pulmonary edema\n• Empiric broad-spectrum antibiotics are appropriate until bacterial infection is excluded\n• ECMO as a bridge to recovery in refractory cardiopulmonary failure where available\n\nThere is no approved antiviral therapy for hantavirus. Ribavirin has been studied but has not demonstrated efficacy in controlled trials for HPS.\n\nWithout early supportive care, most deaths occur within 24–48 hours of onset of the cardiopulmonary phase (NETEC).`}
         authorityName="CDC"
         documentTitle="Hantavirus Pulmonary Syndrome: Clinical Overview for Clinicians"
         publicationDate="2024"
         sourceUrl="https://www.cdc.gov/hantavirus/hcp/clinical-overview/hps.html"
+        additionalSources={[
+          {
+            authority: 'NETEC',
+            documentTitle: 'Hantavirus: Clinical Insights, Emerging Evidence, and What Every Healthcare Worker Should Know (empiric antibiotics; 24–48h mortality timeline)',
+            date: '2026-05-06',
+            url: 'https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/',
+          },
+          {
+            authority: 'NYC DOH',
+            documentTitle: 'HAN Advisory #8 — Andes Strain Hantavirus (ECMO reference)',
+            date: '2026-05-08',
+            url: 'https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf',
+          },
+        ]}
+      />
+
+      <ContentBlock
+        title="Poor Prognostic Indicators"
+        content={`The following findings indicate high risk of fatal outcome and should prompt immediate escalation to ECMO-capable facility (per NETEC Clinical Insights, Dr. Bradfute and Dr. Frank, May 2026):\n\n• Lactate >4.0 mmol/L\n• Cardiac index <2.2 L/min/m²\n• Severe myocardial depression, arrhythmias, or electromechanical dissociation\n\nAdditional high-risk clinical features:\n• Most patients develop hypotension within 24 hours of cardiopulmonary phase onset\n• Pulmonary edema and hypoxia typically worsen rapidly once the cardiopulmonary phase begins\n• Without early supportive care including ECMO where indicated, most deaths occur within 24–48 hours of cardiopulmonary phase onset\n\nSurvivors often experience a polyuric phase and may recover rapidly, though fatigue may persist for weeks to months.`}
+        authorityName="NETEC"
+        documentTitle="Hantavirus: Clinical Insights, Emerging Evidence, and What Every Healthcare Worker Should Know (Dr. Bradfute, Dr. Frank — prognostic indicators)"
+        publicationDate="2026-05-06"
+        sourceUrl="https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/"
       />
 
       {/*

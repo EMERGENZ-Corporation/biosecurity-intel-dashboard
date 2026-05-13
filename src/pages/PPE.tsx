@@ -33,7 +33,7 @@ export default function PPE() {
       */}
       <ContentBlock
         title="Risk Stratification"
-        content={`ECDC Rapid Risk Assessment (May 6, 2026) identifies two risk tiers for healthcare worker exposure:\n\nTier 1 — Routine Patient Contact:\nStandard and droplet precautions apply. Surgical mask, gloves, gown, and eye protection are the minimum requirements for routine contact with a suspected or confirmed ANDV patient.\n\nTier 2 — Aerosol-Generating Procedures (AGPs):\nStandard and droplet precautions should be escalated to airborne precautions in the event that aerosol-generating procedures are performed. AGPs include: endotracheal intubation and extubation, bag-valve-mask (BVM) ventilation, CPAP/BiPAP, nebulizer treatments, bronchoscopy, and suctioning of the airway.\n\nNote: NYC DOH HAN Advisory #8 recommends airborne infection isolation precautions for ALL contacts with suspected or confirmed ANDV patients — not limited to AGPs — citing the documented person-to-person transmission potential of Andes virus.`}
+        content={`ECDC Rapid Risk Assessment (May 6, 2026) identifies two risk tiers for healthcare worker exposure:\n\nTier 1 — Routine Patient Contact:\nStandard and droplet precautions apply. Surgical mask, gloves, gown, and eye protection are the minimum requirements for routine contact with a suspected or confirmed ANDV patient.\n\nTier 2 — Aerosol-Generating Procedures (AGPs):\nStandard and droplet precautions should be escalated to airborne precautions in the event that aerosol-generating procedures are performed. AGPs include: endotracheal intubation and extubation, bag-valve-mask (BVM) ventilation, CPAP/BiPAP, nebulizer treatments, bronchoscopy, and suctioning of the airway.\n\nNote: NYC DOH HAN Advisory #8 recommends airborne infection isolation precautions for ALL contacts with suspected or confirmed ANDV patients — not limited to AGPs — citing the documented person-to-person transmission potential of Andes virus.\n\nNETEC Gown Specification (Dr. Maria Frank / Jill Morgan, Emory Biocontainment PPE Working Group):\n"Dry VHF PPE with respiratory protection is sufficient for suspect and confirmed Andes hantavirus patients." Minimum gown specification: fluid-resistant gown, AAMI Level 3 or 4, or coverall. Respiratory protection: fit-tested N95 or PAPR (powered air-purifying respirator). This specification aligns with, and provides greater detail than, the NYC DOH and ECDC airborne precaution recommendations.`}
         authorityName="ECDC"
         documentTitle="Rapid Risk Assessment — Hantavirus Disease, Cruise Ship Cluster"
         publicationDate="2026-05-06"
@@ -45,6 +45,12 @@ export default function PPE() {
             documentTitle: 'HAN Advisory #8 — Andes Strain Hantavirus (airborne precautions for all contacts)',
             date: '2026-05-08',
             url: 'https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf',
+          },
+          {
+            authority: 'NETEC',
+            documentTitle: 'Hantavirus: Clinical Insights — Dry VHF PPE specification; AAMI Level 3/4 gown; PAPR alternative (Jill Morgan, Emory PPE Working Group)',
+            date: '2026-05-06',
+            url: 'https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/',
           },
         ]}
       />
@@ -116,7 +122,7 @@ export default function PPE() {
                 },
                 {
                   scenario: 'AGP (intubation, BVM, CPAP, nebulizer)',
-                  ppe: 'N95 or higher, gloves, gown, face shield',
+                  ppe: 'Fit-tested N95 or PAPR, AAMI Level 3/4 gown or coverall, gloves, face shield',
                   sources: [
                     {
                       label: 'NYC DOH HAN #8',
@@ -126,15 +132,23 @@ export default function PPE() {
                       label: 'ECDC RRA',
                       url: 'https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and',
                     },
+                    {
+                      label: 'NETEC',
+                      url: 'https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/',
+                    },
                   ],
                 },
                 {
                   scenario: 'Suspected/confirmed ANDV patient (any contact)',
-                  ppe: 'Airborne isolation room + N95+ + gown + gloves + eye protection',
+                  ppe: 'AIIR + fit-tested N95 or PAPR + AAMI Level 3/4 gown or coverall + gloves + eye protection',
                   sources: [
                     {
                       label: 'NYC DOH HAN #8',
                       url: 'https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf',
+                    },
+                    {
+                      label: 'NETEC',
+                      url: 'https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/',
                     },
                   ],
                 },

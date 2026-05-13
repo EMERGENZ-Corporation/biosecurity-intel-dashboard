@@ -18,6 +18,7 @@ const DOC_TYPE_COLORS: Record<string, string> = {
   ECDC: 'var(--color-accent-orange)',
   'NYC DOH': 'var(--color-accent-purple)',
   NETEC: 'var(--color-accent-green)',
+  'Nebraska Medicine': 'var(--color-accent-green)',
 }
 
 function AuthorityBadge({ authority }: { authority: string }) {
