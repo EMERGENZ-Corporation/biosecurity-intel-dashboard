@@ -76,7 +76,13 @@ export default function NavBar() {
               <span style={{ color: '#2E86DE' }}>Z</span>
             </span>
 
-            {/* Star of Life — outlined, matches logo treatment */}
+            {/* Star of Life — correct 12-vertex polygon + Rod of Asclepius */}
+            {/*
+              Geometry (100×100 viewBox, center 50,50):
+              Arm half-width=12, outer radius=48, inner-corner radius=24
+              Tips at angles   –90°,–30°,30°,90°,150°,210° → r=48
+              Inner corners at –60°,  0°,60°,120°,180°,240° → r=24
+            */}
             <svg
               width={isMobile ? 16 : 20}
               height={isMobile ? 16 : 20}
@@ -85,25 +91,38 @@ export default function NavBar() {
               aria-hidden="true"
               style={{ flexShrink: 0 }}
             >
-              {/* Six-arm star shape */}
-              <path
-                d="M42 5h16v26l22.6-13 8 13.9L66 45h22v16H66l22.6 13.1-8 13.9L58 75v26H42V75L19.4 88.1l-8-13.9L34 61H12V45h22L11.4 31.9l8-13.9L42 31V5z"
+              <polygon
+                points="
+                  50,2
+                  62,29.2
+                  91.6,26
+                  74,50
+                  91.6,74
+                  62,70.8
+                  50,98
+                  38,70.8
+                  8.4,74
+                  26,50
+                  8.4,26
+                  38,29.2
+                "
                 stroke="#2E86DE"
-                strokeWidth="3"
+                strokeWidth="3.5"
+                strokeLinejoin="round"
                 fill="none"
               />
               {/* Rod of Asclepius — staff */}
-              <line x1="50" y1="20" x2="50" y2="80" stroke="#2E86DE" strokeWidth="3.5" strokeLinecap="round" />
-              {/* Serpent — simplified S-curve around staff */}
+              <line x1="50" y1="14" x2="50" y2="86" stroke="#2E86DE" strokeWidth="4" strokeLinecap="round" />
+              {/* Serpent — S-curve winding around staff */}
               <path
-                d="M50 30 C62 30, 62 42, 50 42 C38 42, 38 54, 50 54 C62 54, 62 66, 50 66"
+                d="M50 26 C63 31 63 45 50 50 C37 55 37 69 50 74"
                 stroke="#2E86DE"
                 strokeWidth="3"
                 fill="none"
                 strokeLinecap="round"
               />
               {/* Serpent head */}
-              <circle cx="50" cy="26" r="3.5" fill="#2E86DE" />
+              <ellipse cx="50" cy="21" rx="4" ry="3" fill="#2E86DE" />
             </svg>
 
             {/* Subtitle — IBM Plex Mono */}
