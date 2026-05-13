@@ -33,7 +33,7 @@ export default function PPE() {
         authorityName="ECDC"
         documentTitle="Rapid Risk Assessment — Hantavirus Disease, Cruise Ship Cluster"
         publicationDate="2026-05-06"
-        sourceUrl="https://www.ecdc.europa.eu/en/publications-data/rapid-risk-assessment-hantavirus-disease-associated-cruise-ship"
+        sourceUrl="https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and"
         license="Open Access with Attribution (ECDC)"
       />
 
@@ -97,21 +97,21 @@ export default function PPE() {
                   ppe: 'Surgical mask, gloves, gown, eye protection',
                   source: 'ECDC',
                   sourceUrl:
-                    'https://www.ecdc.europa.eu/en/publications-data/rapid-risk-assessment-hantavirus-disease-associated-cruise-ship',
+                    'https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and',
                 },
                 {
                   scenario: 'AGP (intubation, BVM, CPAP, nebulizer)',
                   ppe: 'N95 or higher, gloves, gown, face shield',
                   source: 'NYC DOH / ECDC',
                   sourceUrl:
-                    'https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory8.pdf',
+                    'https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf',
                 },
                 {
                   scenario: 'Suspected/confirmed ANDV patient (any contact)',
                   ppe: 'Airborne isolation + N95+ + gown + gloves + eye protection',
                   source: 'NYC DOH HAN #8',
                   sourceUrl:
-                    'https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory8.pdf',
+                    'https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf',
                 },
               ].map((row, i) => (
                 <tr
@@ -162,7 +162,7 @@ export default function PPE() {
         authorityName="NYC DOH"
         documentTitle="HAN Advisory #8 — Andes Strain Hantavirus"
         publicationDate="2026-05-08"
-        sourceUrl="https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory8.pdf"
+        sourceUrl="https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf"
       />
 
       <ContentBlock
@@ -189,7 +189,7 @@ export default function PPE() {
         authorityName="NYC DOH"
         documentTitle="HAN Advisory #8 — Andes Strain Hantavirus"
         publicationDate="2026-05-08"
-        sourceUrl="https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory8.pdf"
+        sourceUrl="https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf"
       >
         <div
           style={{

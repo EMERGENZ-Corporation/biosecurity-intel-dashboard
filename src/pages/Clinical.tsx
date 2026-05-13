@@ -41,7 +41,7 @@ export default function Clinical() {
         authorityName="CDC"
         documentTitle="HAN 528 — Andes Virus Infection Associated with Cruise Ship Voyage"
         publicationDate="2026-05-08"
-        sourceUrl="https://emergency.cdc.gov/han/2026/han00528.asp"
+        sourceUrl="https://www.cdc.gov/han/php/notices/han00528.html"
       />
 
       <ContentBlock
@@ -50,7 +50,7 @@ export default function Clinical() {
         authorityName="CDC"
         documentTitle="HAN 528 — Andes Virus Infection Associated with Cruise Ship Voyage"
         publicationDate="2026-05-08"
-        sourceUrl="https://emergency.cdc.gov/han/2026/han00528.asp"
+        sourceUrl="https://www.cdc.gov/han/php/notices/han00528.html"
       />
 
       <ContentBlock
@@ -122,7 +122,7 @@ export default function Clinical() {
         authorityName="NYC DOH"
         documentTitle="HAN Advisory #8 — Andes Strain Hantavirus"
         publicationDate="2026-05-08"
-        sourceUrl="https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory8.pdf"
+        sourceUrl="https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf"
       />
 
       <ContentBlock
@@ -131,7 +131,7 @@ export default function Clinical() {
         authorityName="NYC DOH"
         documentTitle="HAN Advisory #8 — Andes Strain Hantavirus"
         publicationDate="2026-05-08"
-        sourceUrl="https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory8.pdf"
+        sourceUrl="https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf"
       />
 
       <div

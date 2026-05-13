@@ -148,7 +148,7 @@ export default function Genomics() {
         authorityName="SMC"
         documentTitle="Expert reaction to cases of hantavirus on a cruise ship"
         publicationDate="2026-05-06"
-        sourceUrl="https://www.sciencemediacentre.org/expert-reaction-to-cases-of-hantavirus-on-cruise-ship/"
+        sourceUrl="https://www.sciencemediacentre.org/expert-reaction-to-first-complete-sequence-of-the-hantavirus-from-the-current-cluster-from-mv-hondius-from-the-swiss-patient-with-confirmed-andes-strain-uploaded-to-the-virological-org-platform-by-t/"
       />
 
       <ContentBlock
@@ -157,7 +157,7 @@ export default function Genomics() {
         authorityName="SMC"
         documentTitle="Expert reaction to cases of hantavirus on a cruise ship"
         publicationDate="2026-05-06"
-        sourceUrl="https://www.sciencemediacentre.org/expert-reaction-to-cases-of-hantavirus-on-cruise-ship/"
+        sourceUrl="https://www.sciencemediacentre.org/expert-reaction-to-first-complete-sequence-of-the-hantavirus-from-the-current-cluster-from-mv-hondius-from-the-swiss-patient-with-confirmed-andes-strain-uploaded-to-the-virological-org-platform-by-t/"
       />
 
       {/* Origin Investigation — prominently labeled unconfirmed */}
@@ -247,7 +247,7 @@ export default function Genomics() {
             SOURCE:
           </span>
           <a
-            href="https://www.aljazeera.com/news/2026/5/11/hantavirus-what-to-know"
+            href="https://www.aljazeera.com/news/2026/5/11/two-more-cruise-ship-passengers-test-positive-for-hantavirus"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -259,7 +259,7 @@ export default function Genomics() {
             Al Jazeera (May 11, 2026) ↗
           </a>
           <a
-            href="https://time.com/hantavirus-cruise-ship-outbreak-2026/"
+            href="https://time.com/article/2026/05/04/hantavirus-outbreak-cruise-ship/"
             target="_blank"
             rel="noopener noreferrer"
             style={{

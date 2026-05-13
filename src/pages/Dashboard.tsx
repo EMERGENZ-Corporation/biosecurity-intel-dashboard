@@ -88,14 +88,14 @@ export default function Dashboard() {
             value: 'Level 3',
             color: 'var(--color-accent-orange)',
             source: 'CDC HAN 528',
-            url: 'https://emergency.cdc.gov/han/2026/han00528.asp',
+            url: 'https://www.cdc.gov/han/php/notices/han00528.html',
           },
           {
             label: 'ECDC EU/EEA Risk',
             value: 'VERY LOW',
             color: 'var(--color-accent-green)',
             source: 'ECDC May 12',
-            url: 'https://www.ecdc.europa.eu/en/news-events/epidemiological-update-hantavirus-disease',
+            url: 'https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak',
           },
         ].map((badge) => (
           <a
@@ -166,7 +166,7 @@ export default function Dashboard() {
             value: '11',
             source: 'WHO / ECDC',
             date: 'May 12, 2026',
-            url: 'https://www.ecdc.europa.eu/en/news-events/epidemiological-update-hantavirus-disease',
+            url: 'https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak',
             color: 'var(--color-accent-red)',
           },
           {
@@ -190,7 +190,7 @@ export default function Dashboard() {
             value: '11',
             source: 'CDC + State DOHs',
             date: 'May 12, 2026',
-            url: 'https://emergency.cdc.gov/han/2026/han00528.asp',
+            url: 'https://www.cdc.gov/han/php/notices/han00528.html',
             color: 'var(--color-accent-blue)',
           },
         ].map((tile) => (
