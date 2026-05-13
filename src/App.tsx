@@ -1,8 +1,9 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import DisclaimerBanner from './components/DisclaimerBanner'
 import Dashboard from './pages/Dashboard'
+import AcknowledgmentModal, { hasAcknowledged } from './components/AcknowledgmentModal'
 
 // Lazy-load all secondary pages so they don't bloat the initial bundle.
 // The Dashboard is kept as a static import because it's the landing page.
@@ -30,8 +31,11 @@ function PageLoader() {
 }
 
 export default function App() {
+  const [acknowledged, setAcknowledged] = useState<boolean>(hasAcknowledged)
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {!acknowledged && <AcknowledgmentModal onAcknowledge={() => setAcknowledged(true)} />}
       <NavBar />
       <DisclaimerBanner />
       <main style={{ flex: 1, padding: '1.5rem 1rem', maxWidth: '1400px', width: '100%', margin: '0 auto' }}>

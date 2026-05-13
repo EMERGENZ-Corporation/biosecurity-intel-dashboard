@@ -14,18 +14,34 @@ export default function EMSBriefingCard() {
     >
       {/* Header */}
       <div style={{ marginBottom: '0.75rem' }}>
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.6875rem',
-            fontWeight: 700,
-            color: 'var(--color-emergenz)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            marginBottom: '0.125rem',
-          }}
-        >
-          EMS Operational Briefing
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', flexWrap: 'wrap', marginBottom: '0.125rem' }}>
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.6875rem',
+              fontWeight: 700,
+              color: 'var(--color-emergenz)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+            }}
+          >
+            EMS Operational Briefing
+          </div>
+          <span
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.5rem',
+              fontWeight: 600,
+              color: 'var(--color-text-muted)',
+              border: '1px solid var(--color-border)',
+              borderRadius: '3px',
+              padding: '0.1rem 0.3rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+            }}
+          >
+            AI-assisted summarization
+          </span>
         </div>
         <div
           style={{
@@ -55,6 +71,21 @@ export default function EMSBriefingCard() {
           </li>
         ))}
       </ul>
+
+      <p
+        style={{
+          fontFamily: "'IBM Plex Sans', sans-serif",
+          fontSize: '0.6875rem',
+          color: 'var(--color-text-muted)',
+          fontStyle: 'italic',
+          margin: '0 0 0.625rem 0',
+          lineHeight: 1.5,
+        }}
+      >
+        This briefing is an AI-assisted summarization of the source documents cited. It is a
+        summarization tool only — verify all information against the primary source documents
+        before operational use.
+      </p>
 
       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', marginBottom: '0.5rem' }}>
         <span

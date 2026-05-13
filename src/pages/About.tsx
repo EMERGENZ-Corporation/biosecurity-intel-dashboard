@@ -135,38 +135,90 @@ export default function About() {
       {card(
         <>
           {sectionHeader('Legal Disclaimer')}
-          <p
+          <div
             style={{
               fontFamily: "'IBM Plex Sans', sans-serif",
               fontSize: '0.875rem',
               color: 'var(--color-text-secondary)',
               lineHeight: 1.75,
-              margin: 0,
               padding: '1rem',
               backgroundColor: 'var(--color-bg-tertiary)',
               border: '1px solid var(--color-border)',
               borderRadius: '4px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.875rem',
             }}
           >
-            The EMERGENZ Hantavirus Outbreak Intelligence Dashboard is provided for informational
-            and situational awareness purposes only. Content is aggregated from publicly available
-            sources including the World Health Organization, U.S. Centers for Disease Control and
-            Prevention, European Centre for Disease Prevention and Control, and other public health
-            authorities. EMERGENZ Corporation makes no representations or warranties of any kind,
-            express or implied, regarding the accuracy, completeness, timeliness, currency, or
-            fitness for any particular purpose of the information presented. This dashboard does not
-            constitute medical advice, clinical guidance, treatment recommendations, or official
-            public health direction. It is not a substitute for professional medical judgment, agency
-            protocols, or the directives of a licensed medical director. EMS providers, emergency
-            managers, clinicians, and public safety personnel must follow their agency's established
-            protocols and the directives of their medical director or supervising physician.
-            To the maximum extent permitted by applicable law, EMERGENZ Corporation, its officers,
-            directors, employees, contractors, and affiliates shall not be liable for any direct,
-            indirect, incidental, consequential, clinical, operational, or legal outcome arising from
-            use of or reliance on this dashboard or the information it contains. Use of this
-            dashboard constitutes acceptance of these terms. All source content remains the property
-            of the originating authority and is reproduced under applicable license terms as
-            documented in the Sources Registry.
+            <p style={{ margin: 0 }}>
+              The EMERGENZ Hantavirus Outbreak Intelligence Dashboard is provided for informational
+              and situational awareness purposes only. Content is aggregated from publicly available
+              sources including the World Health Organization, U.S. Centers for Disease Control and
+              Prevention, European Centre for Disease Prevention and Control, and other public health
+              authorities. EMERGENZ Corporation makes no representations or warranties of any kind,
+              express or implied, regarding the accuracy, completeness, timeliness, currency, or
+              fitness for any particular purpose of the information presented. This dashboard does not
+              constitute medical advice, clinical guidance, treatment recommendations, or official
+              public health direction. It is not a substitute for professional medical judgment, agency
+              protocols, or the directives of a licensed medical director. EMS providers, emergency
+              managers, clinicians, and public safety personnel must follow their agency's established
+              protocols and the directives of their medical director or supervising physician.
+              To the maximum extent permitted by applicable law, EMERGENZ Corporation, its officers,
+              directors, employees, contractors, and affiliates shall not be liable for any direct,
+              indirect, incidental, consequential, clinical, operational, or legal outcome arising from
+              use of or reliance on this dashboard or the information it contains. All source content
+              remains the property of the originating authority and is reproduced under applicable
+              license terms as documented in the Sources Registry.
+            </p>
+            <p style={{ margin: 0 }}>
+              <strong>Data currency:</strong> Information presented may not reflect the most current
+              available data. Dashboard data is updated on an automated 12-hour cycle. Users should
+              verify time-sensitive information directly with the originating authority before making
+              operational decisions.
+            </p>
+            <p style={{ margin: 0 }}>
+              <strong>Third-party content:</strong> News feed content is sourced from third-party
+              media outlets and is provided for informational purposes only. EMERGENZ Corporation
+              does not endorse, verify, or take responsibility for third-party content. Official
+              guidance content is sourced from and attributed to the named public health authority
+              in each case.
+            </p>
+            <p style={{ margin: 0 }}>
+              <strong>Assumption of risk:</strong> By accessing this dashboard, users acknowledge
+              that emergency medical and public health decisions involve inherent risk and uncertainty,
+              and that no information system can substitute for trained professional judgment in a
+              clinical or operational setting.
+            </p>
+            <p style={{ margin: 0 }}>
+              <strong>Governing law:</strong> EMERGENZ Corporation is a nonprofit corporation
+              incorporated under the laws of the State of Delaware and registered as a foreign entity
+              in the State of California. This dashboard is operated from the United States. Any
+              disputes arising from use of this dashboard shall be governed by the laws of the State
+              of Delaware, without regard to its conflict of law provisions.
+            </p>
+          </div>
+        </>
+      )}
+
+      {/* Privacy */}
+      {card(
+        <>
+          {sectionHeader('Privacy')}
+          <p
+            style={{
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: '0.9375rem',
+              color: 'var(--color-text-secondary)',
+              lineHeight: 1.7,
+              margin: 0,
+            }}
+          >
+            EMERGENZ Corporation does not collect, store, or process any personally identifiable
+            information through this dashboard. No cookies, tracking pixels, or analytics tools are
+            employed. No user accounts or registration are required. This dashboard is a read-only
+            public information tool. The only browser storage used is <code>sessionStorage</code> to
+            retain your acknowledgment of the disclaimer for the duration of your browser session —
+            this data never leaves your device.
           </p>
         </>
       )}
