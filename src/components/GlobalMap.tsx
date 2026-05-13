@@ -6,16 +6,16 @@ import markersData from '../data/markers.json'
 const markers = markersData as Marker[]
 
 const TYPE_COLORS: Record<string, string> = {
-  'ship-route': '#388BFD',
-  case: '#F85149',
+  ship_route: '#388BFD',
+  case_confirmed: '#F85149',
   death: '#D29922',
-  monitoring: '#E3B341',
-  'us-monitoring': '#3FB950',
-  flight: '#BC8CFF',
-  'us-facility': '#8B949E',
+  monitoring_facility: '#E3B341',
+  us_state_monitoring: '#3FB950',
+  flight_tracing: '#BC8CFF',
+  return_destination: '#8B949E',
 }
 
-const LARGE_RADIUS_TYPES = new Set(['case', 'death', 'monitoring', 'flight'])
+const LARGE_RADIUS_TYPES = new Set(['case_confirmed', 'death', 'monitoring_facility', 'flight_tracing'])
 
 interface Props {
   visibleTypes: string[]

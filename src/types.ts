@@ -3,7 +3,7 @@ export interface Marker {
   name: string
   lat: number
   lng: number
-  type: 'ship-route' | 'case' | 'death' | 'monitoring' | 'us-monitoring' | 'flight' | 'us-facility'
+  type: 'ship_route' | 'case_confirmed' | 'death' | 'monitoring_facility' | 'us_state_monitoring' | 'flight_tracing' | 'return_destination'
   status: string
   description: string
   source: string

@@ -7,7 +7,7 @@ import SourceChip from '../components/SourceChip'
 import GlobalMap from '../components/GlobalMap'
 import MapLayerToggle from '../components/MapLayerToggle'
 
-const ALL_TYPES = ['ship-route', 'case', 'death', 'monitoring', 'us-monitoring', 'flight', 'us-facility']
+const ALL_TYPES = ['ship_route', 'case_confirmed', 'death', 'monitoring_facility', 'us_state_monitoring', 'flight_tracing', 'return_destination']
 
 function Section({ children }: { children: React.ReactNode }) {
   return (
