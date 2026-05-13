@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import Timeline from '../components/Timeline'
@@ -9,7 +9,6 @@ import GlobalMap from '../components/GlobalMap'
 import MapLayerToggle from '../components/MapLayerToggle'
 import EMSBriefingCard from '../components/EMSBriefingCard'
 import ShareModal from '../components/ShareModal'
-import { getCached, setCache, isFresh } from '../utils/sessionCache'
 import metaJson from '../data/meta.json'
 
 const ALL_TYPES = [
@@ -21,20 +20,6 @@ const ALL_TYPES = [
   'flight_tracing',
   'return_destination',
 ]
-
-const REFRESH_CACHE_KEY = 'situation_data_cache'
-const REFRESH_TS_KEY = 'situation_data_ts'
-const REFRESH_TTL = 6 * 60 * 60 * 1000 // 6 hours
-
-interface SituationData {
-  confirmed: number
-  deaths: number
-  countries: number
-  usStatesMonitoring: number
-  lastUpdated: string
-  source: string
-  live: boolean
-}
 
 function Section({ children }: { children: React.ReactNode }) {
   return (
@@ -62,50 +47,24 @@ function fmt(iso: string) {
 export default function Dashboard() {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const [visibleTypes, setVisibleTypes] = useState<string[]>(ALL_TYPES)
-  const [data, setData] = useState<SituationData>(
-    getCached<SituationData>(REFRESH_CACHE_KEY) ?? {
-      confirmed: metaJson.confirmed,
-      deaths: metaJson.deaths,
-      countries: metaJson.countries,
-      usStatesMonitoring: metaJson.usStatesMonitoring,
-      lastUpdated: metaJson.lastUpdated,
-      source: metaJson.source,
-      live: false,
-    }
-  )
-  const [refreshing, setRefreshing] = useState(false)
   const [showShare, setShowShare] = useState(false)
+
+  // Data is served from meta.json, updated every 12h via GitHub Actions → Vercel rebuild.
+  // There is no runtime API — the /api/refresh endpoint does not exist in this static deployment.
+  const data = {
+    confirmed: metaJson.confirmed,
+    deaths: metaJson.deaths,
+    countries: metaJson.countries,
+    usStatesMonitoring: metaJson.usStatesMonitoring,
+    lastUpdated: metaJson.lastUpdated,
+    source: metaJson.source,
+  }
 
   function handleToggle(type: string) {
     setVisibleTypes((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
     )
   }
-
-  async function handleRefresh() {
-    if (isFresh(REFRESH_TS_KEY)) return
-    setRefreshing(true)
-    try {
-      const res = await fetch('/api/refresh', { method: 'POST' })
-      if (!res.ok) throw new Error(`API ${res.status}`)
-      const freshData = (await res.json()) as SituationData
-      setData(freshData)
-      setCache(REFRESH_CACHE_KEY, freshData, REFRESH_TTL)
-      setCache(REFRESH_TS_KEY, Date.now(), REFRESH_TTL)
-    } catch (err) {
-      console.error('Refresh failed:', err)
-    } finally {
-      setRefreshing(false)
-    }
-  }
-
-  useEffect(() => {
-    if (!isFresh(REFRESH_TS_KEY)) {
-      handleRefresh()
-    }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  const canRefresh = !isFresh(REFRESH_TS_KEY) && !refreshing
 
   const statusBadges = [
     {
@@ -248,28 +207,16 @@ export default function Dashboard() {
         ))}
 
         <div style={{ marginLeft: isMobile ? 0 : 'auto', display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-          {data.live && (
-            <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-accent-green)' }}>
-              ● LIVE
-            </span>
-          )}
-          <button
-            onClick={handleRefresh}
-            disabled={!canRefresh}
+          <span
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.625rem',
-              padding: '0.25rem 0.625rem',
-              backgroundColor: 'var(--color-bg-tertiary)',
-              border: `1px solid ${canRefresh ? 'var(--color-emergenz)' : 'var(--color-border)'}`,
-              borderRadius: '3px',
-              color: canRefresh ? 'var(--color-emergenz)' : 'var(--color-text-muted)',
-              cursor: canRefresh ? 'pointer' : 'not-allowed',
+              fontSize: '0.5625rem',
+              color: 'var(--color-text-muted)',
               whiteSpace: 'nowrap',
             }}
           >
-            {refreshing ? 'Refreshing…' : 'Refresh Data ↻'}
-          </button>
+            Auto-updated every 12h
+          </span>
         </div>
       </div>
 
