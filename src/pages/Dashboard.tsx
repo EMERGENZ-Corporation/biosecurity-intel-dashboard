@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 import Timeline from '../components/Timeline'
 import USMonitoringTable from '../components/USMonitoringTable'
 import FlightTracingPanel from '../components/FlightTracingPanel'
@@ -61,6 +62,7 @@ function Section({ children }: { children: React.ReactNode }) {
 }
 
 export default function Dashboard() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const [visibleTypes, setVisibleTypes] = useState<string[]>(ALL_TYPES)
   const [data, setData] = useState<SituationData>(
     getCached<SituationData>(REFRESH_CACHE_KEY) ?? STATIC_DATA
@@ -168,7 +170,7 @@ export default function Dashboard() {
           display: 'flex',
           gap: '0.5rem',
           flexWrap: 'wrap',
-          alignItems: 'center',
+          alignItems: isMobile ? 'flex-start' : 'center',
           marginBottom: '1.25rem',
           padding: '0.75rem 1rem',
           backgroundColor: 'var(--color-bg-secondary)',
@@ -236,7 +238,7 @@ export default function Dashboard() {
           </a>
         ))}
 
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ marginLeft: isMobile ? 0 : 'auto', display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           {data.live && (
             <span
               style={{
@@ -433,7 +435,7 @@ export default function Dashboard() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
+          gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(0, 1fr)',
           gap: '1rem',
           marginBottom: '1rem',
         }}

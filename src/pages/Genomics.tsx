@@ -86,7 +86,7 @@ export default function Genomics() {
               date: '2026-05-09',
             },
             {
-              label: 'Nextstrain — ANDV outbreak phylogenetic analysis (verify URL)',
+              label: 'Nextstrain — ANDV outbreak phylogenetic analysis',
               url: 'https://nextstrain.org',
               authority: 'Nextstrain',
               date: '2026-05-08',

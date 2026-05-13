@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { getCached } from '../utils/sessionCache'
 
 interface Props {
@@ -31,6 +31,45 @@ export default function ShareModal({ onClose, caseStats }: Props) {
 
   const draftCount = parseInt(sessionStorage.getItem(SESSION_DRAFT_COUNT) || '0', 10)
   const atLimit = draftCount >= MAX_DRAFTS_PER_SESSION
+
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeBtnRef = useRef<HTMLButtonElement>(null)
+
+  // Focus the close button on mount
+  useEffect(() => {
+    closeBtnRef.current?.focus()
+  }, [])
+
+  // Escape key closes modal
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      // Focus trap — Tab / Shift+Tab
+      if (e.key !== 'Tab' || !dialogRef.current) return
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [onClose])
 
   async function generateDraft() {
     if (atLimit) return
@@ -81,6 +120,10 @@ export default function ShareModal({ onClose, caseStats }: Props) {
       }}
     >
       <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="share-modal-title"
         style={{
           backgroundColor: 'var(--color-bg-secondary)',
           border: '1px solid var(--color-border)',
@@ -98,6 +141,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <div
+              id="share-modal-title"
               style={{
                 fontFamily: "'IBM Plex Mono', monospace",
                 fontSize: '0.875rem',
@@ -121,6 +165,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
             </div>
           </div>
           <button
+            ref={closeBtnRef}
             onClick={onClose}
             style={{
               background: 'none',
@@ -131,7 +176,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
               padding: '0.25rem',
               lineHeight: 1,
             }}
-            aria-label="Close"
+            aria-label="Close share modal"
           >
             ×
           </button>
@@ -189,6 +234,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, overflow: 'hidden' }}>
             <div>
               <label
+                htmlFor="share-subject"
                 style={{
                   fontFamily: "'IBM Plex Mono', monospace",
                   fontSize: '0.625rem',
@@ -202,6 +248,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
                 Subject
               </label>
               <input
+                id="share-subject"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
                 style={{
@@ -219,6 +266,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
             </div>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
               <label
+                htmlFor="share-body"
                 style={{
                   fontFamily: "'IBM Plex Mono', monospace",
                   fontSize: '0.625rem',
@@ -232,6 +280,7 @@ export default function ShareModal({ onClose, caseStats }: Props) {
                 Body
               </label>
               <textarea
+                id="share-body"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 style={{
