@@ -45,5 +45,6 @@ jobs:
             echo "No data changes to commit."
           else
             git commit -m "chore(data): automated update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git pull --rebase origin main
             git push
           fi
