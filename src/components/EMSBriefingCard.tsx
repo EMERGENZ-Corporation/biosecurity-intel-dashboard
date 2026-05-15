@@ -118,7 +118,7 @@ export default function EMSBriefingCard() {
       </div>
       <p
         style={{
-          fontFamily: "'IBM Plex Mono', monospace',",
+          fontFamily: "'IBM Plex Mono', monospace",
           fontSize: '0.5625rem',
           color: 'var(--color-text-muted)',
           margin: 0,

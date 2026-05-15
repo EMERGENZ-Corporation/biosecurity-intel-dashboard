@@ -17,6 +17,12 @@ const AUTHORITY_COLORS: Record<string, string> = {
   ECDC: 'var(--color-accent-orange)',
   Reuters: '#FF8C00',
   AP: '#C0C0C0',
+  Newsweek: '#CC0000',
+  'Detroit Free Press': '#006DB7',
+  'MSN Health': '#00A4EF',
+  Wired: '#000000',
+  'Scientific American': '#FF6600',
+  Forbes: '#A9232F',
 }
 
 function NewsCard({ item }: { item: FeedItem }) {

@@ -77,15 +77,26 @@
     "pinned": true
   },
   {
+    "id": "who-don601",
+    "authority": "WHO",
+    "title": "Disease Outbreak News DON601 — Hantavirus Disease, Update (May 13, 2026)",
+    "description": "Current WHO DON: 11 total cases (8 confirmed, 2 probable, 1 inconclusive), 3 deaths, CFR 27%. Spain and France newly confirmed. US case inconclusive — discordant results from two labs, retesting underway. CDC states no confirmed US cases. Genomic sequencing confirms single zoonotic spillover with subsequent human-to-human transmission. WHO global risk: LOW.",
+    "link": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",
+    "pubDate": "2026-05-13",
+    "timestamp": 1747094400000,
+    "type": "outbreak-news",
+    "pinned": true
+  },
+  {
     "id": "who-don600",
     "authority": "WHO",
-    "title": "Disease Outbreak News DON600 — Hantavirus Disease, Update",
-    "description": "WHO update reporting expanded case counts and geographic spread across multiple countries. Investigations into exposure source and transmission dynamics ongoing.",
+    "title": "Disease Outbreak News DON600 — Hantavirus Disease, Update (May 11, 2026)",
+    "description": "WHO update reporting expanded case counts and geographic spread across multiple countries. Superseded by DON601 (May 13, 2026).",
     "link": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON600",
     "pubDate": "2026-05-11",
     "timestamp": 1746921600000,
     "type": "outbreak-news",
-    "pinned": true
+    "pinned": false
   },
   {
     "id": "who-don599",

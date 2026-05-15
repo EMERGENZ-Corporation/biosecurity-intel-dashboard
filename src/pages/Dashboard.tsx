@@ -89,7 +89,7 @@ export default function Dashboard() {
 
   const tiles = [
     {
-      metric: 'Global Confirmed + Probable',
+      metric: 'Total Cases — WHO DON601',
       value: String(data.confirmed),
       source: 'WHO / ECDC',
       date: new Date(data.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
