@@ -100,6 +100,17 @@
     "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak"
   },
   {
+    "id": "death-aboard-case1",
+    "name": "MV Hondius — Case 1 Death (South Atlantic)",
+    "lat": -43.0,
+    "lng": -20.5,
+    "type": "death",
+    "status": "Fatal — April 11, 2026 (aboard vessel)",
+    "description": "Case 1 (Dutch male passenger) died aboard MV Hondius on April 11, approximately 2 days before the ship reached Tristan da Cunha. Symptom onset ~April 6 with fever, headache, and mild diarrhea. No PCR performed at time of death. Body was removed to Saint Helena on April 24.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
     "id": "case-johannesburg-death",
     "name": "Johannesburg, South Africa — Case 2 (Death)",
     "lat": -26.2041,
@@ -107,6 +118,17 @@
     "type": "death",
     "status": "Fatal — April 26, 2026",
     "description": "Case 2 (Dutch female) died at Johannesburg emergency department on April 26. She had disembarked at Saint Helena and boarded Airlink flight before deteriorating en route. PCR posthumously confirmed Andes virus.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
+    "id": "death-aboard-case4",
+    "name": "MV Hondius — Case 4 Death (approaching Cape Verde)",
+    "lat": 11.5,
+    "lng": -21.5,
+    "type": "death",
+    "status": "Fatal — May 2, 2026 (aboard vessel)",
+    "description": "Case 4 (German female passenger) died aboard MV Hondius on May 2, 2026, one day before the ship docked at Praia, Cape Verde. Symptom onset approximately April 28. The vessel proceeded to Cape Verde on May 3 with no disembarkation due to insufficient local facilities.",
     "source": "WHO Disease Outbreak News 599",
     "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
   },
@@ -190,10 +212,14 @@
     "lat": 40.4168,
     "lng": -3.7038,
     "type": "case_confirmed",
-    "status": "Probable — preliminary positive, pending confirmation",
-    "description": "Spanish male with preliminary positive ANDV test as of May 11. Confirmation pending.",
-    "source": "ECDC Epidemiological Update May 12, 2026",
-    "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak"
+    "status": "Confirmed — May 13, 2026 (WHO DON601)",
+    "description": "Spanish male passenger confirmed positive for Andes virus per WHO DON601 (May 13, 2026). Previously classified as preliminary positive (May 11). Spain was one of two newly confirmed cases added in DON601 alongside France.",
+    "source": "WHO DON601 / ECDC",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",
+    "sources": [
+      { "label": "WHO DON601", "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601" },
+      { "label": "ECDC — Surveillance Update", "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak" }
+    ]
   },
   {
     "id": "monitoring-arrowe",
