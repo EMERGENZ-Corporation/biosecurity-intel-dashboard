@@ -57,7 +57,7 @@ RESOURCES:
   • WHO DON600: https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON600
   • ECDC RRA: https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and
   • NYC DOH HAN #8: https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf
-  • EMERGENZ Dashboard: https://hantavirus.emergenz.org
+  • EMERGENZ Dashboard: https://andeshantavirus.emergenzsystems.org
 
 This alert was generated from authoritative public health sources via EMERGENZ.
 Review and edit before sending. Do not forward unedited.`
