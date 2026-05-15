@@ -43,6 +43,8 @@ const RSS_FEEDS = [
   { url: 'https://feeds.reuters.com/reuters/healthNews',                             authority: 'Reuters' },
   { url: 'https://apnews.com/rss/apf-Health',                                        authority: 'AP News' },
   { url: 'https://www.statnews.com/feed/',                                           authority: 'STAT News' },
+  { url: 'https://www.sciencenews.org/feed',                                         authority: 'Science News' },
+  { url: 'https://hsph.harvard.edu/news/feed/',                                      authority: 'Harvard HSPH' },
 ]
 
 // Keywords to filter RSS items relevant to this outbreak

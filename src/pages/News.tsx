@@ -22,6 +22,8 @@ const AUTHORITY_COLORS: Record<string, string> = {
   'MSN Health': '#00A4EF',
   Wired: '#000000',
   'Scientific American': '#FF6600',
+  'Science News': '#6B4EAB',
+  'Harvard HSPH': '#A51C30',
   Forbes: '#A9232F',
 }
 
