@@ -8,7 +8,7 @@ const markers = markersData as Marker[]
 const TYPE_COLORS: Record<string, string> = {
   ship_route:          '#388BFD',
   case_confirmed:      '#F85149',
-  death:               '#FF6B35',  // orange — distinct from yellow monitoring facilities
+  death:               '#FF1744',  // bright red — maximum contrast on dark tiles
   monitoring_facility: '#E3B341',  // amber/gold
   us_state_monitoring: '#3FB950',
   flight_tracing:      '#BC8CFF',
