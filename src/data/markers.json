@@ -242,8 +242,8 @@
     "lat": 41.2565,
     "lng": -95.9345,
     "type": "monitoring_facility",
-    "status": "Active — 15 quarantine, 1 biocontainment",
-    "description": "U.S. repatriation passengers transferred to UNMC: 15 to quarantine unit, 1 confirmed positive to biocontainment unit. Part of 18 total U.S. passengers from repatriation flight.",
+    "status": "Active — 15 quarantine, 1 biocontainment (inconclusive)",
+    "description": "U.S. repatriation passengers transferred to UNMC: 15 to quarantine unit, 1 to biocontainment unit with inconclusive test result (discordant results from two labs; retesting underway per WHO DON601 May 13). CDC states no confirmed US cases. Part of 18 total U.S. passengers from repatriation flight.",
     "source": "CDC HAN 528 / Nebraska Medicine",
     "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
     "sources": [
@@ -332,8 +332,8 @@
     "lat": 40.8136,
     "lng": -96.7026,
     "type": "us_state_monitoring",
-    "status": "16 persons monitoring; 1 confirmed positive",
-    "description": "Nebraska monitoring 16 repatriated passengers. 1 confirmed asymptomatic positive in UNMC biocontainment unit.",
+    "status": "16 persons monitoring; 1 inconclusive (retesting underway)",
+    "description": "Nebraska monitoring 16 repatriated passengers. 1 passenger in UNMC biocontainment unit with inconclusive test results — discordant results from two laboratories; retesting underway per WHO DON601 (May 13). CDC states no confirmed US cases.",
     "source": "CDC HAN 528 / Nebraska Medicine",
     "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
     "sources": [

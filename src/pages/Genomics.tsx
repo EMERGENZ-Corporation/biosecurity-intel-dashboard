@@ -288,9 +288,9 @@ export default function Genomics() {
             fontStyle: 'italic',
           }}
         >
-          As of May 12, 2026, the World Health Organization and the U.S. Centers for Disease Control
-          and Prevention have not confirmed the specific origin event or exposure site for the index
-          case. Investigations are ongoing.
+          As of May 13, 2026 (WHO DON601), the World Health Organization and the U.S. Centers for
+          Disease Control and Prevention have not confirmed the specific origin event or exposure site
+          for the index case. Investigations are ongoing.
         </p>
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           <span

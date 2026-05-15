@@ -74,7 +74,7 @@ export default function Dashboard() {
       url: metaJson.whoGlobalRiskUrl,
     },
     {
-      label: 'CDC Response',
+      label: 'CDC Health Alert',
       value: metaJson.cdcResponseLevel,
       color: 'var(--color-accent-orange)',
       url: metaJson.cdcResponseLevelUrl,
@@ -99,17 +99,17 @@ export default function Dashboard() {
     {
       metric: 'Global Deaths',
       value: String(data.deaths),
-      source: 'WHO',
+      source: 'WHO DON601',
       date: new Date(data.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      url: 'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599',
+      url: 'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601',
       color: 'var(--color-accent-orange)',
     },
     {
       metric: 'Countries with Cases',
       value: String(data.countries),
-      source: 'WHO DON600',
-      date: 'May 11, 2026',
-      url: 'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON600',
+      source: 'WHO DON601',
+      date: new Date(data.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      url: 'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601',
       color: 'var(--color-accent-yellow)',
     },
     {

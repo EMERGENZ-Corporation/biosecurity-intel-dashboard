@@ -31,7 +31,7 @@ function buildDraft(caseStats?: Props['caseStats']) {
   • Countries with cases: ${caseStats.countries}
   • U.S. states monitoring: ${caseStats.usStatesMonitoring}
 
-Sources: WHO Disease Outbreak News DON600 · CDC HAN 528 · ECDC Rapid Risk Assessment`
+Sources: WHO Disease Outbreak News DON601 · CDC HAN 528 · ECDC Rapid Risk Assessment`
     : ''
 
   const bulletsBlock = emsBriefing.bullets
@@ -54,7 +54,7 @@ ${'-'.repeat(60)}
 
 RESOURCES:
   • CDC HAN 528: https://www.cdc.gov/han/php/notices/han00528.html
-  • WHO DON600: https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON600
+  • WHO DON601: https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601
   • ECDC RRA: https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and
   • NYC DOH HAN #8: https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf
   • EMERGENZ Dashboard: https://andeshantavirus.emergenzsystems.org
