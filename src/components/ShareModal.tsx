@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import emsBriefing from '../data/ems-briefing.json'
+import metaJson from '../data/meta.json'
 
 interface Props {
   onClose: () => void
@@ -12,55 +13,92 @@ interface Props {
   }
 }
 
+function fmtDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric',
+  })
+}
+
 function buildDraft(caseStats?: Props['caseStats']) {
-  const date = new Date().toLocaleDateString('en-US', {
+  const issuedDate = new Date().toLocaleDateString('en-US', {
     month: 'long', day: 'numeric', year: 'numeric',
   })
-  const updatedDate = caseStats?.lastUpdated
-    ? new Date(caseStats.lastUpdated).toLocaleDateString('en-US', {
-        month: 'short', day: 'numeric', year: 'numeric',
-      })
-    : date
 
-  const subject = `SITUATIONAL ALERT: Andes Hantavirus (MV Hondius) — ${date}`
+  // Data-currency date — from meta.json lastUpdated (auto-updated by pipeline)
+  const dataDate = caseStats?.lastUpdated
+    ? fmtDate(caseStats.lastUpdated)
+    : issuedDate
 
-  const statsBlock = caseStats
-    ? `CURRENT SITUATION (as of ${updatedDate}):
-  • Confirmed + probable cases: ${caseStats.confirmed}
-  • Deaths: ${caseStats.deaths}
-  • Countries with cases: ${caseStats.countries}
-  • U.S. states monitoring: ${caseStats.usStatesMonitoring}
+  // Briefing date — from ems-briefing.json updatedAt (manually curated)
+  const briefingDate = emsBriefing.updatedAt
+    ? fmtDate(emsBriefing.updatedAt)
+    : 'See source documents'
 
-Sources: WHO Disease Outbreak News DON601 · CDC HAN 528 · ECDC Rapid Risk Assessment`
-    : ''
+  const subject = `SITUATIONAL ALERT: Andes Hantavirus (MV Hondius) — ${issuedDate}`
 
+  // ── Case statistics block — all values from meta.json via caseStats prop ──
+  const statsBlock = caseStats ? [
+    `CURRENT SITUATION (${metaJson.source} · Data updated: ${dataDate}):`,
+    `  • Total cases (WHO DON601): ${caseStats.confirmed}`,
+    `  • Deaths: ${caseStats.deaths} (CFR approx. ${Math.round((caseStats.deaths / caseStats.confirmed) * 100)}%)`,
+    `  • Countries with cases: ${caseStats.countries}`,
+    `  • U.S. states monitoring: ${caseStats.usStatesMonitoring} (CDC + State DOHs)`,
+  ].join('\n') : ''
+
+  // ── Risk levels block — from meta.json (auto-updated by pipeline) ─────────
+  const riskBlock = [
+    `RISK LEVELS (${dataDate}):`,
+    `  • WHO Global Risk: ${metaJson.whoGlobalRisk}  →  ${metaJson.whoGlobalRiskUrl}`,
+    `  • CDC Health Alert: ${metaJson.cdcResponseLevel}  →  ${metaJson.cdcResponseLevelUrl}`,
+    `  • ECDC EU/EEA Risk: ${metaJson.ecdcRisk}  →  ${metaJson.ecdcRiskUrl}`,
+  ].join('\n')
+
+  // ── HCW alert block — from meta.json (auto-updated by pipeline if new event)
+  const hcwBlock = metaJson.hcwAlert ? [
+    `⚠ HCW EXPOSURE EVENT — ${metaJson.hcwAlert.title} (${metaJson.hcwAlert.date}):`,
+    `  ${metaJson.hcwAlert.content}`,
+    `  Source: ${metaJson.hcwAlert.sourceLabel}  →  ${metaJson.hcwAlert.sourceUrl}`,
+  ].join('\n') : ''
+
+  // ── EMS/clinical bullets — from ems-briefing.json (manually curated) ──────
   const bulletsBlock = emsBriefing.bullets
     .map((b, i) => `  ${i + 1}. ${b}`)
     .join('\n\n')
 
+  const sep = '-'.repeat(60)
+
   const body = `SITUATIONAL ALERT — ANDES HANTAVIRUS (MV HONDIUS OUTBREAK)
-Issued: ${date} | EMERGENZ Intelligence Dashboard
-${'-'.repeat(60)}
+Issued: ${issuedDate} | EMERGENZ Intelligence Dashboard
+${sep}
 
 ${statsBlock}
-${'-'.repeat(60)}
 
-EMS & CLINICAL OPERATIONAL GUIDANCE:
-Sources: ${emsBriefing.sources.join(' + ')}
+${riskBlock}
+${hcwBlock ? '\n' + hcwBlock + '\n' : ''}
+${sep}
+
+EMS & CLINICAL OPERATIONAL GUIDANCE
+Sources: ${emsBriefing.sources.join(' · ')}
+Guidance last reviewed: ${briefingDate}
+⚠ Verify all clinical guidance against current primary sources before operational use.
 
 ${bulletsBlock}
 
-${'-'.repeat(60)}
+${sep}
 
-RESOURCES:
-  • CDC HAN 528: https://www.cdc.gov/han/php/notices/han00528.html
-  • WHO DON601: https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601
-  • ECDC RRA: https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and
-  • NYC DOH HAN #8: https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf
+PRIMARY SOURCES:
+  • WHO DON601 (${dataDate}): ${metaJson.whoGlobalRiskUrl}
+  • CDC ${metaJson.cdcResponseLevel}: ${metaJson.cdcResponseLevelUrl}
+  • ECDC Risk Assessment: ${metaJson.ecdcRiskUrl}
+  • NYC DOH HAN Advisory #8: https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf
+  • NETEC Resource Hub: https://repository.netecweb.org/exhibits/show/hantavirus/hantavirus
   • EMERGENZ Dashboard: https://andeshantavirus.emergenzsystems.org
 
-This alert was generated from authoritative public health sources via EMERGENZ.
-Review and edit before sending. Do not forward unedited.`
+${sep}
+DISCLAIMER: This alert is compiled from publicly available authoritative sources
+for situational awareness only. Data updated: ${dataDate}. Clinical guidance
+last reviewed: ${briefingDate}. All values must be verified against current
+primary sources before clinical or operational use. Do not forward unedited.`
 
   return { subject, body }
 }
