@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const SESSION_KEY = 'emergenz_ack_v1'
 
@@ -149,13 +150,13 @@ export default function AcknowledgmentModal({ onAcknowledge }: Props) {
             margin: '0.875rem 0 0 0',
           }}
         >
-          <a
-            href="/about"
+          <Link
+            to="/about"
             style={{ color: 'var(--color-accent-blue)', textDecoration: 'none' }}
             onClick={handleAccept}
           >
             View full disclaimer and legal notice →
-          </a>
+          </Link>
         </p>
       </div>
     </div>

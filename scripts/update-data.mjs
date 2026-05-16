@@ -25,10 +25,9 @@ const GEMINI_KEY = process.env.GEMINI_API_KEY
 const BD_KEY     = process.env.BRIGHT_DATA_API_KEY
 const BD_ZONE    = process.env.BRIGHT_DATA_ZONE || 'web_unlocker1'
 
-const META_PATH      = 'src/data/meta.json'
-const TIMELINE_PATH  = 'src/data/timeline.json'
-const NEWS_PATH      = 'src/data/news.json'
-const PROTOCOLS_PATH = 'src/data/protocols.json'
+const META_PATH     = 'src/data/meta.json'
+const TIMELINE_PATH = 'src/data/timeline.json'
+const NEWS_PATH     = 'src/data/news.json'
 
 // ─── Feed configuration ────────────────────────────────────────────────────────
 
@@ -320,16 +319,17 @@ Extract and return this exact JSON structure:
   },
   "riskLevels": {
     "whoGlobalRisk": <"LOW"|"MODERATE"|"HIGH"|"VERY HIGH"|null>,
-    "cdcResponseLevel": <"Level 1"|"Level 2"|"Level 3"|null>,
     "ecdcRisk": <"VERY LOW"|"LOW"|"MODERATE"|"HIGH"|null>
   },
   "timelineEvents": [
     {
+      "id": "<t-YYYYMMDD-slugified-title, e.g. t-20260513-who-don601-update>",
       "date": "YYYY-MM-DD",
       "title": "<10 words max, factual>",
       "description": "<one sentence, verbatim or close paraphrase from source>",
-      "source": "<authority>",
-      "sourceUrl": "<direct URL>"
+      "source": "<authority name — e.g. WHO, CDC, ECDC>",
+      "sourceUrl": "<direct URL>",
+      "category": "<WHO|CDC|ECDC|other>"
     }
   ],
   "hcwAlert": null or {
@@ -347,7 +347,8 @@ Extract and return this exact JSON structure:
 Rules:
 - Use null for any caseStats field you are not confident about. Do not guess numbers.
 - usStatesMonitoring: only update if a source explicitly states a new total count of US states monitoring.
-- Only include timelineEvents that represent genuinely new developments.
+- Only include timelineEvents that represent genuinely new developments (not already in current state).
+- Every timelineEvent MUST include id, date, title, description, source, sourceUrl, AND category. category must be exactly one of: WHO, CDC, ECDC, other.
 - hcwAlert must be null unless there is a NEW HCW exposure event after ${meta.hcwAlert?.date ?? '2026-05-12'}.
 - newsDescriptions: only include entries for URLs present in the "Full article text" section above. If no article text was provided, return an empty object {}.
 - Never fabricate numbers or events. Only extract what sources explicitly state.`
@@ -396,9 +397,10 @@ Rules:
     }
   }
 
-  // Apply risk levels
+  // Apply risk levels (cdcResponseLevel intentionally excluded — managed manually
+  // as CDC HAN numbers don't follow "Level X" patterns Gemini was trained on)
   const rl = extracted.riskLevels ?? {}
-  for (const [key, dest] of Object.entries({ whoGlobalRisk: 'whoGlobalRisk', cdcResponseLevel: 'cdcResponseLevel', ecdcRisk: 'ecdcRisk' })) {
+  for (const [key, dest] of Object.entries({ whoGlobalRisk: 'whoGlobalRisk', ecdcRisk: 'ecdcRisk' })) {
     if (rl[key] && rl[key] !== meta[dest]) {
       meta[dest] = rl[key]
       dataChanged = true
@@ -417,13 +419,20 @@ Rules:
   }
 
   // Append new timeline events
+  const VALID_CATEGORIES = new Set(['WHO', 'CDC', 'ECDC', 'other'])
   if (Array.isArray(extracted.timelineEvents) && extracted.timelineEvents.length > 0) {
     let added = 0
     for (const event of extracted.timelineEvents) {
       if (!event.date || !event.title) continue
       const key = `${event.date}::${event.title}`
       if (!existingKeys.has(key)) {
-        existingTimeline.push(event)
+        // Ensure required fields are present — guard against Gemini omissions
+        const safeEvent = {
+          ...event,
+          id: event.id || `t-${event.date.replace(/-/g, '')}-${Math.random().toString(36).slice(2, 7)}`,
+          category: VALID_CATEGORIES.has(event.category) ? event.category : 'other',
+        }
+        existingTimeline.push(safeEvent)
         existingKeys.add(key)
         added++
         dataChanged = true

@@ -40,7 +40,7 @@ function buildDraft(caseStats?: Props['caseStats']) {
   const statsBlock = caseStats ? [
     `CURRENT SITUATION (${metaJson.source} · Data updated: ${dataDate}):`,
     `  • Total cases (WHO DON601): ${caseStats.confirmed}`,
-    `  • Deaths: ${caseStats.deaths} (CFR approx. ${Math.round((caseStats.deaths / caseStats.confirmed) * 100)}%)`,
+    `  • Deaths: ${caseStats.deaths}${caseStats.confirmed > 0 ? ` (CFR approx. ${Math.round((caseStats.deaths / caseStats.confirmed) * 100)}%)` : ''}`,
     `  • Countries with cases: ${caseStats.countries}`,
     `  • U.S. states monitoring: ${caseStats.usStatesMonitoring} (CDC + State DOHs)`,
   ].join('\n') : ''

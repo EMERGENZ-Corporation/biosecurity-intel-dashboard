@@ -69,7 +69,7 @@ export default function Timeline() {
               gap: '0.75rem',
               backgroundColor: 'var(--color-bg-secondary)',
               border: '1px solid var(--color-border)',
-              borderLeft: `3px solid ${CATEGORY_COLORS[event.category]}`,
+              borderLeft: `3px solid ${CATEGORY_COLORS[event.category] ?? 'var(--color-border)'}`,
               borderRadius: '4px',
               padding: '0.75rem',
               minWidth: 0,

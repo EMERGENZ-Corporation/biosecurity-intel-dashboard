@@ -40,7 +40,7 @@ jobs:
         run: |
           git config user.name "EMERGENZ Data Bot"
           git config user.email "bot@emergenz.org"
-          git add src/data/meta.json src/data/timeline.json src/data/news.json src/data/protocols.json
+          git add src/data/meta.json src/data/timeline.json src/data/news.json
           if git diff --staged --quiet; then
             echo "No data changes to commit."
           else
