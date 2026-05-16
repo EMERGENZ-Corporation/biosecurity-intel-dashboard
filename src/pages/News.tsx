@@ -25,6 +25,19 @@ const AUTHORITY_COLORS: Record<string, string> = {
   'Science News': '#6B4EAB',
   'Harvard HSPH': '#A51C30',
   Forbes: '#A9232F',
+  NPR: '#1A9ADB',
+  'BBC Health': '#BB1919',
+  'ABC News': '#1C3F94',
+  ProMED: '#2E7D32',
+  Eurosurveillance: '#003078',
+  RIVM: '#FF6200',
+  NEJM: '#CC0000',
+  Lancet: '#004B8D',
+  'Nature Medicine': '#E87722',
+  Science: '#C41230',
+  'Google News': '#4285F4',
+  'AP News': '#CC0000',
+  'STAT News': '#E63946',
 }
 
 function NewsCard({ item }: { item: FeedItem }) {

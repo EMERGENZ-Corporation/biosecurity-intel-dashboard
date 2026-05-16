@@ -4,10 +4,10 @@
  * Runs every 12 hours via GitHub Actions.
  *
  * Bright Data usage (all conditional on new RSS items being found):
- *   Slot 1  — CDC Situation Summary (existing)
- *   Slots 2–6 — Blocked-domain article enrichment (Wired, Forbes, Reuters, etc.) — up to 4 articles/run
- *   Slots 7–8 — WHO DON page(s) when a new DON is detected in RSS
- *   Slots 9–12 — State DOH pages (NY, CA, TX, WA) for US monitoring count
+ *   Slot 1  — CDC Situation Summary (always when triggered)
+ *   Slots 2–5 — Blocked-domain article enrichment (SA, Wired, Reuters, NEJM, etc.) — up to 4/run
+ *   Slots 6–7 — WHO DON page(s) when a new DON is detected in RSS
+ *   Slots 8–11 — State DOH pages (NY, CA, TX, WA) for US monitoring count
  *   Max ~12 BD calls/triggered run · ~$0.036/triggered run · $5 credit ≈ 138 triggered runs
  *
  * Cost controls:
@@ -33,28 +33,54 @@ const PROTOCOLS_PATH = 'src/data/protocols.json'
 // ─── Feed configuration ────────────────────────────────────────────────────────
 
 const RSS_FEEDS = [
-  // Official public health feeds
-  { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss',                 authority: 'CDC' },
-  { url: 'https://www.who.int/feeds/entity/csr/don/en/rss.xml',                     authority: 'WHO' },
-  { url: 'https://www.ecdc.europa.eu/en/rss.xml',                                   authority: 'ECDC' },
-  // General media — filtered by RELEVANT_KEYWORDS
-  { url: 'https://news.google.com/rss/search?q=hantavirus&hl=en-US&gl=US&ceid=US:en', authority: 'Google News' },
-  { url: 'https://www.wired.com/feed/rss',                                           authority: 'Wired' },
-  { url: 'https://feeds.reuters.com/reuters/healthNews',                             authority: 'Reuters' },
-  { url: 'https://apnews.com/rss/apf-Health',                                        authority: 'AP News' },
-  { url: 'https://www.statnews.com/feed/',                                           authority: 'STAT News' },
-  { url: 'https://www.sciencenews.org/feed',                                         authority: 'Science News' },
-  { url: 'https://hsph.harvard.edu/news/feed/',                                      authority: 'Harvard HSPH' },
+  // ── Official public health — authoritative outbreak feeds ──────────────────
+  { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss',                            authority: 'CDC' },
+  { url: 'https://www.who.int/feeds/entity/csr/don/en/rss.xml',                                authority: 'WHO' },
+  { url: 'https://www.ecdc.europa.eu/en/rss.xml',                                              authority: 'ECDC' },
+  // ProMED — real-time infectious disease surveillance, early outbreak detection
+  { url: 'https://promedmail.org/feed/',                                                        authority: 'ProMED' },
+  // Eurosurveillance — EU peer-reviewed surveillance journal
+  { url: 'https://www.eurosurveillance.org/rss/eurosurv.xml',                                  authority: 'Eurosurveillance' },
+  // Netherlands RIVM — primary European country managing repatriated cases
+  { url: 'https://www.rivm.nl/en/rss.xml',                                                     authority: 'RIVM' },
+
+  // ── Google News targeted searches (free, broad coverage) ──────────────────
+  // Primary: broad hantavirus keyword sweep
+  { url: 'https://news.google.com/rss/search?q=hantavirus&hl=en-US&gl=US&ceid=US:en',          authority: 'Google News' },
+  // Secondary: outbreak-specific — catches MV Hondius / Andes virus articles
+  { url: 'https://news.google.com/rss/search?q=%22andes+virus%22+OR+%22MV+Hondius%22&hl=en-US&gl=US&ceid=US:en', authority: 'Google News' },
+
+  // ── Broadcast / general news health verticals ─────────────────────────────
+  { url: 'https://feeds.npr.org/1128/rss.xml',                                                 authority: 'NPR' },
+  { url: 'https://feeds.bbci.co.uk/news/health/rss.xml',                                       authority: 'BBC Health' },
+  { url: 'https://feeds.reuters.com/reuters/healthNews',                                       authority: 'Reuters' },
+  { url: 'https://apnews.com/rss/apf-Health',                                                  authority: 'AP News' },
+  { url: 'https://abcnews.go.com/abcnews/healthheadlines',                                     authority: 'ABC News' },
+
+  // ── Science / medical journalism ──────────────────────────────────────────
+  { url: 'https://www.wired.com/feed/rss',                                                     authority: 'Wired' },
+  { url: 'https://www.statnews.com/feed/',                                                     authority: 'STAT News' },
+  { url: 'https://www.sciencenews.org/feed',                                                   authority: 'Science News' },
+  { url: 'https://hsph.harvard.edu/news/feed/',                                                authority: 'Harvard HSPH' },
+
+  // ── Academic / peer-reviewed journals (paywalled → BD enrichment) ─────────
+  { url: 'https://www.nejm.org/action/showFeed?jc=nejm&type=etoc&feed=rss',                   authority: 'NEJM' },
+  { url: 'https://www.thelancet.com/rssfeed/lancet_online.xml',                               authority: 'Lancet' },
+  { url: 'https://www.nature.com/nm.rss',                                                     authority: 'Nature Medicine' },
+  { url: 'https://www.science.org/rss/news_current.xml',                                      authority: 'Science' },
 ]
 
 // Keywords to filter RSS items relevant to this outbreak
-const RELEVANT_KEYWORDS = ['hanta', 'andes', 'hondius', 'andv', 'orthohantavirus']
+const RELEVANT_KEYWORDS = ['hanta', 'andes virus', 'hondius', 'andv', 'orthohantavirus', 'andes hantavirus']
 
 // Domains that block plain fetch — use Bright Data for article enrichment
 const BLOCKED_DOMAINS = [
+  // Paywalled news
   'wired.com', 'forbes.com', 'reuters.com', 'bloomberg.com',
   'nytimes.com', 'washingtonpost.com', 'ft.com', 'theatlantic.com',
   'scientificamerican.com', 'thetimes.co.uk', 'telegraph.co.uk',
+  // Academic journals (paywalled abstracts, need BD for full text)
+  'nejm.org', 'thelancet.com', 'nature.com', 'science.org',
 ]
 
 // State DOH pages for US monitoring count — Bright Data only, JS-rendered or bot-protected
@@ -129,7 +155,12 @@ async function main() {
   const meta = JSON.parse(readFileSync(META_PATH, 'utf8'))
   const lastChecked = new Date(meta.lastChecked)
 
+  // ─── Startup diagnostic ───────────────────────────────────────────────────
+  console.log(`[update-data] Run: ${now}`)
   console.log(`[update-data] Last checked: ${meta.lastChecked}`)
+  console.log(`[update-data] BD key: ${BD_KEY ? 'SET' : 'NOT SET'} | Zone: ${BD_ZONE}`)
+  console.log(`[update-data] Gemini key: ${GEMINI_KEY ? 'SET' : 'NOT SET'}`)
+  console.log(`[update-data] RSS feeds: ${RSS_FEEDS.length}`)
 
   // ─── Step 1: Fetch RSS feeds (FREE) ──────────────────────────────────────────
   const newItems = []
