@@ -40,7 +40,6 @@ const AUTHORITY_COLORS: Record<string, string> = {
   'STAT News': '#E63946',
   'CBC News': '#E8292B',
   'CTV News': '#004B8D',
-  Reuters: '#FF8C00',
   'Medscape': '#00539C',
   'MedPage Today': '#005A9C',
   'Healio': '#007CB2',
