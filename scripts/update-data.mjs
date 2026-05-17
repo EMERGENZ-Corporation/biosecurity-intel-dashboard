@@ -59,6 +59,14 @@ const RSS_FEEDS = [
   { url: 'https://www.cbc.ca/cmlink/rss-health',                                                authority: 'CBC News' },
   { url: 'https://www.ctvnews.ca/rss/ctvnews-ca-health-public-rss-1.844908',                    authority: 'CTV News' },
 
+  // ── Additional national public health agencies ────────────────────────────
+  // PHAC — Public Health Agency of Canada (BC confirmed case ongoing surveillance)
+  { url: 'https://healthycanadians.gc.ca/connect-connectez/alerts-avis-rss-eng.xml',           authority: 'PHAC' },
+  // RKI — Robert Koch Institute, Germany (EU outbreak coordination)
+  { url: 'https://www.rki.de/EN/Content/Service/RSS/rss.xml',                                  authority: 'RKI' },
+  // UKHSA — UK Health Security Agency (returnee monitoring, genomics)
+  { url: 'https://www.gov.uk/government/organisations/uk-health-security-agency.atom',          authority: 'UKHSA' },
+
   // ── Broadcast / general news health verticals ─────────────────────────────
   { url: 'https://feeds.npr.org/1128/rss.xml',                                                 authority: 'NPR' },
   { url: 'https://feeds.bbci.co.uk/news/health/rss.xml',                                       authority: 'BBC Health' },
@@ -542,6 +550,16 @@ Rules:
       writeFileSync(NEWS_PATH, JSON.stringify(existingNews.slice(0, 50), null, 2))
       console.log('[update-data] Updated news.json.')
     }
+  }
+
+  // Exit with non-zero code if authoritative feeds failed during active outbreak.
+  // This causes the GitHub Actions step to fail → triggers the pipeline-failure issue alert.
+  const AUTHORITATIVE_FEEDS = new Set(['WHO', 'CDC', 'ECDC'])
+  const failedAuthoritative = [...new Set(failedFeeds)].filter(f => AUTHORITATIVE_FEEDS.has(f))
+  if (failedAuthoritative.length > 0 && (meta.confirmed ?? 0) > 0) {
+    console.error(`[update-data] ⚠ CRITICAL: Authoritative feed failures during active outbreak: ${failedAuthoritative.join(', ')}`)
+    console.error('[update-data] Exiting with code 1 to trigger GitHub Actions failure alert.')
+    process.exit(1)
   }
 
   console.log('[update-data] Done.')

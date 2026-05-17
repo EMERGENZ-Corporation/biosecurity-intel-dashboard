@@ -50,6 +50,9 @@ const AUTHORITY_COLORS: Record<string, string> = {
   'Al Jazeera': '#8B1C13',
   Time: '#E42F21',
   Euronews: '#0055A4',
+  PHAC: '#D80621',
+  RKI: '#003F7F',
+  UKHSA: '#005EB8',
 }
 
 function NewsCard({ item }: { item: FeedItem }) {
