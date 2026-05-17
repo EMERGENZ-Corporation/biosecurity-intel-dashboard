@@ -58,12 +58,6 @@ export default function Dashboard() {
   // Data served from meta.json — updated every 6h via GitHub Actions → Vercel rebuild.
   // Static SPA: no runtime API calls.
   const isDataStale = Date.now() - new Date(metaJson.lastUpdated).getTime() > STALENESS_WARN_MS
-  const feedHealth = (metaJson as Record<string, unknown>).feedHealth as {
-    lastRun?: string
-    failedFeeds?: string[]
-    itemsFound?: number
-  } | undefined
-  const hasFeedFailures = (feedHealth?.failedFeeds?.length ?? 0) > 0
 
   const data = {
     confirmed: metaJson.confirmed,
@@ -186,31 +180,6 @@ export default function Dashboard() {
           </span>
           <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.6875rem', color: 'var(--color-text-secondary)' }}>
             Last update: {new Date(data.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} — verify time-sensitive data directly with WHO, CDC, or ECDC before operational use.
-          </span>
-        </div>
-      )}
-
-      {/* Feed failure warning — shown when pipeline detected broken RSS feeds */}
-      {hasFeedFailures && (
-        <div
-          role="alert"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            marginBottom: '1rem',
-            padding: '0.5rem 1rem',
-            backgroundColor: 'var(--color-bg-secondary)',
-            border: '1px solid var(--color-border)',
-            borderLeft: '3px solid var(--color-accent-red)',
-            borderRadius: '4px',
-          }}
-        >
-          <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: 'var(--color-accent-red)', fontWeight: 700 }}>
-            ⚠ PIPELINE
-          </span>
-          <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-text-muted)' }}>
-            Feed failures on last run: {feedHealth?.failedFeeds?.join(', ')} — authoritative source coverage may be reduced.
           </span>
         </div>
       )}
