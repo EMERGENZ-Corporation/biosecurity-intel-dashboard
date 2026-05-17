@@ -207,6 +207,21 @@
     ]
   },
   {
+    "id": "case-british-columbia",
+    "name": "British Columbia, Canada",
+    "lat": 49.2827,
+    "lng": -123.1207,
+    "type": "case_confirmed",
+    "status": "Confirmed — May 16, 2026",
+    "description": "Confirmed Andes hantavirus case in British Columbia, Canada — the 12th overall case and first in North America outside the United States monitoring context. Canadian passenger from MV Hondius voyage. BC Centre for Disease Control (BCCDC) and Public Health Agency of Canada (PHAC) coordinating response. Makes Canada the 9th country with a confirmed case.",
+    "source": "BC CDC / PHAC",
+    "sourceUrl": "https://www.bccdc.ca/health-info/diseases-conditions/hantavirus",
+    "sources": [
+      { "label": "BC Centre for Disease Control", "url": "https://www.bccdc.ca/health-info/diseases-conditions/hantavirus" },
+      { "label": "Public Health Agency of Canada", "url": "https://www.canada.ca/en/public-health/services/diseases/hantavirus-pulmonary-syndrome.html" }
+    ]
+  },
+  {
     "id": "case-madrid",
     "name": "Madrid, Spain",
     "lat": 40.4168,
@@ -242,8 +257,8 @@
     "lat": 41.2565,
     "lng": -95.9345,
     "type": "monitoring_facility",
-    "status": "Active — 15 quarantine, 1 biocontainment (inconclusive)",
-    "description": "U.S. repatriation passengers transferred to UNMC: 15 to quarantine unit, 1 to biocontainment unit with inconclusive test result (discordant results from two labs; retesting underway per WHO DON601 May 13). CDC states no confirmed US cases. Part of 18 total U.S. passengers from repatriation flight.",
+    "status": "Active — 15 quarantine; biocontainment patient confirmed NEGATIVE",
+    "description": "U.S. repatriation passengers at UNMC: 15 in quarantine unit completing 42-day observation. The biocontainment patient with previously inconclusive results has retested NEGATIVE (confirmed May 15). CDC confirms no U.S. cases from MV Hondius. Part of 18 total U.S. passengers from May 11 repatriation flight.",
     "source": "CDC HAN 528 / Nebraska Medicine",
     "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
     "sources": [
@@ -257,14 +272,29 @@
     "lat": 33.7490,
     "lng": -84.3880,
     "type": "monitoring_facility",
-    "status": "Active — 2 passengers; 1 tested negative May 12",
-    "description": "2 U.S. repatriation passengers transferred to Emory University Hospital. On May 12, Emory patient (mildly symptomatic) tested NEGATIVE for hantavirus.",
+    "status": "Discharged — both passengers cleared May 16",
+    "description": "2 U.S. repatriation passengers transferred to Emory University Hospital. Both tested NEGATIVE for hantavirus and were released May 16. CDC confirms no confirmed U.S. cases from MV Hondius.",
     "source": "CDC HAN 528 / GA DPH / ABC News",
     "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
     "sources": [
       { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
       { "label": "GA DPH Press Release", "url": "https://dph.georgia.gov/press-releases/2026-05-11/two-individuals-being-transported-emory-universitys-serious-communicable" },
       { "label": "ABC News", "url": "https://abcnews.com/International/live-updates/hantavirus-live-updates-mv-hondius-canary-islands/?id=132746955" }
+    ]
+  },
+  {
+    "id": "death-colorado-sinnombre",
+    "name": "Colorado — Sin Nombre Virus Death (UNRELATED to cruise ship)",
+    "lat": 39.5501,
+    "lng": -105.7821,
+    "type": "death",
+    "status": "⚠ UNRELATED — Sin Nombre Virus (NOT Andes) — May 16, 2026",
+    "description": "⚠ NOT LINKED TO MV HONDIUS: A Colorado resident died of hantavirus pulmonary syndrome caused by Sin Nombre virus (SNV) — the rodent-borne strain endemic to the western United States. This is a separate and unrelated endemic exposure. Sin Nombre virus is transmitted by deer mice via inhalation of infected rodent droppings and does NOT transmit person-to-person. No epidemiological link to the MV Hondius Andes virus cluster. Reported by CDC and Colorado CDPHE.",
+    "source": "CDC / Colorado CDPHE",
+    "sourceUrl": "https://cdphe.colorado.gov/news/hantavirus-colorado-2026",
+    "sources": [
+      { "label": "Colorado CDPHE", "url": "https://cdphe.colorado.gov/news/hantavirus-colorado-2026" },
+      { "label": "CDC — Hantavirus", "url": "https://www.cdc.gov/hantavirus/" }
     ]
   },
   {
@@ -295,8 +325,8 @@
     "lat": 33.7490,
     "lng": -84.3880,
     "type": "us_state_monitoring",
-    "status": "2 persons under monitoring",
-    "description": "Georgia monitoring 2 repatriated passengers. 1 Emory patient tested negative May 12.",
+    "status": "2 persons discharged — both hantavirus negative",
+    "description": "Georgia monitoring resolved. Both Emory University Hospital repatriated passengers tested NEGATIVE for hantavirus and were discharged May 16. CDC confirms no US cases from MV Hondius.",
     "source": "CDC HAN 528 / GA DPH",
     "sourceUrl": "https://dph.georgia.gov/press-releases/2026-05-11/two-individuals-being-transported-emory-universitys-serious-communicable",
     "sources": [
@@ -332,8 +362,8 @@
     "lat": 40.8136,
     "lng": -96.7026,
     "type": "us_state_monitoring",
-    "status": "16 persons monitoring; 1 inconclusive (retesting underway)",
-    "description": "Nebraska monitoring 16 repatriated passengers. 1 passenger in UNMC biocontainment unit with inconclusive test results — discordant results from two laboratories; retesting underway per WHO DON601 (May 13). CDC states no confirmed US cases.",
+    "status": "16 persons monitoring; biocontainment patient confirmed NEGATIVE",
+    "description": "Nebraska monitoring 16 repatriated passengers at UNMC. The biocontainment patient who had inconclusive test results (discordant from two labs) has retested NEGATIVE (confirmed May 15). 15 passengers remain in quarantine unit completing 42-day observation. CDC confirms no confirmed US cases from MV Hondius.",
     "source": "CDC HAN 528 / Nebraska Medicine",
     "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
     "sources": [

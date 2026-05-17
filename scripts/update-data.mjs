@@ -34,7 +34,9 @@ const NEWS_PATH     = 'src/data/news.json'
 const RSS_FEEDS = [
   // ── Official public health — authoritative outbreak feeds ──────────────────
   { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss',                            authority: 'CDC' },
-  { url: 'https://www.who.int/feeds/entity/csr/don/en/rss.xml',                                authority: 'WHO' },
+  // NOTE: WHO DON RSS (https://www.who.int/feeds/entity/csr/don/en/rss.xml) returns HTTP 404 as of May 2026
+  // Using WHO news releases feed + DON page monitoring via Google News as fallback
+  { url: 'https://www.who.int/rss-feeds/news-releases.xml',                                    authority: 'WHO' },
   { url: 'https://www.ecdc.europa.eu/en/rss.xml',                                              authority: 'ECDC' },
   // ProMED — real-time infectious disease surveillance, early outbreak detection
   { url: 'https://promedmail.org/feed/',                                                        authority: 'ProMED' },
@@ -48,6 +50,9 @@ const RSS_FEEDS = [
   { url: 'https://news.google.com/rss/search?q=hantavirus&hl=en-US&gl=US&ceid=US:en',          authority: 'Google News' },
   // Secondary: outbreak-specific — catches MV Hondius / Andes virus articles
   { url: 'https://news.google.com/rss/search?q=%22andes+virus%22+OR+%22MV+Hondius%22&hl=en-US&gl=US&ceid=US:en', authority: 'Google News' },
+  // Canadian coverage — BC confirmed case May 16; added for ongoing Canadian surveillance
+  { url: 'https://www.cbc.ca/cmlink/rss-health',                                                authority: 'CBC News' },
+  { url: 'https://www.ctvnews.ca/rss/ctvnews-ca-health-public-rss-1.844908',                    authority: 'CTV News' },
 
   // ── Broadcast / general news health verticals ─────────────────────────────
   { url: 'https://feeds.npr.org/1128/rss.xml',                                                 authority: 'NPR' },
