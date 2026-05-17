@@ -1,9 +1,10 @@
 import { Suspense, lazy, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import DisclaimerBanner from './components/DisclaimerBanner'
 import Dashboard from './pages/Dashboard'
 import AcknowledgmentModal, { hasAcknowledged } from './components/AcknowledgmentModal'
+import { ErrorBoundary } from './components/ErrorBoundary'
 
 // Lazy-load all secondary pages so they don't bloat the initial bundle.
 // The Dashboard is kept as a static import because it's the landing page.
@@ -26,6 +27,51 @@ function PageLoader() {
       }}
     >
       Loading…
+    </div>
+  )
+}
+
+function NotFound() {
+  return (
+    <div
+      style={{
+        paddingTop: '3rem',
+        fontFamily: "'IBM Plex Mono', monospace",
+        textAlign: 'center',
+      }}
+    >
+      <div
+        style={{
+          fontSize: '0.625rem',
+          color: 'var(--color-text-muted)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+          marginBottom: '0.75rem',
+        }}
+      >
+        404
+      </div>
+      <div
+        style={{
+          fontSize: '1rem',
+          fontWeight: 700,
+          color: 'var(--color-text-primary)',
+          marginBottom: '1rem',
+        }}
+      >
+        Page not found
+      </div>
+      <Link
+        to="/"
+        style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '0.75rem',
+          color: 'var(--color-accent-blue)',
+          textDecoration: 'none',
+        }}
+      >
+        ← Return to dashboard
+      </Link>
     </div>
   )
 }
@@ -83,18 +129,21 @@ export default function App() {
       <NavBar />
       <DisclaimerBanner />
       <main id="main-content" style={{ flex: 1, padding: '1.5rem 1rem', maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/clinical" element={<Clinical />} />
-            <Route path="/ppe" element={<PPE />} />
-            <Route path="/genomics" element={<Genomics />} />
-            <Route path="/protocols" element={<Protocols />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/sources" element={<Sources />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </Suspense>
+        <ErrorBoundary label="Page">
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/clinical" element={<Clinical />} />
+              <Route path="/ppe" element={<PPE />} />
+              <Route path="/genomics" element={<Genomics />} />
+              <Route path="/protocols" element={<Protocols />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/sources" element={<Sources />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </main>
 
       <footer

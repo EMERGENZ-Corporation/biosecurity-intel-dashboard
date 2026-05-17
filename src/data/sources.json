@@ -1,5 +1,44 @@
 [
   {
+    "id": "bccdc-hantavirus",
+    "authority": "BC CDC",
+    "authorityFull": "BC Centre for Disease Control",
+    "title": "Hantavirus — BC Centre for Disease Control",
+    "documentType": "Public Health Page",
+    "publicationDate": "2026-05-16",
+    "lastVerified": "2026-05-16",
+    "url": "https://www.bccdc.ca/health-info/diseases-conditions/hantavirus",
+    "contentUsed": "Dashboard, Markers",
+    "license": "BC Government Open Data",
+    "accessStatus": "VERIFIED"
+  },
+  {
+    "id": "phac-hantavirus",
+    "authority": "PHAC",
+    "authorityFull": "Public Health Agency of Canada",
+    "title": "Hantavirus Pulmonary Syndrome — Public Health Agency of Canada",
+    "documentType": "Public Health Page",
+    "publicationDate": "2026-05-16",
+    "lastVerified": "2026-05-16",
+    "url": "https://www.canada.ca/en/public-health/services/diseases/hantavirus-pulmonary-syndrome.html",
+    "contentUsed": "Dashboard",
+    "license": "Government of Canada Open Government Licence",
+    "accessStatus": "VERIFIED"
+  },
+  {
+    "id": "cdc-hantavirus-general",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "Hantavirus — CDC",
+    "documentType": "Public Health Reference",
+    "publicationDate": "2026-05-16",
+    "lastVerified": "2026-05-16",
+    "url": "https://www.cdc.gov/hantavirus/",
+    "contentUsed": "Dashboard, News (Colorado SNV death — UNRELATED to MV Hondius)",
+    "license": "U.S. Government Public Domain",
+    "accessStatus": "VERIFIED"
+  },
+  {
     "id": "who-don599",
     "authority": "WHO",
     "authorityFull": "World Health Organization",

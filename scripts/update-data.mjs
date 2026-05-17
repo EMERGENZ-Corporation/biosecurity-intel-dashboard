@@ -1,21 +1,26 @@
 /**
  * EMERGENZ Hantavirus Dashboard — Automated Data Update Script
  *
- * Runs every 12 hours via GitHub Actions.
+ * Runs every 6 hours via GitHub Actions (0:00, 6:00, 12:00, 18:00 UTC).
+ *
+ * Architecture:
+ *   Step 1 — RSS fetch (FREE, no API calls)
+ *   Step 2 — Bright Data enrichment (only when new items found)
+ *   Step 3 — Gemini extraction (only when new items found, up to 3 retries)
+ *   Step 4 — Write files only if data changed (prevents spurious Vercel rebuilds)
  *
  * Bright Data usage (all conditional on new RSS items being found):
  *   Slot 1  — CDC Situation Summary (always when triggered)
- *   Slots 2–5 — Blocked-domain article enrichment (SA, Wired, Reuters, NEJM, etc.) — up to 4/run
+ *   Slots 2–5 — Blocked-domain article enrichment — up to 4/run
  *   Slots 6–7 — WHO DON page(s) when a new DON is detected in RSS
  *   Slots 8–11 — State DOH pages (NY, CA, TX, WA) for US monitoring count
  *   Max ~12 BD calls/triggered run · ~$0.036/triggered run · $5 credit ≈ 138 triggered runs
  *
  * Cost controls:
- *   - Step 1 (RSS) is FREE — plain HTTP, no APIs
- *   - All Bright Data + Gemini calls only run when new relevant RSS items are found
- *   - All Bright Data calls are parallelized with Promise.allSettled
- *   - Single Gemini call per run regardless of how many BD fetches complete
- *   - During quiet periods (no new publications), cost = $0
+ *   - Zero-item runs write NO files → no git commit → no Vercel rebuild → $0
+ *   - All BD + Gemini calls only run when new relevant RSS items are found
+ *   - All BD calls parallelized with Promise.allSettled
+ *   - Single Gemini call per run (with up to 3 retries on transient errors)
  */
 
 import { readFileSync, writeFileSync } from 'fs'
@@ -157,17 +162,24 @@ function isWhoDon(item) {
 async function main() {
   const now = new Date().toISOString()
   const meta = JSON.parse(readFileSync(META_PATH, 'utf8'))
-  const lastChecked = new Date(meta.lastChecked)
+
+  // 72-hour sliding window — always re-scan recent publications.
+  // Previously used meta.lastChecked as cutoff, which permanently excluded articles
+  // missed during feed outages (e.g. WHO RSS 404 for 3 days → those articles were
+  // forever skipped on recovery). Sliding window self-heals after any feed failure.
+  const LOOKBACK_MS = 72 * 60 * 60 * 1000
+  const cutoff = new Date(Date.now() - LOOKBACK_MS)
 
   // ─── Startup diagnostic ───────────────────────────────────────────────────
   console.log(`[update-data] Run: ${now}`)
-  console.log(`[update-data] Last checked: ${meta.lastChecked}`)
+  console.log(`[update-data] Lookback cutoff: ${cutoff.toISOString()} (72h sliding window)`)
   console.log(`[update-data] BD key: ${BD_KEY ? 'SET' : 'NOT SET'} | Zone: ${BD_ZONE}`)
   console.log(`[update-data] Gemini key: ${GEMINI_KEY ? 'SET' : 'NOT SET'}`)
   console.log(`[update-data] RSS feeds: ${RSS_FEEDS.length}`)
 
   // ─── Step 1: Fetch RSS feeds (FREE) ──────────────────────────────────────────
   const newItems = []
+  const failedFeeds = []
 
   for (const feed of RSS_FEEDS) {
     try {
@@ -178,9 +190,10 @@ async function main() {
         const link        = item.link ?? ''
         const pubDate     = item.pubDate ?? ''
 
+        // 72h sliding window filter — skip articles older than cutoff
         if (pubDate) {
           const d = new Date(pubDate)
-          if (!isNaN(d.getTime()) && d <= lastChecked) continue
+          if (!isNaN(d.getTime()) && d < cutoff) continue
         }
 
         const text = `${title} ${description}`.toLowerCase()
@@ -195,17 +208,26 @@ async function main() {
         })
       }
     } catch (e) {
-      console.warn(`[update-data] RSS fetch failed (${feed.authority}):`, e.message)
+      console.warn(`[update-data] RSS FEED FAILURE (${feed.authority} — ${feed.url}): ${e.message}`)
+      failedFeeds.push(feed.authority)
     }
   }
 
   console.log(`[update-data] New relevant RSS items: ${newItems.length}`)
-
-  meta.lastChecked = now
+  if (failedFeeds.length > 0) {
+    const uniqueFailed = [...new Set(failedFeeds)]
+    console.warn(`[update-data] ⚠ FEED FAILURES (${failedFeeds.length}): ${uniqueFailed.join(', ')}`)
+  }
 
   if (newItems.length === 0) {
-    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
-    console.log('[update-data] No new content. Exiting without API calls.')
+    // ANOMALY WARNING: active outbreak + zero items = likely feed issue, not a quiet news day
+    if ((meta.confirmed ?? 0) > 0) {
+      console.warn('[update-data] ⚠ ANOMALY: Active outbreak (confirmed > 0) but 0 relevant items found.')
+      console.warn('[update-data] Possible causes: all feeds healthy but no new hantavirus publications,')
+      console.warn('[update-data] OR one or more feeds are broken (see FEED FAILURES above).')
+    }
+    // Do NOT write any files — no git diff, no commit, no Vercel rebuild
+    console.log('[update-data] Exiting without writing files.')
     return
   }
 
@@ -262,9 +284,11 @@ async function main() {
     console.warn('[update-data] BRIGHT_DATA_API_KEY not set — skipping all BD fetches.')
   }
 
-  // ─── Step 3: Gemini — ONE call, extract everything ──────────────────────────
+  // ─── Step 3: Gemini — extract everything (with retry) ───────────────────────
   if (!GEMINI_KEY) {
     console.warn('[update-data] GEMINI_API_KEY not set — skipping extraction.')
+    meta.lastChecked = now
+    meta.feedHealth = { lastRun: now, failedFeeds: [...new Set(failedFeeds)], itemsFound: newItems.length }
     writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
     return
   }
@@ -358,34 +382,52 @@ Rules:
 - newsDescriptions: only include entries for URLs present in the "Full article text" section above. If no article text was provided, return an empty object {}.
 - Never fabricate numbers or events. Only extract what sources explicitly state.`
 
+  // ─── Step 3: Gemini — with retry on transient errors ─────────────────────────
   let extracted = null
-  try {
-    const gemRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.1, maxOutputTokens: 1200 },
-        }),
-        signal: AbortSignal.timeout(30000),
+  const GEMINI_MAX_RETRIES = 3
+
+  for (let attempt = 1; attempt <= GEMINI_MAX_RETRIES && !extracted; attempt++) {
+    try {
+      if (attempt > 1) {
+        const delay = attempt * 3000
+        console.log(`[update-data] Gemini retry ${attempt}/${GEMINI_MAX_RETRIES} in ${delay}ms...`)
+        await new Promise(r => setTimeout(r, delay))
       }
-    )
-    if (gemRes.ok) {
-      const gemData = await gemRes.json()
-      const raw = gemData.candidates?.[0]?.content?.parts?.[0]?.text ?? ''
-      const cleaned = raw.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim()
-      extracted = JSON.parse(cleaned)
-      console.log('[update-data] Gemini extraction succeeded.')
-    } else {
-      console.warn('[update-data] Gemini API error:', gemRes.status)
+      const gemRes = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.1, maxOutputTokens: 1200 },
+          }),
+          signal: AbortSignal.timeout(30000),
+        }
+      )
+      if (gemRes.ok) {
+        const gemData = await gemRes.json()
+        const raw = gemData.candidates?.[0]?.content?.parts?.[0]?.text ?? ''
+        const cleaned = raw.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim()
+        extracted = JSON.parse(cleaned)
+        console.log(`[update-data] Gemini extraction succeeded (attempt ${attempt}).`)
+      } else if (gemRes.status === 429 || gemRes.status >= 500) {
+        // Retryable: rate limit or server error
+        console.warn(`[update-data] Gemini retryable error ${gemRes.status} (attempt ${attempt}/${GEMINI_MAX_RETRIES})`)
+      } else {
+        // Non-retryable: bad request, auth failure, etc.
+        console.warn(`[update-data] Gemini non-retryable error: ${gemRes.status} — aborting retries.`)
+        break
+      }
+    } catch (e) {
+      console.warn(`[update-data] Gemini attempt ${attempt} failed: ${e.message}`)
     }
-  } catch (e) {
-    console.warn('[update-data] Gemini call failed:', e.message)
   }
 
   if (!extracted) {
+    // Gemini failed — still write meta to record feedHealth and lastChecked
+    meta.lastChecked = now
+    meta.feedHealth = { lastRun: now, failedFeeds: [...new Set(failedFeeds)], itemsFound: newItems.length }
     writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
     return
   }
@@ -450,12 +492,21 @@ Rules:
     }
   }
 
+  // Update feed health and lastChecked — always written when items were found
+  meta.lastChecked = now
+  meta.feedHealth = {
+    lastRun: now,
+    failedFeeds: [...new Set(failedFeeds)],
+    itemsFound: newItems.length,
+  }
+
   if (dataChanged) {
     meta.lastUpdated = now
-    meta.source = 'WHO / ECDC / CDC — auto-updated'
+    // Do NOT overwrite meta.source — it tracks manual authority additions (e.g. BC CDC).
+    // The pipeline should not reset manual curation work.
     console.log('[update-data] Data changed — lastUpdated set.')
   } else {
-    console.log('[update-data] No data changes detected.')
+    console.log('[update-data] No structured data changes detected.')
   }
 
   writeFileSync(META_PATH, JSON.stringify(meta, null, 2))

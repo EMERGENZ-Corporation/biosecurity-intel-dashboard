@@ -6,6 +6,11 @@
   "source": "WHO / ECDC / CDC / BC CDC",
   "lastUpdated": "2026-05-16T00:00:00Z",
   "lastChecked": "2026-05-16T18:45:20.093Z",
+  "feedHealth": {
+    "lastRun": "2026-05-16T18:45:20.093Z",
+    "failedFeeds": ["WHO"],
+    "itemsFound": 0
+  },
   "whoGlobalRisk": "LOW",
   "whoGlobalRiskUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",
   "cdcResponseLevel": "HAN 528",

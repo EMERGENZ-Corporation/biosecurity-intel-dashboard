@@ -38,6 +38,19 @@ const AUTHORITY_COLORS: Record<string, string> = {
   'Google News': '#4285F4',
   'AP News': '#CC0000',
   'STAT News': '#E63946',
+  'CBC News': '#E8292B',
+  'CTV News': '#004B8D',
+  Reuters: '#FF8C00',
+  'Medscape': '#00539C',
+  'MedPage Today': '#005A9C',
+  'Healio': '#007CB2',
+  'NBC News': '#FA621E',
+  'CBS News': '#004F9F',
+  Guardian: '#052962',
+  'The Hill': '#000000',
+  'Al Jazeera': '#8B1C13',
+  Time: '#E42F21',
+  Euronews: '#0055A4',
 }
 
 function NewsCard({ item }: { item: FeedItem }) {
