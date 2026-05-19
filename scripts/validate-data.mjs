@@ -53,6 +53,15 @@ function isParseableDate(value) {
   return typeof value === 'string' && !isNaN(new Date(value).getTime())
 }
 
+function isUrl(value) {
+  try {
+    new URL(value)
+    return true
+  } catch {
+    return false
+  }
+}
+
 const meta = readJson('meta')
 const timeline = readJson('timeline') ?? []
 const news = readJson('news') ?? []
@@ -67,6 +76,58 @@ if (meta) {
   requireFields(meta, ['confirmed', 'deaths', 'countries', 'usStatesMonitoring', 'lastUpdated', 'lastChecked', 'source'], 'meta')
   if (!isIsoDate(meta.lastUpdated)) errors.push('meta.lastUpdated must be an ISO date string')
   if (!isIsoDate(meta.lastChecked)) errors.push('meta.lastChecked must be an ISO date string')
+  if (meta.lastOfficialSourceCheck && !isIsoDate(meta.lastOfficialSourceCheck)) {
+    errors.push('meta.lastOfficialSourceCheck must be an ISO date string')
+  }
+  if (!Number.isInteger(meta.confirmed) || meta.confirmed < 0) errors.push('meta.confirmed must be a non-negative integer')
+  if (!Number.isInteger(meta.deaths) || meta.deaths < 0) errors.push('meta.deaths must be a non-negative integer')
+  if (!Number.isInteger(meta.countries) || meta.countries < 0) errors.push('meta.countries must be a non-negative integer')
+  if (!Number.isInteger(meta.usStatesMonitoring) || meta.usStatesMonitoring < 0) {
+    errors.push('meta.usStatesMonitoring must be a non-negative integer')
+  }
+  if (meta.deaths > meta.confirmed) errors.push('meta.deaths cannot exceed meta.confirmed')
+  if (new Date(meta.lastChecked).getTime() < new Date(meta.lastUpdated).getTime()) {
+    errors.push('meta.lastChecked cannot be older than meta.lastUpdated')
+  }
+
+  if (meta.feedHealth) {
+    requireFields(meta.feedHealth, ['lastRun', 'failedFeeds', 'itemsFound', 'candidateItemsFound', 'extractionStatus'], 'meta.feedHealth')
+    if (!isIsoDate(meta.feedHealth.lastRun)) errors.push('meta.feedHealth.lastRun must be an ISO date string')
+    if (!Array.isArray(meta.feedHealth.failedFeeds)) errors.push('meta.feedHealth.failedFeeds must be an array')
+    if (!Number.isInteger(meta.feedHealth.itemsFound) || meta.feedHealth.itemsFound < 0) {
+      errors.push('meta.feedHealth.itemsFound must be a non-negative integer')
+    }
+    if (!Number.isInteger(meta.feedHealth.candidateItemsFound) || meta.feedHealth.candidateItemsFound < 0) {
+      errors.push('meta.feedHealth.candidateItemsFound must be a non-negative integer')
+    }
+  }
+
+  if (meta.officialSources) {
+    if (!Array.isArray(meta.officialSources) || meta.officialSources.length === 0) {
+      errors.push('meta.officialSources must be a non-empty array when present')
+    } else {
+      checkDuplicate(meta.officialSources, (source) => source.id, 'meta official source ids')
+      meta.officialSources.forEach((source, index) => {
+        requireFields(source, ['id', 'authority', 'label', 'url', 'status', 'lastChecked'], `meta.officialSources[${index}]`)
+        if (!isUrl(source.url)) errors.push(`meta.officialSources[${index}]: url must be valid`)
+        if (!['ok', 'failed'].includes(source.status)) {
+          errors.push(`meta.officialSources[${index}]: invalid status "${source.status}"`)
+        }
+        if (!isIsoDate(source.lastChecked)) errors.push(`meta.officialSources[${index}]: lastChecked must be ISO`)
+        if (source.lastChanged && !isIsoDate(source.lastChanged)) {
+          errors.push(`meta.officialSources[${index}]: lastChanged must be ISO`)
+        }
+      })
+    }
+  }
+
+  if (meta.metricProvenance) {
+    Object.entries(meta.metricProvenance).forEach(([key, provenance]) => {
+      requireFields(provenance, ['source', 'sourceLabel', 'sourceUrl', 'method', 'lastVerified'], `meta.metricProvenance.${key}`)
+      if (!isUrl(provenance.sourceUrl)) errors.push(`meta.metricProvenance.${key}: sourceUrl must be valid`)
+      if (!isIsoDate(provenance.lastVerified)) errors.push(`meta.metricProvenance.${key}: lastVerified must be ISO`)
+    })
+  }
 }
 
 checkDuplicate(timeline, (event) => event.id, 'timeline ids')

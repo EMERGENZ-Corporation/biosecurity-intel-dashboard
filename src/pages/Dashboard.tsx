@@ -50,6 +50,25 @@ function fmt(iso: string) {
   })
 }
 
+const metricProvenance = metaJson.metricProvenance as Record<string, {
+  sourceLabel: string
+  sourceUrl: string
+  lastVerified: string
+}> | undefined
+
+function metricSource(key: string, fallbackSource: string, fallbackUrl: string, fallbackDate: string) {
+  const provenance = metricProvenance?.[key]
+  return {
+    source: provenance?.sourceLabel ?? fallbackSource,
+    url: provenance?.sourceUrl ?? fallbackUrl,
+    date: new Date(provenance?.lastVerified ?? fallbackDate).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    }),
+  }
+}
+
 export default function Dashboard() {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const [visibleTypes, setVisibleTypes] = useState<string[]>(ALL_TYPES)
@@ -58,6 +77,7 @@ export default function Dashboard() {
   // Data served from meta.json — updated every 6h via GitHub Actions → Vercel rebuild.
   // Static SPA: no runtime API calls.
   const isDataStale = Date.now() - new Date(metaJson.lastUpdated).getTime() > STALENESS_WARN_MS
+  const officialSourceFailures = metaJson.feedHealth?.officialSourceFailures ?? []
 
   const data = {
     confirmed: metaJson.confirmed,
@@ -95,37 +115,54 @@ export default function Dashboard() {
     },
   ]
 
+  const confirmedSource = metricSource(
+    'confirmed',
+    data.source,
+    'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601',
+    data.lastUpdated
+  )
+  const deathsSource = metricSource(
+    'deaths',
+    'WHO DON601',
+    'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601',
+    data.lastUpdated
+  )
+  const countriesSource = metricSource(
+    'countries',
+    'WHO DON601',
+    'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601',
+    data.lastUpdated
+  )
+  const usMonitoringSource = metricSource(
+    'usStatesMonitoring',
+    'CDC + State DOHs',
+    'https://www.cdc.gov/han/php/notices/han00528.html',
+    data.lastUpdated
+  )
+
   const tiles = [
     {
       metric: 'Total Reported Cases',
       value: String(data.confirmed),
-      source: data.source,
-      date: new Date(data.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      url: 'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601',
+      ...confirmedSource,
       color: 'var(--color-accent-red)',
     },
     {
       metric: 'Global Deaths',
       value: String(data.deaths),
-      source: 'WHO DON601',
-      date: new Date(data.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      url: 'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601',
+      ...deathsSource,
       color: 'var(--color-accent-orange)',
     },
     {
       metric: 'Countries with Cases',
       value: String(data.countries),
-      source: 'WHO DON601',
-      date: new Date(data.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      url: 'https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601',
+      ...countriesSource,
       color: 'var(--color-accent-yellow)',
     },
     {
       metric: 'U.S. States Monitoring',
       value: String(data.usStatesMonitoring),
-      source: 'CDC + State DOHs',
-      date: new Date(data.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      url: 'https://www.cdc.gov/han/php/notices/han00528.html',
+      ...usMonitoringSource,
       color: 'var(--color-accent-blue)',
     },
   ]
@@ -283,6 +320,9 @@ export default function Dashboard() {
         </span>
         <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-text-muted)' }}>
           Data updated: {fmt(metaJson.lastUpdated)}
+        </span>
+        <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-text-muted)' }}>
+          Official sources: {officialSourceFailures.length === 0 ? 'OK' : `${officialSourceFailures.length} failing`}
         </span>
         <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5625rem', color: 'var(--color-text-muted)' }}>
           {metaJson.source}

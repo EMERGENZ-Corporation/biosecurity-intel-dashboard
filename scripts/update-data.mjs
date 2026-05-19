@@ -11,6 +11,7 @@
  * - Exit nonzero only for required-path failures that need human attention.
  */
 
+import { createHash } from 'crypto'
 import { readFileSync, writeFileSync } from 'fs'
 import { XMLParser } from 'fast-xml-parser'
 
@@ -95,7 +96,7 @@ const FALLBACK_AUTHORITY_WEIGHT = new Map([
 ])
 
 const FALLBACK_NEWS_LIMIT = Number.parseInt(process.env.FALLBACK_NEWS_LIMIT || '8', 10)
-const FALLBACK_GOOGLE_NEWS_LIMIT = Number.parseInt(process.env.FALLBACK_GOOGLE_NEWS_LIMIT || '4', 10)
+const FALLBACK_GOOGLE_NEWS_LIMIT = Number.parseInt(process.env.FALLBACK_GOOGLE_NEWS_LIMIT || '0', 10)
 
 const BLOCKED_DOMAINS = [
   'wired.com',
@@ -120,6 +121,41 @@ const STATE_DOH_PAGES = [
   { url: 'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Hantavirus.aspx', state: 'CA' },
   { url: 'https://www.dshs.texas.gov/infectious-disease/hantavirus', state: 'TX' },
   { url: 'https://www.doh.wa.gov/YouandYourFamily/IllnessandDisease/Hantavirus', state: 'WA' },
+]
+
+const OFFICIAL_SOURCE_PAGES = [
+  {
+    id: 'cdc-situation-summary',
+    authority: 'CDC',
+    label: 'CDC Situation Summary',
+    url: 'https://www.cdc.gov/hantavirus/situation-summary/index.html',
+    critical: true,
+    parser: parseCdcSituation,
+  },
+  {
+    id: 'ecdc-surveillance',
+    authority: 'ECDC',
+    label: 'ECDC Surveillance Update',
+    url: 'https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak',
+    critical: true,
+    parser: parseEcdcSurveillance,
+  },
+  {
+    id: 'who-rra-v2',
+    authority: 'WHO',
+    label: 'WHO Rapid Risk Assessment v2',
+    url: 'https://www.who.int/publications/m/item/who-rapid-risk-assessment---hantavirus-outbreak-caused-by-andes-virus--global-v.2',
+    critical: false,
+    parser: parseWhoAssessment,
+  },
+  {
+    id: 'phac-media-update',
+    authority: 'PHAC',
+    label: 'PHAC Media Update',
+    url: 'https://www.canada.ca/en/public-health/news/2026/05/media-update-on-andes-hantavirus-situation1.html',
+    critical: false,
+    parser: parsePhacUpdate,
+  },
 ]
 
 function stripHtml(html = '') {
@@ -201,6 +237,26 @@ async function brightDataFetch(url, label) {
   }
 }
 
+async function fetchOfficialPage(page) {
+  try {
+    const res = await fetch(page.url, {
+      headers: {
+        Accept: 'text/html,application/xhtml+xml,application/xml,text/plain,*/*',
+        'User-Agent': 'EMERGENZ-Hantavirus-Dashboard/1.0 (+https://emergenzsystems.org)',
+      },
+      signal: AbortSignal.timeout(20000),
+    })
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    return { status: 'ok', text: stripHtml(await res.text()), transport: 'direct' }
+  } catch (error) {
+    if (!BD_KEY) return { status: 'failed', text: '', error: error.message, transport: 'direct' }
+
+    const text = await brightDataFetch(page.url, page.label)
+    if (text) return { status: 'ok', text, transport: 'bright-data' }
+    return { status: 'failed', text: '', error: error.message, transport: 'bright-data' }
+  }
+}
+
 function isBlockedDomain(url) {
   try {
     const host = new URL(url).hostname.replace(/^www\./, '')
@@ -219,6 +275,174 @@ function uniqueValues(values) {
   return [...new Set(values.filter(Boolean))]
 }
 
+function sha256(text) {
+  return createHash('sha256').update(text).digest('hex')
+}
+
+function normalizeRisk(value) {
+  if (!value) return null
+  const text = value.toUpperCase().replace(/\s+/g, ' ').trim()
+  if (text.includes('VERY LOW')) return 'VERY LOW'
+  if (text.includes('VERY HIGH')) return 'VERY HIGH'
+  if (text.includes('MODERATE')) return 'MODERATE'
+  if (text.includes('HIGH')) return 'HIGH'
+  if (text.includes('LOW')) return 'LOW'
+  return null
+}
+
+function parseEcdcSurveillance(text) {
+  const extraction = { caseStats: {}, riskLevels: {}, facts: [] }
+  const caseMatch = text.match(/(?:total of\s*)?(\d+)\s+cases? has been reported,\s*including\s*(\d+)\s+confirmed\s+and\s+(\d+)\s+probable cases/i)
+    ?? text.match(/(\d+)\s+confirmed cases?,\s*(\d+)\s+probable cases?,\s*(\d+)\s+suspected cases?,?\s*(?:and\s*)?(\d+)\s+(?:number of\s+)?deaths/i)
+
+  if (caseMatch) {
+    if (caseMatch[0].toLowerCase().includes('total of')) {
+      const totalCases = Number.parseInt(caseMatch[1], 10)
+      const confirmed = Number.parseInt(caseMatch[2], 10)
+      const probable = Number.parseInt(caseMatch[3], 10)
+      extraction.caseStats.confirmed = totalCases
+      extraction.facts.push(`${confirmed} confirmed, ${probable} probable, ${totalCases} total reported cases`)
+    } else {
+      const confirmed = Number.parseInt(caseMatch[1], 10)
+      const probable = Number.parseInt(caseMatch[2], 10)
+      const suspected = Number.parseInt(caseMatch[3], 10)
+      const deaths = Number.parseInt(caseMatch[4], 10)
+      extraction.caseStats.confirmed = confirmed + probable
+      extraction.caseStats.deaths = deaths
+      extraction.facts.push(`${confirmed} confirmed, ${probable} probable, ${suspected} suspected, ${deaths} deaths`)
+    }
+  }
+
+  const deathsMatch = text.match(/Number of deaths\s+(\d+)/i) ?? text.match(/(\d+)\s+deaths/i)
+  if (deathsMatch) extraction.caseStats.deaths = Number.parseInt(deathsMatch[1], 10)
+
+  const riskMatch = text.match(/risk(?:\s+to\s+the\s+EU\/EEA\s+general\s+population)?(?:\s+is|\s+remains)?\s+(very low|low|moderate|high)/i)
+  const ecdcRisk = normalizeRisk(riskMatch?.[1])
+  if (ecdcRisk) extraction.riskLevels.ecdcRisk = ecdcRisk
+
+  return extraction
+}
+
+function parseWhoAssessment(text) {
+  const extraction = { caseStats: {}, riskLevels: {}, facts: [] }
+  const riskMatch = text.match(/(?:global|overall)\s+(?:public health\s+)?risk(?:\s+is|\s+remains|\s+as)?\s+(low|moderate|high|very high)/i)
+  const whoGlobalRisk = normalizeRisk(riskMatch?.[1])
+  if (whoGlobalRisk) extraction.riskLevels.whoGlobalRisk = whoGlobalRisk
+  return extraction
+}
+
+function parseCdcSituation(text) {
+  const extraction = { caseStats: {}, riskLevels: {}, facts: [] }
+  const monitoringMatch = text.match(/(\d+)\s+(?:U\.S\.\s+)?states?\s+(?:are\s+)?(?:monitoring|with\s+persons?\s+being\s+monitored)/i)
+  if (monitoringMatch) extraction.caseStats.usStatesMonitoring = Number.parseInt(monitoringMatch[1], 10)
+  if (/HAN\s*528/i.test(text)) extraction.riskLevels.cdcResponseLevel = 'HAN 528'
+  return extraction
+}
+
+function parsePhacUpdate(text) {
+  const extraction = { caseStats: {}, riskLevels: {}, facts: [] }
+  if (/one\s+(?:former\s+)?passenger.*tested positive/i.test(text) || /one.*positive for Andes hantavirus/i.test(text)) {
+    extraction.facts.push('PHAC confirms one Canadian case linked to MV Hondius')
+  }
+  return extraction
+}
+
+async function checkOfficialSources(meta, now) {
+  const previousSources = new Map((meta.officialSources ?? []).map((source) => [source.id, source]))
+  const sourceHealth = []
+  const extractions = []
+
+  for (const page of OFFICIAL_SOURCE_PAGES) {
+    const fetched = await fetchOfficialPage(page)
+    const previous = previousSources.get(page.id)
+    const record = {
+      id: page.id,
+      authority: page.authority,
+      label: page.label,
+      url: page.url,
+      critical: page.critical,
+      status: fetched.status,
+      lastChecked: now,
+      lastChanged: previous?.lastChanged ?? now,
+      hash: previous?.hash ?? null,
+      transport: fetched.transport,
+    }
+
+    if (fetched.status === 'ok') {
+      const hash = sha256(fetched.text)
+      record.hash = hash
+      record.lastChanged = previous?.hash === hash ? previous?.lastChanged ?? now : now
+
+      const extracted = page.parser(fetched.text)
+      sourceHealth.push({ ...record, extracted })
+      extractions.push({ page, extracted })
+    } else {
+      record.error = fetched.error
+      sourceHealth.push(record)
+    }
+  }
+
+  return { sourceHealth, extractions }
+}
+
+function applyOfficialExtractions(meta, extractions) {
+  let changed = false
+  const provenance = { ...(meta.metricProvenance ?? {}) }
+
+  function applyMetric(key, value, source) {
+    if (!Number.isInteger(value) || value < 0) return
+    if (key === 'deaths' && value > (meta.confirmed ?? value)) return
+    if (key !== 'deaths' && key !== 'confirmed' && value === 0) return
+    if (meta[key] !== value) {
+      meta[key] = value
+      changed = true
+      console.log(`[update-data] Official parser updated ${key}: ${value}`)
+    }
+    provenance[key] = {
+      source: source.page.authority,
+      sourceLabel: source.page.label,
+      sourceUrl: source.page.url,
+      method: 'official-parser',
+      lastVerified: new Date().toISOString(),
+    }
+  }
+
+  function applyRisk(key, value, source) {
+    if (!value) return
+    if (meta[key] !== value) {
+      meta[key] = value
+      changed = true
+      console.log(`[update-data] Official parser updated ${key}: ${value}`)
+    }
+    provenance[key] = {
+      source: source.page.authority,
+      sourceLabel: source.page.label,
+      sourceUrl: source.page.url,
+      method: 'official-parser',
+      lastVerified: new Date().toISOString(),
+    }
+  }
+
+  const ecdc = extractions.find((entry) => entry.page.id === 'ecdc-surveillance')
+  if (ecdc) {
+    applyMetric('confirmed', ecdc.extracted.caseStats.confirmed, ecdc)
+    applyMetric('deaths', ecdc.extracted.caseStats.deaths, ecdc)
+    applyRisk('ecdcRisk', ecdc.extracted.riskLevels.ecdcRisk, ecdc)
+  }
+
+  const cdc = extractions.find((entry) => entry.page.id === 'cdc-situation-summary')
+  if (cdc) {
+    applyMetric('usStatesMonitoring', cdc.extracted.caseStats.usStatesMonitoring, cdc)
+    applyRisk('cdcResponseLevel', cdc.extracted.riskLevels.cdcResponseLevel, cdc)
+  }
+
+  const who = extractions.find((entry) => entry.page.id === 'who-rra-v2')
+  if (who) applyRisk('whoGlobalRisk', who.extracted.riskLevels.whoGlobalRisk, who)
+
+  meta.metricProvenance = provenance
+  return changed
+}
+
 function toTimestamp(pubDate) {
   const timestamp = pubDate ? new Date(pubDate).getTime() : NaN
   return Number.isFinite(timestamp) ? timestamp : Date.now()
@@ -227,6 +451,16 @@ function toTimestamp(pubDate) {
 function hasStrongOutbreakSignal(item) {
   const searchable = `${item.title} ${item.description} ${item.link}`.toLowerCase()
   return STRONG_OUTBREAK_KEYWORDS.some((keyword) => searchable.includes(keyword))
+}
+
+function normalizeTitle(title) {
+  return String(title)
+    .toLowerCase()
+    .replace(/centers for disease control and prevention|cdc \(\.gov\)|cdc|the oklahoman|cruise critic|bbc|ap news|google news/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\b(and|the|a|an|on|in|to|for|of|with|what|know|about)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 function fallbackScore(item) {
@@ -258,9 +492,12 @@ function selectFallbackNewsItems(items) {
 
 function addNewsItems({ items, existingNews, existingNewsLinks, descriptions = {} }) {
   let added = 0
+  const existingTitles = new Set(existingNews.map((item) => normalizeTitle(item.title)).filter(Boolean))
 
   for (const item of items) {
     if (!item.link || existingNewsLinks.has(item.link)) continue
+    const titleKey = normalizeTitle(item.title)
+    if (titleKey && existingTitles.has(titleKey)) continue
 
     existingNews.push({
       id: `rss-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
@@ -272,6 +509,7 @@ function addNewsItems({ items, existingNews, existingNewsLinks, descriptions = {
       timestamp: toTimestamp(item.pubDate),
     })
     existingNewsLinks.add(item.link)
+    if (titleKey) existingTitles.add(titleKey)
     added++
   }
 
@@ -283,7 +521,7 @@ function addNewsItems({ items, existingNews, existingNewsLinks, descriptions = {
   return added
 }
 
-function updateFeedHealth(meta, { now, failedFeeds, newItems, candidateItems, extractionStatus }) {
+function updateFeedHealth(meta, { now, failedFeeds, newItems, candidateItems, extractionStatus, officialSources }) {
   meta.lastChecked = now
   meta.feedHealth = {
     lastRun: now,
@@ -291,6 +529,13 @@ function updateFeedHealth(meta, { now, failedFeeds, newItems, candidateItems, ex
     itemsFound: newItems.length,
     candidateItemsFound: candidateItems.length,
     extractionStatus,
+  }
+  if (officialSources) {
+    meta.lastOfficialSourceCheck = now
+    meta.officialSources = officialSources
+    meta.feedHealth.officialSourceFailures = officialSources
+      .filter((source) => source.status !== 'ok')
+      .map((source) => source.authority)
   }
 }
 
@@ -362,9 +607,20 @@ async function main() {
     console.warn(`[update-data] Feed failures: ${uniqueValues(failedFeeds).join(', ')}`)
   }
 
+  console.log(`[update-data] Official source pages: ${OFFICIAL_SOURCE_PAGES.length}`)
+  const { sourceHealth, extractions: officialExtractions } = await checkOfficialSources(meta, now)
+  const officialDataChanged = applyOfficialExtractions(meta, officialExtractions)
+  const failedCriticalOfficialSources = sourceHealth
+    .filter((source) => source.critical && source.status !== 'ok')
+    .map((source) => source.authority)
+
+  if (failedCriticalOfficialSources.length > 0) {
+    console.warn(`[update-data] Official source failures: ${uniqueValues(failedCriticalOfficialSources).join(', ')}`)
+  }
+
   const criticalFailures = uniqueValues(failedCriticalFeeds)
-  if (criticalFailures.length > 0 && (meta.confirmed ?? 0) > 0) {
-    console.error(`[update-data] CRITICAL: Required feed failures during active outbreak: ${criticalFailures.join(', ')}`)
+  if (criticalFailures.length > 0 && failedCriticalOfficialSources.length > 0 && (meta.confirmed ?? 0) > 0) {
+    console.error(`[update-data] CRITICAL: Required feed and official source failures during active outbreak: ${criticalFailures.join(', ')}`)
     process.exit(1)
   }
 
@@ -372,7 +628,19 @@ async function main() {
     if ((meta.confirmed ?? 0) > 0 && candidateItems.length === 0) {
       console.warn('[update-data] ANOMALY: Active outbreak but no relevant RSS candidates found.')
     }
-    console.log('[update-data] No new deduped items. Exiting without writing files.')
+    updateFeedHealth(meta, {
+      now,
+      failedFeeds,
+      newItems,
+      candidateItems,
+      extractionStatus: officialDataChanged
+        ? 'Official parser updated structured data; no new RSS news items'
+        : 'Official sources checked; no new RSS news items',
+      officialSources: sourceHealth,
+    })
+    if (officialDataChanged) meta.lastUpdated = now
+    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+    console.log('[update-data] No new deduped items. Official source status recorded.')
     return
   }
 
@@ -426,8 +694,9 @@ async function main() {
       newItems,
       candidateItems,
       extractionStatus: `Gemini unavailable: missing API key; RSS-only fallback added ${added} news item(s)`,
+      officialSources: sourceHealth,
     })
-    if (added > 0) meta.lastUpdated = now
+    if (added > 0 || officialDataChanged) meta.lastUpdated = now
     writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
     console.log(`[update-data] RSS-only fallback added ${added} news item(s).`)
     return
@@ -572,14 +841,15 @@ Rules:
       newItems,
       candidateItems,
       extractionStatus: `Gemini unavailable after retries; RSS-only fallback added ${added} news item(s)`,
+      officialSources: sourceHealth,
     })
-    if (added > 0) meta.lastUpdated = now
+    if (added > 0 || officialDataChanged) meta.lastUpdated = now
     writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
     console.log(`[update-data] RSS-only fallback added ${added} news item(s).`)
     return
   }
 
-  let dataChanged = false
+  let dataChanged = officialDataChanged
 
   const caseStats = extracted.caseStats ?? {}
   for (const [key, value] of Object.entries(caseStats)) {
@@ -639,6 +909,7 @@ Rules:
     newItems,
     candidateItems,
     extractionStatus: 'Gemini extraction succeeded',
+    officialSources: sourceHealth,
   })
 
   const enrichedDescriptions = extracted.newsDescriptions ?? {}
