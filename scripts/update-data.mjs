@@ -1,133 +1,152 @@
 /**
- * EMERGENZ Hantavirus Dashboard — Automated Data Update Script
+ * EMERGENZ Hantavirus Dashboard - Automated Data Update Script
  *
- * Runs every 6 hours via GitHub Actions (0:00, 6:00, 12:00, 18:00 UTC).
+ * Runs every 6 hours via GitHub Actions.
+ * The dashboard is a static SPA; this script is the only autonomous data writer.
  *
- * Architecture:
- *   Step 1 — RSS fetch (FREE, no API calls)
- *   Step 2 — Bright Data enrichment (only when new items found)
- *   Step 3 — Gemini extraction (only when new items found, up to 3 retries)
- *   Step 4 — Write files only if data changed (prevents spurious Vercel rebuilds)
- *
- * Bright Data usage (all conditional on new RSS items being found):
- *   Slot 1  — CDC Situation Summary (always when triggered)
- *   Slots 2–5 — Blocked-domain article enrichment — up to 4/run
- *   Slots 6–7 — WHO DON page(s) when a new DON is detected in RSS
- *   Slots 8–11 — State DOH pages (NY, CA, TX, WA) for US monitoring count
- *   Max ~12 BD calls/triggered run · ~$0.036/triggered run · $5 credit ≈ 138 triggered runs
- *
- * Cost controls:
- *   - Zero-item runs write NO files → no git commit → no Vercel rebuild → $0
- *   - All BD + Gemini calls only run when new relevant RSS items are found
- *   - All BD calls parallelized with Promise.allSettled
- *   - Single Gemini call per run (with up to 3 retries on transient errors)
+ * Stability rules:
+ * - Deduplicate RSS candidates before calling Gemini.
+ * - Do not write dashboard JSON when Gemini is unavailable.
+ * - Treat broken noncritical feeds as degraded, not fatal.
+ * - Exit nonzero only for required-path failures that need human attention.
  */
 
 import { readFileSync, writeFileSync } from 'fs'
 import { XMLParser } from 'fast-xml-parser'
 
 const GEMINI_KEY = process.env.GEMINI_API_KEY
-const BD_KEY     = process.env.BRIGHT_DATA_API_KEY
-const BD_ZONE    = process.env.BRIGHT_DATA_ZONE || 'web_unlocker1'
+const BD_KEY = process.env.BRIGHT_DATA_API_KEY
+const BD_ZONE = process.env.BRIGHT_DATA_ZONE || 'web_unlocker1'
 
-const META_PATH     = 'src/data/meta.json'
+const META_PATH = 'src/data/meta.json'
 const TIMELINE_PATH = 'src/data/timeline.json'
-const NEWS_PATH     = 'src/data/news.json'
-
-// ─── Feed configuration ────────────────────────────────────────────────────────
+const NEWS_PATH = 'src/data/news.json'
 
 const RSS_FEEDS = [
-  // ── Official public health — authoritative outbreak feeds ──────────────────
-  { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss',                            authority: 'CDC' },
-  // NOTE: WHO DON RSS (https://www.who.int/feeds/entity/csr/don/en/rss.xml) returns HTTP 404 as of May 2026
-  // Using WHO news releases feed + DON page monitoring via Google News as fallback
-  { url: 'https://www.who.int/rss-feeds/news-releases.xml',                                    authority: 'WHO' },
-  { url: 'https://www.ecdc.europa.eu/en/rss.xml',                                              authority: 'ECDC' },
-  // ProMED — real-time infectious disease surveillance, early outbreak detection
-  { url: 'https://promedmail.org/feed/',                                                        authority: 'ProMED' },
-  // Eurosurveillance — EU peer-reviewed surveillance journal
-  { url: 'https://www.eurosurveillance.org/rss/eurosurv.xml',                                  authority: 'Eurosurveillance' },
-  // Netherlands RIVM — primary European country managing repatriated cases
-  { url: 'https://www.rivm.nl/en/rss.xml',                                                     authority: 'RIVM' },
+  { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss', authority: 'CDC', critical: true },
 
-  // ── Google News targeted searches (free, broad coverage) ──────────────────
-  // Primary: broad hantavirus keyword sweep
-  { url: 'https://news.google.com/rss/search?q=hantavirus&hl=en-US&gl=US&ceid=US:en',          authority: 'Google News' },
-  // Secondary: outbreak-specific — catches MV Hondius / Andes virus articles
-  { url: 'https://news.google.com/rss/search?q=%22andes+virus%22+OR+%22MV+Hondius%22&hl=en-US&gl=US&ceid=US:en', authority: 'Google News' },
-  // Canadian coverage — BC confirmed case May 16; added for ongoing Canadian surveillance
-  { url: 'https://www.cbc.ca/cmlink/rss-health',                                                authority: 'CBC News' },
-  { url: 'https://www.ctvnews.ca/rss/ctvnews-ca-health-public-rss-1.844908',                    authority: 'CTV News' },
+  // WHO/ECDC RSS endpoints have been unreliable/404 as of May 2026. Keep them as
+  // monitored feeds, but do not page on their RSS failures alone.
+  { url: 'https://www.who.int/rss-feeds/news-releases.xml', authority: 'WHO', critical: false },
+  { url: 'https://www.ecdc.europa.eu/en/rss.xml', authority: 'ECDC', critical: false },
+  { url: 'https://promedmail.org/feed/', authority: 'ProMED', critical: false },
+  { url: 'https://www.eurosurveillance.org/rss/eurosurv.xml', authority: 'Eurosurveillance', critical: false },
+  { url: 'https://www.rivm.nl/en/rss.xml', authority: 'RIVM', critical: false },
 
-  // ── Additional national public health agencies ────────────────────────────
-  // PHAC — Public Health Agency of Canada (BC confirmed case ongoing surveillance)
-  { url: 'https://healthycanadians.gc.ca/connect-connectez/alerts-avis-rss-eng.xml',           authority: 'PHAC' },
-  // RKI — Robert Koch Institute, Germany (EU outbreak coordination)
-  { url: 'https://www.rki.de/EN/Content/Service/RSS/rss.xml',                                  authority: 'RKI' },
-  // UKHSA — UK Health Security Agency (returnee monitoring, genomics)
-  { url: 'https://www.gov.uk/government/organisations/uk-health-security-agency.atom',          authority: 'UKHSA' },
+  { url: 'https://news.google.com/rss/search?q=hantavirus&hl=en-US&gl=US&ceid=US:en', authority: 'Google News', critical: false },
+  { url: 'https://news.google.com/rss/search?q=%22andes+virus%22+OR+%22MV+Hondius%22&hl=en-US&gl=US&ceid=US:en', authority: 'Google News', critical: false },
+  { url: 'https://www.cbc.ca/cmlink/rss-health', authority: 'CBC News', critical: false },
+  { url: 'https://www.ctvnews.ca/rss/ctvnews-ca-health-public-rss-1.844908', authority: 'CTV News', critical: false },
 
-  // ── Broadcast / general news health verticals ─────────────────────────────
-  { url: 'https://feeds.npr.org/1128/rss.xml',                                                 authority: 'NPR' },
-  { url: 'https://feeds.bbci.co.uk/news/health/rss.xml',                                       authority: 'BBC Health' },
-  { url: 'https://feeds.reuters.com/reuters/healthNews',                                       authority: 'Reuters' },
-  { url: 'https://apnews.com/rss/apf-Health',                                                  authority: 'AP News' },
-  { url: 'https://abcnews.go.com/abcnews/healthheadlines',                                     authority: 'ABC News' },
+  { url: 'https://healthycanadians.gc.ca/connect-connectez/alerts-avis-rss-eng.xml', authority: 'PHAC', critical: false },
+  { url: 'https://www.rki.de/EN/Content/Service/RSS/rss.xml', authority: 'RKI', critical: false },
+  { url: 'https://www.gov.uk/government/organisations/uk-health-security-agency.atom', authority: 'UKHSA', critical: false },
 
-  // ── Science / medical journalism ──────────────────────────────────────────
-  { url: 'https://www.wired.com/feed/rss',                                                     authority: 'Wired' },
-  { url: 'https://www.statnews.com/feed/',                                                     authority: 'STAT News' },
-  { url: 'https://www.sciencenews.org/feed',                                                   authority: 'Science News' },
-  { url: 'https://hsph.harvard.edu/news/feed/',                                                authority: 'Harvard HSPH' },
+  { url: 'https://feeds.npr.org/1128/rss.xml', authority: 'NPR', critical: false },
+  { url: 'https://feeds.bbci.co.uk/news/health/rss.xml', authority: 'BBC Health', critical: false },
+  { url: 'https://feeds.reuters.com/reuters/healthNews', authority: 'Reuters', critical: false },
+  { url: 'https://apnews.com/rss/apf-Health', authority: 'AP News', critical: false },
+  { url: 'https://abcnews.go.com/abcnews/healthheadlines', authority: 'ABC News', critical: false },
 
-  // ── Academic / peer-reviewed journals (paywalled → BD enrichment) ─────────
-  { url: 'https://www.nejm.org/action/showFeed?jc=nejm&type=etoc&feed=rss',                   authority: 'NEJM' },
-  { url: 'https://www.thelancet.com/rssfeed/lancet_online.xml',                               authority: 'Lancet' },
-  { url: 'https://www.nature.com/nm.rss',                                                     authority: 'Nature Medicine' },
-  { url: 'https://www.science.org/rss/news_current.xml',                                      authority: 'Science' },
+  { url: 'https://www.wired.com/feed/rss', authority: 'Wired', critical: false },
+  { url: 'https://www.statnews.com/feed/', authority: 'STAT News', critical: false },
+  { url: 'https://www.sciencenews.org/feed', authority: 'Science News', critical: false },
+  { url: 'https://hsph.harvard.edu/news/feed/', authority: 'Harvard HSPH', critical: false },
+
+  { url: 'https://www.nejm.org/action/showFeed?jc=nejm&type=etoc&feed=rss', authority: 'NEJM', critical: false },
+  { url: 'https://www.thelancet.com/rssfeed/lancet_online.xml', authority: 'Lancet', critical: false },
+  { url: 'https://www.nature.com/nm.rss', authority: 'Nature Medicine', critical: false },
+  { url: 'https://www.science.org/rss/news_current.xml', authority: 'Science', critical: false },
 ]
 
-// Keywords to filter RSS items relevant to this outbreak
-const RELEVANT_KEYWORDS = ['hanta', 'andes virus', 'hondius', 'andv', 'orthohantavirus', 'andes hantavirus']
+const RELEVANT_KEYWORDS = [
+  'hanta',
+  'andes virus',
+  'hondius',
+  'andv',
+  'orthohantavirus',
+  'andes hantavirus',
+]
 
-// Domains that block plain fetch — use Bright Data for article enrichment
 const BLOCKED_DOMAINS = [
-  // Paywalled news
-  'wired.com', 'forbes.com', 'reuters.com', 'bloomberg.com',
-  'nytimes.com', 'washingtonpost.com', 'ft.com', 'theatlantic.com',
-  'scientificamerican.com', 'thetimes.co.uk', 'telegraph.co.uk',
-  // Academic journals (paywalled abstracts, need BD for full text)
-  'nejm.org', 'thelancet.com', 'nature.com', 'science.org',
+  'wired.com',
+  'forbes.com',
+  'reuters.com',
+  'bloomberg.com',
+  'nytimes.com',
+  'washingtonpost.com',
+  'ft.com',
+  'theatlantic.com',
+  'scientificamerican.com',
+  'thetimes.co.uk',
+  'telegraph.co.uk',
+  'nejm.org',
+  'thelancet.com',
+  'nature.com',
+  'science.org',
 ]
 
-// State DOH pages for US monitoring count — Bright Data only, JS-rendered or bot-protected
 const STATE_DOH_PAGES = [
-  { url: 'https://www.health.ny.gov/diseases/communicable/hantavirus/',          state: 'NY' },
-  { url: 'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Hantavirus.aspx',     state: 'CA' },
-  { url: 'https://www.dshs.texas.gov/infectious-disease/hantavirus',             state: 'TX' },
+  { url: 'https://www.health.ny.gov/diseases/communicable/hantavirus/', state: 'NY' },
+  { url: 'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Hantavirus.aspx', state: 'CA' },
+  { url: 'https://www.dshs.texas.gov/infectious-disease/hantavirus', state: 'TX' },
   { url: 'https://www.doh.wa.gov/YouandYourFamily/IllnessandDisease/Hantavirus', state: 'WA' },
 ]
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function stripHtml(html) {
-  return html
+function stripHtml(html = '') {
+  return String(html)
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
     .replace(/<[^>]+>/g, ' ')
-    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&nbsp;/g, ' ').replace(/&#\d+;/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&#\d+;/g, '')
     .replace(/\s+/g, ' ')
     .trim()
 }
 
+function textValue(value) {
+  if (!value) return ''
+  if (typeof value === 'string') return value
+  if (typeof value === 'number') return String(value)
+  if (typeof value === 'object') {
+    return value.__cdata ?? value['#text'] ?? value.href ?? ''
+  }
+  return ''
+}
+
+function linkValue(value) {
+  if (!value) return ''
+  if (typeof value === 'string') return value
+  if (Array.isArray(value)) {
+    const alternate = value.find((entry) => entry?.rel === 'alternate') ?? value[0]
+    return linkValue(alternate)
+  }
+  if (typeof value === 'object') {
+    return value.href ?? value['@_href'] ?? value['#text'] ?? ''
+  }
+  return ''
+}
+
 async function fetchRss(feed) {
-  const res = await fetch(feed.url, { signal: AbortSignal.timeout(15000) })
+  const res = await fetch(feed.url, {
+    headers: { Accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*' },
+    signal: AbortSignal.timeout(15000),
+  })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
+
   const xml = await res.text()
-  const parser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: '',
+    cdataPropName: '__cdata',
+  })
   const parsed = parser.parse(xml)
-  const items = parsed?.rss?.channel?.item ?? []
+  const rssItems = parsed?.rss?.channel?.item
+  const atomEntries = parsed?.feed?.entry
+  const items = rssItems ?? atomEntries ?? []
   return Array.isArray(items) ? items : [items]
 }
 
@@ -140,15 +159,15 @@ async function brightDataFetch(url, label) {
       body: JSON.stringify({ zone: BD_ZONE, url, format: 'raw' }),
       signal: AbortSignal.timeout(30000),
     })
-    if (res.ok) {
-      const text = stripHtml(await res.text())
-      console.log(`[update-data] BD fetched: ${label}`)
-      return text
+    if (!res.ok) {
+      console.warn(`[update-data] BD HTTP ${res.status}: ${label}`)
+      return ''
     }
-    console.warn(`[update-data] BD HTTP ${res.status}: ${label}`)
-    return ''
-  } catch (e) {
-    console.warn(`[update-data] BD failed (${label}):`, e.message)
+    const text = stripHtml(await res.text())
+    console.log(`[update-data] BD fetched: ${label}`)
+    return text
+  } catch (error) {
+    console.warn(`[update-data] BD failed (${label}): ${error.message}`)
     return ''
   }
 }
@@ -156,8 +175,10 @@ async function brightDataFetch(url, label) {
 function isBlockedDomain(url) {
   try {
     const host = new URL(url).hostname.replace(/^www\./, '')
-    return BLOCKED_DOMAINS.some(d => host === d || host.endsWith('.' + d))
-  } catch { return false }
+    return BLOCKED_DOMAINS.some((domain) => host === domain || host.endsWith(`.${domain}`))
+  } catch {
+    return false
+  }
 }
 
 function isWhoDon(item) {
@@ -165,49 +186,49 @@ function isWhoDon(item) {
   return item.authority === 'WHO' && (text.includes('don') || text.includes('disease-outbreak-news'))
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
+function uniqueValues(values) {
+  return [...new Set(values.filter(Boolean))]
+}
 
 async function main() {
   const now = new Date().toISOString()
   const meta = JSON.parse(readFileSync(META_PATH, 'utf8'))
+  const existingTimeline = JSON.parse(readFileSync(TIMELINE_PATH, 'utf8'))
+  const existingNews = JSON.parse(readFileSync(NEWS_PATH, 'utf8'))
+  const existingTimelineKeys = new Set(existingTimeline.map((event) => `${event.date}::${event.title}`))
+  const existingNewsLinks = new Set(existingNews.map((item) => item.link).filter(Boolean))
 
-  // 72-hour sliding window — always re-scan recent publications.
-  // Previously used meta.lastChecked as cutoff, which permanently excluded articles
-  // missed during feed outages (e.g. WHO RSS 404 for 3 days → those articles were
-  // forever skipped on recovery). Sliding window self-heals after any feed failure.
-  const LOOKBACK_MS = 72 * 60 * 60 * 1000
-  const cutoff = new Date(Date.now() - LOOKBACK_MS)
+  const lookbackMs = 72 * 60 * 60 * 1000
+  const cutoff = new Date(Date.now() - lookbackMs)
 
-  // ─── Startup diagnostic ───────────────────────────────────────────────────
   console.log(`[update-data] Run: ${now}`)
   console.log(`[update-data] Lookback cutoff: ${cutoff.toISOString()} (72h sliding window)`)
   console.log(`[update-data] BD key: ${BD_KEY ? 'SET' : 'NOT SET'} | Zone: ${BD_ZONE}`)
   console.log(`[update-data] Gemini key: ${GEMINI_KEY ? 'SET' : 'NOT SET'}`)
   console.log(`[update-data] RSS feeds: ${RSS_FEEDS.length}`)
 
-  // ─── Step 1: Fetch RSS feeds (FREE) ──────────────────────────────────────────
-  const newItems = []
+  const candidateItems = []
   const failedFeeds = []
+  const failedCriticalFeeds = []
 
   for (const feed of RSS_FEEDS) {
     try {
       const items = await fetchRss(feed)
       for (const item of items) {
-        const title       = item.title?.__cdata ?? item.title ?? ''
-        const description = item.description?.__cdata ?? item.description ?? ''
-        const link        = item.link ?? ''
-        const pubDate     = item.pubDate ?? ''
+        const title = textValue(item.title)
+        const description = textValue(item.description ?? item.summary ?? item.content)
+        const link = linkValue(item.link ?? item.id)
+        const pubDate = textValue(item.pubDate ?? item.published ?? item.updated ?? item['dc:date'])
 
-        // 72h sliding window filter — skip articles older than cutoff
         if (pubDate) {
-          const d = new Date(pubDate)
-          if (!isNaN(d.getTime()) && d < cutoff) continue
+          const date = new Date(pubDate)
+          if (!isNaN(date.getTime()) && date < cutoff) continue
         }
 
-        const text = `${title} ${description}`.toLowerCase()
-        if (!RELEVANT_KEYWORDS.some(kw => text.includes(kw))) continue
+        const searchable = `${title} ${description}`.toLowerCase()
+        if (!RELEVANT_KEYWORDS.some((keyword) => searchable.includes(keyword))) continue
 
-        newItems.push({
+        candidateItems.push({
           authority: feed.authority,
           title,
           description: stripHtml(description).slice(0, 400),
@@ -215,124 +236,117 @@ async function main() {
           pubDate,
         })
       }
-    } catch (e) {
-      console.warn(`[update-data] RSS FEED FAILURE (${feed.authority} — ${feed.url}): ${e.message}`)
+    } catch (error) {
+      console.warn(`[update-data] RSS FEED FAILURE (${feed.authority} - ${feed.url}): ${error.message}`)
       failedFeeds.push(feed.authority)
+      if (feed.critical) failedCriticalFeeds.push(feed.authority)
     }
   }
 
-  console.log(`[update-data] New relevant RSS items: ${newItems.length}`)
+  const seenRunItems = new Set()
+  const newItems = candidateItems.filter((item) => {
+    const key = item.link || `${item.authority}::${item.title}::${item.pubDate}`
+    if (seenRunItems.has(key)) return false
+    seenRunItems.add(key)
+    return !item.link || !existingNewsLinks.has(item.link)
+  })
+
+  console.log(`[update-data] Relevant RSS candidates: ${candidateItems.length}`)
+  console.log(`[update-data] New relevant RSS items after dedupe: ${newItems.length}`)
+
   if (failedFeeds.length > 0) {
-    const uniqueFailed = [...new Set(failedFeeds)]
-    console.warn(`[update-data] ⚠ FEED FAILURES (${failedFeeds.length}): ${uniqueFailed.join(', ')}`)
+    console.warn(`[update-data] Feed failures: ${uniqueValues(failedFeeds).join(', ')}`)
+  }
+
+  const criticalFailures = uniqueValues(failedCriticalFeeds)
+  if (criticalFailures.length > 0 && (meta.confirmed ?? 0) > 0) {
+    console.error(`[update-data] CRITICAL: Required feed failures during active outbreak: ${criticalFailures.join(', ')}`)
+    process.exit(1)
   }
 
   if (newItems.length === 0) {
-    // ANOMALY WARNING: active outbreak + zero items = likely feed issue, not a quiet news day
-    if ((meta.confirmed ?? 0) > 0) {
-      console.warn('[update-data] ⚠ ANOMALY: Active outbreak (confirmed > 0) but 0 relevant items found.')
-      console.warn('[update-data] Possible causes: all feeds healthy but no new hantavirus publications,')
-      console.warn('[update-data] OR one or more feeds are broken (see FEED FAILURES above).')
+    if ((meta.confirmed ?? 0) > 0 && candidateItems.length === 0) {
+      console.warn('[update-data] ANOMALY: Active outbreak but no relevant RSS candidates found.')
     }
-    // Do NOT write any files — no git diff, no commit, no Vercel rebuild
-    console.log('[update-data] Exiting without writing files.')
+    console.log('[update-data] No new deduped items. Exiting without writing files.')
     return
   }
 
-  // ─── Step 2: Bright Data — parallel fetches ───────────────────────────────────
-  // Slot 1: CDC Situation Summary (always)
-  // Slots 2–5: up to 4 blocked-domain articles found in this run
-  // Slots 6–7: WHO DON page(s) found in this run
-  // Slots 8–11: State DOH pages
-
   let cdcText = ''
-  const articleTexts = {}   // url → text (for news description enrichment)
-  const donTexts = []       // [{url, text}] for case count extraction
-  const stateTexts = []     // [{state, text}] for US monitoring count
+  const articleTexts = {}
+  const donTexts = []
+  const stateTexts = []
 
   if (BD_KEY) {
-    // Build parallel fetch list
     const bdTasks = []
 
-    // Slot 1 — CDC Situation Summary
     bdTasks.push(
       brightDataFetch('https://www.cdc.gov/hantavirus/situation-summary/index.html', 'CDC Situation Summary')
-        .then(t => { cdcText = t.slice(0, 2500) })
+        .then((text) => { cdcText = text.slice(0, 2500) })
     )
 
-    // Slots 2–5 — blocked-domain article enrichment (cap at 4)
-    const blockedItems = newItems.filter(i => isBlockedDomain(i.link)).slice(0, 4)
-    for (const item of blockedItems) {
+    for (const item of newItems.filter((entry) => isBlockedDomain(entry.link)).slice(0, 4)) {
       bdTasks.push(
         brightDataFetch(item.link, `article: ${item.title.slice(0, 60)}`)
-          .then(t => { if (t) articleTexts[item.link] = t.slice(0, 1500) })
+          .then((text) => { if (text) articleTexts[item.link] = text.slice(0, 1500) })
       )
     }
 
-    // Slots 6–7 — WHO DON pages (cap at 2)
-    const donItems = newItems.filter(isWhoDon).slice(0, 2)
-    for (const item of donItems) {
+    for (const item of newItems.filter(isWhoDon).slice(0, 2)) {
       bdTasks.push(
         brightDataFetch(item.link, `WHO DON: ${item.title.slice(0, 60)}`)
-          .then(t => { if (t) donTexts.push({ url: item.link, text: t.slice(0, 2000) }) })
+          .then((text) => { if (text) donTexts.push({ url: item.link, text: text.slice(0, 2000) }) })
       )
     }
 
-    // Slots 8–11 — State DOH pages
     for (const page of STATE_DOH_PAGES) {
       bdTasks.push(
         brightDataFetch(page.url, `State DOH: ${page.state}`)
-          .then(t => { if (t) stateTexts.push({ state: page.state, text: t.slice(0, 1000) }) })
+          .then((text) => { if (text) stateTexts.push({ state: page.state, text: text.slice(0, 1000) }) })
       )
     }
 
     await Promise.allSettled(bdTasks)
     console.log(`[update-data] BD complete: ${Object.keys(articleTexts).length} articles enriched, ${donTexts.length} DONs fetched, ${stateTexts.length} state pages fetched`)
   } else {
-    console.warn('[update-data] BRIGHT_DATA_API_KEY not set — skipping all BD fetches.')
+    console.warn('[update-data] BRIGHT_DATA_API_KEY not set - skipping BD enrichment.')
   }
 
-  // ─── Step 3: Gemini — extract everything (with retry) ───────────────────────
   if (!GEMINI_KEY) {
-    console.warn('[update-data] GEMINI_API_KEY not set — skipping extraction.')
-    meta.lastChecked = now
-    meta.feedHealth = { lastRun: now, failedFeeds: [...new Set(failedFeeds)], itemsFound: newItems.length }
-    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
-    return
+    console.error('[update-data] GEMINI_API_KEY not set - cannot extract new outbreak data.')
+    process.exit(1)
   }
-
-  const existingTimeline = JSON.parse(readFileSync(TIMELINE_PATH, 'utf8'))
-  const existingKeys = new Set(existingTimeline.map(e => `${e.date}::${e.title}`))
 
   const newItemsText = newItems
-    .map(i => `[${i.authority}] ${i.title}\n${i.description}\nURL: ${i.link}\nDate: ${i.pubDate}`)
+    .map((item) => `[${item.authority}] ${item.title}\n${item.description}\nURL: ${item.link}\nDate: ${item.pubDate}`)
     .join('\n\n---\n\n')
     .slice(0, 3000)
 
   const articleEnrichmentText = Object.entries(articleTexts).length > 0
-    ? '\n\nFull article text (use for newsDescriptions output):\n' +
-      Object.entries(articleTexts)
-        .map(([url, text]) => `URL: ${url}\n${text}`)
-        .join('\n\n---\n\n')
+    ? `\n\nFull article text (use for newsDescriptions output):\n${Object.entries(articleTexts)
+      .map(([url, text]) => `URL: ${url}\n${text}`)
+      .join('\n\n---\n\n')}`
     : ''
 
   const donText = donTexts.length > 0
-    ? '\n\nWHO DON full page text (use for case count extraction):\n' +
-      donTexts.map(d => `URL: ${d.url}\n${d.text}`).join('\n\n---\n\n')
+    ? `\n\nWHO DON full page text (use for case count extraction):\n${donTexts
+      .map((don) => `URL: ${don.url}\n${don.text}`)
+      .join('\n\n---\n\n')}`
     : ''
 
   const stateText = stateTexts.length > 0
-    ? '\n\nState DOH pages (use to update usStatesMonitoring if an explicit count is found):\n' +
-      stateTexts.map(s => `[${s.state}] ${s.text}`).join('\n\n---\n\n')
+    ? `\n\nState DOH pages (use to update usStatesMonitoring if an explicit count is found):\n${stateTexts
+      .map((state) => `[${state.state}] ${state.text}`)
+      .join('\n\n---\n\n')}`
     : ''
 
   const prompt = `You are extracting structured data for a public health dashboard tracking the 2026 Andes hantavirus (MV Hondius) outbreak.
 
-Return ONLY valid JSON — no markdown fences, no explanation, just the JSON object.
+Return ONLY valid JSON. No markdown fences, no explanation, just the JSON object.
 
 ${cdcText ? `CDC Situation Summary (current):\n${cdcText}\n` : ''}${donText}${stateText}
 
-New publications since last check:
+New publications:
 ${newItemsText}
 ${articleEnrichmentText}
 
@@ -349,7 +363,7 @@ Current dashboard state:
 Extract and return this exact JSON structure:
 {
   "caseStats": {
-    "confirmed": <integer or null — only if explicitly stated and changed>,
+    "confirmed": <integer or null>,
     "deaths": <integer or null>,
     "countries": <integer or null>,
     "usStatesMonitoring": <integer or null>
@@ -360,17 +374,17 @@ Extract and return this exact JSON structure:
   },
   "timelineEvents": [
     {
-      "id": "<t-YYYYMMDD-slugified-title, e.g. t-20260513-who-don601-update>",
+      "id": "<t-YYYYMMDD-slugified-title>",
       "date": "YYYY-MM-DD",
       "title": "<10 words max, factual>",
-      "description": "<one sentence, verbatim or close paraphrase from source>",
-      "source": "<authority name — e.g. WHO, CDC, ECDC>",
+      "description": "<one sentence, factual, sourced>",
+      "source": "<authority name>",
       "sourceUrl": "<direct URL>",
       "category": "<WHO|CDC|ECDC|other>"
     }
   ],
   "hcwAlert": null or {
-    "title": "<UPPERCASE — location and event type>",
+    "title": "<UPPERCASE location and event type>",
     "content": "<2-3 sentences, factual, sourced>",
     "date": "YYYY-MM-DD",
     "sourceLabel": "<publication name>",
@@ -384,24 +398,25 @@ Extract and return this exact JSON structure:
 Rules:
 - Use null for any caseStats field you are not confident about. Do not guess numbers.
 - usStatesMonitoring: only update if a source explicitly states a new total count of US states monitoring.
-- Only include timelineEvents that represent genuinely new developments (not already in current state).
-- Every timelineEvent MUST include id, date, title, description, source, sourceUrl, AND category. category must be exactly one of: WHO, CDC, ECDC, other.
-- hcwAlert must be null unless there is a NEW HCW exposure event after ${meta.hcwAlert?.date ?? '2026-05-12'}.
-- newsDescriptions: only include entries for URLs present in the "Full article text" section above. If no article text was provided, return an empty object {}.
-- Never fabricate numbers or events. Only extract what sources explicitly state.`
+- Only include timelineEvents that represent genuinely new developments.
+- Every timelineEvent must include id, date, title, description, source, sourceUrl, and category.
+- category must be exactly one of: WHO, CDC, ECDC, other.
+- hcwAlert must be null unless there is a new HCW exposure event after ${meta.hcwAlert?.date ?? '2026-05-12'}.
+- newsDescriptions: only include entries for URLs present in the full article text section.
+- Never fabricate numbers or events.`
 
-  // ─── Step 3: Gemini — with retry on transient errors ─────────────────────────
   let extracted = null
-  const GEMINI_MAX_RETRIES = 3
+  const maxRetries = 3
 
-  for (let attempt = 1; attempt <= GEMINI_MAX_RETRIES && !extracted; attempt++) {
+  for (let attempt = 1; attempt <= maxRetries && !extracted; attempt++) {
     try {
       if (attempt > 1) {
-        const delay = attempt * 3000
-        console.log(`[update-data] Gemini retry ${attempt}/${GEMINI_MAX_RETRIES} in ${delay}ms...`)
-        await new Promise(r => setTimeout(r, delay))
+        const delayMs = attempt * 3000
+        console.log(`[update-data] Gemini retry ${attempt}/${maxRetries} in ${delayMs}ms...`)
+        await new Promise((resolve) => setTimeout(resolve, delayMs))
       }
-      const gemRes = await fetch(
+
+      const geminiResponse = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
         {
           method: 'POST',
@@ -413,57 +428,49 @@ Rules:
           signal: AbortSignal.timeout(30000),
         }
       )
-      if (gemRes.ok) {
-        const gemData = await gemRes.json()
-        const raw = gemData.candidates?.[0]?.content?.parts?.[0]?.text ?? ''
+
+      if (geminiResponse.ok) {
+        const geminiData = await geminiResponse.json()
+        const raw = geminiData.candidates?.[0]?.content?.parts?.[0]?.text ?? ''
         const cleaned = raw.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim()
         extracted = JSON.parse(cleaned)
         console.log(`[update-data] Gemini extraction succeeded (attempt ${attempt}).`)
-      } else if (gemRes.status === 429 || gemRes.status >= 500) {
-        // Retryable: rate limit or server error
-        console.warn(`[update-data] Gemini retryable error ${gemRes.status} (attempt ${attempt}/${GEMINI_MAX_RETRIES})`)
+      } else if (geminiResponse.status === 429 || geminiResponse.status >= 500) {
+        console.warn(`[update-data] Gemini retryable error ${geminiResponse.status} (attempt ${attempt}/${maxRetries})`)
       } else {
-        // Non-retryable: bad request, auth failure, etc.
-        console.warn(`[update-data] Gemini non-retryable error: ${gemRes.status} — aborting retries.`)
-        break
+        console.error(`[update-data] Gemini non-retryable error ${geminiResponse.status}.`)
+        process.exit(1)
       }
-    } catch (e) {
-      console.warn(`[update-data] Gemini attempt ${attempt} failed: ${e.message}`)
+    } catch (error) {
+      console.warn(`[update-data] Gemini attempt ${attempt} failed: ${error.message}`)
     }
   }
 
   if (!extracted) {
-    // Gemini failed — still write meta to record feedHealth and lastChecked
-    meta.lastChecked = now
-    meta.feedHealth = { lastRun: now, failedFeeds: [...new Set(failedFeeds)], itemsFound: newItems.length }
-    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+    console.warn('[update-data] Gemini extraction unavailable - exiting without writing files.')
     return
   }
 
   let dataChanged = false
 
-  // Apply case stats
-  const cs = extracted.caseStats ?? {}
-  for (const [key, val] of Object.entries(cs)) {
-    if (typeof val === 'number' && Number.isInteger(val) && val > 0 && val !== meta[key]) {
-      meta[key] = val
+  const caseStats = extracted.caseStats ?? {}
+  for (const [key, value] of Object.entries(caseStats)) {
+    if (typeof value === 'number' && Number.isInteger(value) && value > 0 && value !== meta[key]) {
+      meta[key] = value
       dataChanged = true
-      console.log(`[update-data] Updated ${key}: ${val}`)
+      console.log(`[update-data] Updated ${key}: ${value}`)
     }
   }
 
-  // Apply risk levels (cdcResponseLevel intentionally excluded — managed manually
-  // as CDC HAN numbers don't follow "Level X" patterns Gemini was trained on)
-  const rl = extracted.riskLevels ?? {}
-  for (const [key, dest] of Object.entries({ whoGlobalRisk: 'whoGlobalRisk', ecdcRisk: 'ecdcRisk' })) {
-    if (rl[key] && rl[key] !== meta[dest]) {
-      meta[dest] = rl[key]
+  const riskLevels = extracted.riskLevels ?? {}
+  for (const [key, destination] of Object.entries({ whoGlobalRisk: 'whoGlobalRisk', ecdcRisk: 'ecdcRisk' })) {
+    if (riskLevels[key] && riskLevels[key] !== meta[destination]) {
+      meta[destination] = riskLevels[key]
       dataChanged = true
-      console.log(`[update-data] Updated ${dest}: ${rl[key]}`)
+      console.log(`[update-data] Updated ${destination}: ${riskLevels[key]}`)
     }
   }
 
-  // Apply HCW alert (only if newer date)
   if (extracted.hcwAlert?.date) {
     const currentDate = meta.hcwAlert?.date ?? '1970-01-01'
     if (extracted.hcwAlert.date > currentDate) {
@@ -473,26 +480,24 @@ Rules:
     }
   }
 
-  // Append new timeline events
-  const VALID_CATEGORIES = new Set(['WHO', 'CDC', 'ECDC', 'other'])
-  if (Array.isArray(extracted.timelineEvents) && extracted.timelineEvents.length > 0) {
+  const validCategories = new Set(['WHO', 'CDC', 'ECDC', 'other'])
+  if (Array.isArray(extracted.timelineEvents)) {
     let added = 0
     for (const event of extracted.timelineEvents) {
       if (!event.date || !event.title) continue
       const key = `${event.date}::${event.title}`
-      if (!existingKeys.has(key)) {
-        // Ensure required fields are present — guard against Gemini omissions
-        const safeEvent = {
-          ...event,
-          id: event.id || `t-${event.date.replace(/-/g, '')}-${Math.random().toString(36).slice(2, 7)}`,
-          category: VALID_CATEGORIES.has(event.category) ? event.category : 'other',
-        }
-        existingTimeline.push(safeEvent)
-        existingKeys.add(key)
-        added++
-        dataChanged = true
-      }
+      if (existingTimelineKeys.has(key)) continue
+
+      existingTimeline.push({
+        ...event,
+        id: event.id || `t-${event.date.replace(/-/g, '')}-${Math.random().toString(36).slice(2, 7)}`,
+        category: validCategories.has(event.category) ? event.category : 'other',
+      })
+      existingTimelineKeys.add(key)
+      added++
+      dataChanged = true
     }
+
     if (added > 0) {
       existingTimeline.sort((a, b) => (a.date > b.date ? 1 : a.date < b.date ? -1 : 0))
       writeFileSync(TIMELINE_PATH, JSON.stringify(existingTimeline, null, 2))
@@ -500,72 +505,52 @@ Rules:
     }
   }
 
-  // Update feed health and lastChecked — always written when items were found
   meta.lastChecked = now
   meta.feedHealth = {
     lastRun: now,
-    failedFeeds: [...new Set(failedFeeds)],
+    failedFeeds: uniqueValues(failedFeeds),
     itemsFound: newItems.length,
+    candidateItemsFound: candidateItems.length,
   }
 
   if (dataChanged) {
     meta.lastUpdated = now
-    // Do NOT overwrite meta.source — it tracks manual authority additions (e.g. BC CDC).
-    // The pipeline should not reset manual curation work.
-    console.log('[update-data] Data changed — lastUpdated set.')
+    console.log('[update-data] Data changed - lastUpdated set.')
   } else {
     console.log('[update-data] No structured data changes detected.')
   }
 
   writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
 
-  // ─── Update news.json ─────────────────────────────────────────────────────────
   const enrichedDescriptions = extracted.newsDescriptions ?? {}
+  let newsChanged = false
 
-  if (newItems.length > 0) {
-    const existingNews = JSON.parse(readFileSync(NEWS_PATH, 'utf8'))
-    const existingLinks = new Set(existingNews.map(n => n.link))
-    let newsChanged = false
-
-    for (const item of newItems) {
-      if (!item.link || existingLinks.has(item.link)) continue
-      const pubTs = item.pubDate ? new Date(item.pubDate).getTime() : Date.now()
-      // Use Gemini-enriched description if available, otherwise fall back to RSS snippet
-      const description = enrichedDescriptions[item.link] || item.description
-      existingNews.push({
-        id: `rss-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-        authority: item.authority,
-        title: item.title,
-        description,
-        link: item.link,
-        pubDate: item.pubDate,
-        timestamp: isNaN(pubTs) ? Date.now() : pubTs,
-      })
-      existingLinks.add(item.link)
-      newsChanged = true
-    }
-
-    if (newsChanged) {
-      existingNews.sort((a, b) => b.timestamp - a.timestamp)
-      writeFileSync(NEWS_PATH, JSON.stringify(existingNews.slice(0, 50), null, 2))
-      console.log('[update-data] Updated news.json.')
-    }
+  for (const item of newItems) {
+    if (!item.link || existingNewsLinks.has(item.link)) continue
+    const pubTimestamp = item.pubDate ? new Date(item.pubDate).getTime() : Date.now()
+    existingNews.push({
+      id: `rss-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      authority: item.authority,
+      title: item.title,
+      description: enrichedDescriptions[item.link] || item.description,
+      link: item.link,
+      pubDate: item.pubDate,
+      timestamp: isNaN(pubTimestamp) ? Date.now() : pubTimestamp,
+    })
+    existingNewsLinks.add(item.link)
+    newsChanged = true
   }
 
-  // Exit with non-zero code if authoritative feeds failed during active outbreak.
-  // This causes the GitHub Actions step to fail → triggers the pipeline-failure issue alert.
-  const AUTHORITATIVE_FEEDS = new Set(['WHO', 'CDC', 'ECDC'])
-  const failedAuthoritative = [...new Set(failedFeeds)].filter(f => AUTHORITATIVE_FEEDS.has(f))
-  if (failedAuthoritative.length > 0 && (meta.confirmed ?? 0) > 0) {
-    console.error(`[update-data] ⚠ CRITICAL: Authoritative feed failures during active outbreak: ${failedAuthoritative.join(', ')}`)
-    console.error('[update-data] Exiting with code 1 to trigger GitHub Actions failure alert.')
-    process.exit(1)
+  if (newsChanged) {
+    existingNews.sort((a, b) => b.timestamp - a.timestamp)
+    writeFileSync(NEWS_PATH, JSON.stringify(existingNews.slice(0, 50), null, 2))
+    console.log('[update-data] Updated news.json.')
   }
 
   console.log('[update-data] Done.')
 }
 
-main().catch(e => {
-  console.error('[update-data] Fatal error:', e)
+main().catch((error) => {
+  console.error('[update-data] Fatal error:', error)
   process.exit(1)
 })
