@@ -44,17 +44,29 @@ jobs:
         run: npm run validate:data
 
       - name: Commit updated data files
+        id: commit-data
         run: |
           git config user.name "EMERGENZ Data Bot"
           git config user.email "bot@emergenz.org"
-          git add src/data/meta.json src/data/timeline.json src/data/news.json
+          git add src/data/meta.json src/data/timeline.json src/data/news.json src/data/manual-overrides.json
           if git diff --staged --quiet; then
             echo "No data changes to commit."
+            echo "data_changed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "chore(data): automated update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git pull --rebase origin main
             git push
+            echo "data_changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Verify production deployment
+        if: steps.commit-data.outputs.data_changed == 'true'
+        run: npm run verify:production
+        env:
+          PRODUCTION_URL: https://andeshantavirus.emergenzsystems.org
+          VERIFY_PRODUCTION_ATTEMPTS: 16
+          VERIFY_PRODUCTION_DELAY_MS: 30000
+          MAX_OFFICIAL_CHECK_AGE_HOURS: 12
 
       - name: Alert on pipeline failure
         if: failure()

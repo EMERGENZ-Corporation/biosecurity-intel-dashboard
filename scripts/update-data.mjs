@@ -22,6 +22,7 @@ const BD_ZONE = process.env.BRIGHT_DATA_ZONE || 'web_unlocker1'
 const META_PATH = 'src/data/meta.json'
 const TIMELINE_PATH = 'src/data/timeline.json'
 const NEWS_PATH = 'src/data/news.json'
+const MANUAL_OVERRIDES_PATH = 'src/data/manual-overrides.json'
 
 const RSS_FEEDS = [
   { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss', authority: 'CDC', critical: true },
@@ -443,6 +444,78 @@ function applyOfficialExtractions(meta, extractions) {
   return changed
 }
 
+function readManualOverrides(now) {
+  try {
+    const overrides = JSON.parse(readFileSync(MANUAL_OVERRIDES_PATH, 'utf8'))
+    if (!overrides.enabled) return null
+    if (overrides.expiresAt && new Date(overrides.expiresAt) < new Date(now)) {
+      console.warn(`[update-data] Manual overrides expired at ${overrides.expiresAt}; ignoring.`)
+      return null
+    }
+    return overrides
+  } catch (error) {
+    console.warn(`[update-data] Manual overrides unavailable: ${error.message}`)
+    return null
+  }
+}
+
+function applyManualOverrides(meta, overrides, now) {
+  if (!overrides) return false
+
+  let changed = false
+  const provenance = { ...(meta.metricProvenance ?? {}) }
+
+  for (const [key, value] of Object.entries(overrides.metrics ?? {})) {
+    if (!['confirmed', 'deaths', 'countries', 'usStatesMonitoring'].includes(key)) continue
+    if (!Number.isInteger(value) || value < 0) continue
+    if (key === 'deaths' && value > (meta.confirmed ?? value)) continue
+    if (meta[key] !== value) {
+      meta[key] = value
+      changed = true
+      console.log(`[update-data] Manual override applied ${key}: ${value}`)
+    }
+    provenance[key] = {
+      source: 'manual',
+      sourceLabel: 'Manual override',
+      sourceUrl: overrides.sourceUrl ?? meta.metricProvenance?.[key]?.sourceUrl ?? meta.ecdcRiskUrl,
+      method: 'manual-override',
+      lastVerified: now,
+    }
+  }
+
+  for (const [key, value] of Object.entries(overrides.riskLevels ?? {})) {
+    if (!['whoGlobalRisk', 'ecdcRisk', 'cdcResponseLevel'].includes(key) || !value) continue
+    if (meta[key] !== value) {
+      meta[key] = value
+      changed = true
+      console.log(`[update-data] Manual override applied ${key}: ${value}`)
+    }
+    provenance[key] = {
+      source: 'manual',
+      sourceLabel: 'Manual override',
+      sourceUrl: overrides.sourceUrl ?? meta.metricProvenance?.[key]?.sourceUrl ?? meta.ecdcRiskUrl,
+      method: 'manual-override',
+      lastVerified: now,
+    }
+  }
+
+  if (overrides.hcwAlert) {
+    meta.hcwAlert = overrides.hcwAlert
+    changed = true
+    console.log('[update-data] Manual override applied hcwAlert.')
+  }
+
+  meta.metricProvenance = provenance
+  meta.manualOverride = {
+    active: true,
+    updatedAt: overrides.updatedAt ?? now,
+    reason: overrides.reason ?? '',
+    expiresAt: overrides.expiresAt ?? null,
+  }
+
+  return changed
+}
+
 function toTimestamp(pubDate) {
   const timestamp = pubDate ? new Date(pubDate).getTime() : NaN
   return Number.isFinite(timestamp) ? timestamp : Date.now()
@@ -544,6 +617,7 @@ async function main() {
   const meta = JSON.parse(readFileSync(META_PATH, 'utf8'))
   const existingTimeline = JSON.parse(readFileSync(TIMELINE_PATH, 'utf8'))
   const existingNews = JSON.parse(readFileSync(NEWS_PATH, 'utf8'))
+  const manualOverrides = readManualOverrides(now)
   const existingTimelineKeys = new Set(existingTimeline.map((event) => `${event.date}::${event.title}`))
   const existingNewsLinks = new Set(existingNews.map((item) => item.link).filter(Boolean))
 
@@ -610,6 +684,7 @@ async function main() {
   console.log(`[update-data] Official source pages: ${OFFICIAL_SOURCE_PAGES.length}`)
   const { sourceHealth, extractions: officialExtractions } = await checkOfficialSources(meta, now)
   const officialDataChanged = applyOfficialExtractions(meta, officialExtractions)
+  const manualOverrideChanged = applyManualOverrides(meta, manualOverrides, now)
   const failedCriticalOfficialSources = sourceHealth
     .filter((source) => source.critical && source.status !== 'ok')
     .map((source) => source.authority)
@@ -638,7 +713,7 @@ async function main() {
         : 'Official sources checked; no new RSS news items',
       officialSources: sourceHealth,
     })
-    if (officialDataChanged) meta.lastUpdated = now
+    if (officialDataChanged || manualOverrideChanged) meta.lastUpdated = now
     writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
     console.log('[update-data] No new deduped items. Official source status recorded.')
     return
@@ -696,7 +771,7 @@ async function main() {
       extractionStatus: `Gemini unavailable: missing API key; RSS-only fallback added ${added} news item(s)`,
       officialSources: sourceHealth,
     })
-    if (added > 0 || officialDataChanged) meta.lastUpdated = now
+    if (added > 0 || officialDataChanged || manualOverrideChanged) meta.lastUpdated = now
     writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
     console.log(`[update-data] RSS-only fallback added ${added} news item(s).`)
     return
@@ -843,13 +918,13 @@ Rules:
       extractionStatus: `Gemini unavailable after retries; RSS-only fallback added ${added} news item(s)`,
       officialSources: sourceHealth,
     })
-    if (added > 0 || officialDataChanged) meta.lastUpdated = now
+    if (added > 0 || officialDataChanged || manualOverrideChanged) meta.lastUpdated = now
     writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
     console.log(`[update-data] RSS-only fallback added ${added} news item(s).`)
     return
   }
 
-  let dataChanged = officialDataChanged
+  let dataChanged = officialDataChanged || manualOverrideChanged
 
   const caseStats = extracted.caseStats ?? {}
   for (const [key, value] of Object.entries(caseStats)) {

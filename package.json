@@ -8,6 +8,7 @@
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "validate:data": "node scripts/validate-data.mjs",
+        "verify:production": "node scripts/verify-production.mjs",
         "preview": "vite preview"
     },
     "dependencies": {

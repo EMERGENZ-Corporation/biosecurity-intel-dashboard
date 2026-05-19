@@ -11,6 +11,7 @@ const files = {
   flights: `${DATA_DIR}/flights.json`,
   emsBriefing: `${DATA_DIR}/ems-briefing.json`,
   protocols: `${DATA_DIR}/protocols.json`,
+  manualOverrides: `${DATA_DIR}/manual-overrides.json`,
 }
 
 const errors = []
@@ -71,6 +72,7 @@ const usMonitoring = readJson('usMonitoring') ?? []
 const flights = readJson('flights') ?? []
 const emsBriefing = readJson('emsBriefing')
 const protocols = readJson('protocols') ?? []
+const manualOverrides = readJson('manualOverrides')
 
 if (meta) {
   requireFields(meta, ['confirmed', 'deaths', 'countries', 'usStatesMonitoring', 'lastUpdated', 'lastChecked', 'source'], 'meta')
@@ -127,6 +129,42 @@ if (meta) {
       if (!isUrl(provenance.sourceUrl)) errors.push(`meta.metricProvenance.${key}: sourceUrl must be valid`)
       if (!isIsoDate(provenance.lastVerified)) errors.push(`meta.metricProvenance.${key}: lastVerified must be ISO`)
     })
+  }
+
+  if (meta.manualOverride) {
+    requireFields(meta.manualOverride, ['active', 'updatedAt', 'reason'], 'meta.manualOverride')
+    if (typeof meta.manualOverride.active !== 'boolean') errors.push('meta.manualOverride.active must be boolean')
+    if (!isIsoDate(meta.manualOverride.updatedAt)) errors.push('meta.manualOverride.updatedAt must be ISO')
+    if (meta.manualOverride.expiresAt && !isIsoDate(meta.manualOverride.expiresAt)) {
+      errors.push('meta.manualOverride.expiresAt must be ISO')
+    }
+  }
+}
+
+if (manualOverrides) {
+  requireFields(manualOverrides, ['enabled', 'metrics', 'riskLevels'], 'manual-overrides')
+  if (typeof manualOverrides.enabled !== 'boolean') errors.push('manual-overrides.enabled must be boolean')
+  if (manualOverrides.updatedAt !== null && manualOverrides.updatedAt !== undefined && !isIsoDate(manualOverrides.updatedAt)) {
+    errors.push('manual-overrides.updatedAt must be null or ISO')
+  }
+  if (manualOverrides.expiresAt !== null && manualOverrides.expiresAt !== undefined && !isIsoDate(manualOverrides.expiresAt)) {
+    errors.push('manual-overrides.expiresAt must be null or ISO')
+  }
+  for (const [key, value] of Object.entries(manualOverrides.metrics ?? {})) {
+    if (!['confirmed', 'deaths', 'countries', 'usStatesMonitoring'].includes(key)) {
+      errors.push(`manual-overrides.metrics: unsupported metric "${key}"`)
+    }
+    if (!Number.isInteger(value) || value < 0) {
+      errors.push(`manual-overrides.metrics.${key} must be a non-negative integer`)
+    }
+  }
+  for (const [key, value] of Object.entries(manualOverrides.riskLevels ?? {})) {
+    if (!['whoGlobalRisk', 'ecdcRisk', 'cdcResponseLevel'].includes(key)) {
+      errors.push(`manual-overrides.riskLevels: unsupported risk level "${key}"`)
+    }
+    if (typeof value !== 'string' || value.length === 0) {
+      errors.push(`manual-overrides.riskLevels.${key} must be a non-empty string`)
+    }
   }
 }
 
