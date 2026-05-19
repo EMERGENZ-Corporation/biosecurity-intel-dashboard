@@ -9,6 +9,7 @@
         "lint": "eslint .",
         "test:parsers": "node scripts/test-official-parsers.mjs",
         "validate:data": "node scripts/validate-data.mjs",
+        "monitor:status": "node scripts/check-status.mjs",
         "verify:production": "node scripts/verify-production.mjs",
         "preview": "vite preview"
     },
