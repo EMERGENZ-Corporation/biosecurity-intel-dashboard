@@ -16,12 +16,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
           cache: 'npm'
@@ -69,7 +69,7 @@ jobs:
 
       - name: Alert on stale dashboard data
         if: success()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           MAX_DATA_AGE_HOURS: 48
           MAX_OFFICIAL_CHECK_AGE_HOURS: 12
@@ -181,7 +181,7 @@ jobs:
 
       - name: Alert on pipeline failure
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
