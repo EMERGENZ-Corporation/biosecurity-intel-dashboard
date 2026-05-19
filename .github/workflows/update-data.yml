@@ -47,7 +47,7 @@ jobs:
         run: |
           git config user.name "EMERGENZ Data Bot"
           git config user.email "bot@emergenz.org"
-          git add src/data/meta.json src/data/timeline.json src/data/news.json src/data/manual-overrides.json
+          git add src/data/meta.json src/data/timeline.json src/data/news.json src/data/manual-overrides.json public/status.json
           if git diff --staged --quiet; then
             echo "No data changes to commit."
             echo "data_changed=false" >> "$GITHUB_OUTPUT"
@@ -155,6 +155,7 @@ jobs:
               `Last checked: \`${meta.lastChecked}\``,
               `Official sources checked: \`${meta.lastOfficialSourceCheck || 'not recorded'}\``,
               `Extraction status: \`${meta.feedHealth?.extractionStatus || 'unknown'}\``,
+              `Public status: https://andeshantavirus.emergenzsystems.org/status.json`,
               '',
               `Run: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
               '',

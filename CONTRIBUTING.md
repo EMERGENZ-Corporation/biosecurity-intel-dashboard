@@ -59,6 +59,8 @@ Static data should be updated only from official primary sources. If a source ch
 
 Automated refresh runs through `.github/workflows/update-data.yml` and `scripts/update-data.mjs`. The production app is a static Vite build; it does not depend on Vercel serverless API routes at runtime.
 
+The updater also writes `public/status.json`, published at `https://andeshantavirus.emergenzsystems.org/status.json`. Use that file for uptime checks, freshness checks, and incident triage instead of scraping the dashboard UI.
+
 ---
 
 ## Questions

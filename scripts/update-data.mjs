@@ -24,6 +24,9 @@ const META_PATH = 'src/data/meta.json'
 const TIMELINE_PATH = 'src/data/timeline.json'
 const NEWS_PATH = 'src/data/news.json'
 const MANUAL_OVERRIDES_PATH = 'src/data/manual-overrides.json'
+const STATUS_PATH = 'public/status.json'
+const MAX_DATA_AGE_HOURS = Number.parseInt(process.env.MAX_DATA_AGE_HOURS || '48', 10)
+const MAX_OFFICIAL_CHECK_AGE_HOURS = Number.parseInt(process.env.MAX_OFFICIAL_CHECK_AGE_HOURS || '12', 10)
 
 const RSS_FEEDS = [
   { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss', authority: 'CDC', critical: true },
@@ -604,11 +607,20 @@ function addNewsItems({ items, existingNews, existingNewsLinks, descriptions = {
   return added
 }
 
-function updateFeedHealth(meta, { now, failedFeeds, newItems, candidateItems, extractionStatus, officialSources }) {
+function updateFeedHealth(meta, {
+  now,
+  failedFeeds,
+  failedCriticalFeeds = [],
+  newItems,
+  candidateItems,
+  extractionStatus,
+  officialSources,
+}) {
   meta.lastChecked = now
   meta.feedHealth = {
     lastRun: now,
     failedFeeds: uniqueValues(failedFeeds),
+    criticalFeedFailures: uniqueValues(failedCriticalFeeds),
     itemsFound: newItems.length,
     candidateItemsFound: candidateItems.length,
     extractionStatus,
@@ -620,6 +632,76 @@ function updateFeedHealth(meta, { now, failedFeeds, newItems, candidateItems, ex
       .filter((source) => source.status !== 'ok')
       .map((source) => source.authority)
   }
+}
+
+function ageHours(now, iso) {
+  const age = (new Date(now).getTime() - new Date(iso).getTime()) / (60 * 60 * 1000)
+  return Number.isFinite(age) ? age : null
+}
+
+function buildStatus(meta, now) {
+  const officialSourceFailures = meta.feedHealth?.officialSourceFailures ?? []
+  const criticalFeedFailures = meta.feedHealth?.criticalFeedFailures ?? []
+  const dataAgeHours = ageHours(now, meta.lastUpdated)
+  const officialCheckAgeHours = ageHours(now, meta.lastOfficialSourceCheck ?? meta.lastChecked)
+  const staleReasons = []
+
+  if (dataAgeHours === null || dataAgeHours > MAX_DATA_AGE_HOURS) {
+    staleReasons.push(`headline data older than ${MAX_DATA_AGE_HOURS}h`)
+  }
+  if (officialCheckAgeHours === null || officialCheckAgeHours > MAX_OFFICIAL_CHECK_AGE_HOURS) {
+    staleReasons.push(`official source check older than ${MAX_OFFICIAL_CHECK_AGE_HOURS}h`)
+  }
+
+  const status = staleReasons.length > 0 || criticalFeedFailures.length > 0
+    ? 'critical'
+    : officialSourceFailures.length > 0
+      ? 'degraded'
+      : 'ok'
+
+  return {
+    schemaVersion: 1,
+    status,
+    generatedAt: now,
+    thresholds: {
+      maxDataAgeHours: MAX_DATA_AGE_HOURS,
+      maxOfficialCheckAgeHours: MAX_OFFICIAL_CHECK_AGE_HOURS,
+    },
+    dashboard: {
+      lastUpdated: meta.lastUpdated,
+      lastChecked: meta.lastChecked,
+      lastOfficialSourceCheck: meta.lastOfficialSourceCheck ?? meta.lastChecked,
+      dataAgeHours,
+      officialCheckAgeHours,
+      source: meta.source,
+    },
+    metrics: {
+      confirmed: meta.confirmed,
+      deaths: meta.deaths,
+      countries: meta.countries,
+      usStatesMonitoring: meta.usStatesMonitoring,
+      whoGlobalRisk: meta.whoGlobalRisk,
+      cdcResponseLevel: meta.cdcResponseLevel,
+      ecdcRisk: meta.ecdcRisk,
+    },
+    pipeline: {
+      extractionStatus: meta.feedHealth?.extractionStatus ?? 'unknown',
+      itemsFound: meta.feedHealth?.itemsFound ?? 0,
+      candidateItemsFound: meta.feedHealth?.candidateItemsFound ?? 0,
+      failedFeeds: meta.feedHealth?.failedFeeds ?? [],
+      criticalFeedFailures,
+      officialSourceFailures,
+      officialSourcesOk: (meta.officialSources ?? []).filter((source) => source.status === 'ok').length,
+      officialSourcesTotal: (meta.officialSources ?? []).length,
+    },
+    staleReasons,
+    runbook: 'Check GitHub Actions workflow "Automated Data Update", open stale-data or pipeline-failure issues, then verify official CDC/ECDC/WHO/PHAC source pages.',
+  }
+}
+
+function writeMetaAndStatus(meta, now) {
+  writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+  writeFileSync(STATUS_PATH, JSON.stringify(buildStatus(meta, now), null, 2))
 }
 
 async function main() {
@@ -716,6 +798,7 @@ async function main() {
     updateFeedHealth(meta, {
       now,
       failedFeeds,
+      failedCriticalFeeds,
       newItems,
       candidateItems,
       extractionStatus: officialDataChanged
@@ -724,7 +807,7 @@ async function main() {
       officialSources: sourceHealth,
     })
     if (officialDataChanged || manualOverrideChanged) meta.lastUpdated = now
-    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+    writeMetaAndStatus(meta, now)
     console.log('[update-data] No new deduped items. Official source status recorded.')
     return
   }
@@ -776,13 +859,14 @@ async function main() {
     updateFeedHealth(meta, {
       now,
       failedFeeds,
+      failedCriticalFeeds,
       newItems,
       candidateItems,
       extractionStatus: `Gemini unavailable: missing API key; RSS-only fallback added ${added} news item(s)`,
       officialSources: sourceHealth,
     })
     if (added > 0 || officialDataChanged || manualOverrideChanged) meta.lastUpdated = now
-    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+    writeMetaAndStatus(meta, now)
     console.log(`[update-data] RSS-only fallback added ${added} news item(s).`)
     return
   }
@@ -923,13 +1007,14 @@ Rules:
     updateFeedHealth(meta, {
       now,
       failedFeeds,
+      failedCriticalFeeds,
       newItems,
       candidateItems,
       extractionStatus: `Gemini unavailable after retries; RSS-only fallback added ${added} news item(s)`,
       officialSources: sourceHealth,
     })
     if (added > 0 || officialDataChanged || manualOverrideChanged) meta.lastUpdated = now
-    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+    writeMetaAndStatus(meta, now)
     console.log(`[update-data] RSS-only fallback added ${added} news item(s).`)
     return
   }
@@ -991,6 +1076,7 @@ Rules:
   updateFeedHealth(meta, {
     now,
     failedFeeds,
+    failedCriticalFeeds,
     newItems,
     candidateItems,
     extractionStatus: 'Gemini extraction succeeded',
@@ -1012,7 +1098,7 @@ Rules:
     console.log('[update-data] No data changes detected.')
   }
 
-  writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+  writeMetaAndStatus(meta, now)
 
   console.log('[update-data] Done.')
 }

@@ -2,6 +2,7 @@ import { readFileSync } from 'fs'
 
 const DATA_DIR = 'src/data'
 const files = {
+  status: 'public/status.json',
   meta: `${DATA_DIR}/meta.json`,
   timeline: `${DATA_DIR}/timeline.json`,
   news: `${DATA_DIR}/news.json`,
@@ -64,6 +65,7 @@ function isUrl(value) {
 }
 
 const meta = readJson('meta')
+const status = readJson('status')
 const timeline = readJson('timeline') ?? []
 const news = readJson('news') ?? []
 const markers = readJson('markers') ?? []
@@ -96,6 +98,9 @@ if (meta) {
     requireFields(meta.feedHealth, ['lastRun', 'failedFeeds', 'itemsFound', 'candidateItemsFound', 'extractionStatus'], 'meta.feedHealth')
     if (!isIsoDate(meta.feedHealth.lastRun)) errors.push('meta.feedHealth.lastRun must be an ISO date string')
     if (!Array.isArray(meta.feedHealth.failedFeeds)) errors.push('meta.feedHealth.failedFeeds must be an array')
+    if (meta.feedHealth.criticalFeedFailures && !Array.isArray(meta.feedHealth.criticalFeedFailures)) {
+      errors.push('meta.feedHealth.criticalFeedFailures must be an array')
+    }
     if (!Number.isInteger(meta.feedHealth.itemsFound) || meta.feedHealth.itemsFound < 0) {
       errors.push('meta.feedHealth.itemsFound must be a non-negative integer')
     }
@@ -137,6 +142,52 @@ if (meta) {
     if (!isIsoDate(meta.manualOverride.updatedAt)) errors.push('meta.manualOverride.updatedAt must be ISO')
     if (meta.manualOverride.expiresAt && !isIsoDate(meta.manualOverride.expiresAt)) {
       errors.push('meta.manualOverride.expiresAt must be ISO')
+    }
+  }
+}
+
+if (status && meta) {
+  requireFields(status, ['schemaVersion', 'status', 'generatedAt', 'thresholds', 'dashboard', 'metrics', 'pipeline'], 'status')
+  if (status.schemaVersion !== 1) errors.push('status.schemaVersion must be 1')
+  if (!['ok', 'degraded', 'critical'].includes(status.status)) {
+    errors.push(`status.status must be ok, degraded, or critical; got "${status.status}"`)
+  }
+  if (!isIsoDate(status.generatedAt)) errors.push('status.generatedAt must be ISO')
+  if (!Array.isArray(status.staleReasons)) errors.push('status.staleReasons must be an array')
+
+  if (status.thresholds) {
+    requireFields(status.thresholds, ['maxDataAgeHours', 'maxOfficialCheckAgeHours'], 'status.thresholds')
+    if (!Number.isInteger(status.thresholds.maxDataAgeHours) || status.thresholds.maxDataAgeHours <= 0) {
+      errors.push('status.thresholds.maxDataAgeHours must be a positive integer')
+    }
+    if (!Number.isInteger(status.thresholds.maxOfficialCheckAgeHours) || status.thresholds.maxOfficialCheckAgeHours <= 0) {
+      errors.push('status.thresholds.maxOfficialCheckAgeHours must be a positive integer')
+    }
+  }
+
+  if (status.dashboard) {
+    requireFields(status.dashboard, ['lastUpdated', 'lastChecked', 'lastOfficialSourceCheck', 'source'], 'status.dashboard')
+    if (status.dashboard.lastUpdated !== meta.lastUpdated) errors.push('status.dashboard.lastUpdated must match meta.lastUpdated')
+    if (status.dashboard.lastChecked !== meta.lastChecked) errors.push('status.dashboard.lastChecked must match meta.lastChecked')
+    if (status.dashboard.lastOfficialSourceCheck !== (meta.lastOfficialSourceCheck ?? meta.lastChecked)) {
+      errors.push('status.dashboard.lastOfficialSourceCheck must match meta')
+    }
+    if (status.dashboard.source !== meta.source) errors.push('status.dashboard.source must match meta.source')
+  }
+
+  if (status.metrics) {
+    for (const key of ['confirmed', 'deaths', 'countries', 'usStatesMonitoring', 'whoGlobalRisk', 'cdcResponseLevel', 'ecdcRisk']) {
+      if (status.metrics[key] !== meta[key]) errors.push(`status.metrics.${key} must match meta.${key}`)
+    }
+  }
+
+  if (status.pipeline) {
+    requireFields(status.pipeline, ['extractionStatus', 'itemsFound', 'candidateItemsFound', 'failedFeeds', 'criticalFeedFailures', 'officialSourceFailures'], 'status.pipeline')
+    if (!Array.isArray(status.pipeline.failedFeeds)) errors.push('status.pipeline.failedFeeds must be an array')
+    if (!Array.isArray(status.pipeline.criticalFeedFailures)) errors.push('status.pipeline.criticalFeedFailures must be an array')
+    if (!Array.isArray(status.pipeline.officialSourceFailures)) errors.push('status.pipeline.officialSourceFailures must be an array')
+    if (status.pipeline.extractionStatus !== (meta.feedHealth?.extractionStatus ?? 'unknown')) {
+      errors.push('status.pipeline.extractionStatus must match meta.feedHealth.extractionStatus')
     }
   }
 }

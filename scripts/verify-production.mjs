@@ -27,6 +27,19 @@ async function fetchText(url) {
   return res.text()
 }
 
+async function fetchJson(url) {
+  const res = await fetch(url, {
+    headers: {
+      Accept: 'application/json,*/*',
+      'Cache-Control': 'no-cache',
+      'User-Agent': 'EMERGENZ-Production-Verifier/1.0',
+    },
+    signal: AbortSignal.timeout(20000),
+  })
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`)
+  return res.json()
+}
+
 function assetUrls(html, baseUrl) {
   const urls = new Set()
   const pattern = /(?:src|href)=["']([^"']+\.js(?:\?[^"']*)?)["']/gi
@@ -37,6 +50,18 @@ function assetUrls(html, baseUrl) {
   }
 
   return [...urls]
+}
+
+async function productionStatusMatches(meta, expectedLastUpdated, expectedLastOfficialSourceCheck) {
+  const statusUrl = new URL('/status.json', PRODUCTION_URL)
+  statusUrl.searchParams.set('verify', Date.now().toString())
+
+  const status = await fetchJson(statusUrl.toString())
+  return status.schemaVersion === 1
+    && status.dashboard?.lastUpdated === expectedLastUpdated
+    && status.dashboard?.lastOfficialSourceCheck === expectedLastOfficialSourceCheck
+    && status.metrics?.confirmed === meta.confirmed
+    && status.metrics?.deaths === meta.deaths
 }
 
 async function productionContains(expectedMarkers) {
@@ -75,11 +100,13 @@ async function main() {
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     try {
       console.log(`[verify-production] Attempt ${attempt}/${MAX_ATTEMPTS}: ${PRODUCTION_URL}`)
-      if (await productionContains(expectedMarkers)) {
-        console.log(`[verify-production] OK: production contains ${expectedMarkers.join(' and ')}`)
+      const statusMatches = await productionStatusMatches(meta, expectedLastUpdated, lastOfficialSourceCheck)
+      const bundleMatches = await productionContains(expectedMarkers)
+      if (statusMatches && bundleMatches) {
+        console.log(`[verify-production] OK: production status and bundle contain ${expectedMarkers.join(' and ')}`)
         return
       }
-      console.warn(`[verify-production] Production does not yet contain ${expectedMarkers.join(' and ')}`)
+      console.warn(`[verify-production] Production not fresh yet (status=${statusMatches}, bundle=${bundleMatches})`)
     } catch (error) {
       console.warn(`[verify-production] Attempt ${attempt} failed: ${error.message}`)
     }
