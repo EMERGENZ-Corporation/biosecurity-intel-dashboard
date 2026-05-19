@@ -4,10 +4,10 @@
   "countries": 9,
   "usStatesMonitoring": 11,
   "source": "ECDC / WHO / CDC / PHAC",
-  "lastUpdated": "2026-05-19T18:47:00Z",
-  "lastChecked": "2026-05-19T18:46:18.622Z",
+  "lastUpdated": "2026-05-19T18:58:20.188Z",
+  "lastChecked": "2026-05-19T18:58:20.188Z",
   "feedHealth": {
-    "lastRun": "2026-05-19T18:46:18.622Z",
+    "lastRun": "2026-05-19T18:58:20.188Z",
     "failedFeeds": [
       "WHO",
       "ECDC",
@@ -21,9 +21,9 @@
       "AP News",
       "Harvard HSPH"
     ],
-    "itemsFound": 143,
-    "candidateItemsFound": 153,
-    "extractionStatus": "Gemini 429; manual source-backed update applied"
+    "itemsFound": 131,
+    "candidateItemsFound": 142,
+    "extractionStatus": "Gemini unavailable: missing API key; RSS-only fallback added 6 curated news item(s)"
   },
   "whoGlobalRisk": "LOW",
   "whoGlobalRiskUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",

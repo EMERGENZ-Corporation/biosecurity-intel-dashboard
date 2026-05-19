@@ -6,7 +6,7 @@
  *
  * Stability rules:
  * - Deduplicate RSS candidates before calling Gemini.
- * - Do not write dashboard JSON when Gemini is unavailable.
+ * - Fall back to capped, source-backed RSS news updates when Gemini is unavailable.
  * - Treat broken noncritical feeds as degraded, not fatal.
  * - Exit nonzero only for required-path failures that need human attention.
  */
@@ -67,6 +67,35 @@ const RELEVANT_KEYWORDS = [
   'orthohantavirus',
   'andes hantavirus',
 ]
+
+const STRONG_OUTBREAK_KEYWORDS = [
+  'andes virus',
+  'andes hantavirus',
+  'mv hondius',
+  'hondius',
+  'andv',
+  'orthohantavirus',
+]
+
+const FALLBACK_AUTHORITY_WEIGHT = new Map([
+  ['CDC', 100],
+  ['WHO', 95],
+  ['ECDC', 95],
+  ['PHAC', 90],
+  ['UKHSA', 80],
+  ['ProMED', 75],
+  ['AP News', 70],
+  ['Reuters', 70],
+  ['ABC News', 60],
+  ['BBC Health', 60],
+  ['CBC News', 60],
+  ['NPR', 55],
+  ['STAT News', 55],
+  ['Google News', 25],
+])
+
+const FALLBACK_NEWS_LIMIT = Number.parseInt(process.env.FALLBACK_NEWS_LIMIT || '8', 10)
+const FALLBACK_GOOGLE_NEWS_LIMIT = Number.parseInt(process.env.FALLBACK_GOOGLE_NEWS_LIMIT || '4', 10)
 
 const BLOCKED_DOMAINS = [
   'wired.com',
@@ -188,6 +217,81 @@ function isWhoDon(item) {
 
 function uniqueValues(values) {
   return [...new Set(values.filter(Boolean))]
+}
+
+function toTimestamp(pubDate) {
+  const timestamp = pubDate ? new Date(pubDate).getTime() : NaN
+  return Number.isFinite(timestamp) ? timestamp : Date.now()
+}
+
+function hasStrongOutbreakSignal(item) {
+  const searchable = `${item.title} ${item.description} ${item.link}`.toLowerCase()
+  return STRONG_OUTBREAK_KEYWORDS.some((keyword) => searchable.includes(keyword))
+}
+
+function fallbackScore(item) {
+  const authorityWeight = FALLBACK_AUTHORITY_WEIGHT.get(item.authority) ?? 20
+  const strongSignalWeight = hasStrongOutbreakSignal(item) ? 40 : 0
+  const recencyWeight = Math.min(Math.max(toTimestamp(item.pubDate) / 100000000000, 0), 20)
+  return authorityWeight + strongSignalWeight + recencyWeight
+}
+
+function selectFallbackNewsItems(items) {
+  const selected = []
+  const googleNews = []
+
+  for (const item of items
+    .filter((item) => item.link && item.title && hasStrongOutbreakSignal(item))
+    .sort((a, b) => fallbackScore(b) - fallbackScore(a))) {
+    if (item.authority === 'Google News') {
+      googleNews.push(item)
+      continue
+    }
+    selected.push(item)
+    if (selected.length >= FALLBACK_NEWS_LIMIT) return selected
+  }
+
+  return selected
+    .concat(googleNews.slice(0, Math.max(0, FALLBACK_GOOGLE_NEWS_LIMIT)))
+    .slice(0, Math.max(1, FALLBACK_NEWS_LIMIT))
+}
+
+function addNewsItems({ items, existingNews, existingNewsLinks, descriptions = {} }) {
+  let added = 0
+
+  for (const item of items) {
+    if (!item.link || existingNewsLinks.has(item.link)) continue
+
+    existingNews.push({
+      id: `rss-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      authority: item.authority,
+      title: item.title,
+      description: descriptions[item.link] || item.description,
+      link: item.link,
+      pubDate: item.pubDate,
+      timestamp: toTimestamp(item.pubDate),
+    })
+    existingNewsLinks.add(item.link)
+    added++
+  }
+
+  if (added > 0) {
+    existingNews.sort((a, b) => b.timestamp - a.timestamp)
+    writeFileSync(NEWS_PATH, JSON.stringify(existingNews.slice(0, 50), null, 2))
+  }
+
+  return added
+}
+
+function updateFeedHealth(meta, { now, failedFeeds, newItems, candidateItems, extractionStatus }) {
+  meta.lastChecked = now
+  meta.feedHealth = {
+    lastRun: now,
+    failedFeeds: uniqueValues(failedFeeds),
+    itemsFound: newItems.length,
+    candidateItemsFound: candidateItems.length,
+    extractionStatus,
+  }
 }
 
 async function main() {
@@ -313,8 +417,20 @@ async function main() {
   }
 
   if (!GEMINI_KEY) {
-    console.error('[update-data] GEMINI_API_KEY not set - cannot extract new outbreak data.')
-    process.exit(1)
+    console.warn('[update-data] GEMINI_API_KEY not set - using RSS-only fallback.')
+    const fallbackItems = selectFallbackNewsItems(newItems)
+    const added = addNewsItems({ items: fallbackItems, existingNews, existingNewsLinks })
+    updateFeedHealth(meta, {
+      now,
+      failedFeeds,
+      newItems,
+      candidateItems,
+      extractionStatus: `Gemini unavailable: missing API key; RSS-only fallback added ${added} news item(s)`,
+    })
+    if (added > 0) meta.lastUpdated = now
+    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+    console.log(`[update-data] RSS-only fallback added ${added} news item(s).`)
+    return
   }
 
   const newItemsText = newItems
@@ -447,7 +563,19 @@ Rules:
   }
 
   if (!extracted) {
-    console.warn('[update-data] Gemini extraction unavailable - exiting without writing files.')
+    console.warn('[update-data] Gemini extraction unavailable - using RSS-only fallback.')
+    const fallbackItems = selectFallbackNewsItems(newItems)
+    const added = addNewsItems({ items: fallbackItems, existingNews, existingNewsLinks })
+    updateFeedHealth(meta, {
+      now,
+      failedFeeds,
+      newItems,
+      candidateItems,
+      extractionStatus: `Gemini unavailable after retries; RSS-only fallback added ${added} news item(s)`,
+    })
+    if (added > 0) meta.lastUpdated = now
+    writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
+    console.log(`[update-data] RSS-only fallback added ${added} news item(s).`)
     return
   }
 
@@ -505,47 +633,30 @@ Rules:
     }
   }
 
-  meta.lastChecked = now
-  meta.feedHealth = {
-    lastRun: now,
-    failedFeeds: uniqueValues(failedFeeds),
-    itemsFound: newItems.length,
-    candidateItemsFound: candidateItems.length,
+  updateFeedHealth(meta, {
+    now,
+    failedFeeds,
+    newItems,
+    candidateItems,
+    extractionStatus: 'Gemini extraction succeeded',
+  })
+
+  const enrichedDescriptions = extracted.newsDescriptions ?? {}
+  const addedNews = addNewsItems({ items: newItems, existingNews, existingNewsLinks, descriptions: enrichedDescriptions })
+
+  if (addedNews > 0) {
+    dataChanged = true
+    console.log('[update-data] Updated news.json.')
   }
 
   if (dataChanged) {
     meta.lastUpdated = now
     console.log('[update-data] Data changed - lastUpdated set.')
   } else {
-    console.log('[update-data] No structured data changes detected.')
+    console.log('[update-data] No data changes detected.')
   }
 
   writeFileSync(META_PATH, JSON.stringify(meta, null, 2))
-
-  const enrichedDescriptions = extracted.newsDescriptions ?? {}
-  let newsChanged = false
-
-  for (const item of newItems) {
-    if (!item.link || existingNewsLinks.has(item.link)) continue
-    const pubTimestamp = item.pubDate ? new Date(item.pubDate).getTime() : Date.now()
-    existingNews.push({
-      id: `rss-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      authority: item.authority,
-      title: item.title,
-      description: enrichedDescriptions[item.link] || item.description,
-      link: item.link,
-      pubDate: item.pubDate,
-      timestamp: isNaN(pubTimestamp) ? Date.now() : pubTimestamp,
-    })
-    existingNewsLinks.add(item.link)
-    newsChanged = true
-  }
-
-  if (newsChanged) {
-    existingNews.sort((a, b) => b.timestamp - a.timestamp)
-    writeFileSync(NEWS_PATH, JSON.stringify(existingNews.slice(0, 50), null, 2))
-    console.log('[update-data] Updated news.json.')
-  }
 
   console.log('[update-data] Done.')
 }
