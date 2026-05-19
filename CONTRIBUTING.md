@@ -6,7 +6,7 @@ This dashboard is a public health intelligence tool maintained by EMERGENZ Syste
 
 ## Ground rules
 
-- **Accuracy first.** Every factual claim must be traceable to a primary source (WHO, CDC, ECDC, peer-reviewed publication, or official government release). Do not add information from secondary or opinion media.
+- **Accuracy first.** Every factual claim must be traceable to a primary source such as WHO, CDC, ECDC, a peer-reviewed publication, or an official government release. Do not add information from secondary or opinion media.
 - **Cite everything.** If you add or update a marker, case count, protocol, or clinical fact, include the source URL and publication date.
 - **No speculation.** This is an operational tool. Predictive content, opinion, or extrapolation beyond official statements must be clearly labelled or excluded.
 
@@ -18,13 +18,14 @@ This dashboard is a public health intelligence tool maintained by EMERGENZ Syste
 git clone https://github.com/EMERGENZ-Corporation/hantavirus-intel-dashboard.git
 cd hantavirus-intel-dashboard
 npm install
-cp .env.example .env.local   # fill in your API keys for local development
+cp .env.example .env.local
 npm run dev
 ```
 
-Required environment variables (see `.env.example`):
-- `BRIGHT_DATA_API_KEY` — Bright Data Web Unlocker key for CDC scraping
-- `GEMINI_API_KEY` — Google Gemini 2.0 Flash key for AI summaries
+Required environment variables for automation:
+
+- `BRIGHT_DATA_API_KEY` - Bright Data Web Unlocker key for fallback source fetching
+- `GEMINI_API_KEY` - Google Gemini key for AI-assisted extraction and summaries
 
 ---
 
@@ -32,10 +33,11 @@ Required environment variables (see `.env.example`):
 
 | Area | How |
 |------|-----|
-| Map markers | Edit `src/data/markers.json` — follow the existing schema. Multi-source markers use the `sources[]` array. |
-| Case counts / stats | Update `STATIC_DATA` in `src/pages/Dashboard.tsx` and note the source + date in the PR description. |
-| Clinical content | Edit `src/pages/Clinical.tsx` or `src/pages/PPE.tsx` — cite all claims. |
-| Protocol links | Update the `PINNED_PROTOCOLS` array in `api/feeds.ts`. |
+| Map markers | Edit `src/data/markers.json` and follow the existing schema. Multi-source markers use the `sources[]` array. |
+| Case counts / stats | Prefer `src/data/manual-overrides.json` for urgent temporary corrections, or update `src/data/meta.json` with source provenance. |
+| Clinical content | Edit `src/pages/Clinical.tsx` or `src/pages/PPE.tsx` and cite all claims. |
+| Protocol links | Update `src/data/protocols.json` and source metadata. |
+| Parser logic | Update `scripts/update-data.mjs` and add/adjust `npm run test:parsers` fixtures. |
 | Bug fixes / UI | Open an issue first for significant changes. |
 
 ---
@@ -43,18 +45,19 @@ Required environment variables (see `.env.example`):
 ## Pull request checklist
 
 - [ ] All new data has a source URL and date
+- [ ] `npm run test:parsers` passes
+- [ ] `npm run validate:data` passes
 - [ ] `npm run build` passes without errors
-- [ ] No `console.log` left in production paths
-- [ ] Accessible: interactive elements have labels, focus states work
-- [ ] PR description explains *what changed and why*, not just *what*
+- [ ] Accessible: interactive elements have labels and focus states work
+- [ ] PR description explains what changed and why, not just what
 
 ---
 
 ## Data update policy
 
-Static data (case counts, markers) should be updated only from official primary sources. If a source changes or expires, open an issue rather than removing the reference.
+Static data should be updated only from official primary sources. If a source changes or expires, open an issue rather than removing the reference.
 
-Automated refresh (`api/refresh.ts`) supplements static data — it does not replace it. Static data is the authoritative baseline.
+Automated refresh runs through `.github/workflows/update-data.yml` and `scripts/update-data.mjs`. The production app is a static Vite build; it does not depend on Vercel serverless API routes at runtime.
 
 ---
 

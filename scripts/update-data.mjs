@@ -13,6 +13,7 @@
 
 import { createHash } from 'crypto'
 import { readFileSync, writeFileSync } from 'fs'
+import { fileURLToPath } from 'url'
 import { XMLParser } from 'fast-xml-parser'
 
 const GEMINI_KEY = process.env.GEMINI_API_KEY
@@ -291,10 +292,11 @@ function normalizeRisk(value) {
   return null
 }
 
-function parseEcdcSurveillance(text) {
+export function parseEcdcSurveillance(text) {
   const extraction = { caseStats: {}, riskLevels: {}, facts: [] }
   const caseMatch = text.match(/(?:total of\s*)?(\d+)\s+cases? has been reported,\s*including\s*(\d+)\s+confirmed\s+and\s+(\d+)\s+probable cases/i)
     ?? text.match(/(\d+)\s+confirmed cases?,\s*(\d+)\s+probable cases?,\s*(\d+)\s+suspected cases?,?\s*(?:and\s*)?(\d+)\s+(?:number of\s+)?deaths/i)
+    ?? text.match(/confirmed cases?\s+(\d+)\s+probable cases?\s+(\d+)\s+suspected cases?\s+(\d+)\s+number of deaths\s+(\d+)/i)
 
   if (caseMatch) {
     if (caseMatch[0].toLowerCase().includes('total of')) {
@@ -303,6 +305,14 @@ function parseEcdcSurveillance(text) {
       const probable = Number.parseInt(caseMatch[3], 10)
       extraction.caseStats.confirmed = totalCases
       extraction.facts.push(`${confirmed} confirmed, ${probable} probable, ${totalCases} total reported cases`)
+    } else if (caseMatch[0].toLowerCase().includes('confirmed cases')) {
+      const confirmed = Number.parseInt(caseMatch[1], 10)
+      const probable = Number.parseInt(caseMatch[2], 10)
+      const suspected = Number.parseInt(caseMatch[3], 10)
+      const deaths = Number.parseInt(caseMatch[4], 10)
+      extraction.caseStats.confirmed = confirmed + probable
+      extraction.caseStats.deaths = deaths
+      extraction.facts.push(`${confirmed} confirmed, ${probable} probable, ${suspected} suspected, ${deaths} deaths`)
     } else {
       const confirmed = Number.parseInt(caseMatch[1], 10)
       const probable = Number.parseInt(caseMatch[2], 10)
@@ -324,7 +334,7 @@ function parseEcdcSurveillance(text) {
   return extraction
 }
 
-function parseWhoAssessment(text) {
+export function parseWhoAssessment(text) {
   const extraction = { caseStats: {}, riskLevels: {}, facts: [] }
   const riskMatch = text.match(/(?:global|overall)\s+(?:public health\s+)?risk(?:\s+is|\s+remains|\s+as)?\s+(low|moderate|high|very high)/i)
   const whoGlobalRisk = normalizeRisk(riskMatch?.[1])
@@ -332,7 +342,7 @@ function parseWhoAssessment(text) {
   return extraction
 }
 
-function parseCdcSituation(text) {
+export function parseCdcSituation(text) {
   const extraction = { caseStats: {}, riskLevels: {}, facts: [] }
   const monitoringMatch = text.match(/(\d+)\s+(?:U\.S\.\s+)?states?\s+(?:are\s+)?(?:monitoring|with\s+persons?\s+being\s+monitored)/i)
   if (monitoringMatch) extraction.caseStats.usStatesMonitoring = Number.parseInt(monitoringMatch[1], 10)
@@ -340,9 +350,9 @@ function parseCdcSituation(text) {
   return extraction
 }
 
-function parsePhacUpdate(text) {
+export function parsePhacUpdate(text) {
   const extraction = { caseStats: {}, riskLevels: {}, facts: [] }
-  if (/one\s+(?:former\s+)?passenger.*tested positive/i.test(text) || /one.*positive for Andes hantavirus/i.test(text)) {
+  if (/one\s+(?:former\s+)?passenger[\s\S]{0,160}tested positive/i.test(text) || /one[\s\S]{0,160}positive for Andes hantavirus/i.test(text)) {
     extraction.facts.push('PHAC confirms one Canadian case linked to MV Hondius')
   }
   return extraction
@@ -1007,7 +1017,9 @@ Rules:
   console.log('[update-data] Done.')
 }
 
-main().catch((error) => {
-  console.error('[update-data] Fatal error:', error)
-  process.exit(1)
-})
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  main().catch((error) => {
+    console.error('[update-data] Fatal error:', error)
+    process.exit(1)
+  })
+}

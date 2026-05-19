@@ -36,6 +36,9 @@ jobs:
           BRIGHT_DATA_API_KEY: ${{ secrets.BRIGHT_DATA_API_KEY }}
           BRIGHT_DATA_ZONE: ${{ secrets.BRIGHT_DATA_ZONE }}
 
+      - name: Test official parsers
+        run: npm run test:parsers
+
       - name: Validate data files
         run: npm run validate:data
 
