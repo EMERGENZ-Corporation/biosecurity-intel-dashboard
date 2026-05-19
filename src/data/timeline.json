@@ -1,5 +1,41 @@
 [
   {
+    "id": "t-20260519-ecdc-update",
+    "date": "May 19, 2026",
+    "title": "ECDC reports 9 confirmed, 2 probable cases",
+    "description": "ECDC updates its Andes hantavirus outbreak surveillance page to 9 confirmed cases, 2 probable cases, 0 suspected cases, and 3 deaths. ECDC notes that additional cases may still be identified because of the long incubation period, while the EU/EEA general-population risk remains very low.",
+    "source": "ECDC",
+    "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+    "category": "ECDC"
+  },
+  {
+    "id": "t-20260519-cdc-quarantine-orders",
+    "date": "May 19, 2026",
+    "title": "CDC orders quarantine for two UNMC passengers",
+    "description": "CDC issues federal quarantine orders for two MV Hondius passengers at the University of Nebraska Medical Center. AP reports 18 people from the ship are being assessed at UNMC, with 16 others asked to remain at the facility through May 31.",
+    "source": "AP News / CDC",
+    "sourceUrl": "https://apnews.com/article/hantavirus-ship-quarantine-andes-virus-302d45d77aac4d55aa76c43d79f54ec9",
+    "category": "CDC"
+  },
+  {
+    "id": "t-20260517-who-rra-v2",
+    "date": "May 17, 2026",
+    "title": "WHO publishes rapid risk assessment v2",
+    "description": "WHO publishes version 2 of its global rapid risk assessment for the MV Hondius Andes hantavirus outbreak, addressing public health impact, geographic spread risk, and response-capacity considerations.",
+    "source": "WHO",
+    "sourceUrl": "https://www.who.int/publications/m/item/who-rapid-risk-assessment---hantavirus-outbreak-caused-by-andes-virus--global-v.2",
+    "category": "WHO"
+  },
+  {
+    "id": "t-20260517-phac-confirmation",
+    "date": "May 17, 2026",
+    "title": "PHAC confirms Canadian Andes hantavirus case",
+    "description": "PHAC confirms by National Microbiology Laboratory testing that one Canadian MV Hondius passenger is positive for Andes hantavirus. A travelling partner tested negative, no further Canadian cases had been identified at that time, and high-risk contacts remained in isolation and monitoring.",
+    "source": "PHAC",
+    "sourceUrl": "https://www.canada.ca/en/public-health/news/2026/05/media-update-on-andes-hantavirus-situation1.html",
+    "category": "other"
+  },
+  {
     "id": "t-20260516-canada",
     "date": "May 16, 2026",
     "title": "Canada confirms 12th case — British Columbia; 9th country affected",

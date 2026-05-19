@@ -1,15 +1,29 @@
 {
-  "confirmed": 12,
+  "confirmed": 11,
   "deaths": 3,
   "countries": 9,
   "usStatesMonitoring": 11,
-  "source": "WHO / ECDC / CDC / BC CDC",
-  "lastUpdated": "2026-05-16T00:00:00Z",
-  "lastChecked": "2026-05-16T18:45:20.093Z",
+  "source": "ECDC / WHO / CDC / PHAC",
+  "lastUpdated": "2026-05-19T18:47:00Z",
+  "lastChecked": "2026-05-19T18:46:18.622Z",
   "feedHealth": {
-    "lastRun": "2026-05-16T18:45:20.093Z",
-    "failedFeeds": [],
-    "itemsFound": 0
+    "lastRun": "2026-05-19T18:46:18.622Z",
+    "failedFeeds": [
+      "WHO",
+      "ECDC",
+      "ProMED",
+      "Eurosurveillance",
+      "RIVM",
+      "CTV News",
+      "PHAC",
+      "RKI",
+      "Reuters",
+      "AP News",
+      "Harvard HSPH"
+    ],
+    "itemsFound": 143,
+    "candidateItemsFound": 153,
+    "extractionStatus": "Gemini 429; manual source-backed update applied"
   },
   "whoGlobalRisk": "LOW",
   "whoGlobalRiskUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",
