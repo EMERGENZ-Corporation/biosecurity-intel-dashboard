@@ -1,6 +1,10 @@
 name: Automated Data Update
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-data.yml'
   schedule:
     # Every 6 hours UTC during active outbreak monitoring.
     - cron: '0 0,6,12,18 * * *'
