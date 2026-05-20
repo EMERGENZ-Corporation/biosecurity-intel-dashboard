@@ -1,0 +1,80 @@
+[
+  {
+    "id": "andes-hantavirus-mv-hondius-2026",
+    "name": "Andes virus hantavirus cluster — MV Hondius travel-linked",
+    "category": "zoonotic",
+    "pathogen": "Andes orthohantavirus",
+    "geography": [
+      "Argentina",
+      "Chile",
+      "Netherlands",
+      "Canada",
+      "Germany",
+      "United Kingdom",
+      "United States"
+    ],
+    "severity": "concern",
+    "confidence": "official",
+    "trend": "stable",
+    "status": "active",
+    "summary": "Andes hantavirus cluster linked to a South America–Antarctica expedition cruise aboard MV Hondius. 11 reported cases (9 confirmed, 2 probable) and 3 deaths across multiple countries, with multinational case-finding and post-exposure monitoring continuing.",
+    "operationalRelevance": "Long incubation (up to 6 weeks) means travelers and returning expedition staff can present in jurisdictions far from the source. EMS and emergency departments handling unexplained respiratory failure in returning travelers should consider hantavirus pulmonary syndrome and use airborne precautions during aerosol-generating procedures.",
+    "whyItMatters": "Andes virus is the only hantavirus with documented person-to-person transmission. The Radboud UMC quarantine event after an incorrect blood-sampling procedure shows healthcare worker exposure is a real operational risk if PPE and specimen handling deviate from protocol.",
+    "currentSituation": "ECDC, WHO, CDC, and PHAC continue active surveillance and have issued aligned guidance. WHO global risk remains LOW; ECDC risk for the EU/EEA remains VERY LOW. CDC issued HAN 528 for clinical awareness in the United States.",
+    "geographyNotes": "Source exposure occurred aboard MV Hondius. Confirmed and probable cases have been reported across passengers' home countries; ongoing monitoring spans 11 US states and several EU/EEA member states.",
+    "metrics": [
+      { "label": "Confirmed/probable cases", "value": 11, "sourceId": "ecdc-andes-surveillance" },
+      { "label": "Deaths", "value": 3, "sourceId": "ecdc-andes-surveillance" },
+      { "label": "Countries with cases or contacts under monitoring", "value": 9, "sourceId": "ecdc-andes-surveillance" },
+      { "label": "US states with persons under monitoring", "value": 11, "sourceId": "cdc-hantavirus-situation-summary" }
+    ],
+    "mapMarkers": [
+      { "id": "andes-arg", "lat": -34.6037, "lng": -58.3816, "label": "Argentina — exposure region", "severity": "concern" },
+      { "id": "andes-cl", "lat": -33.4489, "lng": -70.6693, "label": "Chile — exposure region", "severity": "concern" },
+      { "id": "andes-nl-radboud", "lat": 51.8246, "lng": 5.8689, "label": "Radboud UMC, Nijmegen — HCW exposure event", "severity": "action" }
+    ],
+    "primarySourceId": "ecdc-andes-surveillance",
+    "sourceIds": [
+      "ecdc-andes-surveillance",
+      "who-andes-rra-v2",
+      "cdc-hantavirus-situation-summary",
+      "cdc-han-528",
+      "phac-andes-media-update"
+    ],
+    "lastUpdated": "2026-05-19T23:23:55.802Z",
+    "lastChecked": "2026-05-20T01:32:03.663Z"
+  },
+  {
+    "id": "ebola-bundibugyo-drc-2026",
+    "name": "Ebola disease — Bundibugyo virus, Democratic Republic of the Congo",
+    "category": "vhf",
+    "pathogen": "Bundibugyo ebolavirus",
+    "geography": [
+      "Democratic Republic of the Congo",
+      "Ituri Province",
+      "Bunia",
+      "Mongwalu",
+      "Rwampara"
+    ],
+    "severity": "action",
+    "confidence": "corroborated",
+    "trend": "increasing",
+    "status": "active",
+    "summary": "Africa CDC and WHO are responding to a Bundibugyo virus outbreak in Ituri Province, Democratic Republic of the Congo, with cross-border concern for Uganda and South Sudan. Specific case counts should be confirmed directly against the WHO Disease Outbreak News and Africa CDC outbreak pages, which update frequently.",
+    "operationalRelevance": "Filovirus outbreaks demand strict isolation, source-control PPE, and contact tracing. Healthcare preparedness teams should review travel-history screening, airport and port-of-entry coordination, and laboratory specimen pathways for suspected viral hemorrhagic fever.",
+    "whyItMatters": "Bundibugyo virus has caused multiple regional outbreaks since 2007 with case-fatality rates around 30–40%. Cross-border movement in eastern DRC, Uganda, and South Sudan elevates the risk of geographic spread; no licensed vaccine specific to Bundibugyo is currently available.",
+    "geographyNotes": "Initial signals concentrated in Ituri Province (Bunia, Mongwalu, Rwampara). Travel-linked importation risk for neighbouring countries and to long-haul destinations remains under monitoring.",
+    "metrics": [],
+    "mapMarkers": [
+      { "id": "ebola-bunia", "lat": 1.5598, "lng": 30.2473, "label": "Bunia, Ituri Province — outbreak focus", "severity": "action" }
+    ],
+    "primarySourceId": "who-disease-outbreak-news",
+    "sourceIds": [
+      "who-disease-outbreak-news",
+      "africa-cdc-outbreaks",
+      "cdc-current-outbreaks"
+    ],
+    "lastUpdated": "2026-05-15T00:00:00Z",
+    "lastChecked": "2026-05-19T00:00:00Z"
+  }
+]

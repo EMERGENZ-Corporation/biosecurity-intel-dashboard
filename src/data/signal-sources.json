@@ -1,0 +1,94 @@
+[
+  {
+    "id": "ecdc-andes-surveillance",
+    "authority": "ECDC",
+    "authorityFull": "European Centre for Disease Prevention and Control",
+    "title": "ECDC Surveillance Update — Andes hantavirus outbreak",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+    "publicationDate": "2026-05-19",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "who-andes-rra-v2",
+    "authority": "WHO",
+    "authorityFull": "World Health Organization",
+    "title": "WHO Rapid Risk Assessment v2 — Andes hantavirus, global",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.who.int/publications/m/item/who-rapid-risk-assessment---hantavirus-outbreak-caused-by-andes-virus--global-v.2",
+    "publicationDate": "2026-05-15",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "cdc-hantavirus-situation-summary",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Hantavirus Situation Summary",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.cdc.gov/hantavirus/situation-summary/index.html",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "cdc-han-528",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC HAN 528 — Clinical awareness for Andes hantavirus",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "phac-andes-media-update",
+    "authority": "PHAC",
+    "authorityFull": "Public Health Agency of Canada",
+    "title": "PHAC Media Update on Andes Hantavirus Situation",
+    "sourceType": "press-release",
+    "primary": true,
+    "url": "https://www.canada.ca/en/public-health/news/2026/05/media-update-on-andes-hantavirus-situation1.html",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "who-disease-outbreak-news",
+    "authority": "WHO",
+    "authorityFull": "World Health Organization",
+    "title": "WHO Disease Outbreak News",
+    "sourceType": "outbreak-news",
+    "primary": true,
+    "url": "https://www.who.int/emergencies/disease-outbreak-news",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne"],
+    "notes": "Landing page for WHO Disease Outbreak News. Verify the specific DON item for each cited outbreak before publishing event-level claims."
+  },
+  {
+    "id": "africa-cdc-outbreaks",
+    "authority": "Africa CDC",
+    "authorityFull": "Africa Centres for Disease Control and Prevention",
+    "title": "Africa CDC Epidemic Intelligence and Outbreaks",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://africacdc.org",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "vaccine_preventable", "enteric", "zoonotic"],
+    "notes": "Africa CDC landing site. Use weekly epidemic intelligence reports for specific outbreak claims."
+  },
+  {
+    "id": "cdc-current-outbreaks",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Current Outbreaks",
+    "sourceType": "outbreak-news",
+    "primary": true,
+    "url": "https://www.cdc.gov/outbreaks/",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "respiratory", "vaccine_preventable", "enteric", "zoonotic", "vector_borne"]
+  }
+]
