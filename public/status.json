@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "status": "ok",
-  "generatedAt": "2026-05-20T08:52:53.429Z",
+  "generatedAt": "2026-05-20T14:34:01.392Z",
   "thresholds": {
     "maxDataAgeHours": 48,
     "maxOfficialCheckAgeHours": 12
   },
   "dashboard": {
     "lastUpdated": "2026-05-19T23:23:55.802Z",
-    "lastChecked": "2026-05-20T08:52:53.429Z",
-    "lastOfficialSourceCheck": "2026-05-20T08:52:53.429Z",
-    "dataAgeHours": 9.482674166666667,
+    "lastChecked": "2026-05-20T14:34:01.392Z",
+    "lastOfficialSourceCheck": "2026-05-20T14:34:01.392Z",
+    "dataAgeHours": 15.168219444444444,
     "officialCheckAgeHours": 0,
     "source": "ECDC / WHO / CDC / PHAC"
   },
@@ -25,8 +25,8 @@
   },
   "pipeline": {
     "extractionStatus": "Gemini unavailable: missing API key; RSS-only fallback added 0 news item(s)",
-    "itemsFound": 132,
-    "candidateItemsFound": 144,
+    "itemsFound": 130,
+    "candidateItemsFound": 137,
     "failedFeeds": [
       "WHO",
       "ECDC",
