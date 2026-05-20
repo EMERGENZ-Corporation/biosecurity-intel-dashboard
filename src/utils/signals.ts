@@ -8,6 +8,7 @@ import {
   SignalSeverity,
   ThreatCategory,
   THREAT_CATEGORY_LABELS,
+  MarkerType,
 } from '../types'
 
 export const signals = signalsData as Signal[]
@@ -44,6 +45,30 @@ export const SEVERITY_COLORS: Record<SignalSeverity, string> = {
   watch: 'var(--color-accent-yellow)',
   concern: 'var(--color-accent-orange)',
   action: 'var(--color-accent-red)',
+}
+
+// Marker-type color palette tuned for dark CARTO tile contrast.
+// Resolved hex values (not CSS vars) — used by Leaflet CircleMarker which
+// does not resolve CSS variables.
+export const MARKER_TYPE_COLORS: Record<MarkerType, string> = {
+  case_confirmed: '#F85149',     // red
+  death: '#FF1744',              // bright red — maximum contrast on dark tiles
+  outbreak_zone: '#E08E45',      // orange
+  exposure_event: '#BC8CFF',     // violet
+  monitoring_site: '#E3B341',    // amber/gold
+  animal_detection: '#3FB950',   // green
+  vector_zone: '#56D364',        // lime
+  infrastructure: '#79C0FF',     // light blue
+}
+
+// Larger marker radius for case-level and exposure markers, smaller for
+// region/infrastructure markers.
+const LARGE_MARKER_TYPES: Set<MarkerType> = new Set([
+  'case_confirmed', 'death', 'exposure_event', 'monitoring_site',
+])
+
+export function markerRadius(type: MarkerType): number {
+  return LARGE_MARKER_TYPES.has(type) ? 9 : 6
 }
 
 export const CONFIDENCE_LABELS = {

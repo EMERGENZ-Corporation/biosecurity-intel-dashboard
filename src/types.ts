@@ -40,13 +40,49 @@ export interface SignalMetric {
   asOf?: string
 }
 
+/**
+ * Generalized marker categories for the multi-threat dashboard.
+ * Replaces the hantavirus-only types (ship_route, flight_tracing,
+ * us_state_monitoring, etc.) with semantically broader categories
+ * that work across all signal domains.
+ */
+export type MarkerType =
+  | 'case_confirmed'      // confirmed/probable human case
+  | 'death'               // fatal case
+  | 'outbreak_zone'       // active outbreak area (city/region/country)
+  | 'exposure_event'      // specific exposure incident (ship route, HCW exposure, mass-gathering venue)
+  | 'monitoring_site'     // wastewater, surveillance, biocontainment, treatment center
+  | 'animal_detection'    // livestock/wildlife/poultry detection
+  | 'vector_zone'         // vector establishment / endemic vector area
+  | 'infrastructure'      // health system asset (BSL lab, port of entry, mass-gathering venue)
+
+export const MARKER_TYPE_LABELS: Record<MarkerType, string> = {
+  case_confirmed: 'Confirmed case',
+  death: 'Fatal case',
+  outbreak_zone: 'Outbreak zone',
+  exposure_event: 'Exposure event',
+  monitoring_site: 'Monitoring site',
+  animal_detection: 'Animal detection',
+  vector_zone: 'Vector zone',
+  infrastructure: 'Infrastructure',
+}
+
+export interface MarkerSource {
+  label: string
+  url: string
+}
+
 export interface SignalMapMarker {
   id: string
   lat: number
   lng: number
   label: string
   description?: string
+  /** Marker category for layer toggle, color, and size. Defaults to outbreak_zone. */
+  type?: MarkerType
   severity?: SignalSeverity
+  /** Direct source link(s) shown in the popup. */
+  sources?: MarkerSource[]
 }
 
 export interface SignalDetailSection {

@@ -1,56 +1,207 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import L from 'leaflet'
+import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import { Signal, SignalSeverity } from '../types'
-import { SEVERITY_COLORS, SEVERITY_LABELS, categoryLabel } from '../utils/signals'
+import type { Signal, MarkerType } from '../types'
+import { MARKER_TYPE_LABELS } from '../types'
+import { MARKER_TYPE_COLORS, markerRadius, categoryLabel } from '../utils/signals'
 
 interface Props {
   signals: Signal[]
   height?: number
   initialCenter?: [number, number]
   initialZoom?: number
+  /** Marker types to render. If undefined, all types render. */
+  visibleTypes?: Set<MarkerType>
 }
 
-function dotIcon(color: string) {
-  return L.divIcon({
-    className: 'signal-marker',
-    html: `<span style="display:block;width:14px;height:14px;border-radius:50%;background:${color};box-shadow:0 0 0 2px rgba(0,0,0,0.45);"></span>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
-  })
-}
+const DEFAULT_TYPE: MarkerType = 'outbreak_zone'
 
-export default function SignalsMap({ signals, height = 420, initialCenter = [10, 10], initialZoom = 2 }: Props) {
+/**
+ * Dark-mode popup + Leaflet control styling.
+ * Scoped via a single style tag inside the map container.
+ */
+const POPUP_STYLE = `
+  .biosec-popup .leaflet-popup-content-wrapper {
+    background: #21262D;
+    color: #E6EDF3;
+    border: 1px solid #30363D;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+  .biosec-popup .leaflet-popup-tip {
+    background: #21262D;
+    border: 1px solid #30363D;
+  }
+  .biosec-popup .leaflet-popup-content {
+    margin: 10px 14px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  .biosec-popup a.leaflet-popup-close-button {
+    color: #8B949E;
+  }
+  .leaflet-bar a, .leaflet-bar a:hover {
+    background-color: #21262D;
+    border-color: #30363D;
+    color: #E6EDF3;
+  }
+  .leaflet-bar a:hover { background-color: #30363D; }
+  .leaflet-bar {
+    border: 1px solid #30363D !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .leaflet-control-attribution {
+    background: rgba(13,17,23,0.85) !important;
+    color: #8B949E !important;
+    font-size: 0.625rem;
+  }
+  .leaflet-control-attribution a { color: #388BFD !important; }
+`
+
+export default function SignalsMap({
+  signals,
+  height = 500,
+  initialCenter = [20, 0],
+  initialZoom = 2,
+  visibleTypes,
+}: Props) {
   return (
-    <div style={{ height, width: '100%', borderRadius: '6px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
-      <MapContainer center={initialCenter} zoom={initialZoom} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
+    <div
+      style={{
+        height,
+        width: '100%',
+        borderRadius: '6px',
+        overflow: 'hidden',
+        border: '1px solid var(--color-border)',
+        backgroundColor: '#0D1117',
+      }}
+    >
+      <style>{POPUP_STYLE}</style>
+      <MapContainer
+        center={initialCenter}
+        zoom={initialZoom}
+        scrollWheelZoom={false}
+        style={{ height: '100%', width: '100%', backgroundColor: '#0D1117' }}
+        aria-label="Biosecurity signals map"
+      >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          subdomains="abcd"
+          maxZoom={20}
         />
         {signals.flatMap((signal) =>
           (signal.mapMarkers ?? []).map((marker) => {
-            const severity: SignalSeverity = marker.severity ?? signal.severity
+            const type: MarkerType = marker.type ?? DEFAULT_TYPE
+            if (visibleTypes && !visibleTypes.has(type)) return null
+            const color = MARKER_TYPE_COLORS[type]
+            const radius = markerRadius(type)
+
             return (
-              <Marker
+              <CircleMarker
                 key={`${signal.id}-${marker.id}`}
-                position={[marker.lat, marker.lng]}
-                icon={dotIcon(SEVERITY_COLORS[severity])}
+                center={[marker.lat, marker.lng]}
+                radius={radius}
+                pathOptions={{
+                  color,
+                  fillColor: color,
+                  fillOpacity: 0.85,
+                  weight: 1.5,
+                  opacity: 1,
+                }}
               >
-                <Popup>
-                  <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', minWidth: 220 }}>
-                    <div style={{ fontWeight: 700, marginBottom: '0.25rem' }}>{signal.name}</div>
-                    <div style={{ color: '#555', marginBottom: '0.25rem' }}>
-                      {categoryLabel(signal.category)} · {SEVERITY_LABELS[severity]}
+                <Popup className="biosec-popup">
+                  <div style={{ minWidth: 220 }}>
+                    <div
+                      style={{
+                        fontFamily: "'IBM Plex Mono', monospace",
+                        fontSize: '0.625rem',
+                        fontWeight: 700,
+                        color,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                        marginBottom: '0.25rem',
+                      }}
+                    >
+                      {MARKER_TYPE_LABELS[type]}
                     </div>
-                    <div style={{ marginBottom: '0.375rem' }}>{marker.label}</div>
-                    {marker.description && <div style={{ color: '#555' }}>{marker.description}</div>}
-                    <a href={`/signals/${signal.id}`} style={{ color: '#1f6feb', fontWeight: 600, marginTop: '0.375rem', display: 'inline-block' }}>
+                    <div
+                      style={{
+                        fontFamily: "'IBM Plex Mono', monospace",
+                        fontWeight: 700,
+                        fontSize: '0.8125rem',
+                        color: '#E6EDF3',
+                        marginBottom: '0.25rem',
+                      }}
+                    >
+                      {marker.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '0.6875rem',
+                        color: '#8B949E',
+                        fontFamily: "'IBM Plex Sans', sans-serif",
+                        marginBottom: '0.5rem',
+                      }}
+                    >
+                      {signal.name} · {categoryLabel(signal.category)}
+                    </div>
+                    {marker.description && (
+                      <div
+                        style={{
+                          fontSize: '0.8125rem',
+                          color: '#C9D1D9',
+                          marginBottom: '0.5rem',
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {marker.description}
+                      </div>
+                    )}
+                    {marker.sources && marker.sources.length > 0 && (
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '0.25rem',
+                          marginBottom: '0.5rem',
+                        }}
+                      >
+                        {marker.sources.map((s) => (
+                          <a
+                            key={s.url}
+                            href={s.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              fontFamily: "'IBM Plex Mono', monospace",
+                              fontSize: '0.6875rem',
+                              color: '#388BFD',
+                              textDecoration: 'none',
+                            }}
+                          >
+                            {s.label} ↗
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                    <a
+                      href={`/signals/${signal.id}`}
+                      style={{
+                        display: 'inline-block',
+                        marginTop: '0.25rem',
+                        fontFamily: "'IBM Plex Mono', monospace",
+                        fontSize: '0.6875rem',
+                        color: '#388BFD',
+                        textDecoration: 'none',
+                        fontWeight: 600,
+                      }}
+                    >
                       View signal →
                     </a>
                   </div>
                 </Popup>
-              </Marker>
+              </CircleMarker>
             )
           })
         )}
