@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20 (after ContentBlock restoration)
+**Last updated:** 2026-05-20 (after Overview rails restoration)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 ---
@@ -26,7 +26,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 2. ✅ **About & Legal page** — multi-threat adaptation
 3. ✅ **Map** — dark CARTO + typed markers + seed data
 4. ✅ **SignalDetail / ContentBlock** — per-block source attribution
-5. ⏳ **Overview page** — restore briefing/news/monitoring rails
+5. ✅ **Overview page** — restored briefing/news/monitoring rails
 6. ⏳ **Sweep remaining tabs** — Timeline, Briefings, Resources, Status fit-and-finish
 
 ---
@@ -74,11 +74,24 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 **Verify:** visit `/signals/andes-hantavirus-mv-hondius-2026` — 5 ContentBlocks each with Source: chip and Also: rows. Visit `/signals/avian-influenza-h5-2026` — Operational guidance ContentBlock with USDA APHIS source chip. `npm run validate:data` passes.
 
+### 5. Overview page rails (commit pending push)
+- `src/pages/Overview.tsx` — restructured with 7 sections plus stat strip:
+  - Status strip adds **News items** stat chip alongside existing (active signals, highest severity, domains, stale signals)
+  - **Active operational briefings** rail (NEW, EMERGENZ accent border) — pulls signals at severity >= concern, surfaces the `ems-specific` / `operational-guidance` / `protocols-and-guidance` section, shows severity chip, category, section title + authority, and a 2-sentence summary card. Top 3, sorted by severity rank. Each card links to the signal detail page.
+  - Priority signal queue (preserved)
+  - Threat domain coverage + Data currency (preserved, Data currency now also shows news item count)
+  - **Latest authority & media coverage** (NEW) — 5 most-recent items from `news.json`, authority color stripe, signal chips, links external to source
+  - Signal map preview (preserved, dark CARTO via SignalsMap rewrite)
+  - Recent developments timeline (preserved)
+- Authority color map + signal short-name map mirror the News page so chips render consistently.
+
+**Verify:** visit `/`. Expect 7 section headers above; "Active operational briefings" shows hantavirus + concern-level signals; latest news rail shows 5 items with signal chips; mini-map renders dark tiles with 100+ markers.
+
 ---
 
 ## ⏳ Outstanding work
 
-### 5. Overview page rails
+### 6. Sweep remaining tabs
 **Goal:** Restore visible operational rails. The hantavirus Dashboard.tsx had: EMS Briefing card up top, US Monitoring table, fresh news rail, and the global map. The current `Overview.tsx` is shallow (just counts + severity).
 
 **Files to inspect:**
@@ -93,11 +106,12 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 5. Timeline preview — already partially present, polish it
 
 ### 6. Sweep remaining tabs
-- **Timeline:** ensure each event has source link, signal-color stripe matching map markers
-- **Briefings:** improve top-5 ranking display, add severity color band, link to full signal
-- **Resources:** verify filters work, add tier badge per source
-- **Status:** verify the `/status.json` contract still works after all changes
-- **Signals (list):** consider richer card layout; add small map-pin showing primary geography
+- **Timeline (`/timeline`):** ensure each event has source link with authority chip, signal-color stripe matching map markers, filter by category/severity, group by date
+- **Briefings (`/briefings`):** improve top-N ranking display, add severity color band, link to full signal detail. Should now surface the ContentBlock sections we seeded in step 4.
+- **Resources (`/resources`):** verify filters work; add tier badge per source (Tier 1-4 per CONTENT-STANDARDS.md §1)
+- **Sources (`/sources`):** confirm 40+ source registry renders correctly; add tier badge + lastVerified relative-time
+- **Status (`/status`):** verify the `/status.json` contract still works after marker/news/section changes; ensure stale-signal alerting still functions
+- **Signals (list, `/signals`):** consider richer card layout; add small map-pin or marker count showing primary geography; mention `detailSections.length` so users see depth
 
 ---
 
