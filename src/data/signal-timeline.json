@@ -9,12 +9,39 @@
     "category": "zoonotic"
   },
   {
+    "id": "tl-andes-2026-05-04-who-don599",
+    "signalId": "andes-hantavirus-mv-hondius-2026",
+    "date": "2026-05-04",
+    "title": "WHO publishes Disease Outbreak News DON599",
+    "description": "WHO issues DON599 describing the initial Andes hantavirus cluster aboard MV Hondius and the multinational case-finding effort.",
+    "sourceId": "who-don599",
+    "category": "zoonotic"
+  },
+  {
+    "id": "tl-andes-2026-05-06-ecdc-rra",
+    "signalId": "andes-hantavirus-mv-hondius-2026",
+    "date": "2026-05-06",
+    "title": "ECDC Rapid Risk Assessment published",
+    "description": "ECDC publishes a Rapid Risk Assessment for the cruise-ship hantavirus cluster, recommending escalation to airborne precautions during aerosol-generating procedures.",
+    "sourceId": "ecdc-andes-rra",
+    "category": "zoonotic"
+  },
+  {
+    "id": "tl-andes-2026-05-08-cdc-han528",
+    "signalId": "andes-hantavirus-mv-hondius-2026",
+    "date": "2026-05-08",
+    "title": "CDC issues HAN 528",
+    "description": "CDC issues Health Alert Network 528 for U.S. clinical awareness, infection prevention, and exposure reporting for Andes virus.",
+    "sourceId": "cdc-han-528",
+    "category": "zoonotic"
+  },
+  {
     "id": "tl-andes-2026-05-12-radboud",
     "signalId": "andes-hantavirus-mv-hondius-2026",
     "date": "2026-05-12",
     "title": "Radboud UMC places 12 staff in precautionary quarantine",
     "description": "12 staff at Radboud UMC in Nijmegen, Netherlands, placed in precautionary quarantine after an incorrect blood-sampling procedure was followed with a confirmed Andes hantavirus patient.",
-    "sourceId": "ecdc-andes-surveillance",
+    "sourceId": "euronews-radboud-quarantine",
     "category": "zoonotic"
   },
   {
@@ -34,5 +61,59 @@
     "description": "Africa CDC and DRC public health authorities report a suspected Ebola outbreak in Ituri Province caused by Bundibugyo virus; cross-border concern raised for Uganda and South Sudan.",
     "sourceId": "africa-cdc-outbreaks",
     "category": "vhf"
+  },
+  {
+    "id": "tl-measles-2026-05-14-pccr",
+    "signalId": "measles-us-2026",
+    "date": "2026-05-14",
+    "title": "Continued increase in U.S. measles cases reported",
+    "description": "Surveillance indicates continued rise in U.S. measles cases through 2026, raising concern for the Americas region's elimination status.",
+    "sourceId": "cdc-current-outbreaks",
+    "category": "vaccine_preventable"
+  },
+  {
+    "id": "tl-mpox-2026-05-14-clade1-ct",
+    "signalId": "mpox-africa-clade-i-2026",
+    "date": "2026-05-14",
+    "title": "Clade I mpox importation case reported in Connecticut",
+    "description": "U.S. clade I mpox importation case reported in Connecticut, set against declining mpox case trends across much of Africa but with a continuing South Sudan surge.",
+    "sourceId": "cdc-current-outbreaks",
+    "category": "zoonotic"
+  },
+  {
+    "id": "tl-h5-2026-05-14-h5n6-china",
+    "signalId": "avian-influenza-h5-2026",
+    "date": "2026-05-14",
+    "title": "Fatal H5N6 case reported in China; LA cat-to-human serology signal",
+    "description": "Continued zoonotic influenza signals: a fatal H5N6 case in China and an H5 cat-to-human serology signal under investigation in the Los Angeles area.",
+    "sourceId": "who-disease-outbreak-news",
+    "category": "zoonotic"
+  },
+  {
+    "id": "tl-cholera-2026-05-14-africa",
+    "signalId": "cholera-africa-2026",
+    "date": "2026-05-14",
+    "title": "Cholera activity sustained across multiple African countries",
+    "description": "Africa CDC reports continued cholera activity with elevated fatality concern in the Republic of Congo.",
+    "sourceId": "africa-cdc-outbreaks",
+    "category": "enteric"
+  },
+  {
+    "id": "tl-chikv-2026-05-14-paho",
+    "signalId": "chikungunya-2026",
+    "date": "2026-05-14",
+    "title": "Chikungunya activity reported across multiple PAHO countries",
+    "description": "Surveillance shows chikungunya activity across multiple Americas countries with Brazil among the highest-burden settings.",
+    "sourceId": "paho-epi-alerts",
+    "category": "vector_borne"
+  },
+  {
+    "id": "tl-cauris-2026-05-14-wastewater",
+    "signalId": "candida-auris-wastewater-2026",
+    "date": "2026-05-14",
+    "title": "C. auris wastewater detections expand across U.S. states",
+    "description": "Wastewater surveillance identifies expanding C. auris signal across multiple U.S. states, complementing clinical surveillance.",
+    "sourceId": "cdc-nwss",
+    "category": "amr_fungal"
   }
 ]

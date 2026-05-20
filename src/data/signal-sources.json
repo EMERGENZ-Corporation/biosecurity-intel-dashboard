@@ -12,6 +12,18 @@
     "domains": ["zoonotic", "travel"]
   },
   {
+    "id": "ecdc-andes-rra",
+    "authority": "ECDC",
+    "authorityFull": "European Centre for Disease Prevention and Control",
+    "title": "ECDC Rapid Risk Assessment — Hantavirus cluster on cruise ship",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and",
+    "publicationDate": "2026-05-06",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
     "id": "who-andes-rra-v2",
     "authority": "WHO",
     "authorityFull": "World Health Organization",
@@ -20,6 +32,30 @@
     "primary": true,
     "url": "https://www.who.int/publications/m/item/who-rapid-risk-assessment---hantavirus-outbreak-caused-by-andes-virus--global-v.2",
     "publicationDate": "2026-05-15",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "who-don601",
+    "authority": "WHO",
+    "authorityFull": "World Health Organization",
+    "title": "WHO Disease Outbreak News DON601 — Andes virus update",
+    "sourceType": "outbreak-news",
+    "primary": true,
+    "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",
+    "publicationDate": "2026-05-12",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "who-don599",
+    "authority": "WHO",
+    "authorityFull": "World Health Organization",
+    "title": "WHO Disease Outbreak News DON599 — Andes virus",
+    "sourceType": "outbreak-news",
+    "primary": true,
+    "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599",
+    "publicationDate": "2026-05-04",
     "lastVerified": "2026-05-20",
     "domains": ["zoonotic", "travel"]
   },
@@ -38,12 +74,105 @@
     "id": "cdc-han-528",
     "authority": "CDC",
     "authorityFull": "U.S. Centers for Disease Control and Prevention",
-    "title": "CDC HAN 528 — Clinical awareness for Andes hantavirus",
+    "title": "CDC HAN 528 — Andes Virus Infection Associated with Cruise Ship Voyage",
     "sourceType": "health-advisory",
     "primary": true,
     "url": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "publicationDate": "2026-05-08",
     "lastVerified": "2026-05-20",
     "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "cdc-hantavirus-clinical-overview",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Hantavirus Pulmonary Syndrome — Clinical Overview for Clinicians",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.cdc.gov/hantavirus/hcp/clinical-overview/hps.html",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic"]
+  },
+  {
+    "id": "cdc-hantavirus-about-andes",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC — About Andes Virus",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.cdc.gov/hantavirus/about/andesvirus.html",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic"]
+  },
+  {
+    "id": "cdc-isolation-precautions",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Isolation Precautions — PPE Donning and Removal Figure",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.cdc.gov/infection-control/hcp/isolation-precautions/appendix-a-figure.html",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "vhf"]
+  },
+  {
+    "id": "cdc-rodent-cleanup",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC — How to Clean Up After Rodents",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic"]
+  },
+  {
+    "id": "nyc-doh-han-8",
+    "authority": "NYC DOH",
+    "authorityFull": "New York City Department of Health and Mental Hygiene",
+    "title": "NYC DOH HAN Advisory #8 — Andes Strain Hantavirus",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf",
+    "publicationDate": "2026-05-08",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"]
+  },
+  {
+    "id": "netec-hantavirus-clinical-insights",
+    "authority": "NETEC",
+    "authorityFull": "National Emerging Special Pathogens Training and Education Center",
+    "title": "NETEC — Hantavirus Clinical Insights & Emerging Evidence",
+    "sourceType": "academic",
+    "primary": false,
+    "url": "https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/",
+    "publicationDate": "2026-05-06",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic"]
+  },
+  {
+    "id": "netec-vhf-ppe-matrix",
+    "authority": "NETEC",
+    "authorityFull": "National Emerging Special Pathogens Training and Education Center",
+    "title": "NETEC VHF PPE Matrix",
+    "sourceType": "academic",
+    "primary": false,
+    "url": "https://repository.netecweb.org/items/show/1693",
+    "publicationDate": "2024-10-29",
+    "lastVerified": "2026-05-20",
+    "domains": ["vhf", "zoonotic"]
+  },
+  {
+    "id": "netec-hantavirus-lab-resources",
+    "authority": "NETEC",
+    "authorityFull": "National Emerging Special Pathogens Training and Education Center",
+    "title": "NETEC Hantavirus Laboratory Resources",
+    "sourceType": "academic",
+    "primary": false,
+    "url": "https://repository.netecweb.org/exhibits/show/hantavirus/hantavirus",
+    "publicationDate": "2026-05-06",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic"]
   },
   {
     "id": "phac-andes-media-update",
@@ -57,6 +186,18 @@
     "domains": ["zoonotic", "travel"]
   },
   {
+    "id": "euronews-radboud-quarantine",
+    "authority": "Euronews",
+    "title": "Dutch hospital workers quarantined after faulty Andes hantavirus procedure",
+    "sourceType": "press-release",
+    "primary": false,
+    "url": "https://www.euronews.com/health/2026/05/12/dutch-hospital-workers-quarantined-after-faulty-procedure-treating-hantavirus-patient",
+    "publicationDate": "2026-05-12",
+    "lastVerified": "2026-05-20",
+    "domains": ["zoonotic", "travel"],
+    "notes": "Secondary press source documenting the Radboud UMC healthcare worker exposure event."
+  },
+  {
     "id": "who-disease-outbreak-news",
     "authority": "WHO",
     "authorityFull": "World Health Organization",
@@ -67,6 +208,17 @@
     "lastVerified": "2026-05-19",
     "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne"],
     "notes": "Landing page for WHO Disease Outbreak News. Verify the specific DON item for each cited outbreak before publishing event-level claims."
+  },
+  {
+    "id": "who-emergencies",
+    "authority": "WHO",
+    "authorityFull": "World Health Organization",
+    "title": "WHO Emergencies — Disease Outbreaks",
+    "sourceType": "outbreak-news",
+    "primary": true,
+    "url": "https://www.who.int/emergencies/disease-outbreaks",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne", "amr_fungal", "mass_gathering"]
   },
   {
     "id": "africa-cdc-outbreaks",
@@ -90,5 +242,138 @@
     "url": "https://www.cdc.gov/outbreaks/",
     "lastVerified": "2026-05-19",
     "domains": ["vhf", "respiratory", "vaccine_preventable", "enteric", "zoonotic", "vector_borne"]
+  },
+  {
+    "id": "cdc-han",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Health Alert Network",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.cdc.gov/han/",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "respiratory", "vaccine_preventable", "enteric", "zoonotic", "vector_borne", "amr_fungal"]
+  },
+  {
+    "id": "cdc-nwss",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC National Wastewater Surveillance System (NWSS)",
+    "sourceType": "wastewater",
+    "primary": true,
+    "url": "https://www.cdc.gov/nwss/",
+    "lastVerified": "2026-05-19",
+    "domains": ["environmental", "respiratory", "enteric", "amr_fungal"]
+  },
+  {
+    "id": "wastewaterscan",
+    "authority": "WastewaterSCAN",
+    "title": "WastewaterSCAN — pathogen surveillance dashboard",
+    "sourceType": "wastewater",
+    "primary": true,
+    "url": "https://data.wastewaterscan.org/",
+    "lastVerified": "2026-05-19",
+    "domains": ["environmental", "respiratory", "enteric", "amr_fungal"]
+  },
+  {
+    "id": "paho-epi-alerts",
+    "authority": "PAHO",
+    "authorityFull": "Pan American Health Organization",
+    "title": "PAHO Epidemiological Alerts and Updates",
+    "sourceType": "outbreak-news",
+    "primary": true,
+    "url": "https://www.paho.org/en/epidemiological-alerts-and-updates",
+    "lastVerified": "2026-05-19",
+    "domains": ["vaccine_preventable", "vector_borne", "enteric", "respiratory"]
+  },
+  {
+    "id": "ecdc-cdtr",
+    "authority": "ECDC",
+    "authorityFull": "European Centre for Disease Prevention and Control",
+    "title": "ECDC Communicable Disease Threats Report (CDTR)",
+    "sourceType": "expert-weekly-report",
+    "primary": true,
+    "url": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "respiratory", "vaccine_preventable", "enteric", "vector_borne", "zoonotic", "amr_fungal"]
+  },
+  {
+    "id": "cdc-fluview",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC FluView — Weekly Influenza Surveillance",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.cdc.gov/fluview/",
+    "lastVerified": "2026-05-19",
+    "domains": ["respiratory"]
+  },
+  {
+    "id": "cdc-respiratory-viruses",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Respiratory Virus Data",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.cdc.gov/respiratory-viruses/data/",
+    "lastVerified": "2026-05-19",
+    "domains": ["respiratory"]
+  },
+  {
+    "id": "usda-aphis-hpai",
+    "authority": "USDA APHIS",
+    "authorityFull": "U.S. Department of Agriculture — Animal and Plant Health Inspection Service",
+    "title": "USDA APHIS — Avian Influenza",
+    "sourceType": "animal-health",
+    "primary": true,
+    "url": "https://www.aphis.usda.gov/livestock-poultry-disease/avian/avian-influenza",
+    "lastVerified": "2026-05-19",
+    "domains": ["zoonotic", "respiratory"]
+  },
+  {
+    "id": "woah-wahis",
+    "authority": "WOAH",
+    "authorityFull": "World Organisation for Animal Health",
+    "title": "WOAH World Animal Health Information System (WAHIS)",
+    "sourceType": "animal-health",
+    "primary": true,
+    "url": "https://wahis.woah.org/",
+    "lastVerified": "2026-05-19",
+    "domains": ["zoonotic", "respiratory"]
+  },
+  {
+    "id": "promed",
+    "authority": "ProMED",
+    "authorityFull": "Program for Monitoring Emerging Diseases (ISID)",
+    "title": "ProMED Mail",
+    "sourceType": "other",
+    "primary": false,
+    "url": "https://promedmail.org/",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne"],
+    "notes": "Unofficial early-signal aggregator. Treat as a lead; always corroborate with WHO/CDC/Africa CDC/PAHO/ECDC before operational use."
+  },
+  {
+    "id": "cidrap",
+    "authority": "CIDRAP",
+    "authorityFull": "Center for Infectious Disease Research and Policy, University of Minnesota",
+    "title": "CIDRAP News",
+    "sourceType": "academic",
+    "primary": false,
+    "url": "https://www.cidrap.umn.edu/",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne", "amr_fungal"]
+  },
+  {
+    "id": "brown-pandemic-center",
+    "authority": "Brown Pandemic Center",
+    "authorityFull": "Brown University School of Public Health — Pandemic Center",
+    "title": "Brown Pandemic Center — Tracking Reports",
+    "sourceType": "expert-weekly-report",
+    "primary": false,
+    "url": "https://pandemics.sph.brown.edu/",
+    "lastVerified": "2026-05-19",
+    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne", "amr_fungal", "environmental", "mass_gathering"],
+    "notes": "Weekly expert tracking report used as a scoping signal. Treat as secondary; verify event-level claims against the cited primary authorities."
   }
 ]
