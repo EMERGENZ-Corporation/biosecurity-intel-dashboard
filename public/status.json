@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "status": "ok",
-  "generatedAt": "2026-05-19T23:23:55.802Z",
+  "generatedAt": "2026-05-20T01:32:03.663Z",
   "thresholds": {
     "maxDataAgeHours": 48,
     "maxOfficialCheckAgeHours": 12
   },
   "dashboard": {
     "lastUpdated": "2026-05-19T23:23:55.802Z",
-    "lastChecked": "2026-05-19T23:23:55.802Z",
-    "lastOfficialSourceCheck": "2026-05-19T23:23:55.802Z",
-    "dataAgeHours": 0,
+    "lastChecked": "2026-05-20T01:32:03.663Z",
+    "lastOfficialSourceCheck": "2026-05-20T01:32:03.663Z",
+    "dataAgeHours": 2.1355169444444444,
     "officialCheckAgeHours": 0,
     "source": "ECDC / WHO / CDC / PHAC"
   },
@@ -24,9 +24,9 @@
     "ecdcRisk": "VERY LOW"
   },
   "pipeline": {
-    "extractionStatus": "Gemini unavailable after retries; RSS-only fallback added 1 news item(s)",
-    "itemsFound": 133,
-    "candidateItemsFound": 142,
+    "extractionStatus": "Gemini unavailable after retries; RSS-only fallback added 0 news item(s)",
+    "itemsFound": 121,
+    "candidateItemsFound": 132,
     "failedFeeds": [
       "WHO",
       "ECDC",
