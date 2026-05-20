@@ -5,6 +5,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery'
 const NAV_LINKS = [
   { to: '/', label: 'Overview' },
   { to: '/signals', label: 'Signals' },
+  { to: '/news', label: 'News' },
   { to: '/map', label: 'Map' },
   { to: '/timeline', label: 'Timeline' },
   { to: '/briefings', label: 'Briefings' },

@@ -134,3 +134,15 @@ export interface StatusSourcesSummary {
   degraded: string[]
   failed: string[]
 }
+
+export interface NewsItem {
+  id: string
+  /** Signal IDs this item relates to. Empty array = general biosecurity coverage. */
+  signalIds: string[]
+  authority: string
+  title: string
+  description: string
+  link: string
+  pubDate: string
+  timestamp: number
+}

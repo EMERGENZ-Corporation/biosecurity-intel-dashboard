@@ -9,6 +9,7 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 // Lazy-load secondary pages so they don't bloat the initial bundle.
 // Overview is the landing page and stays as a static import.
 const Signals = lazy(() => import('./pages/Signals'))
+const News = lazy(() => import('./pages/News'))
 const SignalDetail = lazy(() => import('./pages/SignalDetail'))
 const MapPage = lazy(() => import('./pages/MapPage'))
 const TimelinePage = lazy(() => import('./pages/TimelinePage'))
@@ -137,6 +138,7 @@ export default function App() {
               <Route path="/" element={<Overview />} />
               <Route path="/signals" element={<Signals />} />
               <Route path="/signals/:id" element={<SignalDetail />} />
+              <Route path="/news" element={<News />} />
               <Route path="/map" element={<MapPage />} />
               <Route path="/timeline" element={<TimelinePage />} />
               <Route path="/briefings" element={<Briefings />} />
