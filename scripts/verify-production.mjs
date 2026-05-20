@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs'
 
 const META_PATH = 'src/data/meta.json'
-const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://andeshantavirus.emergenzsystems.org'
+const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://biosecurity-intel.emergenzsystems.org'
 const MAX_ATTEMPTS = Number.parseInt(process.env.VERIFY_PRODUCTION_ATTEMPTS || '12', 10)
 const DELAY_MS = Number.parseInt(process.env.VERIFY_PRODUCTION_DELAY_MS || '30000', 10)
 const MAX_OFFICIAL_CHECK_AGE_HOURS = Number.parseInt(process.env.MAX_OFFICIAL_CHECK_AGE_HOURS || '12', 10)

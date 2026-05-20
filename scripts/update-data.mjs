@@ -1,5 +1,5 @@
 /**
- * EMERGENZ Hantavirus Dashboard - Automated Data Update Script
+ * EMERGENZ Biosecurity Intel Dashboard - Automated Data Update Script
  *
  * Runs every 6 hours via GitHub Actions.
  * The dashboard is a static SPA; this script is the only autonomous data writer.

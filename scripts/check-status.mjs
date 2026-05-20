@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs'
 
-const STATUS_URL = process.env.STATUS_URL || 'https://andeshantavirus.emergenzsystems.org/status.json'
+const STATUS_URL = process.env.STATUS_URL || 'https://biosecurity-intel.emergenzsystems.org/status.json'
 const OUTPUT_PATH = process.env.STATUS_MONITOR_OUTPUT || 'status-monitor-result.json'
 const MAX_GENERATED_AGE_HOURS = Number.parseInt(process.env.MAX_STATUS_GENERATED_AGE_HOURS || '8', 10)
 

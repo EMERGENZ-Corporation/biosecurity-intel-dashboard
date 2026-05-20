@@ -60,7 +60,7 @@ export default function NavBar() {
         <NavLink
           to="/"
           style={{ textDecoration: 'none' }}
-          aria-label="EMERGENZ Hantavirus Intel Dashboard — home"
+          aria-label="EMERGENZ Biosecurity Intel Dashboard — home"
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', whiteSpace: 'nowrap' }}>
             {/* Wordmark — Singapore Sling font */}
@@ -132,7 +132,7 @@ export default function NavBar() {
                   lineHeight: 1.2,
                 }}
               >
-                HANTAVIRUS<br />INTEL DASHBOARD
+                BIOSECURITY<br />INTEL DASHBOARD
               </span>
             )}
           </div>
