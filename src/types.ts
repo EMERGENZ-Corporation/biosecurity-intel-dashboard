@@ -85,6 +85,20 @@ export interface SignalMapMarker {
   sources?: MarkerSource[]
 }
 
+/**
+ * A citation attached to a content block. The primary attribution lives on
+ * SignalDetailSection itself; additionalAttributions[] is for blocks that
+ * pull from multiple authoritative documents.
+ */
+export interface SectionAttribution {
+  authority: string
+  documentTitle: string
+  /** Publication or DON date. ISO date or human-readable year. */
+  date: string
+  url: string
+  license?: string
+}
+
 export interface SignalDetailSection {
   id: string
   title: string
@@ -92,6 +106,14 @@ export interface SignalDetailSection {
   updatedAt?: string
   /** Plain text or lightweight markdown. Rendered as paragraphs in the UI. */
   bodyMarkdown: string
+  /**
+   * Primary source for this block. When present, the section renders with a
+   * source-attribution footer (per CONTENT-STANDARDS.md §2.1). When absent,
+   * the block falls back to plain rendering for backwards compatibility.
+   */
+  attribution?: SectionAttribution
+  /** Additional supporting sources beyond the primary attribution. */
+  additionalAttributions?: SectionAttribution[]
 }
 
 export interface Signal {

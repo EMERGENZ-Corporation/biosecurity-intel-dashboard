@@ -13,6 +13,7 @@ import {
   SOURCE_TIER_LABELS,
 } from '../utils/signals'
 import SignalsMap from '../components/SignalsMap'
+import ContentBlock from '../components/ContentBlock'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -293,11 +294,14 @@ export default function SignalDetail() {
       </Section>
 
       {(signal.detailSections?.length ?? 0) > 0 && signal.detailSections!.map((section) => (
-        <Section key={section.id} title={section.title}>
-          {section.bodyMarkdown.split('\n\n').map((para, i) => (
-            <Paragraph key={i}>{para}</Paragraph>
-          ))}
-        </Section>
+        <ContentBlock
+          key={section.id}
+          title={section.title}
+          bodyMarkdown={section.bodyMarkdown}
+          attribution={section.attribution}
+          additionalAttributions={section.additionalAttributions}
+          lastReviewed={section.lastReviewed}
+        />
       ))}
 
       <Section title="Data quality & confidence">

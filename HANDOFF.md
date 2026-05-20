@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20
+**Last updated:** 2026-05-20 (after ContentBlock restoration)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 ---
@@ -25,7 +25,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 1. ✅ **News feed** — page + pipeline + workflow
 2. ✅ **About & Legal page** — multi-threat adaptation
 3. ✅ **Map** — dark CARTO + typed markers + seed data
-4. ⏳ **SignalDetail / ContentBlock** — per-block source attribution
+4. ✅ **SignalDetail / ContentBlock** — per-block source attribution
 5. ⏳ **Overview page** — restore briefing/news/monitoring rails
 6. ⏳ **Sweep remaining tabs** — Timeline, Briefings, Resources, Status fit-and-finish
 
@@ -62,29 +62,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 **Verify:** visit `/map`. Tile URL should contain `cartocdn.com/dark_all`. Marker counter shows "103 markers visible". Click marker → dark popup with type label and source links.
 
+### 4. SignalDetail / ContentBlock (commit pending push)
+- `src/types.ts` — added `SectionAttribution` interface; `SignalDetailSection` extended with optional `attribution`, `additionalAttributions[]`
+- `src/components/ContentBlock.tsx` — new component: title + body paragraphs + per-block source-attribution footer with primary "Source:" row and "Also:" rows for additional sources, plus optional License badge and lastReviewed line
+- `src/components/SourceChip.tsx` — restored from history; renders "Authority · Document title · Date ↗" chip
+- `src/pages/SignalDetail.tsx` — `detailSections[]` now rendered via ContentBlock (was: plain `<Paragraph>` per `\n\n` split)
+- `scripts/seed-section-attribution.mjs` — one-time seeder:
+  - Hantavirus 5 existing sections: layered structured attribution (CDC HAN 528, NYC DOH HAN #8, NETEC, WHO DON601, etc.) onto unchanged bodyMarkdown
+  - Other 15 signals: added a single "Operational guidance" / "Mass-gathering health preparedness" section with primary + 1-2 additional attributions sourced from CDC, WHO, USDA APHIS, WOAH, PAHO, ECDC, Africa CDC, WastewaterSCAN
+- Total: 20 attributed sections (5 hantavirus + 15 new)
+
+**Verify:** visit `/signals/andes-hantavirus-mv-hondius-2026` — 5 ContentBlocks each with Source: chip and Also: rows. Visit `/signals/avian-influenza-h5-2026` — Operational guidance ContentBlock with USDA APHIS source chip. `npm run validate:data` passes.
+
 ---
 
 ## ⏳ Outstanding work
-
-### 4. SignalDetail / ContentBlock — next up
-**Goal:** Restore per-block source attribution. Currently `detailSections[].bodyMarkdown` renders as plain prose. The hantavirus dashboard had a `ContentBlock` component that carried per-block `authorityName`, `documentTitle`, `publicationDate`, `sourceUrl`, `license`, and optional `additionalSources[]`.
-
-**Files to inspect:**
-- `git show 90bd172^:src/components/ContentBlock.tsx` — the original component
-- `git show 90bd172^:src/pages/Clinical.tsx` — usage example with `additionalSources`
-- Current: `src/pages/SignalDetail.tsx` (renders custom sections as plain text)
-- Current: `src/types.ts` → `SignalDetailSection` interface
-
-**Plan:**
-1. Update `SignalDetailSection` interface — add structured source fields: `authority`, `documentTitle`, `documentDate`, `sourceUrl`, `license`, `additionalSources[]` (mirror the old ContentBlock prop shape). Keep `bodyMarkdown` for the content.
-2. Create `src/components/ContentBlock.tsx` — render a section with body + a citation footer chip ("AUTHORITY · Document title · Date · License ↗"). Match dark-mode styling already in the codebase.
-3. Update `src/pages/SignalDetail.tsx` to use ContentBlock for each `detailSections[]` entry.
-4. Update `src/data/signals.json` — extract embedded source attributions from hantavirus signal's existing `detailSections` bodyMarkdown (currently parenthetical references like "(CDC HAN 528)") into structured fields. For other signals, populate from `primarySourceId` / `sourceIds`.
-5. Validator update if needed: `scripts/validate-data.mjs` should require `sourceUrl` or `authority` on every section.
-
-**Verification:**
-- Visit `/signals/andes-hantavirus-mv-hondius-2026` — every clinical section card has a source-chip footer with link.
-- Run `npm run validate:data`.
 
 ### 5. Overview page rails
 **Goal:** Restore visible operational rails. The hantavirus Dashboard.tsx had: EMS Briefing card up top, US Monitoring table, fresh news rail, and the global map. The current `Overview.tsx` is shallow (just counts + severity).

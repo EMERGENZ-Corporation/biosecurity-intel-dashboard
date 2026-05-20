@@ -180,31 +180,143 @@
         "id": "clinical-profile",
         "title": "Clinical profile",
         "bodyMarkdown": "Andes virus (ANDV) is a hantavirus that causes Hantavirus Pulmonary Syndrome (HPS) and is the only hantavirus with documented person-to-person transmission via close contact with blood, saliva, respiratory secretions, urine, or feces (CDC HAN 528; NYC DOH HAN #8).\n\nIncubation is 4–42 days. Most clinical screening protocols ask about exposures within 7–30 days; for hantavirus, screen for the full 6-week window (NETEC Clinical Insights; NYC DOH HAN #8).\n\nClinical course progresses through three phases: (1) a 3–5 day influenza-like prodrome with fever, myalgia, fatigue, and GI symptoms; (2) a rapid cardiopulmonary phase with non-cardiogenic pulmonary edema, hypoxemia, and cardiogenic shock that can collapse within hours and carries the highest mortality; (3) a convalescent phase beginning with diuresis (CDC Clinical Overview).\n\nThe Classic Five laboratory findings — thrombocytopenia, hemoconcentration, left shift without toxic granulation, >10% immunoblasts on smear, and rapid respiratory compromise — strongly suggest HCPS when four or more are present (NETEC Clinical Insights, Dr. Maria Frank).\n\nCase fatality is approximately 38% for HPS overall (CDC HAN 528). Diagnosis is via IgM serology, RT-PCR (viremia persists through illness), or immunohistochemistry. There is no specific antiviral therapy; ribavirin has not demonstrated efficacy in controlled trials. Management is aggressive supportive care: lung-protective ventilation, vasopressors (avoid fluid boluses), and ECMO as a bridge for refractory cardiopulmonary failure (CDC Clinical Overview; NETEC; NYC DOH HAN #8).\n\nPoor prognostic indicators triggering immediate ECMO-capable facility transfer: lactate >4.0 mmol/L, cardiac index <2.2 L/min/m², severe myocardial depression or electromechanical dissociation (NETEC, Dr. Bradfute / Dr. Frank).\n\nContact the CDC Emergency Operations Center at 770-488-7100 to request diagnostic testing and clinical consultation. NYC providers should call 866-692-3641 (NYC DOH 24-hour line). Verify all contact numbers directly with the issuing authority before operational use.",
-        "lastReviewed": "2026-05-20"
+        "lastReviewed": "2026-05-20",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC HAN 528 — Andes Virus Infection Associated with Cruise Ship Voyage",
+          "date": "2026-05-08",
+          "url": "https://www.cdc.gov/han/php/notices/han00528.html"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "NYC DOH",
+            "documentTitle": "NYC DOH HAN Advisory #8 — Andes Strain Hantavirus",
+            "date": "2026-05-08",
+            "url": "https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf"
+          },
+          {
+            "authority": "NETEC",
+            "documentTitle": "NETEC — Hantavirus Clinical Insights & Emerging Evidence",
+            "date": "2026-05-06",
+            "url": "https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/"
+          },
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Hantavirus Pulmonary Syndrome — Clinical Overview for Clinicians",
+            "date": "2026-05-20",
+            "url": "https://www.cdc.gov/hantavirus/hcp/clinical-overview/hps.html"
+          }
+        ]
       },
       {
         "id": "ppe-and-ipc",
         "title": "PPE & infection control",
         "bodyMarkdown": "NYC DOH HAN Advisory #8 recommends airborne infection isolation precautions for ALL contacts with suspected or confirmed Andes virus patients — gown, gloves, eye protection, and N95 respirator or higher — citing the documented person-to-person transmission potential. ECDC's Rapid Risk Assessment minimum for routine patient contact is standard + droplet precautions, escalating to airborne precautions for aerosol-generating procedures. When in doubt, apply the more protective standard.\n\nNETEC PPE specification (Dr. Maria Frank / Jill Morgan, Emory Biocontainment PPE Working Group): \"Dry VHF PPE with respiratory protection is sufficient for suspect and confirmed Andes hantavirus patients.\" Minimum: fluid-resistant AAMI Level 3 or 4 gown or coverall; fit-tested N95 or PAPR for respiratory protection.\n\nAerosol-generating procedures (AGPs) requiring full airborne PPE: endotracheal intubation/extubation, BVM, CPAP/BiPAP, nebulizers, bronchoscopy, airway suctioning. Minimize AGPs in the field; if required, ensure PPE is in place before initiating.\n\nDonning and doffing sequences should follow CDC Isolation Precautions Appendix A. For VHF-specific EMS donning/doffing (with and without active bleeding/vomiting/diarrhea) see the NETEC EMS Model PPE procedures.\n\nLaboratory specimens with potential to contain hantavirus should be handled using BSL-3 precautions in a biosafety cabinet whenever possible. Centrifugation can aerosolize — use sealed rotors or sealed safety cups. Hantavirus specimens are classified UN2814 (Category A Infectious Substance) for shipping; shippers must be trained and certified. Coordinate testing with your jurisdiction's LRN reference laboratory before specimen collection (NETEC Lab Resources; CDC Hantavirus).\n\nEnvironmental decontamination (CDC \"How to Clean Up After Rodents\"): never vacuum or sweep rodent urine, droppings, or nesting materials — these aerosolize the virus. Use 1.5 cups household bleach to 1 gallon water (or 1:9 bleach:water). Soak materials for 5 minutes. For healthcare facility and EMS vehicle decontamination, follow your agency's infection control SOP and consult your local health department.\n\nHCW exposure response: remove and dispose of PPE using proper doffing, perform hand hygiene, report exposure to occupational health and infection control, document all involved personnel, and monitor for symptoms for the full 42-day incubation window. Exposed staff should not provide direct patient care pending risk assessment (CDC; NYC DOH HAN #8).",
-        "lastReviewed": "2026-05-20"
+        "lastReviewed": "2026-05-20",
+        "attribution": {
+          "authority": "NYC DOH",
+          "documentTitle": "NYC DOH HAN Advisory #8 — Andes Strain Hantavirus",
+          "date": "2026-05-08",
+          "url": "https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "NETEC",
+            "documentTitle": "NETEC VHF PPE Matrix",
+            "date": "2024-10-29",
+            "url": "https://repository.netecweb.org/items/show/1693"
+          },
+          {
+            "authority": "ECDC",
+            "documentTitle": "ECDC Rapid Risk Assessment — Hantavirus cluster on cruise ship",
+            "date": "2026-05-06",
+            "url": "https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and"
+          },
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Isolation Precautions — PPE Donning and Removal Figure",
+            "date": "2026-05-20",
+            "url": "https://www.cdc.gov/infection-control/hcp/isolation-precautions/appendix-a-figure.html"
+          },
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC — How to Clean Up After Rodents",
+            "date": "2026-05-20",
+            "url": "https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html"
+          }
+        ]
       },
       {
         "id": "ems-specific",
         "title": "EMS operational notes",
         "bodyMarkdown": "EMS personnel responding to suspected or confirmed Andes virus patients should follow NYC DOH HAN #8 and CDC HAN 528:\n\n- Apply airborne precautions (N95 or PAPR, gown, gloves, eye protection) before patient contact for all suspected or confirmed cases — not only for AGPs.\n- Minimize AGPs in the field; if required (intubation, BVM, CPAP, nebulizer), ensure full AGP PPE is in place before initiation.\n- Notify the receiving facility in advance of transport so an airborne infection isolation room (AIIR) can be prepared.\n- Document all personnel with direct patient contact for exposure tracking.\n- Report any suspected case to the local health department immediately.\n- Personnel developing symptoms within 42 days of a potential exposure should report to occupational health and avoid patient care.\n\nAndes virus does not spread by casual contact. Documented transmission requires close sustained contact, exposure to bodily fluids, or AGPs without adequate PPE.",
-        "lastReviewed": "2026-05-20"
+        "lastReviewed": "2026-05-20",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC HAN 528 — Andes Virus Infection Associated with Cruise Ship Voyage",
+          "date": "2026-05-08",
+          "url": "https://www.cdc.gov/han/php/notices/han00528.html"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News DON601 — Andes virus update",
+            "date": "2026-05-12",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601"
+          },
+          {
+            "authority": "NETEC",
+            "documentTitle": "NETEC — Hantavirus Clinical Insights & Emerging Evidence",
+            "date": "2026-05-06",
+            "url": "https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/"
+          }
+        ]
       },
       {
         "id": "genomics-and-diagnostics",
         "title": "Genomics & laboratory diagnostics",
         "bodyMarkdown": "The causative agent of the 2026 MV Hondius outbreak was confirmed as Andes virus (Orthohantavirus andesense) by genomic sequencing at the National Institute for Communicable Diseases (NICD, South Africa) and virus-specific PCR at Geneva University Hospitals (CDC About Andes Virus; WHO DON599).\n\nLaboratory confirmation criteria (CDC Clinical Overview): IgM detection by ELISA in a single serum specimen, fourfold or greater rise in IgG titer between acute and convalescent sera, RT-PCR detection of hantavirus RNA in blood/urine/tissue, or immunohistochemistry detection of antigen in tissue.\n\nTesting capacity is limited to public health laboratories with hantavirus capability. Contact the LRN reference laboratory in your jurisdiction or the CDC Emergency Operations Center (770-488-7100) for testing coordination, specimen handling, and pre-approval before shipment.",
-        "lastReviewed": "2026-05-20"
+        "lastReviewed": "2026-05-20",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC — About Andes Virus",
+          "date": "2026-05-20",
+          "url": "https://www.cdc.gov/hantavirus/about/andesvirus.html"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "NETEC",
+            "documentTitle": "NETEC Hantavirus Laboratory Resources",
+            "date": "2026-05-06",
+            "url": "https://repository.netecweb.org/exhibits/show/hantavirus/hantavirus"
+          }
+        ]
       },
       {
         "id": "protocols-and-guidance",
         "title": "Protocols & authoritative guidance",
         "bodyMarkdown": "Core authoritative guidance for the 2026 Andes virus situation:\n\n- WHO Disease Outbreak News DON599 and DON601 (case-finding and risk assessment updates).\n- WHO Rapid Risk Assessment v2 — Andes hantavirus, global.\n- CDC HAN 528 — clinical recognition and infection prevention for U.S. clinicians.\n- ECDC Rapid Risk Assessment (May 6, 2026) and ongoing ECDC Surveillance Update for EU/EEA cases.\n- NYC DOH HAN Advisory #8 — jurisdiction-specific case reporting and airborne precaution requirements.\n- PHAC Media Update — Canadian situation summary and clinical guidance for Canadian providers.\n- NETEC Clinical Insights and Laboratory Resources — operational guidance for special-pathogen-capable centers.\n\nReporting: HPS is a nationally notifiable condition in the United States. Report suspected cases promptly to your local or state health department. NYC providers: 866-692-3641. CDC EOC: 770-488-7100. EU/EEA providers should follow national notification pathways.",
-        "lastReviewed": "2026-05-20"
+        "lastReviewed": "2026-05-20",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC HAN 528 — Andes Virus Infection Associated with Cruise Ship Voyage",
+          "date": "2026-05-08",
+          "url": "https://www.cdc.gov/han/php/notices/han00528.html"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "NYC DOH",
+            "documentTitle": "NYC DOH HAN Advisory #8 — Andes Strain Hantavirus",
+            "date": "2026-05-08",
+            "url": "https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf"
+          },
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News DON601 — Andes virus update",
+            "date": "2026-05-12",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601"
+          }
+        ]
       }
     ],
     "primarySourceId": "ecdc-andes-surveillance",
@@ -315,7 +427,35 @@
       "cdc-current-outbreaks"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-19T00:00:00Z"
+    "lastChecked": "2026-05-19T00:00:00Z",
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Ebolavirus outbreaks are reported in real time by WHO Disease Outbreak News and Africa CDC. Active surveillance includes ring-vaccination campaigns where rVSV-ZEBOV is matched to the strain, cross-border case-finding, and Ebola Treatment Unit (ETU) deployment.\n\nReturning travelers from active outbreak zones presenting with febrile illness within 21 days of departure should be triaged using standard EVD screening (fever, exposure history, contact with known/suspected case). Specimen handling requires BSL-4 containment for confirmatory testing; coordinate with state public health lab and CDC Emergency Operations Center (770-488-7100) prior to collection.\n\nOperational priorities include early isolation, contact tracing, safe burials, and community engagement. Verify ETU locations, transport protocols, and PPE supply chains against your agency's biosafety SOP before deployment.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO Disease Outbreak News",
+          "date": "2026-05-19",
+          "url": "https://www.who.int/emergencies/disease-outbreak-news"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "Africa CDC",
+            "documentTitle": "Africa CDC Epidemic Intelligence and Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://africacdc.org"
+          },
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
+      }
+    ]
   },
   {
     "id": "measles-us-2026",
@@ -406,6 +546,28 @@
         "severity": "watch",
         "label": "Prince George's County, MD — importation case"
       }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Measles outbreaks in the United States are driven primarily by under-vaccinated communities and importation from regions with active circulation. CDC monitors the situation through state health department case reports and HAN advisories. The MMR vaccine is approximately 97% effective after two doses; herd immunity threshold is roughly 95% population coverage.\n\nOperationally, EMS providers and emergency departments handling suspected measles cases should apply airborne precautions (N95 or higher), isolate the patient in a negative-pressure room when available, and notify the receiving facility before transport. Vulnerable contacts (under 1 year, immunocompromised, pregnant) require post-exposure prophylaxis evaluation within 72 hours (vaccine) or 6 days (immunoglobulin).\n\nVerify state-specific case-reporting requirements with your local health department. Measles is a reportable condition in all 50 states.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Health Alert Network",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/han/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
+      }
     ]
   },
   {
@@ -490,6 +652,34 @@
         "type": "case_confirmed",
         "severity": "watch",
         "label": "Thailand — imported clade Ib case"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Clade I mpox (formerly Monkeypox virus clade I) is the strain currently driving sustained transmission in the Democratic Republic of the Congo and neighboring countries. Clade I has historically caused more severe disease than clade II, including higher case-fatality and increased pediatric burden. WHO declared the current outbreak a Public Health Emergency of International Concern (PHEIC) in 2024.\n\nOperationally, suspected mpox cases require standard, contact, and droplet precautions. Confirmed clade I cases should be reported to CDC and managed in consultation with state public health authorities. JYNNEOS vaccine is licensed for pre-exposure and post-exposure use in eligible adults.\n\nTravelers returning from active outbreak zones with characteristic rash should be triaged using CDC clinical criteria. Coordinate diagnostic testing through your jurisdiction's Laboratory Response Network (LRN) reference laboratory.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO Disease Outbreak News",
+          "date": "2026-05-19",
+          "url": "https://www.who.int/emergencies/disease-outbreak-news"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "Africa CDC",
+            "documentTitle": "Africa CDC Epidemic Intelligence and Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://africacdc.org"
+          },
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
       }
     ]
   },
@@ -585,6 +775,34 @@
         "severity": "action",
         "label": "Cambodia — human H5N1 fatal case (clade 2.3.2.1c)"
       }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Highly pathogenic avian influenza (HPAI) H5N1 clade 2.3.4.4b has expanded its host range to include dairy cattle in the United States since March 2024. USDA APHIS coordinates animal-health response (depopulation, biosecurity, milk-supply surveillance); CDC monitors human exposures and conducts genomic surveillance.\n\nOperationally, occupational exposures (dairy workers, poultry workers, depopulation responders) should be assessed under CDC guidance. PPE for active depopulation includes fit-tested N95, eye protection, gloves, coveralls, and boots. Antiviral prophylaxis with oseltamivir is recommended for unprotected exposures.\n\nThe pasteurized commercial milk supply remains safe per FDA pasteurization studies. Surveillance focuses on detecting any mutations associated with enhanced mammalian transmission. Verify outbreak reports against USDA APHIS and WOAH WAHIS dashboards.",
+        "attribution": {
+          "authority": "USDA APHIS",
+          "documentTitle": "USDA APHIS — Avian Influenza",
+          "date": "2026-05-19",
+          "url": "https://www.aphis.usda.gov/livestock-poultry-disease/avian/avian-influenza"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          },
+          {
+            "authority": "WOAH",
+            "documentTitle": "WOAH World Animal Health Information System (WAHIS)",
+            "date": "2026-05-19",
+            "url": "https://wahis.woah.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
+      }
     ]
   },
   {
@@ -668,6 +886,34 @@
         "severity": "concern",
         "label": "Somalia — IDP camp-linked transmission"
       }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Cholera outbreaks across sub-Saharan Africa are driven by displacement, conflict-affected water and sanitation infrastructure, and seasonal flooding. WHO and Africa CDC coordinate oral cholera vaccine (OCV) deployment from the global stockpile, which is managed by the International Coordinating Group (ICG).\n\nOperationally, cholera is treatable with prompt oral or intravenous rehydration; case-fatality should be under 1% with adequate care. Vibrio cholerae O1 serogroup is the predominant circulating strain. Standard precautions are sufficient for clinical contact; the primary transmission route is fecal-oral via contaminated water or food.\n\nTravelers from active outbreak zones presenting with acute watery diarrhea should be evaluated using clinical criteria; rapid diagnostic tests are available at sentinel sites. Coordinate suspected case management with state public health authorities.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO Disease Outbreak News",
+          "date": "2026-05-19",
+          "url": "https://www.who.int/emergencies/disease-outbreak-news"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "Africa CDC",
+            "documentTitle": "Africa CDC Epidemic Intelligence and Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://africacdc.org"
+          },
+          {
+            "authority": "PAHO",
+            "documentTitle": "PAHO Epidemiological Alerts and Updates",
+            "date": "2026-05-19",
+            "url": "https://www.paho.org/en/epidemiological-alerts-and-updates"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
+      }
     ]
   },
   {
@@ -734,6 +980,34 @@
         "type": "monitoring_site",
         "severity": "watch",
         "label": "PHAC FluWatch, Ottawa"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Seasonal influenza activity is tracked weekly by CDC FluView (US), ECDC (EU/EEA), UKHSA (UK), and Public Health Agency of Canada FluWatch. Northern Hemisphere influenza vaccine composition is announced annually in February for the following season. Vaccine effectiveness varies year over year based on antigenic match.\n\nOperationally, EMS and hospital systems should anticipate surge during peak weeks (typically December–March in Northern Hemisphere). Antiviral treatment with oseltamivir, baloxavir, or zanamivir is most effective when initiated within 48 hours of symptom onset, especially in high-risk populations (adults 65+, immunocompromised, pregnant, chronic conditions).\n\nSubtyping (A/H1N1, A/H3N2, B/Victoria, B/Yamagata) and antiviral resistance surveillance are conducted via the WHO Global Influenza Surveillance and Response System (GISRS). Verify current circulating strains and dominant subtype via FluView before clinical interpretation.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC FluView — Weekly Influenza Surveillance",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/fluview/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Respiratory Virus Data",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/respiratory-viruses/data/"
+          },
+          {
+            "authority": "ECDC",
+            "documentTitle": "ECDC Communicable Disease Threats Report, 9-13 May 2026, week 20",
+            "date": "2026-05-13",
+            "url": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-9-13-may-2026-week-20"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
       }
     ]
   },
@@ -810,6 +1084,28 @@
         "severity": "watch",
         "label": "Chicago — IDPH wastewater monitoring"
       }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "SARS-CoV-2 wastewater surveillance through the CDC National Wastewater Surveillance System (NWSS) and WastewaterSCAN provides leading-indicator signal for community transmission, typically rising 4–7 days before clinical case reports. Variants of concern are detected through sequencing of wastewater samples at select sites.\n\nOperationally, sustained increases in wastewater signal can indicate forthcoming healthcare surge. EMS and hospital preparedness teams should align resourcing, PPE, and capacity planning to wastewater trajectories alongside conventional clinical surveillance.\n\nWastewater signal does not provide individual-level diagnosis, vaccination guidance, or treatment recommendation — it informs population-level situational awareness only. Verify trends against CDC NWSS and your jurisdiction's public health dashboard.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC National Wastewater Surveillance System (NWSS)",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/nwss/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
+      }
     ]
   },
   {
@@ -858,6 +1154,28 @@
         "type": "monitoring_site",
         "severity": "watch",
         "label": "Twin Cities, MN — norovirus signal increase"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Norovirus wastewater surveillance through WastewaterSCAN tracks community-level transmission of the leading cause of acute gastroenteritis in the United States. Seasonal peaks typically occur November–April. Norovirus is highly transmissible via fecal-oral, food, and surface routes.\n\nOperationally, sustained increases in wastewater signal correlate with elevated ED visits for vomiting and diarrhea, especially in long-term-care facilities, schools, and cruise-ship environments. Standard precautions plus contact precautions; alcohol-based hand sanitizer is less effective than soap and water against norovirus.\n\nOutbreak management focuses on isolation of symptomatic cases, environmental decontamination (1:50 bleach for hard surfaces), and exclusion of food handlers for 48 hours after symptom resolution. Verify outbreak status against your jurisdiction's enteric-disease surveillance program.",
+        "attribution": {
+          "authority": "WastewaterSCAN",
+          "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+          "date": "2026-05-19",
+          "url": "https://data.wastewaterscan.org/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC National Wastewater Surveillance System (NWSS)",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/nwss/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
       }
     ]
   },
@@ -910,6 +1228,34 @@
         "severity": "watch",
         "label": "Houston — TMC RSV surveillance"
       }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Respiratory syncytial virus (RSV) wastewater surveillance complements CDC RESP-NET clinical surveillance to track seasonal RSV circulation. Peak season in the Northern Hemisphere typically runs October–March. RSV is the leading cause of hospitalization for infants in the United States.\n\nOperationally, monoclonal antibody prophylaxis (nirsevimab) is recommended for eligible infants and high-risk children during RSV season. Adult RSV vaccines (Abrysvo, Arexvy) are licensed for adults 60+ and select populations.\n\nEMS and pediatric facilities should anticipate surge during peak weeks. Standard precautions plus contact and droplet precautions; isolate suspected cases and verify diagnostic testing pathway with your hospital's clinical laboratory. Verify current circulating activity through CDC respiratory-virus dashboards.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Respiratory Virus Data",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/respiratory-viruses/data/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          },
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC National Wastewater Surveillance System (NWSS)",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/nwss/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
+      }
     ]
   },
   {
@@ -958,6 +1304,28 @@
         "type": "monitoring_site",
         "severity": "watch",
         "label": "Beijing CDC — hMPV reporting"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Human metapneumovirus (hMPV) is a pneumovirus that causes respiratory illness across all age groups, with the highest burden in young children, older adults, and immunocompromised patients. Wastewater surveillance through WastewaterSCAN and clinical surveillance through CDC respiratory-virus systems track seasonal circulation.\n\nOperationally, hMPV currently has no licensed vaccine or specific antiviral. Management is supportive: oxygen, fluids, and respiratory support as clinically indicated. Standard precautions plus contact and droplet precautions for known or suspected cases.\n\nCo-circulation with influenza, RSV, SARS-CoV-2, and other respiratory pathogens is common during peak seasons. Multiplex molecular testing is the gold standard for diagnosis. Verify circulating activity and co-infection patterns through CDC respiratory-virus data.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Respiratory Virus Data",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/respiratory-viruses/data/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
       }
     ]
   },
@@ -1033,6 +1401,34 @@
         "severity": "watch",
         "label": "Guinea — Lassa endemic zone"
       }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Lassa fever is endemic in West Africa, with the highest burden in Nigeria (Edo, Ondo, Bauchi, and Ebonyi states), Sierra Leone, Liberia, and Guinea. The Lassa mammarenavirus reservoir is the multimammate rat (Mastomys natalensis). Person-to-person transmission occurs through contact with body fluids of infected patients, particularly in healthcare settings without adequate PPE.\n\nOperationally, returning travelers from endemic areas presenting with febrile illness within 21 days require Lassa screening. Standard, contact, and droplet precautions are recommended; airborne precautions for aerosol-generating procedures. Specimen handling requires BSL-4 containment for confirmatory testing.\n\nRibavirin has activity against Lassa virus and is recommended for suspected severe cases when initiated early in the clinical course. Coordinate with CDC Emergency Operations Center (770-488-7100) and your state public health laboratory before specimen collection.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO Disease Outbreak News",
+          "date": "2026-05-19",
+          "url": "https://www.who.int/emergencies/disease-outbreak-news"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          },
+          {
+            "authority": "Africa CDC",
+            "documentTitle": "Africa CDC Epidemic Intelligence and Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://africacdc.org"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
+      }
     ]
   },
   {
@@ -1107,6 +1503,28 @@
         "severity": "watch",
         "label": "Florida, USA — competent vector established"
       }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Chikungunya virus is transmitted by Aedes aegypti and Aedes albopictus mosquitoes. Endemic and outbreak transmission is sustained across the Americas, parts of Africa, South Asia, and Southeast Asia; autochthonous transmission has been documented in southern Europe and the southern United States where competent vectors are established.\n\nOperationally, the clinical course typically includes fever, severe polyarthralgia, headache, and rash. Mortality is low but chronic arthralgia can persist for months to years. There is no specific antiviral; management is supportive (rest, fluids, NSAIDs after dengue is ruled out).\n\nA licensed chikungunya vaccine (Ixchiq) is available for travelers and at-risk populations. Vector control (source reduction, larvicide, residual indoor spraying) remains the primary prevention strategy in endemic areas. Verify outbreak status and vector activity through PAHO and CDC.",
+        "attribution": {
+          "authority": "PAHO",
+          "documentTitle": "PAHO Epidemiological Alerts and Updates",
+          "date": "2026-05-19",
+          "url": "https://www.paho.org/en/epidemiological-alerts-and-updates"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
+      }
     ]
   },
   {
@@ -1172,6 +1590,28 @@
         "type": "monitoring_site",
         "severity": "watch",
         "label": "California — wastewater detection program"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Candida auris is a multidrug-resistant yeast first identified in 2009 and now associated with healthcare-facility outbreaks in over 40 US states. The organism colonizes patients persistently, transmits between patients via healthcare contact and shared environment, and is resistant to multiple antifungal classes (echinocandins, azoles, polyenes — sometimes all three).\n\nOperationally, infection prevention measures include single-room isolation, dedicated equipment, enhanced terminal cleaning with EPA List P disinfectants, and pre-admission screening from facilities with active C. auris cases. Active surveillance through wastewater is emerging as a tool for facility-level monitoring.\n\nEmpiric antifungal selection should be informed by local susceptibility patterns; consult your facility's antimicrobial stewardship team. Confirmatory speciation requires MALDI-TOF or sequencing — many automated platforms misidentify C. auris as related Candida species.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
       }
     ]
   },
@@ -1247,6 +1687,28 @@
         "type": "infrastructure",
         "severity": "watch",
         "label": "USDA APHIS HQ, Riverdale MD — national response"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "The New World screwworm (Cochliomyia hominivorax) was eradicated from the United States in 1966 and from much of Central America via sterile-insect technique. Northward expansion from Panama through Costa Rica and into southern Mexico since 2023 represents a serious risk to US livestock, wildlife, and (rarely) human myiasis cases.\n\nOperationally, USDA APHIS coordinates surveillance and sterile-fly release with Mexican and Central American partners. US border surveillance focuses on Texas, New Mexico, Arizona, and California. Veterinarians and producers in border states should report any maggot infestations of livestock or wildlife wounds to USDA APHIS via 1-866-536-7593.\n\nHuman cases are rare and typically resolve with mechanical removal of larvae and wound care. EMS providers encountering suspect wounds should consult infectious disease and coordinate with local public health. Verify outbreak status and sterile-fly release schedules through USDA APHIS.",
+        "attribution": {
+          "authority": "USDA APHIS",
+          "documentTitle": "Current Status of New World Screwworm",
+          "date": "2026-05-20",
+          "url": "https://www.aphis.usda.gov/livestock-poultry-disease/stop-screwworm/current-status"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WOAH",
+            "documentTitle": "WOAH World Animal Health Information System (WAHIS)",
+            "date": "2026-05-19",
+            "url": "https://wahis.woah.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
       }
     ]
   },
@@ -1339,6 +1801,28 @@
         "type": "infrastructure",
         "severity": "watch",
         "label": "Estadio BBVA, Monterrey"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Mass-gathering health preparedness",
+        "bodyMarkdown": "The 2026 FIFA World Cup will be hosted across 16 venues in the United States, Canada, and Mexico from June 11 through July 19, 2026. Expected attendance and concentrated international travel create elevated risk for respiratory virus transmission, vector-borne disease importation, foodborne outbreaks, and mass-casualty preparedness scenarios.\n\nOperationally, host-city and venue medical planning is coordinated with state, provincial, and federal public health authorities. WHO has published mass-gathering health risk-assessment frameworks (WHO-MG checklist) that inform syndromic surveillance, EMS surge capacity, hospital diversion plans, and pathogen-specific contingency protocols.\n\nEMS systems serving host cities should pre-position medical strike teams, validate translation services, coordinate with FBI/DHS for security-medical integration, and verify cross-border medical-evacuation protocols with Canadian and Mexican counterparts. Verify venue-specific medical plans with the local host committee.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO - Managing health risks during mass gatherings",
+          "date": "2026-05-20",
+          "url": "https://www.who.int/activities/managing-health-risks-during-mass-gatherings"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-20"
       }
     ]
   }
