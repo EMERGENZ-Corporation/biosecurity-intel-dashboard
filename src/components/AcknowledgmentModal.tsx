@@ -70,7 +70,7 @@ export default function AcknowledgmentModal({ onAcknowledge }: Props) {
             marginBottom: '1.25rem',
           }}
         >
-          EMERGENZ — Hantavirus Intel Dashboard
+          EMERGENZ — Biosecurity Intel Dashboard
         </div>
 
         {/* Title */}
@@ -98,10 +98,11 @@ export default function AcknowledgmentModal({ onAcknowledge }: Props) {
             margin: '0 0 1.25rem 0',
           }}
         >
-          This dashboard provides aggregated public health information for situational awareness
-          only. It does not constitute medical advice, clinical guidance, or official public health
-          direction. EMS providers and clinicians must follow their agency protocols and medical
-          director directives.
+          This dashboard provides aggregated, source-backed biosecurity situational awareness
+          across multiple biological threat domains. It does not constitute medical advice,
+          clinical guidance, predictive modeling, or official public health direction. EMS
+          providers and clinicians must follow their agency protocols and medical director
+          directives.
         </p>
 
         <p
@@ -113,9 +114,9 @@ export default function AcknowledgmentModal({ onAcknowledge }: Props) {
             margin: '0 0 1.75rem 0',
           }}
         >
-          Data is updated on a 12-hour automated cycle and may not reflect the most current
-          information. Verify time-sensitive data directly with the originating authority before
-          making operational decisions.
+          Data is refreshed on an automated cycle and may lag the originating source. Verify
+          time-sensitive data directly with WHO, CDC, ECDC, Africa CDC, PAHO, or the relevant
+          national authority before making operational decisions.
         </p>
 
         {/* CTA */}

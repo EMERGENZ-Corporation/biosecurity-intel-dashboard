@@ -2,19 +2,21 @@ import { Suspense, lazy, useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import DisclaimerBanner from './components/DisclaimerBanner'
-import Dashboard from './pages/Dashboard'
+import Overview from './pages/Overview'
 import AcknowledgmentModal, { hasAcknowledged } from './components/AcknowledgmentModal'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
-// Lazy-load all secondary pages so they don't bloat the initial bundle.
-// The Dashboard is kept as a static import because it's the landing page.
-const Clinical = lazy(() => import('./pages/Clinical'))
-const PPE = lazy(() => import('./pages/PPE'))
-const Genomics = lazy(() => import('./pages/Genomics'))
-const Protocols = lazy(() => import('./pages/Protocols'))
-const News = lazy(() => import('./pages/News'))
-const Sources = lazy(() => import('./pages/Sources'))
-const About = lazy(() => import('./pages/About'))
+// Lazy-load secondary pages so they don't bloat the initial bundle.
+// Overview is the landing page and stays as a static import.
+const Signals = lazy(() => import('./pages/Signals'))
+const SignalDetail = lazy(() => import('./pages/SignalDetail'))
+const MapPage = lazy(() => import('./pages/MapPage'))
+const TimelinePage = lazy(() => import('./pages/TimelinePage'))
+const Briefings = lazy(() => import('./pages/Briefings'))
+const Resources = lazy(() => import('./pages/Resources'))
+const SourcesPage = lazy(() => import('./pages/SourcesPage'))
+const Status = lazy(() => import('./pages/Status'))
+const AboutPage = lazy(() => import('./pages/AboutPage'))
 
 function PageLoader() {
   return (
@@ -70,7 +72,7 @@ function NotFound() {
           textDecoration: 'none',
         }}
       >
-        ← Return to dashboard
+        ← Return to overview
       </Link>
     </div>
   )
@@ -132,14 +134,16 @@ export default function App() {
         <ErrorBoundary label="Page">
           <Suspense fallback={<PageLoader />}>
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/clinical" element={<Clinical />} />
-              <Route path="/ppe" element={<PPE />} />
-              <Route path="/genomics" element={<Genomics />} />
-              <Route path="/protocols" element={<Protocols />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/sources" element={<Sources />} />
-              <Route path="/about" element={<About />} />
+              <Route path="/" element={<Overview />} />
+              <Route path="/signals" element={<Signals />} />
+              <Route path="/signals/:id" element={<SignalDetail />} />
+              <Route path="/map" element={<MapPage />} />
+              <Route path="/timeline" element={<TimelinePage />} />
+              <Route path="/briefings" element={<Briefings />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/sources" element={<SourcesPage />} />
+              <Route path="/status" element={<Status />} />
+              <Route path="/about" element={<AboutPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

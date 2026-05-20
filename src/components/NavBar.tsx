@@ -3,13 +3,14 @@ import { NavLink } from 'react-router-dom'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 
 const NAV_LINKS = [
-  { to: '/', label: 'Dashboard' },
-  { to: '/clinical', label: 'Clinical' },
-  { to: '/ppe', label: 'PPE' },
-  { to: '/genomics', label: 'Genomics' },
-  { to: '/protocols', label: 'Protocols' },
-  { to: '/news', label: 'News' },
+  { to: '/', label: 'Overview' },
+  { to: '/signals', label: 'Signals' },
+  { to: '/map', label: 'Map' },
+  { to: '/timeline', label: 'Timeline' },
+  { to: '/briefings', label: 'Briefings' },
+  { to: '/resources', label: 'Resources' },
   { to: '/sources', label: 'Sources' },
+  { to: '/status', label: 'Status' },
   { to: '/about', label: 'About' },
 ]
 
