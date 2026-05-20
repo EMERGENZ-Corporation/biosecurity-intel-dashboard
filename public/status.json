@@ -1,50 +1,50 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-05-20T01:32:03.663Z",
+  "generatedAt": "2026-05-20T03:29:33.556Z",
   "thresholds": {
-    "maxDataAgeHours": 48,
-    "maxOfficialCheckAgeHours": 12
+    "maxDataAgeHours": 168,
+    "maxOfficialCheckAgeHours": 48,
+    "maxSignalStaleHours": 168
   },
   "dashboard": {
     "lastUpdated": "2026-05-19T23:23:55.802Z",
     "lastChecked": "2026-05-20T01:32:03.663Z",
     "lastOfficialSourceCheck": "2026-05-20T01:32:03.663Z",
-    "dataAgeHours": 2.1355169444444444,
-    "officialCheckAgeHours": 0,
-    "source": "ECDC / WHO / CDC / PHAC"
+    "dataAgeHours": 4.093820833333333,
+    "officialCheckAgeHours": 1.9583038888888888
   },
-  "metrics": {
-    "confirmed": 11,
-    "deaths": 3,
-    "countries": 9,
-    "usStatesMonitoring": 11,
-    "whoGlobalRisk": "LOW",
-    "cdcResponseLevel": "HAN 528",
-    "ecdcRisk": "VERY LOW"
+  "signals": {
+    "total": 16,
+    "active": 14,
+    "highestSeverity": "action",
+    "byCategory": {
+      "zoonotic": 4,
+      "vhf": 2,
+      "vaccine_preventable": 1,
+      "enteric": 1,
+      "respiratory": 1,
+      "environmental": 4,
+      "vector_borne": 1,
+      "amr_fungal": 1,
+      "mass_gathering": 1
+    },
+    "staleSignalIds": [],
+    "timelineEvents": 13
+  },
+  "sources": {
+    "total": 33,
+    "primary": 26,
+    "secondary": 7
   },
   "pipeline": {
-    "extractionStatus": "Gemini unavailable after retries; RSS-only fallback added 0 news item(s)",
-    "itemsFound": 121,
-    "candidateItemsFound": 132,
-    "failedFeeds": [
-      "WHO",
-      "ECDC",
-      "ProMED",
-      "Eurosurveillance",
-      "RIVM",
-      "CTV News",
-      "PHAC",
-      "RKI",
-      "Reuters",
-      "AP News",
-      "Harvard HSPH"
-    ],
+    "extractionStatus": "static-seed",
+    "failedFeeds": [],
     "criticalFeedFailures": [],
     "officialSourceFailures": [],
-    "officialSourcesOk": 4,
-    "officialSourcesTotal": 4
+    "officialSourcesOk": 26,
+    "officialSourcesTotal": 26
   },
   "staleReasons": [],
-  "runbook": "Check GitHub Actions workflow \"Automated Data Update\", open stale-data or pipeline-failure issues, then verify official CDC/ECDC/WHO/PHAC source pages."
+  "runbook": "Update signals.json, signal-timeline.json, and signal-sources.json as primary authorities (WHO, CDC, ECDC, Africa CDC, PAHO, PHAC, USDA APHIS, WOAH, CDC NWSS, WastewaterSCAN) publish new information. Run npm run validate:data and npm run generate:status before committing. See BIOSECURITY-MONITORING-BUILD-PACKET.md."
 }

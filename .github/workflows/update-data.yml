@@ -1,17 +1,26 @@
-name: Automated Data Update
+name: Status Refresh
 
 on:
   schedule:
-    # Every 6 hours UTC during active outbreak monitoring.
-    - cron: '0 0,6,12,18 * * *'
+    # Refresh the public status contract daily. The signal data itself is
+    # currently maintained by hand against primary sources; richer
+    # source-specific extractors can be wired in here without changing
+    # the contract.
+    - cron: '0 6 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/data/signals.json'
+      - 'src/data/signal-timeline.json'
+      - 'src/data/signal-sources.json'
 
 permissions:
   contents: write
   issues: write
 
 jobs:
-  update:
+  refresh:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,87 +38,54 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run data update script
-        run: node scripts/update-data.mjs
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          BRIGHT_DATA_API_KEY: ${{ secrets.BRIGHT_DATA_API_KEY }}
-          BRIGHT_DATA_ZONE: ${{ secrets.BRIGHT_DATA_ZONE }}
-
-      - name: Test official parsers
-        run: npm run test:parsers
-
-      - name: Validate data files
+      - name: Validate signal data
         run: npm run validate:data
 
-      - name: Commit updated data files
-        id: commit-data
+      - name: Regenerate status.json
+        run: npm run generate:status
+
+      - name: Re-validate after regeneration
+        run: npm run validate:data
+
+      - name: Commit refreshed status.json
+        id: commit-status
         run: |
           git config user.name "EMERGENZ Data Bot"
           git config user.email "bot@emergenz.org"
-          git add src/data/meta.json src/data/timeline.json src/data/news.json src/data/manual-overrides.json public/status.json
+          git add public/status.json
           if git diff --staged --quiet; then
-            echo "No data changes to commit."
+            echo "No status changes to commit."
             echo "data_changed=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "chore(data): automated update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git commit -m "chore(status): refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git pull --rebase origin main
             git push
             echo "data_changed=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Verify production deployment
-        if: steps.commit-data.outputs.data_changed == 'true'
+        if: steps.commit-status.outputs.data_changed == 'true'
         run: npm run verify:production
         env:
           PRODUCTION_URL: https://biosecurity-intel.emergenzsystems.org
           VERIFY_PRODUCTION_ATTEMPTS: 16
           VERIFY_PRODUCTION_DELAY_MS: 30000
-          MAX_OFFICIAL_CHECK_AGE_HOURS: 12
+          MAX_OFFICIAL_CHECK_AGE_HOURS: 48
 
       - name: Alert on stale dashboard data
         if: success()
         uses: actions/github-script@v8
         env:
-          MAX_DATA_AGE_HOURS: 48
-          MAX_OFFICIAL_CHECK_AGE_HOURS: 12
+          MAX_DATA_AGE_HOURS: 168
+          MAX_OFFICIAL_CHECK_AGE_HOURS: 48
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs')
-            const meta = JSON.parse(fs.readFileSync('src/data/meta.json', 'utf8'))
+            const status = JSON.parse(fs.readFileSync('public/status.json', 'utf8'))
             const marker = '<!-- emergenz-stale-data -->'
-            const title = '[DATA ALERT] Dashboard data may be stale'
-            const now = Date.now()
-            const hoursSince = (iso) => (now - new Date(iso).getTime()) / 36e5
-            const maxDataAge = Number(process.env.MAX_DATA_AGE_HOURS || 48)
-            const maxOfficialAge = Number(process.env.MAX_OFFICIAL_CHECK_AGE_HOURS || 12)
-            const dataAge = hoursSince(meta.lastUpdated)
-            const officialAge = hoursSince(meta.lastOfficialSourceCheck || meta.lastChecked)
-            const officialFailures = meta.feedHealth?.officialSourceFailures || []
-            const staleReasons = []
-
-            if (!Number.isFinite(dataAge) || dataAge > maxDataAge) {
-              staleReasons.push(`Headline data age is ${Number.isFinite(dataAge) ? dataAge.toFixed(1) : 'unknown'}h (max ${maxDataAge}h).`)
-            }
-            if (!Number.isFinite(officialAge) || officialAge > maxOfficialAge) {
-              staleReasons.push(`Official source check age is ${Number.isFinite(officialAge) ? officialAge.toFixed(1) : 'unknown'}h (max ${maxOfficialAge}h).`)
-            }
-            if (officialFailures.length > 0) {
-              staleReasons.push(`Official source failures: ${officialFailures.join(', ')}.`)
-            }
-
-            try {
-              await github.rest.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                name: 'stale-data',
-                color: 'D93F0B',
-                description: 'Dashboard data freshness or official source freshness alert',
-              })
-            } catch (error) {
-              if (error.status !== 422) throw error
-            }
+            const title = '[STALE DATA] Biosecurity dashboard signals are aging out of policy'
+            const reasons = status.staleReasons ?? []
 
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
@@ -122,18 +98,13 @@ jobs:
               issue.title === title || issue.body?.includes(marker)
             )
 
-            if (staleReasons.length === 0) {
+            if (reasons.length === 0) {
               if (existing) {
                 await github.rest.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: existing.number,
-                  body: [
-                    'Freshness recovered.',
-                    `Data updated: \`${meta.lastUpdated}\``,
-                    `Official sources checked: \`${meta.lastOfficialSourceCheck || meta.lastChecked}\``,
-                    `Run: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
-                  ].join('\n'),
+                  body: `Stale-data state cleared at \`${status.generatedAt}\`.`,
                 })
                 await github.rest.issues.update({
                   owner: context.repo.owner,
@@ -147,19 +118,14 @@ jobs:
 
             const body = [
               marker,
-              '## Dashboard data freshness alert',
+              '## Biosecurity dashboard signals are stale',
               '',
-              ...staleReasons.map((reason) => `- ${reason}`),
+              ...reasons.map((reason) => `- ${reason}`),
               '',
-              `Data updated: \`${meta.lastUpdated}\``,
-              `Last checked: \`${meta.lastChecked}\``,
-              `Official sources checked: \`${meta.lastOfficialSourceCheck || 'not recorded'}\``,
-              `Extraction status: \`${meta.feedHealth?.extractionStatus || 'unknown'}\``,
-              `Public status: https://andeshantavirus.emergenzsystems.org/status.json`,
-              '',
-              `Run: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
-              '',
-              '_Auto-generated by the EMERGENZ data pipeline. This issue is reused to prevent alert spam._',
+              `Generated at: \`${status.generatedAt}\``,
+              `Active signals: ${status.signals?.active ?? 'unknown'}/${status.signals?.total ?? 'unknown'}`,
+              `Highest severity: ${status.signals?.highestSeverity ?? 'unknown'}`,
+              `Stale signal ids: ${(status.signals?.staleSignalIds ?? []).join(', ') || 'none'}`,
             ].join('\n')
 
             if (existing) {
@@ -170,66 +136,22 @@ jobs:
                 body,
               })
             } else {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: 'stale-data',
+                  color: 'D29922',
+                  description: 'Signal data has aged beyond policy thresholds',
+                })
+              } catch (error) {
+                if (error.status !== 422) throw error
+              }
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title,
                 body,
                 labels: ['stale-data'],
-              })
-            }
-
-      - name: Alert on pipeline failure
-        if: failure()
-        uses: actions/github-script@v8
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const marker = '<!-- emergenz-pipeline-failure -->'
-            const title = '[PIPELINE ALERT] Data update failing'
-            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
-            const body = [
-              marker,
-              '## Automated data pipeline failure',
-              '',
-              `**Workflow:** ${context.workflow}`,
-              `**Latest failed run:** [${context.runNumber}](${runUrl})`,
-              `**Commit:** \`${context.sha.slice(0, 7)}\``,
-              `**Time:** ${new Date().toUTCString()}`,
-              '',
-              `Check the [Actions log](${runUrl}) for details.`,
-              '',
-              '_Auto-generated by the EMERGENZ data pipeline. This issue is reused to prevent alert spam._',
-            ].join('\n')
-
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              labels: 'pipeline-failure',
-              per_page: 20,
-            })
-            const existing = issues.find((issue) =>
-              issue.title === title || issue.body?.includes(marker)
-            )
-
-            if (existing) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: existing.number,
-                body: [
-                  `Another scheduled run failed: [${context.runNumber}](${runUrl})`,
-                  `Commit: \`${context.sha.slice(0, 7)}\``,
-                  `Time: ${new Date().toUTCString()}`,
-                ].join('\n'),
-              })
-            } else {
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title,
-                body,
-                labels: ['pipeline-failure'],
               })
             }

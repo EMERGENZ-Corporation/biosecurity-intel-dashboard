@@ -7,14 +7,13 @@
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
-        "test:parsers": "node scripts/test-official-parsers.mjs",
         "validate:data": "node scripts/validate-data.mjs",
+        "generate:status": "node scripts/generate-status.mjs",
         "monitor:status": "node scripts/check-status.mjs",
         "verify:production": "node scripts/verify-production.mjs",
         "preview": "vite preview"
     },
     "dependencies": {
-        "fast-xml-parser": "^5.8.0",
         "leaflet": "^1.9.4",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",

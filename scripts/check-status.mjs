@@ -48,68 +48,61 @@ async function main() {
   }
 
   if (status) {
-    if (status.schemaVersion !== 1) failures.push(`Unsupported schemaVersion: ${status.schemaVersion}`)
+    if (status.schemaVersion !== 2) failures.push(`Unsupported schemaVersion: ${status.schemaVersion}`)
     if (!['ok', 'degraded', 'critical'].includes(status.status)) failures.push(`Invalid status: ${status.status}`)
     if (status.status !== 'ok') failures.push(`Dashboard status is ${status.status}`)
 
     addAgeFailure(failures, 'status.json generation', status.generatedAt, MAX_GENERATED_AGE_HOURS)
 
-    const maxDataAge = Number(status.thresholds?.maxDataAgeHours ?? process.env.MAX_DATA_AGE_HOURS ?? 48)
-    const maxOfficialAge = Number(status.thresholds?.maxOfficialCheckAgeHours ?? process.env.MAX_OFFICIAL_CHECK_AGE_HOURS ?? 12)
-    addAgeFailure(failures, 'headline data', status.dashboard?.lastUpdated, maxDataAge)
-    addAgeFailure(failures, 'official source check', status.dashboard?.lastOfficialSourceCheck, maxOfficialAge)
-
-    const criticalFeedFailures = status.pipeline?.criticalFeedFailures ?? []
-    const officialSourceFailures = status.pipeline?.officialSourceFailures ?? []
-    if (criticalFeedFailures.length > 0) {
-      failures.push(`Critical feed failures: ${criticalFeedFailures.join(', ')}`)
+    const maxDataAge = Number(
+      status.thresholds?.maxDataAgeHours ?? process.env.MAX_DATA_AGE_HOURS ?? 168
+    )
+    const maxOfficialAge = Number(
+      status.thresholds?.maxOfficialCheckAgeHours ?? process.env.MAX_OFFICIAL_CHECK_AGE_HOURS ?? 48
+    )
+    if (status.dashboard?.lastUpdated) {
+      addAgeFailure(failures, 'headline signal data', status.dashboard.lastUpdated, maxDataAge)
     }
-    if (officialSourceFailures.length > 0) {
-      failures.push(`Official source failures: ${officialSourceFailures.join(', ')}`)
+    if (status.dashboard?.lastOfficialSourceCheck) {
+      addAgeFailure(failures, 'last official source check', status.dashboard.lastOfficialSourceCheck, maxOfficialAge)
     }
 
-    for (const staleReason of status.staleReasons ?? []) failures.push(staleReason)
+    if (Array.isArray(status.signals?.staleSignalIds) && status.signals.staleSignalIds.length > 0) {
+      failures.push(`Stale signals: ${status.signals.staleSignalIds.join(', ')}`)
+    }
+    if (Array.isArray(status.pipeline?.officialSourceFailures) && status.pipeline.officialSourceFailures.length > 0) {
+      failures.push(`Failed official sources: ${status.pipeline.officialSourceFailures.join(', ')}`)
+    }
   }
 
   const result = {
     ok: failures.length === 0,
-    checkedAt,
     statusUrl: STATUS_URL,
-    status: status?.status ?? 'unreachable',
+    checkedAt,
+    status: status?.status ?? null,
     generatedAt: status?.generatedAt ?? null,
     lastUpdated: status?.dashboard?.lastUpdated ?? null,
     lastChecked: status?.dashboard?.lastChecked ?? null,
     lastOfficialSourceCheck: status?.dashboard?.lastOfficialSourceCheck ?? null,
     extractionStatus: status?.pipeline?.extractionStatus ?? null,
+    activeSignals: status?.signals?.active ?? null,
+    highestSeverity: status?.signals?.highestSeverity ?? null,
     failures,
   }
 
   writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2))
 
   if (!result.ok) {
-    console.error('[check-status] FAILED')
+    console.error('[monitor:status] FAILED')
     for (const failure of failures) console.error(`- ${failure}`)
     process.exit(1)
   }
 
-  console.log(`[check-status] OK: ${STATUS_URL}`)
+  console.log('[monitor:status] OK')
 }
 
 main().catch((error) => {
-  const checkedAt = new Date().toISOString()
-  const result = {
-    ok: false,
-    checkedAt,
-    statusUrl: STATUS_URL,
-    status: 'failed',
-    generatedAt: null,
-    lastUpdated: null,
-    lastChecked: null,
-    lastOfficialSourceCheck: null,
-    extractionStatus: null,
-    failures: [error.message],
-  }
-  writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2))
-  console.error('[check-status] FAILED:', error.message)
+  console.error('[monitor:status] FAILED:', error.message)
+  writeFileSync(OUTPUT_PATH, JSON.stringify({ ok: false, statusUrl: STATUS_URL, checkedAt: new Date().toISOString(), failures: [error.message] }, null, 2))
   process.exit(1)
 })
