@@ -67,7 +67,7 @@ jobs:
         if: steps.commit-status.outputs.data_changed == 'true'
         run: npm run verify:production
         env:
-          PRODUCTION_URL: https://biosecurity-intel.emergenzsystems.org
+          PRODUCTION_URL: https://biosecurity-intel-dashboard.vercel.app
           VERIFY_PRODUCTION_ATTEMPTS: 16
           VERIFY_PRODUCTION_DELAY_MS: 30000
           MAX_OFFICIAL_CHECK_AGE_HOURS: 48
