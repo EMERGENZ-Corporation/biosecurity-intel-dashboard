@@ -15,7 +15,8 @@ template and preserves its resilience patterns:
 
 - `npm run validate:data` — schema validation for generalized signals,
   timeline, sources, and status records.
-- `npm run test:parsers` — regression coverage for source extractors.
+- `npm run test:parsers` — no-op placeholder until source extractors are
+  reintroduced.
 - `npm run verify:production` — verifies the deployed bundle and
   `/status.json` after each data update.
 - `npm run monitor:status` — independent hourly check of the public
@@ -25,3 +26,5 @@ template and preserves its resilience patterns:
 
 The hantavirus dashboard remains live as a separate incident vertical.
 This project is the broader multi-threat companion.
+
+Content and source decisions are governed by `CONTENT-STANDARDS.md`.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-05-20T03:29:33.556Z",
+  "generatedAt": "2026-05-20T20:49:08.654Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 48,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-19T23:23:55.802Z",
     "lastChecked": "2026-05-20T01:32:03.663Z",
     "lastOfficialSourceCheck": "2026-05-20T01:32:03.663Z",
-    "dataAgeHours": 4.093820833333333,
-    "officialCheckAgeHours": 1.9583038888888888
+    "dataAgeHours": 21.420236666666668,
+    "officialCheckAgeHours": 19.28471972222222
   },
   "signals": {
     "total": 16,
@@ -33,18 +33,9 @@
     "timelineEvents": 13
   },
   "sources": {
-    "total": 33,
-    "primary": 26,
+    "total": 34,
+    "primary": 27,
     "secondary": 7
   },
-  "pipeline": {
-    "extractionStatus": "static-seed",
-    "failedFeeds": [],
-    "criticalFeedFailures": [],
-    "officialSourceFailures": [],
-    "officialSourcesOk": 26,
-    "officialSourcesTotal": 26
-  },
-  "staleReasons": [],
-  "runbook": "Update signals.json, signal-timeline.json, and signal-sources.json as primary authorities (WHO, CDC, ECDC, Africa CDC, PAHO, PHAC, USDA APHIS, WOAH, CDC NWSS, WastewaterSCAN) publish new information. Run npm run validate:data and npm run generate:status before committing. See BIOSECURITY-MONITORING-BUILD-PACKET.md."
+  "staleReasons": []
 }

@@ -36,6 +36,7 @@ const SOURCE_TYPES = new Set([
   'other',
 ])
 const STATUS_VALUES = new Set(['ok', 'degraded', 'critical'])
+const SOURCE_TIERS = new Set([1, 2, 3, 4])
 
 const errors = []
 
@@ -103,11 +104,17 @@ const signalSourceIds = new Set(signalSources.map((source) => source.id))
 
 signalSources.forEach((source, index) => {
   const label = `signal-sources[${index}]`
-  requireFields(source, ['id', 'authority', 'title', 'sourceType', 'primary', 'url', 'lastVerified', 'domains'], label)
+  requireFields(source, ['id', 'authority', 'title', 'sourceType', 'sourceTier', 'primary', 'url', 'lastVerified', 'domains'], label)
   if (source.sourceType && !SOURCE_TYPES.has(source.sourceType)) {
     errors.push(`${label}: invalid sourceType "${source.sourceType}"`)
   }
+  if (source.sourceTier && !SOURCE_TIERS.has(source.sourceTier)) {
+    errors.push(`${label}: invalid sourceTier "${source.sourceTier}"`)
+  }
   if (typeof source.primary !== 'boolean') errors.push(`${label}: primary must be boolean`)
+  if (source.primary && source.sourceTier > 2) {
+    errors.push(`${label}: primary sources must be Tier 1 or Tier 2`)
+  }
   if (source.url && !isUrl(source.url)) errors.push(`${label}: url must be valid`)
   if (source.lastVerified && !isIsoDate(source.lastVerified)) {
     errors.push(`${label}: lastVerified must be an ISO date string`)
@@ -153,8 +160,20 @@ signals.forEach((signal, index) => {
   }
   if (signal.lastUpdated && !isIsoDate(signal.lastUpdated)) errors.push(`${label}: lastUpdated must be ISO`)
   if (signal.lastChecked && !isIsoDate(signal.lastChecked)) errors.push(`${label}: lastChecked must be ISO`)
+  if (
+    signal.lastUpdated &&
+    signal.lastChecked &&
+    new Date(signal.lastChecked).getTime() < new Date(signal.lastUpdated).getTime()
+  ) {
+    errors.push(`${label}: lastChecked must be on or after lastUpdated`)
+  }
   if (signal.primarySourceId && !signalSourceIds.has(signal.primarySourceId)) {
     errors.push(`${label}: primarySourceId "${signal.primarySourceId}" not in signal-sources.json`)
+  } else if (signal.primarySourceId) {
+    const primarySource = signalSources.find((source) => source.id === signal.primarySourceId)
+    if (primarySource && primarySource.sourceTier > 2) {
+      errors.push(`${label}: primarySourceId must reference a Tier 1 or Tier 2 source`)
+    }
   }
   if (Array.isArray(signal.sourceIds)) {
     signal.sourceIds.forEach((sourceId) => {
@@ -190,6 +209,9 @@ signals.forEach((signal, index) => {
         if (typeof marker.lng !== 'number' || marker.lng < -180 || marker.lng > 180) {
           errors.push(`${mLabel}: invalid longitude`)
         }
+        if (marker.severity && !SIGNAL_SEVERITIES.has(marker.severity)) {
+          errors.push(`${mLabel}: invalid severity "${marker.severity}"`)
+        }
       })
     }
   }
@@ -197,8 +219,18 @@ signals.forEach((signal, index) => {
     if (!Array.isArray(signal.detailSections)) {
       errors.push(`${label}: detailSections must be an array`)
     } else {
+      checkDuplicate(signal.detailSections, (section) => section.id, `${label}.detailSections ids`)
       signal.detailSections.forEach((section, sIndex) => {
         requireFields(section, ['id', 'title', 'bodyMarkdown'], `${label}.detailSections[${sIndex}]`)
+        if (!section.lastReviewed && !section.updatedAt) {
+          errors.push(`${label}.detailSections[${sIndex}]: clinical/detail content must include lastReviewed or updatedAt`)
+        }
+        if (section.lastReviewed && !isIsoDate(section.lastReviewed)) {
+          errors.push(`${label}.detailSections[${sIndex}]: lastReviewed must be ISO`)
+        }
+        if (section.updatedAt && !isIsoDate(section.updatedAt)) {
+          errors.push(`${label}.detailSections[${sIndex}]: updatedAt must be ISO`)
+        }
       })
     }
   }
@@ -221,7 +253,7 @@ signalTimeline.forEach((event, index) => {
 })
 
 if (status) {
-  requireFields(status, ['schemaVersion', 'status', 'generatedAt', 'thresholds', 'dashboard', 'signals', 'sources', 'pipeline', 'staleReasons'], 'status')
+  requireFields(status, ['schemaVersion', 'status', 'generatedAt', 'thresholds', 'dashboard', 'signals', 'sources', 'staleReasons'], 'status')
   if (status.schemaVersion !== 2) errors.push(`status.schemaVersion must be 2; got ${status.schemaVersion}`)
   if (!STATUS_VALUES.has(status.status)) errors.push(`status.status invalid: ${status.status}`)
   if (status.generatedAt && !isIsoDate(status.generatedAt)) errors.push('status.generatedAt must be ISO')
@@ -233,10 +265,6 @@ if (status) {
     requireFields(status.signals, ['total', 'active', 'byCategory', 'staleSignalIds'], 'status.signals')
     if (status.signals.total !== signals.length) errors.push('status.signals.total must match signals.json length')
     if (!Array.isArray(status.signals.staleSignalIds)) errors.push('status.signals.staleSignalIds must be array')
-  }
-  if (status.pipeline) {
-    if (!Array.isArray(status.pipeline.failedFeeds)) errors.push('status.pipeline.failedFeeds must be array')
-    if (!Array.isArray(status.pipeline.officialSourceFailures)) errors.push('status.pipeline.officialSourceFailures must be array')
   }
 }
 

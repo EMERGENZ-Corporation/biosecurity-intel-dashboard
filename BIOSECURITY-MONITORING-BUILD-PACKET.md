@@ -4,8 +4,7 @@ Prepared for: Claude Code implementation
 Prepared by: Codex engineering workshop
 Date: 2026-05-19
 Source inputs:
-- `C:\Users\mikem\Downloads\Inbox - Michael Migliaccio - Outlook.pdf`
-- `C:\Users\mikem\Downloads\Inbox - Michael Migliaccio - Outlook 1.pdf`
+- Public and expert biosecurity source context
 - Existing repository: `EMERGENZ-Corporation/hantavirus-intel-dashboard`
 
 ## 1. Executive Recommendation
@@ -35,11 +34,11 @@ The dashboard should monitor multiple biological threat domains, summarize curre
 
 This is not a clinical decision system, not a prediction engine, and not a replacement for official public health guidance. It is a source-backed situational awareness and triage dashboard.
 
-## 3. Email-Derived Monitoring Domains
+## 3. Initial Monitoring Domains
 
-The Pandemic Center emails point to a broader monitoring scope than a single outbreak:
+The initial source context points to a broader monitoring scope than a single outbreak:
 
-| Domain | Example from emails | Operational reason to monitor |
+| Domain | Example signal | Operational reason to monitor |
 |---|---|---|
 | Viral hemorrhagic fevers | Ebola/Bundibugyo outbreak in DRC; cross-border concern with Uganda and South Sudan | High severity, cross-border surveillance, limited countermeasures for some species |
 | Hantavirus / zoonotic respiratory threats | Andes virus MV Hondius cluster | Long incubation, travel-linked exposure, healthcare worker protection |
@@ -57,12 +56,12 @@ The Pandemic Center emails point to a broader monitoring scope than a single out
 
 ## 4. Resource List
 
-### Email Source Artifacts
+### Expert Source Context
 
 | Resource | Use |
 |---|---|
-| Pandemic Center Tracking Report, May 14, 2026 | Seed topic taxonomy and initial monitored threat domains |
-| Pandemic Center Special Report: Ebola Outbreak in the DRC, May 15, 2026 | Seed special-report pattern for high-priority acute events |
+| Pandemic Center Tracking Report, May 14, 2026 | Inform topic taxonomy and initial monitored threat domains |
+| Pandemic Center Special Report: Ebola Outbreak in the DRC, May 15, 2026 | Inform special-report pattern for high-priority acute events |
 | Pandemic Center Tracking Report Archive | Candidate source for a curated weekly intelligence feed |
 
 ### Core Official / Primary Sources To Support
@@ -323,11 +322,11 @@ Keep the existing source registry pattern, but generalize fields:
     "title": "Tracking Report - May 14, 2026",
     "sourceType": "expert-weekly-report",
     "primary": false,
-    "url": "source URL or local email artifact reference",
+    "url": "source URL or official/expert report reference",
     "publicationDate": "2026-05-14",
     "lastVerified": "2026-05-19",
     "domains": ["zoonotic", "vaccine_preventable", "respiratory", "environmental"],
-    "notes": "Extracted from Outlook PDF provided by project owner."
+    "notes": "Verify against primary or expert source before publication."
   }
 ]
 ```
@@ -358,7 +357,7 @@ Preserve these current resilience patterns:
 - independent status monitor workflow
 - `npm audit` clean state
 
-Initial MVP automation can use static seed data from the PDFs plus a source registry. Do not require full automated ingestion of all sources for the first Claude Code build. Add source-specific parsers incrementally after the UI and data model are stable.
+Initial MVP automation can use curated static records plus a source registry. Do not require full automated ingestion of all sources for the first Claude Code build. Add source-specific parsers incrementally after the UI and data model are stable.
 
 ## 10. Build Phases For Claude Code
 
@@ -385,9 +384,9 @@ Initial MVP automation can use static seed data from the PDFs plus a source regi
 - Build Resources page filters.
 - Build Status page backed by `public/status.json`.
 
-### Phase 4 - Seed Email-Derived Content
+### Phase 4 - Add Initial Monitored Signals
 
-- Add seed signals from Pandemic Center emails:
+- Add initial monitored signals from verified public or expert sources:
   - Andes virus/hantavirus MV Hondius
   - Ebola/Bundibugyo in DRC
   - Measles US
@@ -404,7 +403,7 @@ Initial MVP automation can use static seed data from the PDFs plus a source regi
   - Candida auris wastewater
   - New World screwworm
   - FIFA World Cup preparedness
-- Mark Pandemic Center email-derived records as secondary/expert source unless a direct official source is added.
+- Mark Pandemic Center records as secondary/expert source unless a direct official source is added.
 
 ### Phase 5 - Preserve And Adapt Resilience
 
@@ -433,7 +432,7 @@ Implementation rules:
 - Replace disease-specific UI and data structures with generalized multi-threat structures.
 - Keep the UI operational and dense. Do not create a marketing landing page.
 - Use source provenance everywhere. No unsourced facts.
-- Label Pandemic Center email-derived records as secondary/expert-source seed data unless a primary official source is also added.
+- Label Pandemic Center records as secondary/expert-source context unless a primary official source is also added.
 - Avoid overbuilding. Build the MVP described in the packet, not a full intelligence platform.
 
 Required deliverables:
@@ -463,8 +462,8 @@ Required deliverables:
    - Keep build passing.
    - Keep npm audit clean.
 
-4. Seed content:
-   Seed signals from the Pandemic Center emails:
+4. Initial content:
+   Initial monitored signals from verified public or expert sources:
    - Andes virus / hantavirus MV Hondius
    - Ebola / Bundibugyo virus in DRC
    - Measles US
@@ -521,7 +520,7 @@ After Claude Code builds the clone, Codex should review and harden it in this or
 
 ## 13. Known Risks
 
-- Outlook PDFs contain Mailchimp tracking links and not all direct source URLs. Claude should treat email-derived items as seed intelligence and verify primary source URLs before presenting official claims.
+- Some expert reports may contain indirect or redirected source links. Claude should verify primary source URLs before presenting official claims.
 - Broad biosecurity scope can sprawl quickly. MVP must stay focused on monitoring, triage, provenance, and status.
 - Wastewater and animal-health signals vary in geography and cadence; do not force all signals into a case-count model.
 - Multi-threat severity is not the same as clinical severity. It should reflect operational monitoring priority.

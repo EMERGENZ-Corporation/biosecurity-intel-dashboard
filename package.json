@@ -7,6 +7,7 @@
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
+        "test:parsers": "node scripts/test-official-parsers.mjs",
         "validate:data": "node scripts/validate-data.mjs",
         "generate:status": "node scripts/generate-status.mjs",
         "monitor:status": "node scripts/check-status.mjs",

@@ -108,17 +108,7 @@ function main() {
       primary: sources.filter((s) => s.primary).length,
       secondary: sources.filter((s) => !s.primary).length,
     },
-    pipeline: {
-      extractionStatus: 'static-seed',
-      failedFeeds: [],
-      criticalFeedFailures: [],
-      officialSourceFailures: [],
-      officialSourcesOk: sources.filter((s) => s.primary).length,
-      officialSourcesTotal: sources.filter((s) => s.primary).length,
-    },
     staleReasons,
-    runbook:
-      'Update signals.json, signal-timeline.json, and signal-sources.json as primary authorities (WHO, CDC, ECDC, Africa CDC, PAHO, PHAC, USDA APHIS, WOAH, CDC NWSS, WastewaterSCAN) publish new information. Run npm run validate:data and npm run generate:status before committing. See BIOSECURITY-MONITORING-BUILD-PACKET.md.',
   }
 
   writeFileSync(STATUS_PATH, JSON.stringify(out, null, 2) + '\n')

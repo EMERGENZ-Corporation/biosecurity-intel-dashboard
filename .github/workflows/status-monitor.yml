@@ -106,7 +106,6 @@ jobs:
               `Data updated: \`${result.lastUpdated || 'unknown'}\``,
               `Last checked: \`${result.lastChecked || 'unknown'}\``,
               `Official sources checked: \`${result.lastOfficialSourceCheck || 'unknown'}\``,
-              `Extraction status: \`${result.extractionStatus || 'unknown'}\``,
               `Workflow outcome: \`${process.env.CHECK_OUTCOME}\``,
               '',
               `Run: ${runUrl}`,

@@ -60,6 +60,13 @@ export const TREND_LABELS = {
   unknown: '? Unknown',
 } as const
 
+export const SOURCE_TIER_LABELS = {
+  1: 'Tier 1 · Authoritative',
+  2: 'Tier 2 · Institutional',
+  3: 'Tier 3 · Media / expert analysis',
+  4: 'Tier 4 · Preprint / unreviewed',
+} as const
+
 export function rankSignals(input: Signal[]): Signal[] {
   return [...input].sort((a, b) => {
     const severityDelta = SEVERITY_RANK[b.severity] - SEVERITY_RANK[a.severity]

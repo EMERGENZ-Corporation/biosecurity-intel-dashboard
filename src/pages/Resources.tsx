@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { signalSources, formatDate } from '../utils/signals'
+import { signalSources, formatDate, SOURCE_TIER_LABELS } from '../utils/signals'
 import { ThreatCategory, THREAT_CATEGORY_LABELS, SourceType } from '../types'
 
 const SOURCE_TYPE_LABELS: Record<SourceType, string> = {
@@ -136,7 +136,7 @@ export default function Resources() {
                 {source.authority} — {source.title}
               </span>
               <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: source.primary ? 'var(--color-accent-green)' : 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                {source.primary ? 'Primary' : 'Secondary'} · {SOURCE_TYPE_LABELS[source.sourceType]}
+                {source.primary ? 'Primary' : 'Secondary'} · {SOURCE_TIER_LABELS[source.sourceTier]} · {SOURCE_TYPE_LABELS[source.sourceType]}
               </span>
             </div>
             <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: 'var(--color-text-muted)' }}>

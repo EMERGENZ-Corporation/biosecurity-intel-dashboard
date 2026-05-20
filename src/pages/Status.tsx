@@ -11,13 +11,10 @@ interface StatusJson {
     maxOfficialCheckAgeHours: number
   }
   dashboard?: Record<string, unknown>
-  pipeline?: {
-    failedFeeds?: string[]
-    criticalFeedFailures?: string[]
-    officialSourceFailures?: string[]
-    extractionStatus?: string
-    officialSourcesOk?: number
-    officialSourcesTotal?: number
+  sources?: {
+    total?: number
+    primary?: number
+    secondary?: number
   }
   staleReasons?: string[]
   runbook?: string
@@ -67,7 +64,6 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 
 export default function Status() {
   const [live, setLive] = useState<StatusJson | null>(null)
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -79,9 +75,7 @@ export default function Status() {
       .then((json) => {
         if (!cancelled) setLive(json as StatusJson)
       })
-      .catch((err) => {
-        if (!cancelled) setError(err.message)
-      })
+      .catch(() => {})
     return () => {
       cancelled = true
     }
@@ -89,8 +83,6 @@ export default function Status() {
 
   const status = (live ?? (staticStatus as StatusJson))
   const color = STATUS_COLORS[status.status] ?? 'var(--color-text-secondary)'
-  const failedFeeds = status.pipeline?.failedFeeds ?? []
-  const failedOfficial = status.pipeline?.officialSourceFailures ?? []
   const staleReasons = status.staleReasons ?? []
 
   return (
@@ -108,7 +100,6 @@ export default function Status() {
       </h1>
       <p style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.6875rem', color: 'var(--color-text-muted)', margin: '0 0 1rem 0' }}>
         Human-readable view of the public <code>/status.json</code> contract
-        {error ? ` · falling back to bundled snapshot (${error})` : ''}
       </p>
 
       <div
@@ -134,7 +125,7 @@ export default function Status() {
           {status.status}
         </div>
         <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
-          Generated {formatDateTime(status.generatedAt)}
+          Data last updated {status.dashboard?.lastUpdated ? formatDateTime(status.dashboard.lastUpdated as string) : '—'}
         </div>
       </div>
 
@@ -171,12 +162,11 @@ export default function Status() {
         }}
       >
         <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 0.5rem 0' }}>
-          Sources &amp; feeds
+          Source registry
         </h2>
-        <Row label="Official sources OK">{status.pipeline?.officialSourcesOk ?? '—'}/{status.pipeline?.officialSourcesTotal ?? '—'}</Row>
-        <Row label="Failing official sources">{failedOfficial.length === 0 ? 'None' : failedOfficial.join(', ')}</Row>
-        <Row label="Degraded RSS feeds">{failedFeeds.length === 0 ? 'None' : failedFeeds.join(', ')}</Row>
-        <Row label="Extraction status">{status.pipeline?.extractionStatus ?? '—'}</Row>
+        <Row label="Registered sources">{status.sources?.total ?? '—'}</Row>
+        <Row label="Primary sources">{status.sources?.primary ?? '—'}</Row>
+        <Row label="Secondary sources">{status.sources?.secondary ?? '—'}</Row>
       </div>
 
       {staleReasons.length > 0 && (

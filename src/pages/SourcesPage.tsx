@@ -1,4 +1,4 @@
-import { signalSources, formatDate } from '../utils/signals'
+import { signalSources, formatDate, SOURCE_TIER_LABELS } from '../utils/signals'
 import { THREAT_CATEGORY_LABELS } from '../types'
 
 export default function SourcesPage() {
@@ -32,10 +32,9 @@ export default function SourcesPage() {
           lineHeight: 1.6,
         }}
       >
-        Primary sources are official health authorities (WHO, CDC, ECDC, Africa CDC, PAHO, PHAC,
-        USDA APHIS, WOAH). Secondary sources are expert analyses (e.g. Brown Pandemic Center,
-        CIDRAP) and unofficial early signals (e.g. ProMED). Treat secondary sources as leads,
-        not authoritative claims.
+        Tier 1 and Tier 2 sources can support structured monitoring data when they link to a
+        specific relevant document or dashboard. Tier 3 and Tier 4 sources are informational leads
+        only and must not drive structured data fields.
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -56,7 +55,7 @@ export default function SourcesPage() {
                 {source.authorityFull && source.authorityFull !== source.authority ? ` — ${source.authorityFull}` : ''}
               </span>
               <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: source.primary ? 'var(--color-accent-green)' : 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                {source.primary ? 'Primary' : 'Secondary'} · {source.sourceType}
+                {source.primary ? 'Primary' : 'Secondary'} · {SOURCE_TIER_LABELS[source.sourceTier]} · {source.sourceType}
               </span>
             </div>
             <div style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '0.875rem', color: 'var(--color-text-primary)', marginTop: '0.25rem' }}>

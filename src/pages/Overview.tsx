@@ -105,8 +105,7 @@ export default function Overview() {
     []
   )
 
-  const failedSources = statusJson.pipeline?.officialSourceFailures ?? []
-  const degradedFeeds = statusJson.pipeline?.failedFeeds ?? []
+  const lastDataUpdate = statusJson.dashboard?.lastUpdated
 
   return (
     <div style={{ maxWidth: '1300px' }}>
@@ -159,11 +158,6 @@ export default function Overview() {
           value={staleSignals.length}
           color={staleSignals.length > 0 ? 'var(--color-accent-orange)' : 'var(--color-accent-green)'}
         />
-        <StatChip
-          label="Official sources failing"
-          value={failedSources.length}
-          color={failedSources.length > 0 ? 'var(--color-accent-red)' : 'var(--color-accent-green)'}
-        />
         <div style={{ marginLeft: isMobile ? 0 : 'auto', alignSelf: 'center', display: 'flex', gap: '0.5rem' }}>
           <Link
             to="/status"
@@ -209,7 +203,7 @@ export default function Overview() {
             ))}
             {priorityQueue.length === 0 && (
               <p style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-                No active signals seeded.
+                No active signals available.
               </p>
             )}
           </div>
@@ -258,7 +252,7 @@ export default function Overview() {
             </div>
           </Section>
 
-          <Section title="Freshness & feed health">
+          <Section title="Data currency">
             <div
               style={{
                 display: 'flex',
@@ -270,9 +264,8 @@ export default function Overview() {
               }}
             >
               <div>Status: <span style={{ color: statusJson.status === 'ok' ? 'var(--color-accent-green)' : 'var(--color-accent-orange)' }}>{statusJson.status?.toUpperCase()}</span></div>
-              <div>Generated: {formatDateTime(statusJson.generatedAt)}</div>
-              <div>Failing feeds: {degradedFeeds.length}</div>
-              <div>Failed official sources: {failedSources.length}</div>
+              <div>Data last updated: {lastDataUpdate ? formatDateTime(lastDataUpdate) : '—'}</div>
+              <div>Source records: {statusJson.sources?.total ?? '—'}</div>
               {staleSignals.length > 0 && (
                 <div style={{ color: 'var(--color-accent-orange)' }}>
                   Stale signals: {staleSignals.map((s) => s.id).join(', ')}

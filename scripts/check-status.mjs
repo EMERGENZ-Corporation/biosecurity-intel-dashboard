@@ -70,9 +70,6 @@ async function main() {
     if (Array.isArray(status.signals?.staleSignalIds) && status.signals.staleSignalIds.length > 0) {
       failures.push(`Stale signals: ${status.signals.staleSignalIds.join(', ')}`)
     }
-    if (Array.isArray(status.pipeline?.officialSourceFailures) && status.pipeline.officialSourceFailures.length > 0) {
-      failures.push(`Failed official sources: ${status.pipeline.officialSourceFailures.join(', ')}`)
-    }
   }
 
   const result = {
@@ -84,7 +81,6 @@ async function main() {
     lastUpdated: status?.dashboard?.lastUpdated ?? null,
     lastChecked: status?.dashboard?.lastChecked ?? null,
     lastOfficialSourceCheck: status?.dashboard?.lastOfficialSourceCheck ?? null,
-    extractionStatus: status?.pipeline?.extractionStatus ?? null,
     activeSignals: status?.signals?.active ?? null,
     highestSeverity: status?.signals?.highestSeverity ?? null,
     failures,

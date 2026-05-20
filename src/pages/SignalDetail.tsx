@@ -10,6 +10,7 @@ import {
   categoryLabel,
   formatDate,
   formatDateTime,
+  SOURCE_TIER_LABELS,
 } from '../utils/signals'
 import SignalsMap from '../components/SignalsMap'
 import { ErrorBoundary } from '../components/ErrorBoundary'
@@ -275,7 +276,7 @@ export default function SignalDetail() {
           {sources.map((source) => source && (
             <li key={source.id} style={{ padding: '0.625rem 0.75rem', backgroundColor: 'var(--color-bg-tertiary)', border: '1px solid var(--color-border)', borderRadius: '4px' }}>
               <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: source.primary ? 'var(--color-accent-green)' : 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                {source.primary ? 'Primary' : 'Secondary'} · {source.sourceType}
+                {source.primary ? 'Primary' : 'Secondary'} · {SOURCE_TIER_LABELS[source.sourceTier]} · {source.sourceType}
               </div>
               <div style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '0.8125rem', color: 'var(--color-text-primary)', fontWeight: 600 }}>
                 {source.authority} — {source.title}

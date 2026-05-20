@@ -57,8 +57,8 @@
     "id": "tl-ebola-2026-05-15-africa-cdc",
     "signalId": "ebola-bundibugyo-drc-2026",
     "date": "2026-05-15",
-    "title": "Africa CDC reports suspected Ebola outbreak in Ituri",
-    "description": "Africa CDC and DRC public health authorities report a suspected Ebola outbreak in Ituri Province caused by Bundibugyo virus; cross-border concern raised for Uganda and South Sudan.",
+    "title": "Ebola readiness signal added for DRC and neighbouring-region monitoring",
+    "description": "Monitoring record added for Ebola disease preparedness and source verification; publish case counts or health-zone details only from a specific WHO or Africa CDC outbreak report.",
     "sourceId": "africa-cdc-outbreaks",
     "category": "vhf"
   },
@@ -66,8 +66,8 @@
     "id": "tl-measles-2026-05-14-pccr",
     "signalId": "measles-us-2026",
     "date": "2026-05-14",
-    "title": "Continued increase in U.S. measles cases reported",
-    "description": "Surveillance indicates continued rise in U.S. measles cases through 2026, raising concern for the Americas region's elimination status.",
+    "title": "U.S. measles surveillance remains under review",
+    "description": "Monitoring record added for U.S. measles outbreak surveillance and Americas elimination-status implications; verify current counts against CDC and PAHO updates.",
     "sourceId": "cdc-current-outbreaks",
     "category": "vaccine_preventable"
   },
@@ -75,8 +75,8 @@
     "id": "tl-mpox-2026-05-14-clade1-ct",
     "signalId": "mpox-africa-clade-i-2026",
     "date": "2026-05-14",
-    "title": "Clade I mpox importation case reported in Connecticut",
-    "description": "U.S. clade I mpox importation case reported in Connecticut, set against declining mpox case trends across much of Africa but with a continuing South Sudan surge.",
+    "title": "Mpox clade I and importation readiness remains under review",
+    "description": "Monitoring record added for mpox clinical and laboratory readiness; verify current country trends and importation details against specific Africa CDC, WHO, or CDC updates.",
     "sourceId": "cdc-current-outbreaks",
     "category": "zoonotic"
   },
@@ -84,8 +84,8 @@
     "id": "tl-h5-2026-05-14-h5n6-china",
     "signalId": "avian-influenza-h5-2026",
     "date": "2026-05-14",
-    "title": "Fatal H5N6 case reported in China; LA cat-to-human serology signal",
-    "description": "Continued zoonotic influenza signals: a fatal H5N6 case in China and an H5 cat-to-human serology signal under investigation in the Los Angeles area.",
+    "title": "Zoonotic influenza watch remains active",
+    "description": "Monitoring record added for H5 animal-health activity and sporadic human-exposure investigations; verify subtype-specific human case details against WHO or CDC event updates.",
     "sourceId": "who-disease-outbreak-news",
     "category": "zoonotic"
   },
@@ -93,8 +93,8 @@
     "id": "tl-cholera-2026-05-14-africa",
     "signalId": "cholera-africa-2026",
     "date": "2026-05-14",
-    "title": "Cholera activity sustained across multiple African countries",
-    "description": "Africa CDC reports continued cholera activity with elevated fatality concern in the Republic of Congo.",
+    "title": "Cholera preparedness signal added for sub-Saharan Africa",
+    "description": "Monitoring record added for cholera preparedness where WASH disruption and population movement can amplify outbreaks; verify country-level figures against WHO or Africa CDC reports.",
     "sourceId": "africa-cdc-outbreaks",
     "category": "enteric"
   },
@@ -102,8 +102,8 @@
     "id": "tl-chikv-2026-05-14-paho",
     "signalId": "chikungunya-2026",
     "date": "2026-05-14",
-    "title": "Chikungunya activity reported across multiple PAHO countries",
-    "description": "Surveillance shows chikungunya activity across multiple Americas countries with Brazil among the highest-burden settings.",
+    "title": "Chikungunya surveillance signal added",
+    "description": "Monitoring record added for chikungunya activity in mosquito-active regions; verify current country burden against specific PAHO or WHO updates.",
     "sourceId": "paho-epi-alerts",
     "category": "vector_borne"
   },
@@ -111,8 +111,8 @@
     "id": "tl-cauris-2026-05-14-wastewater",
     "signalId": "candida-auris-wastewater-2026",
     "date": "2026-05-14",
-    "title": "C. auris wastewater detections expand across U.S. states",
-    "description": "Wastewater surveillance identifies expanding C. auris signal across multiple U.S. states, complementing clinical surveillance.",
+    "title": "C. auris wastewater monitoring signal added",
+    "description": "Monitoring record added for C. auris wastewater and clinical surveillance interpretation; verify current state-level details against CDC NWSS, WastewaterSCAN, or local public health reporting.",
     "sourceId": "cdc-nwss",
     "category": "amr_fungal"
   }

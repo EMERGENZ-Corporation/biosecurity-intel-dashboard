@@ -9,7 +9,11 @@
     "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
     "publicationDate": "2026-05-19",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "ecdc-andes-rra",
@@ -21,7 +25,11 @@
     "url": "https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and",
     "publicationDate": "2026-05-06",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "who-andes-rra-v2",
@@ -33,7 +41,11 @@
     "url": "https://www.who.int/publications/m/item/who-rapid-risk-assessment---hantavirus-outbreak-caused-by-andes-virus--global-v.2",
     "publicationDate": "2026-05-15",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "who-don601",
@@ -45,7 +57,11 @@
     "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",
     "publicationDate": "2026-05-12",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "who-don599",
@@ -57,7 +73,11 @@
     "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599",
     "publicationDate": "2026-05-04",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-hantavirus-situation-summary",
@@ -68,7 +88,11 @@
     "primary": true,
     "url": "https://www.cdc.gov/hantavirus/situation-summary/index.html",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-han-528",
@@ -80,7 +104,11 @@
     "url": "https://www.cdc.gov/han/php/notices/han00528.html",
     "publicationDate": "2026-05-08",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-hantavirus-clinical-overview",
@@ -91,7 +119,10 @@
     "primary": true,
     "url": "https://www.cdc.gov/hantavirus/hcp/clinical-overview/hps.html",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic"]
+    "domains": [
+      "zoonotic"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-hantavirus-about-andes",
@@ -102,7 +133,10 @@
     "primary": true,
     "url": "https://www.cdc.gov/hantavirus/about/andesvirus.html",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic"]
+    "domains": [
+      "zoonotic"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-isolation-precautions",
@@ -113,7 +147,11 @@
     "primary": true,
     "url": "https://www.cdc.gov/infection-control/hcp/isolation-precautions/appendix-a-figure.html",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "vhf"]
+    "domains": [
+      "zoonotic",
+      "vhf"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-rodent-cleanup",
@@ -124,7 +162,10 @@
     "primary": true,
     "url": "https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic"]
+    "domains": [
+      "zoonotic"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "nyc-doh-han-8",
@@ -136,7 +177,11 @@
     "url": "https://www.nyc.gov/assets/doh/downloads/pdf/han/advisory/2026/han-advisory-8-hantavirus.pdf",
     "publicationDate": "2026-05-08",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "netec-hantavirus-clinical-insights",
@@ -148,7 +193,10 @@
     "url": "https://netec.org/2026/02/23/hantavirus-clinical-insights-emerging-evidence-and-what-every-healthcare-worker-should-know/",
     "publicationDate": "2026-05-06",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic"]
+    "domains": [
+      "zoonotic"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "netec-vhf-ppe-matrix",
@@ -160,7 +208,11 @@
     "url": "https://repository.netecweb.org/items/show/1693",
     "publicationDate": "2024-10-29",
     "lastVerified": "2026-05-20",
-    "domains": ["vhf", "zoonotic"]
+    "domains": [
+      "vhf",
+      "zoonotic"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "netec-hantavirus-lab-resources",
@@ -172,7 +224,10 @@
     "url": "https://repository.netecweb.org/exhibits/show/hantavirus/hantavirus",
     "publicationDate": "2026-05-06",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic"]
+    "domains": [
+      "zoonotic"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "phac-andes-media-update",
@@ -183,7 +238,11 @@
     "primary": true,
     "url": "https://www.canada.ca/en/public-health/news/2026/05/media-update-on-andes-hantavirus-situation1.html",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"]
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "euronews-radboud-quarantine",
@@ -194,8 +253,12 @@
     "url": "https://www.euronews.com/health/2026/05/12/dutch-hospital-workers-quarantined-after-faulty-procedure-treating-hantavirus-patient",
     "publicationDate": "2026-05-12",
     "lastVerified": "2026-05-20",
-    "domains": ["zoonotic", "travel"],
-    "notes": "Secondary press source documenting the Radboud UMC healthcare worker exposure event."
+    "domains": [
+      "zoonotic",
+      "travel"
+    ],
+    "notes": "Secondary press source documenting the Radboud UMC healthcare worker exposure event.",
+    "sourceTier": 3
   },
   {
     "id": "who-disease-outbreak-news",
@@ -206,19 +269,16 @@
     "primary": true,
     "url": "https://www.who.int/emergencies/disease-outbreak-news",
     "lastVerified": "2026-05-19",
-    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne"],
-    "notes": "Landing page for WHO Disease Outbreak News. Verify the specific DON item for each cited outbreak before publishing event-level claims."
-  },
-  {
-    "id": "who-emergencies",
-    "authority": "WHO",
-    "authorityFull": "World Health Organization",
-    "title": "WHO Emergencies — Disease Outbreaks",
-    "sourceType": "outbreak-news",
-    "primary": true,
-    "url": "https://www.who.int/emergencies/disease-outbreaks",
-    "lastVerified": "2026-05-19",
-    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne", "amr_fungal", "mass_gathering"]
+    "domains": [
+      "vhf",
+      "respiratory",
+      "zoonotic",
+      "vaccine_preventable",
+      "enteric",
+      "vector_borne"
+    ],
+    "notes": "Landing page for WHO Disease Outbreak News. Verify the specific DON item for each cited outbreak before publishing event-level claims.",
+    "sourceTier": 1
   },
   {
     "id": "africa-cdc-outbreaks",
@@ -229,8 +289,14 @@
     "primary": true,
     "url": "https://africacdc.org",
     "lastVerified": "2026-05-19",
-    "domains": ["vhf", "vaccine_preventable", "enteric", "zoonotic"],
-    "notes": "Africa CDC landing site. Use weekly epidemic intelligence reports for specific outbreak claims."
+    "domains": [
+      "vhf",
+      "vaccine_preventable",
+      "enteric",
+      "zoonotic"
+    ],
+    "notes": "Africa CDC landing site. Use weekly epidemic intelligence reports for specific outbreak claims.",
+    "sourceTier": 2
   },
   {
     "id": "cdc-current-outbreaks",
@@ -241,7 +307,15 @@
     "primary": true,
     "url": "https://www.cdc.gov/outbreaks/",
     "lastVerified": "2026-05-19",
-    "domains": ["vhf", "respiratory", "vaccine_preventable", "enteric", "zoonotic", "vector_borne"]
+    "domains": [
+      "vhf",
+      "respiratory",
+      "vaccine_preventable",
+      "enteric",
+      "zoonotic",
+      "vector_borne"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-han",
@@ -252,7 +326,16 @@
     "primary": true,
     "url": "https://www.cdc.gov/han/",
     "lastVerified": "2026-05-19",
-    "domains": ["vhf", "respiratory", "vaccine_preventable", "enteric", "zoonotic", "vector_borne", "amr_fungal"]
+    "domains": [
+      "vhf",
+      "respiratory",
+      "vaccine_preventable",
+      "enteric",
+      "zoonotic",
+      "vector_borne",
+      "amr_fungal"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-nwss",
@@ -263,7 +346,13 @@
     "primary": true,
     "url": "https://www.cdc.gov/nwss/",
     "lastVerified": "2026-05-19",
-    "domains": ["environmental", "respiratory", "enteric", "amr_fungal"]
+    "domains": [
+      "environmental",
+      "respiratory",
+      "enteric",
+      "amr_fungal"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "wastewaterscan",
@@ -273,7 +362,13 @@
     "primary": true,
     "url": "https://data.wastewaterscan.org/",
     "lastVerified": "2026-05-19",
-    "domains": ["environmental", "respiratory", "enteric", "amr_fungal"]
+    "domains": [
+      "environmental",
+      "respiratory",
+      "enteric",
+      "amr_fungal"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "paho-epi-alerts",
@@ -284,18 +379,35 @@
     "primary": true,
     "url": "https://www.paho.org/en/epidemiological-alerts-and-updates",
     "lastVerified": "2026-05-19",
-    "domains": ["vaccine_preventable", "vector_borne", "enteric", "respiratory"]
+    "domains": [
+      "vaccine_preventable",
+      "vector_borne",
+      "enteric",
+      "respiratory"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "ecdc-cdtr",
     "authority": "ECDC",
     "authorityFull": "European Centre for Disease Prevention and Control",
-    "title": "ECDC Communicable Disease Threats Report (CDTR)",
+    "title": "ECDC Communicable Disease Threats Report, 9-13 May 2026, week 20",
     "sourceType": "expert-weekly-report",
     "primary": true,
-    "url": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report",
+    "url": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-9-13-may-2026-week-20",
     "lastVerified": "2026-05-19",
-    "domains": ["vhf", "respiratory", "vaccine_preventable", "enteric", "vector_borne", "zoonotic", "amr_fungal"]
+    "domains": [
+      "vhf",
+      "respiratory",
+      "vaccine_preventable",
+      "enteric",
+      "vector_borne",
+      "zoonotic",
+      "amr_fungal"
+    ],
+    "sourceTier": 1,
+    "publicationDate": "2026-05-13",
+    "notes": "Specific CDTR issue. Do not use for claims outside the topics covered by this report."
   },
   {
     "id": "cdc-fluview",
@@ -306,7 +418,10 @@
     "primary": true,
     "url": "https://www.cdc.gov/fluview/",
     "lastVerified": "2026-05-19",
-    "domains": ["respiratory"]
+    "domains": [
+      "respiratory"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "cdc-respiratory-viruses",
@@ -317,7 +432,10 @@
     "primary": true,
     "url": "https://www.cdc.gov/respiratory-viruses/data/",
     "lastVerified": "2026-05-19",
-    "domains": ["respiratory"]
+    "domains": [
+      "respiratory"
+    ],
+    "sourceTier": 1
   },
   {
     "id": "usda-aphis-hpai",
@@ -328,7 +446,11 @@
     "primary": true,
     "url": "https://www.aphis.usda.gov/livestock-poultry-disease/avian/avian-influenza",
     "lastVerified": "2026-05-19",
-    "domains": ["zoonotic", "respiratory"]
+    "domains": [
+      "zoonotic",
+      "respiratory"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "woah-wahis",
@@ -339,7 +461,11 @@
     "primary": true,
     "url": "https://wahis.woah.org/",
     "lastVerified": "2026-05-19",
-    "domains": ["zoonotic", "respiratory"]
+    "domains": [
+      "zoonotic",
+      "respiratory"
+    ],
+    "sourceTier": 2
   },
   {
     "id": "promed",
@@ -350,8 +476,16 @@
     "primary": false,
     "url": "https://promedmail.org/",
     "lastVerified": "2026-05-19",
-    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne"],
-    "notes": "Unofficial early-signal aggregator. Treat as a lead; always corroborate with WHO/CDC/Africa CDC/PAHO/ECDC before operational use."
+    "domains": [
+      "vhf",
+      "respiratory",
+      "zoonotic",
+      "vaccine_preventable",
+      "enteric",
+      "vector_borne"
+    ],
+    "notes": "Unofficial early-signal aggregator. Treat as a lead; always corroborate with WHO/CDC/Africa CDC/PAHO/ECDC before operational use.",
+    "sourceTier": 3
   },
   {
     "id": "cidrap",
@@ -362,7 +496,16 @@
     "primary": false,
     "url": "https://www.cidrap.umn.edu/",
     "lastVerified": "2026-05-19",
-    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne", "amr_fungal"]
+    "domains": [
+      "vhf",
+      "respiratory",
+      "zoonotic",
+      "vaccine_preventable",
+      "enteric",
+      "vector_borne",
+      "amr_fungal"
+    ],
+    "sourceTier": 3
   },
   {
     "id": "brown-pandemic-center",
@@ -373,7 +516,47 @@
     "primary": false,
     "url": "https://pandemics.sph.brown.edu/",
     "lastVerified": "2026-05-19",
-    "domains": ["vhf", "respiratory", "zoonotic", "vaccine_preventable", "enteric", "vector_borne", "amr_fungal", "environmental", "mass_gathering"],
-    "notes": "Weekly expert tracking report used as a scoping signal. Treat as secondary; verify event-level claims against the cited primary authorities."
+    "domains": [
+      "vhf",
+      "respiratory",
+      "zoonotic",
+      "vaccine_preventable",
+      "enteric",
+      "vector_borne",
+      "amr_fungal",
+      "environmental",
+      "mass_gathering"
+    ],
+    "notes": "Weekly expert tracking report used as a scoping signal. Treat as secondary; verify event-level claims against the cited primary authorities.",
+    "sourceTier": 3
+  },
+  {
+    "id": "who-mass-gatherings",
+    "authority": "WHO",
+    "authorityFull": "World Health Organization",
+    "title": "WHO - Managing health risks during mass gatherings",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "sourceTier": 1,
+    "url": "https://www.who.int/activities/managing-health-risks-during-mass-gatherings",
+    "lastVerified": "2026-05-20",
+    "domains": [
+      "mass_gathering",
+      "travel"
+    ]
+  },
+  {
+    "id": "usda-aphis-screwworm-status",
+    "authority": "USDA APHIS",
+    "authorityFull": "U.S. Department of Agriculture - Animal and Plant Health Inspection Service",
+    "title": "Current Status of New World Screwworm",
+    "sourceType": "animal-health",
+    "primary": true,
+    "sourceTier": 2,
+    "url": "https://www.aphis.usda.gov/livestock-poultry-disease/stop-screwworm/current-status",
+    "lastVerified": "2026-05-20",
+    "domains": [
+      "zoonotic"
+    ]
   }
 ]

@@ -52,6 +52,8 @@ export interface SignalMapMarker {
 export interface SignalDetailSection {
   id: string
   title: string
+  lastReviewed?: string
+  updatedAt?: string
   /** Plain text or lightweight markdown. Rendered as paragraphs in the UI. */
   bodyMarkdown: string
 }
@@ -101,12 +103,15 @@ export type SourceType =
   | 'press-release'
   | 'other'
 
+export type SourceTier = 1 | 2 | 3 | 4
+
 export interface SignalSource {
   id: string
   authority: string
   authorityFull?: string
   title: string
   sourceType: SourceType
+  sourceTier: SourceTier
   primary: boolean
   url: string
   publicationDate?: string

@@ -73,8 +73,8 @@ export default function Briefings() {
       >
         Briefings are derived from the signal records and their primary sources. The MVP shows the
         top-of-queue scan; richer per-domain briefings (EMS, healthcare preparedness, public health
-        analyst, nonprofit situational awareness) can be added as static summaries without changing
-        the data pipeline.
+        analyst, nonprofit situational awareness) can be added as manually reviewed static
+        summaries.
       </div>
     </div>
   )
