@@ -248,6 +248,8 @@ export default function News() {
       {/* Signal filter tabs */}
       {signalsWithNews.length > 0 && (
         <div
+          role="group"
+          aria-label="News signal filter"
           style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -256,6 +258,8 @@ export default function News() {
           }}
         >
           <button
+            type="button"
+            aria-pressed={activeSignal === null}
             onClick={() => setActiveSignal(null)}
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
@@ -279,6 +283,8 @@ export default function News() {
             return (
               <button
                 key={signal.id}
+                type="button"
+                aria-pressed={isActive}
                 onClick={() => setActiveSignal(signal.id)}
                 style={{
                   fontFamily: "'IBM Plex Mono', monospace",

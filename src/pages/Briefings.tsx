@@ -292,7 +292,7 @@ export default function Briefings() {
           borderRadius: '6px',
         }}
       >
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Briefing severity filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
@@ -310,6 +310,8 @@ export default function Briefings() {
             return (
               <button
                 key={s}
+                type="button"
+                aria-pressed={active}
                 onClick={() => setSeverity(s)}
                 style={{
                   fontFamily: "'IBM Plex Mono', monospace",
@@ -330,7 +332,7 @@ export default function Briefings() {
           })}
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Briefing category filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
@@ -344,6 +346,8 @@ export default function Briefings() {
             Category:
           </span>
           <button
+            type="button"
+            aria-pressed={category === 'all'}
             onClick={() => setCategory('all')}
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
@@ -365,6 +369,8 @@ export default function Briefings() {
             return (
               <button
                 key={k}
+                type="button"
+                aria-pressed={active}
                 onClick={() => setCategory(k)}
                 style={{
                   fontFamily: "'IBM Plex Mono', monospace",

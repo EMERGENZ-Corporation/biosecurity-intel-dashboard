@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-21 (custom domain verified + bundle split)
+**Last updated:** 2026-05-21 (accessibility sweep)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,26 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Accessibility sweep: modal focus + filter semantics (commit pending)
+
+Completed the next backlog item after the bundle split. The acknowledgment
+modal now traps Tab focus inside the dialog, focuses the acceptance button on
+open, returns focus on close, and handles Escape without dismissing the
+required acknowledgment. Filter chip rows now expose grouped labels and pressed
+state to assistive technologies across the primary filter-heavy pages.
+
+**Files touched:**
+- `src/components/AcknowledgmentModal.tsx` — adds focus trap, Escape handling, focus restoration, `aria-describedby`, and an explicit button type/ref.
+- `src/pages/MapPage.tsx` — adds filter groups, button types, and `aria-pressed` to severity/category/marker-type filters.
+- `src/pages/Signals.tsx` — adds filter groups and `aria-pressed` to severity/category chips.
+- `src/pages/Briefings.tsx` — adds filter groups and `aria-pressed` to severity/category chips.
+- `src/pages/TimelinePage.tsx` — adds filter groups and `aria-pressed` to severity/category chips.
+- `src/pages/News.tsx` — adds filter group and `aria-pressed` to signal filter tabs.
+- `src/pages/SourcesPage.tsx` — adds filter group and `aria-pressed` to tier filter chips.
+- `HANDOFF.md` — logs the accessibility backlog completion.
+
+**Verify:** `npm run validate:data` and `npm run build`. Manual browser follow-up: open a fresh session, Tab/Shift+Tab inside the acknowledgment modal, press Escape, and confirm filter chips announce pressed/unpressed state.
 
 ## ✅ Custom domain verification + bundle split (commit 6798844)
 
@@ -329,7 +349,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 
 - **Further deepening if desired.** Currently 3 sections per non-hantavirus signal vs 5 for hantavirus. Adding 1-2 more per signal would bring full parity. Diminishing-returns territory; only worth doing for signals that warrant deeper EMS-facing content.
 - **~~Bundle size.~~** ✅ Addressed by lazy route loading + Rollup `manualChunks`. Entry chunk is now 18.23 kB (gzip 6.39 kB); heavy map/data/vendor chunks are split and cacheable.
-- **Accessibility sweep.** AcknowledgmentModal focus trap + ESC; keyboard nav for filter chip rows; verify ARIA on map filter rows.
+- **~~Accessibility sweep.~~** ✅ Code-level sweep shipped: acknowledgment modal focus trap/Escape handling and grouped `aria-pressed` filter chips on Map, Signals, Briefings, Timeline, News, and Sources. Manual browser/axe pass still useful before a formal accessibility sign-off.
 - **Intermittent feed failures.** WHO and ECDC occasionally 404 during pipeline runs. Tolerated as non-critical, but watch for sustained failures — they're Tier 1 and CONTENT-STANDARDS §6.1 says Tier 1 failures during active outbreaks should hard-alert. The current pipeline only marks CDC as `critical: true`; consider adding WHO/ECDC if their endpoints stabilize.
 - **Marker deduplication (cosmetic).** The restoration left ~3 generic vs specific overlaps on the hantavirus signal (e.g. "France — confirmed case" generic + "Paris, France" specific from old data). Both at similar coords; functional but slightly redundant. Trim if desired.
 - **~~HCW alert / risk badges on other signals.~~** ✅ Shipped. Risk badges now on 9 signals total (hantavirus + 8 others); HCW alerts on 6 signals total (hantavirus + 5 others). See `scripts/seed-risk-and-hcw.mjs`.

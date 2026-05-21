@@ -140,13 +140,15 @@ export default function MapPage() {
         }}
       >
         {/* Severity row */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Map severity filters" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span style={ROW_LABEL}>Severity:</span>
           {SEVERITY_OPTIONS.map((s) => {
             const active = activeSeverities.has(s)
             return (
               <button
                 key={s}
+                type="button"
+                aria-pressed={active}
                 onClick={() => toggleSeverity(s)}
                 style={{
                   ...CHIP_BASE,
@@ -162,13 +164,15 @@ export default function MapPage() {
         </div>
 
         {/* Category row */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Map category filters" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span style={ROW_LABEL}>Category:</span>
           {(Object.entries(THREAT_CATEGORY_LABELS) as [ThreatCategory, string][]).map(([k, label]) => {
             const active = activeCategories.has(k)
             return (
               <button
                 key={k}
+                type="button"
+                aria-pressed={active}
                 onClick={() => toggleCategory(k)}
                 style={{
                   ...CHIP_BASE,
@@ -184,7 +188,7 @@ export default function MapPage() {
         </div>
 
         {/* Marker-type row with color swatches */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Map marker type filters" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span style={ROW_LABEL}>Marker type:</span>
           {MARKER_TYPE_OPTIONS.map((t) => {
             const active = activeTypes.has(t)
@@ -192,6 +196,8 @@ export default function MapPage() {
             return (
               <button
                 key={t}
+                type="button"
+                aria-pressed={active}
                 onClick={() => toggleType(t)}
                 style={{
                   ...CHIP_BASE,

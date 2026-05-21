@@ -96,7 +96,7 @@ export default function TimelinePage() {
           borderRadius: '6px',
         }}
       >
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Timeline severity filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
@@ -114,6 +114,8 @@ export default function TimelinePage() {
             return (
               <button
                 key={s}
+                type="button"
+                aria-pressed={active}
                 onClick={() => setSeverityFilter(s)}
                 style={{
                   fontFamily: "'IBM Plex Mono', monospace",
@@ -134,7 +136,7 @@ export default function TimelinePage() {
           })}
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Timeline category filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
@@ -152,6 +154,8 @@ export default function TimelinePage() {
             return (
               <button
                 key={key}
+                type="button"
+                aria-pressed={active}
                 onClick={() => setCategoryFilter(key)}
                 style={{
                   fontFamily: "'IBM Plex Mono', monospace",

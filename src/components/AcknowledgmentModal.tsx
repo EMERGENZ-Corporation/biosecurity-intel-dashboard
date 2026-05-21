@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const SESSION_KEY = 'emergenz_ack_v1'
@@ -16,11 +16,51 @@ interface Props {
 }
 
 export default function AcknowledgmentModal({ onAcknowledge }: Props) {
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const acceptButtonRef = useRef<HTMLButtonElement>(null)
+
   // Trap focus and handle Escape (Escape does NOT dismiss — must click the button)
   useEffect(() => {
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = prev }
+
+    acceptButtonRef.current?.focus()
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        acceptButtonRef.current?.focus()
+        return
+      }
+
+      if (event.key !== 'Tab') return
+
+      const focusable = Array.from(
+        dialogRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      )
+      if (focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = prev
+      document.removeEventListener('keydown', handleKeyDown)
+      previouslyFocused?.focus()
+    }
   }, [])
 
   function handleAccept() {
@@ -32,9 +72,11 @@ export default function AcknowledgmentModal({ onAcknowledge }: Props) {
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="ack-title"
+      aria-describedby="ack-description"
       style={{
         position: 'fixed',
         inset: 0,
@@ -90,6 +132,7 @@ export default function AcknowledgmentModal({ onAcknowledge }: Props) {
 
         {/* Acknowledgment text */}
         <p
+          id="ack-description"
           style={{
             fontFamily: "'IBM Plex Sans', sans-serif",
             fontSize: '0.9375rem',
@@ -121,8 +164,9 @@ export default function AcknowledgmentModal({ onAcknowledge }: Props) {
 
         {/* CTA */}
         <button
+          ref={acceptButtonRef}
+          type="button"
           onClick={handleAccept}
-          autoFocus
           style={{
             width: '100%',
             fontFamily: "'IBM Plex Mono', monospace",

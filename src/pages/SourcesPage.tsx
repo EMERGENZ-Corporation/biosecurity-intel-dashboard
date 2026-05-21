@@ -52,6 +52,8 @@ export default function SourcesPage() {
 
       {/* Tier breakdown */}
       <div
+        role="group"
+        aria-label="Source tier filter"
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
@@ -148,6 +150,8 @@ export default function SourcesPage() {
           return (
             <button
               key={String(tier)}
+              type="button"
+              aria-pressed={active}
               onClick={() => setTierFilter(tier)}
               style={{
                 fontFamily: "'IBM Plex Mono', monospace",

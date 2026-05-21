@@ -12,6 +12,8 @@ const SEVERITY_OPTIONS: SignalSeverity[] = ['monitor', 'watch', 'concern', 'acti
 function FilterButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
+      type="button"
+      aria-pressed={active}
       onClick={onClick}
       style={{
         fontFamily: "'IBM Plex Mono', monospace",
@@ -81,7 +83,7 @@ export default function Signals() {
           borderRadius: '6px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div role="group" aria-label="Signal severity filter" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Severity:
           </span>
@@ -93,7 +95,7 @@ export default function Signals() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div role="group" aria-label="Signal category filter" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Category:
           </span>
