@@ -1,7 +1,9 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20 (after risk badges + HCW alerts extended to 8 non-hantavirus signals)
+**Last updated:** 2026-05-20 (after threat-category label rename)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
+
+> **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
 
 ---
 
@@ -145,7 +147,47 @@ All sections carry: primary `attribution` + 1-2 `additionalAttributions` (pulled
 
 ---
 
-## ✅ Hantavirus-asset restoration (commit pending push)
+## ✅ Threat-category label rename (commit 497d6d1)
+
+User request: friendlier display labels for the 10 threat categories.
+
+Internal keys **unchanged** (vhf, respiratory, zoonotic, vaccine_preventable,
+enteric, vector_borne, amr_fungal, environmental, mass_gathering, travel),
+so no schema or data migration. Only `THREAT_CATEGORY_LABELS` in `src/types.ts`
+updated. All filter chips, signal cards, map popups, briefing badges, and
+About-page tier copy pick up the new labels automatically.
+
+New labels:
+- `respiratory` → "Respiratory Threats"
+- `vhf` → "Hemorrhagic Threats"
+- `enteric` → "Enteric / Waterborne"
+- `vector_borne` → "Vector-Borne"
+- `zoonotic` → "Zoonotic Spillover"
+- `amr_fungal` → "Healthcare-Associated / AMR"
+- `environmental` → "Environmental Surveillance"
+- `mass_gathering` → "Mass Gatherings & Events"
+- `travel` → "Travel & Importation"
+- `vaccine_preventable` → "Vaccine Gaps"
+
+**Verify:** visit `/map` — all 10 category chips render with the new labels.
+
+---
+
+## ✅ Risk badges + HCW alerts extended (commit be1a004 / 681b11b)
+
+Risk-assessment badge strip now renders on **9 signals** total (added 8):
+mpox (WHO PHEIC), lassa, ebola, avian flu H5, measles US, cholera, chikungunya, screwworm.
+
+HCW alert callouts now render on **6 signals** total (added 5):
+ebola, lassa, mpox, measles, candida auris.
+
+`scripts/seed-risk-and-hcw.mjs`: one-time seeder. All risk badges link to
+real published authority documents; HCW alerts cite the authority issuing
+the operational guidance.
+
+---
+
+## ✅ Hantavirus-asset restoration (commit f4c4438)
 
 Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.md).
 
