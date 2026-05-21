@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20 (after backlog bundle — custom domain, RSS, zero-write, Tier 4, Status depth)
+**Last updated:** 2026-05-20 (after deepening — 30 new attributed sections across 15 signals; total now 50)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 ---
@@ -118,12 +118,39 @@ Shipped in a single safe bundle:
 
 ---
 
+## ✅ Section deepening (commit pending push)
+
+`scripts/deepen-signal-sections.mjs` added 2 attributed ContentBlock sections to each of the 15 non-hantavirus signals (30 new sections; total now 50). Hantavirus unchanged at 5.
+
+Section themes per signal:
+- **Ebola DRC**: Clinical profile · PPE & isolation
+- **Measles US**: Clinical profile · Post-exposure prophylaxis
+- **Mpox clade I**: Clinical profile · Infection prevention & vaccination
+- **Avian flu H5**: Human clinical profile · Occupational exposure response
+- **Cholera Africa**: Clinical management · Oral cholera vaccine deployment
+- **Seasonal influenza**: Clinical management · Surveillance methods
+- **COVID wastewater**: Surveillance methodology · Interpretation & limitations
+- **Norovirus wastewater**: Clinical profile · Outbreak response
+- **RSV wastewater**: Clinical profile · Prevention (nirsevimab, maternal & adult vaccines)
+- **hMPV wastewater**: Clinical profile · Diagnostic testing
+- **Lassa fever**: Clinical profile · PPE & isolation
+- **Chikungunya**: Clinical profile · Vector control & vaccination (Ixchiq)
+- **Candida auris**: Infection prevention in healthcare · Laboratory identification
+- **Screwworm**: Animal detection & surveillance · Human myiasis
+- **FIFA 2026**: Surveillance planning · EMS surge readiness
+
+All sections carry: primary `attribution` + 1-2 `additionalAttributions` (pulled from `signal-sources.json`), `lastReviewed: 2026-05-20`. Bodies are factual, non-prescriptive per CONTENT-STANDARDS §7.1; clinical specifics cite the primary source inline so reviewers can verify.
+
+**Verify:** any non-hantavirus signal detail page (e.g. `/signals/cholera-africa-2026`) shows 3 ContentBlocks each with Source: + Also: rows. `/status` shows "Detail sections: 50".
+
+---
+
 ## ⏳ Outstanding work (backlog)
 
-- **Deepen non-hantavirus detailSections.** Each of the 15 non-hantavirus signals currently has 1 "Operational guidance" section. Deepen to 3-5 ContentBlocks each (clinical, surveillance, infection control, lab diagnostics, vaccination/prophylaxis where applicable), modeled on the hantavirus signal. Largest remaining piece of content work.
-- **Bundle size.** Main bundle is 640 kB (gzip 203 kB) — past Vite's 500 kB warning. Consider `manualChunks` or convert `news.json` to a runtime `fetch()` instead of build-time import.
+- **Further deepening if desired.** Currently 3 sections per non-hantavirus signal vs 5 for hantavirus. Adding 1-2 more per signal would bring full parity. Diminishing-returns territory; only worth doing for signals that warrant deeper EMS-facing content.
+- **Bundle size.** Main bundle is 640 kB (gzip 203 kB) — past Vite's 500 kB warning. Larger now with 50 sections embedded. Consider `manualChunks` or convert `news.json` and `signals.json` to a runtime `fetch()` instead of build-time import.
 - **Accessibility sweep.** AcknowledgmentModal focus trap + ESC; keyboard nav for filter chip rows; verify ARIA on map filter rows.
-- **Intermittent feed failures.** WHO and ECDC occasionally 404 during pipeline runs (saw it in the post-backlog run). Tolerated as non-critical, but watch for sustained failures — they're Tier 1 and CONTENT-STANDARDS §6.1 says Tier 1 failures during active outbreaks should hard-alert. The current pipeline only marks CDC as `critical: true`; consider adding WHO/ECDC if their endpoints stabilize.
+- **Intermittent feed failures.** WHO and ECDC occasionally 404 during pipeline runs. Tolerated as non-critical, but watch for sustained failures — they're Tier 1 and CONTENT-STANDARDS §6.1 says Tier 1 failures during active outbreaks should hard-alert. The current pipeline only marks CDC as `critical: true`; consider adding WHO/ECDC if their endpoints stabilize.
 
 ---
 

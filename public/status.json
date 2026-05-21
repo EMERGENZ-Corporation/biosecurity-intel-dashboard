@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-05-21T01:42:10.073Z",
+  "generatedAt": "2026-05-21T01:50:39.615Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 48,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-19T23:23:55.802Z",
     "lastChecked": "2026-05-20T01:32:03.663Z",
     "lastOfficialSourceCheck": "2026-05-20T01:32:03.663Z",
-    "dataAgeHours": 26.303964444444443,
-    "officialCheckAgeHours": 24.1684475
+    "dataAgeHours": 26.44550388888889,
+    "officialCheckAgeHours": 24.309986944444443
   },
   "signals": {
     "total": 16,
@@ -32,7 +32,7 @@
     "staleSignalIds": [],
     "timelineEvents": 13,
     "totalMapMarkers": 103,
-    "totalDetailSections": 20
+    "totalDetailSections": 50
   },
   "sources": {
     "total": 37,
