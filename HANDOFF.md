@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-21 (Tier 1 news feed hard alerts)
+**Last updated:** 2026-05-21 (hantavirus marker deduplication)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,22 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Hantavirus marker deduplication (commit pending)
+
+Completed the cosmetic marker-deduplication backlog item. Removed the legacy
+generic `andes-fr-paris` marker ("France — confirmed case") because it had the
+same coordinates and case semantics as the richer restored `case-paris` marker.
+Other close marker pairs were left intact because they represent distinct event
+types at the same city or site, such as a hospital exposure event and a death
+record.
+
+**Files touched:**
+- `src/data/signals.json` — removes the duplicate hantavirus France/Paris marker; hantavirus markers now total 47.
+- `public/status.json` — regenerated so `signals.totalMapMarkers` reflects the marker count change.
+- `HANDOFF.md` — logs the marker-deduplication backlog completion.
+
+**Verify:** `npm run generate:status`, `npm run validate:data`, and confirm `/signals/andes-hantavirus-mv-hondius-2026` no longer includes the duplicate "France — confirmed case" marker while retaining "Paris, France".
 
 ## ✅ Tier 1 news feed hard alerts + refresh (commit 39fd4a1)
 
@@ -376,7 +392,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 - **~~Bundle size.~~** ✅ Addressed by lazy route loading + Rollup `manualChunks`. Entry chunk is now 18.23 kB (gzip 6.39 kB); heavy map/data/vendor chunks are split and cacheable.
 - **~~Accessibility sweep.~~** ✅ Code-level sweep shipped: acknowledgment modal focus trap/Escape handling and grouped `aria-pressed` filter chips on Map, Signals, Briefings, Timeline, News, and Sources. Manual browser/axe pass still useful before a formal accessibility sign-off.
 - **~~Intermittent feed failures.~~** ✅ Addressed for Tier 1 feeds: CDC, WHO, and ECDC now use live endpoints and hard-fail the news workflow during active monitoring. Soft Tier 2/3 feed failures remain tolerated and internal-only.
-- **Marker deduplication (cosmetic).** The restoration left ~3 generic vs specific overlaps on the hantavirus signal (e.g. "France — confirmed case" generic + "Paris, France" specific from old data). Both at similar coords; functional but slightly redundant. Trim if desired.
+- **~~Marker deduplication (cosmetic).~~** ✅ Removed the exact France/Paris duplicate marker. Other close pairs were retained because they represent different event types rather than duplicate records.
 - **~~HCW alert / risk badges on other signals.~~** ✅ Shipped. Risk badges now on 9 signals total (hantavirus + 8 others); HCW alerts on 6 signals total (hantavirus + 5 others). See `scripts/seed-risk-and-hcw.mjs`.
 
 ---
