@@ -15,16 +15,16 @@ export type ThreatCategory =
   | 'travel'
 
 export const THREAT_CATEGORY_LABELS: Record<ThreatCategory, string> = {
-  vhf: 'Viral hemorrhagic fever',
-  respiratory: 'Respiratory viruses',
-  zoonotic: 'Zoonotic / One Health',
-  vaccine_preventable: 'Vaccine-preventable disease',
-  enteric: 'Enteric / waterborne',
-  vector_borne: 'Vector-borne disease',
-  amr_fungal: 'AMR / fungal / healthcare-associated',
-  environmental: 'Wastewater / environmental',
-  mass_gathering: 'Event-based / mass gathering',
-  travel: 'Travel-linked / importation',
+  respiratory: 'Respiratory Threats',
+  vhf: 'Hemorrhagic Threats',
+  enteric: 'Enteric / Waterborne',
+  vector_borne: 'Vector-Borne',
+  zoonotic: 'Zoonotic Spillover',
+  amr_fungal: 'Healthcare-Associated / AMR',
+  environmental: 'Environmental Surveillance',
+  mass_gathering: 'Mass Gatherings & Events',
+  travel: 'Travel & Importation',
+  vaccine_preventable: 'Vaccine Gaps',
 }
 
 export type SignalSeverity = 'monitor' | 'watch' | 'concern' | 'action'
