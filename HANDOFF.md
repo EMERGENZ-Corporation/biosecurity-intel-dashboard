@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-21 (accessibility sweep)
+**Last updated:** 2026-05-21 (Tier 1 news feed hard alerts)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,31 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Tier 1 news feed hard alerts + refresh (commit pending)
+
+Completed the intermittent-feed backlog item in line with
+CONTENT-STANDARDS §6.1. The news updater now uses live official CDC, WHO, and
+ECDC RSS endpoints as critical Tier 1 feeds; when any critical feed fails while
+active signals exist, the script writes no `news.json`, emits
+`update-news-result.json`, and exits non-zero so GitHub Actions can alert.
+The update-news workflow now has `issues: write`, creates/reuses a
+`news-pipeline` issue on failure, closes it on recovery, and only commits
+`news.json` when the updater succeeds.
+
+The local verification run fetched all three Tier 1 feeds successfully and
+refreshed the checked-in static snapshot to 500 news items. One CBC News timeout
+was recorded as a soft Tier 3 failure, which does not fail the pipeline.
+
+**Files touched:**
+- `scripts/update-news.mjs` — replaces dead WHO/ECDC feed URLs, marks WHO/ECDC critical, writes `update-news-result.json`, and exits before writing public data on critical Tier 1 failures.
+- `.github/workflows/update-news.yml` — adds issue reconciliation for news pipeline failures and gates data commits on successful updater runs.
+- `.gitignore` — ignores the local/workflow `update-news-result.json` diagnostic file.
+- `src/data/news.json` — refreshed by `npm run update:news` after Tier 1 feed verification.
+- `public/status.json` — regenerated after the news refresh.
+- `HANDOFF.md` — logs the pipeline hard-alert backlog completion.
+
+**Verify:** `npm run update:news`, `npm run generate:status`, `npm run validate:data`, `npm run build`, and `npm audit`. In the verification run, CDC/WHO/ECDC returned success and `update-news-result.json` had `criticalFailures: []`.
 
 ## ✅ Accessibility sweep: modal focus + filter semantics (commit d9ef47e)
 
@@ -350,7 +375,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 - **Further deepening if desired.** Currently 3 sections per non-hantavirus signal vs 5 for hantavirus. Adding 1-2 more per signal would bring full parity. Diminishing-returns territory; only worth doing for signals that warrant deeper EMS-facing content.
 - **~~Bundle size.~~** ✅ Addressed by lazy route loading + Rollup `manualChunks`. Entry chunk is now 18.23 kB (gzip 6.39 kB); heavy map/data/vendor chunks are split and cacheable.
 - **~~Accessibility sweep.~~** ✅ Code-level sweep shipped: acknowledgment modal focus trap/Escape handling and grouped `aria-pressed` filter chips on Map, Signals, Briefings, Timeline, News, and Sources. Manual browser/axe pass still useful before a formal accessibility sign-off.
-- **Intermittent feed failures.** WHO and ECDC occasionally 404 during pipeline runs. Tolerated as non-critical, but watch for sustained failures — they're Tier 1 and CONTENT-STANDARDS §6.1 says Tier 1 failures during active outbreaks should hard-alert. The current pipeline only marks CDC as `critical: true`; consider adding WHO/ECDC if their endpoints stabilize.
+- **~~Intermittent feed failures.~~** ✅ Addressed for Tier 1 feeds: CDC, WHO, and ECDC now use live endpoints and hard-fail the news workflow during active monitoring. Soft Tier 2/3 feed failures remain tolerated and internal-only.
 - **Marker deduplication (cosmetic).** The restoration left ~3 generic vs specific overlaps on the hantavirus signal (e.g. "France — confirmed case" generic + "Paris, France" specific from old data). Both at similar coords; functional but slightly redundant. Trim if desired.
 - **~~HCW alert / risk badges on other signals.~~** ✅ Shipped. Risk badges now on 9 signals total (hantavirus + 8 others); HCW alerts on 6 signals total (hantavirus + 5 others). See `scripts/seed-risk-and-hcw.mjs`.
 

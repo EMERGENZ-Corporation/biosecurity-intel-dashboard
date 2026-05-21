@@ -15,6 +15,7 @@ import { XMLParser } from 'fast-xml-parser'
 
 const SIGNALS_PATH = 'src/data/signals.json'
 const NEWS_PATH = 'src/data/news.json'
+const RESULT_PATH = 'update-news-result.json'
 
 // Bumped from 200 -> 500 so historical / authoritative items survive when
 // per-signal Google News queries flood with same-day items. With ~16 signals
@@ -93,7 +94,9 @@ const SIGNAL_KEYWORD_OVERRIDES = {
 // Direct authority/media feeds; per-signal Google News queries are built
 // dynamically below and fill in coverage for outlets without working RSS.
 //
-// Validated 2026-05-20. Endpoints removed (returning 404/403/timeout):
+// Validated 2026-05-21. Endpoints removed (returning 404/403/timeout):
+//   WHO old news-releases.xml - replaced with live news-english.xml
+//   ECDC old /en/rss.xml - replaced with live CDTR taxonomy feed
 //   ProMED (promedmail.org/feed/) — coverage now via per-signal Google News
 //   Eurosurveillance (eurosurveillance.org/rss/eurosurv.xml) — 403
 //   PHAC (healthycanadians.gc.ca alerts feed) — domain deprecated
@@ -103,8 +106,8 @@ const SIGNAL_KEYWORD_OVERRIDES = {
 const GLOBAL_FEEDS = [
   // Tier 1 — authoritative
   { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss', authority: 'CDC', critical: true },
-  { url: 'https://www.who.int/rss-feeds/news-releases.xml', authority: 'WHO', critical: false },
-  { url: 'https://www.ecdc.europa.eu/en/rss.xml', authority: 'ECDC', critical: false },
+  { url: 'https://www.who.int/rss-feeds/news-english.xml', authority: 'WHO', critical: true },
+  { url: 'https://www.ecdc.europa.eu/en/taxonomy/term/1505/feed', authority: 'ECDC', critical: true },
 
   // Tier 2 — institutional
   { url: 'https://www.gov.uk/government/organisations/uk-health-security-agency.atom', authority: 'UKHSA', critical: false },
@@ -293,6 +296,13 @@ function buildSignalGoogleFeeds(signals) {
   return feeds
 }
 
+function writeResult(result) {
+  writeFileSync(RESULT_PATH, JSON.stringify({
+    checkedAt: new Date().toISOString(),
+    ...result,
+  }, null, 2) + '\n')
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -301,6 +311,7 @@ async function main() {
   let existing = []
   try { existing = JSON.parse(readFileSync(NEWS_PATH, 'utf8')) } catch { /* first run */ }
 
+  const activeSignalCount = signals.filter(signal => signal.status === 'active').length
   const allFeeds = [...GLOBAL_FEEDS, ...buildSignalGoogleFeeds(signals)]
 
   console.log(`[update-news] fetching ${allFeeds.length} feeds…`)
@@ -314,7 +325,8 @@ async function main() {
     })
   )
 
-  let critical_failed = false
+  const criticalFailures = []
+  const softFailures = []
   const fresh = []
 
   feedResults.forEach((result, i) => {
@@ -323,12 +335,27 @@ async function main() {
     } else {
       const feed = allFeeds[i]
       console.warn(`  ✗ ${feed.authority} FAILED: ${result.reason?.message ?? result.reason}`)
-      if (feed.critical) critical_failed = true
+      const failure = {
+        authority: feed.authority,
+        url: feed.url,
+        reason: result.reason?.message ?? String(result.reason),
+      }
+      if (feed.critical) criticalFailures.push(failure)
+      else softFailures.push(failure)
     }
   })
 
-  if (critical_failed) {
-    console.error('[update-news] a critical feed failed — falling back to existing items only')
+  if (activeSignalCount > 0 && criticalFailures.length > 0) {
+    writeResult({
+      ok: false,
+      activeSignalCount,
+      criticalFailures,
+      softFailures,
+      fetchedItems: fresh.length,
+      wroteNewsJson: false,
+    })
+    console.error('[update-news] critical Tier 1 feed failure during active monitoring - writing no files')
+    process.exit(1)
   }
 
   // Build a merged set: start from existing, layer in fresh
@@ -372,11 +399,29 @@ async function main() {
   try { existingSerialized = readFileSync(NEWS_PATH, 'utf8') } catch { /* first run */ }
 
   if (existingSerialized === nextSerialized) {
+    writeResult({
+      ok: true,
+      activeSignalCount,
+      criticalFailures,
+      softFailures,
+      fetchedItems: fresh.length,
+      outputItems: output.length,
+      wroteNewsJson: false,
+    })
     console.log('[update-news] no change vs existing news.json — skipping write per CONTENT-STANDARDS §4.4')
     return
   }
 
   writeFileSync(NEWS_PATH, nextSerialized)
+  writeResult({
+    ok: true,
+    activeSignalCount,
+    criticalFailures,
+    softFailures,
+    fetchedItems: fresh.length,
+    outputItems: output.length,
+    wroteNewsJson: true,
+  })
 
   const signalCoverage = signals.map(s => ({
     id: s.id,
