@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20 (after threat-category label rename)
+**Last updated:** 2026-05-21 (custom domain verified + bundle split)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,25 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Custom domain verification + bundle split (commit 6e671ab)
+
+User reported the custom domain was resolved. Verified
+`biosecurity-intel.emergenzsystems.org` now resolves to Vercel DNS, confirmed
+`https://biosecurity-intel.emergenzsystems.org/status.json` returns HTTP 200,
+and `npm run monitor:status` passes against the custom-domain status endpoint.
+
+The bundle-size backlog item was addressed by lazy-loading the Overview route
+and splitting React, Leaflet, signal data, and news data into stable Rollup
+chunks. This reduced the app-shell entry chunk from **928.90 kB / 297.83 kB
+gzip** to **18.23 kB / 6.39 kB gzip** and removed Vite's >500 kB chunk warning.
+
+**Files touched:**
+- `src/App.tsx` — lazy-loads the Overview route so large route/data imports stay out of the app shell.
+- `vite.config.ts` — adds `manualChunks` for `react-vendor`, `map-vendor`, `signal-data`, and `news-data`.
+- `HANDOFF.md` — logs the domain verification and bundle-size backlog completion.
+
+**Verify:** `npm run validate:data`, `npm run build`, `STATUS_URL=https://biosecurity-intel.emergenzsystems.org/status.json MAX_STATUS_GENERATED_AGE_HOURS=24 npm run monitor:status`, and `npm audit`.
 
 ### 1. News feed (commit `b0c0753`)
 - `src/pages/News.tsx` — multi-signal filter tabs, authority-color cards, signal tag chips
@@ -309,7 +328,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 ## ⏳ Outstanding work (backlog)
 
 - **Further deepening if desired.** Currently 3 sections per non-hantavirus signal vs 5 for hantavirus. Adding 1-2 more per signal would bring full parity. Diminishing-returns territory; only worth doing for signals that warrant deeper EMS-facing content.
-- **Bundle size.** Main bundle is 640 kB (gzip 203 kB) — past Vite's 500 kB warning. Larger now with all sections + restored markers embedded. Consider `manualChunks` or convert `news.json` and `signals.json` to a runtime `fetch()` instead of build-time import.
+- **~~Bundle size.~~** ✅ Addressed by lazy route loading + Rollup `manualChunks`. Entry chunk is now 18.23 kB (gzip 6.39 kB); heavy map/data/vendor chunks are split and cacheable.
 - **Accessibility sweep.** AcknowledgmentModal focus trap + ESC; keyboard nav for filter chip rows; verify ARIA on map filter rows.
 - **Intermittent feed failures.** WHO and ECDC occasionally 404 during pipeline runs. Tolerated as non-critical, but watch for sustained failures — they're Tier 1 and CONTENT-STANDARDS §6.1 says Tier 1 failures during active outbreaks should hard-alert. The current pipeline only marks CDC as `critical: true`; consider adding WHO/ECDC if their endpoints stabilize.
 - **Marker deduplication (cosmetic).** The restoration left ~3 generic vs specific overlaps on the hantavirus signal (e.g. "France — confirmed case" generic + "Paris, France" specific from old data). Both at similar coords; functional but slightly redundant. Trim if desired.
@@ -347,10 +366,8 @@ git pull --rebase origin main && git push origin main
 
 ## Known issues / deferred
 
-- **Custom domain `biosecurity-intel.emergenzsystems.org`** does not resolve. Workflows currently point at `biosecurity-intel-dashboard.vercel.app`. Swap back once DNS is configured (or use env var).
 - **Vercel CLI auth** is invalid on this machine; deploy plumbing is owned by the user.
 - **Several RSS feeds 404 or 403** (PHAC, RKI, AP News, CTV News, Eurosurveillance). The pipeline tolerates these — they're Tier 2/3 non-critical. Update the URLs in `scripts/update-news.mjs` `GLOBAL_FEEDS` when better endpoints are identified.
-- **Pipeline behavior gap vs CONTENT-STANDARDS §4.4** — current `update-news.mjs` writes news.json even when zero new items are added. Per spec, zero-new-item runs should write nothing. Low priority; the file is checked-in either way.
 
 ---
 

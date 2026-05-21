@@ -2,12 +2,11 @@ import { Suspense, lazy, useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import DisclaimerBanner from './components/DisclaimerBanner'
-import Overview from './pages/Overview'
 import AcknowledgmentModal, { hasAcknowledged } from './components/AcknowledgmentModal'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
-// Lazy-load secondary pages so they don't bloat the initial bundle.
-// Overview is the landing page and stays as a static import.
+// Lazy-load route modules so large data and map libraries stay out of the app shell.
+const Overview = lazy(() => import('./pages/Overview'))
 const Signals = lazy(() => import('./pages/Signals'))
 const News = lazy(() => import('./pages/News'))
 const SignalDetail = lazy(() => import('./pages/SignalDetail'))
