@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Hantavirus marker deduplication (commit pending)
+## ✅ Hantavirus marker deduplication (commit 0272520)
 
 Completed the cosmetic marker-deduplication backlog item. Removed the legacy
 generic `andes-fr-paris` marker ("France — confirmed case") because it had the
