@@ -59,12 +59,15 @@ export const MARKER_TYPE_COLORS: Record<MarkerType, string> = {
   animal_detection: '#3FB950',   // green
   vector_zone: '#56D364',        // lime
   infrastructure: '#79C0FF',     // light blue
+  ship_route: '#388BFD',         // blue — itinerary trail
+  us_state_monitoring: '#3FB950', // green — domestic surveillance
+  flight_tracing: '#BC8CFF',     // violet — contact-tracing path
 }
 
 // Larger marker radius for case-level and exposure markers, smaller for
 // region/infrastructure markers.
 const LARGE_MARKER_TYPES: Set<MarkerType> = new Set([
-  'case_confirmed', 'death', 'exposure_event', 'monitoring_site',
+  'case_confirmed', 'death', 'exposure_event', 'monitoring_site', 'flight_tracing',
 ])
 
 export function markerRadius(type: MarkerType): number {

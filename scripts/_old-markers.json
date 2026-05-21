@@ -1,0 +1,495 @@
+[
+  {
+    "id": "ship-ushuaia",
+    "name": "Ushuaia, Argentina",
+    "lat": -54.8019,
+    "lng": -68.3030,
+    "type": "ship_route",
+    "status": "Departure point — April 1, 2026",
+    "description": "MV Hondius departed Ushuaia with 147 passengers and crew from 23 nationalities on April 1, 2026.",
+    "source": "Wikipedia / Oceanwide Expeditions",
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius",
+    "sources": [
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" },
+      { "label": "Oceanwide Expeditions", "url": "https://oceanwide-expeditions.com/" }
+    ]
+  },
+  {
+    "id": "ship-southgeorgia",
+    "name": "South Georgia Island",
+    "lat": -54.2500,
+    "lng": -36.5000,
+    "type": "ship_route",
+    "status": "Ship route waypoint",
+    "description": "MV Hondius waypoint during Antarctic expedition route.",
+    "source": "Wikipedia / Oceanwide Expeditions",
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius",
+    "sources": [
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" },
+      { "label": "Oceanwide Expeditions", "url": "https://oceanwide-expeditions.com/" }
+    ]
+  },
+  {
+    "id": "ship-tristanda",
+    "name": "Tristan da Cunha",
+    "lat": -37.1052,
+    "lng": -12.2777,
+    "type": "ship_route",
+    "status": "Stop — April 13–15, 2026",
+    "description": "MV Hondius stopped at Tristan da Cunha April 13–15. One island resident later suspected of exposure.",
+    "source": "Wikipedia",
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius"
+  },
+  {
+    "id": "ship-sainthelena",
+    "name": "Saint Helena",
+    "lat": -15.9650,
+    "lng": -5.7089,
+    "type": "ship_route",
+    "status": "Stop — April 24, 2026",
+    "description": "Body of Case 1 removed to Saint Helena. Case 2 (Dutch female) disembarked. 30 total passengers disembarked. Case 2 subsequently boarded Airlink flight to Johannesburg.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
+    "id": "ship-ascension",
+    "name": "Ascension Island",
+    "lat": -7.9467,
+    "lng": -14.3559,
+    "type": "ship_route",
+    "status": "Stop — late April 2026",
+    "description": "Case 3 (British male, pneumonia) medically evacuated from Ascension Island to South Africa ICU on approximately April 27.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
+    "id": "ship-praia",
+    "name": "Praia, Cape Verde",
+    "lat": 14.9315,
+    "lng": -23.5087,
+    "type": "ship_route",
+    "status": "Stop — May 3, 2026",
+    "description": "Ship docked at Praia, Cape Verde on May 3. No disembarkation — local facilities insufficient. PCR posthumously confirmed Case 2.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
+    "id": "ship-tenerife",
+    "name": "Tenerife, Canary Islands",
+    "lat": 28.2916,
+    "lng": -16.6291,
+    "type": "ship_route",
+    "status": "Final stop — May 10–11, 2026",
+    "description": "MV Hondius arrived Tenerife May 10. All passengers disembarked May 11. UK passengers flown to Manchester; U.S. passengers to Offutt AFB. WHO DG Tedros present.",
+    "source": "Wikipedia / UKHSA",
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius",
+    "sources": [
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" },
+      { "label": "UKHSA — Hantavirus Cruise Ship Update", "url": "https://www.gov.uk/government/news/ukhsa-update-on-the-hantavirus-cruise-ship-outbreak" }
+    ]
+  },
+  {
+    "id": "ship-rotterdam",
+    "name": "Rotterdam, Netherlands",
+    "lat": 51.9244,
+    "lng": 4.4777,
+    "type": "return_destination",
+    "status": "Return destination — expected May 17–18, 2026",
+    "description": "MV Hondius en route to Rotterdam following all-passenger disembarkation at Tenerife.",
+    "source": "ECDC Epidemiological Update May 12, 2026",
+    "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak"
+  },
+  {
+    "id": "death-aboard-case1",
+    "name": "MV Hondius — Case 1 Death (South Atlantic)",
+    "lat": -43.0,
+    "lng": -20.5,
+    "type": "death",
+    "status": "Fatal — April 11, 2026 (aboard vessel)",
+    "description": "Case 1 (Dutch male passenger) died aboard MV Hondius on April 11, approximately 2 days before the ship reached Tristan da Cunha. Symptom onset ~April 6 with fever, headache, and mild diarrhea. No PCR performed at time of death. Body was removed to Saint Helena on April 24.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
+    "id": "case-johannesburg-death",
+    "name": "Johannesburg, South Africa — Case 2 (Death)",
+    "lat": -26.2041,
+    "lng": 28.0473,
+    "type": "death",
+    "status": "Fatal — April 26, 2026",
+    "description": "Case 2 (Dutch female) died at Johannesburg emergency department on April 26. She had disembarked at Saint Helena and boarded Airlink flight before deteriorating en route. PCR posthumously confirmed Andes virus.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
+    "id": "death-aboard-case4",
+    "name": "MV Hondius — Case 4 Death (approaching Cape Verde)",
+    "lat": 11.5,
+    "lng": -21.5,
+    "type": "death",
+    "status": "Fatal — May 2, 2026 (aboard vessel)",
+    "description": "Case 4 (German female passenger) died aboard MV Hondius on May 2, 2026, one day before the ship docked at Praia, Cape Verde. Symptom onset approximately April 28. The vessel proceeded to Cape Verde on May 3 with no disembarkation due to insufficient local facilities.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
+    "id": "case-johannesburg-icu",
+    "name": "Johannesburg, South Africa — Case 3 (ICU)",
+    "lat": -26.1800,
+    "lng": 28.0600,
+    "type": "case_confirmed",
+    "status": "Confirmed — hospitalized ICU",
+    "description": "Case 3 (British male) medically evacuated from Ascension Island to South Africa ICU approximately April 27. PCR confirmed hantavirus May 2.",
+    "source": "WHO Disease Outbreak News 599",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599"
+  },
+  {
+    "id": "case-zurich",
+    "name": "Zurich, Switzerland",
+    "lat": 47.3769,
+    "lng": 8.5417,
+    "type": "case_confirmed",
+    "status": "Confirmed — May 5, 2026",
+    "description": "Swiss case confirmed by Geneva University Hospitals on May 5. Passenger who disembarked Saint Helena April 24. Complete genome sequence ANDV/Switzerland/Hu-3337/2026 published May 8.",
+    "source": "Virological.org",
+    "sourceUrl": "https://virological.org/t/complete-sequence-of-orthohantavirus-andesense-virus-swiss-resident-2026/1023"
+  },
+  {
+    "id": "case-leiden",
+    "name": "Leiden UMC, Netherlands",
+    "lat": 52.1734,
+    "lng": 4.4777,
+    "type": "case_confirmed",
+    "status": "Confirmed — evacuated from Tenerife",
+    "description": "One or more confirmed ANDV cases evacuated from MV Hondius/Tenerife to Leiden University Medical Centre.",
+    "source": "ECDC Rapid Risk Assessment",
+    "sourceUrl": "https://www.ecdc.europa.eu/en/publications-data/hantavirus-associated-cluster-illness-cruise-ship-ecdc-assessment-and"
+  },
+  {
+    "id": "case-radboud",
+    "name": "Radboud UMC, Nijmegen, Netherlands",
+    "lat": 51.8221,
+    "lng": 5.8652,
+    "type": "case_confirmed",
+    "status": "Confirmed + 12 HCW quarantine — May 12, 2026",
+    "description": "Confirmed ANDV patient at Radboud UMC. On May 12, 12 hospital staff placed in precautionary quarantine after an incorrect blood sampling procedure was followed with the confirmed patient.",
+    "source": "Euronews May 12, 2026",
+    "sourceUrl": "https://www.euronews.com/health/2026/05/12/dutch-hospital-workers-quarantined-after-faulty-procedure-treating-hantavirus-patient"
+  },
+  {
+    "id": "case-amsterdam-umc",
+    "name": "Amsterdam UMC, Netherlands",
+    "lat": 52.3321,
+    "lng": 4.9008,
+    "type": "case_confirmed",
+    "status": "Confirmed — KLM flight attendant",
+    "description": "KLM flight attendant from KL592 (Johannesburg → Amsterdam) hospitalized at Amsterdam UMC. Attendant was on the flight when Case 2 was aboard for 45 minutes before removal.",
+    "source": "NL Times / ECDC",
+    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger",
+    "sources": [
+      { "label": "NL Times — KLM Flight Attendant", "url": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger" },
+      { "label": "ECDC — Epidemiological Update", "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak" }
+    ]
+  },
+  {
+    "id": "case-paris",
+    "name": "Paris, France",
+    "lat": 48.8566,
+    "lng": 2.3522,
+    "type": "case_confirmed",
+    "status": "Confirmed — May 11, 2026",
+    "description": "French female passenger confirmed positive for Andes virus. ANRS France activated Level 1 Emergency Response on May 7.",
+    "source": "ECDC / Al Jazeera",
+    "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+    "sources": [
+      { "label": "ECDC — Epidemiological Update", "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak" },
+      { "label": "Al Jazeera — May 11, 2026", "url": "https://www.aljazeera.com/news/2026/5/11/two-more-cruise-ship-passengers-test-positive-for-hantavirus" }
+    ]
+  },
+  {
+    "id": "case-british-columbia",
+    "name": "British Columbia, Canada",
+    "lat": 49.2827,
+    "lng": -123.1207,
+    "type": "case_confirmed",
+    "status": "Confirmed — May 16, 2026",
+    "description": "Confirmed Andes hantavirus case in British Columbia, Canada — the 12th overall case and first in North America outside the United States monitoring context. Canadian passenger from MV Hondius voyage. BC Centre for Disease Control (BCCDC) and Public Health Agency of Canada (PHAC) coordinating response. Makes Canada the 9th country with a confirmed case.",
+    "source": "BC CDC / PHAC",
+    "sourceUrl": "https://www.bccdc.ca/health-info/diseases-conditions/hantavirus",
+    "sources": [
+      { "label": "BC Centre for Disease Control", "url": "https://www.bccdc.ca/health-info/diseases-conditions/hantavirus" },
+      { "label": "Public Health Agency of Canada", "url": "https://www.canada.ca/en/public-health/services/diseases/hantavirus-pulmonary-syndrome.html" }
+    ]
+  },
+  {
+    "id": "case-madrid",
+    "name": "Madrid, Spain",
+    "lat": 40.4168,
+    "lng": -3.7038,
+    "type": "case_confirmed",
+    "status": "Confirmed — May 13, 2026 (WHO DON601)",
+    "description": "Spanish male passenger confirmed positive for Andes virus per WHO DON601 (May 13, 2026). Previously classified as preliminary positive (May 11). Spain was one of two newly confirmed cases added in DON601 alongside France.",
+    "source": "WHO DON601 / ECDC",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",
+    "sources": [
+      { "label": "WHO DON601", "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601" },
+      { "label": "ECDC — Surveillance Update", "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak" }
+    ]
+  },
+  {
+    "id": "monitoring-arrowe",
+    "name": "Arrowe Park Hospital, Wirral, UK",
+    "lat": 53.3637,
+    "lng": -3.1167,
+    "type": "monitoring_facility",
+    "status": "Quarantine facility — May 10, 2026",
+    "description": "22 UK passengers and crew (19 passengers, 3 crew) flown from Tenerife to Manchester and placed in 72-hour quarantine at Arrowe Park Hospital, followed by 45-day home isolation.",
+    "source": "Wikipedia / UKHSA",
+    "sourceUrl": "https://en.wikipedia.org/wiki/MV_Hondius",
+    "sources": [
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" },
+      { "label": "UKHSA — Hantavirus Cruise Ship Update", "url": "https://www.gov.uk/government/news/ukhsa-update-on-the-hantavirus-cruise-ship-outbreak" }
+    ]
+  },
+  {
+    "id": "facility-unmc",
+    "name": "Nebraska Medicine / UNMC Biocontainment Unit, Omaha",
+    "lat": 41.2565,
+    "lng": -95.9345,
+    "type": "monitoring_facility",
+    "status": "Active — 15 quarantine; biocontainment patient confirmed NEGATIVE",
+    "description": "U.S. repatriation passengers at UNMC: 15 in quarantine unit completing 42-day observation. The biocontainment patient with previously inconclusive results has retested NEGATIVE (confirmed May 15). CDC confirms no U.S. cases from MV Hondius. Part of 18 total U.S. passengers from May 11 repatriation flight.",
+    "source": "CDC HAN 528 / Nebraska Medicine",
+    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "Nebraska Medicine", "url": "https://www.nebraskamed.com/health/nebraska-medicine-news/biocontainment-unit/nebraska-medicineunmc-asked-to-monitor-us" }
+    ]
+  },
+  {
+    "id": "facility-emory",
+    "name": "Emory University Hospital, Atlanta",
+    "lat": 33.7490,
+    "lng": -84.3880,
+    "type": "monitoring_facility",
+    "status": "Discharged — both passengers cleared May 16",
+    "description": "2 U.S. repatriation passengers transferred to Emory University Hospital. Both tested NEGATIVE for hantavirus and were released May 16. CDC confirms no confirmed U.S. cases from MV Hondius.",
+    "source": "CDC HAN 528 / GA DPH / ABC News",
+    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "GA DPH Press Release", "url": "https://dph.georgia.gov/press-releases/2026-05-11/two-individuals-being-transported-emory-universitys-serious-communicable" },
+      { "label": "ABC News", "url": "https://abcnews.com/International/live-updates/hantavirus-live-updates-mv-hondius-canary-islands/?id=132746955" }
+    ]
+  },
+  {
+    "id": "death-colorado-sinnombre",
+    "name": "Colorado — Sin Nombre Virus Death (UNRELATED to cruise ship)",
+    "lat": 39.5501,
+    "lng": -105.7821,
+    "type": "death",
+    "status": "⚠ UNRELATED — Sin Nombre Virus (NOT Andes) — May 16, 2026",
+    "description": "⚠ NOT LINKED TO MV HONDIUS: A Colorado resident died of hantavirus pulmonary syndrome caused by Sin Nombre virus (SNV) — the rodent-borne strain endemic to the western United States. This is a separate and unrelated endemic exposure. Sin Nombre virus is transmitted by deer mice via inhalation of infected rodent droppings and does NOT transmit person-to-person. No epidemiological link to the MV Hondius Andes virus cluster. Reported by CDC and Colorado CDPHE.",
+    "source": "CDC / Colorado CDPHE",
+    "sourceUrl": "https://cdphe.colorado.gov/respiratory/hantavirus",
+    "sources": [
+      { "label": "Colorado CDPHE", "url": "https://cdphe.colorado.gov/respiratory/hantavirus" },
+      { "label": "CDC — Hantavirus", "url": "https://www.cdc.gov/hantavirus/" }
+    ]
+  },
+  {
+    "id": "usmon-arizona",
+    "name": "Arizona (Phoenix)",
+    "lat": 33.4484,
+    "lng": -112.0740,
+    "type": "us_state_monitoring",
+    "status": "1 person under monitoring",
+    "description": "Arizona Department of Health Services monitoring 1 passenger who disembarked at Saint Helena.",
+    "source": "AZ Department of Health Services",
+    "sourceUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/vector-borne-zoonotic-diseases/index.php"
+  },
+  {
+    "id": "usmon-california",
+    "name": "California (Sacramento)",
+    "lat": 38.5816,
+    "lng": -121.4944,
+    "type": "us_state_monitoring",
+    "status": "4 persons under monitoring",
+    "description": "California Department of Public Health monitoring 4 persons: 3 passengers and 1 flight contact.",
+    "source": "California Department of Public Health",
+    "sourceUrl": "https://www.cdph.ca.gov/"
+  },
+  {
+    "id": "usmon-georgia",
+    "name": "Georgia (Atlanta)",
+    "lat": 33.7490,
+    "lng": -84.3880,
+    "type": "us_state_monitoring",
+    "status": "2 persons discharged — both hantavirus negative",
+    "description": "Georgia monitoring resolved. Both Emory University Hospital repatriated passengers tested NEGATIVE for hantavirus and were discharged May 16. CDC confirms no US cases from MV Hondius.",
+    "source": "CDC HAN 528 / GA DPH",
+    "sourceUrl": "https://dph.georgia.gov/press-releases/2026-05-11/two-individuals-being-transported-emory-universitys-serious-communicable",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "GA DPH Press Release", "url": "https://dph.georgia.gov/press-releases/2026-05-11/two-individuals-being-transported-emory-universitys-serious-communicable" }
+    ]
+  },
+  {
+    "id": "usmon-kansas",
+    "name": "Kansas (Topeka)",
+    "lat": 39.0558,
+    "lng": -95.6890,
+    "type": "us_state_monitoring",
+    "status": "3 persons under monitoring (high-risk)",
+    "description": "Kansas KDHE monitoring 3 residents identified as high-risk close contacts.",
+    "source": "Kansas KDHE",
+    "sourceUrl": "https://www.kdhe.ks.gov/m/NewsFlash/Home/Detail/1936"
+  },
+  {
+    "id": "usmon-maryland",
+    "name": "Maryland (Annapolis)",
+    "lat": 38.9784,
+    "lng": -76.4922,
+    "type": "us_state_monitoring",
+    "status": "2 persons under monitoring",
+    "description": "Maryland DOH monitoring 2 flight contacts.",
+    "source": "Maryland Department of Health",
+    "sourceUrl": "https://health.maryland.gov/newsroom/Pages/Maryland-Department-of-Health-Monitoring-2-MD-Residents-Following-Potential-Hantavirus-Exposure-Linked-to-Hondius-Passenger.aspx"
+  },
+  {
+    "id": "usmon-nebraska",
+    "name": "Nebraska (Lincoln)",
+    "lat": 40.8136,
+    "lng": -96.7026,
+    "type": "us_state_monitoring",
+    "status": "16 persons monitoring; biocontainment patient confirmed NEGATIVE",
+    "description": "Nebraska monitoring 16 repatriated passengers at UNMC. The biocontainment patient who had inconclusive test results (discordant from two labs) has retested NEGATIVE (confirmed May 15). 15 passengers remain in quarantine unit completing 42-day observation. CDC confirms no confirmed US cases from MV Hondius.",
+    "source": "CDC HAN 528 / Nebraska Medicine",
+    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "Nebraska Medicine", "url": "https://www.nebraskamed.com/health/nebraska-medicine-news/biocontainment-unit/nebraska-medicineunmc-asked-to-monitor-us" }
+    ]
+  },
+  {
+    "id": "usmon-newjersey",
+    "name": "New Jersey (Trenton)",
+    "lat": 40.2171,
+    "lng": -74.7429,
+    "type": "us_state_monitoring",
+    "status": "2 persons under monitoring",
+    "description": "NJDOH monitoring 2 residents identified as flight contacts.",
+    "source": "New Jersey Department of Health",
+    "sourceUrl": "https://www.nj.gov/health/cd/topics/hanta.shtml"
+  },
+  {
+    "id": "usmon-texas",
+    "name": "Texas (Austin)",
+    "lat": 30.2672,
+    "lng": -97.7431,
+    "type": "us_state_monitoring",
+    "status": "2 persons under monitoring",
+    "description": "Texas DSHS monitoring 2 passengers who returned before the outbreak was declared.",
+    "source": "Texas DSHS",
+    "sourceUrl": "https://www.dshs.texas.gov/news-alerts/dshs-statement-texas-residents-who-were-board-mv-hondius"
+  },
+  {
+    "id": "usmon-virginia",
+    "name": "Virginia (Richmond)",
+    "lat": 37.5407,
+    "lng": -77.4360,
+    "type": "us_state_monitoring",
+    "status": "TBD persons under monitoring",
+    "description": "Virginia Department of Health monitoring passengers and contacts. Number TBD.",
+    "source": "Virginia Department of Health",
+    "sourceUrl": "https://www.vdh.virginia.gov/hantavirus"
+  },
+  {
+    "id": "usmon-washington",
+    "name": "Washington (Olympia)",
+    "lat": 47.0379,
+    "lng": -122.9007,
+    "type": "us_state_monitoring",
+    "status": "3 persons under monitoring",
+    "description": "Washington State DOH and King County monitoring 3 residents: 2 flight contacts and 1 passenger.",
+    "source": "WA DOH / King County DPH",
+    "sourceUrl": "https://doh.wa.gov/you-and-your-family/illness-and-disease-z/hantavirus",
+    "sources": [
+      { "label": "WA DOH — Hantavirus", "url": "https://doh.wa.gov/you-and-your-family/illness-and-disease-z/hantavirus" },
+      { "label": "King County DPH — May 12, 2026", "url": "https://kingcounty.gov/en/dept/dph/about-king-county/about-public-health/news/news-archive-2026/05-12-hantavirus" }
+    ]
+  },
+  {
+    "id": "usmon-newyork",
+    "name": "New York (Albany)",
+    "lat": 42.6526,
+    "lng": -73.7562,
+    "type": "us_state_monitoring",
+    "status": "3 persons under monitoring",
+    "description": "NY State DOH confirmed 3 NY residents aboard: NYC, Orange County, and Westchester County.",
+    "source": "New York State Department of Health",
+    "sourceUrl": "https://www.health.ny.gov/diseases/communicable/hantavirus/"
+  },
+  {
+    "id": "flight-airlink-origin",
+    "name": "Saint Helena — Airlink Flight Origin",
+    "lat": -15.9700,
+    "lng": -5.7150,
+    "type": "flight_tracing",
+    "status": "Airlink flight — April 25, 2026",
+    "description": "Airlink flight departed Saint Helena Airport with 82 passengers and 6 crew on April 25. Case 2 (confirmed ANDV, died April 26) was aboard. South African health ministry conducted full passenger contact tracing.",
+    "source": "WHO DON599 / CNN",
+    "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599",
+    "sources": [
+      { "label": "WHO DON599", "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON599" },
+      { "label": "CNN — Hantavirus Cruise Outbreak", "url": "https://www.cnn.com/2026/05/11/us/live-news/hantavirus-cruise-outbreak" }
+    ]
+  },
+  {
+    "id": "flight-klm-origin",
+    "name": "Johannesburg — KLM KL592 Origin",
+    "lat": -26.1380,
+    "lng": 28.2410,
+    "type": "flight_tracing",
+    "status": "KLM KL592 — April 25, 2026",
+    "description": "KLM KL592 (also codeshare AF8282 / DL9560 / SK6855) departed Johannesburg OR Tambo at 11:15 PM April 25. Case 2 was aboard for 45 minutes before removal. Dutch GGD contacted all passengers.",
+    "source": "NL Times / CNN / Wikipedia",
+    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger",
+    "sources": [
+      { "label": "NL Times — KLM Flight Attendant", "url": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger" },
+      { "label": "CNN — Hantavirus Cruise Outbreak", "url": "https://www.cnn.com/2026/05/11/us/live-news/hantavirus-cruise-outbreak" },
+      { "label": "Wikipedia — MV Hondius", "url": "https://en.wikipedia.org/wiki/MV_Hondius" }
+    ]
+  },
+  {
+    "id": "flight-klm-destination",
+    "name": "Amsterdam — KLM KL592 Destination",
+    "lat": 52.3676,
+    "lng": 4.9041,
+    "type": "flight_tracing",
+    "status": "KLM KL592 arrival — April 26, 2026",
+    "description": "KLM KL592 arrived Amsterdam Schiphol. KLM flight attendant subsequently hospitalized at Amsterdam UMC with mild symptoms.",
+    "source": "NL Times / CNN",
+    "sourceUrl": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger",
+    "sources": [
+      { "label": "NL Times — KLM Flight Attendant", "url": "https://nltimes.nl/2026/05/07/klm-flight-attendant-hospitalized-contact-hantavirus-cruise-ship-passenger" },
+      { "label": "CNN — Hantavirus Cruise Outbreak", "url": "https://www.cnn.com/2026/05/11/us/live-news/hantavirus-cruise-outbreak" }
+    ]
+  },
+  {
+    "id": "flight-usrepatriation",
+    "name": "Offutt AFB, Omaha — U.S. Repatriation Flight Destination",
+    "lat": 41.1200,
+    "lng": -95.9134,
+    "type": "flight_tracing",
+    "status": "U.S. Gov charter — May 11, 2026",
+    "description": "U.S. Government charter flight from Tenerife arrived Offutt Air Force Base May 11 with 18 passengers (17 Americans + 1 British dual national). 1 mildly positive and 1 mildly symptomatic traveled in aircraft biocontainment units.",
+    "source": "CDC HAN 528 / NPR / ABC News",
+    "sourceUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+    "sources": [
+      { "label": "CDC HAN 528", "url": "https://www.cdc.gov/han/php/notices/han00528.html" },
+      { "label": "NPR — U.S. Passengers Land at Offutt AFB", "url": "https://www.npr.org/2026/05/10/nx-s1-5817578/hantavirus-cruise-ship-nebraska-us-passengers" },
+      { "label": "ABC News — Live Updates", "url": "https://abcnews.com/International/live-updates/hantavirus-live-updates-mv-hondius-canary-islands/?id=132746955" }
+    ]
+  }
+]

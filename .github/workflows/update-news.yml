@@ -36,7 +36,7 @@ jobs:
       - name: Fetch and update news feed
         run: npm run update:news
         env:
-          MAX_NEWS_ITEMS: 200
+          MAX_NEWS_ITEMS: 500
           MAX_NEWS_AGE_DAYS: 30
 
       - name: Commit updated news.json

@@ -41,20 +41,24 @@ export interface SignalMetric {
 }
 
 /**
- * Generalized marker categories for the multi-threat dashboard.
- * Replaces the hantavirus-only types (ship_route, flight_tracing,
- * us_state_monitoring, etc.) with semantically broader categories
- * that work across all signal domains.
+ * Multi-threat marker categories. Includes both the generalized types
+ * (outbreak_zone, exposure_event, etc.) and travel/domestic-monitoring
+ * types preserved from the original hantavirus dashboard (ship_route,
+ * us_state_monitoring, flight_tracing) which are useful for any signal
+ * involving travel-linked exposure or domestic surveillance networks.
  */
 export type MarkerType =
-  | 'case_confirmed'      // confirmed/probable human case
-  | 'death'               // fatal case
-  | 'outbreak_zone'       // active outbreak area (city/region/country)
-  | 'exposure_event'      // specific exposure incident (ship route, HCW exposure, mass-gathering venue)
-  | 'monitoring_site'     // wastewater, surveillance, biocontainment, treatment center
-  | 'animal_detection'    // livestock/wildlife/poultry detection
-  | 'vector_zone'         // vector establishment / endemic vector area
-  | 'infrastructure'      // health system asset (BSL lab, port of entry, mass-gathering venue)
+  | 'case_confirmed'        // confirmed/probable human case
+  | 'death'                 // fatal case
+  | 'outbreak_zone'         // active outbreak area (city/region/country)
+  | 'exposure_event'        // specific exposure incident (HCW exposure, mass-gathering venue)
+  | 'monitoring_site'       // wastewater, surveillance, biocontainment, treatment center
+  | 'animal_detection'      // livestock/wildlife/poultry detection
+  | 'vector_zone'           // vector establishment / endemic vector area
+  | 'infrastructure'        // health system asset (BSL lab, port of entry, mass-gathering venue)
+  | 'ship_route'            // ship/cruise itinerary waypoint
+  | 'us_state_monitoring'   // US state-level domestic monitoring node
+  | 'flight_tracing'        // flight contact-tracing origin or destination
 
 export const MARKER_TYPE_LABELS: Record<MarkerType, string> = {
   case_confirmed: 'Confirmed case',
@@ -65,6 +69,9 @@ export const MARKER_TYPE_LABELS: Record<MarkerType, string> = {
   animal_detection: 'Animal detection',
   vector_zone: 'Vector zone',
   infrastructure: 'Infrastructure',
+  ship_route: 'Ship route',
+  us_state_monitoring: 'US state monitoring',
+  flight_tracing: 'Flight tracing',
 }
 
 export interface MarkerSource {
@@ -116,6 +123,41 @@ export interface SignalDetailSection {
   additionalAttributions?: SectionAttribution[]
 }
 
+/**
+ * Authoritative risk-level assessment from a public health authority.
+ * Renders as a prominent badge strip on signal-detail pages.
+ */
+export interface RiskAssessment {
+  /** Authority issuing the assessment (e.g. WHO, CDC, ECDC). */
+  authority: string
+  /** Label shown on the badge (e.g. "LOW", "VERY LOW", "HAN 528"). */
+  label: string
+  /** Free-text description (e.g. "Global risk", "EU/EEA risk"). */
+  description: string
+  /** Link to the issuing document. */
+  url: string
+  /** Date of the assessment. */
+  asOf?: string
+}
+
+/**
+ * Healthcare-worker alert callout — prominent warning surfaced on
+ * signal-detail pages when a signal carries an HCW-relevant operational
+ * concern (e.g. documented HCW transmission, faulty procedure exposure).
+ */
+export interface HcwAlert {
+  /** Short headline shown in the alert. */
+  headline: string
+  /** Plain text body — single paragraph. */
+  body: string
+  /** Link to the issuing authority's source document. */
+  sourceUrl: string
+  /** Authority issuing the alert. */
+  sourceAuthority: string
+  /** Date the alert was issued or last updated. */
+  updatedAt: string
+}
+
 export interface Signal {
   id: string
   name: string
@@ -134,6 +176,10 @@ export interface Signal {
   metrics?: SignalMetric[]
   mapMarkers?: SignalMapMarker[]
   detailSections?: SignalDetailSection[]
+  /** Authoritative risk assessments from public health authorities. */
+  riskAssessments?: RiskAssessment[]
+  /** Healthcare-worker alert callout when applicable. */
+  hcwAlert?: HcwAlert
   primarySourceId: string
   sourceIds: string[]
   lastUpdated: string

@@ -1,0 +1,144 @@
+{
+  "confirmed": 11,
+  "deaths": 3,
+  "countries": 9,
+  "usStatesMonitoring": 11,
+  "source": "ECDC / WHO / CDC / PHAC",
+  "lastUpdated": "2026-05-19T23:23:55.802Z",
+  "lastChecked": "2026-05-20T01:32:03.663Z",
+  "feedHealth": {
+    "lastRun": "2026-05-20T01:32:03.663Z",
+    "failedFeeds": [
+      "WHO",
+      "ECDC",
+      "ProMED",
+      "Eurosurveillance",
+      "RIVM",
+      "CTV News",
+      "PHAC",
+      "RKI",
+      "Reuters",
+      "AP News",
+      "Harvard HSPH"
+    ],
+    "criticalFeedFailures": [],
+    "itemsFound": 121,
+    "candidateItemsFound": 132,
+    "extractionStatus": "Gemini unavailable after retries; RSS-only fallback added 0 news item(s)",
+    "officialSourceFailures": []
+  },
+  "whoGlobalRisk": "LOW",
+  "whoGlobalRiskUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON601",
+  "cdcResponseLevel": "HAN 528",
+  "cdcResponseLevelUrl": "https://www.cdc.gov/han/php/notices/han00528.html",
+  "ecdcRisk": "VERY LOW",
+  "ecdcRiskUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+  "hcwAlert": {
+    "title": "HEALTHCARE WORKER EXPOSURE EVENT — Netherlands",
+    "content": "12 staff at Radboud UMC university medical centre in Nijmegen placed in precautionary quarantine after an incorrect blood sampling procedure was followed with a confirmed Andes hantavirus patient. May 12, 2026.",
+    "date": "2026-05-12",
+    "sourceLabel": "Euronews",
+    "sourceUrl": "https://www.euronews.com/health/2026/05/12/dutch-hospital-workers-quarantined-after-faulty-procedure-treating-hantavirus-patient"
+  },
+  "metricProvenance": {
+    "ecdcRisk": {
+      "source": "ECDC",
+      "sourceLabel": "ECDC Surveillance Update",
+      "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+      "method": "official-parser",
+      "lastVerified": "2026-05-20T01:32:16.207Z"
+    },
+    "confirmed": {
+      "source": "ECDC",
+      "sourceLabel": "ECDC Surveillance Update",
+      "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+      "method": "official-parser",
+      "lastVerified": "2026-05-20T01:32:16.207Z"
+    },
+    "deaths": {
+      "source": "ECDC",
+      "sourceLabel": "ECDC Surveillance Update",
+      "sourceUrl": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+      "method": "official-parser",
+      "lastVerified": "2026-05-20T01:32:16.207Z"
+    }
+  },
+  "lastOfficialSourceCheck": "2026-05-20T01:32:03.663Z",
+  "officialSources": [
+    {
+      "id": "cdc-situation-summary",
+      "authority": "CDC",
+      "label": "CDC Situation Summary",
+      "url": "https://www.cdc.gov/hantavirus/situation-summary/index.html",
+      "critical": true,
+      "status": "ok",
+      "lastChecked": "2026-05-20T01:32:03.663Z",
+      "lastChanged": "2026-05-19T19:13:33.009Z",
+      "hash": "9c368d1181146ac3bb081969869329f8e3cf08171b079882a8850f339a111daf",
+      "transport": "direct",
+      "extracted": {
+        "caseStats": {},
+        "riskLevels": {},
+        "facts": []
+      }
+    },
+    {
+      "id": "ecdc-surveillance",
+      "authority": "ECDC",
+      "label": "ECDC Surveillance Update",
+      "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
+      "critical": true,
+      "status": "ok",
+      "lastChecked": "2026-05-20T01:32:03.663Z",
+      "lastChanged": "2026-05-19T19:13:33.009Z",
+      "hash": "ecef85609ae171e9f0ff4b0eeae182a3598e737f718482059bdad46870bd9303",
+      "transport": "direct",
+      "extracted": {
+        "caseStats": {
+          "confirmed": 11,
+          "deaths": 3
+        },
+        "riskLevels": {
+          "ecdcRisk": "VERY LOW"
+        },
+        "facts": [
+          "9 confirmed, 2 probable, 11 total reported cases"
+        ]
+      }
+    },
+    {
+      "id": "who-rra-v2",
+      "authority": "WHO",
+      "label": "WHO Rapid Risk Assessment v2",
+      "url": "https://www.who.int/publications/m/item/who-rapid-risk-assessment---hantavirus-outbreak-caused-by-andes-virus--global-v.2",
+      "critical": false,
+      "status": "ok",
+      "lastChecked": "2026-05-20T01:32:03.663Z",
+      "lastChanged": "2026-05-19T19:13:33.009Z",
+      "hash": "033cf8f836bc837129fdb6e59dc0e834b9c24fc43360e0bba00d524772e6e39f",
+      "transport": "direct",
+      "extracted": {
+        "caseStats": {},
+        "riskLevels": {},
+        "facts": []
+      }
+    },
+    {
+      "id": "phac-media-update",
+      "authority": "PHAC",
+      "label": "PHAC Media Update",
+      "url": "https://www.canada.ca/en/public-health/news/2026/05/media-update-on-andes-hantavirus-situation1.html",
+      "critical": false,
+      "status": "ok",
+      "lastChecked": "2026-05-20T01:32:03.663Z",
+      "lastChanged": "2026-05-19T19:13:33.009Z",
+      "hash": "52fc08b633a90bcc302a95c101a224c6d2e497d6e1befa4b7fed7331beb292cd",
+      "transport": "direct",
+      "extracted": {
+        "caseStats": {},
+        "riskLevels": {},
+        "facts": []
+      }
+    }
+  ]
+}

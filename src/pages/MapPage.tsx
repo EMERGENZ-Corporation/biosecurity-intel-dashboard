@@ -20,6 +20,9 @@ const MARKER_TYPE_OPTIONS: MarkerType[] = [
   'animal_detection',
   'vector_zone',
   'infrastructure',
+  'ship_route',
+  'us_state_monitoring',
+  'flight_tracing',
 ]
 
 const ROW_LABEL: React.CSSProperties = {

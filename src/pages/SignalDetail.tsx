@@ -14,6 +14,8 @@ import {
 } from '../utils/signals'
 import SignalsMap from '../components/SignalsMap'
 import ContentBlock from '../components/ContentBlock'
+import HcwAlertCard from '../components/HcwAlertCard'
+import AuthorityRiskBadges from '../components/AuthorityRiskBadges'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -163,6 +165,12 @@ export default function SignalDetail() {
         <Field label="Updated">{formatDate(signal.lastUpdated)}</Field>
         <Field label="Last checked">{formatDate(signal.lastChecked)}</Field>
       </div>
+
+      {signal.riskAssessments && signal.riskAssessments.length > 0 && (
+        <AuthorityRiskBadges assessments={signal.riskAssessments} />
+      )}
+
+      {signal.hcwAlert && <HcwAlertCard alert={signal.hcwAlert} />}
 
       <Section title="Summary">
         <Paragraph>{signal.summary}</Paragraph>

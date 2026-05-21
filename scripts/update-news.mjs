@@ -16,7 +16,11 @@ import { XMLParser } from 'fast-xml-parser'
 const SIGNALS_PATH = 'src/data/signals.json'
 const NEWS_PATH = 'src/data/news.json'
 
-const MAX_ITEMS = Number.parseInt(process.env.MAX_NEWS_ITEMS || '200', 10)
+// Bumped from 200 -> 500 so historical / authoritative items survive when
+// per-signal Google News queries flood with same-day items. With ~16 signals
+// × ~100 fresh items per run, the old 200 cap evicted everything older than
+// 24 hours including curated CDC HAN / WHO DON / ECDC seeded entries.
+const MAX_ITEMS = Number.parseInt(process.env.MAX_NEWS_ITEMS || '500', 10)
 const MAX_AGE_DAYS = Number.parseInt(process.env.MAX_NEWS_AGE_DAYS || '30', 10)
 const FETCH_TIMEOUT_MS = 12000
 

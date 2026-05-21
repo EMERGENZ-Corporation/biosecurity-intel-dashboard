@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20 (after deepening — 30 new attributed sections across 15 signals; total now 50)
+**Last updated:** 2026-05-20 (after hantavirus-asset restoration — markers, news, timeline, risk badges, HCW alert)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 ---
@@ -145,12 +145,46 @@ All sections carry: primary `attribution` + 1-2 `additionalAttributions` (pulled
 
 ---
 
+## ✅ Hantavirus-asset restoration (commit pending push)
+
+Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.md).
+
+**Types** (`src/types.ts`):
+- `MarkerType` extended with `ship_route`, `us_state_monitoring`, `flight_tracing` — preserves original hantavirus dashboard semantics
+- New interfaces: `RiskAssessment` (authority + label + description + url), `HcwAlert` (headline + body + source)
+- `Signal` interface adds optional `riskAssessments[]` and `hcwAlert`
+
+**Components** (new):
+- `src/components/HcwAlertCard.tsx` — orange-accent alert callout with headline, body, source link, updated-at
+- `src/components/AuthorityRiskBadges.tsx` — colored badge strip (WHO/CDC/ECDC etc.) with click-through to source
+
+**SignalDetail** now renders, in this order: risk badges → HCW alert → summary → ...
+
+**Data restored** (via `scripts/restore-hantavirus-assets.mjs`):
+- **48 hantavirus markers** (was 15) — 6 ship-route waypoints, 11 US-state monitoring nodes, 4 flight-tracing markers, 7 specific case/death sites, Arrowe Park UK monitoring, Colorado Sin Nombre context, Rotterdam return destination
+- **231 news items** (was 200) — 31 original hantavirus items (CDC HAN, WHO DON, ECDC, AP, BBC, etc.) re-seeded with `signalIds: ['andes-hantavirus-mv-hondius-2026']`
+- **41 timeline events** (was 13) — 28 hantavirus events restored across April–May 2026
+- **3 authority risk badges** for hantavirus (WHO LOW, CDC HAN 528, ECDC VERY LOW) wired through to source documents
+- **HCW alert** on hantavirus signal citing NYC DOH HAN #8 and Radboud UMC HCW exposure event
+
+**Pipeline fix** (`scripts/update-news.mjs` + `.github/workflows/update-news.yml`):
+- `MAX_ITEMS` raised from 200 → 500 so authoritative seeded items survive the daily Google News flood
+- Root cause documented: pipeline-generated IDs (`${authority}-${md5(link).slice(0,8)}`) don't collide with manually-seeded IDs, so without higher cap, sort-by-timestamp evicts older items
+
+**Status counters** now read: 136 markers · 50 sections · 41 events · 231 news.
+
+**Verify:** visit `/signals/andes-hantavirus-mv-hondius-2026` — expect risk-badge strip (WHO/CDC/ECDC), HCW alert callout, 48 markers on mini-map. `/status` shows updated counts. `/timeline` shows the restored hantavirus chronology.
+
+---
+
 ## ⏳ Outstanding work (backlog)
 
 - **Further deepening if desired.** Currently 3 sections per non-hantavirus signal vs 5 for hantavirus. Adding 1-2 more per signal would bring full parity. Diminishing-returns territory; only worth doing for signals that warrant deeper EMS-facing content.
-- **Bundle size.** Main bundle is 640 kB (gzip 203 kB) — past Vite's 500 kB warning. Larger now with 50 sections embedded. Consider `manualChunks` or convert `news.json` and `signals.json` to a runtime `fetch()` instead of build-time import.
+- **Bundle size.** Main bundle is 640 kB (gzip 203 kB) — past Vite's 500 kB warning. Larger now with all sections + restored markers embedded. Consider `manualChunks` or convert `news.json` and `signals.json` to a runtime `fetch()` instead of build-time import.
 - **Accessibility sweep.** AcknowledgmentModal focus trap + ESC; keyboard nav for filter chip rows; verify ARIA on map filter rows.
 - **Intermittent feed failures.** WHO and ECDC occasionally 404 during pipeline runs. Tolerated as non-critical, but watch for sustained failures — they're Tier 1 and CONTENT-STANDARDS §6.1 says Tier 1 failures during active outbreaks should hard-alert. The current pipeline only marks CDC as `critical: true`; consider adding WHO/ECDC if their endpoints stabilize.
+- **Marker deduplication (cosmetic).** The restoration left ~3 generic vs specific overlaps on the hantavirus signal (e.g. "France — confirmed case" generic + "Paris, France" specific from old data). Both at similar coords; functional but slightly redundant. Trim if desired.
+- **HCW alert / risk badges on other signals.** Currently only the hantavirus signal carries `riskAssessments` and `hcwAlert`. Add WHO global risk, regional risk, and HCW alerts where applicable to mpox, lassa, ebola, H5 — the schema supports it; just needs content.
 
 ---
 
