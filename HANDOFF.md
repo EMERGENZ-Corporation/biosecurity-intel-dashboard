@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Accessibility sweep: modal focus + filter semantics (commit pending)
+## ✅ Accessibility sweep: modal focus + filter semantics (commit d9ef47e)
 
 Completed the next backlog item after the bundle split. The acknowledgment
 modal now traps Tab focus inside the dialog, focuses the acceptance button on
