@@ -7,6 +7,93 @@
 
 ---
 
+## How to maintain this file (read before editing the repo)
+
+If you are an agent picking up work on this repo, follow these instructions every session.
+
+### When you must update HANDOFF.md
+
+**Before staging a commit, check whether HANDOFF.md needs an entry.** If your change:
+
+- Adds, removes, or renames any file in `src/`, `scripts/`, `.github/workflows/`, or `public/`
+- Modifies any data file (`signals.json`, `signal-sources.json`, `signal-timeline.json`, `news.json`)
+- Changes any user-visible string (labels, copy, button text)
+- Touches build configuration (`package.json`, `vite.config.ts`, `tsconfig.json`)
+- Adds or modifies a TypeScript type, interface, or exported constant
+- Updates a workflow URL, env var, schedule, or step
+- Adds or removes a dependency
+
+…then it requires a HANDOFF entry. Trivial whitespace/formatting cleanups do not.
+
+### Where the entry goes
+
+The file is organized as a reverse-chronological log. Add a new `## ✅ <Title> (commit <SHA-prefix>)` section immediately under the most recent shipped item. Move older items down — never delete them. Keep the **Outstanding work (backlog)** section as the tail.
+
+### Entry structure
+
+```markdown
+## ✅ <Short title of what shipped> (commit <7-char-sha>)
+
+<1–3 sentences describing what changed and why. Include the user's
+original ask if applicable so future agents see the intent, not just
+the implementation.>
+
+**Files touched:**
+- `src/path/to/file.tsx` — what changed
+- `scripts/something.mjs` — what it does
+
+<For larger shipments, add a bullet list of specifics — e.g. signal
+names affected, marker counts, etc.>
+
+**Verify:** <one-line description of how to confirm the change is live
+in the browser or in test output, with an explicit path like `/map` or
+a command like `npm run validate:data`>
+```
+
+### When you complete a backlog item
+
+1. Move it from "Outstanding work (backlog)" into a new "✅ Shipped" section above (don't delete from the backlog — strike it through or rewrite as a completed item).
+2. Cross-reference the commit SHA so future agents can find the diff.
+
+### When you discover new outstanding work
+
+Add it to the **Outstanding work (backlog)** section with:
+- Why it matters (1 sentence)
+- What's blocking it from being done now (if anything)
+- Rough scope (small / medium / large)
+
+### Update the timestamp
+
+Edit the `**Last updated:**` line at the top of the file to reflect the most recent change. Format: `2026-MM-DD (short summary)`.
+
+### Commit message convention for HANDOFF updates
+
+When you ship a change, the commit message body should include a HANDOFF mention. Examples:
+
+- `docs(handoff): log <feature> ship` — when HANDOFF is the only file changed (backfill)
+- For combined commits, mention "HANDOFF.md updated" in the body, after the description of the code change
+
+### What "current" means
+
+The file should always represent the **state of main**, not work-in-progress. If you stage but don't commit, don't update HANDOFF yet. If you commit but don't push, update HANDOFF in the pending commit. The user reads this file to know what's actually deployed.
+
+### Backfill discipline
+
+If you discover an old commit that wasn't logged, backfill it as a separate `docs(handoff)` commit. Don't bundle backfills with new feature work.
+
+### Stale check
+
+At the start of every session, scan recent `git log` and compare against HANDOFF entries. If commits exist that aren't logged, backfill before starting new work.
+
+```bash
+git log --oneline -20  # check recent commits
+# If any commits aren't reflected in HANDOFF.md, backfill before proceeding
+```
+
+---
+
+---
+
 ## Background
 
 The repository was migrated from a single-threat hantavirus dashboard to a multi-threat biosecurity scaffold in commits `f39f8a4`, `cfd08bb`, `90bd172`, and `f4ebe5c` (Mar–May 2026). The migration **stripped substantial depth** — news feed, deep clinical pages, source-attributed content blocks, US monitoring tables, EMS briefing cards, flight tracing, dark-mode map with typed markers, and a comprehensive About/Legal page.
