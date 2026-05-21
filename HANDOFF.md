@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Custom domain verification + bundle split (commit 6e671ab)
+## ✅ Custom domain verification + bundle split (commit 6798844)
 
 User reported the custom domain was resolved. Verified
 `biosecurity-intel.emergenzsystems.org` now resolves to Vercel DNS, confirmed
