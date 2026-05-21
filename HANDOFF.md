@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20 (after Overview rails restoration)
+**Last updated:** 2026-05-20 (after tab sweep — all restoration items complete)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 ---
@@ -27,7 +27,9 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 3. ✅ **Map** — dark CARTO + typed markers + seed data
 4. ✅ **SignalDetail / ContentBlock** — per-block source attribution
 5. ✅ **Overview page** — restored briefing/news/monitoring rails
-6. ⏳ **Sweep remaining tabs** — Timeline, Briefings, Resources, Status fit-and-finish
+6. ✅ **Sweep remaining tabs** — Timeline, Briefings, Sources, Resources, SignalCard
+
+**All six restoration items shipped.** Future work is now polish, content deepening, or new features — see "Outstanding work" below for backlog ideas.
 
 ---
 
@@ -89,29 +91,30 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ---
 
-## ⏳ Outstanding work
+### 6. Tab sweep (commit pending push)
+- **Briefings (`/briefings`):** complete rebuild. Each signal at severity Watch+ rendered as a card surfacing its `ems-specific` / `operational-guidance` / `protocols-and-guidance` / `clinical-profile` section (whichever is present, in that priority). Card shows severity pill, category, geography, signal name link, operational relevance, a tinted preview box with section title and first 2 paragraphs + "Read full briefing →" link, and a footer SourceChip pulling from `section.attribution` (falls back to primarySourceId). Severity + category filters.
+- **Timeline (`/timeline`):** event card `borderLeft` now uses the signal's severity color (was always blue). Each event includes a severity pill matching the signal. Source link replaced with a proper `SourceChip`. Added severity filter alongside category. Events grouped by month with EMERGENZ-accent month headers. Header shows event count and signal count.
+- **SignalCard:** added depth indicators (markers / sections / news counts) rendered as small mono chips. Reads from `signal.mapMarkers`, `signal.detailSections`, and matches against `news.json` by `signalIds`. Counts surface signal depth at-a-glance on `/signals` and on Overview.
+- **Sources (`/sources`):** added tier-breakdown summary grid at the top (Tier 1 / 2 / 3 / 4 with count and tier color); tier filter chips; per-source `borderLeft` colored by tier instead of primary/secondary; tier pill in card header. References CONTENT-STANDARDS.md §1 in the intro card.
+- **Resources (`/resources`):** per-source `borderLeft` switched from primary/secondary (green/purple) to tier-colored. Result count shown in header ("N of M shown").
+- **Tier color palette:** Tier 1 green, Tier 2 blue, Tier 3 yellow, Tier 4 orange. Defined identically in both SourcesPage.tsx and Resources.tsx.
 
-### 6. Sweep remaining tabs
-**Goal:** Restore visible operational rails. The hantavirus Dashboard.tsx had: EMS Briefing card up top, US Monitoring table, fresh news rail, and the global map. The current `Overview.tsx` is shallow (just counts + severity).
+**Verify:** `/briefings` shows 12 cards each with Source: footer; `/timeline` groups by month with severity stripes and SourceChip footers; `/signals` first card shows depth badges ("7 markers", "1 sections", "83 news"); `/sources` shows tier breakdown grid + tier filter (Tier 1: 19, Tier 2: 11, Tier 3: 4, Tier 4: 0); `/resources` borderLeft now tier-colored.
 
-**Files to inspect:**
-- `git show 90bd172^:src/pages/Dashboard.tsx` — full structure
-- Current: `src/pages/Overview.tsx`
+---
 
-**Plan (multi-threat adaptation):**
-1. Cross-signal severity indicator + signal counts (already present — keep)
-2. "Most recent news" rail — 5 most recent items from `news.json` with signal chips
-3. "Active EMS briefings" card — surfaces the `ems-specific` / `protocols-and-guidance` custom sections from any signal with severity >= concern. Pull bullets from the section bodyMarkdown.
-4. Mini-map (use existing SignalsMap component) showing the top-5 signals
-5. Timeline preview — already partially present, polish it
+## ⏳ Outstanding work (backlog)
 
-### 6. Sweep remaining tabs
-- **Timeline (`/timeline`):** ensure each event has source link with authority chip, signal-color stripe matching map markers, filter by category/severity, group by date
-- **Briefings (`/briefings`):** improve top-N ranking display, add severity color band, link to full signal detail. Should now surface the ContentBlock sections we seeded in step 4.
-- **Resources (`/resources`):** verify filters work; add tier badge per source (Tier 1-4 per CONTENT-STANDARDS.md §1)
-- **Sources (`/sources`):** confirm 40+ source registry renders correctly; add tier badge + lastVerified relative-time
-- **Status (`/status`):** verify the `/status.json` contract still works after marker/news/section changes; ensure stale-signal alerting still functions
-- **Signals (list, `/signals`):** consider richer card layout; add small map-pin or marker count showing primary geography; mention `detailSections.length` so users see depth
+These are not part of the original 6-item restoration plan but are natural next steps:
+
+- **Deepen non-hantavirus detailSections.** Each of the 15 non-hantavirus signals currently has 1 "Operational guidance" section. Deepen to 3-5 ContentBlocks each (clinical, surveillance, infection control, lab diagnostics, vaccination/prophylaxis where applicable), modeled on the hantavirus signal.
+- **Tier 4 sources empty (0 in registry).** Add 2-3 representative preprints (bioRxiv/medRxiv) to demonstrate the tier system end-to-end.
+- **Custom domain** `biosecurity-intel.emergenzsystems.org` still does not resolve. Workflows point at `biosecurity-intel-dashboard.vercel.app`. Swap back via env var or workflow edit once DNS is configured.
+- **Pipeline §4.4 gap.** `update-news.mjs` writes `news.json` even when zero new items are added; CONTENT-STANDARDS spec says zero-new-item runs should write nothing.
+- **Failing RSS endpoints** (PHAC, RKI, AP News, CTV, CBC, Eurosurveillance) — find current URLs and update `GLOBAL_FEEDS` in `scripts/update-news.mjs`.
+- **Status page (`/status`)** was lightly touched in the sweep — verify renders correctly after all data changes; consider adding marker / section count fields to `generate-status.mjs` output and surfacing them here.
+- **Bundle size.** Main bundle is 640 kB (gzip 203 kB) — past Vite's 500 kB warning. Consider `manualChunks` or convert `news.json` to a runtime `fetch()` instead of build-time import.
+- **Accessibility sweep.** AcknowledgmentModal focus trap + ESC; keyboard nav for filter chip rows; verify ARIA on map filter rows.
 
 ---
 

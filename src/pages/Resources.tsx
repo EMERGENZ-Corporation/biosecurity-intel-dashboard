@@ -1,6 +1,13 @@
 import { useMemo, useState } from 'react'
 import { signalSources, formatDate, SOURCE_TIER_LABELS } from '../utils/signals'
-import { ThreatCategory, THREAT_CATEGORY_LABELS, SourceType } from '../types'
+import { ThreatCategory, THREAT_CATEGORY_LABELS, SourceType, type SourceTier } from '../types'
+
+const TIER_COLORS: Record<SourceTier, string> = {
+  1: 'var(--color-accent-green)',
+  2: 'var(--color-accent-blue)',
+  3: 'var(--color-accent-yellow)',
+  4: 'var(--color-accent-orange)',
+}
 
 const SOURCE_TYPE_LABELS: Record<SourceType, string> = {
   'outbreak-news': 'Outbreak news',
@@ -44,7 +51,7 @@ export default function Resources() {
         RESOURCES
       </h1>
       <p style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.6875rem', color: 'var(--color-text-muted)', margin: '0 0 1rem 0' }}>
-        Filterable library of monitored sources · primary vs secondary · by domain &amp; type
+        Filterable library of monitored sources · {filtered.length} of {signalSources.length} shown
       </p>
 
       <div
@@ -125,7 +132,7 @@ export default function Resources() {
               padding: '0.75rem 0.875rem',
               backgroundColor: 'var(--color-bg-secondary)',
               border: '1px solid var(--color-border)',
-              borderLeft: `3px solid ${source.primary ? 'var(--color-accent-green)' : 'var(--color-accent-purple)'}`,
+              borderLeft: `3px solid ${TIER_COLORS[source.sourceTier]}`,
               borderRadius: '4px',
               textDecoration: 'none',
               color: 'inherit',

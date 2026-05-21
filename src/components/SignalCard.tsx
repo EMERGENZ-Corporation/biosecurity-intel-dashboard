@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Signal } from '../types'
+import { Signal, type NewsItem } from '../types'
 import {
   SEVERITY_COLORS,
   SEVERITY_LABELS,
@@ -9,15 +9,47 @@ import {
   formatDate,
   getSource,
 } from '../utils/signals'
+import newsData from '../data/news.json'
+
+const news = newsData as NewsItem[]
 
 interface Props {
   signal: Signal
   compact?: boolean
 }
 
+function DepthBadge({ count, label }: { count: number; label: string }) {
+  return (
+    <span
+      title={`${count} ${label}`}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '0.25rem',
+        padding: '0.1rem 0.35rem',
+        backgroundColor: 'var(--color-bg-tertiary)',
+        border: '1px solid var(--color-border)',
+        borderRadius: '3px',
+        fontFamily: "'IBM Plex Mono', monospace",
+        fontSize: '0.5625rem',
+        color: 'var(--color-text-muted)',
+        textTransform: 'uppercase',
+        letterSpacing: '0.04em',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      <span style={{ color: 'var(--color-text-primary)', fontWeight: 600 }}>{count}</span>
+      {label}
+    </span>
+  )
+}
+
 export default function SignalCard({ signal, compact = false }: Props) {
   const primary = getSource(signal.primarySourceId)
   const color = SEVERITY_COLORS[signal.severity]
+  const markerCount = signal.mapMarkers?.length ?? 0
+  const sectionCount = signal.detailSections?.length ?? 0
+  const newsCount = news.filter((n) => n.signalIds.includes(signal.id)).length
 
   return (
     <Link
@@ -35,7 +67,14 @@ export default function SignalCard({ signal, compact = false }: Props) {
         color: 'inherit',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.75rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          gap: '0.75rem',
+        }}
+      >
         <span
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
@@ -76,7 +115,10 @@ export default function SignalCard({ signal, compact = false }: Props) {
       >
         <span>{categoryLabel(signal.category)}</span>
         <span>·</span>
-        <span>{signal.geography[0] ?? 'Global'}{signal.geography.length > 1 ? ` +${signal.geography.length - 1}` : ''}</span>
+        <span>
+          {signal.geography[0] ?? 'Global'}
+          {signal.geography.length > 1 ? ` +${signal.geography.length - 1}` : ''}
+        </span>
         <span>·</span>
         <span>{CONFIDENCE_LABELS[signal.confidence]}</span>
         <span>·</span>
@@ -95,6 +137,15 @@ export default function SignalCard({ signal, compact = false }: Props) {
         >
           {signal.operationalRelevance}
         </p>
+      )}
+
+      {/* Depth indicators */}
+      {!compact && (markerCount + sectionCount + newsCount) > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
+          {markerCount > 0 && <DepthBadge count={markerCount} label="markers" />}
+          {sectionCount > 0 && <DepthBadge count={sectionCount} label="sections" />}
+          {newsCount > 0 && <DepthBadge count={newsCount} label="news" />}
+        </div>
       )}
 
       <div

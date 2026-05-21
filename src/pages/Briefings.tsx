@@ -1,12 +1,261 @@
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { signals, rankSignals, SEVERITY_COLORS, SEVERITY_LABELS, categoryLabel } from '../utils/signals'
+import SourceChip from '../components/SourceChip'
+import {
+  signals,
+  rankSignals,
+  SEVERITY_COLORS,
+  SEVERITY_LABELS,
+  SEVERITY_RANK,
+  categoryLabel,
+  getSource,
+} from '../utils/signals'
+import {
+  type Signal,
+  type SignalDetailSection,
+  type SignalSeverity,
+  type ThreatCategory,
+  THREAT_CATEGORY_LABELS,
+} from '../types'
 
-export default function Briefings() {
-  const ranked = rankSignals(signals)
-  const top = ranked.slice(0, 5)
+const SEVERITY_OPTIONS: SignalSeverity[] = ['monitor', 'watch', 'concern', 'action']
+
+// Prefer the operationally-actionable section per signal in this order.
+const SECTION_PRIORITY = [
+  'ems-specific',
+  'operational-guidance',
+  'protocols-and-guidance',
+  'clinical-profile',
+  'ppe-and-ipc',
+]
+
+function pickBriefingSection(signal: Signal): SignalDetailSection | null {
+  for (const id of SECTION_PRIORITY) {
+    const section = signal.detailSections?.find((s) => s.id === id)
+    if (section) return section
+  }
+  return signal.detailSections?.[0] ?? null
+}
+
+function BriefingCard({ signal }: { signal: Signal }) {
+  const section = pickBriefingSection(signal)
+  const sevColor = SEVERITY_COLORS[signal.severity]
+  const primary = signal.primarySourceId ? getSource(signal.primarySourceId) : undefined
 
   return (
-    <div style={{ maxWidth: '900px' }}>
+    <article
+      style={{
+        backgroundColor: 'var(--color-bg-secondary)',
+        border: '1px solid var(--color-border)',
+        borderLeft: `3px solid ${sevColor}`,
+        borderRadius: '6px',
+        padding: '1.125rem 1.375rem',
+      }}
+    >
+      {/* Header row: severity + category + signal name */}
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          gap: '0.5rem',
+          marginBottom: '0.625rem',
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.625rem',
+            fontWeight: 700,
+            color: sevColor,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            padding: '0.15rem 0.4rem',
+            border: `1px solid ${sevColor}`,
+            borderRadius: '3px',
+          }}
+        >
+          {SEVERITY_LABELS[signal.severity]}
+        </span>
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.6875rem',
+            color: 'var(--color-text-muted)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
+          }}
+        >
+          {categoryLabel(signal.category)}
+        </span>
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.6875rem',
+            color: 'var(--color-text-muted)',
+          }}
+        >
+          ·
+        </span>
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.6875rem',
+            color: 'var(--color-text-muted)',
+          }}
+        >
+          {signal.geography[0] ?? 'Global'}
+          {signal.geography.length > 1 ? ` +${signal.geography.length - 1}` : ''}
+        </span>
+      </div>
+
+      <Link
+        to={`/signals/${signal.id}`}
+        style={{
+          fontFamily: "'IBM Plex Sans', sans-serif",
+          fontSize: '1rem',
+          fontWeight: 700,
+          color: 'var(--color-text-primary)',
+          textDecoration: 'none',
+          lineHeight: 1.35,
+          display: 'block',
+          marginBottom: '0.5rem',
+        }}
+      >
+        {signal.name} →
+      </Link>
+
+      <p
+        style={{
+          fontFamily: "'IBM Plex Sans', sans-serif",
+          fontSize: '0.875rem',
+          color: 'var(--color-text-secondary)',
+          lineHeight: 1.6,
+          margin: '0 0 0.75rem 0',
+        }}
+      >
+        {signal.operationalRelevance}
+      </p>
+
+      {/* Briefing section content — body preview */}
+      {section && (
+        <div
+          style={{
+            backgroundColor: 'var(--color-bg-tertiary)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '4px',
+            padding: '0.75rem 0.875rem',
+            marginBottom: '0.75rem',
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              fontWeight: 700,
+              color: 'var(--color-emergenz)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              marginBottom: '0.5rem',
+            }}
+          >
+            {section.title}
+          </div>
+          {section.bodyMarkdown
+            .split(/\n\s*\n/)
+            .slice(0, 2)
+            .map((para, i) => (
+              <p
+                key={i}
+                style={{
+                  fontFamily: "'IBM Plex Sans', sans-serif",
+                  fontSize: '0.8125rem',
+                  color: 'var(--color-text-primary)',
+                  lineHeight: 1.6,
+                  margin: '0 0 0.5rem 0',
+                  whiteSpace: 'pre-wrap',
+                }}
+              >
+                {para.trim()}
+              </p>
+            ))}
+          <Link
+            to={`/signals/${signal.id}`}
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              color: 'var(--color-accent-blue)',
+              textDecoration: 'none',
+            }}
+          >
+            Read full briefing →
+          </Link>
+        </div>
+      )}
+
+      {/* Source attribution */}
+      {(section?.attribution || primary) && (
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.5rem',
+            alignItems: 'center',
+            paddingTop: '0.625rem',
+            borderTop: '1px solid var(--color-border)',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              color: 'var(--color-text-muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+            }}
+          >
+            Source:
+          </span>
+          {section?.attribution ? (
+            <SourceChip
+              authority={section.attribution.authority}
+              documentTitle={section.attribution.documentTitle}
+              date={section.attribution.date}
+              url={section.attribution.url}
+            />
+          ) : primary ? (
+            <SourceChip
+              authority={primary.authority}
+              documentTitle={primary.title}
+              date={primary.publicationDate ?? primary.lastVerified}
+              url={primary.url}
+            />
+          ) : null}
+        </div>
+      )}
+    </article>
+  )
+}
+
+export default function Briefings() {
+  const [severity, setSeverity] = useState<SignalSeverity | 'all'>('all')
+  const [category, setCategory] = useState<ThreatCategory | 'all'>('all')
+
+  const filtered = useMemo(() => {
+    const subset = signals.filter((s) => {
+      if (severity !== 'all' && s.severity !== severity) return false
+      if (category !== 'all' && s.category !== category) return false
+      return true
+    })
+    // Briefings emphasize concern/action by default — sort by severity rank then ranking helper
+    const ranked = rankSignals(subset)
+    return severity === 'all'
+      ? ranked.filter((s) => SEVERITY_RANK[s.severity] >= SEVERITY_RANK['watch'])
+      : ranked
+  }, [severity, category])
+
+  return (
+    <div style={{ maxWidth: '1000px' }}>
       <h1
         style={{
           fontFamily: "'IBM Plex Mono', monospace",
@@ -18,49 +267,148 @@ export default function Briefings() {
       >
         BRIEFINGS
       </h1>
-      <p style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.6875rem', color: 'var(--color-text-muted)', margin: '0 0 1rem 0' }}>
-        Operational summaries for public health, EMS, and healthcare preparedness users
+      <p
+        style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '0.6875rem',
+          color: 'var(--color-text-muted)',
+          margin: '0 0 1rem 0',
+        }}
+      >
+        Operational briefings for EMS, healthcare preparedness, and public health staff · {filtered.length}{' '}
+        signal{filtered.length !== 1 ? 's' : ''} surfaced
       </p>
 
+      {/* Filters */}
       <div
         style={{
-          padding: '1rem 1.25rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.625rem',
+          padding: '0.875rem 1rem',
           marginBottom: '1rem',
           backgroundColor: 'var(--color-bg-secondary)',
           border: '1px solid var(--color-border)',
           borderRadius: '6px',
         }}
       >
-        <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-text-primary)', margin: '0 0 0.625rem 0' }}>
-          Top operational signals
-        </h2>
-        <p style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.6, margin: '0 0 0.875rem 0' }}>
-          Ranked by severity, confidence, and recency. Use these as a scan list before shift change or
-          a preparedness huddle. Each signal links to source-backed detail.
-        </p>
-
-        <ol style={{ margin: 0, paddingLeft: '1.25rem' }}>
-          {top.map((signal) => (
-            <li key={signal.id} style={{ marginBottom: '0.625rem' }}>
-              <Link
-                to={`/signals/${signal.id}`}
-                style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '0.9375rem', color: 'var(--color-text-primary)', fontWeight: 600, textDecoration: 'none' }}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+          <span
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              color: 'var(--color-text-muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              minWidth: '5rem',
+            }}
+          >
+            Severity:
+          </span>
+          {(['all', ...SEVERITY_OPTIONS] as Array<SignalSeverity | 'all'>).map((s) => {
+            const active = severity === s
+            return (
+              <button
+                key={s}
+                onClick={() => setSeverity(s)}
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: '0.625rem',
+                  padding: '0.25rem 0.5rem',
+                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
+                  border: `1px solid ${active ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
+                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                }}
               >
-                {signal.name}
-              </Link>
-              <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: 'var(--color-text-muted)', marginTop: '0.125rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                <span style={{ color: SEVERITY_COLORS[signal.severity] }}>{SEVERITY_LABELS[signal.severity]}</span> · {categoryLabel(signal.category)} · {signal.geography[0]}
-              </div>
-              <div style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '0.8125rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginTop: '0.25rem' }}>
-                {signal.operationalRelevance}
-              </div>
-            </li>
-          ))}
-        </ol>
+                {s === 'all' ? 'Watch+' : SEVERITY_LABELS[s]}
+              </button>
+            )
+          })}
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+          <span
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              color: 'var(--color-text-muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              minWidth: '5rem',
+            }}
+          >
+            Category:
+          </span>
+          <button
+            onClick={() => setCategory('all')}
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              padding: '0.25rem 0.5rem',
+              backgroundColor: category === 'all' ? 'var(--color-bg-tertiary)' : 'transparent',
+              border: `1px solid ${category === 'all' ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
+              color: category === 'all' ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+            }}
+          >
+            All
+          </button>
+          {(Object.entries(THREAT_CATEGORY_LABELS) as Array<[ThreatCategory, string]>).map(([k, label]) => {
+            const active = category === k
+            return (
+              <button
+                key={k}
+                onClick={() => setCategory(k)}
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: '0.625rem',
+                  padding: '0.25rem 0.5rem',
+                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
+                  border: `1px solid ${active ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
+                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                }}
+              >
+                {label}
+              </button>
+            )
+          })}
+        </div>
       </div>
+
+      {/* Briefings list */}
+      {filtered.length === 0 ? (
+        <p
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            color: 'var(--color-text-muted)',
+            padding: '1.5rem 0',
+          }}
+        >
+          No signals match the current filters.
+        </p>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          {filtered.map((signal) => (
+            <BriefingCard key={signal.id} signal={signal} />
+          ))}
+        </div>
+      )}
 
       <div
         style={{
+          marginTop: '1.25rem',
           padding: '0.875rem 1rem',
           backgroundColor: 'var(--color-bg-tertiary)',
           border: '1px solid var(--color-border)',
@@ -71,10 +419,9 @@ export default function Briefings() {
           lineHeight: 1.6,
         }}
       >
-        Briefings are derived from the signal records and their primary sources. The MVP shows the
-        top-of-queue scan; richer per-domain briefings (EMS, healthcare preparedness, public health
-        analyst, nonprofit situational awareness) can be added as manually reviewed static
-        summaries.
+        Briefings are previews of source-backed signal content. Each card cites its primary source —
+        verify against the linked document before operational use. For full clinical depth, click
+        through to the signal detail page.
       </div>
     </div>
   )
