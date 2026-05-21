@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Tier 1 news feed hard alerts + refresh (commit pending)
+## ✅ Tier 1 news feed hard alerts + refresh (commit 39fd4a1)
 
 Completed the intermittent-feed backlog item in line with
 CONTENT-STANDARDS §6.1. The news updater now uses live official CDC, WHO, and
