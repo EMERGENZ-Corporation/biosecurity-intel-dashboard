@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20 (after hantavirus-asset restoration — markers, news, timeline, risk badges, HCW alert)
+**Last updated:** 2026-05-20 (after risk badges + HCW alerts extended to 8 non-hantavirus signals)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 ---
@@ -184,7 +184,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 - **Accessibility sweep.** AcknowledgmentModal focus trap + ESC; keyboard nav for filter chip rows; verify ARIA on map filter rows.
 - **Intermittent feed failures.** WHO and ECDC occasionally 404 during pipeline runs. Tolerated as non-critical, but watch for sustained failures — they're Tier 1 and CONTENT-STANDARDS §6.1 says Tier 1 failures during active outbreaks should hard-alert. The current pipeline only marks CDC as `critical: true`; consider adding WHO/ECDC if their endpoints stabilize.
 - **Marker deduplication (cosmetic).** The restoration left ~3 generic vs specific overlaps on the hantavirus signal (e.g. "France — confirmed case" generic + "Paris, France" specific from old data). Both at similar coords; functional but slightly redundant. Trim if desired.
-- **HCW alert / risk badges on other signals.** Currently only the hantavirus signal carries `riskAssessments` and `hcwAlert`. Add WHO global risk, regional risk, and HCW alerts where applicable to mpox, lassa, ebola, H5 — the schema supports it; just needs content.
+- **~~HCW alert / risk badges on other signals.~~** ✅ Shipped. Risk badges now on 9 signals total (hantavirus + 8 others); HCW alerts on 6 signals total (hantavirus + 5 others). See `scripts/seed-risk-and-hcw.mjs`.
 
 ---
 

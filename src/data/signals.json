@@ -1063,7 +1063,37 @@
         ],
         "lastReviewed": "2026-05-20"
       }
-    ]
+    ],
+    "riskAssessments": [
+      {
+        "authority": "WHO",
+        "label": "Active Outbreak",
+        "description": "Disease Outbreak News",
+        "url": "https://www.who.int/emergencies/disease-outbreak-news",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "Africa CDC",
+        "label": "Regional Alert",
+        "description": "Cross-border surveillance & response",
+        "url": "https://africacdc.org",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "CDC",
+        "label": "Current Outbreaks",
+        "description": "US importation risk monitoring",
+        "url": "https://www.cdc.gov/outbreaks/",
+        "asOf": "2026-05-20"
+      }
+    ],
+    "hcwAlert": {
+      "headline": "Documented HCW transmission risk — full airborne + contact PPE required",
+      "body": "Ebolavirus has documented healthcare-worker transmission, including HCW deaths during prior outbreaks where adequate PPE was unavailable or doffing protocols failed. CDC and ECDC recommend airborne, contact, and droplet precautions for any suspected or confirmed case, with a trained observer for donning and doffing. PPE must be in place before any patient contact; aerosol-generating procedures must be minimized and, if essential, performed in an AIIR with full airborne PPE. Personnel with potential exposure must be monitored daily for the 21-day incubation window and excluded from direct patient care pending occupational health risk assessment.",
+      "sourceUrl": "https://www.cdc.gov/outbreaks/",
+      "sourceAuthority": "CDC + WHO (joint guidance)",
+      "updatedAt": "2026-05-20"
+    }
   },
   {
     "id": "measles-us-2026",
@@ -1216,7 +1246,30 @@
         ],
         "lastReviewed": "2026-05-20"
       }
-    ]
+    ],
+    "riskAssessments": [
+      {
+        "authority": "CDC",
+        "label": "Health Advisory",
+        "description": "US outbreak monitoring & response",
+        "url": "https://www.cdc.gov/outbreaks/",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "WHO",
+        "label": "Regional Concern",
+        "description": "Global measles resurgence",
+        "url": "https://www.who.int/emergencies/disease-outbreak-news",
+        "asOf": "2026-05-20"
+      }
+    ],
+    "hcwAlert": {
+      "headline": "Airborne precautions required — verify HCW immunity status before patient contact",
+      "body": "Measles is one of the most contagious infectious diseases known (R0 12-18); airborne droplet nuclei persist in a room for up to 2 hours after the infected person has left. Healthcare workers without documented immunity (two doses of MMR, lab evidence of immunity, or birth before 1957) are at risk of acquiring measles from patient encounters. CDC recommends pre-employment immunity verification and post-exposure MMR within 72 hours or IG within 6 days for non-immune HCWs. Exposed non-immune personnel should be furloughed from day 5 through day 21 after last exposure. Suspected cases require an airborne infection isolation room (AIIR) with negative pressure where available.",
+      "sourceUrl": "https://www.cdc.gov/han/",
+      "sourceAuthority": "CDC HAN",
+      "updatedAt": "2026-05-20"
+    }
   },
   {
     "id": "mpox-africa-clade-i-2026",
@@ -1375,7 +1428,37 @@
         ],
         "lastReviewed": "2026-05-20"
       }
-    ]
+    ],
+    "riskAssessments": [
+      {
+        "authority": "WHO",
+        "label": "PHEIC",
+        "description": "Global Public Health Emergency of International Concern",
+        "url": "https://www.who.int/news/item/14-08-2024-who-director-general-declares-mpox-outbreak-a-public-health-emergency-of-international-concern",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "Africa CDC",
+        "label": "Continental Emergency",
+        "description": "Public Health Emergency of Continental Security",
+        "url": "https://africacdc.org",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "CDC",
+        "label": "Health Advisory",
+        "description": "Clade I mpox in DRC and clade I outbreaks",
+        "url": "https://www.cdc.gov/outbreaks/",
+        "asOf": "2026-05-20"
+      }
+    ],
+    "hcwAlert": {
+      "headline": "HCW exposure risk via direct contact — JYNNEOS PEP within 4 days",
+      "body": "Clade I mpox transmits via direct contact with skin lesions, body fluids, and respiratory droplets at close range. Healthcare workers caring for mpox patients should apply standard, contact, and droplet precautions, with airborne precautions added for aerosol-generating procedures and any procedure likely to disturb lesions. PPE includes gown, gloves, eye protection, and N95 or higher respirator. JYNNEOS vaccine is recommended post-exposure for HCWs and other close contacts within 4 days (for prevention) or up to 14 days (for symptom reduction). Tecovirimat (TPOXX) is available under expanded-access for severe disease or high-risk patients.",
+      "sourceUrl": "https://www.cdc.gov/outbreaks/",
+      "sourceAuthority": "CDC + WHO (mpox clinical guidance)",
+      "updatedAt": "2026-05-20"
+    }
   },
   {
     "id": "avian-influenza-h5-2026",
@@ -1549,6 +1632,29 @@
         ],
         "lastReviewed": "2026-05-20"
       }
+    ],
+    "riskAssessments": [
+      {
+        "authority": "WHO",
+        "label": "LOW",
+        "description": "Global human risk; no sustained human-to-human transmission",
+        "url": "https://www.who.int/emergencies/disease-outbreak-news",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "USDA APHIS",
+        "label": "Active Animal Outbreak",
+        "description": "HPAI H5N1 dairy + poultry response",
+        "url": "https://www.aphis.usda.gov/livestock-poultry-disease/avian/avian-influenza",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "CDC",
+        "label": "Health Advisory",
+        "description": "Occupational exposure surveillance",
+        "url": "https://www.cdc.gov/outbreaks/",
+        "asOf": "2026-05-20"
+      }
     ]
   },
   {
@@ -1705,6 +1811,29 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      }
+    ],
+    "riskAssessments": [
+      {
+        "authority": "WHO",
+        "label": "High Burden",
+        "description": "Multi-country active outbreaks; OCV stockpile deployment",
+        "url": "https://www.who.int/emergencies/disease-outbreak-news",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "Africa CDC",
+        "label": "Continental Alert",
+        "description": "Multi-country emergency response",
+        "url": "https://africacdc.org",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "PAHO",
+        "label": "Regional Monitoring",
+        "description": "Caribbean / Latin America surveillance",
+        "url": "https://www.paho.org/en/epidemiological-alerts-and-updates",
+        "asOf": "2026-05-20"
       }
     ]
   },
@@ -2473,7 +2602,37 @@
         ],
         "lastReviewed": "2026-05-20"
       }
-    ]
+    ],
+    "riskAssessments": [
+      {
+        "authority": "WHO",
+        "label": "Endemic Risk",
+        "description": "Endemic in West Africa; cases imported globally",
+        "url": "https://www.who.int/emergencies/disease-outbreak-news",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "CDC",
+        "label": "Clinical Guidance",
+        "description": "Imported case clinical management",
+        "url": "https://www.cdc.gov/outbreaks/",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "Africa CDC",
+        "label": "Active Surveillance",
+        "description": "Multi-country outbreaks monitored",
+        "url": "https://africacdc.org",
+        "asOf": "2026-05-20"
+      }
+    ],
+    "hcwAlert": {
+      "headline": "Documented HCW transmission risk — VHF precautions required",
+      "body": "Lassa fever has documented person-to-person transmission to healthcare workers, particularly in settings without adequate PPE. WHO and CDC VHF guidelines recommend standard, contact, and droplet precautions for any suspected case, with airborne precautions added for aerosol-generating procedures. PPE includes fluid-resistant gown or coverall, double gloves, fit-tested N95 or PAPR, face shield, and waterproof boot covers. Trained observers should monitor donning and doffing. Specimen handling requires BSL-4 containment. Exposed HCWs must be monitored daily for 21 days following the last exposure and consultation with CDC for ribavirin PEP in high-risk exposures.",
+      "sourceUrl": "https://www.cdc.gov/outbreaks/",
+      "sourceAuthority": "CDC + WHO (VHF guidelines)",
+      "updatedAt": "2026-05-20"
+    }
   },
   {
     "id": "chikungunya-2026",
@@ -2609,6 +2768,22 @@
         ],
         "lastReviewed": "2026-05-20"
       }
+    ],
+    "riskAssessments": [
+      {
+        "authority": "PAHO",
+        "label": "Regional Outbreak",
+        "description": "Sustained transmission in the Americas",
+        "url": "https://www.paho.org/en/epidemiological-alerts-and-updates",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "CDC",
+        "label": "Travel Health Notice",
+        "description": "US traveler risk in endemic regions",
+        "url": "https://www.cdc.gov/outbreaks/",
+        "asOf": "2026-05-20"
+      }
     ]
   },
   {
@@ -2737,7 +2912,14 @@
         ],
         "lastReviewed": "2026-05-20"
       }
-    ]
+    ],
+    "hcwAlert": {
+      "headline": "Healthcare-acquired transmission — single-room isolation + contact precautions",
+      "body": "Candida auris colonizes patients persistently and transmits efficiently in healthcare settings via direct contact, shared equipment, and contaminated environmental surfaces. CDC requires single-patient rooms (or cohorting of confirmed cases), contact precautions, dedicated single-use or thoroughly disinfected reusable equipment, and pre-admission screening for patients from facilities with documented C. auris transmission. Environmental cleaning requires EPA List P/K disinfectants effective against C. auris; many standard quaternary ammonium products have reduced efficacy. Alcohol-based hand sanitizer is effective on HCW hands. Inter-facility communication is essential — receiving facilities must be notified in advance so isolation can be in place at arrival.",
+      "sourceUrl": "https://www.cdc.gov/outbreaks/",
+      "sourceAuthority": "CDC",
+      "updatedAt": "2026-05-20"
+    }
   },
   {
     "id": "screwworm-onehealth-2026",
@@ -2873,6 +3055,22 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      }
+    ],
+    "riskAssessments": [
+      {
+        "authority": "USDA APHIS",
+        "label": "Animal Health Emergency",
+        "description": "Northward spread surveillance",
+        "url": "https://www.aphis.usda.gov/livestock-poultry-disease/stop-screwworm/current-status",
+        "asOf": "2026-05-20"
+      },
+      {
+        "authority": "WOAH",
+        "label": "Reportable Disease",
+        "description": "WAHIS active reporting",
+        "url": "https://wahis.woah.org/",
+        "asOf": "2026-05-20"
       }
     ]
   },
