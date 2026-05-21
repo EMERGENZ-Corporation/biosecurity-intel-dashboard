@@ -15,14 +15,23 @@ interface StatusJson {
     total?: number
     primary?: number
     secondary?: number
+    byTier?: Record<string, number>
   }
   staleReasons?: string[]
   runbook?: string
   signals?: {
+    total?: number
     active?: number
     highestSeverity?: string | null
     byCategory?: Record<string, number>
     staleSignalIds?: string[]
+    timelineEvents?: number
+    totalMapMarkers?: number
+    totalDetailSections?: number
+  }
+  news?: {
+    total?: number
+    newest?: string | null
   }
 }
 
@@ -145,11 +154,30 @@ export default function Status() {
         <Row label="Max official check age">{status.thresholds?.maxOfficialCheckAgeHours ?? '—'}h</Row>
         {status.signals && (
           <>
-            <Row label="Active signals">{status.signals.active ?? '—'}</Row>
+            <Row label="Active signals">{status.signals.active ?? '—'} / {status.signals.total ?? '—'}</Row>
             <Row label="Highest severity">{status.signals.highestSeverity ?? '—'}</Row>
             <Row label="Stale signals">{status.signals.staleSignalIds?.length ?? 0}</Row>
           </>
         )}
+      </div>
+
+      <div
+        style={{
+          padding: '0.75rem 1rem',
+          marginBottom: '1rem',
+          backgroundColor: 'var(--color-bg-secondary)',
+          border: '1px solid var(--color-border)',
+          borderRadius: '6px',
+        }}
+      >
+        <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 0.5rem 0' }}>
+          Dashboard depth
+        </h2>
+        <Row label="Map markers">{status.signals?.totalMapMarkers ?? '—'}</Row>
+        <Row label="Detail sections">{status.signals?.totalDetailSections ?? '—'}</Row>
+        <Row label="Timeline events">{status.signals?.timelineEvents ?? '—'}</Row>
+        <Row label="News items">{status.news?.total ?? '—'}</Row>
+        {status.news?.newest && <Row label="Newest news item">{formatDateTime(status.news.newest)}</Row>}
       </div>
 
       <div
@@ -167,6 +195,14 @@ export default function Status() {
         <Row label="Registered sources">{status.sources?.total ?? '—'}</Row>
         <Row label="Primary sources">{status.sources?.primary ?? '—'}</Row>
         <Row label="Secondary sources">{status.sources?.secondary ?? '—'}</Row>
+        {status.sources?.byTier && (
+          <>
+            <Row label="Tier 1 (authoritative)">{status.sources.byTier.tier1 ?? 0}</Row>
+            <Row label="Tier 2 (institutional)">{status.sources.byTier.tier2 ?? 0}</Row>
+            <Row label="Tier 3 (media)">{status.sources.byTier.tier3 ?? 0}</Row>
+            <Row label="Tier 4 (preprint)">{status.sources.byTier.tier4 ?? 0}</Row>
+          </>
+        )}
       </div>
 
       {staleReasons.length > 0 && (

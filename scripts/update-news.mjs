@@ -85,35 +85,46 @@ const SIGNAL_KEYWORD_OVERRIDES = {
   ],
 }
 
-// Global health RSS feeds — fetched for every run
+// Global health RSS feeds — fetched for every run.
+// Direct authority/media feeds; per-signal Google News queries are built
+// dynamically below and fill in coverage for outlets without working RSS.
+//
+// Validated 2026-05-20. Endpoints removed (returning 404/403/timeout):
+//   ProMED (promedmail.org/feed/) — coverage now via per-signal Google News
+//   Eurosurveillance (eurosurveillance.org/rss/eurosurv.xml) — 403
+//   PHAC (healthycanadians.gc.ca alerts feed) — domain deprecated
+//   RKI (rki.de EN feed) — timeout / structure changed
+//   AP News (apnews.com/rss/apf-Health) — RSS discontinued
+//   CTV News (older URL) — feed restructured
 const GLOBAL_FEEDS = [
+  // Tier 1 — authoritative
   { url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss', authority: 'CDC', critical: true },
   { url: 'https://www.who.int/rss-feeds/news-releases.xml', authority: 'WHO', critical: false },
   { url: 'https://www.ecdc.europa.eu/en/rss.xml', authority: 'ECDC', critical: false },
-  { url: 'https://promedmail.org/feed/', authority: 'ProMED', critical: false },
-  { url: 'https://www.eurosurveillance.org/rss/eurosurv.xml', authority: 'Eurosurveillance', critical: false },
-  { url: 'https://healthycanadians.gc.ca/connect-connectez/alerts-avis-rss-eng.xml', authority: 'PHAC', critical: false },
-  { url: 'https://www.rki.de/EN/Content/Service/RSS/rss.xml', authority: 'RKI', critical: false },
+
+  // Tier 2 — institutional
   { url: 'https://www.gov.uk/government/organisations/uk-health-security-agency.atom', authority: 'UKHSA', critical: false },
+  { url: 'https://www.science.org/rss/news_current.xml', authority: 'Science', critical: false },
+  { url: 'https://www.cidrap.umn.edu/rss.xml', authority: 'CIDRAP', critical: false },
+
+  // Tier 3 — media
   { url: 'https://feeds.bbci.co.uk/news/health/rss.xml', authority: 'BBC Health', critical: false },
-  { url: 'https://apnews.com/rss/apf-Health', authority: 'AP News', critical: false },
   { url: 'https://abcnews.go.com/abcnews/healthheadlines', authority: 'ABC News', critical: false },
   { url: 'https://feeds.npr.org/1128/rss.xml', authority: 'NPR', critical: false },
   { url: 'https://www.statnews.com/feed/', authority: 'STAT News', critical: false },
-  { url: 'https://www.cbc.ca/cmlink/rss-health', authority: 'CBC News', critical: false },
-  { url: 'https://www.ctvnews.ca/rss/ctvnews-ca-health-public-rss-1.844908', authority: 'CTV News', critical: false },
-  { url: 'https://www.science.org/rss/news_current.xml', authority: 'Science', critical: false },
+  { url: 'https://feeds.nbcnews.com/nbcnews/public/health', authority: 'NBC News', critical: false },
+  { url: 'https://www.cbc.ca/webfeed/rss/rss-health', authority: 'CBC News', critical: false },
   { url: 'https://www.sciencenews.org/feed', authority: 'Science News', critical: false },
 ]
 
 // Authority weight for deduplication tie-breaking (higher = preferred)
 const AUTHORITY_WEIGHT = new Map([
-  ['CDC', 100], ['WHO', 95], ['ECDC', 95], ['PHAC', 90],
-  ['UKHSA', 80], ['RKI', 75], ['ProMED', 75],
-  ['AP News', 70], ['BBC Health', 65], ['CBC News', 60],
-  ['ABC News', 55], ['NPR', 55], ['STAT News', 55],
-  ['CTV News', 50], ['Eurosurveillance', 70],
-  ['Science', 60], ['Science News', 55],
+  ['CDC', 100], ['WHO', 95], ['ECDC', 95],
+  ['UKHSA', 80], ['CIDRAP', 78],
+  ['Science', 70], ['STAT News', 60],
+  ['BBC Health', 65], ['NBC News', 55], ['CBC News', 55],
+  ['ABC News', 55], ['NPR', 55],
+  ['Science News', 55],
   ['Google News', 25],
 ])
 
@@ -349,7 +360,19 @@ async function main() {
     .sort((a, b) => b.timestamp - a.timestamp)
     .slice(0, MAX_ITEMS)
 
-  writeFileSync(NEWS_PATH, JSON.stringify(output, null, 2) + '\n')
+  // Per CONTENT-STANDARDS.md §4.4: if the output is byte-identical to what's
+  // already on disk, write nothing. Prevents spurious commits and Vercel
+  // rebuilds when feeds return only items already in the dataset.
+  const nextSerialized = JSON.stringify(output, null, 2) + '\n'
+  let existingSerialized = ''
+  try { existingSerialized = readFileSync(NEWS_PATH, 'utf8') } catch { /* first run */ }
+
+  if (existingSerialized === nextSerialized) {
+    console.log('[update-news] no change vs existing news.json — skipping write per CONTENT-STANDARDS §4.4')
+    return
+  }
+
+  writeFileSync(NEWS_PATH, nextSerialized)
 
   const signalCoverage = signals.map(s => ({
     id: s.id,

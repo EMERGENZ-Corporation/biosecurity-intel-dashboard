@@ -14,6 +14,7 @@ import { readFileSync, writeFileSync } from 'fs'
 const SIGNALS_PATH = 'src/data/signals.json'
 const SOURCES_PATH = 'src/data/signal-sources.json'
 const TIMELINE_PATH = 'src/data/signal-timeline.json'
+const NEWS_PATH = 'src/data/news.json'
 const STATUS_PATH = 'public/status.json'
 
 const MAX_DATA_AGE_HOURS = Number.parseInt(process.env.MAX_DATA_AGE_HOURS || '168', 10)
@@ -41,10 +42,15 @@ function categoryCounts(signals) {
   return counts
 }
 
+function readJsonOptional(path) {
+  try { return JSON.parse(readFileSync(path, 'utf8')) } catch { return null }
+}
+
 function main() {
   const signals = readJson(SIGNALS_PATH)
   const sources = readJson(SOURCES_PATH)
   const timeline = readJson(TIMELINE_PATH)
+  const news = readJsonOptional(NEWS_PATH) ?? []
 
   if (!Array.isArray(signals) || signals.length === 0) {
     throw new Error('signals.json must be a non-empty array')
@@ -102,11 +108,24 @@ function main() {
       byCategory: categoryCounts(signals),
       staleSignalIds,
       timelineEvents: timeline.length,
+      totalMapMarkers: signals.reduce((sum, s) => sum + (Array.isArray(s.mapMarkers) ? s.mapMarkers.length : 0), 0),
+      totalDetailSections: signals.reduce((sum, s) => sum + (Array.isArray(s.detailSections) ? s.detailSections.length : 0), 0),
     },
     sources: {
       total: sources.length,
       primary: sources.filter((s) => s.primary).length,
       secondary: sources.filter((s) => !s.primary).length,
+      byTier: sources.reduce((acc, s) => {
+        const key = `tier${s.sourceTier}`
+        acc[key] = (acc[key] ?? 0) + 1
+        return acc
+      }, {}),
+    },
+    news: {
+      total: Array.isArray(news) ? news.length : 0,
+      newest: Array.isArray(news) && news.length > 0
+        ? new Date(news.reduce((max, item) => Math.max(max, item.timestamp ?? 0), 0)).toISOString()
+        : null,
     },
     staleReasons,
   }

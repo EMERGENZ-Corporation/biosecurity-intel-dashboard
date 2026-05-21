@@ -558,5 +558,67 @@
     "domains": [
       "zoonotic"
     ]
+  },
+  {
+    "id": "biorxiv-infectious-disease",
+    "authority": "bioRxiv",
+    "authorityFull": "bioRxiv — Infectious Diseases collection",
+    "title": "bioRxiv Infectious Diseases preprint collection",
+    "sourceType": "academic",
+    "primary": false,
+    "sourceTier": 4,
+    "url": "https://www.biorxiv.org/collection/infectious-diseases",
+    "lastVerified": "2026-05-20",
+    "domains": [
+      "vhf",
+      "respiratory",
+      "zoonotic",
+      "vaccine_preventable",
+      "vector_borne",
+      "amr_fungal"
+    ],
+    "notes": "Preprint server. Not peer-reviewed — must be labeled as such per CONTENT-STANDARDS.md §1. Use for early-signal context only; never for structured data fields."
+  },
+  {
+    "id": "medrxiv-infectious-disease",
+    "authority": "medRxiv",
+    "authorityFull": "medRxiv — Infectious Diseases (except HIV/AIDS) collection",
+    "title": "medRxiv Infectious Diseases preprint collection",
+    "sourceType": "academic",
+    "primary": false,
+    "sourceTier": 4,
+    "url": "https://www.medrxiv.org/collection/infectious-diseases-except-hiv-aids",
+    "lastVerified": "2026-05-20",
+    "domains": [
+      "vhf",
+      "respiratory",
+      "zoonotic",
+      "vaccine_preventable",
+      "enteric",
+      "vector_borne",
+      "amr_fungal",
+      "environmental"
+    ],
+    "notes": "Preprint server. Not peer-reviewed — must be labeled as such per CONTENT-STANDARDS.md §1. Use for early-signal context only; never for structured data fields."
+  },
+  {
+    "id": "medrxiv-epidemiology",
+    "authority": "medRxiv",
+    "authorityFull": "medRxiv — Epidemiology collection",
+    "title": "medRxiv Epidemiology preprint collection",
+    "sourceType": "academic",
+    "primary": false,
+    "sourceTier": 4,
+    "url": "https://www.medrxiv.org/collection/epidemiology",
+    "lastVerified": "2026-05-20",
+    "domains": [
+      "respiratory",
+      "zoonotic",
+      "vector_borne",
+      "environmental",
+      "mass_gathering",
+      "travel"
+    ],
+    "notes": "Preprint server. Not peer-reviewed — must be labeled as such per CONTENT-STANDARDS.md §1. Use for early-signal context only; never for structured data fields."
   }
 ]

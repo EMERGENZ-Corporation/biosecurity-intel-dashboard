@@ -23,17 +23,21 @@ import { THREAT_CATEGORY_LABELS, type NewsItem } from '../types'
 
 const news = newsData as NewsItem[]
 
-// Authority pills for the news rail
+// Authority pills for the news rail. Mirror News.tsx so chip colors are consistent.
 const AUTHORITY_COLORS: Record<string, string> = {
   WHO: 'var(--color-accent-blue)',
   CDC: 'var(--color-accent-red)',
   ECDC: 'var(--color-accent-orange)',
-  PHAC: '#D80621',
   UKHSA: '#005EB8',
-  ProMED: '#2E7D32',
-  'AP News': '#CC0000',
+  CIDRAP: '#7A0019',
   'BBC Health': '#BB1919',
+  'ABC News': '#1C3F94',
+  'NBC News': '#FA621E',
+  'CBC News': '#E8292B',
+  NPR: '#1A9ADB',
   'STAT News': '#E63946',
+  'Science News': '#6B4EAB',
+  Science: '#C41230',
   'Google News': '#4285F4',
 }
 

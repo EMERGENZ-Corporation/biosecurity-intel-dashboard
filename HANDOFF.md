@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-20 (after tab sweep — all restoration items complete)
+**Last updated:** 2026-05-20 (after backlog bundle — custom domain, RSS, zero-write, Tier 4, Status depth)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 ---
@@ -103,18 +103,27 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ---
 
+## ✅ Backlog bundle (commit pending push)
+
+Shipped in a single safe bundle:
+
+- **Custom domain workflows.** `status-monitor.yml` STATUS_URL and `update-data.yml` PRODUCTION_URL restored to `https://biosecurity-intel.emergenzsystems.org` now that DNS resolves.
+- **RSS endpoints (`scripts/update-news.mjs`).** Removed 6 dead feeds (ProMED, Eurosurveillance, PHAC, RKI, AP News, CTV News). Added 3 known-working: CIDRAP (`cidrap.umn.edu/rss.xml` — Tier 2 institutional), NBC News health, CBC News (alt URL `webfeed/rss/rss-health`). Per-signal Google News queries already cover removed authorities. Authority-weight map updated.
+- **Authority colors** synced in `News.tsx` and `Overview.tsx` so chips render consistently for the new feeds.
+- **Zero-write skip (CONTENT-STANDARDS §4.4).** `update-news.mjs` now serializes the candidate output, compares byte-for-byte to existing `news.json`, and skips the write if identical. Prevents spurious commits and Vercel rebuilds.
+- **Tier 4 sources added** (3 entries): bioRxiv Infectious Diseases, medRxiv Infectious Diseases, medRxiv Epidemiology. All carry `notes` explaining the not-peer-reviewed status per §1.
+- **Status page depth.** `generate-status.mjs` now exposes `signals.totalMapMarkers` (103), `signals.totalDetailSections` (20), `sources.byTier` ({tier1: 19, tier2: 11, tier3: 4, tier4: 3}), and `news` ({total, newest}). Status.tsx renders a new "Dashboard depth" card and an extended source-registry section with per-tier counts.
+
+**Verify:** `npm run generate:status` then visit `/status` — expect "Map markers 103 · Detail sections 20 · Timeline events 13 · News items 200" and a Tier 1–4 breakdown.
+
+---
+
 ## ⏳ Outstanding work (backlog)
 
-These are not part of the original 6-item restoration plan but are natural next steps:
-
-- **Deepen non-hantavirus detailSections.** Each of the 15 non-hantavirus signals currently has 1 "Operational guidance" section. Deepen to 3-5 ContentBlocks each (clinical, surveillance, infection control, lab diagnostics, vaccination/prophylaxis where applicable), modeled on the hantavirus signal.
-- **Tier 4 sources empty (0 in registry).** Add 2-3 representative preprints (bioRxiv/medRxiv) to demonstrate the tier system end-to-end.
-- **Custom domain** `biosecurity-intel.emergenzsystems.org` still does not resolve. Workflows point at `biosecurity-intel-dashboard.vercel.app`. Swap back via env var or workflow edit once DNS is configured.
-- **Pipeline §4.4 gap.** `update-news.mjs` writes `news.json` even when zero new items are added; CONTENT-STANDARDS spec says zero-new-item runs should write nothing.
-- **Failing RSS endpoints** (PHAC, RKI, AP News, CTV, CBC, Eurosurveillance) — find current URLs and update `GLOBAL_FEEDS` in `scripts/update-news.mjs`.
-- **Status page (`/status`)** was lightly touched in the sweep — verify renders correctly after all data changes; consider adding marker / section count fields to `generate-status.mjs` output and surfacing them here.
+- **Deepen non-hantavirus detailSections.** Each of the 15 non-hantavirus signals currently has 1 "Operational guidance" section. Deepen to 3-5 ContentBlocks each (clinical, surveillance, infection control, lab diagnostics, vaccination/prophylaxis where applicable), modeled on the hantavirus signal. Largest remaining piece of content work.
 - **Bundle size.** Main bundle is 640 kB (gzip 203 kB) — past Vite's 500 kB warning. Consider `manualChunks` or convert `news.json` to a runtime `fetch()` instead of build-time import.
 - **Accessibility sweep.** AcknowledgmentModal focus trap + ESC; keyboard nav for filter chip rows; verify ARIA on map filter rows.
+- **Intermittent feed failures.** WHO and ECDC occasionally 404 during pipeline runs (saw it in the post-backlog run). Tolerated as non-critical, but watch for sustained failures — they're Tier 1 and CONTENT-STANDARDS §6.1 says Tier 1 failures during active outbreaks should hard-alert. The current pipeline only marks CDC as `critical: true`; consider adding WHO/ECDC if their endpoints stabilize.
 
 ---
 
