@@ -144,12 +144,16 @@ jobs:
               })
             }
 
+      - name: Regenerate public API news endpoint
+        if: steps.update-news.outcome == 'success'
+        run: npm run generate:api
+
       - name: Commit updated news.json
         if: steps.update-news.outcome == 'success'
         run: |
           git config user.name "EMERGENZ Data Bot"
           git config user.email "bot@emergenz.org"
-          git add src/data/news.json
+          git add src/data/news.json public/api/v1/
           if git diff --staged --quiet; then
             echo "No news changes to commit."
           else

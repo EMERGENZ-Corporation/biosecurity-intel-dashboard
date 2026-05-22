@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (intel rigor bundle — source diversity, watch indicators, risk-history Δ)
+**Last updated:** 2026-05-22 (analyst tooling — public API endpoints, API docs, /compare side-by-side)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,65 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Analyst tooling — public API + /compare side-by-side (commit pending)
+
+Closes UX-GAP-ANALYSIS §3 items 17 (public API documentation) and 21
+(comparative view). Together with the prior intel-rigor bundle, the
+analyst & medical-intel-officer personas now have:
+- Source-diversity score (item 18 — prior bundle)
+- Risk-history Δ (item 19 — prior bundle)
+- Watch indicators (item 20 — prior bundle)
+- Public API endpoints + documentation (items 16, 17 — this bundle)
+- Side-by-side comparative view (item 21 — this bundle)
+
+### Public API endpoints (§3 #17)
+- `scripts/generate-api.mjs` (new) — copies `src/data/*.json` to
+  `public/api/v1/*.json` with envelope: `{ schemaVersion, generatedAt,
+  endpoint, count, <name> }`. Tested locally:
+  - `/api/v1/signals.json` (16 signals)
+  - `/api/v1/signal-sources.json` (37 sources)
+  - `/api/v1/signal-timeline.json` (41 events)
+  - `/api/v1/news.json` (500 items)
+- `package.json` — adds `generate:api` script
+- `.github/workflows/update-data.yml` — runs `generate:api` after `generate:status`;
+  stages `public/api/v1/` in the bot commit so endpoints stay fresh
+- `.github/workflows/update-news.yml` — runs `generate:api` after the news
+  pipeline; stages `public/api/v1/` so news endpoint stays fresh
+- `src/pages/Status.tsx` — new "Public API" card with envelope description,
+  per-endpoint list, sample `curl` command
+
+### Comparative view (§3 #21)
+- `src/pages/ComparePage.tsx` (new) — `/compare?signals=A,B,C` route.
+  Multi-select chip row (toggles signal in/out of comparison, caps at 4);
+  sticky-left column table with 17 comparison rows: Severity, Confidence,
+  Trend, Status, Category, Pathogen, Geography, Map markers, Detail
+  sections, Risk badges, HCW alert, Watch indicators, Source diversity,
+  Last updated, Last checked, Summary, Operational relevance
+- `src/App.tsx` — `/compare` route registered (lazy-loaded)
+- `src/components/SignalActionStrip.tsx` — adds "Compare with… ↗" button
+  linking to `/compare?signals={this signal id}` as launch point
+
+### Files touched
+- New: `scripts/generate-api.mjs`, `src/pages/ComparePage.tsx`
+- Modified: `package.json` (generate:api script),
+  `.github/workflows/update-data.yml`,
+  `.github/workflows/update-news.yml`,
+  `src/pages/Status.tsx` (Public API card),
+  `src/App.tsx` (compare route),
+  `src/components/SignalActionStrip.tsx` (Compare with… link)
+- Generated: `public/api/v1/signals.json`, `signal-sources.json`,
+  `signal-timeline.json`, `news.json`
+
+**Verify (live):**
+- `/api/v1/signals.json` returns enveloped JSON with 16 signals
+- `/status` shows new "Public API" card listing all 4 endpoints + curl example
+- `/compare?signals=andes-hantavirus-mv-hondius-2026,lassa-fever-2026`
+  renders 17-row comparison table with both signals' headers + severity stripes
+- Signal detail action strip shows "Compare with… ↗" button that
+  pre-fills the current signal
+
+---
 
 ## ✅ Intel rigor bundle — source diversity + watch indicators + risk history (commit 02934f5)
 

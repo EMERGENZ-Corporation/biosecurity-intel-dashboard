@@ -114,6 +114,24 @@ export default function SignalActionStrip({ signal }: Props) {
         </a>
       )}
 
+      <a
+        href={`/compare?signals=${signal.id}`}
+        title="Compare this signal with another side-by-side"
+        style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '0.6875rem',
+          fontWeight: 600,
+          color: 'var(--color-text-secondary)',
+          textDecoration: 'none',
+          padding: '0.3rem 0.625rem',
+          border: '1px solid var(--color-border)',
+          borderRadius: '4px',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        Compare with… ↗
+      </a>
+
       <button
         type="button"
         onClick={onPrint}

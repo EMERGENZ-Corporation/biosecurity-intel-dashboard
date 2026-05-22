@@ -44,6 +44,9 @@ jobs:
       - name: Regenerate status.json
         run: npm run generate:status
 
+      - name: Regenerate public API endpoints
+        run: npm run generate:api
+
       - name: Re-validate after regeneration
         run: npm run validate:data
 
@@ -52,7 +55,7 @@ jobs:
         run: |
           git config user.name "EMERGENZ Data Bot"
           git config user.email "bot@emergenz.org"
-          git add public/status.json
+          git add public/status.json public/api/v1/
           if git diff --staged --quiet; then
             echo "No status changes to commit."
             echo "data_changed=false" >> "$GITHUB_OUTPUT"
