@@ -75,6 +75,23 @@ export default function AuthorityRiskBadges({ assessments }: Props) {
               >
                 {a.label} ↗
               </span>
+              {a.history && a.history.length > 0 && (
+                <span
+                  title={a.history
+                    .map((h) => `${h.label} (${formatDate(h.asOf)})`)
+                    .join(' → ') + ` → ${a.label}${a.asOf ? ` (${formatDate(a.asOf)})` : ''}`}
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: '0.5rem',
+                    color: 'var(--color-text-muted)',
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                    marginTop: '0.125rem',
+                  }}
+                >
+                  Δ {a.history[a.history.length - 1]?.label} → {a.label}
+                </span>
+              )}
             </div>
           </a>
         )

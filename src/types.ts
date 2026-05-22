@@ -127,6 +127,20 @@ export interface SignalDetailSection {
  * Authoritative risk-level assessment from a public health authority.
  * Renders as a prominent badge strip on signal-detail pages.
  */
+/**
+ * Prior risk-level entry for the same authority — surfaces the Δ over
+ * time per UX-GAP-ANALYSIS §1.7. Renders as a small history strip when
+ * a current RiskAssessment carries ≥1 history entry.
+ */
+export interface RiskAssessmentHistoryEntry {
+  /** Previous risk label (e.g. "VERY LOW", "MODERATE"). */
+  label: string
+  /** Date the previous level was set. */
+  asOf: string
+  /** Optional link to the previous-level source document. */
+  url?: string
+}
+
 export interface RiskAssessment {
   /** Authority issuing the assessment (e.g. WHO, CDC, ECDC). */
   authority: string
@@ -138,6 +152,26 @@ export interface RiskAssessment {
   url: string
   /** Date of the assessment. */
   asOf?: string
+  /** Prior risk-level entries (oldest first) showing how this authority's view evolved. */
+  history?: RiskAssessmentHistoryEntry[]
+}
+
+/**
+ * Watch indicator — an explicit escalation trigger per UX-GAP-ANALYSIS §1.7.
+ * Surfaces "if X happens, escalate this signal to severity Y" so the
+ * medical intelligence officer sees the analytic plan, not just the
+ * current state. ICD-203 aligned: makes the analytic methodology
+ * transparent.
+ */
+export interface WatchIndicator {
+  /** Short descriptor — "Sustained human-to-human transmission" */
+  trigger: string
+  /** Operational threshold — "≥3 generations of community transmission" */
+  threshold: string
+  /** Target severity if the threshold is met */
+  escalateTo: SignalSeverity
+  /** Why this indicator matters / what it implies */
+  rationale: string
 }
 
 /**
@@ -178,6 +212,8 @@ export interface Signal {
   detailSections?: SignalDetailSection[]
   /** Authoritative risk assessments from public health authorities. */
   riskAssessments?: RiskAssessment[]
+  /** Explicit escalation triggers — surfaces analytic-watch indicators per ICD-203 practice. */
+  watchIndicators?: WatchIndicator[]
   /** Healthcare-worker alert callout when applicable. */
   hcwAlert?: HcwAlert
   primarySourceId: string

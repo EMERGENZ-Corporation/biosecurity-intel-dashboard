@@ -22,6 +22,8 @@ import AuthorityRiskBadges from '../components/AuthorityRiskBadges'
 import SignalActionStrip from '../components/SignalActionStrip'
 import TldrBox from '../components/TldrBox'
 import SignalDetailToc, { type TocEntry } from '../components/SignalDetailToc'
+import SourceDiversityBadge from '../components/SourceDiversityBadge'
+import WatchIndicatorsBlock from '../components/WatchIndicatorsBlock'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -125,6 +127,7 @@ export default function SignalDetail() {
     { id: 'summary', label: 'Summary' },
     ...(signal.currentSituation ? [{ id: 'current-situation', label: 'Current situation' }] : []),
     { id: 'why-it-matters', label: 'Why it matters' },
+    ...((signal.watchIndicators?.length ?? 0) > 0 ? [{ id: 'watch-indicators', label: 'Watch indicators' }] : []),
     { id: 'geography', label: 'Geography' },
     ...((signal.metrics?.length ?? 0) > 0 ? [{ id: 'metrics', label: 'Metrics' }] : []),
     ...(events.length > 0 ? [{ id: 'timeline', label: 'Timeline' }] : []),
@@ -196,6 +199,7 @@ export default function SignalDetail() {
 
       <SignalActionStrip signal={signal} />
       <TldrBox signal={signal} />
+      <SourceDiversityBadge signal={signal} variant="detail" />
 
       <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
         <SignalDetailToc entries={tocEntries} />
@@ -228,6 +232,10 @@ export default function SignalDetail() {
           </>
         )}
       </Section>
+
+      {signal.watchIndicators && signal.watchIndicators.length > 0 && (
+        <WatchIndicatorsBlock indicators={signal.watchIndicators} />
+      )}
 
       <Section title="Geography" id="geography">
         <Paragraph>{signal.geographyNotes ?? signal.geography.join(', ')}</Paragraph>

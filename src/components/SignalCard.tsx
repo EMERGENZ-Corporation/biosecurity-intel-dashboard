@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Signal, type NewsItem } from '../types'
+import SourceDiversityBadge from './SourceDiversityBadge'
 import {
   SEVERITY_COLORS,
   SEVERITY_LABELS,
@@ -167,12 +168,13 @@ export default function SignalCard({ signal, compact = false }: Props) {
         </p>
       )}
 
-      {/* Depth indicators */}
-      {!compact && (markerCount + sectionCount + newsCount) > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
+      {/* Depth indicators + source-diversity score */}
+      {!compact && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem', alignItems: 'center' }}>
           {markerCount > 0 && <DepthBadge count={markerCount} label="markers" />}
           {sectionCount > 0 && <DepthBadge count={sectionCount} label="sections" />}
           {newsCount > 0 && <DepthBadge count={newsCount} label="news" />}
+          <SourceDiversityBadge signal={signal} variant="card" />
         </div>
       )}
 

@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (UX first-pass shortlist shipped — 8 highest-ROI items from UX-GAP-ANALYSIS)
+**Last updated:** 2026-05-22 (intel rigor bundle — source diversity, watch indicators, risk-history Δ)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,72 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Intel rigor bundle — source diversity + watch indicators + risk history (commit pending)
+
+Implements UX-GAP-ANALYSIS §3 items 18, 19, 20 (analyst & intel rigor tier).
+All three address the medical intelligence officer persona's gap: "no
+source-diversity score, no risk-history Δ, no watch indicators — would
+not satisfy ICD-203 / IC analytic standards."
+
+### Source-diversity score (§3 #18)
+- `src/utils/sourceDiversity.ts` (new) — computes distinct-authority count,
+  per-tier counts, top tier, and STRONG / MODERATE / WEAK / SINGLE-SOURCE
+  label. No new data; runtime-calculated from signal.sourceIds.
+- `src/components/SourceDiversityBadge.tsx` (new) — two variants:
+  - `card`: compact "STRONG · 9 src" chip on SignalCard
+  - `detail`: expanded breakdown row on SignalDetail with T1/T2/T3/T4 counts
+- Hantavirus reads STRONG (≥3 distinct Tier 1/2 authorities corroborating).
+
+### Watch indicators (§3 #20)
+- `WatchIndicator` interface in `src/types.ts` — `trigger` + `threshold` +
+  `escalateTo` (severity) + `rationale`. Optional `Signal.watchIndicators[]`.
+- `src/components/WatchIndicatorsBlock.tsx` (new) — yellow-accent section
+  with trigger headline, "Escalate to X" pill, threshold line, rationale.
+  Inserted between "Why it matters" and "Geography" on signal detail.
+- TOC dynamically includes "Watch indicators" entry when present.
+- 18 indicators seeded across 5 highest-priority signals via
+  `scripts/seed-intel-rigor.mjs`:
+  - hantavirus: 4 (P2P transmission, HCW infection with intact PPE,
+    >42d incubation, atypical genomics)
+  - ebola: 4 (cross-border, vaccine evasion, imported case, ETU cluster)
+  - avian flu H5: 4 (sustained H2H, severe non-occupational case,
+    geographic expansion, antiviral resistance)
+  - mpox clade I: 3 (sustained outside Africa, pediatric outside endemic,
+    JYNNEOS breakthrough)
+  - lassa: 3 (imported with onward transmission, above-baseline season,
+    HCW death)
+
+### Risk-assessment history Δ (§3 #19)
+- `RiskAssessmentHistoryEntry` interface in `src/types.ts` — `label` +
+  `asOf` + optional `url`. Optional `RiskAssessment.history[]`.
+- `AuthorityRiskBadges` extended to render "Δ PRIOR → CURRENT" sub-line
+  under each badge when history is present; full chronology shown on hover.
+- 12 history entries seeded:
+  - hantavirus: WHO (VERY LOW→LOW), CDC (Monitoring→HAN 528), ECDC
+  - mpox clade I: WHO (CONCERN→HIGH→PHEIC), Africa CDC
+  - avian flu H5: WHO, USDA APHIS (WATCH→INCIDENT)
+  - ebola, cholera: prior alert states
+
+### Files touched
+- New: `src/utils/sourceDiversity.ts`, `src/components/SourceDiversityBadge.tsx`,
+  `src/components/WatchIndicatorsBlock.tsx`, `scripts/seed-intel-rigor.mjs`
+- Modified: `src/types.ts` (added WatchIndicator, RiskAssessmentHistoryEntry,
+  optional `Signal.watchIndicators`, optional `RiskAssessment.history`),
+  `src/pages/SignalDetail.tsx` (renders new components, extends TOC),
+  `src/components/SignalCard.tsx` (compact diversity badge),
+  `src/components/AuthorityRiskBadges.tsx` (renders Δ history line),
+  `src/data/signals.json` (seeded watch indicators + risk history),
+  `public/status.json` (regenerated)
+
+**Verify (live):**
+- `/signals/andes-hantavirus-mv-hondius-2026` shows STRONG diversity badge,
+  4 watch indicators with Escalate-to pills, 3 risk-history Δ lines under
+  WHO/CDC/ECDC badges. TOC includes "Watch indicators" entry.
+- `/signals` cards show compact diversity badge (e.g. "STRONG · 9 src").
+- `npm run build` and `npm run validate:data` clean.
+
+---
 
 ## ✅ UX first-pass shortlist — 8 highest-ROI fixes (commit 67e26ca)
 
