@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-21 (hantavirus marker deduplication)
+**Last updated:** 2026-05-21 (semantic intelligence color system)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,32 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Semantic intelligence color system (commit fe52413)
+
+User request: replace arbitrary tag colors with a semantically consistent
+intelligence/biosurveillance visual language. Severity now follows a strict
+blue -> amber -> orange -> red escalation gradient; threat categories cluster
+by operational domain; marker types use function-specific colors for cases,
+deaths, outbreak zones, exposure events, monitoring sites, animal/vector
+detections, infrastructure, ship routes, flight tracking, and US monitoring.
+
+**Files touched:**
+- `src/utils/signals.ts` - adds shared severity/category/marker tone registries, marker color constants, and `intelToneStyle()` helpers.
+- `src/index.css` - adds the reusable `.intel-pill` / `.intel-dot` treatment: dark translucent fill, colored border, muted glow, uppercase white text, hover and active states.
+- `src/tokens.css` - retunes the base dark navy/charcoal palette and shared accent colors.
+- `src/pages/MapPage.tsx` - applies semantic severity, category, and marker-type filter pills.
+- `src/pages/Signals.tsx` - applies semantic severity/category filter pills.
+- `src/components/SignalCard.tsx` - applies semantic severity/category chips on signal cards.
+- `src/pages/Briefings.tsx` - applies semantic pills to briefing cards and filters.
+- `src/pages/TimelinePage.tsx` - applies semantic pills to timeline filters and event chips.
+- `src/pages/News.tsx` - applies semantic signal filter pills.
+- `src/pages/Overview.tsx` - applies semantic pills to active briefings, domain counts, and latest-news signal chips.
+- `src/pages/SignalDetail.tsx` - applies semantic category/severity pills in the signal metadata strip.
+- `src/components/SignalsMap.tsx` - softens marker fills and uses semantic marker-type popup pills.
+- `HANDOFF.md` - logs the semantic color-system shipment.
+
+**Verify:** `npm run validate:data`, `npm run build`, then visit `/`, `/signals`, `/map`, `/timeline`, `/briefings`, `/news`, and a representative signal detail page to confirm the pill system and map markers render with muted dark tactical styling.
 
 ## ✅ Hantavirus marker deduplication (commit 0272520)
 
