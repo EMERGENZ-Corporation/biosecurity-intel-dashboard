@@ -1029,6 +1029,52 @@
         "lastReviewed": "2026-05-20"
       },
       {
+        "id": "laboratory-diagnostics",
+        "title": "Laboratory diagnostics",
+        "bodyMarkdown": "RT-PCR for ebolavirus is the gold-standard diagnostic for acute Ebola disease, typically becoming positive within 3 days of symptom onset. Antigen-capture ELISA and IgM serology become positive later in illness. Specimens may be persistently positive in convalescent blood, semen, breast milk, ocular fluid, and CNS for extended periods after recovery (CDC; WHO).\n\nAll specimen handling for known or suspected Ebola requires BSL-4 containment for live virus and BSL-3 containment with inactivation for diagnostic work. Routine clinical laboratories should not process Ebola specimens; coordinate with the state public health laboratory and the Laboratory Response Network (LRN) before any specimen collection. CDC Emergency Operations Center: 770-488-7100.\n\nAcceptable diagnostic specimens include EDTA whole blood (preferred), serum, and oral or buccal swabs in cases where blood draw is contraindicated. Specimens are shipped as Category A Infectious Substance (UN2814) — shippers must be IATA-trained and certified, and the receiving facility must be notified in advance.\n\nDifferential diagnosis includes malaria (especially in returning travelers from endemic regions), typhoid fever, Lassa fever, Marburg disease, and yellow fever. Empiric antimalarials should be considered while awaiting confirmatory testing in patients with appropriate exposure history.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News",
+            "date": "2026-05-19",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news"
+          },
+          {
+            "authority": "Africa CDC",
+            "documentTitle": "Africa CDC Epidemic Intelligence and Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://africacdc.org"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "ems-transport-protocols",
+        "title": "EMS transport protocols",
+        "bodyMarkdown": "Pre-notification of the receiving facility is mandatory for any suspected Ebola case. The receiving facility must have time to activate VHF protocols, prepare an airborne infection isolation room (AIIR), assemble the donning/doffing trained team, and arrange dedicated equipment before patient arrival.\n\nEMS vehicles transporting suspected cases require thorough decontamination per agency biosafety SOP after the run. The cabin should be sealed during transport; minimize the number of personnel in the patient compartment; document all personnel with direct or indirect patient contact for the duration of the run.\n\nPersonnel transporting suspected cases must be in full PPE before patient contact and maintain PPE throughout the run. Doffing occurs only at the receiving facility under trained-observer supervision in a designated doffing area. PPE waste is handled as Category A regulated medical waste per UN2814 shipping requirements.\n\nAfter completion, all involved personnel are tracked for 21 days through occupational health, monitored daily for symptoms, and excluded from direct patient care pending occupational health risk assessment. Coordinate exposure response with the state health department and the receiving facility's infection prevention team.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Health Alert Network",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/han/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
         "id": "operational-guidance",
         "title": "Operational guidance",
         "bodyMarkdown": "Ebolavirus outbreaks are reported in real time by WHO Disease Outbreak News and Africa CDC. Active surveillance includes ring-vaccination campaigns where rVSV-ZEBOV is matched to the strain, cross-border case-finding, and Ebola Treatment Unit (ETU) deployment.\n\nReturning travelers from active outbreak zones presenting with febrile illness within 21 days of departure should be triaged using standard EVD screening (fever, exposure history, contact with known/suspected case). Specimen handling requires BSL-4 containment for confirmatory testing; coordinate with state public health lab and CDC Emergency Operations Center (770-488-7100) prior to collection.\n\nOperational priorities include early isolation, contact tracing, safe burials, and community engagement. Verify ETU locations, transport protocols, and PPE supply chains against your agency's biosafety SOP before deployment.",
@@ -1218,6 +1264,46 @@
         "lastReviewed": "2026-05-20"
       },
       {
+        "id": "school-and-childcare-response",
+        "title": "School and childcare response",
+        "bodyMarkdown": "Exposed contacts without evidence of immunity must be excluded from school, childcare, healthcare work, and shared communal settings from day 5 through day 21 after the last exposure per CDC guidance. The exclusion window starts day 5 post-exposure (matching the typical infectious-period onset) and ends day 21 (the outer bound of incubation).\n\nSchools and childcare facilities should review immunization records during active community transmission and require documentation of immunity for continued attendance per state law. States vary in their handling of philosophical and religious exemptions; verify current state policy with the local health department.\n\nSchool closure is considered only when transmission cannot be controlled through case isolation, contact exclusion, and targeted vaccination. Most outbreaks can be contained without facility closure; closure is typically reserved for situations where vaccination coverage in the school community is severely below herd-immunity threshold (CDC).\n\nHealthcare-worker immunity verification is critical; non-immune HCWs exposed during outbreaks should be furloughed from direct patient care during the exclusion window. Coordinate with occupational health, infection prevention, and the state health department for management of exposed staff.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Health Alert Network",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/han/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "surveillance-and-reporting",
+        "title": "Surveillance and reporting",
+        "bodyMarkdown": "Measles is a nationally notifiable condition in all 50 states. Any suspected case must be reported immediately to the local or state health department, typically by phone, with formal case report submission within 24 hours per state regulations. Public health response includes contact tracing, source investigation, and active surveillance of exposed populations (CDC).\n\nDiagnosis is confirmed by serology (measles-specific IgM) or RT-PCR on a nasopharyngeal or oropharyngeal swab plus urine specimen. Specimens should be collected as soon as possible after rash onset for highest sensitivity. Specimens are sent to the state public health laboratory; CDC provides genotyping for outbreak investigation and source attribution.\n\nGenotype assignment is essential for distinguishing imported cases from endemic transmission (the US declared measles eliminated in 2000; sustained transmission greater than 12 months would constitute loss of elimination status). Most current US cases are linked to importation followed by local transmission in under-vaccinated communities.\n\nState health departments coordinate with CDC for cluster investigation, vaccination campaign deployment, and communication to clinicians and the public. The Vaccines for Children (VFC) program and state immunization registries support outbreak vaccination response. Verify current case-count thresholds and reporting timelines with your state's Communicable Disease Branch.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Health Alert Network",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/han/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
         "id": "operational-guidance",
         "title": "Operational guidance",
         "bodyMarkdown": "Measles outbreaks in the United States are driven primarily by under-vaccinated communities and importation from regions with active circulation. CDC monitors the situation through state health department case reports and HAN advisories. The MMR vaccine is approximately 97% effective after two doses; herd immunity threshold is roughly 95% population coverage.\n\nOperationally, EMS providers and emergency departments handling suspected measles cases should apply airborne precautions (N95 or higher), isolate the patient in a negative-pressure room when available, and notify the receiving facility before transport. Vulnerable contacts (under 1 year, immunocompromised, pregnant) require post-exposure prophylaxis evaluation within 72 hours (vaccine) or 6 days (immunoglobulin).\n\nVerify state-specific case-reporting requirements with your local health department. Measles is a reportable condition in all 50 states.",
@@ -1392,6 +1478,46 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      },
+      {
+        "id": "laboratory-diagnostics",
+        "title": "Laboratory diagnostics",
+        "bodyMarkdown": "Real-time PCR on lesion material (vesicle fluid, lesion exudate, or lesion crust) is the gold-standard diagnostic for mpox. Two swabs per lesion from 2-3 distinct lesions are typical; samples are placed in viral transport medium and shipped to the state public health laboratory or LRN reference lab (CDC).\n\nSpecimen collection requires standard, contact, and droplet PPE; airborne PPE is recommended for any procedure likely to disturb lesions. Swabs are vigorous; avoid de-roofing intact vesicles. Specimens from active lesions are far more sensitive than blood or serology, which are not reliable for acute diagnosis.\n\nClade differentiation (clade I vs clade IIb) requires sequencing or specific clade-targeted assays beyond initial mpox PCR. The state public health laboratory coordinates clade differentiation with CDC; specifically request clade typing for any positive case to inform outbreak attribution and public health response.\n\nSerology may be useful for retrospective diagnosis or population studies but is not reliable for acute care given orthopoxvirus cross-reactivity. Coordinate testing with CDC and your state's LRN reference laboratory.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News",
+            "date": "2026-05-19",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "travel-and-importation-risk",
+        "title": "Travel and importation risk",
+        "bodyMarkdown": "CDC has issued travel health notices for countries with active clade I transmission. Travelers from active clade I outbreak zones presenting with characteristic rash within 21 days of return should be evaluated using CDC clinical criteria. The 21-day window accounts for the upper bound of incubation (CDC; WHO).\n\nPorts of entry are not actively screening travelers for mpox; reliance is on clinical alertness, traveler health education, and post-arrival self-monitoring. EMS providers and emergency department clinicians serving major airports and international ports should maintain a high index of suspicion for returning travelers with characteristic presentation.\n\nCDC's monitoring includes voluntary contact tracing for confirmed cases, partner notification, and outreach to high-risk populations. State health departments coordinate with CDC for travel-related case management and JYNNEOS vaccine deployment to identified close contacts.\n\nFor clinicians: suspected case management includes immediate isolation, single-patient room with private bathroom, PPE per CDC guidance, prompt PCR testing on lesion material, and notification of the state health department. Tecovirimat (TPOXX) is available under expanded-access protocols for severe disease or high-risk patients; coordinate access through CDC.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News",
+            "date": "2026-05-19",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
       },
       {
         "id": "operational-guidance",
@@ -1598,6 +1724,58 @@
         "lastReviewed": "2026-05-20"
       },
       {
+        "id": "one-health-surveillance",
+        "title": "One Health surveillance coordination",
+        "bodyMarkdown": "Coordinated surveillance of avian influenza H5 spans animal, environmental, and human health domains. USDA APHIS operates animal-health surveillance (commercial poultry, dairy herds, wildlife testing); CDC coordinates human surveillance through state public health laboratories and the Influenza Risk Assessment Tool (IRAT); WOAH WAHIS aggregates global animal-health intelligence.\n\nIn April 2024, USDA issued a federal order requiring mandatory testing of lactating dairy cattle moving interstate to support outbreak surveillance and contain spread. State agriculture and health departments coordinate joint farm investigations, worker exposure tracking, and risk communication. The arrangement formalizes One Health collaboration that had previously been case-by-case.\n\nWastewater surveillance for influenza A is conducted by CDC NWSS and WastewaterSCAN at select sites. Influenza A signal in wastewater above expected seasonal baseline can indicate either circulating human seasonal influenza or spillover from animal sources; subtyping is typically not done routinely in wastewater but is increasing in capability.\n\nVerify current surveillance findings through USDA APHIS, CDC IRAT updates, and WOAH WAHIS. Multi-source surveillance integration informs the IRAT's probability and severity scores, which guide pandemic preparedness planning.",
+        "attribution": {
+          "authority": "USDA APHIS",
+          "documentTitle": "USDA APHIS — Avian Influenza",
+          "date": "2026-05-19",
+          "url": "https://www.aphis.usda.gov/livestock-poultry-disease/avian/avian-influenza"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          },
+          {
+            "authority": "WOAH",
+            "documentTitle": "WOAH World Animal Health Information System (WAHIS)",
+            "date": "2026-05-19",
+            "url": "https://wahis.woah.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "laboratory-diagnostics",
+        "title": "Laboratory diagnostics",
+        "bodyMarkdown": "Routine respiratory viral panels typically detect influenza A but do not reliably subtype H5. Suspected H5 cases require dedicated H5-specific RT-PCR, which is performed at state public health laboratories (Laboratory Response Network) with confirmation at CDC. Suspected case identification triggers prioritized state-to-CDC specimen transfer (CDC).\n\nAcceptable specimens include nasopharyngeal swab in viral transport medium, lower-respiratory specimens (sputum, bronchoalveolar lavage) for severely ill patients, and conjunctival swab for patients with conjunctivitis (notable in recent US dairy-worker cases). Specimens should be collected as early as possible after symptom onset.\n\nAntiviral resistance monitoring is conducted on positive specimens through CDC's neuraminidase inhibitor and cap-dependent endonuclease inhibitor resistance surveillance programs. Resistance to current treatments (oseltamivir, baloxavir) has been rare in H5 isolates to date but warrants ongoing monitoring as use expands.\n\nCoordinate suspected case testing with the state epidemiologist and CDC EOC (770-488-7100) before specimen collection. Routine reflex H5 testing of all positive influenza A specimens is not standard at most clinical laboratories; explicit subtyping request is required.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News",
+            "date": "2026-05-19",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news"
+          },
+          {
+            "authority": "USDA APHIS",
+            "documentTitle": "USDA APHIS — Avian Influenza",
+            "date": "2026-05-19",
+            "url": "https://www.aphis.usda.gov/livestock-poultry-disease/avian/avian-influenza"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
         "id": "operational-guidance",
         "title": "Operational guidance",
         "bodyMarkdown": "Highly pathogenic avian influenza (HPAI) H5N1 clade 2.3.4.4b has expanded its host range to include dairy cattle in the United States since March 2024. USDA APHIS coordinates animal-health response (depopulation, biosecurity, milk-supply surveillance); CDC monitors human exposures and conducts genomic surveillance.\n\nOperationally, occupational exposures (dairy workers, poultry workers, depopulation responders) should be assessed under CDC guidance. PPE for active depopulation includes fit-tested N95, eye protection, gloves, coveralls, and boots. Antiviral prophylaxis with oseltamivir is recommended for unprotected exposures.\n\nThe pasteurized commercial milk supply remains safe per FDA pasteurization studies. Surveillance focuses on detecting any mutations associated with enhanced mammalian transmission. Verify outbreak reports against USDA APHIS and WOAH WAHIS dashboards.",
@@ -1778,6 +1956,58 @@
         "lastReviewed": "2026-05-20"
       },
       {
+        "id": "wash-interventions",
+        "title": "WASH interventions",
+        "bodyMarkdown": "Water, Sanitation, and Hygiene (WASH) interventions are foundational to cholera outbreak control alongside case management and vaccination. WHO and UNICEF coordinate WASH response with country MoH, MSF, IFRC, and partner NGOs. Priority interventions include safe water supply, latrine construction, hand hygiene promotion, household water treatment, and oral rehydration corners (WHO).\n\nSafe water supply uses chlorination of household water (typically with sodium hypochlorite tablets or solution dosed for typical household volumes), point-of-use filtration, or bulk-chlorinated municipal supply where feasible. In IDP camps and displacement settings, chlorinated water distribution points are established with documented dosing.\n\nLatrine coverage targets vary by context but typically aim for 1 latrine per 20 persons in stable refugee camps and adjust for emergency phases. Latrine siting requires safe distance from water sources (minimum 30 meters), gender-separated facilities, and night-lighting for security. Coordinate latrine construction with the camp management agency and the host MoH.\n\nHygiene promotion focuses on handwashing with soap before food preparation, before eating, after defecation, and after caring for sick people. Communication channels include community health workers, household visits, posters, radio, and through religious and community leaders. Adapt messaging to the local language and cultural context.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO Disease Outbreak News",
+          "date": "2026-05-19",
+          "url": "https://www.who.int/emergencies/disease-outbreak-news"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "PAHO",
+            "documentTitle": "PAHO Epidemiological Alerts and Updates",
+            "date": "2026-05-19",
+            "url": "https://www.paho.org/en/epidemiological-alerts-and-updates"
+          },
+          {
+            "authority": "Africa CDC",
+            "documentTitle": "Africa CDC Epidemic Intelligence and Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://africacdc.org"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "outbreak-response-coordination",
+        "title": "Outbreak response coordination",
+        "bodyMarkdown": "Country-led cholera response is coordinated by the National Ministry of Health, with WHO providing technical assistance and convening the International Coordinating Group (ICG) on Vaccine Provision for OCV stockpile decisions. UNICEF supports WASH, child health, and supply-chain logistics. MSF operates Cholera Treatment Centres (CTCs) and Cholera Treatment Units (CTUs) in many high-burden settings (WHO).\n\nThe Global Task Force on Cholera Control (GTFCC), hosted by WHO, coordinates international cholera response, technical guidance, and the Ending Cholera 2030 roadmap. GTFCC supports country preparedness, OCV deployment planning, and surveillance harmonization.\n\nActivation of the ICG OCV stockpile follows a country request, ICG review, and dispatch from regional stocks. Activation triggers include confirmed outbreak with sustained transmission, high case-fatality, or sustained risk in vulnerable populations (IDP camps, conflict zones, post-disaster). Average decision-to-dispatch is typically 7-14 days.\n\nFor US clinicians receiving travelers from cholera-endemic regions: cholera is a nationally notifiable condition. Coordinate with the state health department for case reporting, treatment with rapid rehydration and azithromycin or doxycycline (where susceptible), and rapid diagnostic testing through sentinel and reference laboratories.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO Disease Outbreak News",
+          "date": "2026-05-19",
+          "url": "https://www.who.int/emergencies/disease-outbreak-news"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "Africa CDC",
+            "documentTitle": "Africa CDC Epidemic Intelligence and Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://africacdc.org"
+          },
+          {
+            "authority": "PAHO",
+            "documentTitle": "PAHO Epidemiological Alerts and Updates",
+            "date": "2026-05-19",
+            "url": "https://www.paho.org/en/epidemiological-alerts-and-updates"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
         "id": "operational-guidance",
         "title": "Operational guidance",
         "bodyMarkdown": "Cholera outbreaks across sub-Saharan Africa are driven by displacement, conflict-affected water and sanitation infrastructure, and seasonal flooding. WHO and Africa CDC coordinate oral cholera vaccine (OCV) deployment from the global stockpile, which is managed by the International Coordinating Group (ICG).\n\nOperationally, cholera is treatable with prompt oral or intravenous rehydration; case-fatality should be under 1% with adequate care. Vibrio cholerae O1 serogroup is the predominant circulating strain. Standard precautions are sufficient for clinical contact; the primary transmission route is fecal-oral via contaminated water or food.\n\nTravelers from active outbreak zones presenting with acute watery diarrhea should be evaluated using clinical criteria; rapid diagnostic tests are available at sentinel sites. Coordinate suspected case management with state public health authorities.",
@@ -1942,6 +2172,46 @@
         "lastReviewed": "2026-05-20"
       },
       {
+        "id": "vaccine-strategy",
+        "title": "Vaccine strategy",
+        "bodyMarkdown": "Annual seasonal influenza vaccine composition is announced by WHO each February for the Northern Hemisphere season (October-March) and each September for the Southern Hemisphere season. The composition is informed by the WHO Global Influenza Surveillance and Response System (GISRS) collaborating centres and reflects expected circulating strains based on the prior season's surveillance (WHO; CDC).\n\nTrivalent and quadrivalent formulations are licensed in the United States. ACIP recommends annual vaccination for all persons aged 6 months and older without contraindications, with particular emphasis on high-risk populations (adults 65+, pregnant patients, immunocompromised, chronic conditions, healthcare personnel).\n\nHigh-dose and adjuvanted vaccines are licensed for adults aged 65 and older to address age-related immune senescence; ACIP recommends preferential use of these enhanced formulations where available. Cell-based and recombinant vaccines provide alternatives for patients with egg allergy and for accelerated production timelines.\n\nVaccine effectiveness varies year over year based on antigenic match. CDC publishes interim vaccine effectiveness estimates during the season through MMWR. Verify current ACIP recommendations and the season's interim VE estimates with CDC FluView before patient counseling.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC FluView — Weekly Influenza Surveillance",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/fluview/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Respiratory Virus Data",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/respiratory-viruses/data/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "antiviral-stewardship",
+        "title": "Antiviral stewardship",
+        "bodyMarkdown": "Neuraminidase inhibitors (oseltamivir, zanamivir, peramivir) and the cap-dependent endonuclease inhibitor baloxavir are the licensed antivirals for influenza. CDC and IDSA recommend treatment for hospitalized patients, severe or progressive illness, and high-risk outpatients regardless of vaccination status. Treatment is most effective when initiated within 48 hours of symptom onset (CDC; IDSA).\n\nOseltamivir is the most-used influenza antiviral worldwide; it is available in oral capsule and suspension formulations and is licensed for treatment from 2 weeks of age and for prophylaxis from 3 months. Baloxavir is a single-dose oral agent licensed for treatment of acute uncomplicated influenza in patients 5 years and older.\n\nAntiviral chemoprophylaxis can be considered for high-risk close contacts in long-term-care facility outbreaks and during institutional outbreaks where vaccination cannot be relied upon. CDC recommends vaccination as the primary prevention strategy and treats antivirals as a treatment tool, not a substitute for vaccination.\n\nResistance to oseltamivir has been documented historically for certain H1N1 strains; CDC publishes current circulating-strain antiviral resistance through FluView. Verify resistance patterns before treatment selection in cases of suspected antiviral failure.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC FluView — Weekly Influenza Surveillance",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/fluview/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Respiratory Virus Data",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/respiratory-viruses/data/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
         "id": "operational-guidance",
         "title": "Operational guidance",
         "bodyMarkdown": "Seasonal influenza activity is tracked weekly by CDC FluView (US), ECDC (EU/EEA), UKHSA (UK), and Public Health Agency of Canada FluWatch. Northern Hemisphere influenza vaccine composition is announced annually in February for the following season. Vaccine effectiveness varies year over year based on antigenic match.\n\nOperationally, EMS and hospital systems should anticipate surge during peak weeks (typically December–March in Northern Hemisphere). Antiviral treatment with oseltamivir, baloxavir, or zanamivir is most effective when initiated within 48 hours of symptom onset, especially in high-risk populations (adults 65+, immunocompromised, pregnant, chronic conditions).\n\nSubtyping (A/H1N1, A/H3N2, B/Victoria, B/Yamagata) and antiviral resistance surveillance are conducted via the WHO Global Influenza Surveillance and Response System (GISRS). Verify current circulating strains and dominant subtype via FluView before clinical interpretation.",
@@ -2085,6 +2355,52 @@
         "lastReviewed": "2026-05-20"
       },
       {
+        "id": "variant-tracking",
+        "title": "Variant tracking",
+        "bodyMarkdown": "Sequencing of wastewater samples enables early detection of SARS-CoV-2 variants and lineages before clinical case sequencing accumulates sufficient statistical power. CDC NWSS and WastewaterSCAN both support amplicon-based and metagenomic sequencing approaches for variant surveillance (CDC NWSS).\n\nVariant detection in wastewater typically precedes peak clinical reporting by 2-4 weeks; this lead time is most pronounced during periods of low clinical sequencing volume. Wastewater sequencing can identify novel variants weeks before they accumulate in clinical surveillance, providing early situational awareness for public health response.\n\nWastewater variant data is not equivalent to a population-prevalence estimate. The signal reflects the mix of variants shedding into the sampled wastewater catchment area, weighted by the relative shedding rates of each variant, sampling and processing methodology, and stochastic variation. Interpret as a relative-frequency signal rather than absolute prevalence.\n\nCDC and WHO collaborate with national reference labs and academic sequencing consortia for variant nomenclature (Pango lineages, WHO Greek-letter designations) and signal-to-clinical correlation. Verify variant detections through CDC NWSS dashboards before clinical interpretation; cross-reference with clinical sequencing data from GISAID where available.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC National Wastewater Surveillance System (NWSS)",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/nwss/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "clinical-integration",
+        "title": "Clinical surveillance integration",
+        "bodyMarkdown": "Wastewater surveillance is most operationally valuable when integrated with conventional clinical surveillance signals: ED visit data, hospital admissions, ICU census, ventilator availability, and laboratory case counts. Combined signals provide earlier and more reliable surge prediction than any single data stream (CDC NWSS).\n\nCDC's COVID Data Tracker integrates wastewater concentration trends alongside ED visits, hospital admissions, and emergency department visits for COVID-19-like illness. State health departments operate parallel integrated dashboards for jurisdictional planning. EMS and hospital preparedness teams use the integrated picture to align PPE, staffing, and bed capacity to forthcoming demand.\n\nLead time of wastewater over hospital admissions is typically 1-3 weeks in mature surveillance systems; lead time over mortality is 4-6 weeks. Local lead times vary by community testing behavior, healthcare-seeking patterns, and reporting infrastructure. Validate your jurisdiction's specific lead-time relationships before using wastewater alone for trigger thresholds.\n\nPopulation-level wastewater signal does not provide individual-level diagnosis. For clinical decisions, refer to current clinical testing, vaccination guidance from ACIP/CDC, and your facility's clinical protocols. Wastewater informs the population-level question of \"what will hospital demand look like in 2-4 weeks\" rather than the individual question of \"should this patient be tested.\"",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC National Wastewater Surveillance System (NWSS)",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/nwss/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Respiratory Virus Data",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/respiratory-viruses/data/"
+          },
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
         "id": "operational-guidance",
         "title": "Operational guidance",
         "bodyMarkdown": "SARS-CoV-2 wastewater surveillance through the CDC National Wastewater Surveillance System (NWSS) and WastewaterSCAN provides leading-indicator signal for community transmission, typically rising 4–7 days before clinical case reports. Variants of concern are detected through sequencing of wastewater samples at select sites.\n\nOperationally, sustained increases in wastewater signal can indicate forthcoming healthcare surge. EMS and hospital preparedness teams should align resourcing, PPE, and capacity planning to wastewater trajectories alongside conventional clinical surveillance.\n\nWastewater signal does not provide individual-level diagnosis, vaccination guidance, or treatment recommendation — it informs population-level situational awareness only. Verify trends against CDC NWSS and your jurisdiction's public health dashboard.",
@@ -2194,6 +2510,52 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      },
+      {
+        "id": "laboratory-diagnostics",
+        "title": "Laboratory diagnostics",
+        "bodyMarkdown": "Real-time RT-PCR on stool or vomitus specimens collected within 72 hours of symptom onset provides the highest diagnostic sensitivity for norovirus. Most US clinical laboratories detect norovirus via multiplex GI panels that include other enteric pathogens (Salmonella, Shigella, Campylobacter, EHEC, Cryptosporidium, Giardia, rotavirus, sapovirus, astrovirus, adenovirus 40/41) (CDC).\n\nCDC's CaliciNet supports outbreak typing and genotype identification, distinguishing GI from GII strains and tracking circulating genotypes. CaliciNet specimens are forwarded from state public health laboratories with appropriate epidemiologic linkage. Real-time outbreak typing informs identification of novel emergent strains and outbreak source attribution.\n\nWastewater surveillance through WastewaterSCAN measures community-level norovirus circulation independent of clinical reporting, which is highly under-ascertained for norovirus given the typically self-limited course. Wastewater signal can precede clinical reporting by several days and provides earlier situational awareness for LTCF, school, and ED preparedness.\n\nSpecimens should be collected during the symptomatic period; storage at -70 degrees C preserves viral RNA for confirmatory testing and CaliciNet typing. Coordinate clinical and outbreak specimen submission with the state public health laboratory.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          },
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC National Wastewater Surveillance System (NWSS)",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/nwss/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "healthcare-and-ltcf-ipc",
+        "title": "Healthcare and LTCF infection prevention",
+        "bodyMarkdown": "Norovirus outbreaks in long-term-care facilities, healthcare, and other congregate-living settings require rapid response: case isolation, cohorting of symptomatic and exposed asymptomatic residents, enhanced environmental cleaning, exclusion of symptomatic staff, and clear communication to residents and families (CDC).\n\nEnvironmental decontamination protocols specify EPA List G disinfectants for healthcare settings. Sodium hypochlorite (bleach) at 1:50 dilution for non-porous surfaces or 1:10 for heavily contaminated areas is widely used; surface contact times specified by the EPA registration label must be followed for effectiveness. Quaternary ammonium products commonly used in healthcare have reduced efficacy against non-enveloped viruses.\n\nHealthcare worker hand hygiene with soap and water is more effective than alcohol-based hand sanitizer against norovirus given the virus's non-enveloped structure. Education on this distinction is important for staff who default to alcohol-based hand sanitizer use; explicit policy reinforcement is recommended during outbreak periods.\n\nSymptomatic food handlers and direct-care HCWs must be excluded from food preparation and direct patient care for 48 hours after symptom resolution per the FDA Food Code. Symptomatic visitors should be barred from the facility until 48 hours after symptom resolution. Coordinate exclusion management with occupational health and the state health department.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
       },
       {
         "id": "operational-guidance",
@@ -2307,6 +2669,46 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      },
+      {
+        "id": "laboratory-diagnostics",
+        "title": "Laboratory diagnostics",
+        "bodyMarkdown": "Multiplex respiratory PCR panels including RSV are the recommended diagnostic approach during peak respiratory virus season. Panels typically include influenza A/B, SARS-CoV-2, RSV, parainfluenza 1-4, hMPV, adenovirus, rhinovirus/enterovirus, and others. Multiplex testing identifies co-infections that influence clinical course (CDC).\n\nAntigen detection tests for RSV have lower sensitivity than RT-PCR and are most useful in young children where viral load is typically high. In older children and adults, antigen sensitivity is reduced; RT-PCR is preferred. Outpatient testing options include rapid antigen tests, multiplex POC PCR, and laboratory-based PCR.\n\nSpecimen of choice is a nasopharyngeal swab in viral transport medium; nasopharyngeal aspirate is acceptable in young children, and oropharyngeal swab is acceptable when NP collection is not feasible. Specimens should be transported on ice and processed within standard timeframes per the laboratory's specifications.\n\nCDC RESP-NET conducts hospitalization-based surveillance for RSV alongside influenza and SARS-CoV-2. Wastewater RSV surveillance through CDC NWSS and WastewaterSCAN provides community-level signal that complements clinical RESP-NET data. Verify diagnostic capabilities and reporting timelines with your laboratory before peak season.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Respiratory Virus Data",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/respiratory-viruses/data/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "pediatric-surge-management",
+        "title": "Pediatric surge management",
+        "bodyMarkdown": "RSV is the leading cause of pediatric hospitalization for lower-respiratory infection in the United States, with peak admissions during the seasonal peak (typically December-February in temperate climates). Hospitals serving children should pre-position surge plans for emergency department, inpatient, and PICU capacity (CDC; AAP).\n\nBronchiolitis admission criteria per AAP guidance include hypoxemia (SpO2 less than 90% on room air), severe respiratory distress (retractions, grunting, nasal flaring), dehydration or inability to maintain oral hydration, apnea, and age under 3 months with concerning clinical features. Most hospitalizations are for hydration and respiratory support, not specific antiviral therapy.\n\nRespiratory support escalation typically proceeds through supplemental oxygen, high-flow nasal cannula (HFNC), continuous positive airway pressure (CPAP), bilevel positive airway pressure (BiPAP), and mechanical ventilation. HFNC has become first-line for moderate bronchiolitis in many institutions; CPAP and intubation are reserved for severe cases.\n\nManagement is supportive: bronchodilators and corticosteroids are not routinely recommended for typical bronchiolitis in infants per AAP guidelines. Hypertonic saline nebulization may reduce length of stay in hospitalized infants per some evidence. Verify your institution's clinical pathway and coordinate ED-to-floor handoffs to minimize boarding during surge.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Respiratory Virus Data",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/respiratory-viruses/data/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Health Alert Network",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/han/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
       },
       {
         "id": "operational-guidance",
@@ -2424,6 +2826,46 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      },
+      {
+        "id": "clinical-management",
+        "title": "Clinical management",
+        "bodyMarkdown": "There is currently no licensed vaccine or specific antiviral for hMPV. Management is supportive: oxygen, hydration, respiratory support (high-flow nasal cannula, BiPAP, intubation as needed). Bronchodilators may be considered case-by-case for documented airway reactivity but are not routinely recommended for hMPV bronchiolitis (CDC).\n\nSeverity distribution overlaps with RSV; young children, older adults, and immunocompromised patients carry the highest burden. Hospitalization criteria mirror RSV: hypoxemia, severe respiratory distress, inability to maintain hydration, apnea, or age under 3 months with concerning clinical features. Most cases are managed outpatient with supportive care and follow-up.\n\nCo-infection with other respiratory pathogens (RSV, influenza, SARS-CoV-2, rhinovirus) is common during peak respiratory virus season and may worsen clinical course in immunocompromised hosts. Multiplex PCR testing identifies co-infections that inform clinical management.\n\nRibavirin has activity against hMPV in vitro and has been used adjunctively in severe cases in immunocompromised hosts (particularly stem-cell transplant recipients) per case reports, though no controlled trial data support routine use. Consult infectious disease for severe disease in immunocompromised patients.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Respiratory Virus Data",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/respiratory-viruses/data/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "infection-prevention",
+        "title": "Infection prevention",
+        "bodyMarkdown": "Standard, contact, and droplet precautions are recommended for any patient with known or suspected hMPV. Patients should be placed in a single-patient room when available, or cohorted with confirmed hMPV cases. Dedicated single-use or thoroughly disinfected reusable equipment minimizes cross-transmission risk (CDC).\n\nPPE for direct patient care includes gown, gloves, eye protection, and a procedural mask. N95 or higher respirator is recommended for aerosol-generating procedures (intubation, extubation, BVM ventilation, CPAP/BiPAP, nebulizers, bronchoscopy, suctioning). PPE removal follows standard doffing protocols.\n\nHand hygiene with alcohol-based hand sanitizer or soap and water before and after patient contact, and after PPE removal, is the foundation of transmission prevention. Avoid touching the face during clinical encounters; hMPV transmits via large respiratory droplets and contact with contaminated surfaces.\n\nOutbreak management in long-term-care, healthcare, and congregate-living settings during peak season focuses on case identification, cohorting of confirmed cases, enhanced environmental cleaning, and exclusion of symptomatic staff. Coordinate outbreak response with the state health department and your facility's infection prevention team.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Respiratory Virus Data",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/respiratory-viruses/data/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
       },
       {
         "id": "operational-guidance",
@@ -2566,6 +3008,52 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      },
+      {
+        "id": "ribavirin-treatment-protocol",
+        "title": "Ribavirin treatment protocol",
+        "bodyMarkdown": "Ribavirin has documented activity against Lassa virus and is recommended for suspected severe cases when initiated early in the clinical course. Treatment efficacy decreases substantially after day 6 of illness, emphasizing the importance of early recognition and prompt initiation. CDC and WHO VHF guidelines recommend ribavirin for severe Lassa fever and for post-exposure prophylaxis in high-risk healthcare exposures.\n\nAdult treatment dosing per CDC VHF guidance: 30 mg/kg IV loading dose (maximum 2 g), then 16 mg/kg IV every 6 hours for 4 days (maximum 1 g per dose), then 8 mg/kg IV every 8 hours for 6 days (maximum 500 mg per dose). Total treatment course is 10 days. Pediatric dosing is weight-based and should be coordinated with pediatric infectious disease consultation (CDC).\n\nAdverse effects of ribavirin include hemolytic anemia (the dose-limiting toxicity), nausea, headache, fatigue, and elevated bilirubin. Hematocrit should be monitored every 1-2 days during therapy. Ribavirin is teratogenic and contraindicated in pregnancy; pregnant patients with Lassa fever require maternal-fetal medicine and infectious disease consultation for individualized risk-benefit assessment.\n\nCoordinate ribavirin access through CDC Emergency Operations Center (770-488-7100) and the state public health laboratory. Ribavirin is held in the Strategic National Stockpile for VHF cases; access requires CDC consultation and verification of the clinical scenario.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News",
+            "date": "2026-05-19",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "travel-surveillance",
+        "title": "Travel surveillance",
+        "bodyMarkdown": "Lassa fever is endemic in West Africa, with the highest burden in Nigeria (Edo, Ondo, Bauchi, Ebonyi states), Sierra Leone, Liberia, and Guinea. The annual outbreak peak in Nigeria typically runs January through March. CDC publishes travel health notices for active outbreak periods; travelers from endemic areas with febrile illness within 21 days of return warrant Lassa fever evaluation (CDC; WHO).\n\nScreening criteria for returning travelers include: fever, exposure history (residence in or travel through endemic regions), and absence of alternative diagnosis after initial workup. Differential diagnosis includes malaria (often co-circulating), typhoid fever, Ebola, Marburg disease, yellow fever, and rickettsial diseases. Empiric antimalarials should be considered in parallel with VHF workup.\n\nEMS providers and emergency departments serving major international airports and ports of entry should maintain awareness of Lassa fever among returning travelers. Pre-travel counseling for healthcare workers and humanitarian staff deploying to endemic regions includes Lassa fever recognition, prevention measures (avoidance of rodent contact, safe food storage, PPE in clinical settings), and post-deployment monitoring.\n\nCoordinate suspected case management with CDC Emergency Operations Center (770-488-7100) and the state public health laboratory. The state Communicable Disease Branch coordinates clinical management, contact tracing, and PPE deployment for VHF cases.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News",
+            "date": "2026-05-19",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news"
+          },
+          {
+            "authority": "Africa CDC",
+            "documentTitle": "Africa CDC Epidemic Intelligence and Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://africacdc.org"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
       },
       {
         "id": "operational-guidance",
@@ -2740,6 +3228,46 @@
         "lastReviewed": "2026-05-20"
       },
       {
+        "id": "chronic-arthropathy",
+        "title": "Chronic arthropathy management",
+        "bodyMarkdown": "Approximately 30-40% of patients with acute chikungunya develop chronic arthralgia and arthritis that can persist for months to years. Risk factors for chronic disease include older age, female sex, and higher acute viral load. Chronic chikungunya arthropathy can be severely disabling and clinically difficult to distinguish from rheumatoid arthritis without serologic testing (PAHO; CDC).\n\nInitial management of chronic symptoms includes NSAIDs for pain and inflammation, physical therapy for joint mobility, and patient education on disease course. Acetaminophen and NSAIDs are first-line analgesics; opioids should be avoided given the chronic course and addiction risk.\n\nRheumatology referral is recommended for patients with persistent symptoms beyond 3 months or for those with severe functional impairment. Disease-modifying antirheumatic drugs (DMARDs), particularly methotrexate, have been used for chronic chikungunya with reported benefit in observational studies; consider in consultation with rheumatology.\n\nDifferentiation from inflammatory arthritis requires serology (CHIKV IgG positive, antinuclear antibody and rheumatoid factor negative). CHIKV IgG can persist for years after acute infection; positive serology in the appropriate clinical context with exposure history supports the diagnosis. Coordinate with infectious disease and rheumatology for complex cases.",
+        "attribution": {
+          "authority": "PAHO",
+          "documentTitle": "PAHO Epidemiological Alerts and Updates",
+          "date": "2026-05-19",
+          "url": "https://www.paho.org/en/epidemiological-alerts-and-updates"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "vector-establishment-and-importation",
+        "title": "Vector establishment and importation",
+        "bodyMarkdown": "Aedes aegypti and Aedes albopictus are established in the southern United States (Florida, Texas, Hawaii, parts of the Gulf Coast, and Southeast). Aedes albopictus is increasingly present in temperate regions including parts of the Northeast and Pacific Coast. Established vectors create autochthonous transmission risk during introduction events from returning infected travelers (CDC; PAHO).\n\nAutochthonous CHIKV transmission has been documented sporadically in Florida and other Gulf states, typically initiated by an infected returning traveler. Local mosquito control departments coordinate vector surveillance and response. The Aedes aegypti and albopictus 'invasive mosquito' surveillance programs operate at the federal level (CDC vector-borne diseases division) and at state and county vector control districts.\n\nEMS and ED clinicians in vector-establishment zones should maintain index of suspicion for CHIKV alongside dengue and Zika in symptomatic returning travelers and local residents during peak vector activity. Local cases of autochthonous transmission trigger heightened vector-control response: house-by-house source reduction, ULV adulticide spraying, and intensified surveillance.\n\nTravel health counseling for travelers to endemic regions includes mosquito-bite prevention (DEET, picaridin, or IR3535-containing repellents; long sleeves; permethrin-treated clothing) and consideration of the licensed chikungunya vaccine (Ixchiq) for adults 18 and older at increased risk of exposure. Verify current ACIP recommendations for chikungunya vaccination.",
+        "attribution": {
+          "authority": "PAHO",
+          "documentTitle": "PAHO Epidemiological Alerts and Updates",
+          "date": "2026-05-19",
+          "url": "https://www.paho.org/en/epidemiological-alerts-and-updates"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
         "id": "operational-guidance",
         "title": "Operational guidance",
         "bodyMarkdown": "Chikungunya virus is transmitted by Aedes aegypti and Aedes albopictus mosquitoes. Endemic and outbreak transmission is sustained across the Americas, parts of Africa, South Asia, and Southeast Asia; autochthonous transmission has been documented in southern Europe and the southern United States where competent vectors are established.\n\nOperationally, the clinical course typically includes fever, severe polyarthralgia, headache, and rash. Mortality is low but chronic arthralgia can persist for months to years. There is no specific antiviral; management is supportive (rest, fluids, NSAIDs after dengue is ruled out).\n\nA licensed chikungunya vaccine (Ixchiq) is available for travelers and at-risk populations. Vector control (source reduction, larvicide, residual indoor spraying) remains the primary prevention strategy in endemic areas. Verify outbreak status and vector activity through PAHO and CDC.",
@@ -2884,6 +3412,46 @@
         "lastReviewed": "2026-05-20"
       },
       {
+        "id": "outbreak-investigation",
+        "title": "Outbreak investigation",
+        "bodyMarkdown": "Healthcare-associated C. auris outbreaks require rapid case ascertainment, colonization screening of exposed patients, environmental sampling, and infection prevention reinforcement. CDC and state health departments coordinate outbreak response; facilities with newly identified cases should notify the state public health laboratory and infection prevention authority within 24 hours (CDC).\n\nColonization screening uses composite swabs of axilla and groin processed by selective culture or PCR. Screening of exposed patients is recommended for any patient who shared a room or care team with a confirmed case in the prior 4 weeks. Repeat screening may be indicated based on local risk assessment and the patient's continued exposure risk.\n\nEnvironmental sampling is conducted on high-touch surfaces (bed rails, call buttons, monitors, IV poles, mobile equipment) in rooms occupied by confirmed cases. Persistent environmental contamination has been documented for months on suboptimally cleaned surfaces; enhanced terminal cleaning is critical at discharge or transfer.\n\nOutbreak control measures include single-patient room isolation (or cohorting), contact precautions, dedicated equipment, enhanced environmental cleaning with EPA List P or List K disinfectants, inter-facility communication for any patient transfer, and ongoing surveillance until 8 weeks without new cases. Coordinate outbreak response with CDC and state public health.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "antifungal-stewardship",
+        "title": "Antifungal stewardship",
+        "bodyMarkdown": "Empiric antifungal selection for C. auris should be informed by local susceptibility patterns and consultation with the facility's antimicrobial stewardship team and infectious disease consultation. Approximately 90% of isolates are fluconazole-resistant, 30% echinocandin-resistant, and a small but growing subset are pan-resistant to all three antifungal classes (CDC).\n\nEchinocandins (caspofungin, micafungin, anidulafungin) are typically first-line empiric therapy for C. auris bloodstream infection given the high rate of azole resistance. Susceptibility testing should be performed on every isolate to guide definitive therapy; CDC's Antibiotic Resistance Laboratory Network (AR Lab Network) provides reference susceptibility testing.\n\nTreatment duration depends on infection site and clinical response. Catheter-related bloodstream infections typically require catheter removal alongside antifungal therapy. Other deep-seated infections (endocarditis, osteomyelitis, CNS infection) require prolonged antifungal therapy and surgical source control where applicable.\n\nSurveillance for development of resistance during therapy is critical given the documented emergence of pan-resistance under treatment pressure. Repeat susceptibility testing at 7-14 days into therapy and at any sign of clinical failure. Coordinate complex cases with infectious disease and the state public health laboratory.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Current Outbreaks",
+          "date": "2026-05-19",
+          "url": "https://www.cdc.gov/outbreaks/"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-19",
+            "url": "https://data.wastewaterscan.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
         "id": "operational-guidance",
         "title": "Operational guidance",
         "bodyMarkdown": "Candida auris is a multidrug-resistant yeast first identified in 2009 and now associated with healthcare-facility outbreaks in over 40 US states. The organism colonizes patients persistently, transmits between patients via healthcare contact and shared environment, and is resistant to multiple antifungal classes (echinocandins, azoles, polyenes — sometimes all three).\n\nOperationally, infection prevention measures include single-room isolation, dedicated equipment, enhanced terminal cleaning with EPA List P disinfectants, and pre-admission screening from facilities with active C. auris cases. Active surveillance through wastewater is emerging as a tool for facility-level monitoring.\n\nEmpiric antifungal selection should be informed by local susceptibility patterns; consult your facility's antimicrobial stewardship team. Confirmatory speciation requires MALDI-TOF or sequencing — many automated platforms misidentify C. auris as related Candida species.",
@@ -3026,6 +3594,46 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      },
+      {
+        "id": "usda-aphis-coordination",
+        "title": "USDA APHIS coordination",
+        "bodyMarkdown": "USDA APHIS coordinates the federal screwworm response in partnership with state animal-health officials, Mexican animal-health authorities (SENASICA), and Central American partners through the Commission for the Eradication and Prevention of Screwworm (COPEG). The decades-long partnership maintained the Darien Gap biological barrier through sterile-insect technique (SIT) releases until the recent northward breakthrough.\n\nSIT operations release sterile male screwworm flies in target zones; sterile males mate with wild females, producing infertile eggs that suppress population growth. The Panama sterile-fly production facility supports COPEG's release program; expanded production capacity is needed to address the current northward incursion. USDA APHIS is coordinating expansion plans with Panamanian partners (USDA APHIS).\n\nState animal-health officials in border states (Texas, New Mexico, Arizona, California, Florida) operate field surveillance with cooperation from livestock producers, veterinarians, and wildlife biologists. The APHIS hotline 1-866-536-7593 receives suspect-case reports. Confirmed identifications trigger quarantine, treatment protocols, and intensified local surveillance.\n\nCross-border information sharing between US, Mexican, and Central American animal-health authorities supports outbreak intelligence. Verify current status, sterile-fly release schedules, and quarantine zones through USDA APHIS communications and the COPEG situation reports.",
+        "attribution": {
+          "authority": "USDA APHIS",
+          "documentTitle": "Current Status of New World Screwworm",
+          "date": "2026-05-20",
+          "url": "https://www.aphis.usda.gov/livestock-poultry-disease/stop-screwworm/current-status"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WOAH",
+            "documentTitle": "WOAH World Animal Health Information System (WAHIS)",
+            "date": "2026-05-19",
+            "url": "https://wahis.woah.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "wildlife-and-border-surveillance",
+        "title": "Wildlife and border surveillance",
+        "bodyMarkdown": "Border-state wildlife surveillance is critical given the screwworm's host range (any warm-blooded animal with an open wound or natural body opening). Deer, feral hogs, and other wild ungulates can carry infestations across borders and into US territory. State wildlife agencies coordinate with USDA APHIS for wildlife monitoring and reporting (USDA APHIS).\n\nLivestock import inspection at US-Mexico border crossings is intensified during outbreak periods. APHIS port-of-entry veterinarians inspect cattle, horses, and other livestock for visible wounds and active myiasis. Detected animals are quarantined, treated, and processed under outbreak response protocols.\n\nWildlife monitoring relies on partnership with state fish and wildlife agencies, hunter-reported observations, and roadside-carcass surveillance during hunting seasons. The combination provides early-warning intelligence on northward movement and identifies sentinel populations for targeted SIT release.\n\nCoordinate suspect case reports through APHIS (1-866-536-7593) and your state animal-health office. Verify quarantine zones, surveillance protocols, and SIT release schedules through USDA APHIS situation reports and the WOAH WAHIS dashboard.",
+        "attribution": {
+          "authority": "USDA APHIS",
+          "documentTitle": "Current Status of New World Screwworm",
+          "date": "2026-05-20",
+          "url": "https://www.aphis.usda.gov/livestock-poultry-disease/stop-screwworm/current-status"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WOAH",
+            "documentTitle": "WOAH World Animal Health Information System (WAHIS)",
+            "date": "2026-05-19",
+            "url": "https://wahis.woah.org/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
       },
       {
         "id": "operational-guidance",
@@ -3196,6 +3804,46 @@
           }
         ],
         "lastReviewed": "2026-05-20"
+      },
+      {
+        "id": "cross-border-coordination",
+        "title": "Cross-border coordination",
+        "bodyMarkdown": "The 2026 FIFA World Cup is hosted by the United States, Canada, and Mexico, creating an unprecedented need for cross-border public health and EMS coordination during the tournament period (June 11 - July 19, 2026). National authorities (CDC, PHAC, and Mexican health authorities), state and provincial agencies, and host-city emergency management coordinate through pre-established channels (WHO Mass Gatherings framework).\n\nMedical evacuation protocols across the three host countries are validated through joint exercises. Air-medical agreements address mass-casualty scenarios, repatriation of injured spectators, and continuity of care for chronic medical conditions. Ground transport agreements support border-crossing transfers and humanitarian medical evacuations.\n\nSurveillance intelligence-sharing during the tournament includes daily situational-awareness reports that integrate participating-team home-region outbreak intelligence, syndromic surveillance from host-city EDs and EMS, and laboratory signal from sentinel sites. CDC, PHAC, and Mexican health authorities coordinate joint situational-awareness conference calls during tournament play.\n\nCommunications protocols with venue medical, hotel medical, host-city EMS, FBI/DHS security-medical integration, and consular partners are pre-established. Multilingual public-communications materials are produced in collaboration with FIFA, host committees, and consular partners.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO - Managing health risks during mass gatherings",
+          "date": "2026-05-20",
+          "url": "https://www.who.int/activities/managing-health-risks-during-mass-gatherings"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
+      },
+      {
+        "id": "pre-event-vaccination",
+        "title": "Pre-event vaccination and traveler health",
+        "bodyMarkdown": "Pre-event traveler health counseling for international attendees includes routine vaccination verification (MMR, varicella, polio booster as needed), seasonal vaccinations (influenza for Southern Hemisphere travelers, COVID-19 boosters), and destination-specific recommendations (yellow fever for travelers from endemic regions, measles in unvaccinated populations) (WHO; CDC).\n\nHost-city public health departments coordinate with CDC and PHAC for traveler health advisories, immunization clinics for arriving teams and staff, and outbreak response for any imported transmission. Spectator-facing communication uses CDC Traveler's Health pages, FIFA host-city portals, and partner consular outreach.\n\nMass-gathering health risk-assessment frameworks (WHO-MG checklist) inform pre-tournament vaccination strategy. Risk assessment considers: participating-team home-region outbreak status, host-city vaccination coverage, expected attendance demographics, and venue-specific risk factors (indoor vs outdoor seating, crowd density, transportation patterns).\n\nVerify current ACIP and CDC traveler health recommendations during the tournament planning phase and through tournament play. Coordinate vaccine deployment to identified at-risk populations through state immunization programs, partner pharmacies, and host-committee health-services contractors.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO - Managing health risks during mass gatherings",
+          "date": "2026-05-20",
+          "url": "https://www.who.int/activities/managing-health-risks-during-mass-gatherings"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-05-19",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-05-21"
       },
       {
         "id": "operational-guidance",

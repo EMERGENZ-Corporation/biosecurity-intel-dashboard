@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-21 (semantic intelligence color system)
+**Last updated:** 2026-05-21 (full section parity — every signal now has 5 ContentBlocks)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,48 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Full section parity (commit pending)
+
+Brings every non-hantavirus signal from 3 → 5 attributed `detailSections`,
+matching the hantavirus signal. Total sections across the dashboard:
+**50 → 80** (30 new sections). Closes the last item on the restoration
+backlog.
+
+Each signal received 2 new thematic ContentBlocks inserted BEFORE its
+existing "Operational guidance" section so the clinical/operational
+ordering reads naturally. Themes were chosen to avoid duplication with
+existing sections and to surface practical operational depth:
+
+- **ebola**: Laboratory diagnostics · EMS transport protocols
+- **measles**: School and childcare response · Surveillance and reporting
+- **mpox clade I**: Laboratory diagnostics · Travel and importation risk
+- **avian flu H5**: One Health surveillance coordination · Laboratory diagnostics
+- **cholera**: WASH interventions · Outbreak response coordination
+- **seasonal influenza**: Vaccine strategy · Antiviral stewardship
+- **covid wastewater**: Variant tracking · Clinical surveillance integration
+- **norovirus wastewater**: Laboratory diagnostics · Healthcare and LTCF IPC
+- **rsv wastewater**: Laboratory diagnostics · Pediatric surge management
+- **hmpv wastewater**: Clinical management · Infection prevention
+- **lassa fever**: Ribavirin treatment protocol · Travel surveillance
+- **chikungunya**: Chronic arthropathy management · Vector establishment and importation
+- **candida auris**: Outbreak investigation · Antifungal stewardship
+- **screwworm**: USDA APHIS coordination · Wildlife and border surveillance
+- **fifa 2026**: Cross-border coordination · Pre-event vaccination and traveler health
+
+All sections carry primary `attribution` + 1-2 `additionalAttributions`
+pulled from `signal-sources.json` with `lastReviewed: 2026-05-21`. Bodies
+are factual, non-prescriptive per CONTENT-STANDARDS §7.1; specifics cite
+the primary source inline so reviewers can verify quickly.
+
+**Files touched:**
+- `scripts/parity-signal-sections.mjs` — one-time seeder
+- `src/data/signals.json` — 30 new sections added (5 per signal × 15 non-hantavirus + hantavirus unchanged at 5)
+- `public/status.json` — regenerated; `signals.totalDetailSections: 80`
+
+**Verify:** visit `/signals/lassa-fever-2026` (5 ContentBlocks ordered Clinical → PPE → Ribavirin → Travel → Operational), `/signals/fifa-world-cup-2026-prep` (5 ContentBlocks), and `/status` ("Detail sections: 80").
+
+---
 
 ## ✅ Semantic intelligence color system (commit fe52413)
 
@@ -414,7 +456,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 
 ## ⏳ Outstanding work (backlog)
 
-- **Further deepening if desired.** Currently 3 sections per non-hantavirus signal vs 5 for hantavirus. Adding 1-2 more per signal would bring full parity. Diminishing-returns territory; only worth doing for signals that warrant deeper EMS-facing content.
+- **~~Further deepening.~~** ✅ Shipped. Every signal now has 5 attributed sections (was 3 for non-hantavirus). Total dashboard sections: 80 (was 50). See `scripts/parity-signal-sections.mjs`.
 - **~~Bundle size.~~** ✅ Addressed by lazy route loading + Rollup `manualChunks`. Entry chunk is now 18.23 kB (gzip 6.39 kB); heavy map/data/vendor chunks are split and cacheable.
 - **~~Accessibility sweep.~~** ✅ Code-level sweep shipped: acknowledgment modal focus trap/Escape handling and grouped `aria-pressed` filter chips on Map, Signals, Briefings, Timeline, News, and Sources. Manual browser/axe pass still useful before a formal accessibility sign-off.
 - **~~Intermittent feed failures.~~** ✅ Addressed for Tier 1 feeds: CDC, WHO, and ECDC now use live endpoints and hard-fail the news workflow during active monitoring. Soft Tier 2/3 feed failures remain tolerated and internal-only.
