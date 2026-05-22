@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## 🔍 UX gap analysis + adversarial review (commit pending)
+## 🔍 UX gap analysis + adversarial review (commit 9ed1d1a)
 
 Produced **UX-GAP-ANALYSIS.md** — full audit of the dashboard's UX/UX
 from 5 target user perspectives (EMS, emergency manager, public health
