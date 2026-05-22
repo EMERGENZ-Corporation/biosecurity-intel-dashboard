@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-21 (full section parity — every signal now has 5 ContentBlocks)
+**Last updated:** 2026-05-22 (UX gap analysis + adversarial review committed)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,45 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## 🔍 UX gap analysis + adversarial review (commit pending)
+
+Produced **UX-GAP-ANALYSIS.md** — full audit of the dashboard's UX/UX
+from 5 target user perspectives (EMS, emergency manager, public health
+analyst, healthcare preparedness, nonprofit ops) plus a medical
+intelligence officer.
+
+**Key empirical findings:**
+- Signal detail page is **77,838 px tall** — **60 viewport-heights** to
+  read through; 13 sections inline with no jump navigation
+- CDC EOC phone for a suspected case takes **3 clicks and 30 viewport-
+  scrolls** to find
+- Overview leads with `Active signals: 14` (least actionable number); no
+  hero threat card; no role selector; no `Current as of` stamp visible
+  above the fold
+- 10-item top nav, no global search
+- `Resources` and `Sources` are nearly duplicate pages
+- Wastewater signals describe methodology but show no concentration curves
+- No data export, no documented API for signal/news JSON contracts
+- No source-diversity score, no risk-history (Δ over time), no watch-
+  indicator escalation triggers, no competing-hypothesis surface
+  (ICD-203 analytic rigor absent)
+
+**Document structure:**
+- §0 Empirical baseline (measured live)
+- §1 Gap analysis (8 categories: orientation, rapid-scan, drill-down, IA,
+  actionability, visual hierarchy, analyst utility, accessibility/mobile)
+- §2 Adversarial review by 6 personas (severity-ranked frictions)
+- §3 25 prioritized recommendations across 5 tiers
+- §4 Recommended first-pass shortlist (8 highest-ROI items)
+
+**Files touched:**
+- `UX-GAP-ANALYSIS.md` (new) — the full audit
+
+**No code changes yet.** The next conversation step is to convert any
+subset of the §3 recommendations into discrete implementation tasks.
+
+---
 
 ## ✅ Full section parity (commit 19ffb28)
 
