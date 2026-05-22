@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Full section parity (commit pending)
+## ✅ Full section parity (commit 19ffb28)
 
 Brings every non-hantavirus signal from 3 → 5 attributed `detailSections`,
 matching the hantavirus signal. Total sections across the dashboard:
