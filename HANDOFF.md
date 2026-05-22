@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Source freshness refresh (commit 2e53697)
+## ✅ Source freshness refresh (commit 1238f58)
 
 Refreshed the dashboard's official-source check metadata after verifying the
 30 source URLs actively cited by the 16 monitored signals. Direct fetch checks
