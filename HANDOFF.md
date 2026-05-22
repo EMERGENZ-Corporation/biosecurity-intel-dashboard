@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Intel rigor bundle — source diversity + watch indicators + risk history (commit pending)
+## ✅ Intel rigor bundle — source diversity + watch indicators + risk history (commit 02934f5)
 
 Implements UX-GAP-ANALYSIS §3 items 18, 19, 20 (analyst & intel rigor tier).
 All three address the medical intelligence officer persona's gap: "no
