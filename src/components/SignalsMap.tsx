@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import type { Signal, MarkerType } from '../types'
 import { MARKER_TYPE_LABELS } from '../types'
-import { MARKER_TYPE_COLORS, markerRadius, categoryLabel } from '../utils/signals'
+import { MARKER_TYPE_COLORS, markerRadius, categoryLabel, intelToneStyle, markerTypeTone } from '../utils/signals'
 
 interface Props {
   signals: Signal[]
@@ -105,23 +105,16 @@ export default function SignalsMap({
                 pathOptions={{
                   color,
                   fillColor: color,
-                  fillOpacity: 0.85,
-                  weight: 1.5,
+                  fillOpacity: 0.28,
+                  weight: 2,
                   opacity: 1,
                 }}
               >
                 <Popup className="biosec-popup">
                   <div style={{ minWidth: 220 }}>
                     <div
-                      style={{
-                        fontFamily: "'IBM Plex Mono', monospace",
-                        fontSize: '0.625rem',
-                        fontWeight: 700,
-                        color,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.06em',
-                        marginBottom: '0.25rem',
-                      }}
+                      className="intel-pill is-active"
+                      style={{ ...intelToneStyle(markerTypeTone(type)), marginBottom: '0.25rem' }}
                     >
                       {MARKER_TYPE_LABELS[type]}
                     </div>

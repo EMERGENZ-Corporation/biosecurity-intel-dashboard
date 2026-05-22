@@ -1,6 +1,7 @@
 import signalsData from '../data/signals.json'
 import timelineData from '../data/signal-timeline.json'
 import sourcesData from '../data/signal-sources.json'
+import type { CSSProperties } from 'react'
 import {
   Signal,
   SignalSource,
@@ -41,27 +42,90 @@ export const SEVERITY_LABELS: Record<SignalSeverity, string> = {
 }
 
 export const SEVERITY_COLORS: Record<SignalSeverity, string> = {
-  monitor: 'var(--color-accent-green)',
-  watch: 'var(--color-accent-yellow)',
-  concern: 'var(--color-accent-orange)',
-  action: 'var(--color-accent-red)',
+  monitor: '#3B82F6',
+  watch: '#FBBF24',
+  concern: '#F97316',
+  action: '#EF4444',
+}
+
+export interface IntelTone {
+  border: string
+  glow: string
+}
+
+export const NEUTRAL_TONE: IntelTone = {
+  border: '#64748B',
+  glow: 'rgba(100,116,139,0.24)',
+}
+
+export const SEVERITY_TONES: Record<SignalSeverity, IntelTone> = {
+  monitor: { border: '#3B82F6', glow: 'rgba(59,130,246,0.25)' },
+  watch: { border: '#FBBF24', glow: 'rgba(251,191,36,0.25)' },
+  concern: { border: '#F97316', glow: 'rgba(249,115,22,0.25)' },
+  action: { border: '#EF4444', glow: 'rgba(239,68,68,0.30)' },
+}
+
+export const CATEGORY_TONES: Record<ThreatCategory, IntelTone> = {
+  respiratory: { border: '#38BDF8', glow: 'rgba(56,189,248,0.24)' },
+  vhf: { border: '#DC2626', glow: 'rgba(220,38,38,0.28)' },
+  enteric: { border: '#14B8A6', glow: 'rgba(20,184,166,0.24)' },
+  vector_borne: { border: '#22C55E', glow: 'rgba(34,197,94,0.24)' },
+  zoonotic: { border: '#84CC16', glow: 'rgba(132,204,22,0.22)' },
+  amr_fungal: { border: '#A855F7', glow: 'rgba(168,85,247,0.25)' },
+  environmental: { border: '#64748B', glow: 'rgba(100,116,139,0.24)' },
+  mass_gathering: { border: '#F59E0B', glow: 'rgba(245,158,11,0.25)' },
+  travel: { border: '#0EA5E9', glow: 'rgba(14,165,233,0.24)' },
+  vaccine_preventable: { border: '#F97316', glow: 'rgba(249,115,22,0.25)' },
 }
 
 // Marker-type color palette tuned for dark CARTO tile contrast.
 // Resolved hex values (not CSS vars) — used by Leaflet CircleMarker which
 // does not resolve CSS variables.
 export const MARKER_TYPE_COLORS: Record<MarkerType, string> = {
-  case_confirmed: '#F85149',     // red
-  death: '#FF1744',              // bright red — maximum contrast on dark tiles
-  outbreak_zone: '#E08E45',      // orange
-  exposure_event: '#BC8CFF',     // violet
-  monitoring_site: '#E3B341',    // amber/gold
-  animal_detection: '#3FB950',   // green
-  vector_zone: '#56D364',        // lime
-  infrastructure: '#79C0FF',     // light blue
-  ship_route: '#388BFD',         // blue — itinerary trail
-  us_state_monitoring: '#3FB950', // green — domestic surveillance
-  flight_tracing: '#BC8CFF',     // violet — contact-tracing path
+  case_confirmed: '#EF4444',
+  death: '#991B1B',
+  outbreak_zone: '#EA580C',
+  exposure_event: '#A855F7',
+  monitoring_site: '#EAB308',
+  animal_detection: '#22C55E',
+  vector_zone: '#15803D',
+  infrastructure: '#60A5FA',
+  ship_route: '#2563EB',
+  us_state_monitoring: '#10B981',
+  flight_tracing: '#38BDF8',
+}
+
+export const MARKER_TYPE_TONES: Record<MarkerType, IntelTone> = {
+  case_confirmed: { border: '#EF4444', glow: 'rgba(239,68,68,0.30)' },
+  death: { border: '#991B1B', glow: 'rgba(153,27,27,0.34)' },
+  outbreak_zone: { border: '#EA580C', glow: 'rgba(234,88,12,0.28)' },
+  exposure_event: { border: '#A855F7', glow: 'rgba(168,85,247,0.26)' },
+  monitoring_site: { border: '#EAB308', glow: 'rgba(234,179,8,0.25)' },
+  animal_detection: { border: '#22C55E', glow: 'rgba(34,197,94,0.25)' },
+  vector_zone: { border: '#15803D', glow: 'rgba(21,128,61,0.30)' },
+  infrastructure: { border: '#60A5FA', glow: 'rgba(96,165,250,0.24)' },
+  ship_route: { border: '#2563EB', glow: 'rgba(37,99,235,0.26)' },
+  us_state_monitoring: { border: '#10B981', glow: 'rgba(16,185,129,0.24)' },
+  flight_tracing: { border: '#38BDF8', glow: 'rgba(56,189,248,0.25)' },
+}
+
+export function intelToneStyle(tone: IntelTone): CSSProperties {
+  return {
+    '--pill-color': tone.border,
+    '--pill-glow': tone.glow,
+  } as CSSProperties
+}
+
+export function severityTone(severity: SignalSeverity): IntelTone {
+  return SEVERITY_TONES[severity]
+}
+
+export function categoryTone(category: ThreatCategory): IntelTone {
+  return CATEGORY_TONES[category]
+}
+
+export function markerTypeTone(type: MarkerType): IntelTone {
+  return MARKER_TYPE_TONES[type]
 }
 
 // Larger marker radius for case-level and exposure markers, smaller for

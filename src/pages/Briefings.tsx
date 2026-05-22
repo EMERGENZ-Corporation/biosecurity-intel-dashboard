@@ -8,7 +8,11 @@ import {
   SEVERITY_LABELS,
   SEVERITY_RANK,
   categoryLabel,
+  categoryTone,
   getSource,
+  intelToneStyle,
+  NEUTRAL_TONE,
+  severityTone,
 } from '../utils/signals'
 import {
   type Signal,
@@ -63,27 +67,17 @@ function BriefingCard({ signal }: { signal: Signal }) {
         }}
       >
         <span
+          className="intel-pill is-active"
           style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.625rem',
-            fontWeight: 700,
-            color: sevColor,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            padding: '0.15rem 0.4rem',
-            border: `1px solid ${sevColor}`,
-            borderRadius: '3px',
+            ...intelToneStyle(severityTone(signal.severity)),
           }}
         >
           {SEVERITY_LABELS[signal.severity]}
         </span>
         <span
+          className="intel-pill is-muted"
           style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.6875rem',
-            color: 'var(--color-text-muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
+            ...intelToneStyle(categoryTone(signal.category)),
           }}
         >
           {categoryLabel(signal.category)}
@@ -312,18 +306,11 @@ export default function Briefings() {
                 key={s}
                 type="button"
                 aria-pressed={active}
+                className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
                 onClick={() => setSeverity(s)}
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.625rem',
-                  padding: '0.25rem 0.5rem',
-                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
-                  border: `1px solid ${active ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
-                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-                  borderRadius: '4px',
+                  ...intelToneStyle(s === 'all' ? NEUTRAL_TONE : severityTone(s)),
                   cursor: 'pointer',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
                 }}
               >
                 {s === 'all' ? 'Watch+' : SEVERITY_LABELS[s]}
@@ -348,18 +335,11 @@ export default function Briefings() {
           <button
             type="button"
             aria-pressed={category === 'all'}
+            className={`intel-pill is-button ${category === 'all' ? 'is-active' : 'is-muted'}`}
             onClick={() => setCategory('all')}
             style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.625rem',
-              padding: '0.25rem 0.5rem',
-              backgroundColor: category === 'all' ? 'var(--color-bg-tertiary)' : 'transparent',
-              border: `1px solid ${category === 'all' ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
-              color: category === 'all' ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-              borderRadius: '4px',
+              ...intelToneStyle(NEUTRAL_TONE),
               cursor: 'pointer',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
             }}
           >
             All
@@ -371,18 +351,11 @@ export default function Briefings() {
                 key={k}
                 type="button"
                 aria-pressed={active}
+                className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
                 onClick={() => setCategory(k)}
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.625rem',
-                  padding: '0.25rem 0.5rem',
-                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
-                  border: `1px solid ${active ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
-                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-                  borderRadius: '4px',
+                  ...intelToneStyle(categoryTone(k)),
                   cursor: 'pointer',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
                 }}
               >
                 {label}

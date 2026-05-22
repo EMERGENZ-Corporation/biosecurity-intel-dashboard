@@ -18,6 +18,9 @@ import {
   SEVERITY_LABELS,
   SEVERITY_RANK,
   categoryLabel,
+  categoryTone,
+  intelToneStyle,
+  severityTone,
 } from '../utils/signals'
 import { THREAT_CATEGORY_LABELS, type NewsItem } from '../types'
 
@@ -332,25 +335,14 @@ export default function Overview() {
                       }}
                     >
                       <span
-                        style={{
-                          fontFamily: "'IBM Plex Mono', monospace",
-                          fontSize: '0.625rem',
-                          fontWeight: 700,
-                          color: sevColor,
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.06em',
-                        }}
+                        className="intel-pill is-active"
+                        style={intelToneStyle(severityTone(signal.severity))}
                       >
                         {SEVERITY_LABELS[signal.severity]}
                       </span>
                       <span
-                        style={{
-                          fontFamily: "'IBM Plex Mono', monospace",
-                          fontSize: '0.5625rem',
-                          color: 'var(--color-text-muted)',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.06em',
-                        }}
+                        className="intel-pill is-muted"
+                        style={intelToneStyle(categoryTone(signal.category))}
                       >
                         {categoryLabel(signal.category)}
                       </span>
@@ -460,12 +452,8 @@ export default function Overview() {
                       {label}
                     </span>
                     <span
-                      style={{
-                        fontFamily: "'IBM Plex Mono', monospace",
-                        fontSize: '0.6875rem',
-                        fontWeight: 700,
-                        color: count > 0 ? 'var(--color-accent-blue)' : 'var(--color-text-muted)',
-                      }}
+                      className={`intel-pill ${count > 0 ? 'is-active' : 'is-muted'}`}
+                      style={intelToneStyle(count > 0 ? categoryTone(key) : { border: '#64748B', glow: 'rgba(100,116,139,0.20)' })}
                     >
                       {count}
                     </span>
@@ -583,25 +571,18 @@ export default function Overview() {
                         >
                           {date}
                         </span>
-                        {item.signalIds.slice(0, 2).map((sid) => (
-                          <span
-                            key={sid}
-                            style={{
-                              fontFamily: "'IBM Plex Mono', monospace",
-                              fontSize: '0.5625rem',
-                              fontWeight: 600,
-                              color: 'var(--color-text-muted)',
-                              border: '1px solid var(--color-border)',
-                              borderRadius: '3px',
-                              padding: '0.0625rem 0.3rem',
-                              textTransform: 'uppercase',
-                              letterSpacing: '0.04em',
-                              whiteSpace: 'nowrap',
-                            }}
-                          >
-                            {SIGNAL_SHORT_NAMES[sid] ?? sid}
-                          </span>
-                        ))}
+                        {item.signalIds.slice(0, 2).map((sid) => {
+                          const chipSignal = signals.find((signal) => signal.id === sid)
+                          return (
+                            <span
+                              key={sid}
+                              className="intel-pill is-muted"
+                              style={chipSignal ? intelToneStyle(categoryTone(chipSignal.category)) : undefined}
+                            >
+                              {SIGNAL_SHORT_NAMES[sid] ?? sid}
+                            </span>
+                          )
+                        })}
                       </div>
                       <div
                         style={{

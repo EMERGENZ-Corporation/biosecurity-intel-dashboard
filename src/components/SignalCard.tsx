@@ -6,8 +6,11 @@ import {
   CONFIDENCE_LABELS,
   TREND_LABELS,
   categoryLabel,
+  categoryTone,
   formatDate,
   getSource,
+  intelToneStyle,
+  severityTone,
 } from '../utils/signals'
 import newsData from '../data/news.json'
 
@@ -87,13 +90,9 @@ export default function SignalCard({ signal, compact = false }: Props) {
           {signal.name}
         </span>
         <span
+          className="intel-pill is-active"
           style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.625rem',
-            fontWeight: 700,
-            color,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
+            ...intelToneStyle(severityTone(signal.severity)),
             whiteSpace: 'nowrap',
           }}
         >
@@ -113,7 +112,9 @@ export default function SignalCard({ signal, compact = false }: Props) {
           letterSpacing: '0.06em',
         }}
       >
-        <span>{categoryLabel(signal.category)}</span>
+        <span className="intel-pill is-muted" style={intelToneStyle(categoryTone(signal.category))}>
+          {categoryLabel(signal.category)}
+        </span>
         <span>·</span>
         <span>
           {signal.geography[0] ?? 'Global'}

@@ -1,7 +1,14 @@
 import { useMemo, useState } from 'react'
 import SignalsMap from '../components/SignalsMap'
 import { ErrorBoundary } from '../components/ErrorBoundary'
-import { signals, SEVERITY_LABELS, MARKER_TYPE_COLORS } from '../utils/signals'
+import {
+  signals,
+  SEVERITY_LABELS,
+  categoryTone,
+  intelToneStyle,
+  markerTypeTone,
+  severityTone,
+} from '../utils/signals'
 import {
   SignalSeverity,
   ThreatCategory,
@@ -35,17 +42,7 @@ const ROW_LABEL: React.CSSProperties = {
 }
 
 const CHIP_BASE: React.CSSProperties = {
-  fontFamily: "'IBM Plex Mono', monospace",
-  fontSize: '0.625rem',
-  padding: '0.25rem 0.5rem',
-  borderRadius: '4px',
   cursor: 'pointer',
-  textTransform: 'uppercase',
-  letterSpacing: '0.06em',
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: '0.35rem',
-  transition: 'all 0.15s',
 }
 
 export default function MapPage() {
@@ -149,12 +146,11 @@ export default function MapPage() {
                 key={s}
                 type="button"
                 aria-pressed={active}
+                className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
                 onClick={() => toggleSeverity(s)}
                 style={{
                   ...CHIP_BASE,
-                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
-                  border: `1px solid ${active ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
-                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
+                  ...intelToneStyle(severityTone(s)),
                 }}
               >
                 {SEVERITY_LABELS[s]}
@@ -173,12 +169,11 @@ export default function MapPage() {
                 key={k}
                 type="button"
                 aria-pressed={active}
+                className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
                 onClick={() => toggleCategory(k)}
                 style={{
                   ...CHIP_BASE,
-                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
-                  border: `1px solid ${active ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
-                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
+                  ...intelToneStyle(categoryTone(k)),
                 }}
               >
                 {label}
@@ -192,31 +187,21 @@ export default function MapPage() {
           <span style={ROW_LABEL}>Marker type:</span>
           {MARKER_TYPE_OPTIONS.map((t) => {
             const active = activeTypes.has(t)
-            const color = MARKER_TYPE_COLORS[t]
             return (
               <button
                 key={t}
                 type="button"
                 aria-pressed={active}
+                className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
                 onClick={() => toggleType(t)}
                 style={{
                   ...CHIP_BASE,
-                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
-                  border: `1px solid ${active ? color : 'var(--color-border)'}`,
-                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-                  opacity: active ? 1 : 0.55,
+                  ...intelToneStyle(markerTypeTone(t)),
                 }}
               >
                 <span
                   aria-hidden="true"
-                  style={{
-                    display: 'inline-block',
-                    width: '0.625rem',
-                    height: '0.625rem',
-                    borderRadius: '50%',
-                    backgroundColor: color,
-                    boxShadow: '0 0 0 1px rgba(0,0,0,0.45)',
-                  }}
+                  className="intel-dot"
                 />
                 {MARKER_TYPE_LABELS[t]}
               </button>

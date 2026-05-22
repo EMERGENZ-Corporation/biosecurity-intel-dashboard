@@ -8,8 +8,11 @@ import {
   CONFIDENCE_LABELS,
   TREND_LABELS,
   categoryLabel,
+  categoryTone,
   formatDate,
   formatDateTime,
+  intelToneStyle,
+  severityTone,
   SOURCE_TIER_LABELS,
 } from '../utils/signals'
 import SignalsMap from '../components/SignalsMap'
@@ -154,9 +157,15 @@ export default function SignalDetail() {
           borderRadius: '6px',
         }}
       >
-        <Field label="Category">{categoryLabel(signal.category)}</Field>
+        <Field label="Category">
+          <span className="intel-pill is-muted" style={intelToneStyle(categoryTone(signal.category))}>
+            {categoryLabel(signal.category)}
+          </span>
+        </Field>
         <Field label="Severity">
-          <span style={{ color: severityColor }}>{SEVERITY_LABELS[signal.severity]}</span>
+          <span className="intel-pill is-active" style={intelToneStyle(severityTone(signal.severity))}>
+            {SEVERITY_LABELS[signal.severity]}
+          </span>
         </Field>
         <Field label="Confidence">{CONFIDENCE_LABELS[signal.confidence]}</Field>
         <Field label="Trend">{TREND_LABELS[signal.trend]}</Field>

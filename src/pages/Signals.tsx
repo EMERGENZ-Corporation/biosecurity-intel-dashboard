@@ -4,28 +4,36 @@ import {
   signals,
   rankSignals,
   SEVERITY_LABELS,
+  NEUTRAL_TONE,
+  categoryTone,
+  intelToneStyle,
+  severityTone,
+  type IntelTone,
 } from '../utils/signals'
 import { SignalSeverity, ThreatCategory, THREAT_CATEGORY_LABELS } from '../types'
 
 const SEVERITY_OPTIONS: SignalSeverity[] = ['monitor', 'watch', 'concern', 'action']
 
-function FilterButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+function FilterButton({
+  active,
+  tone,
+  onClick,
+  children,
+}: {
+  active: boolean
+  tone: IntelTone
+  onClick: () => void
+  children: React.ReactNode
+}) {
   return (
     <button
       type="button"
       aria-pressed={active}
+      className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
       onClick={onClick}
       style={{
-        fontFamily: "'IBM Plex Mono', monospace",
-        fontSize: '0.6875rem',
-        padding: '0.375rem 0.625rem',
-        backgroundColor: active ? 'var(--color-accent-blue)' : 'var(--color-bg-tertiary)',
-        border: '1px solid var(--color-border)',
-        color: active ? '#000' : 'var(--color-text-secondary)',
-        borderRadius: '4px',
+        ...intelToneStyle(tone),
         cursor: 'pointer',
-        textTransform: 'uppercase',
-        letterSpacing: '0.06em',
       }}
     >
       {children}
@@ -87,9 +95,9 @@ export default function Signals() {
           <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Severity:
           </span>
-          <FilterButton active={severityFilter === 'all'} onClick={() => setSeverityFilter('all')}>All</FilterButton>
+          <FilterButton active={severityFilter === 'all'} tone={NEUTRAL_TONE} onClick={() => setSeverityFilter('all')}>All</FilterButton>
           {SEVERITY_OPTIONS.map((s) => (
-            <FilterButton key={s} active={severityFilter === s} onClick={() => setSeverityFilter(s)}>
+            <FilterButton key={s} active={severityFilter === s} tone={severityTone(s)} onClick={() => setSeverityFilter(s)}>
               {SEVERITY_LABELS[s]}
             </FilterButton>
           ))}
@@ -99,9 +107,9 @@ export default function Signals() {
           <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Category:
           </span>
-          <FilterButton active={categoryFilter === 'all'} onClick={() => setCategoryFilter('all')}>All</FilterButton>
+          <FilterButton active={categoryFilter === 'all'} tone={NEUTRAL_TONE} onClick={() => setCategoryFilter('all')}>All</FilterButton>
           {(Object.entries(THREAT_CATEGORY_LABELS) as Array<[ThreatCategory, string]>).map(([key, label]) => (
-            <FilterButton key={key} active={categoryFilter === key} onClick={() => setCategoryFilter(key)}>
+            <FilterButton key={key} active={categoryFilter === key} tone={categoryTone(key)} onClick={() => setCategoryFilter(key)}>
               {label}
             </FilterButton>
           ))}

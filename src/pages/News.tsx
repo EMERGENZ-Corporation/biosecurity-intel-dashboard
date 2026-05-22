@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import type { NewsItem, Signal } from '../types'
 import newsData from '../data/news.json'
 import signalsData from '../data/signals.json'
+import { categoryTone, intelToneStyle, NEUTRAL_TONE } from '../utils/signals'
 
 const news = newsData as NewsItem[]
 const signals = signalsData as Signal[]
@@ -260,19 +261,11 @@ export default function News() {
           <button
             type="button"
             aria-pressed={activeSignal === null}
+            className={`intel-pill is-button ${activeSignal === null ? 'is-active' : 'is-muted'}`}
             onClick={() => setActiveSignal(null)}
             style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '0.6875rem',
-              fontWeight: 600,
-              padding: '0.3rem 0.75rem',
-              borderRadius: '4px',
-              border: '1px solid',
-              borderColor: activeSignal === null ? 'var(--color-emergenz)' : 'var(--color-border)',
-              backgroundColor: activeSignal === null ? 'var(--color-bg-tertiary)' : 'transparent',
-              color: activeSignal === null ? 'var(--color-emergenz)' : 'var(--color-text-secondary)',
+              ...intelToneStyle(NEUTRAL_TONE),
               cursor: 'pointer',
-              transition: 'all 0.15s',
             }}
           >
             All ({news.length})
@@ -285,19 +278,11 @@ export default function News() {
                 key={signal.id}
                 type="button"
                 aria-pressed={isActive}
+                className={`intel-pill is-button ${isActive ? 'is-active' : 'is-muted'}`}
                 onClick={() => setActiveSignal(signal.id)}
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.6875rem',
-                  fontWeight: 600,
-                  padding: '0.3rem 0.75rem',
-                  borderRadius: '4px',
-                  border: '1px solid',
-                  borderColor: isActive ? 'var(--color-emergenz)' : 'var(--color-border)',
-                  backgroundColor: isActive ? 'var(--color-bg-tertiary)' : 'transparent',
-                  color: isActive ? 'var(--color-emergenz)' : 'var(--color-text-secondary)',
+                  ...intelToneStyle(categoryTone(signal.category)),
                   cursor: 'pointer',
-                  transition: 'all 0.15s',
                 }}
               >
                 {SIGNAL_SHORT_NAMES[signal.id] ?? signal.id} ({count})

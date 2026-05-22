@@ -6,8 +6,12 @@ import {
   getSource,
   getSignal,
   categoryLabel,
+  categoryTone,
+  intelToneStyle,
+  NEUTRAL_TONE,
   SEVERITY_COLORS,
   SEVERITY_LABELS,
+  severityTone,
 } from '../utils/signals'
 import {
   type SignalSeverity,
@@ -116,18 +120,11 @@ export default function TimelinePage() {
                 key={s}
                 type="button"
                 aria-pressed={active}
+                className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
                 onClick={() => setSeverityFilter(s)}
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.625rem',
-                  padding: '0.25rem 0.5rem',
-                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
-                  border: `1px solid ${active ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
-                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-                  borderRadius: '4px',
+                  ...intelToneStyle(s === 'all' ? NEUTRAL_TONE : severityTone(s)),
                   cursor: 'pointer',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
                 }}
               >
                 {s === 'all' ? 'All' : SEVERITY_LABELS[s]}
@@ -156,18 +153,11 @@ export default function TimelinePage() {
                 key={key}
                 type="button"
                 aria-pressed={active}
+                className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
                 onClick={() => setCategoryFilter(key)}
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.625rem',
-                  padding: '0.25rem 0.5rem',
-                  backgroundColor: active ? 'var(--color-bg-tertiary)' : 'transparent',
-                  border: `1px solid ${active ? 'var(--color-accent-blue)' : 'var(--color-border)'}`,
-                  color: active ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-                  borderRadius: '4px',
+                  ...intelToneStyle(key === 'all' ? NEUTRAL_TONE : categoryTone(key)),
                   cursor: 'pointer',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
                 }}
               >
                 {key === 'all' ? 'All' : THREAT_CATEGORY_LABELS[key as ThreatCategory]}
@@ -257,28 +247,18 @@ export default function TimelinePage() {
                           </span>
                           {signal && (
                             <span
+                              className="intel-pill is-active"
                               style={{
-                                fontFamily: "'IBM Plex Mono', monospace",
-                                fontSize: '0.5625rem',
-                                fontWeight: 700,
-                                color: sevColor,
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.06em',
-                                padding: '0.1rem 0.35rem',
-                                border: `1px solid ${sevColor}`,
-                                borderRadius: '3px',
+                                ...intelToneStyle(severityTone(signal.severity)),
                               }}
                             >
                               {SEVERITY_LABELS[signal.severity]}
                             </span>
                           )}
                           <span
+                            className="intel-pill is-muted"
                             style={{
-                              fontFamily: "'IBM Plex Mono', monospace",
-                              fontSize: '0.625rem',
-                              color: 'var(--color-text-muted)',
-                              textTransform: 'uppercase',
-                              letterSpacing: '0.06em',
+                              ...intelToneStyle(categoryTone(event.category)),
                             }}
                           >
                             {categoryLabel(event.category)}
