@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Methodology page + RSS feed + mobile search (commit pending)
+## ✅ Methodology page + RSS feed + mobile search (commit d96a7db)
 
 Closes UX-GAP-ANALYSIS §3 items 23 (confidence methodology) and 25 (alert
 subscription) plus the mobile-search affordance gap.
