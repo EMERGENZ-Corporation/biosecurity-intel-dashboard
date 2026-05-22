@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (source freshness refresh)
+**Last updated:** 2026-05-22 (production status verification + RSS note cleanup)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,26 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Production status verification + RSS note cleanup (commit pending)
+
+Confirmed the pushed source-freshness refresh is live at
+`https://biosecurity-intel.emergenzsystems.org/status.json`; production now
+reports `status: ok`, `lastOfficialSourceCheck: 2026-05-22T20:55:00.000Z`,
+and no stale reasons. Also cleaned up the stale Known Issues RSS note: the
+PHAC/RKI/AP/CTV/Eurosurveillance feeds listed there are no longer configured
+in `GLOBAL_FEEDS`; they remain documented in `scripts/update-news.mjs` as
+historical removals.
+
+**Files touched:**
+- `HANDOFF.md` — added this verification note and replaced the stale RSS
+  known-issue bullet with the current pipeline behavior
+
+**Verify:** production `/status.json` returns `status: ok` and
+`staleReasons: []`; `scripts/update-news.mjs` `GLOBAL_FEEDS` contains only
+currently configured RSS endpoints.
+
+---
 
 ## ✅ Source freshness refresh (commit 1238f58)
 
@@ -806,7 +826,7 @@ git pull --rebase origin main && git push origin main
 ## Known issues / deferred
 
 - **Vercel CLI auth** is invalid on this machine; deploy plumbing is owned by the user.
-- **Several RSS feeds 404 or 403** (PHAC, RKI, AP News, CTV News, Eurosurveillance). The pipeline tolerates these — they're Tier 2/3 non-critical. Update the URLs in `scripts/update-news.mjs` `GLOBAL_FEEDS` when better endpoints are identified.
+- **Soft news-feed failures are tolerated and alerted.** The currently configured Tier 1 feeds (CDC, WHO, ECDC) hard-fail the news workflow during active monitoring; Tier 2/3 RSS or per-signal Google News failures are recorded in `update-news-result.json` and surfaced through the reusable `news-pipeline` GitHub issue. Historical dead feeds (PHAC, RKI, AP News, CTV News, Eurosurveillance, ProMED) are no longer in `GLOBAL_FEEDS`; keep them removed unless a stable endpoint is found.
 
 ---
 
