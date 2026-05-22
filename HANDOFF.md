@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Production status verification + RSS note cleanup (commit pending)
+## ✅ Production status verification + RSS note cleanup (commit a5cf183)
 
 Confirmed the pushed source-freshness refresh is live at
 `https://biosecurity-intel.emergenzsystems.org/status.json`; production now
