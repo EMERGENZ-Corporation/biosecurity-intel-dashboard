@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (handoff commit-reference cleanup)
+**Last updated:** 2026-05-22 (source freshness refresh)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,34 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Source freshness refresh (commit 2e53697)
+
+Refreshed the dashboard's official-source check metadata after verifying the
+30 source URLs actively cited by the 16 monitored signals. Direct fetch checks
+confirmed 28 URLs; the PHAC Andes media update and CDC HAN landing page were
+verified separately because they rejected or timed out scripted requests while
+remaining browser-accessible. No case counts, severity labels, risk language,
+or operational guidance were changed.
+
+**Files touched:**
+- `src/data/signals.json` — updated `lastChecked` for all 16 signals to
+  `2026-05-22T20:55:00.000Z`
+- `src/data/signal-sources.json` — updated `lastVerified` to `2026-05-22`
+  for the 30 source records referenced by active signal metadata
+- `public/status.json` — regenerated; status moved from degraded to ok and
+  stale reasons cleared
+- `public/api/v1/signals.json` — regenerated signal endpoint
+- `public/api/v1/signal-sources.json` — regenerated source endpoint
+- `public/api/v1/signal-timeline.json` — regenerated timeline endpoint
+- `public/api/v1/news.json` — regenerated news endpoint envelope
+- `public/api/v1/feed.rss` — regenerated RSS feed timestamps
+
+**Verify:** `npm run validate:data`, `npm run build`, and visit `/status` —
+expect status `ok`, last official source check `2026-05-22T20:55:00.000Z`,
+and no stale reasons.
+
+---
 
 ## ✅ Methodology page + RSS feed + mobile search (commit d96a7db)
 
