@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (methodology page + RSS feed + mobile search)
+**Last updated:** 2026-05-22 (handoff commit-reference cleanup)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -170,7 +170,7 @@ subscription) plus the mobile-search affordance gap.
 
 ---
 
-## ✅ Analyst tooling — public API + /compare side-by-side (commit 024db87)
+## ✅ Analyst tooling — public API + /compare side-by-side (commit 89c0866)
 
 Closes UX-GAP-ANALYSIS §3 items 17 (public API documentation) and 21
 (comparative view). Together with the prior intel-rigor bundle, the
@@ -295,7 +295,7 @@ not satisfy ICD-203 / IC analytic standards."
 
 ---
 
-## ✅ UX first-pass shortlist — 8 highest-ROI fixes (commit 67e26ca)
+## ✅ UX first-pass shortlist — 8 highest-ROI fixes (commit 9176928)
 
 Implements all 8 items from UX-GAP-ANALYSIS §4 (first-pass shortlist) in
 3 logical bundles, shipped as one commit per user request.
@@ -367,7 +367,7 @@ Solves the 60-viewport-scroll problem documented in UX-GAP-ANALYSIS §0.
 
 ---
 
-## 🔍 UX gap analysis + adversarial review (commit 9ed1d1a)
+## 🔍 UX gap analysis + adversarial review (commit a551fdc)
 
 Produced **UX-GAP-ANALYSIS.md** — full audit of the dashboard's UX/UX
 from 5 target user perspectives (EMS, emergency manager, public health
@@ -583,7 +583,7 @@ gzip** to **18.23 kB / 6.39 kB gzip** and removed Vite's >500 kB chunk warning.
 
 **Verify:** visit `/map`. Tile URL should contain `cartocdn.com/dark_all`. Marker counter shows "103 markers visible". Click marker → dark popup with type label and source links.
 
-### 4. SignalDetail / ContentBlock (commit pending push)
+### 4. SignalDetail / ContentBlock (commit `9c3b3e9`)
 - `src/types.ts` — added `SectionAttribution` interface; `SignalDetailSection` extended with optional `attribution`, `additionalAttributions[]`
 - `src/components/ContentBlock.tsx` — new component: title + body paragraphs + per-block source-attribution footer with primary "Source:" row and "Also:" rows for additional sources, plus optional License badge and lastReviewed line
 - `src/components/SourceChip.tsx` — restored from history; renders "Authority · Document title · Date ↗" chip
@@ -595,7 +595,7 @@ gzip** to **18.23 kB / 6.39 kB gzip** and removed Vite's >500 kB chunk warning.
 
 **Verify:** visit `/signals/andes-hantavirus-mv-hondius-2026` — 5 ContentBlocks each with Source: chip and Also: rows. Visit `/signals/avian-influenza-h5-2026` — Operational guidance ContentBlock with USDA APHIS source chip. `npm run validate:data` passes.
 
-### 5. Overview page rails (commit pending push)
+### 5. Overview page rails (commit `d959dfd`)
 - `src/pages/Overview.tsx` — restructured with 7 sections plus stat strip:
   - Status strip adds **News items** stat chip alongside existing (active signals, highest severity, domains, stale signals)
   - **Active operational briefings** rail (NEW, EMERGENZ accent border) — pulls signals at severity >= concern, surfaces the `ems-specific` / `operational-guidance` / `protocols-and-guidance` section, shows severity chip, category, section title + authority, and a 2-sentence summary card. Top 3, sorted by severity rank. Each card links to the signal detail page.
@@ -610,7 +610,7 @@ gzip** to **18.23 kB / 6.39 kB gzip** and removed Vite's >500 kB chunk warning.
 
 ---
 
-### 6. Tab sweep (commit pending push)
+### 6. Tab sweep (commit `57346a9`)
 - **Briefings (`/briefings`):** complete rebuild. Each signal at severity Watch+ rendered as a card surfacing its `ems-specific` / `operational-guidance` / `protocols-and-guidance` / `clinical-profile` section (whichever is present, in that priority). Card shows severity pill, category, geography, signal name link, operational relevance, a tinted preview box with section title and first 2 paragraphs + "Read full briefing →" link, and a footer SourceChip pulling from `section.attribution` (falls back to primarySourceId). Severity + category filters.
 - **Timeline (`/timeline`):** event card `borderLeft` now uses the signal's severity color (was always blue). Each event includes a severity pill matching the signal. Source link replaced with a proper `SourceChip`. Added severity filter alongside category. Events grouped by month with EMERGENZ-accent month headers. Header shows event count and signal count.
 - **SignalCard:** added depth indicators (markers / sections / news counts) rendered as small mono chips. Reads from `signal.mapMarkers`, `signal.detailSections`, and matches against `news.json` by `signalIds`. Counts surface signal depth at-a-glance on `/signals` and on Overview.
@@ -622,7 +622,7 @@ gzip** to **18.23 kB / 6.39 kB gzip** and removed Vite's >500 kB chunk warning.
 
 ---
 
-## ✅ Backlog bundle (commit pending push)
+## ✅ Backlog bundle (commit f7490f6)
 
 Shipped in a single safe bundle:
 
@@ -637,7 +637,7 @@ Shipped in a single safe bundle:
 
 ---
 
-## ✅ Section deepening (commit pending push)
+## ✅ Section deepening (commit b37e9a9)
 
 `scripts/deepen-signal-sections.mjs` added 2 attributed ContentBlock sections to each of the 15 non-hantavirus signals (30 new sections; total now 50). Hantavirus unchanged at 5.
 
@@ -664,7 +664,7 @@ All sections carry: primary `attribution` + 1-2 `additionalAttributions` (pulled
 
 ---
 
-## ✅ Threat-category label rename (commit 497d6d1)
+## ✅ Threat-category label rename (commit f0fc728)
 
 User request: friendlier display labels for the 10 threat categories.
 
