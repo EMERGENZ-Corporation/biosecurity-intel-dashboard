@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Analyst tooling — public API + /compare side-by-side (commit pending)
+## ✅ Analyst tooling — public API + /compare side-by-side (commit 024db87)
 
 Closes UX-GAP-ANALYSIS §3 items 17 (public API documentation) and 21
 (comparative view). Together with the prior intel-rigor bundle, the
