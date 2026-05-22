@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { signalSources, formatDate, SOURCE_TIER_LABELS } from '../utils/signals'
 import { THREAT_CATEGORY_LABELS, type SourceTier } from '../types'
+import ExportButtons from '../components/ExportButtons'
 
 // Tier colors used for the per-source borderLeft accent.
 const TIER_COLORS: Record<SourceTier, string> = {
@@ -49,6 +50,27 @@ export default function SourcesPage() {
         Evidence registry · every signal claim cites a source from this list ·{' '}
         {signalSources.length} sources · {primaryCount} primary
       </p>
+
+      <div style={{ marginBottom: '1rem' }}>
+        <ExportButtons
+          filename="sources"
+          rows={filtered.map((s) => ({
+            id: s.id,
+            authority: s.authority,
+            authorityFull: s.authorityFull ?? '',
+            title: s.title,
+            url: s.url,
+            sourceTier: s.sourceTier,
+            sourceType: s.sourceType,
+            primary: s.primary,
+            domains: s.domains.join('; '),
+            publicationDate: s.publicationDate ?? '',
+            lastVerified: s.lastVerified,
+            notes: s.notes ?? '',
+          }))}
+          json={filtered}
+        />
+      </div>
 
       {/* Tier breakdown */}
       <div

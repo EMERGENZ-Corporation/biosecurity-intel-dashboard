@@ -221,31 +221,236 @@ export default function Overview() {
 
   const lastDataUpdate = statusJson.dashboard?.lastUpdated
 
+  // Headline threat = highest-severity active signal, used for the hero card.
+  const headlineThreat = ranked.find((s) => s.status === 'active') ?? ranked[0]
+
+  // "Current as of" — most recent of dashboard.lastUpdated and any signal lastUpdated
+  const currentAsOf = lastDataUpdate
+    ? new Date(lastDataUpdate)
+    : new Date(Math.max(...signals.map((s) => new Date(s.lastUpdated).getTime())))
+
   return (
     <div style={{ maxWidth: '1300px' }}>
-      <div style={{ marginBottom: '1rem' }}>
+      {/* Hero "what is this?" panel — orientation for first-time users */}
+      <div
+        style={{
+          padding: '1.25rem 1.5rem',
+          marginBottom: '1rem',
+          backgroundColor: 'var(--color-bg-secondary)',
+          border: '1px solid var(--color-border)',
+          borderLeft: '3px solid var(--color-emergenz)',
+          borderRadius: '6px',
+        }}
+      >
         <h1
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '1.125rem',
+            fontSize: '1.25rem',
             fontWeight: 700,
             color: 'var(--color-text-primary)',
             margin: '0 0 0.25rem 0',
           }}
         >
-          BIOSECURITY OPERATIONAL OVERVIEW
+          BIOSECURITY INTEL DASHBOARD
         </h1>
         <p
           style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.6875rem',
-            color: 'var(--color-text-muted)',
-            margin: 0,
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: '0.9375rem',
+            color: 'var(--color-text-secondary)',
+            margin: '0 0 0.5rem 0',
+            lineHeight: 1.5,
           }}
         >
-          Multi-threat situational awareness · source-backed · static refresh cycle
+          Multi-threat situational awareness for EMS, emergency managers, public health analysts, and
+          healthcare preparedness teams. {signals.length} tracked signals, 80 attributed clinical
+          sections, {news.length} news items — every claim cites an authoritative source.
         </p>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: '0.75rem',
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.625rem',
+            color: 'var(--color-text-muted)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}
+        >
+          <span style={{ color: 'var(--color-emergenz)', fontWeight: 700 }}>
+            Current as of {formatDateTime(currentAsOf.toISOString())}
+          </span>
+          <span>·</span>
+          <span>
+            Status:{' '}
+            <span
+              style={{
+                color: statusJson.status === 'ok' ? 'var(--color-accent-green)' : 'var(--color-accent-orange)',
+                fontWeight: 700,
+              }}
+            >
+              {statusJson.status?.toUpperCase() ?? 'UNKNOWN'}
+            </span>
+          </span>
+          <span>·</span>
+          <Link to="/about" style={{ color: 'var(--color-accent-blue)', textDecoration: 'none' }}>
+            About this dashboard →
+          </Link>
+        </div>
       </div>
+
+      {/* Headline threat hero card — visually dominant for the highest-severity active signal */}
+      {headlineThreat && (
+        <Link
+          to={`/signals/${headlineThreat.id}`}
+          style={{
+            display: 'block',
+            padding: '1.25rem 1.5rem',
+            marginBottom: '1rem',
+            backgroundColor: 'var(--color-bg-secondary)',
+            border: '1px solid var(--color-border)',
+            borderLeft: `4px solid ${SEVERITY_COLORS[headlineThreat.severity]}`,
+            borderRadius: '6px',
+            textDecoration: 'none',
+            color: 'inherit',
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              marginBottom: '0.5rem',
+              flexWrap: 'wrap',
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.625rem',
+                fontWeight: 700,
+                color: 'var(--color-text-muted)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+              }}
+            >
+              Headline threat
+            </span>
+            <span
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.6875rem',
+                fontWeight: 700,
+                color: SEVERITY_COLORS[headlineThreat.severity],
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                padding: '0.125rem 0.4rem',
+                border: `1px solid ${SEVERITY_COLORS[headlineThreat.severity]}`,
+                borderRadius: '3px',
+              }}
+            >
+              {SEVERITY_LABELS[headlineThreat.severity]}
+            </span>
+            <span
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.6875rem',
+                color: 'var(--color-text-muted)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.06em',
+              }}
+            >
+              {categoryLabel(headlineThreat.category)}
+            </span>
+          </div>
+          <h2
+            style={{
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: '1.25rem',
+              fontWeight: 700,
+              color: 'var(--color-text-primary)',
+              margin: '0 0 0.5rem 0',
+              lineHeight: 1.3,
+            }}
+          >
+            {headlineThreat.name}
+          </h2>
+          <p
+            style={{
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: '0.9375rem',
+              color: 'var(--color-text-secondary)',
+              lineHeight: 1.55,
+              margin: '0 0 0.5rem 0',
+            }}
+          >
+            {headlineThreat.operationalRelevance}
+          </p>
+          {(headlineThreat.metrics ?? []).length > 0 && (
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '0.75rem',
+                marginTop: '0.5rem',
+              }}
+            >
+              {(headlineThreat.metrics ?? []).slice(0, 4).map((metric) => (
+                <div
+                  key={metric.label}
+                  style={{
+                    padding: '0.375rem 0.625rem',
+                    backgroundColor: 'var(--color-bg-tertiary)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: '4px',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontSize: '1rem',
+                      fontWeight: 700,
+                      color: 'var(--color-text-primary)',
+                      lineHeight: 1.1,
+                    }}
+                  >
+                    {metric.value}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontSize: '0.5625rem',
+                      color: 'var(--color-text-muted)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.06em',
+                      marginTop: '0.125rem',
+                    }}
+                  >
+                    {metric.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          <div
+            style={{
+              marginTop: '0.625rem',
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              color: 'var(--color-accent-blue)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              fontWeight: 700,
+            }}
+          >
+            View full briefing →
+          </div>
+        </Link>
+      )}
 
       {/* Global status strip */}
       <div

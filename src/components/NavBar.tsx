@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 
 const NAV_LINKS = [
@@ -17,10 +17,22 @@ const NAV_LINKS = [
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const navigate = useNavigate()
 
   function closeMenu() {
     setMenuOpen(false)
+  }
+
+  function onSearchSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const trimmed = searchQuery.trim()
+    if (trimmed.length >= 2) {
+      navigate(`/search?q=${encodeURIComponent(trimmed)}`)
+      setSearchQuery('')
+      closeMenu()
+    }
   }
 
   const linkStyle = (isActive: boolean) => ({
@@ -140,7 +152,7 @@ export default function NavBar() {
           </div>
         </NavLink>
 
-        {/* Desktop links */}
+        {/* Desktop links + search */}
         {!isMobile && (
           <div
             style={{
@@ -159,6 +171,25 @@ export default function NavBar() {
                 {label}
               </NavLink>
             ))}
+            <form onSubmit={onSearchSubmit} role="search" style={{ marginLeft: '0.5rem' }}>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search…"
+                aria-label="Global search"
+                style={{
+                  fontFamily: "'IBM Plex Sans', sans-serif",
+                  fontSize: '0.8125rem',
+                  padding: '0.3rem 0.625rem',
+                  width: '8rem',
+                  backgroundColor: 'var(--color-bg-tertiary)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: '4px',
+                  color: 'var(--color-text-primary)',
+                }}
+              />
+            </form>
           </div>
         )}
 

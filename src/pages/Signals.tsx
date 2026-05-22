@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import SignalCard from '../components/SignalCard'
+import ExportButtons from '../components/ExportButtons'
 import {
   signals,
   rankSignals,
@@ -77,6 +78,30 @@ export default function Signals() {
       >
         All monitored biosecurity signals · ranked by severity, confidence, and recency.
       </p>
+
+      <div style={{ marginBottom: '1rem' }}>
+        <ExportButtons
+          filename="signals"
+          rows={filtered.map((s) => ({
+            id: s.id,
+            name: s.name,
+            category: s.category,
+            severity: s.severity,
+            confidence: s.confidence,
+            trend: s.trend,
+            status: s.status,
+            pathogen: s.pathogen ?? '',
+            geography: s.geography.join('; '),
+            primarySourceId: s.primarySourceId,
+            sourceIds: s.sourceIds.join('; '),
+            lastUpdated: s.lastUpdated,
+            lastChecked: s.lastChecked,
+            markerCount: s.mapMarkers?.length ?? 0,
+            sectionCount: s.detailSections?.length ?? 0,
+          }))}
+          json={filtered}
+        />
+      </div>
 
       {/* Filters */}
       <div

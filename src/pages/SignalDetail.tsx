@@ -19,6 +19,9 @@ import SignalsMap from '../components/SignalsMap'
 import ContentBlock from '../components/ContentBlock'
 import HcwAlertCard from '../components/HcwAlertCard'
 import AuthorityRiskBadges from '../components/AuthorityRiskBadges'
+import SignalActionStrip from '../components/SignalActionStrip'
+import TldrBox from '../components/TldrBox'
+import SignalDetailToc, { type TocEntry } from '../components/SignalDetailToc'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -42,15 +45,17 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, children, id }: { title: string; children: React.ReactNode; id?: string }) {
   return (
     <div
+      id={id}
       style={{
         backgroundColor: 'var(--color-bg-secondary)',
         border: '1px solid var(--color-border)',
         borderRadius: '6px',
         padding: '1rem 1.25rem',
         marginBottom: '0.875rem',
+        scrollMarginTop: '1rem',
       }}
     >
       <h2
@@ -114,8 +119,22 @@ export default function SignalDetail() {
   const sources = signal.sourceIds.map(getSource).filter(Boolean) as ReturnType<typeof getSource>[]
   const severityColor = SEVERITY_COLORS[signal.severity]
 
+  // Build the table-of-contents entries based on what the page actually
+  // renders. Conditional sections are omitted unless their data is present.
+  const tocEntries: TocEntry[] = [
+    { id: 'summary', label: 'Summary' },
+    ...(signal.currentSituation ? [{ id: 'current-situation', label: 'Current situation' }] : []),
+    { id: 'why-it-matters', label: 'Why it matters' },
+    { id: 'geography', label: 'Geography' },
+    ...((signal.metrics?.length ?? 0) > 0 ? [{ id: 'metrics', label: 'Metrics' }] : []),
+    ...(events.length > 0 ? [{ id: 'timeline', label: 'Timeline' }] : []),
+    { id: 'sources', label: 'Sources & provenance' },
+    ...((signal.detailSections ?? []).map((s) => ({ id: s.id, label: s.title }))),
+    { id: 'data-quality', label: 'Data quality' },
+  ]
+
   return (
-    <div style={{ maxWidth: '1100px' }}>
+    <div style={{ maxWidth: '1320px' }}>
       <Link
         to="/signals"
         style={{
@@ -175,23 +194,30 @@ export default function SignalDetail() {
         <Field label="Last checked">{formatDate(signal.lastChecked)}</Field>
       </div>
 
+      <SignalActionStrip signal={signal} />
+      <TldrBox signal={signal} />
+
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+        <SignalDetailToc entries={tocEntries} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+
       {signal.riskAssessments && signal.riskAssessments.length > 0 && (
         <AuthorityRiskBadges assessments={signal.riskAssessments} />
       )}
 
       {signal.hcwAlert && <HcwAlertCard alert={signal.hcwAlert} />}
 
-      <Section title="Summary">
+      <Section title="Summary" id="summary">
         <Paragraph>{signal.summary}</Paragraph>
       </Section>
 
       {signal.currentSituation && (
-        <Section title="Current situation">
+        <Section title="Current situation" id="current-situation">
           <Paragraph>{signal.currentSituation}</Paragraph>
         </Section>
       )}
 
-      <Section title="Why it matters">
+      <Section title="Why it matters" id="why-it-matters">
         <Paragraph>{signal.whyItMatters ?? signal.operationalRelevance}</Paragraph>
         {signal.whyItMatters && (
           <>
@@ -203,7 +229,7 @@ export default function SignalDetail() {
         )}
       </Section>
 
-      <Section title="Geography">
+      <Section title="Geography" id="geography">
         <Paragraph>{signal.geographyNotes ?? signal.geography.join(', ')}</Paragraph>
         {(signal.mapMarkers?.length ?? 0) > 0 && (
           <ErrorBoundary label="Signal map">
@@ -213,7 +239,7 @@ export default function SignalDetail() {
       </Section>
 
       {(signal.metrics?.length ?? 0) > 0 && (
-        <Section title="Metrics">
+        <Section title="Metrics" id="metrics">
           <div
             style={{
               display: 'grid',
@@ -257,7 +283,7 @@ export default function SignalDetail() {
       )}
 
       {events.length > 0 && (
-        <Section title="Timeline">
+        <Section title="Timeline" id="timeline">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {events.map((event) => {
               const source = getSource(event.sourceId)
@@ -289,7 +315,7 @@ export default function SignalDetail() {
         </Section>
       )}
 
-      <Section title="Sources & provenance">
+      <Section title="Sources & provenance" id="sources">
         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {sources.map((source) => source && (
             <li key={source.id} style={{ padding: '0.625rem 0.75rem', backgroundColor: 'var(--color-bg-tertiary)', border: '1px solid var(--color-border)', borderRadius: '4px' }}>
@@ -311,17 +337,18 @@ export default function SignalDetail() {
       </Section>
 
       {(signal.detailSections?.length ?? 0) > 0 && signal.detailSections!.map((section) => (
-        <ContentBlock
-          key={section.id}
-          title={section.title}
-          bodyMarkdown={section.bodyMarkdown}
-          attribution={section.attribution}
-          additionalAttributions={section.additionalAttributions}
-          lastReviewed={section.lastReviewed}
-        />
+        <div key={section.id} id={section.id} style={{ scrollMarginTop: '1rem' }}>
+          <ContentBlock
+            title={section.title}
+            bodyMarkdown={section.bodyMarkdown}
+            attribution={section.attribution}
+            additionalAttributions={section.additionalAttributions}
+            lastReviewed={section.lastReviewed}
+          />
+        </div>
       ))}
 
-      <Section title="Data quality & confidence">
+      <Section title="Data quality & confidence" id="data-quality">
         <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
           Confidence: <span style={{ color: 'var(--color-text-primary)' }}>{CONFIDENCE_LABELS[signal.confidence]}</span>
         </div>
@@ -329,6 +356,9 @@ export default function SignalDetail() {
           Last checked: <span style={{ color: 'var(--color-text-primary)' }}>{formatDateTime(signal.lastChecked)}</span>
         </div>
       </Section>
+
+        </div>
+      </div>
     </div>
   )
 }

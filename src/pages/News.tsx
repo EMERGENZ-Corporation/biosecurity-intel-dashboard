@@ -3,6 +3,7 @@ import type { NewsItem, Signal } from '../types'
 import newsData from '../data/news.json'
 import signalsData from '../data/signals.json'
 import { categoryTone, intelToneStyle, NEUTRAL_TONE } from '../utils/signals'
+import ExportButtons from '../components/ExportButtons'
 
 const news = newsData as NewsItem[]
 const signals = signalsData as Signal[]
@@ -225,6 +226,22 @@ export default function News() {
         Auto-updated every 6h · {news.length} item{news.length !== 1 ? 's' : ''}
         {updatedLabel ? ` · newest ${updatedLabel}` : ''}
       </p>
+
+      <div style={{ marginBottom: '0.75rem' }}>
+        <ExportButtons
+          filename="news"
+          rows={filtered.map((n) => ({
+            id: n.id,
+            authority: n.authority,
+            title: n.title,
+            description: n.description,
+            link: n.link,
+            pubDate: n.pubDate,
+            signalIds: n.signalIds.join('; '),
+          }))}
+          json={filtered}
+        />
+      </div>
 
       {/* Disclaimer */}
       <div

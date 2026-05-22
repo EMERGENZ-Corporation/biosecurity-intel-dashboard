@@ -47,12 +47,18 @@ function DepthBadge({ count, label }: { count: number; label: string }) {
   )
 }
 
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000
+
 export default function SignalCard({ signal, compact = false }: Props) {
   const primary = getSource(signal.primarySourceId)
   const color = SEVERITY_COLORS[signal.severity]
   const markerCount = signal.mapMarkers?.length ?? 0
   const sectionCount = signal.detailSections?.length ?? 0
   const newsCount = news.filter((n) => n.signalIds.includes(signal.id)).length
+
+  // "Changed 7d" indicator — signal was updated within the past week
+  const lastUpdatedMs = new Date(signal.lastUpdated).getTime()
+  const changedRecently = Number.isFinite(lastUpdatedMs) && Date.now() - lastUpdatedMs <= SEVEN_DAYS_MS
 
   return (
     <Link
@@ -89,15 +95,36 @@ export default function SignalCard({ signal, compact = false }: Props) {
         >
           {signal.name}
         </span>
-        <span
-          className="intel-pill is-active"
-          style={{
-            ...intelToneStyle(severityTone(signal.severity)),
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {SEVERITY_LABELS[signal.severity]}
-        </span>
+        <div style={{ display: 'inline-flex', gap: '0.375rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+          {changedRecently && (
+            <span
+              title={`Updated ${formatDate(signal.lastUpdated)} — within last 7 days`}
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.5625rem',
+                fontWeight: 700,
+                color: 'var(--color-accent-blue)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.06em',
+                padding: '0.1rem 0.35rem',
+                border: '1px solid var(--color-accent-blue)',
+                borderRadius: '3px',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Updated 7d
+            </span>
+          )}
+          <span
+            className="intel-pill is-active"
+            style={{
+              ...intelToneStyle(severityTone(signal.severity)),
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {SEVERITY_LABELS[signal.severity]}
+          </span>
+        </div>
       </div>
 
       <div

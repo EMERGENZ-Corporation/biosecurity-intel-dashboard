@@ -87,3 +87,35 @@ body {
   background: var(--pill-color);
   box-shadow: 0 0 8px var(--pill-glow);
 }
+
+/* Print briefing — hide chrome (nav, footer, action strip, TOC, modal)
+   so the printed page is a clean signal briefing. Forces white background
+   and dark text for ink-efficient printing. */
+@media print {
+  nav[role='navigation'],
+  footer,
+  .signal-action-strip,
+  .signal-detail-toc,
+  [role='dialog'] {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  a {
+    color: black !important;
+    text-decoration: underline;
+  }
+  /* Ensure links print their href so a printed briefing remains traceable */
+  a[href^='http']::after,
+  a[href^='tel:']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.6875rem;
+    color: #444;
+  }
+}

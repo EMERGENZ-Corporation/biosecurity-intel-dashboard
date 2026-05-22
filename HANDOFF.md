@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (UX gap analysis + adversarial review committed)
+**Last updated:** 2026-05-22 (UX first-pass shortlist shipped — 8 highest-ROI items from UX-GAP-ANALYSIS)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,78 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ UX first-pass shortlist — 8 highest-ROI fixes (commit pending)
+
+Implements all 8 items from UX-GAP-ANALYSIS §4 (first-pass shortlist) in
+3 logical bundles, shipped as one commit per user request.
+
+### Bundle 1 — Landing experience
+- **Overview.tsx hero panel** — value prop, target-user list, `Current as of`
+  timestamp; replaces the old bare H1
+- **Headline threat hero card** — dominant card for highest-severity active
+  signal with metric tiles and "View full briefing →" CTA
+- **SignalCard.tsx "Updated 7d" badge** — appears when `signal.lastUpdated`
+  is within the past 7 days
+
+### Bundle 2 — Signal detail efficiency
+Solves the 60-viewport-scroll problem documented in UX-GAP-ANALYSIS §0.
+- **SignalActionStrip.tsx** (new) — pinned quick-action bar with `tel:` link
+  to CDC EOC (770-488-7100), state DOH lookup, primary-source anchor, and a
+  Print briefing button (uses `window.print()` + media-print stylesheet)
+- **TldrBox.tsx** (new) — executive verdict card at the top of every signal:
+  severity pill + confidence + trend + first sentence of operationalRelevance
+  + "Why it matters" highlight
+- **SignalDetailToc.tsx** (new) — sticky 200px side rail with scroll-spy
+  (IntersectionObserver). All 13 sections (summary, current-situation, why-it-
+  matters, geography, metrics, timeline, sources, 5 ContentBlocks, data-quality)
+  get `id`s and `scrollMarginTop`; TOC entries scroll-into-view on click.
+- **index.css `@media print`** — hides nav/footer/action-strip/TOC/modal when
+  printing; forces white background, prints URLs after links
+
+### Bundle 3 — Search + data export
+- **src/utils/search.ts** (new) — global search across signals (name + summary
+  + section bodies), detail sections, news (title + description), sources
+  (authority + title + notes). Lightweight scoring favors title hits +
+  recency for news. No external index — linear scan over ~16 + 80 + 500 + 37
+  records.
+- **src/pages/SearchPage.tsx** (new) — `/search?q=...` route with autofocus
+  input, kind filter chips (Signal / Section / News / Source counts),
+  shareable URL (URLSearchParams sync).
+- **NavBar.tsx** — desktop search box with `<form role="search">` that
+  navigates to `/search?q=...` on submit. Hidden on mobile (use hamburger
+  menu → search link in a future pass).
+- **App.tsx** — `/search` route registered (lazy-loaded).
+- **src/utils/export.ts** (new) — `downloadCsv()` and `downloadJson()` helpers
+  that create a Blob, generate an object URL, synthesize a hidden anchor
+  click, and revoke the URL after 100ms. CSV uses union-of-keys column set
+  with quote-escaping.
+- **src/components/ExportButtons.tsx** (new) — compact "CSV ↓ JSON ↓" bar
+  consumed by Signals, News, and SourcesPage. JSON exports the full filtered
+  array; CSV flattens to first-level scalar columns.
+
+**Verify (live):**
+- `/` shows "BIOSECURITY INTEL DASHBOARD" hero with "Current as of" stamp;
+  headline threat card renders the highest-severity active signal with
+  metric tiles
+- `/signals/{id}` shows action strip with CDC EOC tel link + Print button,
+  TLDR executive verdict box, sticky TOC with 13 entries linking to in-page
+  anchors. `npm run build` clean.
+- `/search?q=hantavirus` returns 30 hits (1 signal + 29 news, 0 sections,
+  0 sources) with kind-filter chips
+- `/signals` shows `Export: CSV ↓ JSON ↓` buttons; same on `/news`, `/sources`
+- `@media print` rules in index.css hide chrome when printing
+
+**Files touched:**
+- New: `src/components/SignalActionStrip.tsx`, `src/components/TldrBox.tsx`,
+  `src/components/SignalDetailToc.tsx`, `src/components/ExportButtons.tsx`,
+  `src/utils/search.ts`, `src/utils/export.ts`, `src/pages/SearchPage.tsx`
+- Modified: `src/pages/Overview.tsx`, `src/pages/SignalDetail.tsx`,
+  `src/pages/Signals.tsx`, `src/pages/News.tsx`, `src/pages/SourcesPage.tsx`,
+  `src/components/SignalCard.tsx`, `src/components/NavBar.tsx`,
+  `src/App.tsx`, `src/index.css`
+
+---
 
 ## 🔍 UX gap analysis + adversarial review (commit 9ed1d1a)
 

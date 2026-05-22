@@ -17,6 +17,7 @@ const Resources = lazy(() => import('./pages/Resources'))
 const SourcesPage = lazy(() => import('./pages/SourcesPage'))
 const Status = lazy(() => import('./pages/Status'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
+const SearchPage = lazy(() => import('./pages/SearchPage'))
 
 function PageLoader() {
   return (
@@ -145,6 +146,7 @@ export default function App() {
               <Route path="/sources" element={<SourcesPage />} />
               <Route path="/status" element={<Status />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/search" element={<SearchPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
