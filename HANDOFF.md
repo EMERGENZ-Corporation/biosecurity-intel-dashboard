@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ UX first-pass shortlist — 8 highest-ROI fixes (commit pending)
+## ✅ UX first-pass shortlist — 8 highest-ROI fixes (commit 67e26ca)
 
 Implements all 8 items from UX-GAP-ANALYSIS §4 (first-pass shortlist) in
 3 logical bundles, shipped as one commit per user request.
