@@ -19,6 +19,7 @@ const Status = lazy(() => import('./pages/Status'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const SearchPage = lazy(() => import('./pages/SearchPage'))
 const ComparePage = lazy(() => import('./pages/ComparePage'))
+const MethodologyPage = lazy(() => import('./pages/MethodologyPage'))
 
 function PageLoader() {
   return (
@@ -149,6 +150,7 @@ export default function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/compare" element={<ComparePage />} />
+              <Route path="/methodology" element={<MethodologyPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

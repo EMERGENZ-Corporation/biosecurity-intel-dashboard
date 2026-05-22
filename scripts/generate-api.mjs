@@ -32,6 +32,70 @@ function ensureDir(path) {
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
 }
 
+const SEVERITY_RANK = { monitor: 0, watch: 1, concern: 2, action: 3 }
+const SITE_URL = process.env.SITE_URL || 'https://biosecurity-intel.emergenzsystems.org'
+
+function escapeXml(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
+/**
+ * Emit an RSS 2.0 feed of high-severity signals + recent news so analysts
+ * and partner agencies can subscribe to dashboard updates per
+ * UX-GAP-ANALYSIS §3 #25. One item per active signal at concern+ severity,
+ * plus the 20 most recent news items.
+ */
+function generateRssFeed(generatedAt) {
+  const signals = JSON.parse(readFileSync('src/data/signals.json', 'utf8'))
+  const news = JSON.parse(readFileSync('src/data/news.json', 'utf8'))
+
+  const highSeveritySignals = signals
+    .filter((s) => s.status === 'active' && SEVERITY_RANK[s.severity] >= SEVERITY_RANK.concern)
+    .sort((a, b) => SEVERITY_RANK[b.severity] - SEVERITY_RANK[a.severity])
+
+  const recentNews = [...news].sort((a, b) => b.timestamp - a.timestamp).slice(0, 20)
+
+  const signalItems = highSeveritySignals.map((s) => `
+    <item>
+      <title>[${s.severity.toUpperCase()}] ${escapeXml(s.name)}</title>
+      <link>${SITE_URL}/signals/${s.id}</link>
+      <guid isPermaLink="true">${SITE_URL}/signals/${s.id}</guid>
+      <pubDate>${new Date(s.lastUpdated).toUTCString()}</pubDate>
+      <category>${escapeXml(s.category)}</category>
+      <description>${escapeXml(s.summary)}</description>
+    </item>`).join('')
+
+  const newsItems = recentNews.map((n) => `
+    <item>
+      <title>${escapeXml(n.authority)}: ${escapeXml(n.title)}</title>
+      <link>${escapeXml(n.link)}</link>
+      <guid isPermaLink="false">${escapeXml(n.id)}</guid>
+      <pubDate>${new Date(n.timestamp).toUTCString()}</pubDate>
+      <category>news</category>
+      <description>${escapeXml(n.description ?? '')}</description>
+    </item>`).join('')
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>EMERGENZ Biosecurity Intel Dashboard</title>
+    <link>${SITE_URL}/</link>
+    <description>High-severity biosecurity signals and recent authority/media coverage. Generated ${generatedAt}.</description>
+    <language>en-us</language>
+    <lastBuildDate>${new Date(generatedAt).toUTCString()}</lastBuildDate>${signalItems}${newsItems}
+  </channel>
+</rss>
+`
+  ensureDir('public/api/v1/feed.rss')
+  writeFileSync('public/api/v1/feed.rss', xml)
+  console.log(`  wrote public/api/v1/feed.rss (${highSeveritySignals.length} signals + ${recentNews.length} news items)`)
+}
+
 function main() {
   const generatedAt = new Date().toISOString()
   let totalItems = 0
@@ -54,7 +118,9 @@ function main() {
     console.log(`  wrote ${dst} (${data.length} ${name})`)
   }
 
-  console.log(`[generate-api] generated ${ENDPOINTS.length} endpoints, ${totalItems} total items`)
+  generateRssFeed(generatedAt)
+
+  console.log(`[generate-api] generated ${ENDPOINTS.length} JSON endpoints + 1 RSS feed, ${totalItems} total items`)
 }
 
 main()

@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { to: '/briefings', label: 'Briefings' },
   { to: '/resources', label: 'Resources' },
   { to: '/sources', label: 'Sources' },
+  { to: '/methodology', label: 'Methodology' },
   { to: '/status', label: 'Status' },
   { to: '/about', label: 'About' },
 ]
@@ -236,6 +237,26 @@ export default function NavBar() {
             boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
           }}
         >
+          <form onSubmit={onSearchSubmit} role="search" style={{ padding: '0.5rem 0.5rem 0.75rem' }}>
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search…"
+              aria-label="Global search"
+              style={{
+                width: '100%',
+                fontFamily: "'IBM Plex Sans', sans-serif",
+                fontSize: '0.9375rem',
+                padding: '0.625rem 0.875rem',
+                backgroundColor: 'var(--color-bg-tertiary)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '4px',
+                color: 'var(--color-text-primary)',
+                minHeight: '44px',
+              }}
+            />
+          </form>
           {NAV_LINKS.map(({ to, label }) => (
             <NavLink
               key={to}

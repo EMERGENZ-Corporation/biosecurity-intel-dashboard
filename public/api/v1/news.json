@@ -1,9 +1,41 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-22T20:30:21.937Z",
+  "generatedAt": "2026-05-22T20:39:50.539Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "google-news-ccfb8ad4",
+      "authority": "Google News",
+      "title": "DR Congo Ebola outbreak reaches nearly 750 suspected cases, 177 deaths as area risk upgraded to ‘very high’ - CIDRAP",
+      "description": "DR Congo Ebola outbreak reaches nearly 750 suspected cases, 177 deaths as area risk upgraded to ‘very high’ CIDRAP",
+      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQZkdxaTNTWWRmYkx4Wm9wdDJGOTZia3hOYVllMEdubmVJbFRPZVpIQUR1eVNocWFFMjNjemdQeVdZa0kxSHhxTkViQ05BajZGNlJYT1dDdEtZaXpUVzNPRlpsS1VteENYbVJ3cS03aHVWR1pwSk9qZDRfR0NLWHRRYm9nNFB1c1pkSDRSTEM3VjZXVTUydURTVElSamFWV0JnZHEzUU1tLVlGNmtjT21uejJZS0Q4cjlyVlVqM0tkalpSeGhY?oc=5",
+      "pubDate": "Fri, 22 May 2026 20:13:22 GMT",
+      "timestamp": 1779480802000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "nbc-news-32eb43f1",
+      "authority": "NBC News",
+      "title": "No child deaths definitively linked to Covid shots, FDA says",
+      "description": "No child deaths have been definitively linked to Covid vaccines, according to a report from the Food and Drug Administration that was quietly made public last week.",
+      "link": "https://www.nbcnews.com/health/health-news/no-child-deaths-definitively-linked-covid-shots-fda-says-rcna346514",
+      "pubDate": "Fri, 22 May 2026 20:01:24 GMT",
+      "timestamp": 1779480084000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-eb81ba04",
+      "authority": "Google News",
+      "title": "A Highly Contagious Illness Is Sickening Hikers on the PCT—and Hand Sanitizer Can't Stop It - Backpacker Magazine",
+      "description": "A Highly Contagious Illness Is Sickening Hikers on the PCT—and Hand Sanitizer Can't Stop It Backpacker Magazine",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9QZG9Nb1JKUF9Lc2FTbXNLelptMkVzVXdBVlUzbC1FNk9id25CbkVFVktxMkJ3VC1ycl9UX0J0NFRqRnJ2TmtuWkhxbEdtZHZUdGxGU3ptQ1FEWE9KTFZVTFRWRGRZX04yNEtKNUFza0xSamo2T2lGRDZ0TQ?oc=5",
+      "pubDate": "Fri, 22 May 2026 19:57:36 GMT",
+      "timestamp": 1779479856000,
+      "signalIds": []
+    },
     {
       "id": "google-news-a1b04756",
       "authority": "Google News",
@@ -54,6 +86,19 @@
       ]
     },
     {
+      "id": "google-news-d224eaa4",
+      "authority": "Google News",
+      "title": "Should Americans be worried about Ebola and Hantavirus outbreaks? (WEB) - The Hill",
+      "description": "Should Americans be worried about Ebola and Hantavirus outbreaks? (WEB) The Hill",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNZWZaeERBYlprVUlXVU1Pd043Sm5kMGdYQkVQWkdCMzk3LW0xTlI5RllnR25oRkVESFk5WFNvbjA5SFNFeS1WQnNnazl4LTZkLVpXanNIQWdsQ2J4cTBIOWFEd3VhVW1pTUJIS1VPNGFmQnRDT2lhTklNT25WUUUxVmMzVUhyMHg4cVVRNlJnU29ySllFWDktVTJjbVc1ZUJHNndGbmd4cw?oc=5",
+      "pubDate": "Fri, 22 May 2026 19:22:00 GMT",
+      "timestamp": 1779477720000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026",
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-23af3aba",
       "authority": "Google News",
       "title": "'This is probably illegal': CDC quietly erases mpox guidance tied to Pride events - Advocate.com",
@@ -95,6 +140,18 @@
       "title": "Misinfo, strained resources and armed conflict hamper Ebola response",
       "description": "One of the first cases of Ebola that Rose Tchwenko heard about in the current outbreak in the Democratic Republic of the Congo was in a healthcare worker.",
       "link": "https://www.nbcnews.com/health/health-news/misinfo-strained-resources-armed-conflict-hamper-ebola-response-rcna346519",
+      "pubDate": "Fri, 22 May 2026 18:54:52 GMT",
+      "timestamp": 1779476092000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-1482b588",
+      "authority": "Google News",
+      "title": "Misinfo, strained resources and armed conflict hamper Ebola response - NBC News",
+      "description": "Misinfo, strained resources and armed conflict hamper Ebola response NBC News",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPT2NKem92UkJwM2FYWDRrNGNkaEpaRlpCZFVncS1IQjJXNGpxYnBVeXNHNW9nd2VhSUlCR1p2bFItQ0R0LWFtVU1id2ZTTHJDNGNtT2lma0ZyU212MUhQWkVzdTRQbm9WbXR0WGxwSHU4UTJCMnVacUlTSzBVQkpCaFE5dDVTTWVSZmpDNkVIak9OZXZ6MzdWeXZzbWFGUGQzTERDQVpyblNoTzlIb2pNTG9OYlBSY0Fy?oc=5",
       "pubDate": "Fri, 22 May 2026 18:54:52 GMT",
       "timestamp": 1779476092000,
       "signalIds": [
@@ -560,6 +617,18 @@
       "title": "WHO declares Ebola outbreak a public health emergency of international concern - WSMV",
       "description": "WHO declares Ebola outbreak a public health emergency of international concern WSMV",
       "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOdG55bUtzU3lMSEhYN250LUJud3l5WWJSRjI1dndySGdYa1VuYUhhU0pYeEhWeW1qZ2VjX0VUUVJ4TDN5T0ZWQnptTV9rdDYzeWEtVWJ0WmlEdnRpWHlObEZkWVZWN3ZENHBSNVNnSEVFTUZ4NmxOODhoaGY1emZ6V243eUtiNmszblRHWFZHM0pNRllBalZDNkdSYmMwMWx1NHkyN2FGN21iQdIBvgFBVV95cUxNTWNTUHlSbEcwdkZXLVN4cm1hTEMyMExZNjV6bVRXZjdYUnd2NWFqcmllVGVMejhOalJxelVEekQwN3V5UE5ibFcwSFBjZ2VNbXdQNkxSeFdHVFFkVFVIbzhJOFQwQ1lnUkNGdXY1TURyV3QzeUIyUjBtWmJuekJZaTRxeTFtMDJCcDFlcmJVMWJYQXo1azlCWm9OVzd2dU5GZHdrc0pnNWFGcU9tc3R3TWVTaHBSU1ZsWkNfWkN3?oc=5",
+      "pubDate": "Fri, 22 May 2026 15:52:00 GMT",
+      "timestamp": 1779465120000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-0b441cb4",
+      "authority": "Google News",
+      "title": "WHO declares Ebola outbreak a public health emergency of international concern - Northern News Now",
+      "description": "WHO declares Ebola outbreak a public health emergency of international concern Northern News Now",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPR3lFeDN0QmxDQ1RwLWJnQm5iWnRNVkNMZjNGVUo4ZHhEUjdCR2wzRk1jRk0wNkNEMlA4Z3ZGeF81cXBnclc4blFaMFB0My00OHZld245S0cyNGxseFpndDhDeGgwRjBfa0RZWlBnUHdVN2RKWXZEczdadzIzVVR4ZGRZV1ZqU3F6dE9lYm5hdUVHTGttSWZhU3IydkpVMktQRFZNNGF3WGJ5eGJMakhGa2Z1QXU3Q0lN0gHMAUFVX3lxTE5NV3JyS3AtTUFtZXZrRzJvbFFlRzlyWm1UMDFwY0I2Y21NblJnaENuUmVnbmZlWmtFWXhUNkRWbm8wYnFpOXdiTEZFLWZUTk5qbHJxeTdDajVlaXdZTGpsM0dsVXRxbFd1ZnNHRi03Q19WUlRZMjk1dnl4c2ExR1ZXamZHbkxDbTdUREFEQTh6T0R5Ri1yeWY3QnhTSHZRbjd6b1Q0ZmVRREhZQzhwaEVlcTk3YmwzTmN5bExmSTRGTWVTWm14OWVGWnkwMQ?oc=5",
       "pubDate": "Fri, 22 May 2026 15:52:00 GMT",
       "timestamp": 1779465120000,
       "signalIds": [
@@ -1312,6 +1381,18 @@
       "timestamp": 1779451200000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-16e175aa",
+      "authority": "Google News",
+      "title": "WHO Health Emergencies EPI-WIN webinar: Hantavirus in Focus II: hantavirus natural history, infection control and clinical management of patients in hospital - World Health Organization (WHO)",
+      "description": "WHO Health Emergencies EPI-WIN webinar: Hantavirus in Focus II: hantavirus natural history, infection control and clinical management of patients in hospital World Health Organization (WHO)",
+      "link": "https://news.google.com/rss/articles/CBMi-wJBVV95cUxOd1d0bnp3cHl1WVFCbEJMT2QyV18wQnhmTmhXOUtuV0d6LTU1SFpnYmF4dEtrYzJPNE5GSkstb3VmbHh6b2NKdEFodU1BaTJTMW9melNTU2xYOGFWS3dLb3BvUUdiSWVlNVFBVW12Xzg5bU5NS0ljTnJwMlBHLVpfWlZNZnZFMFBqQ3ZxZFF1YXRhVkdlLVY2X3VOb2VGaDVjZXFwRTIwY3VUdGYyTEd6WmJHODJwandQd1duQV9FVmViUFhFdDNyRGVGSlREU2NOLUNOdk5qeC1HODNZRlJKLWxtZEp6UllmQWFFRDc3MXRCMVdCWU1OUFlTNnFXdF9zRjJ1MHczcDI4ZFBxdEN1dzQ3ZEtjbWdWZTJ6eXJfcHp0eTdJZWM3bEdqR1F1d2xxTDlOMnFjcW10QXV4bHNMbHJFTlZkT2NubzE3RG9fRmphT01GYjZVckg4RjJNUWNUTlNuMXNxUk9VTllKcWx4VHUtTFM5TVdCVFo0?oc=5",
+      "pubDate": "Fri, 22 May 2026 12:00:00 GMT",
+      "timestamp": 1779451200000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
       ]
     },
     {
@@ -5758,90 +5839,6 @@
       "pubDate": "Wed, 20 May 2026 17:57:47 -0400",
       "timestamp": 1779314267000,
       "signalIds": []
-    },
-    {
-      "id": "google-news-e28bec95",
-      "authority": "Google News",
-      "title": "Don't panic over hantavirus. Doctors' orders. - Travel Weekly",
-      "description": "Don't panic over hantavirus. Doctors' orders. Travel Weekly",
-      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOSDJCU0JLYnNkYzZsZVU1bk45QnFnb1Ruc0NvYXJMSXhMZ1pyTTZLTE4zZXZUOG0wMnY2TEoxNlFuY2hFNVduREdYTWRaNE5EWG4xc0JweVcyeUdEX0NSUTlJc0UyWlNLblhzc29mNVBCNUxuRW1hMWRWc29pb1haRmVGdEN2SE9OcUtqX2h5dlB3dw?oc=5",
-      "pubDate": "Wed, 20 May 2026 21:50:40 GMT",
-      "timestamp": 1779313840000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-8d4edb85",
-      "authority": "Google News",
-      "title": "Ebola can be contained, but the effort is just “ramping up” - Northeastern Global News",
-      "description": "Ebola can be contained, but the effort is just “ramping up” Northeastern Global News",
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1EQURMaDJvcl9NN3hWNk9KYk5MN2F1SU91WjBZV1NURklTYVlELVB6dlV1YTRpSzVHV0poWWNiREUzZ1huWWtZaEl0TDROSlFqdTZQQk0ySjd3TElpYVNOTDU4V0JhOXlzSUMxYnpn?oc=5",
-      "pubDate": "Wed, 20 May 2026 21:39:13 GMT",
-      "timestamp": 1779313153000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-a0fd092b",
-      "authority": "Google News",
-      "title": "Three people exposed to hantavirus remain at KU Hospital for observation - FOX4KC.com",
-      "description": "Three people exposed to hantavirus remain at KU Hospital for observation FOX4KC.com",
-      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQa25JOEMwWmJ5eHA4ZFd3eVd5MkxkSGhKQlNVYnd1c1doREpMaE1abGoyZ1RVZ1BJT2ZBX0ZnSEhQV1dIWG9xUTdUTkxaWmNFR2pxUDFWUTJPNUprWUc0YVFWMkNLeDl5cUdrZldoUEpOQU95TGFKUHlzOHVwN1NzWld5QUFuZlVVOU1EZm5IODZwQ1JMVmU3eVVrRXpPQdIBowFBVV95cUxQRVRVZUtUMXZxX0hScGtwY3kyRFZoQUZxVTdIMDY2TXhVQlVYVmRsb3hLb2FUMTJhalJJSko3MjhyamI4d3Nyc205b1RXUUo3aUZuUDBjazFDUS1DTzZWR0hRLUhQZ1hsVXoyZWROaTcxazFRMFN2YjhnNjRGbklmUzRFZ3dPeURDRzRpWkptYVVjaC1xN1VVSU9KUjZZcXNiRk9Z?oc=5",
-      "pubDate": "Wed, 20 May 2026 21:34:24 GMT",
-      "timestamp": 1779312864000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-6088d257",
-      "authority": "Google News",
-      "title": "Three people exposed to hantavirus remain at KU Hospital for observation - Yahoo",
-      "description": "Three people exposed to hantavirus remain at KU Hospital for observation Yahoo",
-      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQQ1RLaWxkbFctaHBZQ1VSQ2N6a1hLNGtCbHNYdnQxdmhULTUyTERRTF9IczNCWDlwTk5fV01aNjZUdHptVzFqbHF2TVVtT1dvQk5hc3VHMG13alYwUGQwOHpfeDV3YTN1d0l3X0puUlkwMllwSHRnN3VRaFpPX041Ti1HamtzYU5WX1ZQTUYtVUdoMVU?oc=5",
-      "pubDate": "Wed, 20 May 2026 21:34:24 GMT",
-      "timestamp": 1779312864000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-a1610b60",
-      "authority": "Google News",
-      "title": "What to know about Ebola and how it spreads, as the outbreak widens - The Washington Post",
-      "description": "What to know about Ebola and how it spreads, as the outbreak widens The Washington Post",
-      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOM2RFY3RDQ0cxb0x6dzVKZ3RLVHY5cGpfZmN3bThxMHh2eVZyNDI2WU9jaFFsYnJ4VnFtMnlYSGNFcDFPM24zZ3RuVXFGa2J4NGE2YkMxYmtZd0hycnNBQ1VjQVJtNmppdVZWVHFXWmM0TzhFa3pkVEplZFh6S3BwV2FUS1JXXzQzdjNhalFURC14LW12YllZY3ZZNTlOdHlaZVVhMA?oc=5",
-      "pubDate": "Wed, 20 May 2026 21:32:15 GMT",
-      "timestamp": 1779312735000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "cdc-eb6fd1fa",
-      "authority": "CDC",
-      "title": "Transcript - Update on Ebola Outbreak in the Democratic Republic of the Congo and Uganda, 5/20/2026",
-      "description": "Transcript - Update on Ebola Outbreak in the Democratic Republic of the Congo and Uganda, 5/20/2026",
-      "link": "https://tools.cdc.gov/api/embed/downloader/download.asp?m=132608&c=765604",
-      "pubDate": "Wed, 20 May 2026 21:30:00 GMT",
-      "timestamp": 1779312600000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-a1e12db3",
-      "authority": "Google News",
-      "title": "Ebola Outbreak in Central Africa Could Last Months, W.H.O. Says - University of Nebraska Medical Center",
-      "description": "Ebola Outbreak in Central Africa Could Last Months, W.H.O. Says University of Nebraska Medical Center",
-      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNUWVVd0NzQWZjRW55cVpNVXNhdzFadTJVbmJpeXJWbjExWjVNNl9vUV9PNXRSWFc2WmlaS1JxVjN0ZDg2YWZEa3FUVk5uWW5BSmd6bG1EcUFBTWo0SlVPemdrRTV0ajdxc2xYa3RJZWZldzN0QlBmRlpKdXFJcmNFXzFYZU1nRXRIUW9tVFpUMEp0N1F6ZkdoeVAwX1p3YWlkRmZmalBTclBqZGNaa0dLR0lqRU1OaXJKc3RUMlo2aw?oc=5",
-      "pubDate": "Wed, 20 May 2026 21:29:17 GMT",
-      "timestamp": 1779312557000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
     }
   ]
 }

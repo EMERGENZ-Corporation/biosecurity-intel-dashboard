@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (analyst tooling — public API endpoints, API docs, /compare side-by-side)
+**Last updated:** 2026-05-22 (methodology page + RSS feed + mobile search)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,52 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Methodology page + RSS feed + mobile search (commit pending)
+
+Closes UX-GAP-ANALYSIS §3 items 23 (confidence methodology) and 25 (alert
+subscription) plus the mobile-search affordance gap.
+
+### Analytic methodology page (§3 #23)
+- `src/pages/MethodologyPage.tsx` (new) — documents how severity,
+  confidence, trend, source diversity, watch indicators, source tiers,
+  and estimative language are assigned. ICD-203 alignment so external
+  reviewers can audit analytic process.
+- 8 sections: Severity, Confidence, Trend, Source diversity, Watch
+  indicators, Source tiers, Estimative language, Independent review
+- New `/methodology` route registered in `App.tsx`
+- "Methodology" added to NavBar (between Status and About)
+
+### RSS alert feed (§3 #25)
+- `scripts/generate-api.mjs` extended — also emits `public/api/v1/feed.rss`
+  alongside the JSON endpoints
+- RSS 2.0 format: high-severity (concern+) active signals + 20 most-recent
+  news items, with severity prefixes in titles
+- Each pipeline run regenerates the feed; analysts subscribe in their
+  feed reader for push-style alerts
+- Status page "Public API" card lists `/api/v1/feed.rss` alongside JSON
+  endpoints
+
+### Mobile search affordance
+- `src/components/NavBar.tsx` mobile dropdown — search input added at
+  top of the menu (44px min-height for touch targets); same `onSubmit`
+  handler as desktop search navigates to `/search?q=...`
+
+### Files touched
+- New: `src/pages/MethodologyPage.tsx`
+- Modified: `scripts/generate-api.mjs` (RSS emitter),
+  `src/App.tsx` (methodology route),
+  `src/components/NavBar.tsx` (methodology link + mobile search),
+  `src/pages/Status.tsx` (RSS entry in API card)
+- Generated: `public/api/v1/feed.rss`
+
+**Verify:**
+- `/methodology` renders 8 sections covering analytic rubric
+- `/api/v1/feed.rss` returns valid RSS 2.0 XML with 6 signals + 20 news
+- Mobile nav menu shows search input at top (44px min-height)
+- Status page lists feed.rss endpoint alongside JSON
+
+---
 
 ## ✅ Analyst tooling — public API + /compare side-by-side (commit 024db87)
 
