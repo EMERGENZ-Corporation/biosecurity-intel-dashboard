@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Fix concurrent workflow push collision (commit pending)
+## ✅ Fix concurrent workflow push collision (commit 332dfc6)
 
 GitHub Actions failure: "Update News Feed / Commit updated news.json" failed.
 Root cause: our source-registry commit touched both `scripts/update-news.mjs`
