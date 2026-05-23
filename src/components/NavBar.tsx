@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { to: '/briefings', label: 'Briefings' },
   { to: '/resources', label: 'Resources' },
   { to: '/sources', label: 'Sources' },
+  { to: '/network', label: 'Network' },
   { to: '/methodology', label: 'Methodology' },
   { to: '/status', label: 'Status' },
   { to: '/about', label: 'About' },

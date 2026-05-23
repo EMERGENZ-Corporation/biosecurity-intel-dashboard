@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (signal content refresh — measles/cholera/avian-flu/ebola + WastewaterSCAN link-out)
+**Last updated:** 2026-05-23 (Tier 5 — competing hypotheses ICD-203 block + cross-signal relationship network graph)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -124,7 +124,86 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Signal content refresh — measles/cholera/avian-flu/ebola + WastewaterSCAN link-out (commit TBD)
+## ✅ Tier 5 — competing hypotheses (ICD-203) + cross-signal relationship network (commit TBD)
+
+Implements UX-GAP-ANALYSIS §3 items 22 and 24 — the two remaining Tier 5 backlog items.
+
+### §3 #24 — Competing hypothesis surface
+
+New `alternativeHypotheses[]` field on `Signal` (type: `AlternativeHypothesis`, per
+`types.ts`). Each entry has: `hypothesis`, `proponent`, `evidence`, `disposition`
+(`active | under-investigation | discounted`), optional `url` and `sourceId`.
+
+New `CompetingHypothesesBlock` component renders the hypotheses list with an amber
+ICD-203 header badge, disposition chips (color-coded by status), and a framing note
+that warns against single-hypothesis thinking. Wired into `SignalDetail.tsx` after
+the Watch Indicators section and added to the TOC.
+
+Seeded on 4 signals with documented authority or analytical disagreements:
+- `avian-influenza-h5-2026`: 3 hypotheses — CDC LOW assessment, academic dairy-reservoir
+  concern, optimistic trend read
+- `measles-us-2026`: 3 hypotheses — structural coverage decline (CDC), importation-driven
+  ignition, adult waning immunity
+- `ebola-bundibugyo-drc-2026`: 3 hypotheses — healthcare-facility amplification (historical),
+  community transmission (multi-zone spread pattern), lower intrinsic transmissibility
+- `cholera-africa-2026`: 2 hypotheses — genuine 65% decline (Africa CDC), surveillance
+  artifact from conflict-degraded reporting systems
+
+Per CONTENT-STANDARDS.md §4.1: no claims fabricated; all framed as documented analytical
+perspectives with attributed proponents; no specific words put in any authority's mouth.
+
+### §3 #22 — Cross-signal relationship graph
+
+New `relatedSignals[]` field on `Signal` (type: `SignalRelationship` with `signalId`,
+`relationship` description, and `type` from `SignalRelationshipType` union).
+
+New `RelatedSignalsBlock` component in `SignalDetail` (below data-quality section) shows
+linked signal cards — severity-topped, relationship type badge, one-sentence description,
+link to the related signal, and a "View network graph →" link to the new route.
+
+New `/network` page (`NetworkPage.tsx`) — pure SVG radial graph, no D3 dependency:
+- Nodes positioned in 4 severity rings (action → concern → watch → monitor)
+- Edges deduplicated across both sides; colored by relationship type (6 colors)
+- Node size scales with connection count (base 8px, +1 per connection, max 14)
+- Hover highlighting: hovered node + connected edges/nodes glow; others dim to 20%
+- Hover tooltip bar below graph: signal name, connection count, link to detail page
+- Legend: severity ring colors + edge type styles
+- Accessible fallback: collapsible `<details>` table of all edges with links
+
+Relationship types seeded (documented from epidemiological or operational evidence):
+- `avian-influenza-h5-2026` ↔ `seasonal-influenza-2026` (pathogen-family, reassortment)
+- `avian-influenza-h5-2026` ↔ `fifa-world-cup-2026-prep` (shared-context, venue exposure)
+- `ebola-bundibugyo-drc-2026` ↔ `mpox-africa-clade-i-2026` (response-resource-conflict)
+- `ebola-bundibugyo-drc-2026` ↔ `lassa-fever-2026` (pathogen-family, VHF shared protocols)
+- `measles-us-2026` ↔ `seasonal-influenza-2026` (shared-context, vaccine hesitancy)
+- `measles-us-2026` ↔ `fifa-world-cup-2026-prep` (shared-context, importation risk)
+- `mpox-africa-clade-i-2026` ↔ `cholera-africa-2026` (geographic-overlap, DRC/Great Lakes)
+- `cholera-africa-2026` ↔ `screwworm-onehealth-2026` (shared-context, conflict WASH)
+- `covid-wastewater-2026` ↔ norovirus/RSV/hMPV/C.auris/H5 (surveillance-platform / pandemic-precursor)
+- `seasonal-influenza-2026` ↔ `fifa-world-cup-2026-prep` (shared-context)
+- `fifa-world-cup-2026-prep` ↔ `andes-hantavirus-mv-hondius-2026` (geographic-overlap, Andes endemic zone)
+
+**Files touched:**
+- `src/types.ts` — `AlternativeHypothesis`, `HypothesisDisposition`, `SignalRelationship`,
+  `SignalRelationshipType` types; `alternativeHypotheses?` and `relatedSignals?` on `Signal`
+- `src/components/CompetingHypothesesBlock.tsx` — new component
+- `src/components/RelatedSignalsBlock.tsx` — new component
+- `src/pages/NetworkPage.tsx` — new `/network` route page
+- `src/pages/SignalDetail.tsx` — imports and renders both new blocks; TOC updated
+- `src/App.tsx` — lazy-loaded `NetworkPage`, `/network` route
+- `src/components/NavBar.tsx` — "Network" nav link added
+- `scripts/seed-network-and-hypotheses.mjs` — new seeder (idempotent)
+- `src/data/signals.json` — 13 signals patched with relatedSignals and/or alternativeHypotheses
+- `public/status.json`, `public/api/v1/` — regenerated
+
+**Verify:** `/network` shows a labeled SVG radial graph; hover a node to highlight connections.
+Open H5 signal detail → competing hypotheses section appears with 3 ICD-203 hypothesis cards.
+Open any wastewater signal detail → "Related signals" section shows linked surveillance platform signals.
+`npm run validate:data` → OK; `npm run build` → clean.
+
+---
+
+## ✅ Signal content refresh — measles/cholera/avian-flu/ebola + WastewaterSCAN link-out (commit 53fbdfd)
 
 Bundle 1 (signal content refresh) and Bundle 2 (WastewaterSCAN link-out) from the
 prioritized backlog. All four fast-moving signals were updated with verified

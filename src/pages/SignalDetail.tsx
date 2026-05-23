@@ -24,7 +24,10 @@ import TldrBox from '../components/TldrBox'
 import SignalDetailToc, { type TocEntry } from '../components/SignalDetailToc'
 import SourceDiversityBadge from '../components/SourceDiversityBadge'
 import WatchIndicatorsBlock from '../components/WatchIndicatorsBlock'
+import CompetingHypothesesBlock from '../components/CompetingHypothesesBlock'
+import RelatedSignalsBlock from '../components/RelatedSignalsBlock'
 import { ErrorBoundary } from '../components/ErrorBoundary'
+import { signals } from '../utils/signals'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -128,12 +131,14 @@ export default function SignalDetail() {
     ...(signal.currentSituation ? [{ id: 'current-situation', label: 'Current situation' }] : []),
     { id: 'why-it-matters', label: 'Why it matters' },
     ...((signal.watchIndicators?.length ?? 0) > 0 ? [{ id: 'watch-indicators', label: 'Watch indicators' }] : []),
+    ...((signal.alternativeHypotheses?.length ?? 0) > 0 ? [{ id: 'competing-hypotheses', label: 'Competing hypotheses' }] : []),
     { id: 'geography', label: 'Geography' },
     ...((signal.metrics?.length ?? 0) > 0 ? [{ id: 'metrics', label: 'Metrics' }] : []),
     ...(events.length > 0 ? [{ id: 'timeline', label: 'Timeline' }] : []),
     { id: 'sources', label: 'Sources & provenance' },
     ...((signal.detailSections ?? []).map((s) => ({ id: s.id, label: s.title }))),
     { id: 'data-quality', label: 'Data quality' },
+    ...((signal.relatedSignals?.length ?? 0) > 0 ? [{ id: 'related-signals', label: 'Related signals' }] : []),
   ]
 
   return (
@@ -235,6 +240,10 @@ export default function SignalDetail() {
 
       {signal.watchIndicators && signal.watchIndicators.length > 0 && (
         <WatchIndicatorsBlock indicators={signal.watchIndicators} />
+      )}
+
+      {signal.alternativeHypotheses && signal.alternativeHypotheses.length > 0 && (
+        <CompetingHypothesesBlock hypotheses={signal.alternativeHypotheses} />
       )}
 
       <Section title="Geography" id="geography">
@@ -355,6 +364,10 @@ export default function SignalDetail() {
           />
         </div>
       ))}
+
+      {signal.relatedSignals && signal.relatedSignals.length > 0 && (
+        <RelatedSignalsBlock relationships={signal.relatedSignals} allSignals={signals} />
+      )}
 
       <Section title="Data quality & confidence" id="data-quality">
         <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>

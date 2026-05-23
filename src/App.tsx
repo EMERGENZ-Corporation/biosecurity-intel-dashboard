@@ -20,6 +20,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage'))
 const SearchPage = lazy(() => import('./pages/SearchPage'))
 const ComparePage = lazy(() => import('./pages/ComparePage'))
 const MethodologyPage = lazy(() => import('./pages/MethodologyPage'))
+const NetworkPage = lazy(() => import('./pages/NetworkPage'))
 
 function PageLoader() {
   return (
@@ -151,6 +152,7 @@ export default function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/compare" element={<ComparePage />} />
               <Route path="/methodology" element={<MethodologyPage />} />
+              <Route path="/network" element={<NetworkPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

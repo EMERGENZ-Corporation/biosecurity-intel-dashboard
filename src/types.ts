@@ -192,6 +192,50 @@ export interface HcwAlert {
   updatedAt: string
 }
 
+/**
+ * An alternative analytical view on a signal's cause, trajectory, or significance.
+ * Implements ICD-203 competing-hypothesis analytic standard — surfaces documented
+ * disagreements between authorities or analyst communities rather than presenting
+ * a single authoritative interpretation as settled.
+ */
+export type HypothesisDisposition = 'active' | 'under-investigation' | 'discounted'
+
+export interface AlternativeHypothesis {
+  /** Short label for the alternative view */
+  hypothesis: string
+  /** Who holds or articulates this view (authority, analyst community, academic literature) */
+  proponent: string
+  /** Key evidence or rationale underpinning this view */
+  evidence: string
+  /** Current analytic status of this hypothesis */
+  disposition: HypothesisDisposition
+  /** Optional link to source document */
+  url?: string
+  /** Registered source ID if this comes from a Tier 1/2 source */
+  sourceId?: string
+}
+
+/**
+ * Cross-signal relationship — how this signal relates to another active signal.
+ * Drives the /network visualization and "Related signals" block in signal detail.
+ */
+export type SignalRelationshipType =
+  | 'surveillance-platform'   // tracked via the same monitoring system
+  | 'geographic-overlap'      // concurrent activity in the same region
+  | 'pathogen-family'         // related pathogens with interaction/reassortment risk
+  | 'shared-context'          // share a common structural driver
+  | 'pandemic-precursor'      // one signal is a potential precursor to the other
+  | 'response-resource-conflict' // compete for the same response capacity
+
+export interface SignalRelationship {
+  /** The related signal's ID */
+  signalId: string
+  /** Human-readable description of the relationship */
+  relationship: string
+  /** Relationship category used for edge styling in the network graph */
+  type: SignalRelationshipType
+}
+
 export interface Signal {
   id: string
   name: string
@@ -216,6 +260,18 @@ export interface Signal {
   watchIndicators?: WatchIndicator[]
   /** Healthcare-worker alert callout when applicable. */
   hcwAlert?: HcwAlert
+  /**
+   * ICD-203 competing-hypothesis block — alternative analytical views on
+   * the signal's cause, trajectory, or significance. Surfaces documented
+   * authority or analyst disagreements. Never fabricated per CONTENT-STANDARDS §4.1.
+   */
+  alternativeHypotheses?: AlternativeHypothesis[]
+  /**
+   * Cross-signal relationships — how this signal connects to other active
+   * signals. Drives the /network visualization and the "Related signals"
+   * block in signal detail.
+   */
+  relatedSignals?: SignalRelationship[]
   primarySourceId: string
   sourceIds: string[]
   lastUpdated: string
