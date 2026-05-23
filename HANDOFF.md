@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Source registry audit — WastewaterSCAN attribution + FDA addition + pipeline RSS (commit pending)
+## ✅ Source registry audit — WastewaterSCAN attribution + FDA addition + pipeline RSS (commit 961a332)
 
 Triggered by a review of the Brown University Pandemic Center May 21 2026
 newsletter and WastewaterSCAN. Addressed two questions: (1) are all sources
