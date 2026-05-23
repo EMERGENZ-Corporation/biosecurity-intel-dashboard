@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (production status verification + RSS note cleanup)
+**Last updated:** 2026-05-22 (source registry audit — WastewaterSCAN attribution fix + FDA source + RSS feed)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,54 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Source registry audit — WastewaterSCAN attribution + FDA addition + pipeline RSS (commit pending)
+
+Triggered by a review of the Brown University Pandemic Center May 21 2026
+newsletter and WastewaterSCAN. Addressed two questions: (1) are all sources
+cited by the newsletter already captured in our RSS/scraping stack; (2) can
+we legally use WastewaterSCAN and Brown Pandemic Center, and is attribution
+correct.
+
+### Findings
+- **WastewaterSCAN**: Licensed CC BY-NC 4.0. Permissible for nonprofit
+  dashboard use but commercial hosted-service use requires a separate
+  commercial license from Stanford/Emory. Previous registry entry was missing
+  `authorityFull`, license notation, required attribution string, and the
+  Boehm et al. citation. All added.
+- **Brown Pandemic Center**: No explicit license published on their site
+  (as of 2026-05-22; contact `public_health@brown.edu` for formal terms).
+  Correctly marked `primary: false`, `sourceTier: 3`. Fixed URL to point at
+  `/newsletter-archive` rather than homepage. Added note that no RSS feed is
+  exposed from MailChimp hosted archive.
+- **FDA**: Newsletter cited FDA for EUAs but FDA had no entry in the source
+  registry and no RSS feed in the news pipeline. Added both.
+- **Other newsletter sources** (WHO, CDC, Africa CDC, PAHO, USDA APHIS,
+  NETEC, PHAC): All already captured in signal-sources.json. PAHO/Africa
+  CDC/USDA APHIS have no working RSS feeds; covered via Google News and
+  per-signal queries.
+- **Commercial deployment caveat documented**: WastewaterSCAN CC BY-NC 4.0
+  notes warn that any paid SaaS tier incorporating WastewaterSCAN data needs
+  commercial licensing from Stanford/Emory before launch.
+
+**Files touched:**
+- `src/data/signal-sources.json` — WastewaterSCAN: added `authorityFull`,
+  `license`, `notes` with full CC BY-NC 4.0 attribution string and commercial
+  constraint. Brown Pandemic Center: fixed `url` to `/newsletter-archive`,
+  expanded `notes`. FDA (`fda-safety-alerts`): new Tier 1 entry added.
+  Source count: 37 → 38.
+- `scripts/update-news.mjs` — Added FDA MedWatch RSS feed to `GLOBAL_FEEDS`;
+  FDA authority weight set to 90 (just below WHO/ECDC, above UKHSA).
+- `public/status.json` — regenerated (38 sources now reflected)
+- `public/api/v1/signal-sources.json` — regenerated (38 sources)
+- `public/api/v1/` — all endpoints regenerated
+- `src/pages/Status.tsx` — updated hardcoded "37 sources" → "38 sources"
+
+**Verify:** `npm run validate:data` passes; `/status` page Source Registry
+shows 38 registered sources; WastewaterSCAN entry on `/sources` shows
+authorityFull and license note; FDA appears in sources list.
+
+---
 
 ## ✅ Production status verification + RSS note cleanup (commit a5cf183)
 

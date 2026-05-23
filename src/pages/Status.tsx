@@ -242,7 +242,7 @@ export default function Status() {
           {[
             { path: '/status.json', desc: 'Dashboard health, depth counters, source-tier breakdown' },
             { path: '/api/v1/signals.json', desc: 'Full Signal[] — 16 signals with markers, sections, attributions, risk badges, HCW alerts, watch indicators' },
-            { path: '/api/v1/signal-sources.json', desc: 'Full SignalSource[] — 37 sources with tier, type, domain, lastVerified' },
+            { path: '/api/v1/signal-sources.json', desc: 'Full SignalSource[] — 38 sources with tier, type, domain, lastVerified' },
             { path: '/api/v1/signal-timeline.json', desc: 'Full SignalTimelineEvent[] — 41 chronological events tied to signals + sources' },
             { path: '/api/v1/news.json', desc: 'Full NewsItem[] — 500 most recent news items with signalIds tags' },
             { path: '/api/v1/feed.rss', desc: 'RSS 2.0 feed — high-severity signals + 20 most-recent news items. Subscribe in your feed reader for push-style alerts.' },

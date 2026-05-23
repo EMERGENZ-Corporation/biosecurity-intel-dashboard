@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-22T21:06:33.900Z",
+  "generatedAt": "2026-05-23T00:58:10.331Z",
   "endpoint": "/api/v1/signal-sources.json",
-  "count": 37,
+  "count": 38,
   "signalSources": [
     {
       "id": "ecdc-andes-surveillance",
@@ -362,6 +362,7 @@
     {
       "id": "wastewaterscan",
       "authority": "WastewaterSCAN",
+      "authorityFull": "WastewaterSCAN — Stanford University / Emory University / Verily",
       "title": "WastewaterSCAN — pathogen surveillance dashboard",
       "sourceType": "wastewater",
       "primary": true,
@@ -373,7 +374,9 @@
         "enteric",
         "amr_fungal"
       ],
-      "sourceTier": 2
+      "sourceTier": 2,
+      "license": "CC BY-NC 4.0",
+      "notes": "License: CC BY-NC 4.0 — permissible for EMERGENZ non-commercial dashboard use. Required attribution: 'These data were collected as part of the WastewaterSCAN / SCAN project, a partnership between Stanford University, Emory University, and Verily funded philanthropically through a gift to Stanford University.' Required citation: Boehm, A. B., et al. (2026). Pathogen nucleic acids data in wastewater solids from 147 treatment plants in the United States: 2024-2025. Data in Brief. COMMERCIAL USE CONSTRAINT: Any paid hosted-service deployment incorporating WastewaterSCAN data requires a separate commercial license from Stanford/Emory (contact: wwscan_stanford_emory@lists.stanford.edu). Pathogens tracked: SARS-CoV-2, Influenza A/B, RSV, hMPV, EV-D68, Norovirus GII, Rotavirus, Adenovirus F, C. auris, Hepatitis A, Measles, Mpox Ib/II, West Nile virus."
     },
     {
       "id": "paho-epi-alerts",
@@ -516,11 +519,11 @@
       "id": "brown-pandemic-center",
       "authority": "Brown Pandemic Center",
       "authorityFull": "Brown University School of Public Health — Pandemic Center",
-      "title": "Brown Pandemic Center — Tracking Reports",
+      "title": "Brown Pandemic Center — Weekly Tracking Reports",
       "sourceType": "expert-weekly-report",
       "primary": false,
-      "url": "https://pandemics.sph.brown.edu/",
-      "lastVerified": "2026-05-19",
+      "url": "https://pandemics.sph.brown.edu/newsletter-archive",
+      "lastVerified": "2026-05-22",
       "domains": [
         "vhf",
         "respiratory",
@@ -532,7 +535,7 @@
         "environmental",
         "mass_gathering"
       ],
-      "notes": "Weekly expert tracking report used as a scoping signal. Treat as secondary; verify event-level claims against the cited primary authorities.",
+      "notes": "Weekly expert tracking report used as a scoping signal only. Treat as secondary; verify all event-level claims against the cited primaries (WHO, CDC, Africa CDC, PAHO, USDA APHIS). License: No explicit license or terms of use published on pandemics.sph.brown.edu as of 2026-05-22; contact public_health@brown.edu for formal terms. Newsletter is published publicly via MailChimp for broad dissemination — no RSS feed exposed. No programmatic ingestion possible; reviewed manually. Individual reports: mailchi.mp/messages/pandemic-center-tracking-report-[date].",
       "sourceTier": 3
     },
     {
@@ -563,6 +566,24 @@
       "domains": [
         "zoonotic"
       ]
+    },
+    {
+      "id": "fda-safety-alerts",
+      "authority": "FDA",
+      "authorityFull": "U.S. Food and Drug Administration",
+      "title": "FDA Safety Alerts, Recalls and Emergency Use Authorizations",
+      "sourceType": "health-advisory",
+      "primary": true,
+      "url": "https://www.fda.gov/news-events/public-health-focus",
+      "lastVerified": "2026-05-22",
+      "domains": [
+        "respiratory",
+        "zoonotic",
+        "amr_fungal",
+        "vaccine_preventable"
+      ],
+      "sourceTier": 1,
+      "notes": "U.S. Government Work (17 U.S.C. §105) — no copyright; freely usable with attribution. Primary for FDA emergency use authorizations, recalls, and drug/countermeasure policy relevant to outbreak response."
     },
     {
       "id": "biorxiv-infectious-disease",

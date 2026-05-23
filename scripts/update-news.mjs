@@ -94,7 +94,7 @@ const SIGNAL_KEYWORD_OVERRIDES = {
 // Direct authority/media feeds; per-signal Google News queries are built
 // dynamically below and fill in coverage for outlets without working RSS.
 //
-// Validated 2026-05-21. Endpoints removed (returning 404/403/timeout):
+// Validated 2026-05-22. Endpoints removed (returning 404/403/timeout):
 //   WHO old news-releases.xml - replaced with live news-english.xml
 //   ECDC old /en/rss.xml - replaced with live CDTR taxonomy feed
 //   ProMED (promedmail.org/feed/) — coverage now via per-signal Google News
@@ -113,6 +113,9 @@ const GLOBAL_FEEDS = [
   { url: 'https://www.gov.uk/government/organisations/uk-health-security-agency.atom', authority: 'UKHSA', critical: false },
   { url: 'https://www.science.org/rss/news_current.xml', authority: 'Science', critical: false },
   { url: 'https://www.cidrap.umn.edu/rss.xml', authority: 'CIDRAP', critical: false },
+  // FDA — EUAs, drug approvals, safety alerts relevant to outbreak countermeasures
+  // U.S. Government Work (17 U.S.C. §105); no copyright restrictions
+  { url: 'https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/medwatch-safety-alerts/rss.xml', authority: 'FDA', critical: false },
 
   // Tier 3 — media
   { url: 'https://feeds.bbci.co.uk/news/health/rss.xml', authority: 'BBC Health', critical: false },
@@ -127,6 +130,7 @@ const GLOBAL_FEEDS = [
 // Authority weight for deduplication tie-breaking (higher = preferred)
 const AUTHORITY_WEIGHT = new Map([
   ['CDC', 100], ['WHO', 95], ['ECDC', 95],
+  ['FDA', 90],
   ['UKHSA', 80], ['CIDRAP', 78],
   ['Science', 70], ['STAT News', 60],
   ['BBC Health', 65], ['NBC News', 55], ['CBC News', 55],
