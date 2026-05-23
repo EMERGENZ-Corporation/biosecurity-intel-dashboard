@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Triage-card dose de-risking — remove exact medication regimens (commit PENDING)
+## ✅ Triage-card dose de-risking — remove exact medication regimens (commit 8d84962)
 
 User asked how to proceed on Claude's remaining drug-dose content risk. The adopted policy is: printable/operator-facing triage cards should preserve treatment direction and escalation logic, but must not contain exact medication doses or dosing schedules; clinicians must verify current dosing through linked source guidance, facility protocol, and public-health consultation.
 
