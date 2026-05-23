@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-23T01:56:41.589Z",
+  "generatedAt": "2026-05-23T02:11:39.196Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
@@ -3366,6 +3366,18 @@
       "signalIds": []
     },
     {
+      "id": "google-news-d673b7f8",
+      "authority": "Google News",
+      "title": "Is The U.S. Stepping Up In The Fight Against Ebola? - KFF",
+      "description": "Is The U.S. Stepping Up In The Fight Against Ebola? KFF",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPU1ozNHRXUHhUbm9wUXN6X3lWR2ViVm1PRHZtQXpNXy1VZFVEZ1dJMmVMRlE1TWllN2VNV0ZhMXVfWkZJNVg1VjhfbEFmYWxrcktyZXZBbXdIeHB1emw0TnplSDltaTFCX3R4WmJ4YlYtNFBKZjdqNXkyWkl0UHVkbzVxOFB0RmhxSGZEdE1EcDczaTR5d1E?oc=5",
+      "pubDate": "Thu, 21 May 2026 19:44:10 GMT",
+      "timestamp": 1779392650000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-10d4fab2",
       "authority": "Google News",
       "title": "Virginia Department of Health launches measles dashboard as cases rise - Yahoo",
@@ -5820,28 +5832,14 @@
       ]
     },
     {
-      "id": "google-news-655a7d73",
+      "id": "google-news-fcce5a7a",
       "authority": "Google News",
-      "title": "Concern escalating over growing Ebola outbreak in Africa - KPLC 7 News",
-      "description": "Concern escalating over growing Ebola outbreak in Africa KPLC 7 News",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQQ05pN08wcU0yc0d5WmFVSmV1MjVZMXpYdjB1VDg2Rm5kRHVLOFp4eDNONFlKRUZaR0dwVlNQUnl6QURTbjc4NlBKWGYzYmlJZVV0RDZHeTI0Z19adThaTmpDWVBUNWpBQVZ3QmdBWnpzNWpFbnVQS2E5MkhVWWNNMkxPbTJfWmhSWWUtMVhRQkFvWUpXQ0tWOGpn?oc=5",
-      "pubDate": "Thu, 21 May 2026 06:17:00 GMT",
-      "timestamp": 1779344220000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-ee7f5db8",
-      "authority": "Google News",
-      "title": "Too few Malaysians getting flu shots despite high awareness, doctors warn ahead of mid-year influenza season - Malay Mail",
-      "description": "Too few Malaysians getting flu shots despite high awareness, doctors warn ahead of mid-year influenza season Malay Mail",
-      "link": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxNRWRVQXA1TTQyQlV0aFBoUGl6RWw1b05Ec01MQVFyRnlfMGRpM0NpRGoxemlaV3RJdlp6R0V6dllCWDFlUDhFT0V4SHlZQVNpVjFmMzlTOHh2M0VjZDVFdzhmZFVfS3RNSGNqaE5mMlFpQkJONWxmeWVRT0ZzZGhDY2dDVmFIOE9MSy03dy0wanFmRG1FYkNGRjVLSXk5ekxqWlJGYTRBYzZuZGFDc3VSVlJPT2gyamY5MmJQSFhhZDYzZGxVMXZtWmpNX0ZYeFk1UFhWWGhOSk16U3luaFZYeC1HTk9IZlNCMEpPN1VBYllDTW9EZDdVb9IB_gFBVV95cUxPX3RjNVhiaVZScmoxQTlLcThPUU9JUU5qYi1oM0dDNjBkQ2N2RHg5UVpuY1ZtU205Qjd2NmNJdXEtTnlrc0NGeGdvaDJ4QS1FMTRaMWtCR09XMEhrTzRIdHZnaUlkanhaUW5EeFhTODVkMVhFaVZ4QXU2aW9Jd3ItQnp0SGpBYWNGZkJFeFcxLVNabS03ZzNyd3BXTHJjTkg2UUc3Vld0ZFg1ancxZFhSQUNXaGk0TUxNM2ZCbl92cG9WTjQydEl4UjcwaVBnWTRMcWtfelZvTHB0ODZDX3k4VnR1XzFYdC0tRGxjSW8yUVpwb0c3MmMta0R2YUNtUQ?oc=5",
-      "pubDate": "Thu, 21 May 2026 06:15:58 GMT",
-      "timestamp": 1779344158000,
-      "signalIds": [
-        "seasonal-influenza-2026"
-      ]
+      "title": "Fantasy Baseball Closer Report: Cade Smith leading MLB in saves, Grant Taylor on the rise in Chicago - NBC Sports",
+      "description": "Fantasy Baseball Closer Report: Cade Smith leading MLB in saves, Grant Taylor on the rise in Chicago NBC Sports",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPdjBFdDhhdHJQRHpNUlE3d1ZwUlpaclNtbFlLMUhwQUtOTmpULVA5cHR4QURVbEtFQTVnRTFHN25aVEwtZXVNQ1VTZHdOdGdwN2R6YWdNRlZJVlJBN2I5XzU5cUJWWGZLQ0hBVkl2UF8zblYxYnRzYXlnaTduVndJdFlaOU1iM0xWOXpvN09ZREdHV0Z3NmtsSnlQQThFdTlWZEhTcjBWZy05XzNWZE1lMUZSeFRjMVpqQmxPUUF4dmJjZWxLUEV6LQ?oc=5",
+      "pubDate": "Thu, 21 May 2026 06:40:55 GMT",
+      "timestamp": 1779345655000,
+      "signalIds": []
     }
   ]
 }
