@@ -68,9 +68,46 @@ jobs:
             echo "data_changed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "chore(status): refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git pull --rebase origin main
-            git push
-            echo "data_changed=true" >> "$GITHUB_OUTPUT"
+            # Rebase onto latest origin. -X theirs resolves any conflict on generated
+            # files (public/api/v1/, public/status.json) by taking the remote version;
+            # we regenerate immediately after, so the final committed state correctly
+            # blends both the status refresh and any concurrent news-feed changes.
+            git pull --rebase -X theirs origin main || {
+              echo "Rebase failed — aborting."
+              git rebase --abort 2>/dev/null || true
+              exit 1
+            }
+            # Re-run API generation after rebase so public/api/v1/ reflects the
+            # merged state of both signal/status changes and any news changes from main.
+            node scripts/generate-api.mjs
+            git add public/api/v1/
+            git diff --staged --quiet || git commit --amend --no-edit
+            # Push with rebase-and-retry: handles concurrent news-feed writes to
+            # public/api/v1/. On push rejection, rebase onto latest origin/main and
+            # regenerate the API so we push a consistent state.
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              if git push; then
+                pushed=true
+                echo "Push succeeded on attempt $attempt."
+                echo "data_changed=true" >> "$GITHUB_OUTPUT"
+                break
+              fi
+              echo "Push rejected (attempt $attempt/5). Retrying in $((attempt * 3))s..."
+              sleep $((attempt * 3))
+              git pull --rebase -X theirs origin main || {
+                echo "Rebase conflict on retry $attempt — aborting."
+                git rebase --abort 2>/dev/null || true
+                exit 1
+              }
+              node scripts/generate-api.mjs
+              git add public/api/v1/
+              git diff --staged --quiet || git commit --amend --no-edit
+            done
+            if [ "$pushed" = false ]; then
+              echo "All push attempts failed after 5 retries."
+              exit 1
+            fi
           fi
 
       - name: Verify production deployment

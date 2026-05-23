@@ -169,10 +169,15 @@ jobs:
           # Push with rebase-and-retry: handles concurrent Status Refresh writes to
           # public/api/v1/. On push rejection, rebase onto latest origin/main and
           # regenerate the API so we push a consistent state.
+          # -X theirs resolves any rebase conflict on generated files (public/api/v1/)
+          # by taking the remote version; regenerating immediately after ensures the
+          # final committed state correctly blends both the news update and any
+          # concurrent status-refresh or signal-data changes from main.
           pushed=false
           for attempt in 1 2 3 4 5; do
-            git pull --rebase origin main || {
-              echo "Rebase conflict on attempt $attempt — aborting."
+            git pull --rebase -X theirs origin main || {
+              echo "Rebase conflict on attempt $attempt — aborting rebase."
+              git rebase --abort 2>/dev/null || true
               exit 1
             }
             # Re-run API generation after rebase so public/api/v1/ reflects the

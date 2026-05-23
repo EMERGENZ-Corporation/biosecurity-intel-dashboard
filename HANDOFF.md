@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (Tier 5 — competing hypotheses ICD-203 block + cross-signal relationship network graph)
+**Last updated:** 2026-05-23 (fix workflow push races — rebase conflict resilience for Status Refresh + Update News Feed)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,46 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Fix workflow push-race rebase conflicts (commit TBD)
+
+Both "Status Refresh / Commit refreshed status.json" (step 9) and
+"Update News Feed / Commit updated news.json" (step 8) have been failing
+intermittently when both workflows are triggered by the same push (any commit
+that touches `src/data/signals.json` triggers both). The concurrency group
+serializes execution, but the second workflow's commit can still conflict with
+manual commits or the first workflow's generated-file changes during rebase.
+
+Root causes identified:
+1. **Status Refresh had NO retry loop** — a single `git push` with no error handling.
+   If the push was rejected or the rebase conflicted, the step failed immediately.
+2. **Update News Feed's retry loop used `|| { exit 1 }`** on `git pull --rebase`,
+   which aborts on ANY conflict — including conflicts in generated files that could
+   be auto-resolved by taking the remote version and regenerating.
+
+Both fixes use `git pull --rebase -X theirs origin main`:
+- `-X theirs` resolves rebase conflicts on generated artifact files (`public/api/v1/`,
+  `public/status.json`) by accepting the incoming remote version
+- Immediately after rebase, `generate-api.mjs` is re-run so the final committed
+  state correctly blends both workflows' source-level changes
+- Status Refresh now has the same 5-attempt push-retry loop as Update News Feed
+
+Failure pattern that triggered this: any push touching `src/data/signals.json`
+(signals refresh, Tier 5 intel commit) would simultaneously trigger both workflows.
+Even with the concurrency group serializing them, the second workflow's rebase
+onto the first workflow's generated-file commit would fail without `-X theirs`.
+
+**Files touched:**
+- `.github/workflows/update-data.yml` — Status Refresh commit step: added
+  5-attempt push-retry loop + `-X theirs` rebase + API regeneration after rebase
+- `.github/workflows/update-news.yml` — Update News Feed retry loop: `git pull
+  --rebase` → `git pull --rebase -X theirs` + `git rebase --abort` cleanup on failure
+
+**Verify:** Next push touching `src/data/signals.json` should trigger both workflows;
+both should complete with "Push succeeded on attempt 1" (or a clean retry if one
+queues behind the other). No more "Rebase conflict" or single-push failures.
+
+---
 
 ## ✅ Tier 5 — competing hypotheses (ICD-203) + cross-signal relationship network (commit 23d56f8)
 
