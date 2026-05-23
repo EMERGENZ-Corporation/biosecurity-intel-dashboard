@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Tier 5 — competing hypotheses (ICD-203) + cross-signal relationship network (commit TBD)
+## ✅ Tier 5 — competing hypotheses (ICD-203) + cross-signal relationship network (commit 23d56f8)
 
 Implements UX-GAP-ANALYSIS §3 items 22 and 24 — the two remaining Tier 5 backlog items.
 
