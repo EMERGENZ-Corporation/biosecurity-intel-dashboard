@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-22 (source registry audit — WastewaterSCAN attribution fix + FDA source + RSS feed)
+**Last updated:** 2026-05-23 (fix concurrent workflow push collision — concurrency group + retry loop)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,40 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Fix concurrent workflow push collision (commit pending)
+
+GitHub Actions failure: "Update News Feed / Commit updated news.json" failed.
+Root cause: our source-registry commit touched both `scripts/update-news.mjs`
+(triggering Update News Feed) AND `src/data/signal-sources.json` (triggering
+Status Refresh) simultaneously. Both workflows write to `public/api/v1/`.
+Status Refresh pushed first; Update News Feed's `git pull --rebase` then hit
+a conflict on the same generated files.
+
+Two changes:
+1. Added `concurrency: group: biosecurity-data-writers / cancel-in-progress: false`
+   to both `update-news.yml` and `update-data.yml`. This queues overlapping
+   data-writer runs so only one executes at a time.
+2. Replaced the single `git pull --rebase && git push` in the commit step
+   with a 5-attempt retry loop. On each retry: rebase onto origin/main,
+   re-run `generate-api.mjs` (so the committed API state reflects the merged
+   news + status data), amend the commit if needed, then push.
+
+Also removed the FDA MedWatch RSS URL added in the previous commit — the URL
+returned 404 (FDA blocks automated user agents). The FDA source entry in
+`signal-sources.json` stays (correct and valuable); the RSS will be added when
+a verified endpoint URL is confirmed.
+
+**Files touched:**
+- `.github/workflows/update-news.yml` — concurrency group + retry commit logic
+- `.github/workflows/update-data.yml` — concurrency group added
+- `scripts/update-news.mjs` — removed 404 FDA RSS URL; reverted FDA authority weight
+
+**Verify:** Next push that triggers both workflows simultaneously (or next 06:00 UTC
+schedule overlap) should show one workflow queuing while the other completes,
+with no "Commit updated news.json" failure.
+
+---
 
 ## ✅ Source registry audit — WastewaterSCAN attribution + FDA addition + pipeline RSS (commit 961a332)
 

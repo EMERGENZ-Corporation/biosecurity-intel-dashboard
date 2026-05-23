@@ -15,6 +15,13 @@ on:
       - 'src/data/signal-timeline.json'
       - 'src/data/signal-sources.json'
 
+# Shared concurrency group with Update News Feed — both write to public/api/v1/
+# so they must not run in parallel. cancel-in-progress: false ensures the
+# queued run still executes rather than being dropped.
+concurrency:
+  group: biosecurity-data-writers
+  cancel-in-progress: false
+
 permissions:
   contents: write
   issues: write

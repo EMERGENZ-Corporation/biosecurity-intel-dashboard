@@ -11,6 +11,13 @@ on:
       - 'src/data/signals.json'
       - 'scripts/update-news.mjs'
 
+# Prevent concurrent data-writing workflows from colliding on public/api/v1/.
+# Status Refresh and Update News Feed both commit to that directory; this group
+# queues them so only one writer runs at a time.
+concurrency:
+  group: biosecurity-data-writers
+  cancel-in-progress: false
+
 permissions:
   contents: write
   issues: write
@@ -156,10 +163,34 @@ jobs:
           git add src/data/news.json public/api/v1/
           if git diff --staged --quiet; then
             echo "No news changes to commit."
-          else
-            git commit -m "chore(news): automated update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git pull --rebase origin main
-            git push
+            exit 0
+          fi
+          git commit -m "chore(news): automated update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # Push with rebase-and-retry: handles concurrent Status Refresh writes to
+          # public/api/v1/. On push rejection, rebase onto latest origin/main and
+          # regenerate the API so we push a consistent state.
+          pushed=false
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main || {
+              echo "Rebase conflict on attempt $attempt — aborting."
+              exit 1
+            }
+            # Re-run API generation after rebase so public/api/v1/ reflects the
+            # merged state of both news.json and any status changes from main.
+            node scripts/generate-api.mjs
+            git add public/api/v1/
+            git diff --staged --quiet || git commit --amend --no-edit
+            if git push; then
+              pushed=true
+              echo "Push succeeded on attempt $attempt."
+              break
+            fi
+            echo "Push rejected (attempt $attempt/5). Retrying in $((attempt * 3))s..."
+            sleep $((attempt * 3))
+          done
+          if [ "$pushed" = false ]; then
+            echo "All push attempts failed after 5 retries."
+            exit 1
           fi
 
       - name: Fail workflow when news update failed
