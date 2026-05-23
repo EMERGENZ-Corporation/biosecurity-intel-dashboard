@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ CI workflow for branch protection (commit 8103d32)
+## ✅ CI workflow for branch protection (commit f4d8b4d)
 
 User asked how to deal with the remaining GitHub branch-protection item after noting GitHub is installed locally and connected. Added a minimal PR/push CI workflow so `main` protection can require a real check before merge rather than relying only on scheduled data-refresh workflows.
 
@@ -138,7 +138,7 @@ User asked how to deal with the remaining GitHub branch-protection item after no
 
 ---
 
-## ✅ Triage-card dose de-risking — remove exact medication regimens (commit 8d84962)
+## ✅ Triage-card dose de-risking — remove exact medication regimens (commit 99cee91)
 
 User asked how to proceed on Claude's remaining drug-dose content risk. The adopted policy is: printable/operator-facing triage cards should preserve treatment direction and escalation logic, but must not contain exact medication doses or dosing schedules; clinicians must verify current dosing through linked source guidance, facility protocol, and public-health consultation.
 
@@ -156,7 +156,7 @@ User asked how to proceed on Claude's remaining drug-dose content risk. The adop
 
 ---
 
-## ✅ Follow-up hardening — CSP headers, news snippets, validator tests (commit e3964d5)
+## ✅ Follow-up hardening — CSP headers, news snippets, validator tests (commit a324dbc)
 
 User shared the remaining four-pass review findings from Claude and asked for the flagged risks to be considered. This commit ships the low-regret follow-ups that did not require a policy/legal tradeoff: security headers for Vercel, fair-use news snippet truncation, and regression tests for the expanded data validator.
 
