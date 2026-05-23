@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (fix concurrent workflow push collision — concurrency group + retry loop)
+**Last updated:** 2026-05-23 (signal content refresh — measles/cholera/avian-flu/ebola + WastewaterSCAN link-out)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,47 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Signal content refresh — measles/cholera/avian-flu/ebola + WastewaterSCAN link-out (commit TBD)
+
+Bundle 1 (signal content refresh) and Bundle 2 (WastewaterSCAN link-out) from the
+prioritized backlog. All four fast-moving signals were updated with verified
+primary-source data gathered 2026-05-23. Five wastewater signal summaries received
+a direct link-out to the WastewaterSCAN live tracker, closing the UX gap where
+methodology was described but no concentration curves were accessible.
+
+**Sources verified:**
+- CDC Measles Data Research (cdc.gov/measles/data-research), May 21 2026
+- Africa CDC epidemic intelligence via Brown Pandemic Center Tracking Report, May 21 2026
+- CDC H5 Avian Influenza Situation Summary (cdc.gov/bird-flu), May 2026
+- WHO declaration + Africa CDC for Ebola Bundibugyo (WHO DON pages returning 404;
+  narrative-only update, no fabricated metrics per CONTENT-STANDARDS.md)
+- WastewaterSCAN tracker (data.wastewaterscan.org/tracker), CC BY-NC 4.0
+
+**Signal changes:**
+- `measles-us-2026`: summary/currentSituation updated; confidence→official; 3 metrics
+  added (1,952 cases, 29 outbreaks, 40 jurisdictions); lastUpdated 2026-05-23
+- `cholera-africa-2026`: **trend corrected "increasing" → "decreasing"**; 40,707 cases
+  metric added (Africa CDC); narrative updated with 65% YOY decline confirmation
+- `avian-influenza-h5-2026`: 71 US human cases metric added (CDC); narrative updated
+  with poultry detection trend and current risk assessment (LOW)
+- `ebola-bundibugyo-drc-2026`: summary/currentSituation/geography updated; no metrics
+  (WHO DON 404 at time of run; counts require verification before operational briefing)
+- 5 wastewater signals (`covid-wastewater-2026`, `norovirus-wastewater-2026`,
+  `rsv-wastewater-2026`, `hmpv-wastewater-2026`, `candida-auris-wastewater-2026`):
+  appended `data.wastewaterscan.org/tracker` with CC BY-NC 4.0 attribution to summary
+
+**Files touched:**
+- `scripts/refresh-signal-data.mjs` — new one-time seeder script (idempotent; checks
+  before appending wastewater tracker URL)
+- `src/data/signals.json` — 9 signals patched (4 content refresh + 5 wastewater link-out)
+- `public/status.json`, `public/api/v1/` — regenerated
+
+**Verify:** Open any wastewater signal detail page — summary should end with the
+WastewaterSCAN tracker URL. Measles signal should show 3 metrics with value 1952/29/40.
+Cholera trend badge should read "decreasing". Run `npm run validate:data` → OK.
+
+---
 
 ## ✅ Fix concurrent workflow push collision (commit 332dfc6)
 
