@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Progressive disclosure on signal detail (commit TBD)
+## ✅ Progressive disclosure on signal detail (commit 1aca4ac)
 
 Closes UX-GAP-ANALYSIS §3 #12. Three sections on signal detail now collapse by default,
 addressing the 60-viewport-scroll problem (§0): Timeline, Sources & provenance, and
