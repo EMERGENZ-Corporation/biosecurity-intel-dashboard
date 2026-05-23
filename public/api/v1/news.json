@@ -1,9 +1,21 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-23T03:04:58.350Z",
+  "generatedAt": "2026-05-23T03:06:04.575Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "google-news-8dd8f833",
+      "authority": "Google News",
+      "title": "Health Alert: Worldwide Caution – Updated Public Health Arrival Restrictions and Enhanced Ebola Screening – May 22, 2026 - U.S. Embassy & Consulate in Thailand (.gov)",
+      "description": "Health Alert: Worldwide Caution – Updated Public Health Arrival Restrictions and Enhanced Ebola Screening – May 22, 2026 U.S. Embassy & Consulate in Thailand (.gov)",
+      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQdmp4ZnFRSjkwYTNmMUNORGgtNTduN0VvbDhNT0Y3NlJIdUZoVFhJVU4yck1YcW5lTENBTXh4aERrVC1qZWxtQzNDRlhNZmpIVTVVTHB2TDBGbmRPd0xSUXQ5RjJIcnRzSGV3V1YxOTNqY0ZQNnNOTG9uZ1VpR09BVUZHcHItbHRWX1gwMTZNS1g0SDJEcGpxOHZTZkRRMnFqLWRwT01UdVEzZVdGSWk2OUVJOXNkeFJSaWNjV0lXZHFFc1RCUVdxZXUzSlhpUmFYVjdnSWtwOA?oc=5",
+      "pubDate": "Sat, 23 May 2026 02:28:25 GMT",
+      "timestamp": 1779503305000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
     {
       "id": "google-news-76141234",
       "authority": "Google News",
@@ -27,6 +39,18 @@
       "signalIds": []
     },
     {
+      "id": "google-news-c3097315",
+      "authority": "Google News",
+      "title": "US extends Ebola travel ban to Green Card holders - Reuters",
+      "description": "US extends Ebola travel ban to Green Card holders Reuters",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPVFlESUtxTTZHQ1ROOXB1LWlPZjdEUURNUTlseU9CWnQ1WV9WbDlGd200dkxJVlU1MG1ZUVBHQnhqLVhOV0VoMVQtTENDV3lLSUlsQkx0N1FjT0MwTUtPQms0d0YzOF91a3E5dU1OTjhwdHVKZ1k5Zm1kaDQta0xhSzRxTWQ1bmZqMHVKXzNkdFE3MEdxVDA5TXQwOWZtejJXZmpGeXowQzVUT3J6bXBfMlBnWHg0Z1lmUEE?oc=5",
+      "pubDate": "Sat, 23 May 2026 00:45:00 GMT",
+      "timestamp": 1779497100000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-6608f056",
       "authority": "Google News",
       "title": "Health Alert: Worldwide Caution – Updated Public Health Arrival Restrictions and Enhanced Ebola Screening – May 22, 2026 - nz.usembassy.gov",
@@ -34,6 +58,18 @@
       "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNLWloNFV2UTQ3b0FYZW1DUjhvbFJudy1NdjQ0NFE4NWlUMll4NWxDSm9lMVI1TUxFa0hwQk1PY2p2U2dtTDZaZGlUdmtfZldtdUFhOWR4Q19PNi1zSTU4ckJxdGR5dTVTMVcwcEVJZnFyaVQxVXdTRXlwN25ucXNQTF9Ha3F1Q3FUTjVJR3NFeWF4VmVUQ0xCdUxhdkFhNVd0MldmZm9BYVozd3g4cE84Tkg0akk5RGdDSnZiSnIzWW5JVDFheXg4U25ZaVdoR1d2NV9KbFNsdw?oc=5",
       "pubDate": "Sat, 23 May 2026 00:42:10 GMT",
       "timestamp": 1779496930000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-69337282",
+      "authority": "Google News",
+      "title": "Houston's Bush Intercontinental Airport added as entry location for select passengers amid Ebola outbreak - FOX 26 Houston",
+      "description": "Houston's Bush Intercontinental Airport added as entry location for select passengers amid Ebola outbreak FOX 26 Houston",
+      "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNdjJWVWxtdVkxUkd0RkVHWS1qQ0dsUVVJRkNIZVR2WEIwdEVsSHBJVHFVcnRzTWRUdEJ1dE5lMFpOWXZhQkgyU1NsNnVMNVlhcHFBWXhBbVdjcVFFV3hGeTBpQkFZWjNuN09XeDJqLW81eDFrcjZpUDFHNmZ4dldJX1M2N1FUWFNfZDhyWlJidEx4RnAyeHVyUW1mS1U5ZFFmZENOcU9EWGVQeUxVYVhWdlBMY3ZadHFsYWp2YmY3bjc0aHF2QmR4R3RXc9IB0AFBVV95cUxQX3BudjZ1aWdTNDlRdkp1Y094U2FnODA2X2dIQ2tJVXdKdmxhYVU5cU5tRFhCWHZ1MEE4RXJlbi11dWdxX2RuX1dINW5JRC1CU0h1VUZubjlKU1RVMFRmQzRZRWhBSmhmWEVvWUN6WnlkUExlcTd2b2pLYVE4dWJXc2Vrc0VYbjgyUGZnZ2pwaEFwOGxHSTdZUzJ1NG9LZDAzenVldFA1RE9iaWhlZUxSb3duQ1JaTDF1ZURBWGRWQl90amNya3ZOX3JyU043R2VO?oc=5",
+      "pubDate": "Sat, 23 May 2026 00:28:28 GMT",
+      "timestamp": 1779496108000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
       ]
@@ -5806,40 +5842,6 @@
       "signalIds": [
         "measles-us-2026"
       ]
-    },
-    {
-      "id": "google-news-d603d206",
-      "authority": "Google News",
-      "title": "Why measles, diphtheria and whooping cough cases are rising in Australia - SBS Australia",
-      "description": "Why measles, diphtheria and whooping cough cases are rising in Australia SBS Australia",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQTlAyZmhyRTBCcnhoR2xGaUJocHRWeEVKdTZTOGVRU3hUU2Z1blVGaXBqbUx5S2k1a21UTHRUelQweVZaNkx5NEFXbWYxcXR2X3lsWm1fOGs0MXlmTld1ZF9ESHZ5N0xvbHJhUG1xbTZqU2VtQ21Iby1MMUxidlM5c2Y2TFUtQk02UnE1ZFctM3phQ0tKVlZDS1VTM0U3NDN4eHotczAzYVFkeXk1T2NEYkJFcDUtd0g4?oc=5",
-      "pubDate": "Thu, 21 May 2026 07:07:35 GMT",
-      "timestamp": 1779347255000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-95fc3c0f",
-      "authority": "Google News",
-      "title": "Hantavirus in the news - The Foothills Focus",
-      "description": "Hantavirus in the news The Foothills Focus",
-      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOYzZmcWFfZWN0Y2JyRXQ4N19JcXM4N3lGeU5neDBSWWlqXzY1OHk1OGh3amZhZHkyZVFyVllmMGxYZ01Ma2E4RHU0NFVlLW44a0RyU0dEc1lQUGVZRUJWNnl3bkJZRlF3cjhqQU1hRVJ0SExTdDNSUDhCdmlVRUU4ckx5X0RiUThGakNlOFF2RExmUVN0bFlYRkxyWTBRRFRFT054Q3J3VWhjN0ZFUDhHZGs0cFBUdw?oc=5",
-      "pubDate": "Thu, 21 May 2026 07:00:00 GMT",
-      "timestamp": 1779346800000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-fcce5a7a",
-      "authority": "Google News",
-      "title": "Fantasy Baseball Closer Report: Cade Smith leading MLB in saves, Grant Taylor on the rise in Chicago - NBC Sports",
-      "description": "Fantasy Baseball Closer Report: Cade Smith leading MLB in saves, Grant Taylor on the rise in Chicago NBC Sports",
-      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPdjBFdDhhdHJQRHpNUlE3d1ZwUlpaclNtbFlLMUhwQUtOTmpULVA5cHR4QURVbEtFQTVnRTFHN25aVEwtZXVNQ1VTZHdOdGdwN2R6YWdNRlZJVlJBN2I5XzU5cUJWWGZLQ0hBVkl2UF8zblYxYnRzYXlnaTduVndJdFlaOU1iM0xWOXpvN09ZREdHV0Z3NmtsSnlQQThFdTlWZEhTcjBWZy05XzNWZE1lMUZSeFRjMVpqQmxPUUF4dmJjZWxLUEV6LQ?oc=5",
-      "pubDate": "Thu, 21 May 2026 06:40:55 GMT",
-      "timestamp": 1779345655000,
-      "signalIds": []
     }
   ]
 }
