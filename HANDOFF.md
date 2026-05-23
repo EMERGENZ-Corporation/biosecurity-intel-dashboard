@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (triage-card dose de-risking — printable cards no longer include exact medication regimens)
+**Last updated:** 2026-05-23 (CI workflow added for branch-protection enforcement)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,20 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ CI workflow for branch protection (commit PENDING)
+
+User asked how to deal with the remaining GitHub branch-protection item after noting GitHub is installed locally and connected. Added a minimal PR/push CI workflow so `main` protection can require a real check before merge rather than relying only on scheduled data-refresh workflows.
+
+**Files touched:**
+- `.github/workflows/ci.yml` — new `CI / validate-build` job on `pull_request` and `push` to `main`; runs `npm ci`, `npm run test:validators`, `npm run validate:data`, and `npm run build`.
+- `HANDOFF.md` — logs the branch-protection prerequisite.
+
+**Next GitHub-side step:** Enable branch protection on `main` requiring pull requests and the `validate-build` check after this workflow has run once on GitHub.
+
+**Verify:** `npm run test:validators`, `npm run validate:data`, and `npm run build` already pass locally; GitHub should show the `CI / validate-build` check after push.
+
+---
 
 ## ✅ Triage-card dose de-risking — remove exact medication regimens (commit 8d84962)
 
