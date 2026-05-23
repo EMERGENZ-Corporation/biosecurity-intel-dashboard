@@ -37,6 +37,16 @@ const SOURCE_TYPES = new Set([
 ])
 const STATUS_VALUES = new Set(['ok', 'degraded', 'critical'])
 const SOURCE_TIERS = new Set([1, 2, 3, 4])
+const RELATIONSHIP_TYPES = new Set([
+  'surveillance-platform',
+  'geographic-overlap',
+  'pathogen-family',
+  'shared-context',
+  'pandemic-precursor',
+  'response-resource-conflict',
+])
+const HYPOTHESIS_DISPOSITIONS = new Set(['active', 'under-investigation', 'discounted'])
+const TRIAGE_STALE_DAYS = 365
 
 const errors = []
 
@@ -231,6 +241,104 @@ signals.forEach((signal, index) => {
         if (section.updatedAt && !isIsoDate(section.updatedAt)) {
           errors.push(`${label}.detailSections[${sIndex}]: updatedAt must be ISO`)
         }
+      })
+    }
+  }
+  // relatedSignals — enforce referential integrity (typo'd signal IDs silently
+  // dropped from the /network graph would otherwise be invisible to maintainers).
+  if (signal.relatedSignals) {
+    if (!Array.isArray(signal.relatedSignals)) {
+      errors.push(`${label}: relatedSignals must be an array`)
+    } else {
+      signal.relatedSignals.forEach((rel, rIndex) => {
+        const rLabel = `${label}.relatedSignals[${rIndex}]`
+        requireFields(rel, ['signalId', 'relationship', 'type'], rLabel)
+        if (rel.signalId && !signalIds.has(rel.signalId)) {
+          errors.push(`${rLabel}: signalId "${rel.signalId}" not found in signals.json`)
+        }
+        if (rel.signalId && rel.signalId === signal.id) {
+          errors.push(`${rLabel}: a signal cannot be related to itself`)
+        }
+        if (rel.type && !RELATIONSHIP_TYPES.has(rel.type)) {
+          errors.push(`${rLabel}: invalid relationship type "${rel.type}"`)
+        }
+      })
+    }
+  }
+  // alternativeHypotheses — enum validation + proponent attribution discipline
+  // (defamation-by-summary risk if a named proponent is attributed without a URL).
+  if (signal.alternativeHypotheses) {
+    if (!Array.isArray(signal.alternativeHypotheses)) {
+      errors.push(`${label}: alternativeHypotheses must be an array`)
+    } else {
+      signal.alternativeHypotheses.forEach((h, hIndex) => {
+        const hLabel = `${label}.alternativeHypotheses[${hIndex}]`
+        requireFields(h, ['hypothesis', 'proponent', 'evidence', 'disposition'], hLabel)
+        if (h.disposition && !HYPOTHESIS_DISPOSITIONS.has(h.disposition)) {
+          errors.push(`${hLabel}: invalid disposition "${h.disposition}"`)
+        }
+        if (h.url && !isUrl(h.url)) {
+          errors.push(`${hLabel}: url must be valid`)
+        }
+        if (h.sourceId && !signalSourceIds.has(h.sourceId)) {
+          errors.push(`${hLabel}: sourceId "${h.sourceId}" not in signal-sources.json`)
+        }
+      })
+    }
+  }
+  // triageCard — clinical content requires lastReviewed ISO and source URL;
+  // refuse stale clinical content per CONTENT-STANDARDS §7.1 + medical-tort exposure.
+  if (signal.triageCard) {
+    const tcLabel = `${label}.triageCard`
+    const tc = signal.triageCard
+    requireFields(
+      tc,
+      [
+        'whenToSuspect',
+        'exposureCriteria',
+        'isolation',
+        'ppe',
+        'initialActions',
+        'treatmentSummary',
+        'notify',
+        'sourceAuthority',
+        'sourceTitle',
+        'sourceUrl',
+        'lastReviewed',
+      ],
+      tcLabel,
+    )
+    if (tc.sourceUrl && !isUrl(tc.sourceUrl)) {
+      errors.push(`${tcLabel}: sourceUrl must be valid URL`)
+    }
+    if (tc.lastReviewed) {
+      if (!isIsoDate(tc.lastReviewed)) {
+        errors.push(`${tcLabel}: lastReviewed must be ISO date`)
+      } else {
+        const ageDays = (Date.now() - new Date(tc.lastReviewed).getTime()) / (1000 * 60 * 60 * 24)
+        if (ageDays > TRIAGE_STALE_DAYS) {
+          errors.push(
+            `${tcLabel}: lastReviewed is ${Math.floor(ageDays)} days old (>${TRIAGE_STALE_DAYS}d) — clinical content must be re-verified`,
+          )
+        }
+      }
+    }
+    for (const arrField of ['whenToSuspect', 'exposureCriteria', 'initialActions', 'notify']) {
+      if (tc[arrField] !== undefined && !Array.isArray(tc[arrField])) {
+        errors.push(`${tcLabel}: ${arrField} must be an array`)
+      }
+    }
+  }
+  // riskAssessments — cross-reference URLs and history ISO dates.
+  if (signal.riskAssessments) {
+    if (!Array.isArray(signal.riskAssessments)) {
+      errors.push(`${label}: riskAssessments must be an array`)
+    } else {
+      signal.riskAssessments.forEach((ra, raIndex) => {
+        const raLabel = `${label}.riskAssessments[${raIndex}]`
+        requireFields(ra, ['authority', 'label', 'description', 'url'], raLabel)
+        if (ra.url && !isUrl(ra.url)) errors.push(`${raLabel}: url must be valid`)
+        if (ra.asOf && !isIsoDate(ra.asOf)) errors.push(`${raLabel}: asOf must be ISO`)
       })
     }
   }

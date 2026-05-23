@@ -76,7 +76,21 @@ export default function CompetingHypothesesBlock({ hypotheses }: Props) {
         </h2>
       </div>
 
-      {/* Explanatory note */}
+      {/* Explanatory note — raised to ≥12px per WCAG; rephrased for compliance:
+          proponent attributions are EMERGENZ summaries, not direct quotes. */}
+      <p
+        style={{
+          fontFamily: "'IBM Plex Sans', sans-serif",
+          fontSize: '0.8125rem',
+          color: 'var(--color-text-secondary)',
+          margin: '0 0 0.5rem 0',
+          lineHeight: 1.55,
+        }}
+      >
+        Alternative analytical interpretations of this signal. Surfacing competing
+        hypotheses is a recognized ICD-203 analytic-rigor practice — single-hypothesis
+        thinking is a documented source of intelligence failure.
+      </p>
       <p
         style={{
           fontFamily: "'IBM Plex Sans', sans-serif",
@@ -87,10 +101,10 @@ export default function CompetingHypothesesBlock({ hypotheses }: Props) {
           fontStyle: 'italic',
         }}
       >
-        Alternative analytical interpretations documented in authority assessments
-        or the epidemiological literature. Confident single-hypothesis thinking is
-        a recognized source of intelligence failure — consider each view before
-        briefing operational decisions.
+        Proponent attributions are editorial summaries of public positions held by
+        the named entity in the linked source document. They are not direct quotations
+        and do not represent endorsement by that entity. Cite the linked source — not
+        this summary — when attributing a position to a named authority.
       </p>
 
       {/* Hypothesis cards */}

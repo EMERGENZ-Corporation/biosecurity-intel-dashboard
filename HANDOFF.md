@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (About page — attribution/citation guidance card + WastewaterSCAN attribution notice)
+**Last updated:** 2026-05-23 (review-driven hardening — validator coverage, atomic news write, stale chips, ADA disclaimer font sizes, hypothesis attribution caveat)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,86 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Review-driven hardening — validator + atomicity + ADA fonts + attribution caveat (commit TBD)
+
+User requested a four-pass review (logic gap analysis, adversarial compliance review,
+systems-engineering stability review, and attribution/citation guidance for About page).
+This commit lands the highest-leverage cross-cutting fixes the three review agents
+agreed on. The full agent findings are summarized in the user-facing message; what
+shipped here:
+
+### Logic-gap fixes (P0)
+- **Validator coverage of new fields** (`scripts/validate-data.mjs`) — referential
+  integrity for `relatedSignals[].signalId` (a typo previously caused silent drop
+  from the /network graph + RelatedSignalsBlock); enum validation for
+  `SignalRelationshipType` and `HypothesisDisposition`; `triageCard.lastReviewed`
+  ISO check + 365-day staleness rejection; required-field assertions for
+  `triageCard`, `alternativeHypotheses`, `riskAssessments`; self-referential signal
+  check.
+- **Atomic write in news pipeline** (`scripts/update-news.mjs`) — `atomicWriteFileSync`
+  helper using `writeFileSync(tmp) → renameSync(tmp, dest)`. Previously a SIGKILL
+  mid-write left a half-truncated `news.json`; the next run's `JSON.parse` would
+  silently fall back to `[]` and nuke 30 days of curated entries. Now corrupt
+  reads fail loud (`process.exit(1)`) rather than silent reset; atomic write
+  prevents corruption in the first place.
+- **Visible staleness** — `SignalDetail` "Last checked" Field now renders a
+  `Stale >7d` chip when `isSignalStale(signal, 168)` returns true. Previously the
+  status generator computed `staleSignalIds` but no UI surfaced it; users would
+  see a 14-day-old data point with no warning.
+
+### Compliance fixes (severe)
+- **ADA / WCAG 2.1 AA font sizes** — Legal disclaimer text on triage cards raised
+  from 0.5rem / 0.5625rem (8–9px, sub-WCAG) to 0.875rem (14px). The compliance
+  review flagged this as a plaintiff's gift: "EMERGENZ buried its liability
+  disclaimer in unreadable font."
+- **Triage card staleness banner** (`src/pages/TriageCardPrint.tsx`) — Amber
+  alert at top of card when `lastReviewed > 180 days`, with explicit "do not rely
+  for clinical decisions" and link to live source. Logic-gap review #7 + compliance
+  review #2 agreed this was a tort surface.
+- **Hypothesis attribution caveat** (`src/components/CompetingHypothesesBlock.tsx`) —
+  Added explicit disclaimer that proponent attributions are EMERGENZ editorial
+  summaries, not direct quotations. Addresses defamation-by-summary risk from
+  compliance review #3 (MSF, ECDC, named academic researchers attributed without
+  always-linked source).
+- **Disclaimer/source-footer text size** on triage card raised from 0.5625rem to
+  0.75rem (≥12px WCAG minimum).
+
+### Files touched
+- `scripts/validate-data.mjs` — +~80 lines of new field validation
+- `scripts/update-news.mjs` — atomic write helper + corruption-aware read
+- `src/pages/SignalDetail.tsx` — `isSignalStale` import + stale chip on Last checked
+- `src/pages/TriageCardPrint.tsx` — staleness banner + raised font sizes + stronger
+  disclaimer language
+- `src/components/CompetingHypothesesBlock.tsx` — attribution caveat paragraph;
+  body text raised from 0.75rem to 0.8125rem
+
+### Deferred (filed for user prioritization)
+Cross-cutting findings that need user decision before implementation:
+
+- **Drug doses on triage cards** — compliance EXISTENTIAL #2 recommends replacing
+  specific mg/kg dosing with "see source for current dosing" to collapse the largest
+  medical-tort surface. Requires re-seeding the 5 existing cards. Decision: keep
+  current dosing (source-attributed paraphrase, currently legally defensible per
+  FDA learned-intermediary doctrine) vs. follow the more-cautious recommendation.
+- **WHO/WastewaterSCAN NC-license vs SaaS** — compliance EXISTENTIAL #1 — must get
+  written commercial waivers from WHO Press + Stanford/Emory before any paid tier.
+  Human action, not code.
+- **News-description truncation** to 280 chars — compliance SEVERE #4. Would
+  require migrating the existing 500-item news.json corpus.
+- **Tier 1 RSS gate** from "any failed" to "majority failed" — systems review P1.
+  Architectural change; could reduce data-integrity bar.
+- **Branch protection on main** — systems review P0. Repo settings, not code.
+- **CSP/security headers** — systems review P2. Vercel.json change.
+- **Tests for validators** — systems review P3.
+- **USPTO trademark search for EMERGENZ** — compliance SEVERE #6. Human action.
+
+**Verify:** `npm run validate:data` → OK with new coverage. `npm run build` → clean.
+Triage card pages render the new staleness banner when applicable. Stale signals
+show "Stale >7d" chip on detail pages. Hypothesis block shows the new attribution
+caveat. Legal disclaimer text is now ≥14px on triage cards.
+
+---
 
 ## ✅ About page — attribution/citation guidance + WastewaterSCAN notice (commit 9b53e48)
 

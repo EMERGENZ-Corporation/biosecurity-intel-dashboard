@@ -89,6 +89,12 @@ export default function TriageCardPrint() {
 
   const severityColor = SEVERITY_COLORS[signal.severity]
 
+  // Per CONTENT-STANDARDS §7.1 and compliance review: surface clinical-content
+  // staleness prominently. 180 days = amber warning; 365 days = validator
+  // already rejects, so this banner catches the in-between zone.
+  const reviewedAgeDays = (Date.now() - new Date(card.lastReviewed).getTime()) / (1000 * 60 * 60 * 24)
+  const isStale = reviewedAgeDays > 180
+
   return (
     <div className="print-card" style={{ maxWidth: '780px', margin: '0 auto' }}>
       {/* Screen-only top bar (hidden in print via @media print) */}
@@ -124,6 +130,39 @@ export default function TriageCardPrint() {
           🖨 Print / Save as PDF
         </button>
       </div>
+
+      {/* Staleness warning when last reviewed > 180 days. Prints AND screens. */}
+      {isStale && (
+        <div
+          role="alert"
+          style={{
+            padding: '0.75rem 1rem',
+            marginBottom: '0.75rem',
+            backgroundColor: 'color-mix(in srgb, var(--color-severity-concern) 14%, var(--color-bg-secondary))',
+            border: '2px solid var(--color-severity-concern)',
+            borderRadius: '4px',
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: '0.875rem',
+            color: 'var(--color-text-primary)',
+            lineHeight: 1.5,
+          }}
+        >
+          <strong style={{ color: 'var(--color-severity-concern)' }}>
+            ⚠ Stale clinical content ({Math.floor(reviewedAgeDays)} days since review).
+          </strong>{' '}
+          This card has not been re-verified against current CDC guidance in over 180 days.
+          Do not rely on this card for clinical decisions until it has been re-validated. Use{' '}
+          <a
+            href={card.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'var(--color-accent-blue)' }}
+          >
+            the live source document
+          </a>{' '}
+          instead.
+        </div>
+      )}
 
       {/* The actual card */}
       <div
@@ -274,7 +313,7 @@ export default function TriageCardPrint() {
           {card.treatmentSummary}
         </p>
 
-        {/* Source footer */}
+        {/* Source footer — raised to 0.75rem (≥12px) for ADA / WCAG 2.1 AA legibility. */}
         <div
           style={{
             marginTop: '1rem',
@@ -285,8 +324,8 @@ export default function TriageCardPrint() {
             flexWrap: 'wrap',
             gap: '0.5rem',
             fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.5625rem',
-            color: 'var(--color-text-muted)',
+            fontSize: '0.75rem',
+            color: 'var(--color-text-secondary)',
           }}
         >
           <div>
@@ -297,18 +336,27 @@ export default function TriageCardPrint() {
           </div>
           <div>Last reviewed {formatDate(card.lastReviewed)}</div>
         </div>
+        {/* Legal disclaimer — must be legible per WCAG 2.1 AA. Raised from 0.5rem. */}
         <div
           style={{
-            marginTop: '0.25rem',
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '0.5rem',
-            color: 'var(--color-text-muted)',
-            fontStyle: 'italic',
+            marginTop: '0.5rem',
+            padding: '0.5rem 0.625rem',
+            backgroundColor: 'var(--color-bg-tertiary)',
+            borderLeft: '3px solid var(--color-severity-watch)',
+            borderRadius: '3px',
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: '0.875rem',
+            color: 'var(--color-text-primary)',
+            lineHeight: 1.5,
           }}
         >
-          For operational reference only. Always verify against your facility's current
-          clinical protocols and isolation policies. This card is not a substitute for
-          full clinical guidance.
+          <strong>For operational reference only.</strong> This card is a summary of
+          publicly available CDC clinical guidance and is{' '}
+          <strong>not a substitute for current clinical guidance or your facility's
+          protocols</strong>. Verify all isolation precautions, PPE requirements, and
+          treatment regimens against the source document linked above and your medical
+          director before clinical use. Outbreak guidance changes; the source URL is
+          authoritative.
         </div>
       </div>
     </div>

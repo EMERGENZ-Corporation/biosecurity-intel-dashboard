@@ -10,7 +10,28 @@
  */
 
 import { createHash } from 'crypto'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, renameSync, unlinkSync, existsSync } from 'fs'
+
+/**
+ * Atomic write — write to a temp sibling file, fsync via rename. Protects against
+ * the catastrophic case where a SIGKILL (workflow cancellation, OOM, runner
+ * eviction) mid-write leaves a half-truncated `news.json`. The next run's
+ * JSON.parse would silently fall back to `[]` and nuke 30 days of curated entries.
+ * Rename is atomic on POSIX; falls back to write+delete on rare failure.
+ */
+function atomicWriteFileSync(path, content) {
+  const tmp = `${path}.tmp.${process.pid}`
+  writeFileSync(tmp, content)
+  try {
+    renameSync(tmp, path)
+  } catch (error) {
+    // Cleanup tmp file if rename failed, then re-throw
+    if (existsSync(tmp)) {
+      try { unlinkSync(tmp) } catch { /* best-effort */ }
+    }
+    throw error
+  }
+}
 import { XMLParser } from 'fast-xml-parser'
 
 const SIGNALS_PATH = 'src/data/signals.json'
@@ -300,7 +321,7 @@ function buildSignalGoogleFeeds(signals) {
 }
 
 function writeResult(result) {
-  writeFileSync(RESULT_PATH, JSON.stringify({
+  atomicWriteFileSync(RESULT_PATH, JSON.stringify({
     checkedAt: new Date().toISOString(),
     ...result,
   }, null, 2) + '\n')
@@ -312,7 +333,21 @@ function writeResult(result) {
 async function main() {
   const signals = JSON.parse(readFileSync(SIGNALS_PATH, 'utf8'))
   let existing = []
-  try { existing = JSON.parse(readFileSync(NEWS_PATH, 'utf8')) } catch { /* first run */ }
+  // Distinguish "file doesn't exist (first run)" from "file exists but is corrupt".
+  // A corrupt news.json (e.g. SIGKILL during a previous write) must NOT silently
+  // be replaced with [] — that would nuke 30 days of curated entries. Atomic-write
+  // protections above prevent this from happening going forward, but we still
+  // refuse to nuke a corrupt file we encounter.
+  if (existsSync(NEWS_PATH)) {
+    try {
+      existing = JSON.parse(readFileSync(NEWS_PATH, 'utf8'))
+    } catch (error) {
+      console.error(`[update-news] FATAL — ${NEWS_PATH} is corrupt and will not be overwritten:`)
+      console.error(error.message)
+      console.error('Fix: restore the most recent good news.json from git, or delete it explicitly to force a first-run.')
+      process.exit(1)
+    }
+  }
 
   const activeSignalCount = signals.filter(signal => signal.status === 'active').length
   const allFeeds = [...GLOBAL_FEEDS, ...buildSignalGoogleFeeds(signals)]
@@ -415,7 +450,7 @@ async function main() {
     return
   }
 
-  writeFileSync(NEWS_PATH, nextSerialized)
+  atomicWriteFileSync(NEWS_PATH, nextSerialized)
   writeResult({
     ok: true,
     activeSignalCount,

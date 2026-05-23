@@ -14,6 +14,7 @@ import {
   formatDateTime,
   intelToneStyle,
   severityTone,
+  isSignalStale,
   SOURCE_TIER_LABELS,
 } from '../utils/signals'
 import SignalsMap from '../components/SignalsMap'
@@ -331,7 +332,29 @@ export default function SignalDetail() {
         <Field label="Status">{signal.status}</Field>
         <Field label="Pathogen">{signal.pathogen ?? '—'}</Field>
         <Field label="Updated">{formatDate(signal.lastUpdated)}</Field>
-        <Field label="Last checked">{formatDate(signal.lastChecked)}</Field>
+        <Field label="Last checked">
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', flexWrap: 'wrap' }}>
+            {formatDate(signal.lastChecked)}
+            {isSignalStale(signal, 168) && (
+              <span
+                title="This signal has not been re-verified against its primary source within 7 days. Re-verify before operational use."
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: '0.5625rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  color: 'var(--color-severity-concern)',
+                  background: 'color-mix(in srgb, var(--color-severity-concern) 14%, transparent)',
+                  padding: '0.0625rem 0.375rem',
+                  borderRadius: '3px',
+                }}
+              >
+                Stale &gt;7d
+              </span>
+            )}
+          </span>
+        </Field>
       </div>
 
       <SignalActionStrip signal={signal} />
