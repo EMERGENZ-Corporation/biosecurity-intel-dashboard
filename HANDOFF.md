@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ About page — attribution/citation guidance + WastewaterSCAN notice (commit TBD)
+## ✅ About page — attribution/citation guidance + WastewaterSCAN notice (commit 9b53e48)
 
 User asked for "attribution/citation guidance for the dashboard in the about section"
 as part of a broader four-pass review. Added two new cards to `src/pages/AboutPage.tsx`:
