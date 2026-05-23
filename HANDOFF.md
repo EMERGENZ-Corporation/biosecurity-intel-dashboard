@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Follow-up hardening — CSP headers, news snippets, validator tests (commit PENDING)
+## ✅ Follow-up hardening — CSP headers, news snippets, validator tests (commit e3964d5)
 
 User shared the remaining four-pass review findings from Claude and asked for the flagged risks to be considered. This commit ships the low-regret follow-ups that did not require a policy/legal tradeoff: security headers for Vercel, fair-use news snippet truncation, and regression tests for the expanded data validator.
 
