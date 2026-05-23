@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (follow-up hardening — CSP headers, news snippets, validator regression tests)
+**Last updated:** 2026-05-23 (triage-card dose de-risking — printable cards no longer include exact medication regimens)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,24 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Triage-card dose de-risking — remove exact medication regimens (commit PENDING)
+
+User asked how to proceed on Claude's remaining drug-dose content risk. The adopted policy is: printable/operator-facing triage cards should preserve treatment direction and escalation logic, but must not contain exact medication doses or dosing schedules; clinicians must verify current dosing through linked source guidance, facility protocol, and public-health consultation.
+
+**Files touched:**
+- `src/data/signals.json` — removes exact vitamin A, oseltamivir, and ribavirin regimens from printable triage-card fields; replaces them with source/protocol verification language.
+- `scripts/seed-triage-cards.mjs` — updates the triage-card seeder so future reseeding does not restore exact dose strings.
+- `scripts/validate-data.mjs` — adds a triage-card dose-pattern guard that rejects exact drug doses or dose schedules in printable cards.
+- `scripts/test-validate-data.mjs` — adds a regression case proving the validator fails a triage card containing `75 mg BID`.
+- `public/api/v1/signals.json` — regenerated public API signal envelope after the signal data update.
+- `HANDOFF.md` — logs the clinical-content policy decision.
+
+**Scope note:** Source-attributed deep clinical/detail sections may still describe medication dosing as reference context. The hard prohibition applies to printable triage cards because those are the highest-risk operator-facing artifacts.
+
+**Verify:** `npm run test:validators`, `npm run validate:data`, and `npm run build` all pass. The validator now fails if a printable triage card contains dose patterns such as `75 mg BID`.
+
+---
 
 ## ✅ Follow-up hardening — CSP headers, news snippets, validator tests (commit e3964d5)
 

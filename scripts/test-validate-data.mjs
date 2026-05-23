@@ -101,6 +101,15 @@ try {
   )
 
   expectFailure(
+    'triage-card-exact-dose',
+    (signals) => {
+      const signal = signals.find((item) => item.triageCard)
+      signal.triageCard.treatmentSummary = 'Give exampledrug 75 mg BID from this printable card.'
+    },
+    'must not include exact drug doses',
+  )
+
+  expectFailure(
     'invalid-risk-assessment-url',
     (signals) => {
       const signal = signals.find((item) => Array.isArray(item.riskAssessments))

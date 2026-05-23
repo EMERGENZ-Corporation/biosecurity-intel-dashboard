@@ -48,6 +48,7 @@ const RELATIONSHIP_TYPES = new Set([
 ])
 const HYPOTHESIS_DISPOSITIONS = new Set(['active', 'under-investigation', 'discounted'])
 const TRIAGE_STALE_DAYS = 365
+const TRIAGE_DOSE_PATTERN = /\b\d+(?:,\d{3})*(?:\.\d+)?\s*(?:mg|mcg|g|iu|units?|ml|mL)(?:\/kg)?\b|\bq\d+h\b|\b(?:BID|TID|QID|q\.?d\.?)\b/i
 
 const errors = []
 
@@ -96,6 +97,25 @@ function isUrl(value) {
   } catch {
     return false
   }
+}
+
+function collectTriageText(card) {
+  const text = [
+    card.isolation,
+    card.ppe,
+    card.treatmentSummary,
+    ...(Array.isArray(card.initialActions) ? card.initialActions : []),
+  ]
+
+  for (const field of ['whenToSuspect', 'exposureCriteria']) {
+    if (!Array.isArray(card[field])) continue
+    for (const item of card[field]) text.push(item.label, item.detail)
+  }
+  if (Array.isArray(card.notify)) {
+    for (const item of card.notify) text.push(item.party, item.contact, item.timing)
+  }
+
+  return text.filter(Boolean).join(' ')
 }
 
 const signals = readJson('signals') ?? []
@@ -328,6 +348,9 @@ signals.forEach((signal, index) => {
       if (tc[arrField] !== undefined && !Array.isArray(tc[arrField])) {
         errors.push(`${tcLabel}: ${arrField} must be an array`)
       }
+    }
+    if (TRIAGE_DOSE_PATTERN.test(collectTriageText(tc))) {
+      errors.push(`${tcLabel}: printable triage cards must not include exact drug doses or dose schedules; link to current source guidance instead`)
     }
   }
   // riskAssessments — cross-reference URLs and history ISO dates.

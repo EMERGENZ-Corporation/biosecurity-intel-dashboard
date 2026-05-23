@@ -1641,7 +1641,7 @@
         "Collect specimens for measles IgM serology, RT-PCR (NP swab + urine), and viral culture if available",
         "Document vaccination history including dates and dose count",
         "Begin contact tracing list — all unmasked individuals within 6 feet during the patient's infectious period",
-        "Administer vitamin A per CDC pediatric dosing if child <2 years (50,000–200,000 IU based on age)"
+        "Evaluate vitamin A supplementation for hospitalized children per current CDC/AAP/facility protocol; verify dosing from the linked source before administration"
       ],
       "notify": [
         {
@@ -1660,7 +1660,7 @@
           "timing": "For confirmed cases, complex situations, or specimen submission guidance"
         }
       ],
-      "treatmentSummary": "No specific antiviral therapy. Supportive care: antipyretics, IV hydration if dehydrated, and vitamin A supplementation (WHO/CDC recommendation regardless of nutritional status in hospitalized children). Post-exposure prophylaxis for susceptible contacts: MMR within 72 hours of exposure, or immune globulin within 6 days. Watch for complications: pneumonia, otitis media, encephalitis (rare, ~1/1000 cases).",
+      "treatmentSummary": "No specific antiviral therapy. Supportive care includes fever control, hydration, and complication monitoring. For hospitalized children, evaluate vitamin A supplementation using current CDC/AAP/facility protocol rather than this card. Post-exposure prophylaxis for susceptible contacts may include MMR or immune globulin when eligible; verify timing, eligibility, contraindications, and dosing with public health and the linked source before administration.",
       "sourceAuthority": "CDC",
       "sourceTitle": "Measles (Rubeola) — Clinical Overview for Healthcare Providers",
       "sourceUrl": "https://www.cdc.gov/measles/hcp/clinical-overview/index.html",
@@ -2386,7 +2386,7 @@
         "Collect NP swab AND oropharyngeal swab; conjunctival swab if conjunctivitis present",
         "Place specimens in viral transport media; coordinate with state public health lab",
         "Document exposure history: bird/animal contact, dairy operations, raw milk, occupation",
-        "Initiate empiric oseltamivir 75 mg BID (adult dose) without waiting for confirmation if illness compatible",
+        "Initiate empiric antiviral treatment per current CDC/facility protocol without waiting for confirmation if illness is compatible; verify dosing from the linked source before administration",
         "Notify state health department BEFORE testing — they coordinate CDC specimen receipt"
       ],
       "notify": [
@@ -2406,7 +2406,7 @@
           "timing": "For severe cases, healthcare worker exposure, or unusual presentations"
         }
       ],
-      "treatmentSummary": "Empiric oseltamivir (Tamiflu) 75 mg BID × 5 days for adults; weight-based pediatric dosing. Treatment most effective within 48 hours of symptom onset but should be initiated regardless of duration in severe cases. Peramivir or baloxavir are alternatives. Supportive care for ARDS may require ECMO. Antiviral post-exposure prophylaxis (oseltamivir 75 mg daily × 10 days) for high-risk exposed contacts. All current US H5 isolates remain oseltamivir-sensitive (per CDC, May 2026).",
+      "treatmentSummary": "CDC recommends prompt empiric antiviral treatment for suspected or confirmed human H5 infection without waiting for confirmatory testing. Dosing, duration, pediatric adjustment, renal adjustment, and post-exposure prophylaxis decisions must be verified against current CDC guidance and local protocol before administration. Severe cases require aggressive supportive care and early consultation with infectious disease, critical care, and public health; ARDS may require ECMO-capable transfer.",
       "sourceAuthority": "CDC",
       "sourceTitle": "H5N1 Bird Flu — Clinical Care Guidance for Healthcare Providers",
       "sourceUrl": "https://www.cdc.gov/bird-flu/hcp/clinical-care/",
@@ -3858,7 +3858,7 @@
           "timing": "Concurrent — facility-wide VHF response"
         }
       ],
-      "treatmentSummary": "Ribavirin IV is the established treatment: loading 30 mg/kg IV, then 16 mg/kg q6h × 4 days, then 8 mg/kg q8h × 6 days. Treatment within 6 days of symptom onset reduces case fatality from ~55% to <5% in severe cases. Aggressive supportive care: fluid management, electrolyte correction, blood products for coagulopathy, hemodialysis if renal failure. Post-exposure prophylaxis (oral ribavirin) is sometimes used for high-risk percutaneous exposures (consult CDC). No licensed Lassa vaccine.",
+      "treatmentSummary": "Ribavirin is the established treatment for suspected severe Lassa fever when started early, but dosing, route, contraindications, pregnancy risk-benefit, monitoring, and post-exposure prophylaxis decisions must be verified through CDC/state public health consultation and current facility protocol before administration. Aggressive supportive care includes fluid and electrolyte management, blood products for coagulopathy, renal support when indicated, and early transfer planning for severe disease. No licensed Lassa vaccine is available.",
       "sourceAuthority": "CDC",
       "sourceTitle": "Lassa Fever — Information for Healthcare Workers",
       "sourceUrl": "https://www.cdc.gov/vhf/lassa/healthcare-workers/",
