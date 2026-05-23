@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Triage card system — printable case-definition cards (commit TBD)
+## ✅ Triage card system — printable case-definition cards (commit dfdab99)
 
 Closes UX-GAP-ANALYSIS §3 #15 — printable case-definition / triage card. For ED triage
 nurses, EMS captains, and EOC briefers, this provides a single-page clinical operations
