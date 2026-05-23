@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Review-driven hardening — validator + atomicity + ADA fonts + attribution caveat (commit TBD)
+## ✅ Review-driven hardening — validator + atomicity + ADA fonts + attribution caveat (commit 396f39b)
 
 User requested a four-pass review (logic gap analysis, adversarial compliance review,
 systems-engineering stability review, and attribution/citation guidance for About page).
