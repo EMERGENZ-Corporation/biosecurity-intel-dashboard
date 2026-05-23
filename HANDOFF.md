@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Fix workflow push-race rebase conflicts (commit TBD)
+## ✅ Fix workflow push-race rebase conflicts (commit e011871)
 
 Both "Status Refresh / Commit refreshed status.json" (step 9) and
 "Update News Feed / Commit updated news.json" (step 8) have been failing
