@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ CI workflow for branch protection (commit PENDING)
+## ✅ CI workflow for branch protection (commit 8103d32)
 
 User asked how to deal with the remaining GitHub branch-protection item after noting GitHub is installed locally and connected. Added a minimal PR/push CI workflow so `main` protection can require a real check before merge rather than relying only on scheduled data-refresh workflows.
 
