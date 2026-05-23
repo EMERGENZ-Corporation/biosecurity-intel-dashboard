@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
   getSignal,
@@ -50,7 +51,70 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
-function Section({ title, children, id }: { title: string; children: React.ReactNode; id?: string }) {
+/**
+ * Section — signal-detail section block.
+ *
+ * When `collapsible` is true, the header becomes a button that toggles a
+ * chevron and shows/hides the body. `defaultOpen` controls initial state
+ * (default: false — collapsed). Used to address UX-GAP-ANALYSIS §3 #12
+ * (progressive disclosure) — Timeline, Sources, Data quality collapse by
+ * default so the page opens with the operational data, not the appendix.
+ *
+ * Anchor links (#timeline, #sources, #data-quality from the TOC) still
+ * work: clicking a TOC link auto-expands its section via a hashchange
+ * listener wired up in the page-level component.
+ */
+function Section({
+  title,
+  children,
+  id,
+  collapsible = false,
+  defaultOpen = false,
+  badge,
+}: {
+  title: string
+  children: React.ReactNode
+  id?: string
+  collapsible?: boolean
+  defaultOpen?: boolean
+  /** Optional small badge text shown next to the header (e.g. item count) */
+  badge?: string
+}) {
+  const [open, setOpen] = useState(defaultOpen || !collapsible)
+
+  // If non-collapsible, render the traditional always-open layout.
+  if (!collapsible) {
+    return (
+      <div
+        id={id}
+        style={{
+          backgroundColor: 'var(--color-bg-secondary)',
+          border: '1px solid var(--color-border)',
+          borderRadius: '6px',
+          padding: '1rem 1.25rem',
+          marginBottom: '0.875rem',
+          scrollMarginTop: '1rem',
+        }}
+      >
+        <h2
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            margin: '0 0 0.625rem 0',
+          }}
+        >
+          {title}
+        </h2>
+        {children}
+      </div>
+    )
+  }
+
+  // Collapsible: header is a button.
   return (
     <div
       id={id}
@@ -58,25 +122,93 @@ function Section({ title, children, id }: { title: string; children: React.React
         backgroundColor: 'var(--color-bg-secondary)',
         border: '1px solid var(--color-border)',
         borderRadius: '6px',
-        padding: '1rem 1.25rem',
+        padding: open ? '1rem 1.25rem' : '0.625rem 1.25rem',
         marginBottom: '0.875rem',
         scrollMarginTop: '1rem',
+        transition: 'padding 0.15s ease',
       }}
     >
-      <h2
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={id ? `${id}-body` : undefined}
         style={{
-          fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: '0.75rem',
-          fontWeight: 700,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+          padding: 0,
+          margin: 0,
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
           color: 'var(--color-text-primary)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.08em',
-          margin: '0 0 0.625rem 0',
         }}
       >
-        {title}
-      </h2>
-      {children}
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}
+        >
+          <span
+            aria-hidden="true"
+            style={{
+              display: 'inline-block',
+              width: '0.625rem',
+              textAlign: 'center',
+              transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
+              transition: 'transform 0.15s ease',
+              color: 'var(--color-text-muted)',
+              fontSize: '0.6875rem',
+            }}
+          >
+            ▶
+          </span>
+          {title}
+          {badge && (
+            <span
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.5625rem',
+                fontWeight: 600,
+                color: 'var(--color-text-muted)',
+                background: 'var(--color-bg-tertiary)',
+                padding: '0.125rem 0.375rem',
+                borderRadius: '3px',
+                textTransform: 'none',
+                letterSpacing: '0',
+              }}
+            >
+              {badge}
+            </span>
+          )}
+        </span>
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.5625rem',
+            color: 'var(--color-text-muted)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
+          }}
+        >
+          {open ? 'Hide' : 'Show'}
+        </span>
+      </button>
+      {open && (
+        <div id={id ? `${id}-body` : undefined} style={{ marginTop: '0.75rem' }}>
+          {children}
+        </div>
+      )}
     </div>
   )
 }
@@ -300,7 +432,12 @@ export default function SignalDetail() {
       )}
 
       {events.length > 0 && (
-        <Section title="Timeline" id="timeline">
+        <Section
+          title="Timeline"
+          id="timeline"
+          collapsible
+          badge={`${events.length} event${events.length !== 1 ? 's' : ''}`}
+        >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {events.map((event) => {
               const source = getSource(event.sourceId)
@@ -332,7 +469,12 @@ export default function SignalDetail() {
         </Section>
       )}
 
-      <Section title="Sources & provenance" id="sources">
+      <Section
+        title="Sources & provenance"
+        id="sources"
+        collapsible
+        badge={`${sources.length} source${sources.length !== 1 ? 's' : ''}`}
+      >
         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {sources.map((source) => source && (
             <li key={source.id} style={{ padding: '0.625rem 0.75rem', backgroundColor: 'var(--color-bg-tertiary)', border: '1px solid var(--color-border)', borderRadius: '4px' }}>
@@ -369,7 +511,7 @@ export default function SignalDetail() {
         <RelatedSignalsBlock relationships={signal.relatedSignals} allSignals={signals} />
       )}
 
-      <Section title="Data quality & confidence" id="data-quality">
+      <Section title="Data quality & confidence" id="data-quality" collapsible>
         <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
           Confidence: <span style={{ color: 'var(--color-text-primary)' }}>{CONFIDENCE_LABELS[signal.confidence]}</span>
         </div>

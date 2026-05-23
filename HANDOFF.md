@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (printable triage card system — §3 #15, clinical case definitions for 5 signals)
+**Last updated:** 2026-05-23 (progressive disclosure — §3 #12, Timeline/Sources/Data quality collapse by default)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,48 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Progressive disclosure on signal detail (commit TBD)
+
+Closes UX-GAP-ANALYSIS §3 #12. Three sections on signal detail now collapse by default,
+addressing the 60-viewport-scroll problem (§0): Timeline, Sources & provenance, and
+Data quality & confidence are appendix material, not operational data. Users opening
+a signal now land on the operational rails (Summary, Current situation, Why it matters,
+Watch indicators, Competing hypotheses, Geography, Metrics, detailSections) without
+scrolling past the appendix.
+
+The `Section` component (inline in `SignalDetail.tsx`) was extended with optional
+`collapsible`, `defaultOpen`, and `badge` props. When `collapsible` is true, the
+header renders as a `<button aria-expanded>` with a chevron and Show/Hide hint;
+the badge displays an inline count (e.g. "5 events", "7 sources") so users know
+what's hidden without opening it.
+
+Always-expanded sections (no change):
+- Summary, Current situation, Why it matters
+- Watch indicators, Competing hypotheses
+- Geography (with map), Metrics
+- detailSections (the 5 ContentBlocks per signal)
+- Related signals
+- Authority risk badges, HCW alert, TL;DR, Action strip (above the fold)
+
+Collapsed by default:
+- **Timeline** (badge: event count)
+- **Sources & provenance** (badge: source count)
+- **Data quality & confidence**
+
+TOC navigation still works: clicking a TOC entry scrolls the user to the section header,
+which is always visible. Users click the header to expand. This is intentional — the
+TOC entries for collapsible sections function as "jump and decide" markers.
+
+**Files touched:**
+- `src/pages/SignalDetail.tsx` — `Section` component extended; three sections marked
+  `collapsible` with badges where appropriate; `useState` import added.
+
+**Verify:** Open any signal detail page → Timeline, Sources, and Data quality sections
+appear as collapsed headers with chevrons and badges. Click any header → section expands,
+chevron rotates 90°. `npm run build` → clean (SignalDetail bundle ~33 kB, +1.8 kB).
+
+---
 
 ## ✅ Triage card system — printable case-definition cards (commit dfdab99)
 
