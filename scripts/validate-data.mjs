@@ -1,8 +1,9 @@
 import { readFileSync } from 'fs'
 
-const DATA_DIR = 'src/data'
+const DATA_DIR = process.env.VALIDATE_DATA_DIR || 'src/data'
+const PUBLIC_DIR = process.env.VALIDATE_PUBLIC_DIR || 'public'
 const files = {
-  status: 'public/status.json',
+  status: `${PUBLIC_DIR}/status.json`,
   signals: `${DATA_DIR}/signals.json`,
   signalTimeline: `${DATA_DIR}/signal-timeline.json`,
   signalSources: `${DATA_DIR}/signal-sources.json`,

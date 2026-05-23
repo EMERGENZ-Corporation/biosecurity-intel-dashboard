@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (review-driven hardening — validator coverage, atomic news write, stale chips, ADA disclaimer font sizes, hypothesis attribution caveat)
+**Last updated:** 2026-05-23 (follow-up hardening — CSP headers, news snippets, validator regression tests)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,26 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Follow-up hardening — CSP headers, news snippets, validator tests (commit PENDING)
+
+User shared the remaining four-pass review findings from Claude and asked for the flagged risks to be considered. This commit ships the low-regret follow-ups that did not require a policy/legal tradeoff: security headers for Vercel, fair-use news snippet truncation, and regression tests for the expanded data validator.
+
+**Files touched:**
+- `vercel.json` — adds site-wide CSP, HSTS, nosniff, Referrer-Policy, Permissions-Policy, and frame-denial headers while allowing Google Fonts and CARTO map tiles.
+- `scripts/update-news.mjs` — normalizes RSS descriptions to <=280-character snippets for newly fetched and retained existing items.
+- `src/data/news.json` — truncates the checked-in news corpus to the same snippet limit.
+- `public/api/v1/news.json` — regenerates the public API news envelope from the truncated corpus.
+- `scripts/validate-data.mjs` — allows test runs to point the validator at temporary data/public directories.
+- `scripts/test-validate-data.mjs` — new regression harness for valid baseline data, related-signal referential integrity, hypothesis disposition enums, stale triage cards, and risk-assessment URL validation.
+- `package.json` — adds `npm run test:validators`.
+- `HANDOFF.md` — logs this follow-up hardening bundle.
+
+**Deferred:** Specific triage-card drug dosing still needs a clinical/legal product decision. Tier 1 feed gating remains intentionally strict until the data-integrity vs availability tradeoff is decided. Branch protection, uptime monitoring, a formal WCAG/Lighthouse pass, `RUNBOOK.md`, and the generated `public/api/v1/*` commit policy remain external or follow-up items.
+
+**Verify:** `npm run test:validators`, `npm run validate:data`, and `npm run build` all pass. Direct invariant check shows max `description` length is 278 in both `src/data/news.json` and `public/api/v1/news.json`.
+
+---
 
 ## ✅ Review-driven hardening — validator + atomicity + ADA fonts + attribution caveat (commit 396f39b)
 

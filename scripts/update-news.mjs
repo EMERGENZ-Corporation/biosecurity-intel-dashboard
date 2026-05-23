@@ -45,6 +45,7 @@ const RESULT_PATH = 'update-news-result.json'
 const MAX_ITEMS = Number.parseInt(process.env.MAX_NEWS_ITEMS || '500', 10)
 const MAX_AGE_DAYS = Number.parseInt(process.env.MAX_NEWS_AGE_DAYS || '30', 10)
 const FETCH_TIMEOUT_MS = 12000
+const NEWS_DESCRIPTION_MAX_CHARS = 280
 
 // ---------------------------------------------------------------------------
 // Per-signal keyword overrides.
@@ -202,6 +203,22 @@ function stripHtml(str = '') {
     .replace(/\s+/g, ' ').trim()
 }
 
+function truncateDescription(description = '') {
+  const text = stripHtml(description)
+  if (text.length <= NEWS_DESCRIPTION_MAX_CHARS) return text
+
+  const limit = NEWS_DESCRIPTION_MAX_CHARS - 3
+  const clipped = text.slice(0, limit).replace(/\s+\S*$/, '').trimEnd()
+  return `${clipped || text.slice(0, limit).trimEnd()}...`
+}
+
+function normalizeNewsItem(item) {
+  return {
+    ...item,
+    description: truncateDescription(item.description ?? ''),
+  }
+}
+
 function extractText(node) {
   if (!node) return ''
   if (typeof node === 'string') return stripHtml(node)
@@ -256,7 +273,7 @@ function parseFeed(xml, authority) {
 
   return items.map(item => {
     const title = extractText(item.title || item['title:encoded'] || '')
-    const description = extractText(item.description || item.summary || item.content || item['content:encoded'] || '')
+    const description = truncateDescription(extractText(item.description || item.summary || item.content || item['content:encoded'] || ''))
     const link = extractLink(item)
     const pubDate = extractText(item.pubDate || item.published || item.updated || '')
     const timestamp = parseDate(pubDate) || parseDate(item.pubDate) || parseDate(item.published) || 0
@@ -402,7 +419,7 @@ async function main() {
 
   // Existing items first (they've already been reviewed)
   for (const item of existing) {
-    if (item.timestamp >= cutoff) byId.set(item.id, item)
+    if (item.timestamp >= cutoff) byId.set(item.id, normalizeNewsItem(item))
   }
 
   // Fresh items — deduplicate by ID, preferring higher-authority version
@@ -421,7 +438,7 @@ async function main() {
 
     // Tag with signal IDs
     const signalIds = tagItem(item, signals)
-    byId.set(item.id, { ...item, signalIds })
+    byId.set(item.id, normalizeNewsItem({ ...item, signalIds }))
   }
 
   // Sort newest-first, cap at MAX_ITEMS
