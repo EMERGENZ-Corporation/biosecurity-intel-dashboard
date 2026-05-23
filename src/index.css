@@ -96,6 +96,8 @@ body {
   footer,
   .signal-action-strip,
   .signal-detail-toc,
+  .triage-screen-controls,
+  .disclaimer-banner,
   [role='dialog'] {
     display: none !important;
   }
@@ -117,5 +119,22 @@ body {
     content: ' (' attr(href) ')';
     font-size: 0.6875rem;
     color: #444;
+  }
+  /* Triage card: force light background, dark text, ink-efficient borders */
+  .print-card {
+    color: black !important;
+  }
+  .print-card > div {
+    background: white !important;
+    border-color: black !important;
+  }
+  .triage-section-header {
+    background: #eee !important;
+    color: black !important;
+    border-left-color: black !important;
+  }
+  /* A4/Letter page geometry */
+  @page {
+    margin: 0.5in;
   }
 }

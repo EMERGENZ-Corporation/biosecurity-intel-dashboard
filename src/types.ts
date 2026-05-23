@@ -236,6 +236,76 @@ export interface SignalRelationship {
   type: SignalRelationshipType
 }
 
+/**
+ * Printable case-definition / triage card. Single-page clinical operations
+ * one-pager for ED triage nurses, EMS captains, EOC briefers. Per
+ * CONTENT-STANDARDS §7.1, all triage card content must be manually authored
+ * or reviewed by a qualified person and sourced to specific authoritative
+ * clinical guidance documents. Signals without verified clinical content
+ * leave this field undefined (no card surfaced).
+ *
+ * Implements UX-GAP-ANALYSIS §3 #15.
+ */
+export interface TriageCardCriterion {
+  /** Label for the criterion (e.g. "Fever ≥38°C") */
+  label: string
+  /** Optional clinical detail or specificity note */
+  detail?: string
+}
+
+export interface TriageCard {
+  /**
+   * Clinical signs / symptom criteria triggering suspicion of this signal.
+   * Combined with exposure criteria, drives the "suspect" decision in triage.
+   */
+  whenToSuspect: TriageCardCriterion[]
+  /**
+   * Exposure or epidemiologic criteria. Travel history, occupational exposure,
+   * contact with confirmed case, etc.
+   */
+  exposureCriteria: TriageCardCriterion[]
+  /**
+   * Isolation precaution category — Standard, Contact, Droplet, Airborne,
+   * Special Pathogens (BSL-4 equivalent), or a free-form CDC label.
+   */
+  isolation: string
+  /**
+   * Required PPE for clinical encounter — gloves, mask type (surgical/N95/PAPR),
+   * gown, eye protection, etc. Plain string per CDC formatting.
+   */
+  ppe: string
+  /**
+   * First 30 minutes — concrete clinical actions to perform on suspicion.
+   * Each item should be operator-actionable (not analytical).
+   */
+  initialActions: string[]
+  /**
+   * Treatment summary — supportive only vs specific therapy. Brief enough
+   * to fit on a printed card; not a full clinical guideline.
+   */
+  treatmentSummary: string
+  /**
+   * Notification chain — who to call, when, what info to provide.
+   * Each entry is one notification party.
+   */
+  notify: Array<{
+    /** Who to contact (e.g. "State DOH", "CDC EOC", "Hospital Infection Control") */
+    party: string
+    /** Phone, email, or referral instruction */
+    contact: string
+    /** When this notification is required (e.g. "Immediately on suspicion") */
+    timing: string
+  }>
+  /** Authority that published the underlying clinical guidance */
+  sourceAuthority: string
+  /** Specific document/page title for the guidance */
+  sourceTitle: string
+  /** Direct URL to the source document */
+  sourceUrl: string
+  /** ISO date when this card was last reviewed against the source document */
+  lastReviewed: string
+}
+
 export interface Signal {
   id: string
   name: string
@@ -272,6 +342,12 @@ export interface Signal {
    * block in signal detail.
    */
   relatedSignals?: SignalRelationship[]
+  /**
+   * Printable case-definition / triage card for ED, EMS, and EOC frontline.
+   * Per CONTENT-STANDARDS §7.1, clinical content is manually authored and
+   * sourced; signals without verified clinical content omit this field.
+   */
+  triageCard?: TriageCard
   primarySourceId: string
   sourceIds: string[]
   lastUpdated: string

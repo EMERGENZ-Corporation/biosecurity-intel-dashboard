@@ -151,6 +151,28 @@ export default function SignalActionStrip({ signal }: Props) {
       >
         Print briefing ↗
       </button>
+
+      {signal.triageCard && (
+        <a
+          href={`/signals/${signal.id}/triage?print=1`}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Open the printable clinical triage card (case definition, isolation, PPE, notification chain)"
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.6875rem',
+            fontWeight: 600,
+            color: 'var(--color-emergenz)',
+            textDecoration: 'none',
+            padding: '0.3rem 0.625rem',
+            border: '1px solid var(--color-emergenz)',
+            borderRadius: '4px',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          🩺 Triage card ↗
+        </a>
+      )}
     </div>
   )
 }

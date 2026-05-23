@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (fix workflow push races — rebase conflict resilience for Status Refresh + Update News Feed)
+**Last updated:** 2026-05-23 (printable triage card system — §3 #15, clinical case definitions for 5 signals)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,74 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Triage card system — printable case-definition cards (commit TBD)
+
+Closes UX-GAP-ANALYSIS §3 #15 — printable case-definition / triage card. For ED triage
+nurses, EMS captains, and EOC briefers, this provides a single-page clinical operations
+one-pager that can be printed and posted on a wall or saved as PDF for pre-shift briefing.
+
+Per CONTENT-STANDARDS §7.1, all clinical content is sourced to a specific authoritative
+CDC clinical guidance document, manually authored, and timestamped with `lastReviewed`.
+Signals without verified clinical content omit the `triageCard` field — no fabrication.
+
+**New type `TriageCard` with fields:**
+- `whenToSuspect[]` — clinical signs (label + detail)
+- `exposureCriteria[]` — epidemiologic criteria
+- `isolation` — isolation precaution category
+- `ppe` — required PPE
+- `initialActions[]` — first 30 minutes ordered actions
+- `notify[]` — notification chain (party, contact, timing)
+- `treatmentSummary` — brief treatment narrative
+- `sourceAuthority`, `sourceTitle`, `sourceUrl`, `lastReviewed`
+
+**New `/signals/:id/triage` route** — `TriageCardPrint.tsx`:
+- Single-page layout optimized for US Letter / A4 printing
+- Screen-only controls (back link, Print button) hidden via `.triage-screen-controls`
+- `?print=1` query param auto-fires browser print dialog on mount
+- Friendly fallback when triageCard is undefined ("not yet authored", links back to signal)
+- Disclaimer: "For operational reference only. Always verify against your facility's
+  current clinical protocols."
+
+**SignalActionStrip** — conditional "🩺 Triage card ↗" button (only when triageCard is set;
+opens in new tab with `?print=1` so the print dialog fires automatically).
+
+**Print stylesheet (`src/index.css`)** — added:
+- `.print-card` light-mode forcing (black-on-white)
+- `.triage-screen-controls` hidden during print
+- `.triage-section-header` print-friendly styling
+- `.disclaimer-banner` hidden during print
+- `@page { margin: 0.5in }` for proper margin geometry
+
+**Seeded 5 signals** with verified CDC clinical case definitions (all URLs verified as
+specific guidance pages, not homepages):
+- `measles-us-2026` — CDC Measles Clinical Overview (cdc.gov/measles/hcp/clinical-overview/)
+- `avian-influenza-h5-2026` — CDC H5N1 Clinical Care (cdc.gov/bird-flu/hcp/clinical-care/)
+- `ebola-bundibugyo-drc-2026` — CDC Ebola for Clinicians (cdc.gov/vhf/ebola/clinicians/)
+- `mpox-africa-clade-i-2026` — CDC Mpox Clinical Recognition
+  (cdc.gov/poxvirus/mpox/clinicians/clinical-recognition.html)
+- `lassa-fever-2026` — CDC Lassa Fever for Healthcare Workers (cdc.gov/vhf/lassa/healthcare-workers/)
+
+Each card includes specific clinical signs, isolation type, PPE level, 6 ordered first-30-min
+actions, and a 3-tier notification chain (state DOH → CDC EOC → hospital IP).
+
+**Files touched:**
+- `src/types.ts` — `TriageCard`, `TriageCardCriterion` types; `triageCard?` on `Signal`
+- `src/pages/TriageCardPrint.tsx` — new printable route page
+- `src/components/SignalActionStrip.tsx` — conditional triage card button
+- `src/App.tsx` — `/signals/:id/triage` route added
+- `src/index.css` — print stylesheet extended for card rendering
+- `scripts/seed-triage-cards.mjs` — new seeder (idempotent)
+- `src/data/signals.json` — 5 signals patched with triageCard
+- `public/status.json`, `public/api/v1/` — regenerated
+
+**Verify:** Open the Lassa fever signal → action strip shows "🩺 Triage card ↗" button.
+Click it → opens `/signals/lassa-fever-2026/triage?print=1` in new tab → print dialog auto-fires.
+Print view fits one page; black-on-white; nav and disclaimer banner hidden.
+Open a signal without a triage card (e.g. covid-wastewater) → no triage button shown.
+`npm run validate:data` → OK; `npm run build` → clean.
+
+---
 
 ## ✅ Fix workflow push-race rebase conflicts (commit e011871)
 
