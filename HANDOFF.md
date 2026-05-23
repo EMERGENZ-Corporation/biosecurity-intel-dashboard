@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (progressive disclosure — §3 #12, Timeline/Sources/Data quality collapse by default)
+**Last updated:** 2026-05-23 (About page — attribution/citation guidance card + WastewaterSCAN attribution notice)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,34 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ About page — attribution/citation guidance + WastewaterSCAN notice (commit TBD)
+
+User asked for "attribution/citation guidance for the dashboard in the about section"
+as part of a broader four-pass review. Added two new cards to `src/pages/AboutPage.tsx`:
+
+**1. Attribution & Citation Guidance card** — six-section operator-facing guidance:
+- Cite the underlying authority first (the dashboard exists to surface, not replace, sources)
+- How to cite the dashboard itself (APA + inline + machine-readable JSON formats)
+- License-aware re-use — explicit per-source table (US Gov 17 USC §105, WHO CC BY-NC-SA
+  3.0 IGO, WastewaterSCAN CC BY-NC 4.0, Africa CDC / ECDC / PAHO mixed, Tier 3 news fair-use)
+- Triage cards — re-distribution rules, lastReviewed preservation, derivation marking
+- Competing hypotheses — these are EMERGENZ summaries, cite the named proponent's own
+  document, not the dashboard's framing
+- Reporting attribution errors — GitHub issue link, P0 same-day correction policy
+
+**2. WastewaterSCAN Attribution Notice card** — previously missing despite the data
+being used in 5 wastewater signal cards. CC BY-NC 4.0 attribution; explicit commercial
+deployment caveat with contact email for separate licensing.
+
+**Files touched:**
+- `src/pages/AboutPage.tsx` — two new Cards inserted before WHO Content Attribution Notice
+
+**Verify:** `/about` shows the two new cards in the correct position. Both attribution
+licenses (WHO + WastewaterSCAN + per-source table) are explicit and link to the upstream
+license text. `npm run build` → clean.
+
+---
 
 ## ✅ Progressive disclosure on signal detail (commit 1aca4ac)
 

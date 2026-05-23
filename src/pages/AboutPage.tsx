@@ -450,6 +450,270 @@ export default function AboutPage() {
         </pre>
       </Card>
 
+      {/* Attribution & citation guidance for users of the dashboard */}
+      <Card>
+        <SectionHeader>Attribution &amp; Citation Guidance</SectionHeader>
+        <Body>
+          This dashboard is an aggregation layer over primary public health authority
+          reporting. When you cite, quote, or republish information from EMERGENZ
+          Biosecurity Intel, please follow the guidance below so credit flows to the
+          underlying authority and downstream readers can verify against the source.
+        </Body>
+
+        <h3
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            margin: '1.25rem 0 0.5rem 0',
+          }}
+        >
+          1. Cite the underlying authority first
+        </h3>
+        <Body>
+          Every structured data point on this dashboard (case counts, risk levels,
+          clinical guidance, geographic markers, timeline events) is attributed to a
+          specific source document from a Tier 1 or Tier 2 authority (WHO, CDC, ECDC,
+          UKHSA, PHAC, Africa CDC, peer-reviewed journals). When citing one of these
+          data points, <strong>cite the underlying authority document</strong>, not the
+          dashboard. The dashboard exists to surface the source — not to replace it.
+        </Body>
+        <Body>
+          Each signal-detail section and metric carries a source chip linking directly
+          to the issuing document. Use that URL as your citation. Verify against the
+          live source before publishing; outbreak data moves daily.
+        </Body>
+
+        <h3
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            margin: '1.25rem 0 0.5rem 0',
+          }}
+        >
+          2. Cite the dashboard for the aggregation or analysis
+        </h3>
+        <Body>
+          When you are citing the dashboard for its <em>aggregation</em> — for example,
+          the cross-signal relationship network, the source-diversity score, or our
+          analytic framing of competing hypotheses — use one of the following formats:
+        </Body>
+        <pre
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            color: 'var(--color-text-primary)',
+            backgroundColor: 'var(--color-bg-tertiary)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '4px',
+            padding: '0.75rem 1rem',
+            margin: '0.5rem 0',
+            whiteSpace: 'pre-wrap',
+            lineHeight: 1.6,
+          }}
+        >
+{`APA-style:
+EMERGENZ Corporation. (2026). Biosecurity Intel Dashboard.
+  Retrieved [DATE] from https://biosecurity-intel.emergenzsystems.org
+
+Inline:
+EMERGENZ Biosecurity Intel (accessed YYYY-MM-DD),
+  citing [primary authority] — [source-document URL].`}
+        </pre>
+        <Body>
+          For machine-readable citation, every signal is also available at a stable
+          JSON endpoint under <code>/api/v1/</code>. Example:{' '}
+          <ExternalLink href="https://biosecurity-intel.emergenzsystems.org/api/v1/signals.json">
+            /api/v1/signals.json ↗
+          </ExternalLink>
+          . Include the access date in your citation since the file is regenerated
+          continuously.
+        </Body>
+
+        <h3
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            margin: '1.25rem 0 0.5rem 0',
+          }}
+        >
+          3. License-aware re-use
+        </h3>
+        <Body>
+          The dashboard's source code is MIT-licensed (above). Code may be re-used in
+          commercial or non-commercial contexts under MIT terms.
+        </Body>
+        <Body>
+          <strong>The data and content displayed are not all MIT-licensed.</strong>{' '}
+          Underlying content carries the original authority's license, which controls
+          your re-use rights:
+        </Body>
+        <ul
+          style={{
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: '0.875rem',
+            color: 'var(--color-text-secondary)',
+            lineHeight: 1.7,
+            margin: '0.5rem 0 0.75rem 1.25rem',
+            padding: 0,
+          }}
+        >
+          <li>
+            <strong>U.S. federal agency content (CDC, FDA, USDA, NIH)</strong> — public
+            domain in the U.S. under 17 U.S.C. §105. No copyright restriction; attribution
+            requested.
+          </li>
+          <li>
+            <strong>WHO Disease Outbreak News and publications</strong> — CC BY-NC-SA
+            3.0 IGO. Non-commercial re-use only; share-alike required.{' '}
+            <strong>If you commercialize content sourced from WHO, you need a separate
+            commercial license from WHO.</strong>
+          </li>
+          <li>
+            <strong>WastewaterSCAN (Stanford / Emory / Verily)</strong> — CC BY-NC 4.0.
+            Non-commercial re-use only; commercial deployment requires a separate license
+            from Stanford/Emory.
+          </li>
+          <li>
+            <strong>Africa CDC, ECDC, PAHO, national agencies</strong> — varies per
+            source. Most permit non-commercial re-use with attribution. Verify against the
+            issuing agency's terms before redistributing.
+          </li>
+          <li>
+            <strong>News items (Tier 3)</strong> — copyright the originating outlet. The
+            dashboard displays titles, short descriptions, and links under fair-use /
+            news-aggregation conventions. Full-text re-use requires the outlet's permission.
+          </li>
+        </ul>
+
+        <h3
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            margin: '1.25rem 0 0.5rem 0',
+          }}
+        >
+          4. Triage cards &amp; clinical content — additional rules
+        </h3>
+        <Body>
+          The printable triage cards (<code>/signals/:id/triage</code>) summarize CDC
+          clinical guidance. They are:
+        </Body>
+        <ul
+          style={{
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: '0.875rem',
+            color: 'var(--color-text-secondary)',
+            lineHeight: 1.7,
+            margin: '0.5rem 0 0.75rem 1.25rem',
+            padding: 0,
+          }}
+        >
+          <li>
+            Operational quick-reference only — <strong>not a substitute for current CDC
+            clinical guidance</strong> or your facility's clinical protocols.
+          </li>
+          <li>
+            Each card carries a <code>lastReviewed</code> date and a direct link to the
+            CDC source page. <strong>Re-verify against the source before clinical use.</strong>
+          </li>
+          <li>
+            Re-distribution should preserve the source URL and last-reviewed date. If you
+            modify a card, mark your version as derived so downstream users do not mistake
+            it for the EMERGENZ-published version.
+          </li>
+        </ul>
+
+        <h3
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            margin: '1.25rem 0 0.5rem 0',
+          }}
+        >
+          5. Competing hypotheses — attribution caveat
+        </h3>
+        <Body>
+          The Competing Hypotheses block on a signal-detail page summarizes documented
+          analytic positions held by named authorities (e.g., CDC, ECDC, academic
+          researchers). These are <strong>EMERGENZ summaries of those positions</strong>,
+          not direct quotes. When citing a hypothesis, cite the named proponent's own
+          publication via the linked source — do not cite the dashboard's summary as if it
+          were a direct statement from that authority. If the linked source no longer
+          reflects the framing shown here, that is the authoritative document.
+        </Body>
+
+        <h3
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            margin: '1.25rem 0 0.5rem 0',
+          }}
+        >
+          6. Reporting attribution errors
+        </h3>
+        <Body>
+          If you find content on this dashboard that is misattributed, miscites a source,
+          or misrepresents an authority's position, please open an issue at{' '}
+          <ExternalLink href="https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/issues">
+            github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/issues
+          </ExternalLink>
+          . Attribution accuracy is treated as a P0 issue and corrected on the same day
+          when verified.
+        </Body>
+      </Card>
+
+      {/* WastewaterSCAN Attribution */}
+      <Card>
+        <SectionHeader>WastewaterSCAN Attribution Notice</SectionHeader>
+        <Body>
+          Wastewater concentration data and the underlying surveillance methodology are
+          provided by{' '}
+          <ExternalLink href="https://data.wastewaterscan.org/">
+            WastewaterSCAN
+          </ExternalLink>{' '}
+          — a partnership between Stanford University, Emory University, and Verily.
+          Licensed under{' '}
+          <ExternalLink href="https://creativecommons.org/licenses/by-nc/4.0/">
+            CC BY-NC 4.0
+          </ExternalLink>
+          .
+        </Body>
+        <Body>
+          <strong>Non-commercial use only.</strong> Any commercial deployment that
+          incorporates WastewaterSCAN data — including a paid hosted service built on this
+          dashboard — requires a separate commercial license from Stanford and Emory.
+          Contact{' '}
+          <ExternalLink href="mailto:wwscan_stanford_emory@lists.stanford.edu">
+            wwscan_stanford_emory@lists.stanford.edu
+          </ExternalLink>{' '}
+          for licensing inquiries.
+        </Body>
+      </Card>
+
       {/* WHO Attribution */}
       <Card>
         <SectionHeader>WHO Content Attribution Notice</SectionHeader>
