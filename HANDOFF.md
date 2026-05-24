@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Autonomous update contract audit (commit 305b6d5)
+## ✅ Autonomous update contract audit (commit 914c1c5)
 
 User asked to proceed with making the dashboard autonomous while preserving content and attribution standards. Added a first-class autonomy contract to `public/status.json`, surfaced it on `/status`, and added a CI regression audit so scheduled public writers, monitoring workflows, generated endpoints, and manual-review boundaries cannot be removed silently.
 
