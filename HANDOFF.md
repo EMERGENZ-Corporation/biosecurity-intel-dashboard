@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (automation and AI disclosure added)
+**Last updated:** 2026-05-24 (official source audit workflow added)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Official source freshness audit workflow (commit TBD)
+
+User approved the next autonomy task: add an internal Tier 1/2 source freshness audit before attempting higher-risk automated source extractors. Added a non-mutating audit command that checks official source registry records for stale `lastVerified` dates and URL reachability, writes an internal JSON result, and added a daily GitHub Actions workflow that opens or updates one reusable `source-audit` issue when official sources need review.
+
+**Files touched:**
+- `scripts/audit-official-sources.mjs` — new Tier 1/2 source audit script with `lastVerified` age checks, HTTP(S) reachability checks, timeout handling, JSON result output, and a network-skip mode for local validation.
+- `package.json` — adds `npm run audit:sources`.
+- `.github/workflows/official-source-audit.yml` — new daily/manual/push workflow that runs the audit and reconciles one internal GitHub issue without exposing diagnostics on the public dashboard.
+- `.gitignore` — ignores the local `official-source-audit-result.json` runtime artifact.
+- `HANDOFF.md` — logs the autonomy hardening task and verification.
+
+**Verify:** `OFFICIAL_SOURCE_AUDIT_SKIP_NETWORK=1 npm run audit:sources`, `npm run test:validators`, `npm run validate:data`, and `npm run build` pass. A full local networked audit currently flags two review items (`africa-cdc-outbreaks` timeout and `cdc-han` HTTP 403), which the new workflow is designed to surface internally via GitHub issue.
+
+---
 
 ## ✅ Automation and AI disclosure + full Intelligence naming (commit b2fef42)
 
