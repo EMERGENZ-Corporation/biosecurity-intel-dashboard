@@ -28,3 +28,7 @@ The hantavirus dashboard remains live as a separate incident vertical.
 This project is the broader multi-threat companion.
 
 Content and source decisions are governed by `CONTENT-STANDARDS.md`.
+
+Agents and operators should read `AGENTS.md` before starting work. It defines
+model-change prompting rules, token-efficiency expectations, and the standard
+verification cadence for Codex/Claude sessions.

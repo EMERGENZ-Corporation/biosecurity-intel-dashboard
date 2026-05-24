@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (status monitor threshold aligned with daily refresh cadence)
+**Last updated:** 2026-05-23 (agent model-selection and token-efficiency guide added)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -10,6 +10,10 @@
 ## How to maintain this file (read before editing the repo)
 
 If you are an agent picking up work on this repo, follow these instructions every session.
+
+Start with `AGENTS.md` for model-selection prompting, token-efficiency rules,
+and baseline verification expectations; then return here for the chronological
+project state and handoff logging rules.
 
 ### When you must update HANDOFF.md
 
@@ -123,6 +127,19 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Agent model-selection and token-efficiency guide (commit PENDING)
+
+User asked whether the repo already tells Codex/Claude which model to use for token-efficient work and when agents should prompt the user to switch models. Added a root `AGENTS.md` that clarifies agents cannot reliably switch their own model from repo instructions, but must prompt the user before high-risk work when a stronger reasoning model is appropriate.
+
+**Files touched:**
+- `AGENTS.md` — new agent/operator guide covering startup order, model-change prompting, high-risk task categories, token-efficiency expectations, verification commands, and handoff discipline.
+- `README.md` — points agents/operators to `AGENTS.md`.
+- `HANDOFF.md` — adds the startup pointer and logs this documentation change.
+
+**Verify:** Read `AGENTS.md`; it should direct routine tasks to proceed without interruption and high-risk clinical/legal/security/CI/data-integrity work to prompt the user for a stronger model when needed.
+
+---
 
 ## ✅ Status monitor threshold aligned with daily refresh cadence (commit dafa3ef)
 
