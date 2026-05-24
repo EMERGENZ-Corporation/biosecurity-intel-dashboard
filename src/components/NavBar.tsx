@@ -132,7 +132,8 @@ export default function NavBar() {
                   />
                 </svg>
               </span>
-              {/* Medical Intelligence Unit tagline */}
+              {/* Medical Intelligence Unit tagline — justified to span the
+                  full width of the EMERGENZ wordmark + Star of Life row above */}
               <span
                 style={{
                   fontFamily: "'Singapore Sling', sans-serif",
@@ -140,6 +141,10 @@ export default function NavBar() {
                   lineHeight: 1,
                   color: 'var(--color-text-muted)',
                   letterSpacing: '0.05em',
+                  display: 'block',
+                  textAlign: 'justify',
+                  textAlignLast: 'justify',
+                  width: '100%',
                 }}
               >
                 Medical Intelligence Unit

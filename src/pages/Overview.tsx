@@ -180,14 +180,42 @@ export default function Overview() {
   const highest = highestSeverity(signals)
   const staleSignals = signals.filter((signal) => isSignalStale(signal))
 
-  // 6 most recent timeline events
-  const recent = useMemo(
-    () =>
-      [...signalTimeline]
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .slice(0, 6),
-    []
-  )
+  // Recent developments — combined chronological feed of curated timeline
+  // events and automated news items. Without combining, this section looks
+  // stale whenever the manually-curated timeline lags behind the live news
+  // pipeline. Each item retains its data lineage via a "kind" discriminator.
+  const recent = useMemo(() => {
+    const timelineItems = signalTimeline.map((event) => ({
+      kind: 'timeline' as const,
+      id: event.id,
+      signalId: event.signalId,
+      timestamp: new Date(event.date).getTime(),
+      dateLabel: event.date,
+      category: event.category,
+      title: event.title,
+      description: event.description,
+    }))
+    const newsItems = news.map((item) => {
+      const primarySignalId = item.signalIds[0]
+      const matchedSignal = primarySignalId ? signals.find((s) => s.id === primarySignalId) : undefined
+      return {
+        kind: 'news' as const,
+        id: item.id,
+        signalId: primarySignalId,
+        timestamp: item.timestamp,
+        dateLabel: new Date(item.timestamp).toISOString().slice(0, 10),
+        category: matchedSignal?.category,
+        title: item.title,
+        description: item.description ?? '',
+        link: item.link,
+        authority: item.authority,
+      }
+    })
+    return [...timelineItems, ...newsItems]
+      .filter((item) => Number.isFinite(item.timestamp))
+      .sort((a, b) => b.timestamp - a.timestamp)
+      .slice(0, 6)
+  }, [])
 
   // 5 most recent news items
   const latestNews = useMemo(
@@ -821,59 +849,96 @@ export default function Overview() {
         </Section>
       </div>
 
-      {/* Recent developments — timeline */}
+      {/* Recent developments — combined chronological feed of curated
+          timeline events and automated news items */}
       <Section
         title="Recent developments"
         extra={<SeeAllLink to="/timeline" label="Full timeline" />}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          {recent.map((event) => (
-            <Link
-              key={event.id}
-              to={`/signals/${event.signalId}`}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.25rem',
-                padding: '0.625rem 0.75rem',
-                backgroundColor: 'var(--color-bg-tertiary)',
-                border: '1px solid var(--color-border)',
-                borderRadius: '4px',
-                textDecoration: 'none',
-                color: 'inherit',
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: '0.625rem',
-                  color: 'var(--color-text-muted)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                }}
+          {recent.map((item) => {
+            const kindLabel = item.kind === 'timeline' ? 'Tracked event' : `News · ${item.authority}`
+            const meta = [
+              item.dateLabel,
+              kindLabel,
+              item.category ? categoryLabel(item.category) : null,
+            ]
+              .filter(Boolean)
+              .join(' · ')
+
+            const body = (
+              <>
+                <div
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: '0.625rem',
+                    color: 'var(--color-text-muted)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.06em',
+                  }}
+                >
+                  {meta}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'IBM Plex Sans', sans-serif",
+                    fontSize: '0.8125rem',
+                    color: 'var(--color-text-primary)',
+                  }}
+                >
+                  {item.title}
+                  {item.kind === 'news' && ' ↗'}
+                </div>
+                {item.description && (
+                  <div
+                    style={{
+                      fontFamily: "'IBM Plex Sans', sans-serif",
+                      fontSize: '0.75rem',
+                      color: 'var(--color-text-secondary)',
+                    }}
+                  >
+                    {item.description.slice(0, 220)}
+                    {item.description.length > 220 ? '…' : ''}
+                  </div>
+                )}
+              </>
+            )
+
+            const cardStyle = {
+              display: 'flex',
+              flexDirection: 'column' as const,
+              gap: '0.25rem',
+              padding: '0.625rem 0.75rem',
+              backgroundColor: 'var(--color-bg-tertiary)',
+              border: '1px solid var(--color-border)',
+              borderRadius: '4px',
+              textDecoration: 'none',
+              color: 'inherit',
+            }
+
+            if (item.kind === 'news') {
+              return (
+                <a
+                  key={`news-${item.id}`}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={cardStyle}
+                >
+                  {body}
+                </a>
+              )
+            }
+            return (
+              <Link
+                key={`tl-${item.id}`}
+                to={`/signals/${item.signalId}`}
+                style={cardStyle}
               >
-                {event.date} · {categoryLabel(event.category)}
-              </div>
-              <div
-                style={{
-                  fontFamily: "'IBM Plex Sans', sans-serif",
-                  fontSize: '0.8125rem',
-                  color: 'var(--color-text-primary)',
-                }}
-              >
-                {event.title}
-              </div>
-              <div
-                style={{
-                  fontFamily: "'IBM Plex Sans', sans-serif",
-                  fontSize: '0.75rem',
-                  color: 'var(--color-text-secondary)',
-                }}
-              >
-                {event.description}
-              </div>
-            </Link>
-          ))}
+                {body}
+              </Link>
+            )
+          })}
         </div>
       </Section>
     </div>

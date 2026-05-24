@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (add PODCAST-EXPORT-DESIGN.md — draft design doc, no code)
+**Last updated:** 2026-05-23 (navbar tagline width fix + Recent Developments now combines timeline & news + forensic audit findings logged)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -128,7 +128,28 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Podcast export design doc (commit pending)
+## ✅ Navbar tagline width + Recent Developments combined feed + forensic audit (commit pending)
+
+Three coordinated last-fixes for the night driven by user inspection:
+
+1. **Navbar tagline width** — `Medical Intelligence Unit` was rendering narrower than the `EMERGENZ + Star of Life` row above it. Added `display: block`, `textAlign: justify`, `textAlignLast: justify`, and `width: 100%` to the tagline so it spreads to fill the full row width (verified 144.81px = wordmark row width in preview).
+2. **Recent Developments staleness** — section pulled exclusively from `signal-timeline.json`, which is manually curated (newest event 2026-05-19 = 5 days stale at audit time). Replaced with a combined chronological feed of curated timeline events + automated news items, sorted by date. Section now reflects 2026-05-24 items immediately and never stagnates while the live news pipeline runs. Each item retains a `kind` discriminator (`Tracked event` vs `News · <authority>`) so the data lineage is visible to users.
+3. **Forensic site audit** — ran `audit:autonomy`, `audit:ai-enrichment`, `audit:sources`, `audit:source-drift`, `test:validators`, `validate:data`, and `build` plus a full cross-check of status.json vs file timestamps, all 16 routes vs page files, workflow secret references, public API endpoint timestamps, and HANDOFF coverage vs `git log`. Two SHA backfills caught (this commit logs them); two non-blocking issues surfaced and added to the backlog below.
+
+**Files touched:**
+- `src/components/NavBar.tsx` — tagline span gets `display: 'block'`, `textAlign: 'justify'`, `textAlignLast: 'justify'`, `width: '100%'`.
+- `src/pages/Overview.tsx` — `recent` memo now merges `signalTimeline` and `news.json` items into a unified, kind-discriminated chronological feed. Render block updated to handle both timeline events (internal `Link` to `/signals/:id`) and news items (external `<a>` to source link, with `↗` indicator).
+- `HANDOFF.md` — backfilled SHA for the Navbar logo fix (`36d01b1`) and the Podcast export design doc (`d8c0f6b`) per audit finding; logs this commit; surfaces two new backlog items below.
+
+**Verify:** On `/`, "Recent developments" shows news items from today (2026-05-24 UTC) — verified in preview, 6 cards all dated today. Navbar tagline width matches EMERGENZ+star width (144.81px) — verified in preview. `npm run test:validators`, `npm run validate:data`, `npm run build` all pass.
+
+**Outstanding from this audit (added to backlog below):**
+- Tier 1/2 source-drift review (8 fingerprint changes flagged on ECDC/WHO/NETEC/PAHO pages — SME content review needed before any structured-data updates)
+- `cdc-han` persistent HTTP 403 in `audit:sources` (low severity, suppresses real future failures if left as noise — fix via known-blocked allowlist or stronger UA workaround)
+
+---
+
+## ✅ Podcast export design doc (commit d8c0f6b)
 
 User asked to workshop a "Export as podcast" feature for the Briefings page: free TTS, natural voice, downloadable + emailable audio. After surveying the Briefings content shape (16 signals, 12 Watch+, ~25-35 min combined episode length, clinical terminology like "Bundibugyo" / "Koplik" / "maculopapular"), drafted a read-and-approve design doc covering architecture, TTS engine choice, retention, content-integrity controls, and a 6-session build plan. No code written — design only.
 
@@ -186,7 +207,7 @@ The GitHub/Vercel secret for the Bright Data zone is named `biosecurity_web_unlo
 
 ---
 
-## ✅ Navbar logo fix (commit pending)
+## ✅ Navbar logo fix (commit 36d01b1)
 
 - Star of Life SVG moved inside an inline flex row alongside the EMERGENZ wordmark so it renders on the same line immediately after the Z, not below it.
 - Subtitle updated from `BIOSECURITY / INTELLIGENCE` to `BIOSECURITY / INTELLIGENCE / DASHBOARD` so the full title is visible on desktop.
@@ -1523,6 +1544,9 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 
 ## ⏳ Outstanding work (backlog)
 
+- **Tier 1/2 source-drift review (medium).** The 2026-05-23 forensic audit flagged 8 fingerprint changes on ECDC ANDES surveillance/RRA, WHO ANDES RRA v2 / DON601, NETEC VHF/Hantavirus, PAHO epi alerts, and WHO mass-gatherings pages. Requires SME content review of each changed page to confirm clinical facts are unchanged before re-fingerprinting. Blocked on: SME availability. Scope: medium (per-page review + targeted `audit:source-drift` re-run).
+- **`cdc-han` persistent HTTP 403 in `audit:sources` (low).** CDC HAN pages block automated user agents despite the existing UA string. Currently shows as a recurring "failure" in two audits but is report-only so doesn't break builds — long-term risk is masking real future failures behind familiar noise. Scope: small (either add a `knownBlocked: true` flag on the source record + teach the audit to respect it, or upgrade the UA fallback for CDC). Touches audit logic → recommend stronger reasoning model per AGENTS.md.
+- **Timeline event automation (low).** `signal-timeline.json` is manually curated and gradually drifts behind the live news pipeline. Considered acceptable today (events represent significant curated milestones, not raw news) and surfaced honestly via the combined Recent Developments feed shipped 2026-05-23. Revisit if curation cadence proves unsustainable.
 - **~~Further deepening.~~** ✅ Shipped. Every signal now has 5 attributed sections (was 3 for non-hantavirus). Total dashboard sections: 80 (was 50). See `scripts/parity-signal-sections.mjs`.
 - **~~Bundle size.~~** ✅ Addressed by lazy route loading + Rollup `manualChunks`. Entry chunk is now 18.23 kB (gzip 6.39 kB); heavy map/data/vendor chunks are split and cacheable.
 - **~~Accessibility sweep.~~** ✅ Code-level sweep shipped: acknowledgment modal focus trap/Escape handling and grouped `aria-pressed` filter chips on Map, Signals, Briefings, Timeline, News, and Sources. Manual browser/axe pass still useful before a formal accessibility sign-off.
