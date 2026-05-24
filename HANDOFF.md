@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Official source audit report-only workflow fix (commit TBD)
+## ✅ Official source audit report-only workflow fix (commit 72d8125)
 
 User reported the Official Source Audit workflow was still failing and generating GitHub failure notifications. Root cause: source review findings were intentionally converted into failed workflow steps, so expected URL blocks/timeouts/drift alerts caused "All jobs have failed" emails instead of quiet internal issue updates.
 
