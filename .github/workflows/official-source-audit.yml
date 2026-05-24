@@ -10,6 +10,7 @@ on:
     paths:
       - 'src/data/signal-sources.json'
       - 'scripts/audit-official-sources.mjs'
+      - 'scripts/audit-source-drift.mjs'
       - '.github/workflows/official-source-audit.yml'
 
 permissions:
@@ -40,6 +41,31 @@ jobs:
         env:
           MAX_SOURCE_VERIFIED_AGE_DAYS: 30
           SOURCE_AUDIT_TIMEOUT_MS: 15000
+
+      - name: Restore official source fingerprints
+        id: restore-source-fingerprints
+        uses: actions/cache/restore@v4
+        with:
+          path: .source-fingerprints
+          key: official-source-fingerprints-${{ github.run_id }}
+          restore-keys: |
+            official-source-fingerprints-
+
+      - name: Audit Tier 1/2 source drift
+        id: audit-source-drift
+        continue-on-error: true
+        run: npm run audit:source-drift
+        env:
+          SOURCE_DRIFT_BASELINE: .source-fingerprints/official-source-fingerprints.json
+          SOURCE_DRIFT_OUTPUT: official-source-drift-result.json
+          SOURCE_DRIFT_TIMEOUT_MS: 15000
+
+      - name: Save official source fingerprints
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .source-fingerprints
+          key: official-source-fingerprints-${{ github.run_id }}
 
       - name: Reconcile official source audit issue
         uses: actions/github-script@v8
@@ -145,6 +171,118 @@ jobs:
               })
             }
 
+      - name: Reconcile official source drift issue
+        uses: actions/github-script@v8
+        env:
+          DRIFT_OUTCOME: ${{ steps.audit-source-drift.outcome }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs')
+            const marker = '<!-- emergenz-official-source-drift -->'
+            const title = '[SOURCE DRIFT] Official source pages changed'
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            const result = JSON.parse(fs.readFileSync('official-source-drift-result.json', 'utf8'))
+
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'source-drift',
+                color: 'D93F0B',
+                description: 'Tier 1/2 source page changed or could not be fingerprinted',
+              })
+            } catch (error) {
+              if (error.status !== 422) throw error
+            }
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'source-drift',
+              per_page: 20,
+            })
+            const existing = issues.find((issue) =>
+              issue.title === title || issue.body?.includes(marker)
+            )
+
+            if (result.ok) {
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  body: [
+                    'Official source drift cleared.',
+                    `Checked at: \`${result.checkedAt}\``,
+                    `Fingerprint baseline loaded: \`${result.baselineLoaded ? 'yes' : 'no'}\``,
+                    `Fingerprint count: ${result.sources?.fingerprinted ?? 'unknown'}`,
+                    `Run: ${runUrl}`,
+                  ].join('\n'),
+                })
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  state: 'closed',
+                })
+              }
+              return
+            }
+
+            const formatChanged = (items) =>
+              items?.length
+                ? items.map((item) => `- ${item.id || 'unknown'} (${item.authority || 'unknown'}): changed ${item.changedFields?.join(', ') || 'unknown'} — ${item.url || 'no url'}`).join('\n')
+                : '- none recorded'
+
+            const formatUnreadable = (items) =>
+              items?.length
+                ? items.map((item) => `- ${item.id || 'unknown'} (${item.authority || 'unknown'}): ${item.reason}${item.url ? ` — ${item.url}` : ''}`).join('\n')
+                : '- none recorded'
+
+            const body = [
+              marker,
+              '## Official source drift review needed',
+              '',
+              `Workflow outcome: \`${process.env.DRIFT_OUTCOME}\``,
+              `Checked at: \`${result.checkedAt || 'unknown'}\``,
+              `Baseline loaded: \`${result.baselineLoaded ? 'yes' : 'no'}\``,
+              `Audited Tier 1/2 sources: ${result.sources?.audited ?? 'unknown'}`,
+              `Fingerprinted sources: ${result.sources?.fingerprinted ?? 'unknown'}`,
+              '',
+              '### Changed source pages',
+              formatChanged(result.changedSources),
+              '',
+              '### Unreadable source pages',
+              formatUnreadable(result.unreadableSources),
+              '',
+              `Run: ${runUrl}`,
+              '',
+              '_Auto-generated by the EMERGENZ official source drift audit. Review changed pages manually before updating structured data. Diagnostics are internal and are not shown on the public dashboard._',
+            ].join('\n')
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['source-drift'],
+              })
+            }
+
       - name: Fail workflow when official source audit fails
         if: steps.audit-sources.outcome != 'success'
+        run: exit 1
+
+      - name: Fail workflow when official source drift needs review
+        if: steps.audit-source-drift.outcome != 'success'
         run: exit 1

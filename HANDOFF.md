@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (official source audit workflow added)
+**Last updated:** 2026-05-24 (official source drift audit added)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Official source drift detector (commit TBD)
+
+User said to proceed to the next autonomy task after the official source freshness audit. Added a second non-mutating autonomy layer that fingerprints Tier 1/2 source pages, compares them with the previous private GitHub Actions cache baseline, and opens or updates one internal `source-drift` issue when official pages change or cannot be fingerprinted.
+
+**Files touched:**
+- `scripts/audit-source-drift.mjs` — new source drift script that normalizes fetched source pages, records content hash / ETag / Last-Modified / page title fingerprints, compares against the previous cached baseline, writes an internal JSON result, and supports network-skip mode for local validation.
+- `package.json` — adds `npm run audit:source-drift`.
+- `.github/workflows/official-source-audit.yml` — extends the official source audit workflow with fingerprint cache restore/save, source drift auditing, reusable `source-drift` issue reconciliation, and a failure step when changed or unreadable official pages need review.
+- `.gitignore` — ignores source drift runtime JSON and private fingerprint cache output.
+- `HANDOFF.md` — logs the source drift autonomy step and verification.
+
+**Verify:** `OFFICIAL_SOURCE_DRIFT_SKIP_NETWORK=1 npm run audit:source-drift`, `OFFICIAL_SOURCE_AUDIT_SKIP_NETWORK=1 npm run audit:sources`, `npm run test:validators`, `npm run validate:data`, and `npm run build` pass. A full local networked drift run flagged review items rather than writing data: NETEC/Paho fingerprint changes plus `africa-cdc-outbreaks` timeout and `cdc-han` HTTP 403.
+
+---
 
 ## ✅ Official source freshness audit workflow (commit 2558add)
 

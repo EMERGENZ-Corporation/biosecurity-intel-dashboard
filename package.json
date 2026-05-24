@@ -14,6 +14,7 @@
         "generate:api": "node scripts/generate-api.mjs",
         "update:news": "node scripts/update-news.mjs",
         "audit:sources": "node scripts/audit-official-sources.mjs",
+        "audit:source-drift": "node scripts/audit-source-drift.mjs",
         "monitor:status": "node scripts/check-status.mjs",
         "verify:production": "node scripts/verify-production.mjs",
         "preview": "vite preview"
