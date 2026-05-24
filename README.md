@@ -19,12 +19,16 @@ template and preserves its resilience patterns:
   reintroduced.
 - `npm run verify:production` — verifies the deployed bundle and
   `/status.json` after each data update.
+- `npm run enrich:news` — optional server-side Gemini/Bright Data news
+  enrichment. Adds only high-confidence news signal tags and internal review
+  brief context; fails open when provider keys are absent or unavailable.
 - `npm run monitor:status` — independent hourly check of the public
   status endpoint.
 - `npm run audit:autonomy` — regression audit for scheduled update
   workflows, public status metadata, and review-gated content boundaries.
-- `npm run audit:ai-enrichment` — confirms Gemini/Bright Data are not live
-  production dependencies and that AI/enrichment disclosures remain current.
+- `npm run audit:ai-enrichment` — confirms Gemini/Bright Data remain
+  server-side, review-gated news-enrichment helpers and that disclosures remain
+  current.
 - `public/status.json` — machine-readable health contract for the
   dashboard, surfaced on the in-app Status page. It now includes the
   autonomous update contract: scheduled public writers, internal monitors,
@@ -34,9 +38,9 @@ The hantavirus dashboard remains live as a separate incident vertical.
 This project is the broader multi-threat companion.
 
 Content and source decisions are governed by `CONTENT-STANDARDS.md`.
-AI/enrichment boundaries are governed by `AI-ENRICHMENT-POLICY.md`; the
-current dashboard does not require Gemini, Bright Data, or any equivalent
-third-party AI/web-data API key.
+AI/enrichment boundaries are governed by `AI-ENRICHMENT-POLICY.md`; Gemini and
+Bright Data are optional server-side helpers for low-risk news triage and must
+fail open to the deterministic pipeline.
 
 Agents and operators should read `AGENTS.md` before starting work. It defines
 model-change prompting rules, token-efficiency expectations, and the standard

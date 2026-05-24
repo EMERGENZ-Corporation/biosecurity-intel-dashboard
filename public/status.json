@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-05-24T04:41:27.568Z",
+  "generatedAt": "2026-05-24T05:04:29.720Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 48,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-23T00:00:00.000Z",
     "lastChecked": "2026-05-23T12:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-23T12:00:00.000Z",
-    "dataAgeHours": 28.69099111111111,
-    "officialCheckAgeHours": 16.69099111111111
+    "dataAgeHours": 29.0749225,
+    "officialCheckAgeHours": 17.0749225
   },
   "signals": {
     "total": 16,
@@ -69,6 +69,22 @@
         ]
       },
       {
+        "id": "ai-news-enrichment",
+        "cadence": "After successful news fetch when server-side keys are configured",
+        "workflow": "Update News Feed",
+        "writes": [
+          "src/data/news.json signalIds only",
+          "internal ai-news-enrichment-result.json",
+          "reusable ai-news-brief issue"
+        ],
+        "guardrails": [
+          "Gemini failures fail open to deterministic keyword tags",
+          "Only high-confidence AI signal tags may be added; deterministic tags are never removed",
+          "Bright Data is optional context fallback and never source-of-record",
+          "No clinical, risk, legal, licensing, or structured signal fields are AI-written"
+        ]
+      },
+      {
         "id": "status-api-refresh",
         "cadence": "Daily and on source data changes",
         "workflow": "Status Refresh",
@@ -98,7 +114,7 @@
       {
         "id": "ai-or-enrichment-output",
         "mode": "not-source-of-record",
-        "reason": "Gemini, Bright Data, or similar tools are not used by the live pipeline today. They may assist future review workflows, but must not overwrite structured public fields without attribution and validation."
+        "reason": "Gemini and Bright Data are integrated only as optional server-side news-enrichment helpers. They may add high-confidence news tags and internal review context, but must not overwrite clinical, risk, legal, licensing, source-registry, or structured public-health fields."
       }
     ],
     "monitors": [

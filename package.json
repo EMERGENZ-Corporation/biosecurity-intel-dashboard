@@ -13,6 +13,7 @@
         "generate:status": "node scripts/generate-status.mjs",
         "generate:api": "node scripts/generate-api.mjs",
         "update:news": "node scripts/update-news.mjs",
+        "enrich:news": "node scripts/enrich-news.mjs",
         "audit:autonomy": "node scripts/audit-autonomy.mjs",
         "audit:ai-enrichment": "node scripts/audit-ai-enrichment.mjs",
         "audit:sources": "node scripts/audit-official-sources.mjs",

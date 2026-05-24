@@ -357,32 +357,32 @@ export default function AboutPage() {
           GitHub issues when freshness or Tier 1 feed checks fail.
         </Body>
         <Body>
-          <strong>Gemini is not currently used by the live dashboard pipeline.</strong> The
-          news updater is RSS plus keyword matching and explicitly requires no Gemini or other
-          external AI API key. No Gemini dependency, workflow, environment variable, or public
-          writer is active in the production path. If Gemini or another model is reintroduced
-          later, it may only assist with extraction or summarization behind validators; it must
-          not fabricate numbers, clinical recommendations, risk levels, or source claims, and
-          uncertain values must remain <code>null</code> until verified against the originating
-          source.
+          <strong>Gemini is used only for optional server-side news enrichment.</strong> The
+          deterministic RSS and Google News updater remains the baseline. When a server-side
+          Gemini key is configured, Gemini may assist with news tagging, duplicate/event
+          clustering, search-query expansion candidates, and internal briefing
+          generation. If Gemini is unavailable, over quota, or returns invalid output, the
+          dashboard fails open to the deterministic pipeline with no public degradation.
         </Body>
         <Body>
-          <strong>Bright Data is not currently used by the live dashboard pipeline.</strong>{' '}
-          The dashboard does not require a Bright Data API key today. Bright Data could be
-          useful later as an optional enrichment or source-availability layer for pages without
-          stable RSS feeds, blocked article metadata, or link resolution, but it should not
-          become a source of record. Any Bright Data-derived artifact must preserve the original
-          publisher attribution, respect source licensing, and stay out of structured clinical
-          or public-health fields unless independently verified from a Tier 1 or Tier 2
-          authority.
+          <strong>Bright Data is used only as an optional server-side context fallback.</strong>{' '}
+          When Bright Data credentials are configured, the enrichment step may request short
+          context snippets for difficult-to-read news items so Gemini can triage them more
+          accurately. Bright Data does not become a source of record. Any Bright Data-derived
+          artifact must preserve the original publisher attribution, respect source licensing,
+          and stay out of structured clinical or public-health fields unless independently
+          verified from a Tier 1 or Tier 2 authority.
         </Body>
         <Body>
           AI-assisted development and editorial work may help maintain the software, tests,
           and source-backed summaries. The governing rule is attribution first: public claims
           must point to the underlying authority, not to an AI system, and clinical guidance
-          remains manually curated under CONTENT-STANDARDS.md. The project also maintains an
-          explicit AI/enrichment policy and CI audit so future Gemini, Bright Data, or similar
-          integrations cannot become hidden production dependencies.
+          remains manually curated under CONTENT-STANDARDS.md. Gemini can add only
+          high-confidence news <code>signalIds</code> and internal reviewer context; it cannot
+          write clinical guidance, case counts, risk levels, source tiers, legal text, or
+          licensing text. The project also maintains an explicit AI/enrichment policy and CI
+          audit so future Gemini, Bright Data, or similar integrations cannot become hidden
+          production dependencies.
         </Body>
       </Card>
 

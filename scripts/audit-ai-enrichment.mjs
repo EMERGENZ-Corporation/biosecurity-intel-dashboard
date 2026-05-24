@@ -2,11 +2,12 @@
 /**
  * Guards the dashboard's AI/enrichment disclosure boundary.
  *
- * The current production contract is deliberately conservative: no live Gemini
- * or Bright Data integration, no required AI/enrichment API key, and no
- * browser-exposed provider keys. If a future integration adds those services,
- * this audit should fail until the policy, public disclosure, and validators are
- * updated intentionally.
+ * The current production contract is deliberately conservative: Gemini and
+ * Bright Data are allowed only as optional server-side news-enrichment helpers,
+ * must fail open to the deterministic pipeline, and must not expose provider
+ * keys to the browser. If a future integration expands those services, this
+ * audit should fail until policy, public disclosure, and validators are updated
+ * intentionally.
  */
 
 import { readdirSync, readFileSync, writeFileSync } from 'fs'
@@ -19,7 +20,9 @@ const REQUIRED_FILES = [
   'src/pages/AboutPage.tsx',
   'src/pages/MethodologyPage.tsx',
   'public/status.json',
+  'scripts/enrich-news.mjs',
   'scripts/generate-status.mjs',
+  '.github/workflows/update-news.yml',
   'CONTENT-STANDARDS.md',
 ]
 
@@ -28,8 +31,8 @@ const REQUIRED_DISCLOSURE = [
     file: 'AI-ENRICHMENT-POLICY.md',
     phrases: [
       'Gemini is not used by the live dashboard pipeline',
-      'Bright Data is not used by the live dashboard pipeline',
-      'No Gemini, Google Generative AI, Bright Data, or Web Unlocker API key',
+      'Gemini is integrated only as optional server-side news enrichment',
+      'Bright Data is integrated only as optional server-side context fallback',
       'Bright Data must not become a source of record',
       'never fabricate numbers or events',
       'expose API keys through `VITE_` variables',
@@ -38,8 +41,8 @@ const REQUIRED_DISCLOSURE = [
   {
     file: 'src/pages/AboutPage.tsx',
     phrases: [
-      'Gemini is not currently used by the live dashboard pipeline',
-      'Bright Data is not currently used by the live dashboard pipeline',
+      'Gemini is used only for optional server-side news enrichment',
+      'Bright Data is used only as an optional server-side context fallback',
       'source of record',
       'AI-assisted development and editorial work',
     ],
@@ -47,9 +50,28 @@ const REQUIRED_DISCLOSURE = [
   {
     file: 'src/pages/MethodologyPage.tsx',
     phrases: [
-      'Gemini is not currently used by the live update pipeline',
-      'Bright Data is not currently used by the live update pipeline',
+      'Gemini is used only for optional server-side news enrichment',
+      'Bright Data is used only as an optional server-side context fallback',
       'source of record',
+    ],
+  },
+  {
+    file: 'scripts/enrich-news.mjs',
+    phrases: [
+      'deterministic-fallback',
+      'Only high-confidence Gemini tags may be added',
+      'BRIGHT_DATA_API_KEY',
+      'GEMINI_API_KEY',
+      'responseMimeType',
+    ],
+  },
+  {
+    file: '.github/workflows/update-news.yml',
+    phrases: [
+      'Run Gemini/Bright Data news enrichment',
+      'GEMINI_API_KEY',
+      'BRIGHT_DATA_API_KEY',
+      'ai-news-brief',
     ],
   },
   {
@@ -82,6 +104,11 @@ const LIVE_KEY_PATTERNS = [
 const CLIENT_EXPOSED_KEY_PATTERN = /\bVITE_[A-Z0-9_]*(GEMINI|GOOGLE_GENERATIVE|BRIGHT|BRD|UNLOCKER)[A-Z0-9_]*\b/i
 
 const ALLOWED_REFERENCES = new Set([
+  '.env.example',
+  '.github/workflows/update-news.yml',
+  'scripts/enrich-news.mjs',
+  'scripts/generate-status.mjs',
+  'scripts/audit-autonomy.mjs',
   'scripts/audit-ai-enrichment.mjs',
 ])
 
@@ -145,13 +172,15 @@ function main() {
   if (aiGate && aiGate.mode !== 'not-source-of-record') {
     errors.push(`public/status.json: ai-or-enrichment-output mode must be not-source-of-record; got ${aiGate.mode}`)
   }
+  const aiWriter = status.automation?.dataWriters?.find((writer) => writer.id === 'ai-news-enrichment')
+  if (!aiWriter) errors.push('public/status.json: missing ai-news-enrichment data writer')
 
   for (const file of filesToScan()) {
-    if (ALLOWED_REFERENCES.has(file)) continue
     const body = read(file)
     if (CLIENT_EXPOSED_KEY_PATTERN.test(body)) {
       errors.push(`${file}: AI/enrichment keys must not be browser-exposed with VITE_`)
     }
+    if (ALLOWED_REFERENCES.has(file)) continue
     for (const pattern of LIVE_KEY_PATTERNS) {
       if (pattern.test(body)) {
         errors.push(`${file}: live AI/enrichment key reference detected (${pattern})`)

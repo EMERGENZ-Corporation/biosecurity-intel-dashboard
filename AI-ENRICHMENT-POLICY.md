@@ -6,22 +6,30 @@ authorities, clinical reviewers, source licenses, or the source registry.
 
 ## Current Live Status
 
-- Gemini is not used by the live dashboard pipeline.
-- Bright Data is not used by the live dashboard pipeline.
+- Gemini is not used by the live dashboard pipeline unless `GEMINI_API_KEY` is
+  configured in the server-side workflow environment.
+- Gemini is integrated only as optional server-side news enrichment for signal
+  tagging, duplicate/event clustering, query expansion candidates, and internal
+  brief generation.
+- Bright Data is integrated only as optional server-side context fallback for
+  low-risk news triage when `BRIGHT_DATA_API_KEY` and `BRIGHT_DATA_ZONE` are
+  configured.
 - No Gemini, Google Generative AI, Bright Data, or Web Unlocker API key is
-  required to build, validate, deploy, or run the current dashboard.
+  required to build, validate, deploy, or run the dashboard. Missing keys must
+  degrade to the deterministic RSS/Google News keyword pipeline.
 - The active public writers are RSS/Google News keyword collection,
-  `public/status.json` generation, static `/api/v1/` generation, production
-  status monitoring, and official-source review alerts.
+  optional AI news enrichment, `public/status.json` generation, static
+  `/api/v1/` generation, production status monitoring, and official-source
+  review alerts.
 
 ## Bright Data Decision
 
-The dashboard does not need a Bright Data API key for the current architecture.
-The current source model depends on official RSS feeds, registered public
-authority URLs, Google News RSS search, source reachability audits, and manual
-review for structured public-health fields.
+The dashboard does not require a Bright Data API key for the current
+architecture. The current source model depends on official RSS feeds,
+registered public authority URLs, Google News RSS search, source reachability
+audits, and manual review for structured public-health fields.
 
-Bright Data could become useful later for narrow enrichment jobs:
+Bright Data is permitted for narrow enrichment jobs:
 
 - resolving metadata from pages that do not expose stable RSS feeds;
 - improving source-availability checks when public pages block basic fetches;
@@ -38,8 +46,9 @@ without independent Tier 1 or Tier 2 verification.
 Bright Data's own documentation describes Web Unlocker as a way to handle proxy
 rotation, anti-bot challenges, and CAPTCHA handling, and its Scraper APIs as
 prebuilt extraction tools. Those capabilities can improve access reliability,
-but they also increase cost, compliance, and attribution burden, so they should
-be introduced only when a specific blocked-source problem justifies it.
+but they also increase cost, compliance, and attribution burden. The live
+dashboard therefore limits Bright Data to a small, optional context fallback
+inside news enrichment rather than a broad crawler.
 
 References:
 
@@ -48,23 +57,27 @@ References:
 
 ## Gemini Decision
 
-Gemini is not currently doing anything in the live repository. There are no live
-Gemini dependencies, workflows, source imports, or environment variables in the
-current production path. Historical project standards mention Gemini because an
-older dashboard expected possible automated extraction.
+Gemini is permitted only for low-risk autonomous news intelligence. The
+production path calls Gemini from `scripts/enrich-news.mjs` after the
+deterministic news updater succeeds and only when a server-side API key is
+configured. Gemini failures, quota errors, invalid JSON, or missing keys must
+not block news updates.
 
-If Gemini or another model is reintroduced, it may only assist with reviewable
-tasks such as:
+Allowed Gemini tasks:
 
-- extracting candidate facts into a draft review artifact;
-- summarizing source pages for analyst review;
-- classifying already-linked items into dashboard signal categories;
-- generating test fixtures or maintenance code.
+- classifying already-linked news items into existing signal categories;
+- identifying duplicate or same-event news items;
+- generating query expansion candidates for future feed discovery;
+- generating an internal reviewer brief from already-linked news items;
+- adding high-confidence signal tags to news items, without removing
+  deterministic tags.
 
 Any Gemini or equivalent extractor must follow the standing rule in
 `CONTENT-STANDARDS.md`: never fabricate numbers or events; only extract what
 sources explicitly state; use `null` for any field that is not confidently
-verified from the cited source.
+verified from the cited source. Gemini must not write signal facts, clinical
+guidance, PPE guidance, risk levels, source tiers, legal text, licensing text,
+or public-health recommendations.
 
 ## Prohibited Uses
 
@@ -81,7 +94,8 @@ AI or enrichment tools must not:
 
 ## Required Before Any Future Integration
 
-Before adding Gemini, Bright Data, or similar services to the live pipeline:
+Before expanding Gemini, Bright Data, or similar services beyond low-risk news
+enrichment:
 
 - update this policy and the public About/Methodology disclosures;
 - add server-side-only environment variables to `.env.example`;

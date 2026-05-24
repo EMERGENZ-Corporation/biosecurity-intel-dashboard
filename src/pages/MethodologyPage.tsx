@@ -195,29 +195,27 @@ export default function MethodologyPage() {
         body={
           <>
             <p>
-              Gemini is not currently used by the live update pipeline. The active news
-              updater is RSS plus keyword matching and requires no Gemini API key. No Gemini
-              dependency, workflow, environment variable, or public writer is active in the
-              production path. Historical project standards still define the rule for any
-              future Gemini or equivalent extractor: never fabricate numbers or events; use
-              <code>null</code> for any value that cannot be verified from the cited source.
+              Gemini is used only for optional server-side news enrichment after the
+              deterministic RSS and Google News updater succeeds. When configured, Gemini may
+              classify news items into existing signal IDs, identify duplicate or same-event
+              items, suggest future query expansions, and generate an internal brief. Missing
+              keys, quota errors, invalid JSON, or timeouts fail open to the deterministic
+              pipeline.
             </p>
             <p>
-              Bright Data is not currently used by the live update pipeline, and the dashboard
-              does not need a Bright Data API key for the current architecture. It would be an
-              optional enrichment layer, useful for blocked source metadata, link resolution,
-              source-availability checks, and pages without stable RSS feeds. It should not be
-              used as a source of record, and it should not write structured clinical,
-              public-health, legal, or licensing fields without independent Tier 1/2
-              verification.
+              Bright Data is used only as an optional server-side context fallback for the
+              Gemini news-enrichment step. It can help retrieve short context snippets for
+              difficult-to-read news items, but it is not used as a source of record and should
+              not write structured clinical, public-health, legal, or licensing fields without
+              independent Tier 1/2 verification.
             </p>
             <p>
               AI-assisted development may support code, tests, and source-backed summaries.
               Public-facing claims must still cite the underlying authority document, and
-              clinical guidance remains manually curated under the content standards. CI also
-              runs an AI/enrichment disclosure audit to detect accidental introduction of
-              Gemini, Bright Data, or browser-exposed provider keys without a matching policy
-              update.
+              clinical guidance remains manually curated under the content standards. Gemini
+              may add only high-confidence news tags and internal reviewer context. CI also
+              runs an AI/enrichment disclosure audit to detect browser-exposed provider keys
+              or expansion beyond the approved news-enrichment boundary.
             </p>
           </>
         }

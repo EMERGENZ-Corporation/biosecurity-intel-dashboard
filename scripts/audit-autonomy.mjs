@@ -15,6 +15,7 @@ const OUTPUT_PATH = process.env.AUTONOMY_AUDIT_OUTPUT || 'autonomy-audit-result.
 
 const REQUIRED_PACKAGE_SCRIPTS = [
   'update:news',
+  'enrich:news',
   'generate:status',
   'generate:api',
   'validate:data',
@@ -32,9 +33,13 @@ const WORKFLOW_CHECKS = [
     requiredText: [
       "cron: '0 */6 * * *'",
       'npm run update:news',
+      'npm run enrich:news',
       'npm run generate:api',
       'EMERGENZ Data Bot',
       'MAX_NEWS_ITEMS: 500',
+      'GEMINI_API_KEY',
+      'BRIGHT_DATA_API_KEY',
+      'ai-news-brief',
       'news-pipeline',
       'biosecurity-data-writers',
     ],
@@ -135,8 +140,11 @@ function checkPublicContract(errors) {
   if (status.automation?.mode !== 'autonomous-with-review-gates') {
     pushMissing(errors, 'status.json', 'automation.mode must be "autonomous-with-review-gates"')
   }
-  if (!Array.isArray(status.automation?.dataWriters) || status.automation.dataWriters.length < 2) {
+  if (!Array.isArray(status.automation?.dataWriters) || status.automation.dataWriters.length < 3) {
     pushMissing(errors, 'status.json', 'automation.dataWriters must describe the scheduled public writers')
+  }
+  if (!status.automation?.dataWriters?.some((writer) => writer.id === 'ai-news-enrichment')) {
+    pushMissing(errors, 'status.json', 'automation.dataWriters must include ai-news-enrichment')
   }
   if (!Array.isArray(status.automation?.reviewGates) || status.automation.reviewGates.length < 2) {
     pushMissing(errors, 'status.json', 'automation.reviewGates must describe non-autonomous clinical/structured-data boundaries')

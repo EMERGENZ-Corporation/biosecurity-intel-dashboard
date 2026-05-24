@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (AI and enrichment disclosure audit)
+**Last updated:** 2026-05-24 (Gemini/Bright Data news enrichment integration)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,28 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Gemini/Bright Data news enrichment integration (commit TBD)
+
+User approved a low-risk Gemini integration for news tagging, duplicate/event clustering, search-query expansion, and autonomous internal brief generation, with Bright Data as optional context fallback and no degradation when provider keys are absent or unavailable. Added an optional post-news enrichment step that can add only high-confidence news `signalIds`, never removes deterministic keyword tags, writes an internal result artifact/reusable issue, and fails open to the existing RSS/Google News pipeline.
+
+**Files touched:**
+- `scripts/enrich-news.mjs` — new optional Gemini/Bright Data enrichment command. Reads recent news + signal catalog, optionally requests small Bright Data context snippets, calls Gemini for structured JSON triage, validates all IDs/confidence values, adds only high-confidence signal tags, and writes `ai-news-enrichment-result.json`.
+- `.github/workflows/update-news.yml` — runs `npm run enrich:news` after successful deterministic news fetch, passes server-side Gemini/Bright Data secrets, reconciles one reusable `ai-news-brief` issue, then regenerates the public API from any safe tag additions.
+- `.env.example` — documents server-side Gemini and Bright Data settings; no `VITE_` exposure.
+- `package.json` — adds `npm run enrich:news`.
+- `AI-ENRICHMENT-POLICY.md` — updates the policy from non-use to optional server-side news enrichment with deterministic fallback.
+- `scripts/audit-ai-enrichment.mjs` — allows only the approved server-side key references and verifies the workflow/script/disclosure boundary.
+- `scripts/audit-autonomy.mjs` — requires `enrich:news`, the workflow step, and the `ai-news-enrichment` status contract.
+- `scripts/generate-status.mjs` — adds `ai-news-enrichment` to the public automation contract and tightens the AI/enrichment review-gate text.
+- `src/pages/AboutPage.tsx`, `src/pages/MethodologyPage.tsx`, and `README.md` — update public/operator disclosure to describe optional Gemini/Bright Data news enrichment and fail-open behavior.
+- `public/status.json` and `public/api/v1/` — regenerated after the status contract update.
+- `.gitignore` — ignores the local AI news enrichment result artifact.
+- `HANDOFF.md` — logs the integration.
+
+**Verify:** With no provider keys configured, `npm run enrich:news` exits 0 and writes `ai-news-enrichment-result.json` with `mode: deterministic-fallback`, `aiUsed: false`, and `newsJsonChanged: false`. `npm run audit:ai-enrichment`, `npm run audit:autonomy`, `npm run test:validators`, `npm run validate:data`, and `npm run build` pass.
+
+---
 
 ## ✅ AI and enrichment disclosure audit (commit 4143372)
 

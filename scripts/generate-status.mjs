@@ -101,6 +101,18 @@ function main() {
         ],
       },
       {
+        id: 'ai-news-enrichment',
+        cadence: 'After successful news fetch when server-side keys are configured',
+        workflow: 'Update News Feed',
+        writes: ['src/data/news.json signalIds only', 'internal ai-news-enrichment-result.json', 'reusable ai-news-brief issue'],
+        guardrails: [
+          'Gemini failures fail open to deterministic keyword tags',
+          'Only high-confidence AI signal tags may be added; deterministic tags are never removed',
+          'Bright Data is optional context fallback and never source-of-record',
+          'No clinical, risk, legal, licensing, or structured signal fields are AI-written',
+        ],
+      },
+      {
         id: 'status-api-refresh',
         cadence: 'Daily and on source data changes',
         workflow: 'Status Refresh',
@@ -126,7 +138,7 @@ function main() {
       {
         id: 'ai-or-enrichment-output',
         mode: 'not-source-of-record',
-        reason: 'Gemini, Bright Data, or similar tools are not used by the live pipeline today. They may assist future review workflows, but must not overwrite structured public fields without attribution and validation.',
+        reason: 'Gemini and Bright Data are integrated only as optional server-side news-enrichment helpers. They may add high-confidence news tags and internal review context, but must not overwrite clinical, risk, legal, licensing, source-registry, or structured public-health fields.',
       },
     ],
     monitors: [
