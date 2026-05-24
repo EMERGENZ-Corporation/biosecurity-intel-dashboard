@@ -335,7 +335,9 @@
       "vector_borne",
       "amr_fungal"
     ],
-    "sourceTier": 1
+    "sourceTier": 1,
+    "knownBlocked": true,
+    "knownBlockedReason": "CDC HAN returns HTTP 403 to identified audit user-agents (verified 2026-05-23). Source still reachable via browser; re-verify status manually each quarter and reset this flag if access is restored."
   },
   {
     "id": "cdc-nwss",

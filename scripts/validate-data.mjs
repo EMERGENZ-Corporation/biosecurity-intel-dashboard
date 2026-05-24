@@ -160,6 +160,20 @@ signalSources.forEach((source, index) => {
       if (!THREAT_CATEGORIES.has(domain)) errors.push(`${label}: invalid domain "${domain}"`)
     })
   }
+  // knownBlocked — opt-in flag for sources that consistently block automated
+  // user-agents. Audit scripts route HTTP 403 from these to a known-blocked
+  // bucket instead of failures. Require a reason so the flag isn't applied
+  // silently and can be re-audited.
+  if (source.knownBlocked !== undefined) {
+    if (typeof source.knownBlocked !== 'boolean') {
+      errors.push(`${label}: knownBlocked must be boolean`)
+    }
+    if (source.knownBlocked === true) {
+      if (typeof source.knownBlockedReason !== 'string' || source.knownBlockedReason.trim().length === 0) {
+        errors.push(`${label}: knownBlocked=true requires a non-empty knownBlockedReason`)
+      }
+    }
+  }
 })
 
 checkDuplicate(signals, (signal) => signal.id, 'signal ids')

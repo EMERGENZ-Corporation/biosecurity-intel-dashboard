@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (navbar tagline width fix + Recent Developments now combines timeline & news + forensic audit findings logged)
+**Last updated:** 2026-05-23 (knownBlocked source-audit allowlist — cdc-han HTTP 403 noise resolved)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -128,7 +128,29 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Navbar tagline width + Recent Developments combined feed + forensic audit (commit pending)
+## ✅ knownBlocked source-audit allowlist (commit pending)
+
+Forensic-audit follow-up from earlier tonight: the `cdc-han` source returned HTTP 403 on every `audit:sources` run because CDC Health Alert Network pages block identified automated user-agents. The audit was already report-only via `OFFICIAL_SOURCE_AUDIT_STRICT=0`, but the recurring noise risked masking real future failures behind familiar output. Implemented a data-driven allowlist so a source can declare itself `knownBlocked: true` with a `knownBlockedReason`, after which the audits route a HTTP 403 (and only a 403) for that source to a separate `knownBlockedSources` bucket instead of `failures` / `unreadableSources`. Any other failure shape (timeout, 5xx, 404, etc.) still counts as a real failure.
+
+**Files touched:**
+- `src/data/signal-sources.json` — `cdc-han` entry gains `knownBlocked: true` + a `knownBlockedReason` documenting the verified-2026-05-23 status and a quarterly re-verification reminder. No other source records were touched.
+- `scripts/validate-data.mjs` — new schema check: `knownBlocked` must be boolean; when `true`, `knownBlockedReason` must be a non-empty string. Prevents silently flipping the bypass.
+- `scripts/audit-official-sources.mjs` — new `isExpectedBlock(source, item)` helper; reachability checks now route HTTP-403-on-`knownBlocked` to `knownBlockedSources`; result JSON gains `sources.knownBlocked` count + `knownBlockedSources` array; summary log surfaces `, N known-blocked` suffix and dumps each known-blocked acknowledgement separately so it can't hide.
+- `scripts/audit-source-drift.mjs` — mirror of the same pattern on the drift fingerprint fetch path. Same routing, same log shape.
+- `scripts/test-validate-data.mjs` — new `expectSourcesFailure` harness (mutates `signal-sources.json` instead of `signals.json`). Three regression tests added: `knownBlocked: true` without `knownBlockedReason` → fails; empty/whitespace `knownBlockedReason` → fails; non-boolean `knownBlocked` → fails.
+
+**Verify:**
+- `npm run audit:sources` now logs `OK - audited 31 Tier 1/2 sources, 1 known-blocked` with a separate `known-blocked cdc-han: HTTP 403` line above it — no entry in `failures` array; `result.sources.knownBlocked === 1`.
+- `npm run audit:source-drift` (against an isolated baseline path) logs identical structure on the drift side.
+- `npm run validate:data`, `npm run test:validators`, `npm run build` all pass with the new schema validation and three new regression tests green.
+
+**Why this matters (per CONTENT-STANDARDS + AGENTS.md):** This change touches audit logic which is part of the autonomy contract, so it was authored on a stronger reasoning model with full verification per `AGENTS.md`. The bypass is intentionally narrow — it requires both the data-record flag *and* an HTTP 403 specifically. Any other failure mode (a real outage, a takedown, a redirect) is still reported as a failure for the same `knownBlocked` source.
+
+**Backlog impact:** Resolves the second of the two 2026-05-23 forensic-audit backlog items. The remaining backlog item (Tier 1/2 source-drift review of 8 changed ECDC/WHO/NETEC/PAHO fingerprints) is unchanged — that one still requires SME content review, not code.
+
+---
+
+## ✅ Navbar tagline width + Recent Developments combined feed + forensic audit (commit 0a5715d)
 
 Three coordinated last-fixes for the night driven by user inspection:
 
@@ -1545,7 +1567,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 ## ⏳ Outstanding work (backlog)
 
 - **Tier 1/2 source-drift review (medium).** The 2026-05-23 forensic audit flagged 8 fingerprint changes on ECDC ANDES surveillance/RRA, WHO ANDES RRA v2 / DON601, NETEC VHF/Hantavirus, PAHO epi alerts, and WHO mass-gatherings pages. Requires SME content review of each changed page to confirm clinical facts are unchanged before re-fingerprinting. Blocked on: SME availability. Scope: medium (per-page review + targeted `audit:source-drift` re-run).
-- **`cdc-han` persistent HTTP 403 in `audit:sources` (low).** CDC HAN pages block automated user agents despite the existing UA string. Currently shows as a recurring "failure" in two audits but is report-only so doesn't break builds — long-term risk is masking real future failures behind familiar noise. Scope: small (either add a `knownBlocked: true` flag on the source record + teach the audit to respect it, or upgrade the UA fallback for CDC). Touches audit logic → recommend stronger reasoning model per AGENTS.md.
+- **~~`cdc-han` persistent HTTP 403 in `audit:sources`.~~** ✅ Shipped — data-driven `knownBlocked` allowlist added to both `audit:sources` and `audit:source-drift`; cdc-han now routes to `knownBlockedSources` and no longer counts as a failure. Schema requires a `knownBlockedReason` so the bypass can be re-audited; three regression tests cover the schema rule. See the "knownBlocked source-audit allowlist" entry above.
 - **Timeline event automation (low).** `signal-timeline.json` is manually curated and gradually drifts behind the live news pipeline. Considered acceptable today (events represent significant curated milestones, not raw news) and surfaced honestly via the combined Recent Developments feed shipped 2026-05-23. Revisit if curation cadence proves unsustainable.
 - **~~Further deepening.~~** ✅ Shipped. Every signal now has 5 attributed sections (was 3 for non-hantavirus). Total dashboard sections: 80 (was 50). See `scripts/parity-signal-sections.mjs`.
 - **~~Bundle size.~~** ✅ Addressed by lazy route loading + Rollup `manualChunks`. Entry chunk is now 18.23 kB (gzip 6.39 kB); heavy map/data/vendor chunks are split and cacheable.

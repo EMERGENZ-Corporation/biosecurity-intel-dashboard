@@ -115,6 +115,14 @@ function describeChange(previous, current) {
   return fields
 }
 
+// A source flagged knownBlocked is allowed to return HTTP 403 from the
+// drift fingerprint fetch; route that to a known-blocked bucket rather than
+// counting it as unreadable. See audit-official-sources.mjs for the
+// matching contract on the reachability audit.
+function isExpectedBlock(source, error) {
+  return source.knownBlocked === true && error?.status === 403
+}
+
 async function main() {
   const checkedAt = new Date()
   const sources = JSON.parse(readFileSync(`${DATA_DIR}/signal-sources.json`, 'utf8'))
@@ -125,12 +133,20 @@ async function main() {
   const fingerprints = []
   const changedSources = []
   const unreadableSources = []
+  const knownBlockedSources = []
 
   if (!SKIP_NETWORK) {
     const results = await Promise.all(officialSources.map((source) => fingerprintSource(source)))
     for (const result of results) {
       if (result.error) {
-        unreadableSources.push(result.error)
+        if (isExpectedBlock(result.source, result.error)) {
+          knownBlockedSources.push({
+            ...result.error,
+            knownBlockedReason: result.source.knownBlockedReason,
+          })
+        } else {
+          unreadableSources.push(result.error)
+        }
         continue
       }
 
@@ -184,11 +200,17 @@ async function main() {
       total: sources.length,
       audited: officialSources.length,
       fingerprinted: fingerprints.length,
+      knownBlocked: knownBlockedSources.length,
     },
     changedSources,
     unreadableSources,
+    knownBlockedSources,
   }
   writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2) + '\n')
+
+  const knownBlockedSuffix = knownBlockedSources.length > 0
+    ? `, ${knownBlockedSources.length} known-blocked`
+    : ''
 
   if (!result.ok) {
     const mode = STRICT ? 'FAILED' : 'REVIEW NEEDED'
@@ -199,13 +221,24 @@ async function main() {
     for (const item of unreadableSources) {
       console.error(`- ${item.id}: ${item.reason}`)
     }
+    if (knownBlockedSources.length > 0) {
+      console.error(`(${knownBlockedSources.length} known-blocked acknowledged — not counted as failures)`)
+      for (const item of knownBlockedSources) {
+        console.error(`- ${item.id}: ${item.reason} (known-blocked: ${item.knownBlockedReason})`)
+      }
+    }
     if (STRICT) process.exitCode = 1
     return
   }
 
+  if (knownBlockedSources.length > 0) {
+    for (const item of knownBlockedSources) {
+      console.log(`[audit-source-drift] known-blocked ${item.id}: ${item.reason}`)
+    }
+  }
   const baselineNote = baseline ? '' : ' (new baseline)'
   console.log(
-    `[audit-source-drift] OK - fingerprinted ${fingerprints.length} Tier 1/2 sources${baselineNote}` +
+    `[audit-source-drift] OK - fingerprinted ${fingerprints.length} Tier 1/2 sources${knownBlockedSuffix}${baselineNote}` +
       (SKIP_NETWORK ? ' (network skipped)' : ''),
   )
 }

@@ -28,7 +28,12 @@ function makeCaseDir(name) {
   mkdirSync(publicDir, { recursive: true })
   cpSync(join(root, 'src', 'data'), dataDir, { recursive: true })
   cpSync(join(root, 'public', 'status.json'), join(publicDir, 'status.json'))
-  return { dataDir, publicDir, signalsPath: join(dataDir, 'signals.json') }
+  return {
+    dataDir,
+    publicDir,
+    signalsPath: join(dataDir, 'signals.json'),
+    signalSourcesPath: join(dataDir, 'signal-sources.json'),
+  }
 }
 
 function runValidator(dataDir, publicDir) {
@@ -56,6 +61,22 @@ function expectFailure(name, mutate, expectedText) {
   const signals = readJson(signalsPath)
   mutate(signals)
   writeJson(signalsPath, signals)
+
+  const result = runValidator(dataDir, publicDir)
+  const output = `${result.stderr}\n${result.stdout}`
+  if (result.status === 0) {
+    throw new Error(`${name}: expected failure, got pass`)
+  }
+  if (!output.includes(expectedText)) {
+    throw new Error(`${name}: expected output to include "${expectedText}"\n${output}`)
+  }
+}
+
+function expectSourcesFailure(name, mutate, expectedText) {
+  const { dataDir, publicDir, signalSourcesPath } = makeCaseDir(name)
+  const sources = readJson(signalSourcesPath)
+  mutate(sources)
+  writeJson(signalSourcesPath, sources)
 
   const result = runValidator(dataDir, publicDir)
   const output = `${result.stderr}\n${result.stdout}`
@@ -116,6 +137,37 @@ try {
       signal.riskAssessments[0].url = 'not-a-url'
     },
     'url must be valid',
+  )
+
+  // knownBlocked discipline — flagging a source as known-blocked without a
+  // reason is forbidden so the bypass can be re-audited later.
+  expectSourcesFailure(
+    'known-blocked-without-reason',
+    (sources) => {
+      const source = sources[0]
+      source.knownBlocked = true
+      delete source.knownBlockedReason
+    },
+    'knownBlocked=true requires a non-empty knownBlockedReason',
+  )
+
+  expectSourcesFailure(
+    'known-blocked-empty-reason',
+    (sources) => {
+      const source = sources[0]
+      source.knownBlocked = true
+      source.knownBlockedReason = '   '
+    },
+    'knownBlocked=true requires a non-empty knownBlockedReason',
+  )
+
+  expectSourcesFailure(
+    'known-blocked-wrong-type',
+    (sources) => {
+      const source = sources[0]
+      source.knownBlocked = 'yes'
+    },
+    'knownBlocked must be boolean',
   )
 
   console.log('[test-validate-data] OK')

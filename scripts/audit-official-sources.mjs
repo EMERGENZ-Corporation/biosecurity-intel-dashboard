@@ -68,6 +68,15 @@ async function checkReachability(source) {
   }
 }
 
+// A source flagged knownBlocked is allowed to return HTTP 403 from automated
+// reachability checks; we route that one specific failure shape to its own
+// bucket so the audit log stays honest while signalling expected behaviour.
+// Any other failure (timeout, 5xx, 404, etc.) is still a real failure even
+// for known-blocked sources.
+function isExpectedBlock(source, item) {
+  return source.knownBlocked === true && item.status === 403
+}
+
 async function main() {
   const checkedAt = new Date()
   const sources = JSON.parse(readFileSync(`${DATA_DIR}/signal-sources.json`, 'utf8'))
@@ -90,9 +99,19 @@ async function main() {
   }
 
   const unreachableSources = []
+  const knownBlockedSources = []
   if (!SKIP_NETWORK) {
-    const checks = await Promise.all(officialSources.map((source) => checkReachability(source)))
-    unreachableSources.push(...checks.filter(Boolean))
+    const checks = await Promise.all(
+      officialSources.map(async (source) => ({ source, result: await checkReachability(source) })),
+    )
+    for (const { source, result } of checks) {
+      if (!result) continue
+      if (isExpectedBlock(source, result)) {
+        knownBlockedSources.push({ ...result, knownBlockedReason: source.knownBlockedReason })
+      } else {
+        unreachableSources.push(result)
+      }
+    }
   }
 
   const failures = [...malformedSources, ...staleSources, ...unreachableSources]
@@ -113,15 +132,21 @@ async function main() {
     sources: {
       total: sources.length,
       audited: officialSources.length,
+      knownBlocked: knownBlockedSources.length,
       byTier,
     },
     malformedSources,
     staleSources,
     unreachableSources,
+    knownBlockedSources,
     failures,
   }
 
   writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2) + '\n')
+
+  const knownBlockedSuffix = knownBlockedSources.length > 0
+    ? `, ${knownBlockedSources.length} known-blocked`
+    : ''
 
   if (!result.ok) {
     const mode = STRICT ? 'FAILED' : 'REVIEW NEEDED'
@@ -129,12 +154,23 @@ async function main() {
     for (const item of failures) {
       console.error(`- ${item.id ?? 'unknown'}: ${item.reason}`)
     }
+    if (knownBlockedSources.length > 0) {
+      console.error(`(${knownBlockedSources.length} known-blocked acknowledged — not counted as failures)`)
+      for (const item of knownBlockedSources) {
+        console.error(`- ${item.id ?? 'unknown'}: ${item.reason} (known-blocked: ${item.knownBlockedReason})`)
+      }
+    }
     if (STRICT) process.exitCode = 1
     return
   }
 
+  if (knownBlockedSources.length > 0) {
+    for (const item of knownBlockedSources) {
+      console.log(`[audit-official-sources] known-blocked ${item.id}: ${item.reason}`)
+    }
+  }
   console.log(
-    `[audit-official-sources] OK - audited ${officialSources.length} Tier 1/2 sources` +
+    `[audit-official-sources] OK - audited ${officialSources.length} Tier 1/2 sources${knownBlockedSuffix}` +
       (SKIP_NETWORK ? ' (network skipped)' : ''),
   )
 }
