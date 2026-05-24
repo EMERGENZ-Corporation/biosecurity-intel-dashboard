@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Official source freshness audit workflow (commit TBD)
+## ✅ Official source freshness audit workflow (commit 2558add)
 
 User approved the next autonomy task: add an internal Tier 1/2 source freshness audit before attempting higher-risk automated source extractors. Added a non-mutating audit command that checks official source registry records for stale `lastVerified` dates and URL reachability, writes an internal JSON result, and added a daily GitHub Actions workflow that opens or updates one reusable `source-audit` issue when official sources need review.
 
