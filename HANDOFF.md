@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (add SCRATCH.md for informal session notes)
+**Last updated:** 2026-05-23 (add date-range filter to News and Timeline pages)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -128,7 +128,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Add SCRATCH.md (commit pending)
+## ✅ Date-range filter on News and Timeline pages (commit pending)
+
+User asked for a way to filter sections by date instead of scrolling through everything. Added preset date-range pill filters using the existing `intel-pill is-button` pattern — no date picker, no infinite scroll refactor, no data shape changes.
+
+**Files touched:**
+- `src/pages/News.tsx` — added `DateRange` state + filter row (`All / Today / Last 7 days / Last 30 days / Last 90 days`). Each pill shows live item count. Filter composes with the existing signal filter; ExportButtons receives the combined filtered set so CSV/JSON exports respect both filters.
+- `src/pages/TimelinePage.tsx` — added a third filter row above Severity/Category (`All / Last 7 days / Last 30 days / Last 90 days / Last year`). Composes with the existing severity and category filters.
+
+**Why presets, not a date picker:** Biosecurity triage windows (today, 7d, 30d, 90d) are the actual use cases; a custom picker would add weight without value. Matches existing pill UI pattern across the app.
+
+**Verify:** On `/news`, click "Today" — card count drops from 500 to ~108 (validated in preview). On `/timeline`, click "Last 7 days" — events drop from 41 to 3. Defaults are "All" so existing behavior is preserved out of the box. `npm run build` passes with no TS errors.
+
+---
+
+## ✅ Add SCRATCH.md (commit 707d3e4)
 
 Informal scratch log for session notes, ideas, and context that don't belong in HANDOFF.md. Seeded with Brightdata API key setup notes from this session.
 

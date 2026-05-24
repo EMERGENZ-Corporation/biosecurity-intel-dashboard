@@ -21,6 +21,16 @@ import {
 
 const SEVERITY_OPTIONS: SignalSeverity[] = ['monitor', 'watch', 'concern', 'action']
 
+type DateRange = 'all' | '7d' | '30d' | '90d' | '365d'
+
+const DATE_RANGES: { id: DateRange; label: string; days: number | null }[] = [
+  { id: 'all', label: 'All', days: null },
+  { id: '7d', label: 'Last 7 days', days: 7 },
+  { id: '30d', label: 'Last 30 days', days: 30 },
+  { id: '90d', label: 'Last 90 days', days: 90 },
+  { id: '365d', label: 'Last year', days: 365 },
+]
+
 function monthKey(iso: string): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return 'Unknown'
@@ -36,18 +46,25 @@ function dayLabel(iso: string): string {
 export default function TimelinePage() {
   const [categoryFilter, setCategoryFilter] = useState<ThreatCategory | 'all'>('all')
   const [severityFilter, setSeverityFilter] = useState<SignalSeverity | 'all'>('all')
+  const [dateRange, setDateRange] = useState<DateRange>('all')
 
   const events = useMemo(() => {
+    const range = DATE_RANGES.find(r => r.id === dateRange)
+    const cutoff = range?.days != null ? Date.now() - range.days * 24 * 60 * 60 * 1000 : null
     const subset = signalTimeline.filter((event) => {
       if (categoryFilter !== 'all' && event.category !== categoryFilter) return false
       if (severityFilter !== 'all') {
         const signal = getSignal(event.signalId)
         if (!signal || signal.severity !== severityFilter) return false
       }
+      if (cutoff !== null) {
+        const t = new Date(event.date).getTime()
+        if (Number.isNaN(t) || t < cutoff) return false
+      }
       return true
     })
     return [...subset].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  }, [categoryFilter, severityFilter])
+  }, [categoryFilter, severityFilter, dateRange])
 
   // Group events by month for scannable layout
   const grouped = useMemo(() => {
@@ -100,6 +117,39 @@ export default function TimelinePage() {
           borderRadius: '6px',
         }}
       >
+        <div role="group" aria-label="Timeline date range filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+          <span
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '0.625rem',
+              color: 'var(--color-text-muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              minWidth: '5rem',
+            }}
+          >
+            Date:
+          </span>
+          {DATE_RANGES.map((range) => {
+            const active = dateRange === range.id
+            return (
+              <button
+                key={range.id}
+                type="button"
+                aria-pressed={active}
+                className={`intel-pill is-button ${active ? 'is-active' : 'is-muted'}`}
+                onClick={() => setDateRange(range.id)}
+                style={{
+                  ...intelToneStyle(NEUTRAL_TONE),
+                  cursor: 'pointer',
+                }}
+              >
+                {range.label}
+              </button>
+            )
+          })}
+        </div>
+
         <div role="group" aria-label="Timeline severity filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span
             style={{

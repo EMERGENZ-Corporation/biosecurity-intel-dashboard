@@ -171,8 +171,19 @@ function NewsCard({ item }: { item: NewsItem }) {
   )
 }
 
+type DateRange = 'all' | '1d' | '7d' | '30d' | '90d'
+
+const DATE_RANGES: { id: DateRange; label: string; days: number | null }[] = [
+  { id: 'all', label: 'All', days: null },
+  { id: '1d', label: 'Today', days: 1 },
+  { id: '7d', label: 'Last 7 days', days: 7 },
+  { id: '30d', label: 'Last 30 days', days: 30 },
+  { id: '90d', label: 'Last 90 days', days: 90 },
+]
+
 export default function News() {
   const [activeSignal, setActiveSignal] = useState<string | null>(null)
+  const [dateRange, setDateRange] = useState<DateRange>('all')
 
   // Build filter tabs: only signals that have at least one news item
   const signalsWithNews = useMemo(() => {
@@ -181,10 +192,15 @@ export default function News() {
   }, [])
 
   const filtered = useMemo(() => {
+    const range = DATE_RANGES.find(r => r.id === dateRange)
+    const cutoff = range?.days != null ? Date.now() - range.days * 24 * 60 * 60 * 1000 : null
     const sorted = [...news].sort((a, b) => b.timestamp - a.timestamp)
-    if (activeSignal === null) return sorted
-    return sorted.filter(item => item.signalIds.includes(activeSignal))
-  }, [activeSignal])
+    return sorted.filter(item => {
+      if (activeSignal !== null && !item.signalIds.includes(activeSignal)) return false
+      if (cutoff !== null && item.timestamp < cutoff) return false
+      return true
+    })
+  }, [activeSignal, dateRange])
 
   const newestTs = news.reduce((max, item) => Math.max(max, item.timestamp), 0)
   const updatedLabel = newestTs
@@ -261,6 +277,53 @@ export default function News() {
         <strong style={{ color: 'var(--color-accent-yellow)' }}>Note:</strong> News feeds contain
         media coverage and may include analysis, opinion, or unverified information. For
         authoritative clinical and public health guidance, see individual signal detail pages.
+      </div>
+
+      {/* Date range filter */}
+      <div
+        role="group"
+        aria-label="News date range filter"
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '0.375rem',
+          alignItems: 'center',
+          marginBottom: '0.75rem',
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '0.625rem',
+            color: 'var(--color-text-muted)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
+            minWidth: '3.5rem',
+          }}
+        >
+          Date:
+        </span>
+        {DATE_RANGES.map(range => {
+          const isActive = dateRange === range.id
+          const count = range.days == null
+            ? news.length
+            : news.filter(n => n.timestamp >= Date.now() - range.days! * 24 * 60 * 60 * 1000).length
+          return (
+            <button
+              key={range.id}
+              type="button"
+              aria-pressed={isActive}
+              className={`intel-pill is-button ${isActive ? 'is-active' : 'is-muted'}`}
+              onClick={() => setDateRange(range.id)}
+              style={{
+                ...intelToneStyle(NEUTRAL_TONE),
+                cursor: 'pointer',
+              }}
+            >
+              {range.label} ({count})
+            </button>
+          )
+        })}
       </div>
 
       {/* Signal filter tabs */}
