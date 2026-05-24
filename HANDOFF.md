@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (add date-range filter to News and Timeline pages)
+**Last updated:** 2026-05-23 (add PODCAST-EXPORT-DESIGN.md — draft design doc, no code)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -128,7 +128,30 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Date-range filter on News and Timeline pages (commit pending)
+## ✅ Podcast export design doc (commit pending)
+
+User asked to workshop a "Export as podcast" feature for the Briefings page: free TTS, natural voice, downloadable + emailable audio. After surveying the Briefings content shape (16 signals, 12 Watch+, ~25-35 min combined episode length, clinical terminology like "Bundibugyo" / "Koplik" / "maculopapular"), drafted a read-and-approve design doc covering architecture, TTS engine choice, retention, content-integrity controls, and a 6-session build plan. No code written — design only.
+
+**Files touched:**
+- `PODCAST-EXPORT-DESIGN.md` — new root-level design doc (18 sections, ~430 lines).
+
+**Key decisions baked in:**
+- TTS: Kokoro-82M (Apache 2.0, open weights, runs on free GHA CPU)
+- Storage: Vercel Blob (1 GB free) — ~122 MB steady-state at 7-day retention
+- Retention: 7 days for daily combined episodes; per-card MP3s replace-in-place
+- Content equivalence: script generated deterministically from `signals.json`; no paraphrasing or AI rewording allowed
+- Mandatory pre-recorded intro/outro disclaimers, audio-fingerprint enforced in CI
+- Pronunciation lexicon at `src/data/tts-lexicon.json` with SME-reviewed phonetic mappings
+- New audit `audit:podcast` wired into autonomy contract and status JSON
+- New sections in `CONTENT-STANDARDS.md` and `AI-ENRICHMENT-POLICY.md` for synthetic-audio governance
+
+**Open decisions before build:** voice selection, intro/outro voicing, SME owner for lexicon curation, RSS metadata, generation cadence (see §13 of the design doc).
+
+**Verify:** Read `PODCAST-EXPORT-DESIGN.md`. Confirm §13 open decisions, §15 out-of-scope list, and §18 sign-off requirements. `npm run test:validators`, `npm run validate:data`, and `npm run build` all pass.
+
+---
+
+## ✅ Date-range filter on News and Timeline pages (commit e8cb4cd)
 
 User asked for a way to filter sections by date instead of scrolling through everything. Added preset date-range pill filters using the existing `intel-pill is-button` pattern — no date picker, no infinite scroll refactor, no data shape changes.
 
