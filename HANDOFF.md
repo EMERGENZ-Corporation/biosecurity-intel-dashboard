@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Support button and relationship network clipping fix (commit f94a62f)
+## ✅ Support button and relationship network clipping fix (commit 73ed36e)
 
 User asked for a Donate/support button linked to the Zeffy donation form, a visual fix for clipping in the signal relationship network graphic, and a Medical Intelligence Unit brand line under the EMERGENZ wordmark. Added the support link in both desktop and compact navigation, expanded the network SVG drawing area so the outer severity ring and labels no longer clip, and moved the compact nav breakpoint earlier to avoid header overflow.
 
