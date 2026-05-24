@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Automation and AI disclosure + full Intelligence naming (commit TBD)
+## ✅ Automation and AI disclosure + full Intelligence naming (commit b2fef42)
 
 User asked whether the dashboard needs Bright Data, what Gemini is currently doing, whether AI-use disclosure should be enhanced, whether the dashboard should be titled Biosecurity or Biosurveillance Intelligence, and then explicitly said to proceed after the model-change recommendation for legal/data-integrity-sensitive work. Kept the scope as Biosecurity, expanded public-facing "Intel" product-name text to "Biosecurity Intelligence Dashboard," and added clear About/Methodology disclosure that current autonomy covers news/status/API/monitoring while Gemini and Bright Data are not used by the live pipeline.
 
