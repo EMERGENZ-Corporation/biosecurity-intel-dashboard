@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-24T05:04:29.699Z",
+  "generatedAt": "2026-05-24T06:53:09.562Z",
   "endpoint": "/api/v1/signal-sources.json",
   "count": 38,
   "signalSources": [
@@ -340,7 +340,9 @@
         "vector_borne",
         "amr_fungal"
       ],
-      "sourceTier": 1
+      "sourceTier": 1,
+      "knownBlocked": true,
+      "knownBlockedReason": "CDC HAN returns HTTP 403 to identified audit user-agents (verified 2026-05-23). Source still reachable via browser; re-verify status manually each quarter and reset this flag if access is restored."
     },
     {
       "id": "cdc-nwss",
