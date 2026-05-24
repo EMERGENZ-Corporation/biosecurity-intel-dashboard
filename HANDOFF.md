@@ -124,7 +124,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Status monitor threshold aligned with daily refresh cadence (commit PENDING)
+## ✅ Status monitor threshold aligned with daily refresh cadence (commit 390556f)
 
 User reported same-day failures from the Production Status Monitor workflow. Root cause: the monitor ran hourly but failed when deployed `status.json` was older than 8 hours, while the Status Refresh workflow only regenerates `status.json` once daily; this created predictable false-positive failures for much of each day.
 
