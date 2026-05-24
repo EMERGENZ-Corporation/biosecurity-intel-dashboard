@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (official source drift audit added)
+**Last updated:** 2026-05-24 (official source audit report-only workflow fix)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,20 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Official source audit report-only workflow fix (commit TBD)
+
+User reported the Official Source Audit workflow was still failing and generating GitHub failure notifications. Root cause: source review findings were intentionally converted into failed workflow steps, so expected URL blocks/timeouts/drift alerts caused "All jobs have failed" emails instead of quiet internal issue updates.
+
+**Files touched:**
+- `scripts/audit-official-sources.mjs` — adds `OFFICIAL_SOURCE_AUDIT_STRICT`; when set to `0`, source review findings still write JSON and console output but do not return a nonzero exit code.
+- `scripts/audit-source-drift.mjs` — adds `OFFICIAL_SOURCE_DRIFT_STRICT` with the same report-only behavior for drift findings.
+- `.github/workflows/official-source-audit.yml` — runs both audits with strict mode disabled and removes the final failure gates, preserving reusable `source-audit` / `source-drift` issue updates without failing the scheduled workflow.
+- `HANDOFF.md` — logs the permanent notification fix.
+
+**Verify:** `OFFICIAL_SOURCE_AUDIT_STRICT=0 npm run audit:sources` and `OFFICIAL_SOURCE_DRIFT_STRICT=0 npm run audit:source-drift` both exit 0 while still reporting current review items. `npm run test:validators`, `npm run validate:data`, and `npm run build` pass.
+
+---
 
 ## ✅ Official source drift detector (commit 13f335f)
 

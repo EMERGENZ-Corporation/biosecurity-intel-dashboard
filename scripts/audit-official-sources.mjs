@@ -5,6 +5,7 @@ const OUTPUT_PATH = process.env.OFFICIAL_SOURCE_AUDIT_OUTPUT || 'official-source
 const MAX_VERIFIED_AGE_DAYS = Number.parseInt(process.env.MAX_SOURCE_VERIFIED_AGE_DAYS || '30', 10)
 const REQUEST_TIMEOUT_MS = Number.parseInt(process.env.SOURCE_AUDIT_TIMEOUT_MS || '15000', 10)
 const SKIP_NETWORK = process.env.OFFICIAL_SOURCE_AUDIT_SKIP_NETWORK === '1'
+const STRICT = process.env.OFFICIAL_SOURCE_AUDIT_STRICT !== '0'
 const SOURCE_TIERS = new Set([1, 2])
 const HTTP_OK_MAX = 399
 
@@ -123,11 +124,12 @@ async function main() {
   writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2) + '\n')
 
   if (!result.ok) {
-    console.error('[audit-official-sources] FAILED')
+    const mode = STRICT ? 'FAILED' : 'REVIEW NEEDED'
+    console.error(`[audit-official-sources] ${mode}`)
     for (const item of failures) {
       console.error(`- ${item.id ?? 'unknown'}: ${item.reason}`)
     }
-    process.exitCode = 1
+    if (STRICT) process.exitCode = 1
     return
   }
 

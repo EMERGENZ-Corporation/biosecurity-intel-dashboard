@@ -36,11 +36,11 @@ jobs:
 
       - name: Audit Tier 1/2 source freshness
         id: audit-sources
-        continue-on-error: true
         run: npm run audit:sources
         env:
           MAX_SOURCE_VERIFIED_AGE_DAYS: 30
           SOURCE_AUDIT_TIMEOUT_MS: 15000
+          OFFICIAL_SOURCE_AUDIT_STRICT: 0
 
       - name: Restore official source fingerprints
         id: restore-source-fingerprints
@@ -53,12 +53,12 @@ jobs:
 
       - name: Audit Tier 1/2 source drift
         id: audit-source-drift
-        continue-on-error: true
         run: npm run audit:source-drift
         env:
           SOURCE_DRIFT_BASELINE: .source-fingerprints/official-source-fingerprints.json
           SOURCE_DRIFT_OUTPUT: official-source-drift-result.json
           SOURCE_DRIFT_TIMEOUT_MS: 15000
+          OFFICIAL_SOURCE_DRIFT_STRICT: 0
 
       - name: Save official source fingerprints
         if: always()
@@ -278,11 +278,3 @@ jobs:
                 labels: ['source-drift'],
               })
             }
-
-      - name: Fail workflow when official source audit fails
-        if: steps.audit-sources.outcome != 'success'
-        run: exit 1
-
-      - name: Fail workflow when official source drift needs review
-        if: steps.audit-source-drift.outcome != 'success'
-        run: exit 1

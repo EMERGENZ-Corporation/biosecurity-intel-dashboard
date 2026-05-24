@@ -7,6 +7,7 @@ const BASELINE_PATH = process.env.SOURCE_DRIFT_BASELINE || '.source-fingerprints
 const OUTPUT_PATH = process.env.SOURCE_DRIFT_OUTPUT || 'official-source-drift-result.json'
 const REQUEST_TIMEOUT_MS = Number.parseInt(process.env.SOURCE_DRIFT_TIMEOUT_MS || '15000', 10)
 const SKIP_NETWORK = process.env.OFFICIAL_SOURCE_DRIFT_SKIP_NETWORK === '1'
+const STRICT = process.env.OFFICIAL_SOURCE_DRIFT_STRICT !== '0'
 const SOURCE_TIERS = new Set([1, 2])
 const HTTP_OK_MAX = 399
 
@@ -190,14 +191,15 @@ async function main() {
   writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2) + '\n')
 
   if (!result.ok) {
-    console.error('[audit-source-drift] REVIEW NEEDED')
+    const mode = STRICT ? 'FAILED' : 'REVIEW NEEDED'
+    console.error(`[audit-source-drift] ${mode}`)
     for (const item of changedSources) {
       console.error(`- ${item.id}: changed ${item.changedFields.join(', ')}`)
     }
     for (const item of unreadableSources) {
       console.error(`- ${item.id}: ${item.reason}`)
     }
-    process.exitCode = 1
+    if (STRICT) process.exitCode = 1
     return
   }
 
