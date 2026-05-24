@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (official source audit report-only workflow fix)
+**Last updated:** 2026-05-24 (autonomous update contract audit)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,25 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Autonomous update contract audit (commit 305b6d5)
+
+User asked to proceed with making the dashboard autonomous while preserving content and attribution standards. Added a first-class autonomy contract to `public/status.json`, surfaced it on `/status`, and added a CI regression audit so scheduled public writers, monitoring workflows, generated endpoints, and manual-review boundaries cannot be removed silently.
+
+**Files touched:**
+- `scripts/audit-autonomy.mjs` — new non-network regression audit for package scripts, scheduled workflow wiring, public status/API endpoints, and content-standard boundaries.
+- `package.json` — adds `npm run audit:autonomy`.
+- `.github/workflows/ci.yml` — runs the autonomy audit on push and pull request before data validation/build.
+- `scripts/generate-status.mjs` — adds `automation` metadata covering scheduled writers, monitors, and review gates.
+- `scripts/validate-data.mjs` — requires the `status.automation` contract in `public/status.json`.
+- `src/pages/Status.tsx` — displays the autonomous update loop summary from the status contract.
+- `public/status.json` and `public/api/v1/` — regenerated after the status contract update.
+- `README.md` and `.gitignore` — document the audit command and ignore its local result artifact.
+- `HANDOFF.md` — logs the autonomy hardening task.
+
+**Verify:** `npm run audit:autonomy`, `npm run test:validators`, `npm run validate:data`, and `npm run build` pass. Visit `/status`; the page should show an "Autonomous update loop" card with scheduled writers, review gates, monitors, and the news/status refresh cadences.
+
+---
 
 ## ✅ Official source audit report-only workflow fix (commit 72d8125)
 

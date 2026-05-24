@@ -385,7 +385,7 @@ signalTimeline.forEach((event, index) => {
 })
 
 if (status) {
-  requireFields(status, ['schemaVersion', 'status', 'generatedAt', 'thresholds', 'dashboard', 'signals', 'sources', 'staleReasons'], 'status')
+  requireFields(status, ['schemaVersion', 'status', 'generatedAt', 'thresholds', 'dashboard', 'signals', 'sources', 'automation', 'staleReasons'], 'status')
   if (status.schemaVersion !== 2) errors.push(`status.schemaVersion must be 2; got ${status.schemaVersion}`)
   if (!STATUS_VALUES.has(status.status)) errors.push(`status.status invalid: ${status.status}`)
   if (status.generatedAt && !isIsoDate(status.generatedAt)) errors.push('status.generatedAt must be ISO')
@@ -397,6 +397,17 @@ if (status) {
     requireFields(status.signals, ['total', 'active', 'byCategory', 'staleSignalIds'], 'status.signals')
     if (status.signals.total !== signals.length) errors.push('status.signals.total must match signals.json length')
     if (!Array.isArray(status.signals.staleSignalIds)) errors.push('status.signals.staleSignalIds must be array')
+  }
+  if (status.automation) {
+    requireFields(status.automation, ['mode', 'publicSummary', 'dataWriters', 'reviewGates', 'monitors'], 'status.automation')
+    if (status.automation.mode !== 'autonomous-with-review-gates') {
+      errors.push(`status.automation.mode invalid: ${status.automation.mode}`)
+    }
+    for (const field of ['dataWriters', 'reviewGates', 'monitors']) {
+      if (!Array.isArray(status.automation[field]) || status.automation[field].length === 0) {
+        errors.push(`status.automation.${field} must be a non-empty array`)
+      }
+    }
   }
 }
 

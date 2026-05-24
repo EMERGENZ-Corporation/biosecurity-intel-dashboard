@@ -21,8 +21,12 @@ template and preserves its resilience patterns:
   `/status.json` after each data update.
 - `npm run monitor:status` — independent hourly check of the public
   status endpoint.
+- `npm run audit:autonomy` — regression audit for scheduled update
+  workflows, public status metadata, and review-gated content boundaries.
 - `public/status.json` — machine-readable health contract for the
-  dashboard, surfaced on the in-app Status page.
+  dashboard, surfaced on the in-app Status page. It now includes the
+  autonomous update contract: scheduled public writers, internal monitors,
+  and manual review gates for structured/clinical content.
 
 The hantavirus dashboard remains live as a separate incident vertical.
 This project is the broader multi-threat companion.

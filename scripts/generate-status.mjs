@@ -84,6 +84,78 @@ function main() {
   }
 
   const status = staleReasons.length === 0 ? 'ok' : 'degraded'
+  const automation = {
+    mode: 'autonomous-with-review-gates',
+    publicSummary:
+      'News, public API, RSS, status, production monitoring, and official-source review alerts are scheduled. Structured signal facts, clinical text, and public-health guidance remain review-gated.',
+    dataWriters: [
+      {
+        id: 'news-feed',
+        cadence: 'Every 6 hours',
+        workflow: 'Update News Feed',
+        writes: ['src/data/news.json', 'public/api/v1/news.json', 'public/api/v1/feed.rss'],
+        guardrails: [
+          'Tier 1 feed failures hard-alert during active monitoring',
+          'Zero-change runs skip file writes and commits',
+          'News snippets are truncated and tagged by signal keyword match',
+        ],
+      },
+      {
+        id: 'status-api-refresh',
+        cadence: 'Daily and on source data changes',
+        workflow: 'Status Refresh',
+        writes: ['public/status.json', 'public/api/v1/*.json', 'public/api/v1/feed.rss'],
+        guardrails: [
+          'Runs data validation before and after regeneration',
+          'Verifies production after committed refreshes',
+          'Creates or closes one stale-data issue instead of exposing diagnostics publicly',
+        ],
+      },
+    ],
+    reviewGates: [
+      {
+        id: 'structured-signal-data',
+        mode: 'manual-review-required',
+        reason: 'Case counts, risk levels, geography, and source-backed signal facts require Tier 1/2 verification before publication.',
+      },
+      {
+        id: 'clinical-and-operational-guidance',
+        mode: 'manual-review-required',
+        reason: 'Clinical, PPE, isolation, treatment, and triage-card text is manually curated per CONTENT-STANDARDS.md.',
+      },
+      {
+        id: 'ai-or-enrichment-output',
+        mode: 'not-source-of-record',
+        reason: 'Gemini, Bright Data, or similar tools may assist future review workflows but must not overwrite structured public fields without attribution and validation.',
+      },
+    ],
+    monitors: [
+      {
+        id: 'production-status-monitor',
+        cadence: 'Hourly',
+        workflow: 'Production Status Monitor',
+        action: 'Checks deployed /status.json and opens one reusable status-monitor issue on failure.',
+      },
+      {
+        id: 'official-source-audit',
+        cadence: 'Daily',
+        workflow: 'Official Source Audit',
+        action: 'Checks Tier 1/2 source freshness and reachability in report-only mode with internal issue reconciliation.',
+      },
+      {
+        id: 'official-source-drift',
+        cadence: 'Daily',
+        workflow: 'Official Source Audit',
+        action: 'Fingerprints Tier 1/2 source pages and flags changed or unreadable pages for manual review.',
+      },
+      {
+        id: 'autonomy-regression-audit',
+        cadence: 'On CI push and pull request',
+        workflow: 'CI',
+        action: 'Fails CI if scheduled workflows, public status metadata, or content-standard boundaries are accidentally removed.',
+      },
+    ],
+  }
 
   const out = {
     schemaVersion: 2,
@@ -127,6 +199,7 @@ function main() {
         ? new Date(news.reduce((max, item) => Math.max(max, item.timestamp ?? 0), 0)).toISOString()
         : null,
     },
+    automation,
     staleReasons,
   }
 

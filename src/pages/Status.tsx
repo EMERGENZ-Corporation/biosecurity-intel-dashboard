@@ -33,6 +33,24 @@ interface StatusJson {
     total?: number
     newest?: string | null
   }
+  automation?: {
+    mode?: string
+    publicSummary?: string
+    dataWriters?: Array<{
+      id: string
+      cadence: string
+      workflow: string
+    }>
+    reviewGates?: Array<{
+      id: string
+      mode: string
+    }>
+    monitors?: Array<{
+      id: string
+      cadence: string
+      workflow: string
+    }>
+  }
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -179,6 +197,29 @@ export default function Status() {
         <Row label="News items">{status.news?.total ?? '—'}</Row>
         {status.news?.newest && <Row label="Newest news item">{formatDateTime(status.news.newest)}</Row>}
       </div>
+
+      {status.automation && (
+        <div
+          style={{
+            padding: '0.75rem 1rem',
+            marginBottom: '1rem',
+            backgroundColor: 'var(--color-bg-secondary)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '6px',
+          }}
+        >
+          <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 0.5rem 0' }}>
+            Autonomous update loop
+          </h2>
+          <Row label="Mode">{status.automation.mode ?? '-'}</Row>
+          <Row label="Scheduled writers">{status.automation.dataWriters?.length ?? 0}</Row>
+          <Row label="Review gates">{status.automation.reviewGates?.length ?? 0}</Row>
+          <Row label="Monitors">{status.automation.monitors?.length ?? 0}</Row>
+          {status.automation.dataWriters?.map((writer) => (
+            <Row key={writer.id} label={writer.id}>{writer.cadence} | {writer.workflow}</Row>
+          ))}
+        </div>
+      )}
 
       <div
         style={{
