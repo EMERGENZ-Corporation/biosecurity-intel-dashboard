@@ -18,6 +18,7 @@ const REQUIRED_PACKAGE_SCRIPTS = [
   'generate:status',
   'generate:api',
   'validate:data',
+  'audit:ai-enrichment',
   'audit:sources',
   'audit:source-drift',
   'monitor:status',
@@ -79,6 +80,7 @@ const WORKFLOW_CHECKS = [
     path: '.github/workflows/ci.yml',
     requiredText: [
       'npm run audit:autonomy',
+      'npm run audit:ai-enrichment',
       'npm run test:validators',
       'npm run validate:data',
       'npm run build',

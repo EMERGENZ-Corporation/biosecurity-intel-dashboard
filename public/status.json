@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-05-24T04:32:31.014Z",
+  "generatedAt": "2026-05-24T04:41:27.568Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 48,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-23T00:00:00.000Z",
     "lastChecked": "2026-05-23T12:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-23T12:00:00.000Z",
-    "dataAgeHours": 28.541948333333334,
-    "officialCheckAgeHours": 16.541948333333334
+    "dataAgeHours": 28.69099111111111,
+    "officialCheckAgeHours": 16.69099111111111
   },
   "signals": {
     "total": 16,
@@ -98,7 +98,7 @@
       {
         "id": "ai-or-enrichment-output",
         "mode": "not-source-of-record",
-        "reason": "Gemini, Bright Data, or similar tools may assist future review workflows but must not overwrite structured public fields without attribution and validation."
+        "reason": "Gemini, Bright Data, or similar tools are not used by the live pipeline today. They may assist future review workflows, but must not overwrite structured public fields without attribution and validation."
       }
     ],
     "monitors": [
@@ -125,6 +125,12 @@
         "cadence": "On CI push and pull request",
         "workflow": "CI",
         "action": "Fails CI if scheduled workflows, public status metadata, or content-standard boundaries are accidentally removed."
+      },
+      {
+        "id": "ai-enrichment-disclosure-audit",
+        "cadence": "On CI push and pull request",
+        "workflow": "CI",
+        "action": "Fails CI if Gemini/Bright Data key references are introduced without updating policy and public disclosure."
       }
     ]
   },

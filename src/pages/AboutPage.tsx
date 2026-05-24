@@ -359,25 +359,30 @@ export default function AboutPage() {
         <Body>
           <strong>Gemini is not currently used by the live dashboard pipeline.</strong> The
           news updater is RSS plus keyword matching and explicitly requires no Gemini or other
-          external AI API key. If Gemini or another model is reintroduced later, it may only
-          assist with extraction or summarization behind validators; it must not fabricate
-          numbers, clinical recommendations, risk levels, or source claims, and uncertain
-          values must remain <code>null</code> until verified against the originating source.
+          external AI API key. No Gemini dependency, workflow, environment variable, or public
+          writer is active in the production path. If Gemini or another model is reintroduced
+          later, it may only assist with extraction or summarization behind validators; it must
+          not fabricate numbers, clinical recommendations, risk levels, or source claims, and
+          uncertain values must remain <code>null</code> until verified against the originating
+          source.
         </Body>
         <Body>
           <strong>Bright Data is not currently used by the live dashboard pipeline.</strong>{' '}
-          It may be useful later as an optional enrichment or source-availability layer for
-          pages without stable RSS feeds, blocked article metadata, or link resolution, but it
-          should not become a source of record. Any Bright Data-derived artifact must preserve
-          the original publisher attribution, respect source licensing, and stay out of
-          structured clinical or public-health fields unless independently verified from a
-          Tier 1 or Tier 2 authority.
+          The dashboard does not require a Bright Data API key today. Bright Data could be
+          useful later as an optional enrichment or source-availability layer for pages without
+          stable RSS feeds, blocked article metadata, or link resolution, but it should not
+          become a source of record. Any Bright Data-derived artifact must preserve the original
+          publisher attribution, respect source licensing, and stay out of structured clinical
+          or public-health fields unless independently verified from a Tier 1 or Tier 2
+          authority.
         </Body>
         <Body>
           AI-assisted development and editorial work may help maintain the software, tests,
           and source-backed summaries. The governing rule is attribution first: public claims
           must point to the underlying authority, not to an AI system, and clinical guidance
-          remains manually curated under CONTENT-STANDARDS.md.
+          remains manually curated under CONTENT-STANDARDS.md. The project also maintains an
+          explicit AI/enrichment policy and CI audit so future Gemini, Bright Data, or similar
+          integrations cannot become hidden production dependencies.
         </Body>
       </Card>
 

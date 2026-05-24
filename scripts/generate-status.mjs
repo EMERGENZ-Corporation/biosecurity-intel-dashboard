@@ -126,7 +126,7 @@ function main() {
       {
         id: 'ai-or-enrichment-output',
         mode: 'not-source-of-record',
-        reason: 'Gemini, Bright Data, or similar tools may assist future review workflows but must not overwrite structured public fields without attribution and validation.',
+        reason: 'Gemini, Bright Data, or similar tools are not used by the live pipeline today. They may assist future review workflows, but must not overwrite structured public fields without attribution and validation.',
       },
     ],
     monitors: [
@@ -153,6 +153,12 @@ function main() {
         cadence: 'On CI push and pull request',
         workflow: 'CI',
         action: 'Fails CI if scheduled workflows, public status metadata, or content-standard boundaries are accidentally removed.',
+      },
+      {
+        id: 'ai-enrichment-disclosure-audit',
+        cadence: 'On CI push and pull request',
+        workflow: 'CI',
+        action: 'Fails CI if Gemini/Bright Data key references are introduced without updating policy and public disclosure.',
       },
     ],
   }

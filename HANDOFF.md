@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (autonomous update contract audit)
+**Last updated:** 2026-05-24 (AI and enrichment disclosure audit)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,26 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ AI and enrichment disclosure audit (commit TBD)
+
+User asked to proceed on the Gemini/Bright Data review and AI-use disclosure question. Confirmed the live pipeline does not use Gemini, Bright Data, or any equivalent AI/web-data API key; added a formal AI/enrichment policy and a CI audit so future provider-key or live integration changes must update disclosure and review gates intentionally.
+
+**Files touched:**
+- `AI-ENRICHMENT-POLICY.md` — new policy documenting current non-use, the Bright Data decision, Gemini boundaries, prohibited uses, and required steps before any future integration.
+- `scripts/audit-ai-enrichment.mjs` — new audit that checks public disclosure, status review gates, and live code/workflows for Gemini/Bright Data key references or browser-exposed provider keys.
+- `package.json` — adds `npm run audit:ai-enrichment`.
+- `.github/workflows/ci.yml` — runs the AI/enrichment audit on push and pull request.
+- `scripts/audit-autonomy.mjs` — expects the AI/enrichment audit to remain part of the autonomy contract.
+- `scripts/generate-status.mjs` — clarifies that Gemini/Bright Data are not live today and adds the disclosure audit to the status monitor list.
+- `src/pages/AboutPage.tsx` and `src/pages/MethodologyPage.tsx` — strengthen public disclosure that no Gemini/Bright Data dependency, key, workflow, or public writer is active, and that future usage is review-only / not source-of-record.
+- `public/status.json` and `public/api/v1/` — regenerated after the status contract update.
+- `README.md` and `.gitignore` — document the new audit and ignore its local result artifact.
+- `HANDOFF.md` — logs the disclosure hardening task.
+
+**Verify:** `npm run audit:ai-enrichment`, `npm run audit:autonomy`, `npm run test:validators`, `npm run validate:data`, and `npm run build` pass. Visit `/about`, `/methodology`, and `/status`; Gemini and Bright Data should be disclosed as not live production dependencies and future use should be framed as review-gated enrichment only.
+
+---
 
 ## ✅ Autonomous update contract audit (commit 914c1c5)
 

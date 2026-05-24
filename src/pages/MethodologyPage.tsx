@@ -196,23 +196,28 @@ export default function MethodologyPage() {
           <>
             <p>
               Gemini is not currently used by the live update pipeline. The active news
-              updater is RSS plus keyword matching and requires no Gemini API key. Historical
-              project standards still define the rule for any future Gemini or equivalent
-              extractor: never fabricate numbers or events; use <code>null</code> for any
-              value that cannot be verified from the cited source.
+              updater is RSS plus keyword matching and requires no Gemini API key. No Gemini
+              dependency, workflow, environment variable, or public writer is active in the
+              production path. Historical project standards still define the rule for any
+              future Gemini or equivalent extractor: never fabricate numbers or events; use
+              <code>null</code> for any value that cannot be verified from the cited source.
             </p>
             <p>
-              Bright Data is not currently used by the live update pipeline. It would be an
+              Bright Data is not currently used by the live update pipeline, and the dashboard
+              does not need a Bright Data API key for the current architecture. It would be an
               optional enrichment layer, useful for blocked source metadata, link resolution,
-              source-availability checks, and pages without stable RSS feeds. It should not
-              be used as a source of record, and it should not write structured clinical,
+              source-availability checks, and pages without stable RSS feeds. It should not be
+              used as a source of record, and it should not write structured clinical,
               public-health, legal, or licensing fields without independent Tier 1/2
               verification.
             </p>
             <p>
               AI-assisted development may support code, tests, and source-backed summaries.
               Public-facing claims must still cite the underlying authority document, and
-              clinical guidance remains manually curated under the content standards.
+              clinical guidance remains manually curated under the content standards. CI also
+              runs an AI/enrichment disclosure audit to detect accidental introduction of
+              Gemini, Bright Data, or browser-exposed provider keys without a matching policy
+              update.
             </p>
           </>
         }

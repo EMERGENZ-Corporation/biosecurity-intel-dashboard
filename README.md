@@ -23,6 +23,8 @@ template and preserves its resilience patterns:
   status endpoint.
 - `npm run audit:autonomy` — regression audit for scheduled update
   workflows, public status metadata, and review-gated content boundaries.
+- `npm run audit:ai-enrichment` — confirms Gemini/Bright Data are not live
+  production dependencies and that AI/enrichment disclosures remain current.
 - `public/status.json` — machine-readable health contract for the
   dashboard, surfaced on the in-app Status page. It now includes the
   autonomous update contract: scheduled public writers, internal monitors,
@@ -32,6 +34,9 @@ The hantavirus dashboard remains live as a separate incident vertical.
 This project is the broader multi-threat companion.
 
 Content and source decisions are governed by `CONTENT-STANDARDS.md`.
+AI/enrichment boundaries are governed by `AI-ENRICHMENT-POLICY.md`; the
+current dashboard does not require Gemini, Bright Data, or any equivalent
+third-party AI/web-data API key.
 
 Agents and operators should read `AGENTS.md` before starting work. It defines
 model-change prompting rules, token-efficiency expectations, and the standard
