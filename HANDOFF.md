@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (fix Bright Data zone secret name mismatch in CI workflow and .env.example)
+**Last updated:** 2026-05-23 (add SCRATCH.md for informal session notes)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -128,7 +128,16 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Fix Bright Data zone secret name mismatch (commit pending)
+## ✅ Add SCRATCH.md (commit pending)
+
+Informal scratch log for session notes, ideas, and context that don't belong in HANDOFF.md. Seeded with Brightdata API key setup notes from this session.
+
+**Files touched:**
+- `SCRATCH.md` — new informal scratch log
+
+---
+
+## ✅ Fix Bright Data zone secret name mismatch (commit f85562e)
 
 The GitHub/Vercel secret for the Bright Data zone is named `biosecurity_web_unlocker`, but the workflow was referencing `secrets.BRIGHT_DATA_ZONE` (which never existed), causing Bright Data context fetching to silently skip on every CI run. Fixed the workflow to reference the correct secret name, and updated `.env.example` to show the actual zone name instead of the stale placeholder `web_unlocker1`.
 
