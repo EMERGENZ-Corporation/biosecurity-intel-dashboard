@@ -2,7 +2,10 @@ import { writeFileSync } from 'fs'
 
 const STATUS_URL = process.env.STATUS_URL || 'https://biosecurity-intel.emergenzsystems.org/status.json'
 const OUTPUT_PATH = process.env.STATUS_MONITOR_OUTPUT || 'status-monitor-result.json'
-const MAX_GENERATED_AGE_HOURS = Number.parseInt(process.env.MAX_STATUS_GENERATED_AGE_HOURS || '8', 10)
+// Status Refresh currently runs once per day. Keep this threshold comfortably
+// above 24h so the hourly monitor detects missed refresh/deploy cycles instead
+// of alerting during normal daily cadence.
+const MAX_GENERATED_AGE_HOURS = Number.parseInt(process.env.MAX_STATUS_GENERATED_AGE_HOURS || '30', 10)
 
 function hoursSince(iso) {
   const age = (Date.now() - new Date(iso).getTime()) / 36e5
@@ -91,7 +94,8 @@ async function main() {
   if (!result.ok) {
     console.error('[monitor:status] FAILED')
     for (const failure of failures) console.error(`- ${failure}`)
-    process.exit(1)
+    process.exitCode = 1
+    return
   }
 
   console.log('[monitor:status] OK')
@@ -100,5 +104,5 @@ async function main() {
 main().catch((error) => {
   console.error('[monitor:status] FAILED:', error.message)
   writeFileSync(OUTPUT_PATH, JSON.stringify({ ok: false, statusUrl: STATUS_URL, checkedAt: new Date().toISOString(), failures: [error.message] }, null, 2))
-  process.exit(1)
+  process.exitCode = 1
 })

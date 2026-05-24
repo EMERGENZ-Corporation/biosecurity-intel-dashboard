@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (CI workflow added for branch-protection enforcement)
+**Last updated:** 2026-05-23 (status monitor threshold aligned with daily refresh cadence)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -123,6 +123,19 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Status monitor threshold aligned with daily refresh cadence (commit PENDING)
+
+User reported same-day failures from the Production Status Monitor workflow. Root cause: the monitor ran hourly but failed when deployed `status.json` was older than 8 hours, while the Status Refresh workflow only regenerates `status.json` once daily; this created predictable false-positive failures for much of each day.
+
+**Files touched:**
+- `.github/workflows/status-monitor.yml` — raises `MAX_STATUS_GENERATED_AGE_HOURS` from 8 to 30 so the hourly monitor catches missed daily refresh/deploy cycles instead of normal daily cadence.
+- `scripts/check-status.mjs` — changes the default generated-age threshold to 30 hours and exits via `process.exitCode` instead of immediate `process.exit(1)`, avoiding the local Windows Node assertion seen during reproduction.
+- `HANDOFF.md` — logs the production-monitor fix.
+
+**Verify:** `STATUS_URL=https://biosecurity-intel.emergenzsystems.org/status.json MAX_STATUS_GENERATED_AGE_HOURS=30 npm run monitor:status` passes against the currently deployed status endpoint. `npm run validate:data` and `npm run build` pass.
+
+---
 
 ## ✅ CI workflow for branch protection (commit f4d8b4d)
 

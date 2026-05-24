@@ -33,7 +33,7 @@ jobs:
         run: npm run monitor:status
         env:
           STATUS_URL: https://biosecurity-intel.emergenzsystems.org/status.json
-          MAX_STATUS_GENERATED_AGE_HOURS: 8
+          MAX_STATUS_GENERATED_AGE_HOURS: 30
 
       - name: Reconcile status monitor issue
         uses: actions/github-script@v8
