@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Gemini/Bright Data news enrichment integration (commit TBD)
+## ✅ Gemini/Bright Data news enrichment integration (commit 9a26173)
 
 User approved a low-risk Gemini integration for news tagging, duplicate/event clustering, search-query expansion, and autonomous internal brief generation, with Bright Data as optional context fallback and no degradation when provider keys are absent or unavailable. Added an optional post-news enrichment step that can add only high-confidence news `signalIds`, never removes deterministic keyword tags, writes an internal result artifact/reusable issue, and fails open to the existing RSS/Google News pipeline.
 
