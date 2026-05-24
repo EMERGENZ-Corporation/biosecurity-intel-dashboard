@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (navbar logo fix — star of life inline with Z; subtitle shows DASHBOARD)
+**Last updated:** 2026-05-23 (fix Bright Data zone secret name mismatch in CI workflow and .env.example)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,18 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Fix Bright Data zone secret name mismatch (commit pending)
+
+The GitHub/Vercel secret for the Bright Data zone is named `biosecurity_web_unlocker`, but the workflow was referencing `secrets.BRIGHT_DATA_ZONE` (which never existed), causing Bright Data context fetching to silently skip on every CI run. Fixed the workflow to reference the correct secret name, and updated `.env.example` to show the actual zone name instead of the stale placeholder `web_unlocker1`.
+
+**Files touched:**
+- `.github/workflows/update-news.yml` — changed `secrets.BRIGHT_DATA_ZONE` → `secrets.biosecurity_web_unlocker` on the `BRIGHT_DATA_ZONE` env line
+- `.env.example` — updated default zone value from `web_unlocker1` to `biosecurity_web_unlocker`
+
+**Verify:** On next workflow run, `BRIGHT_DATA_ZONE` env var will be non-empty; `ai-news-enrichment-result.json` should show `brightData.attempted > 0` when `BRIGHT_DATA_NEWS_CONTEXT=1`.
+
+---
 
 ## ✅ Navbar logo fix (commit pending)
 

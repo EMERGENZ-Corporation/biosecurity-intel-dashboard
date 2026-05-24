@@ -61,7 +61,7 @@ jobs:
           MAX_AI_NEWS_ITEMS: 80
           MAX_AI_PUBLIC_TAG_ADDS: 80
           BRIGHT_DATA_API_KEY: ${{ secrets.BRIGHT_DATA_API_KEY }}
-          BRIGHT_DATA_ZONE: ${{ secrets.BRIGHT_DATA_ZONE }}
+          BRIGHT_DATA_ZONE: ${{ secrets.biosecurity_web_unlocker }}
           BRIGHT_DATA_NEWS_CONTEXT: ${{ vars.BRIGHT_DATA_NEWS_CONTEXT || '1' }}
           MAX_BRIGHT_DATA_CONTEXT_ITEMS: 5
 
