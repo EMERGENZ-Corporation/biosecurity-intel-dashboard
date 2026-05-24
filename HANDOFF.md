@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ AI and enrichment disclosure audit (commit TBD)
+## ✅ AI and enrichment disclosure audit (commit 4143372)
 
 User asked to proceed on the Gemini/Bright Data review and AI-use disclosure question. Confirmed the live pipeline does not use Gemini, Bright Data, or any equivalent AI/web-data API key; added a formal AI/enrichment policy and a CI audit so future provider-key or live integration changes must update disclosure and review gates intentionally.
 
