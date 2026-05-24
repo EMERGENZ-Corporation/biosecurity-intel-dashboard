@@ -251,7 +251,7 @@ export default function Overview() {
             margin: '0 0 0.25rem 0',
           }}
         >
-          BIOSECURITY INTEL DASHBOARD
+          BIOSECURITY INTELLIGENCE DASHBOARD
         </h1>
         <p
           style={{

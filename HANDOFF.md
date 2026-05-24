@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (support button and relationship network clipping fix)
+**Last updated:** 2026-05-24 (automation and AI disclosure added)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,20 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Automation and AI disclosure + full Intelligence naming (commit TBD)
+
+User asked whether the dashboard needs Bright Data, what Gemini is currently doing, whether AI-use disclosure should be enhanced, whether the dashboard should be titled Biosecurity or Biosurveillance Intelligence, and then explicitly said to proceed after the model-change recommendation for legal/data-integrity-sensitive work. Kept the scope as Biosecurity, expanded public-facing "Intel" product-name text to "Biosecurity Intelligence Dashboard," and added clear About/Methodology disclosure that current autonomy covers news/status/API/monitoring while Gemini and Bright Data are not used by the live pipeline.
+
+**Files touched:**
+- `src/pages/AboutPage.tsx` — adds "Automation & AI Use Disclosure" covering current automation, Gemini non-use, Bright Data non-use, future AI guardrails, and source-attribution boundaries; updates citation examples to the full dashboard title.
+- `src/pages/MethodologyPage.tsx` — adds "Automation boundaries" and "AI and enrichment tools" sections for analyst-facing transparency.
+- `index.html`, `src/components/AcknowledgmentModal.tsx`, `src/components/NavBar.tsx`, `src/pages/Overview.tsx`, `scripts/generate-api.mjs` — updates public-facing product-name/title text from "Biosecurity Intel Dashboard" to "Biosecurity Intelligence Dashboard" while keeping the repo/domain identifiers unchanged.
+- `public/api/v1/` — regenerated static API/RSS outputs so the feed title and generation timestamps match the updated generator.
+
+**Verify:** Visit `/about` and `/methodology`; About should show "Automation & AI Use Disclosure" with Gemini and Bright Data non-use language, Methodology should show "Automation boundaries" and "AI and enrichment tools," and the browser title / overview heading / RSS feed title should use "Biosecurity Intelligence Dashboard." `npm run test:validators`, `npm run validate:data`, and `npm run build` pass.
+
+---
 
 ## ✅ Support button and relationship network clipping fix (commit 73ed36e)
 

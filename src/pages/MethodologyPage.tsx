@@ -164,6 +164,61 @@ export default function MethodologyPage() {
       />
 
       <MethodologySection
+        title="Automation boundaries"
+        body={
+          <>
+            <p>
+              The dashboard is autonomous where automation is low-risk and directly
+              inspectable: public news collection, RSS feed generation, status-contract
+              publication, static API generation, validation, production verification, and
+              stale-data alerting.
+            </p>
+            <ul style={listStyle}>
+              <li><strong>News feed:</strong> RSS and per-signal Google News queries run every 6 hours. News items are tagged to signals by keyword matching and source weighting.</li>
+              <li><strong>Status contract:</strong> <code>/status.json</code> is regenerated daily and when source-backed data changes.</li>
+              <li><strong>Public API:</strong> <code>/api/v1/</code> static JSON and RSS endpoints are regenerated after successful data/news updates.</li>
+              <li><strong>Monitoring:</strong> production checks verify deployed freshness and raise reusable GitHub issues when thresholds fail.</li>
+            </ul>
+            <p>
+              Structured public-health fields remain intentionally conservative. Case counts,
+              clinical guidance, PPE language, risk levels, and generated API contracts must
+              pass validators and stay tied to registered Tier 1/2 sources. Automation may
+              assist with discovery and extraction, but it cannot become the authority of
+              record.
+            </p>
+          </>
+        }
+      />
+
+      <MethodologySection
+        title="AI and enrichment tools"
+        body={
+          <>
+            <p>
+              Gemini is not currently used by the live update pipeline. The active news
+              updater is RSS plus keyword matching and requires no Gemini API key. Historical
+              project standards still define the rule for any future Gemini or equivalent
+              extractor: never fabricate numbers or events; use <code>null</code> for any
+              value that cannot be verified from the cited source.
+            </p>
+            <p>
+              Bright Data is not currently used by the live update pipeline. It would be an
+              optional enrichment layer, useful for blocked source metadata, link resolution,
+              source-availability checks, and pages without stable RSS feeds. It should not
+              be used as a source of record, and it should not write structured clinical,
+              public-health, legal, or licensing fields without independent Tier 1/2
+              verification.
+            </p>
+            <p>
+              AI-assisted development may support code, tests, and source-backed summaries.
+              Public-facing claims must still cite the underlying authority document, and
+              clinical guidance remains manually curated under the content standards.
+            </p>
+          </>
+        }
+      />
+
+      <MethodologySection
         title="Estimative language"
         body={
           <>

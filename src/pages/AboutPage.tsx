@@ -340,9 +340,45 @@ export default function AboutPage() {
           </li>
           <li>
             All automated pipeline commits are authored by <code>EMERGENZ Data Bot</code>; all
-            AI-assisted manual commits carry <code>Co-Authored-By: Claude</code> attribution.
+            AI-assisted manual commits carry co-authorship attribution in git history.
           </li>
         </ul>
+      </Card>
+
+      {/* Automation and AI disclosure */}
+      <Card>
+        <SectionHeader>Automation &amp; AI Use Disclosure</SectionHeader>
+        <Body>
+          The dashboard is designed to be autonomous for public news collection, status
+          publication, and static API generation, while keeping structured public-health fields
+          under source-backed review. The current automated jobs fetch RSS and Google News
+          results, validate checked-in data, regenerate <code>/status.json</code>, regenerate
+          <code>/api/v1/</code> endpoints, verify production freshness, and raise reusable
+          GitHub issues when freshness or Tier 1 feed checks fail.
+        </Body>
+        <Body>
+          <strong>Gemini is not currently used by the live dashboard pipeline.</strong> The
+          news updater is RSS plus keyword matching and explicitly requires no Gemini or other
+          external AI API key. If Gemini or another model is reintroduced later, it may only
+          assist with extraction or summarization behind validators; it must not fabricate
+          numbers, clinical recommendations, risk levels, or source claims, and uncertain
+          values must remain <code>null</code> until verified against the originating source.
+        </Body>
+        <Body>
+          <strong>Bright Data is not currently used by the live dashboard pipeline.</strong>{' '}
+          It may be useful later as an optional enrichment or source-availability layer for
+          pages without stable RSS feeds, blocked article metadata, or link resolution, but it
+          should not become a source of record. Any Bright Data-derived artifact must preserve
+          the original publisher attribution, respect source licensing, and stay out of
+          structured clinical or public-health fields unless independently verified from a
+          Tier 1 or Tier 2 authority.
+        </Body>
+        <Body>
+          AI-assisted development and editorial work may help maintain the software, tests,
+          and source-backed summaries. The governing rule is attribution first: public claims
+          must point to the underlying authority, not to an AI system, and clinical guidance
+          remains manually curated under CONTENT-STANDARDS.md.
+        </Body>
       </Card>
 
       {/* Legal Disclaimer */}
@@ -455,8 +491,8 @@ export default function AboutPage() {
         <SectionHeader>Attribution &amp; Citation Guidance</SectionHeader>
         <Body>
           This dashboard is an aggregation layer over primary public health authority
-          reporting. When you cite, quote, or republish information from EMERGENZ
-          Biosecurity Intel, please follow the guidance below so credit flows to the
+          reporting. When you cite, quote, or republish information from the EMERGENZ
+          Biosecurity Intelligence Dashboard, please follow the guidance below so credit flows to the
           underlying authority and downstream readers can verify against the source.
         </Body>
 
@@ -520,11 +556,11 @@ export default function AboutPage() {
           }}
         >
 {`APA-style:
-EMERGENZ Corporation. (2026). Biosecurity Intel Dashboard.
+EMERGENZ Corporation. (2026). Biosecurity Intelligence Dashboard.
   Retrieved [DATE] from https://biosecurity-intel.emergenzsystems.org
 
 Inline:
-EMERGENZ Biosecurity Intel (accessed YYYY-MM-DD),
+EMERGENZ Biosecurity Intelligence Dashboard (accessed YYYY-MM-DD),
   citing [primary authority] — [source-document URL].`}
         </pre>
         <Body>

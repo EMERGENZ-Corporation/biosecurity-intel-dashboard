@@ -83,7 +83,7 @@ function generateRssFeed(generatedAt) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>EMERGENZ Biosecurity Intel Dashboard</title>
+    <title>EMERGENZ Biosecurity Intelligence Dashboard</title>
     <link>${SITE_URL}/</link>
     <description>High-severity biosecurity signals and recent authority/media coverage. Generated ${generatedAt}.</description>
     <language>en-us</language>

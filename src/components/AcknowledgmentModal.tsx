@@ -112,7 +112,7 @@ export default function AcknowledgmentModal({ onAcknowledge }: Props) {
             marginBottom: '1.25rem',
           }}
         >
-          EMERGENZ — Biosecurity Intel Dashboard
+          EMERGENZ — Biosecurity Intelligence Dashboard
         </div>
 
         {/* Title */}
