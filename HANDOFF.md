@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (agent model-selection and token-efficiency guide added)
+**Last updated:** 2026-05-24 (support button and relationship network clipping fix)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,18 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Support button and relationship network clipping fix (commit f94a62f)
+
+User asked for a Donate/support button linked to the Zeffy donation form, a visual fix for clipping in the signal relationship network graphic, and a Medical Intelligence Unit brand line under the EMERGENZ wordmark. Added the support link in both desktop and compact navigation, expanded the network SVG drawing area so the outer severity ring and labels no longer clip, and moved the compact nav breakpoint earlier to avoid header overflow.
+
+**Files touched:**
+- `src/components/NavBar.tsx` — adds the Zeffy support link, renders "Medical Intelligence Unit" under the Singapore Sling wordmark, and switches to compact navigation below 1360px to prevent header overflow.
+- `src/pages/NetworkPage.tsx` — expands the SVG viewBox, adjusts outer ring radius, and allows contained horizontal scroll on narrow graph layouts.
+
+**Verify:** Visit `/network`; graph nodes and labels should remain inside the SVG bounds with no page-level horizontal overflow. The header should show "Medical Intelligence Unit" under EMERGENZ and the Support link should target the Zeffy donation form.
+
+---
 
 ## ✅ Agent model-selection and token-efficiency guide (commit 864d6e4)
 

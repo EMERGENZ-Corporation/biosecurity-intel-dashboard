@@ -17,10 +17,12 @@ const NAV_LINKS = [
   { to: '/about', label: 'About' },
 ]
 
+const DONATE_URL = 'https://www.zeffy.com/en-US/donation-form/support-the-biosecurity-intelligence-dashboard'
+
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useMediaQuery('(max-width: 1360px)')
   const navigate = useNavigate()
 
   function closeMenu() {
@@ -80,16 +82,29 @@ export default function NavBar() {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', whiteSpace: 'nowrap' }}>
             {/* Wordmark — Singapore Sling font */}
-            <span
-              style={{
-                fontFamily: "'Singapore Sling', sans-serif",
-                fontSize: isMobile ? '1.375rem' : '1.625rem',
-                lineHeight: 1,
-                letterSpacing: '0.02em',
-              }}
-            >
-              <span style={{ color: '#E52222' }}>EMERGEN</span>
-              <span style={{ color: '#2E86DE' }}>Z</span>
+            <span style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
+              <span
+                style={{
+                  fontFamily: "'Singapore Sling', sans-serif",
+                  fontSize: isMobile ? '1.375rem' : '1.625rem',
+                  lineHeight: 0.9,
+                  letterSpacing: '0.02em',
+                }}
+              >
+                <span style={{ color: '#E52222' }}>EMERGEN</span>
+                <span style={{ color: '#2E86DE' }}>Z</span>
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Singapore Sling', sans-serif",
+                  fontSize: isMobile ? '0.5rem' : '0.625rem',
+                  lineHeight: 1,
+                  color: 'var(--color-text-muted)',
+                  letterSpacing: '0.05em',
+                }}
+              >
+                Medical Intelligence Unit
+              </span>
             </span>
 
             {/* Star of Life — path lifted verbatim from Star_of_life.svg brand asset,
@@ -173,6 +188,26 @@ export default function NavBar() {
                 {label}
               </NavLink>
             ))}
+            <a
+              href={DONATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily: "'IBM Plex Sans', sans-serif",
+                fontSize: '0.8125rem',
+                fontWeight: 700,
+                padding: '0.3rem 0.7rem',
+                borderRadius: '4px',
+                textDecoration: 'none',
+                color: '#071014',
+                backgroundColor: 'var(--color-emergenz)',
+                border: '1px solid var(--color-emergenz)',
+                display: 'block',
+                marginLeft: '0.25rem',
+              }}
+            >
+              Support
+            </a>
             <form onSubmit={onSearchSubmit} role="search" style={{ marginLeft: '0.5rem' }}>
               <input
                 type="search"
@@ -277,6 +312,29 @@ export default function NavBar() {
               {label}
             </NavLink>
           ))}
+          <a
+            href={DONATE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            role="menuitem"
+            onClick={closeMenu}
+            style={{
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: '0.9375rem',
+              fontWeight: 700,
+              padding: '0.75rem 0.875rem',
+              minHeight: '44px',
+              display: 'flex',
+              alignItems: 'center',
+              borderRadius: '4px',
+              textDecoration: 'none',
+              color: '#071014',
+              backgroundColor: 'var(--color-emergenz)',
+              border: '1px solid var(--color-emergenz)',
+            }}
+          >
+            Support the dashboard
+          </a>
         </div>
       )}
     </nav>

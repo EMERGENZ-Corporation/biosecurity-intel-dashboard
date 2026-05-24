@@ -14,16 +14,16 @@ import { signals, SEVERITY_COLORS } from '../utils/signals'
 import type { Signal, SignalRelationshipType } from '../types'
 
 // ── Layout constants ──────────────────────────────────────────────────────────
-const WIDTH = 800
-const HEIGHT = 600
+const WIDTH = 900
+const HEIGHT = 720
 const CX = WIDTH / 2
 const CY = HEIGHT / 2
 
 const SEVERITY_RINGS: Record<string, number> = {
   action: 90,
   concern: 175,
-  watch: 255,
-  monitor: 320,
+  watch: 245,
+  monitor: 300,
 }
 
 // ── Edge styling by relationship type ────────────────────────────────────────
@@ -186,13 +186,14 @@ export default function NetworkPage() {
           backgroundColor: 'var(--color-bg-secondary)',
           border: '1px solid var(--color-border)',
           borderRadius: '6px',
-          overflow: 'hidden',
+          overflowX: 'auto',
+          overflowY: 'hidden',
         }}
       >
         {/* SVG graph */}
         <svg
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          style={{ width: '100%', height: 'auto', display: 'block' }}
+          style={{ width: '100%', minWidth: '640px', height: 'auto', display: 'block' }}
           aria-label="Signal relationship network graph"
           role="img"
         >
