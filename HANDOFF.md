@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (Gemini/Bright Data news enrichment integration)
+**Last updated:** 2026-05-24 (navbar logo fix — star of life inline with Z; subtitle shows DASHBOARD)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,12 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Navbar logo fix (commit pending)
+
+- Star of Life SVG moved inside an inline flex row alongside the EMERGENZ wordmark so it renders on the same line immediately after the Z, not below it.
+- Subtitle updated from `BIOSECURITY / INTELLIGENCE` to `BIOSECURITY / INTELLIGENCE / DASHBOARD` so the full title is visible on desktop.
+- Stale `C:Tempour-signal-changes.patch` deleted — fully superseded by the Gemini enrichment commit (`9a26173`).
 
 ## ✅ Gemini/Bright Data news enrichment integration (commit 9a26173)
 
