@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Official source drift detector (commit TBD)
+## ✅ Official source drift detector (commit 13f335f)
 
 User said to proceed to the next autonomy task after the official source freshness audit. Added a second non-mutating autonomy layer that fingerprints Tier 1/2 source pages, compares them with the previous private GitHub Actions cache baseline, and opens or updates one internal `source-drift` issue when official pages change or cannot be fingerprinted.
 
