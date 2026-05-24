@@ -1,9 +1,45 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-24T08:20:00.995Z",
+  "generatedAt": "2026-05-24T08:39:26.122Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "google-news-632d4517",
+      "authority": "Google News",
+      "title": "Hantavirus Outbreak Shows We Haven’t Learned the Lesson of Sars-1 or COVID-19 - The Good Men Project",
+      "description": "Hantavirus Outbreak Shows We Haven’t Learned the Lesson of Sars-1 or COVID-19 The Good Men Project",
+      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOdWF3Uy1vV2xydk1HbnpxdEhxeU9wLUNHNnZzc3ZzWTZ6UUgwSW1EMFllVFNlSTVnTFVMRURWODVGbmFzeU9lSXk5cy02c1pYZlBZeGpsZ0Z3ZEFKRXhVcDVjeHp0SVZMaDJuc1EzNVFyNUVHQ25waGV3NDNFY2lQbUxNQVFPTE1ERThxU29KWWhLX2JVZGZDYll0cENlYlBuSkMyVjFJd1IxdzFIR3RBU2NDcFc4ZGtDZzc0V2d3?oc=5",
+      "pubDate": "Sun, 24 May 2026 08:01:46 GMT",
+      "timestamp": 1779609706000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "google-news-47023643",
+      "authority": "Google News",
+      "title": "Attacks on Ebola centres intensify in eastern DRC amid outbreak fears - Al Jazeera",
+      "description": "Attacks on Ebola centres intensify in eastern DRC amid outbreak fears Al Jazeera",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOaGRwQ2lFYUlvYS03WkZoenNMU3BaQ0RXNkcyd1J0b0FubXBuSEdPdkt5b3oxdXgxMGkzZVlvMVhrSHUyQlEtRXZFNFUtZ0RQQlN1cHBTc1p6NnVIWVptdjdpSVh5RHY2VkhYWk1McHFDRDlrcG1ILTEwdU1iNHlwQ0paYXcydmZUcm5Ga19Bdy15dDZJaEhyWnpBWlMzLVBZbVJ3WTBsUk9HaGV5eHJ30gG0AUFVX3lxTE9FWGhCR0hIelBoSUllR284Z2V6RlN0VURoR3JoRnhzZTN6bU53WjRKWlZON0lPUlRLVVVfZjhGZXBoWURfLXlHRmFwM3hKM3ZDcGlUYTh1Nm1HWTZxeHRjQTZVY19pQzFUcjRNZlF4SkVzbVNHajdxWTBJM2RpRVM4WUZ3VXlVeHlFbVRwbWQ2WThqd1FrX0RabHRVaWl2Yjh0empHd004TDJ0WW1sODhCLXRJOA?oc=5",
+      "pubDate": "Sun, 24 May 2026 07:30:00 GMT",
+      "timestamp": 1779607800000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-68685c56",
+      "authority": "Google News",
+      "title": "Three Red Cross volunteers die from suspected Ebola in DR Congo as outbreak continues to spread - Euronews.com",
+      "description": "Three Red Cross volunteers die from suspected Ebola in DR Congo as outbreak continues to spread Euronews.com",
+      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQbUR0WElNMmIyU1kxM1hvdFlMdUxQQlh1SXVXbW53U1U4WkV0QnhsYndPSk5IclV5S1FaTVRsb0YzbFdUMHlnOC1lbGVEaVZVOXNZN19QV3dPV05wN0d0Qy1kcGJWZ01RNlUzOXRtR3p6NzZxTmw3VEhGOThmRWNscGI3RUdKdDJrZ3Y4aGFPSjU5eFoxc1lGU2lHQ01vRThvOTlyRk0wRGNPOWNiSTZyLWpFUzBURW1ZYWdaQWxWOEswRGk1VFRYRnBmajU3QQ?oc=5",
+      "pubDate": "Sun, 24 May 2026 07:21:27 GMT",
+      "timestamp": 1779607287000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
     {
       "id": "google-news-2deec72a",
       "authority": "Google News",
@@ -255,6 +291,18 @@
       ]
     },
     {
+      "id": "google-news-51f068cc",
+      "authority": "Google News",
+      "title": "Violence and overcrowding hampers Ebola response in DRC - Al Jazeera",
+      "description": "Violence and overcrowding hampers Ebola response in DRC Al Jazeera",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPUi1Ybkt0QWtQOTllZVhkQWkyWlMxQmV3T2Z4ZXZuYVloUXRyZ2ZWYlp5c1NRRDFpZFJ3Sm40ZC1uSEhaS3EzMW9Gc0I4ZmwxZERveDRGdzRMSWtmU2RSLWcwc1k2NDhPRWs3SU04TjVnekthVE1XU3F4UUt4UEZFUHozcHlHZ0J3QVlhbVBfeGRiWGo3dDFvaHZxbFV3Rjk4UmhxaEpfbi1yd9IBrwFBVV95cUxNQ0VLRU5RMkpDdENqaHVfX0ZHV2ZfVWhFM3oycF9yVXQ2UUVvRVJjV0thdDRISjZ0cnFmc0NabXdpd0xLQ3p3ejZONXpKaVQ3S00zaWFCUkhDdV9HbWFLRkV2QWctNnFNaU5QZzhkN3pfT3A5U0JmTGpjVEtaX3YtaHJXRWdBNk54MElXR3N2SXZ6Rmp0d3RhWF9DcjRMeklWRWlpS3BEVnp4ckkxN3I0?oc=5",
+      "pubDate": "Sat, 23 May 2026 21:00:02 GMT",
+      "timestamp": 1779570002000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-a728ca27",
       "authority": "Google News",
       "title": "Mexico measles cases top 11,000 in 2026, Additional death in Zacatecas - Outbreak News Today",
@@ -300,6 +348,18 @@
       "timestamp": 1779567272000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-6ada9a2d",
+      "authority": "Google News",
+      "title": "Two measles cases confirmed in San Diego County - NBC 7 San Diego",
+      "description": "Two measles cases confirmed in San Diego County NBC 7 San Diego",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNY3I4VzJRZEJsZm9YUVdyZDBGMnhxQ3g2elRzNVVOU0w1NGtIbjZad1NuUzVIYVRDbEFoX3NhVVJKVlRBZmFvSktkUjZZZmhwV3JWZEJBRDh6eEdMTUUtelJQSUtQRVdrZDFwamMwRE9zeFJuNEJycURINDY1ZkNDajZxeHR0b09vNmJJNkFwYTVISEg3cnRDeWItTdIBowFBVV95cUxOM204MmZrbk40RzZyT0RBUHlpWGVhOFhJOFZqNml2WmV6TUlINnkwWmhwcElIVHNDNE5TYzNnZzBxclVvWVlkUUxLWmRsc0J1TGdLS0lTcGlBUVA5N0RiSGRDcHM5djVoM2x0Qk5tSnkydTVKeTZ1cEhqS2JzUmNWa2dQcW9kbWhEcXNwSnAxa3NZcjVNRy1jNjVlVUF5SERWM1ZF?oc=5",
+      "pubDate": "Sat, 23 May 2026 19:48:43 GMT",
+      "timestamp": 1779565723000,
+      "signalIds": [
+        "measles-us-2026"
       ]
     },
     {
@@ -3758,6 +3818,18 @@
       ]
     },
     {
+      "id": "google-news-33b25a2f",
+      "authority": "Google News",
+      "title": "CDC: Enhanced Ebola Airport Screening Begins at Washington-Dulles International Airport for U.S. Citizens - U.S. Embassy in Uganda (.gov)",
+      "description": "CDC: Enhanced Ebola Airport Screening Begins at Washington-Dulles International Airport for U.S. Citizens U.S. Embassy in Uganda (.gov)",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNSy1YbEZTdU9IMndySXBSX2gzSG4zUG02dU9IY0Q4WWJrd0dLT2hDbl84NDBnRkhaVEhSWHQ1U2JUcDh6Y21aTENFT0ZwTWp0Mlp5TXNickxGekFqMjNLZFNTTHluNDBmdV85Y3FjSXVxYU5CZlZ1VkpUZlRsUDFfbGhKMi1wTVNLeEdUTXlhZkpPR1MxamhERnJKSXNBQnAtSHNRYkFrVUpidFhQWFRlcjBB?oc=5",
+      "pubDate": "Fri, 22 May 2026 11:03:15 GMT",
+      "timestamp": 1779447795000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-c06d2547",
       "authority": "Google News",
       "title": "The Ebola and Hantavirus Outbreaks Offer an Ominous Warning - Time Magazine",
@@ -5835,77 +5907,6 @@
       "timestamp": 1779380944000,
       "signalIds": [
         "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-437bac6c",
-      "authority": "Google News",
-      "title": "Protecting Our Birds from Avian Influenza - Calgary Zoo",
-      "description": "Protecting Our Birds from Avian Influenza Calgary Zoo",
-      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE8tVktYYjhPcGQ3aUUtMm5PLW5HcmdPOVZvMlh1MjY1RDhzLVNDcksyX1Z6b3pkcVRua1NGWmZ2UzZJSnNPelgtQ2pwbllRR094cDBZMGlLU0dGbkxzNGtEQVktcDNNRk1YdWpqaC1iSjFEdHM5bXVvcVh4R1FBLW8?oc=5",
-      "pubDate": "Thu, 21 May 2026 16:28:46 GMT",
-      "timestamp": 1779380926000,
-      "signalIds": [
-        "avian-influenza-h5-2026"
-      ]
-    },
-    {
-      "id": "stat-news-fabd16eb",
-      "authority": "STAT News",
-      "title": "STAT+: Immunovant shares surge on arthritis trial data",
-      "description": "Trial results for Lilly's \"triple-G\" drug, FDA's leadership purge leaves chaos, and more biotech news from The Readout",
-      "link": "https://www.statnews.com/2026/05/21/biotech-news-immunovant-shares-surge-on-arthritis-trial-data/?utm_campaign=rss",
-      "pubDate": "Thu, 21 May 2026 16:27:38 +0000",
-      "timestamp": 1779380858000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-7667acb5",
-      "authority": "Google News",
-      "title": "Northeast Ohio epidemiologist explains latest hantavirus, ebola outbreaks - Ideastream",
-      "description": "Northeast Ohio epidemiologist explains latest hantavirus, ebola outbreaks Ideastream",
-      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQUW9RU0s0T1l2bkh2ZUxBUUF3WFpQNkM0QmpiMXl2VTh6S1dKLXVBaGc1WWZzMnJtamtGWE9jM0cxazMyT01kcGlpdVFRdEVZR2wzVC01VGsyOVZIeTZzOE9kSGdWYXFuNmY0Tmd1VTlXalZaMllEZGx6T19jRkpLX1dONWo4Qlh5V1BtOFl5MFNxb0NDUmRMZUkxMHhZLURpREJ5dFZ3Umlhb1k5TVNaVzVhR04wX0dMVmg2cm9WSDc0SEdhWGFWX1ln?oc=5",
-      "pubDate": "Thu, 21 May 2026 16:26:00 GMT",
-      "timestamp": 1779380760000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026",
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-098e0fea",
-      "authority": "Google News",
-      "title": "Cruise ship plays a crucial role in the hantavirus outbreak - Yahoo",
-      "description": "Cruise ship plays a crucial role in the hantavirus outbreak Yahoo",
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOYnBSdnd4MDRVSWFsMXZaMVcyN3RVUndVSHdzUnlzdW1yWUlmbm9NMURfMlVOWXczc2pSaFpGdC1fZnZHYjc0VGJtZURybjhKVjlWNjlfdm5teFdmOFVmQXlPMEhzaWlDVnZVYndoeE1lRkxxR0ptZXpja3hYOTd5ck9WclBaazRm?oc=5",
-      "pubDate": "Thu, 21 May 2026 16:23:58 GMT",
-      "timestamp": 1779380638000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-c276fdef",
-      "authority": "Google News",
-      "title": "U.S. doctor with Ebola feared he \"wasn't going to make it\" before evacuation from Congo - CBS News",
-      "description": "U.S. doctor with Ebola feared he \"wasn't going to make it\" before evacuation from Congo CBS News",
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQVGFlUk1WZkRVclpOcHRLQmQ3RG45dXVrTDlXSWhRcUlOaFFtTjc5NmZzVW42YWZUQ21laEtSYk9xWlpEbzF4Y0RFMEsxb0pCMV9FMm5McUpfeThnQVNWTFF6VzllbGhqelhqNFROU29aUFd2OWVTenBtS2RoX3NJMVFFc1FaV1JfTHFfN9IBkgFBVV95cUxOOUlQTVJvRzVxQ0tyamhucE0tTGt6VFdLbE44eHdLY2RUMkZqMnA4YkRaWlhzLUhSblB2TnF5cjJRdGs1QWxvU20yMU4tQTVHMmhHNENPUHpNM1dtSWRHYl9mT2draGQxUVphWkdESlhuOVdMaVZRSy1IdUZRYWlQUTY1b2poNlNDemFzMkItd0dHdw?oc=5",
-      "pubDate": "Thu, 21 May 2026 16:21:00 GMT",
-      "timestamp": 1779380460000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-4b7cea26",
-      "authority": "Google News",
-      "title": "CDC confirms cat-to-human transmission of avian influenza - WATTPoultry.com",
-      "description": "CDC confirms cat-to-human transmission of avian influenza WATTPoultry.com",
-      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOZGkzNHN6LTRxLVN2SWhjSC1Ra3REVktTdUd1YmJhX3hSWEVHWF8yVnpHUU12OW5EcTlmWUZxc2JzT2NGTDZ2d1VNZ0JmTF8zTlFoeVJQMUpvVDR3c056OVdQWXhNeFdpUlNVTWNlOE5lSzd1TGZjeDRnQ2ZkZXk5ZUgwaHI3RVJET3RHQzVHM3VFejZHcXQ4U29sN0JvbUVFV3BVd3NGdGNIbzJwOV9ncVJSMjhRRUVyT3NvbEZFMmp2eGlJTW9nRXBRU2tTQ3Y0Q19MWkFOaw?oc=5",
-      "pubDate": "Thu, 21 May 2026 16:14:08 GMT",
-      "timestamp": 1779380048000,
-      "signalIds": [
-        "avian-influenza-h5-2026"
       ]
     }
   ]
