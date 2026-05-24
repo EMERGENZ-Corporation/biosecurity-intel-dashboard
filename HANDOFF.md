@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Agent model-selection and token-efficiency guide (commit PENDING)
+## ✅ Agent model-selection and token-efficiency guide (commit 864d6e4)
 
 User asked whether the repo already tells Codex/Claude which model to use for token-efficient work and when agents should prompt the user to switch models. Added a root `AGENTS.md` that clarifies agents cannot reliably switch their own model from repo instructions, but must prompt the user before high-risk work when a stronger reasoning model is appropriate.
 
