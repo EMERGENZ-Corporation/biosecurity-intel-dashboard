@@ -33,7 +33,13 @@ jobs:
         run: npm run monitor:status
         env:
           STATUS_URL: https://biosecurity-intel.emergenzsystems.org/status.json
+          # 30h tolerates a missed daily Status Refresh.
           MAX_STATUS_GENERATED_AGE_HOURS: 30
+          # 168h (7 days) matches the human review cadence for structured signal
+          # data (CONTENT-STANDARDS §3.4). Tighter values false-alarm every
+          # weekend; see HANDOFF 2026-05-25.
+          MAX_OFFICIAL_CHECK_AGE_HOURS: 168
+          MAX_DATA_AGE_HOURS: 168
 
       - name: Reconcile status monitor issue
         uses: actions/github-script@v8

@@ -81,6 +81,12 @@ const WORKFLOW_CHECKS = [
       'npm run monitor:status',
       'status-monitor',
       'MAX_STATUS_GENERATED_AGE_HOURS: 30',
+      // The next two pins were added 2026-05-25 after a false-alarm cycle on
+      // the official-source-check age. They keep the monitor aligned with the
+      // human review cadence for structured signal data. Do not tighten without
+      // a CONTENT-STANDARDS §3.4 conversation.
+      'MAX_OFFICIAL_CHECK_AGE_HOURS: 168',
+      'MAX_DATA_AGE_HOURS: 168',
     ],
   },
   {

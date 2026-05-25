@@ -48,23 +48,35 @@ Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). The
 
 **Symptom:** workflow exits 1 at `Alert on stale dashboard data`.
 
-**Cause:** `status.json` `data.lastUpdated` is older than `MAX_DATA_AGE_HOURS` (default 48). This means structured signal data hasn't been touched in 2 days during an active monitoring period.
+**Cause:** `status.json` `data.lastUpdated` is older than `MAX_DATA_AGE_HOURS` (default **168** = 7 days, aligned with the human review cadence per CONTENT-STANDARDS §3.4). This means structured signal data hasn't been touched in a week — a real review gap, not a workflow noise event.
 
 **Recovery:**
-1. Check whether this is a true alert (no signal updates) or a workflow false alarm (data did change but `lastUpdated` wasn't bumped).
+1. Check whether this is a true alert (no signal updates in a week) or a generator bug (data did change but `lastUpdated` wasn't bumped).
 2. If true: hand-curate one structured update from a primary Tier 1/2 source per CONTENT-STANDARDS §1 and ship via PR.
 3. If false: the bug is in the generator; check `scripts/generate-status.mjs` for the `lastUpdated` computation.
 
 ### 2.4 `Production Status Monitor` — hourly status check failed
 
-**Symptom:** reusable issue `status-monitor` opens or updates with `unhealthy: status.json generated > 30h ago` (or unreachable).
+**Symptom:** reusable issue `status-monitor` opens or updates with one or more of: `Dashboard status is degraded`, `status.json generated > 30h ago`, `last official source check > Nh old`, or `status URL unreachable`.
 
-**Cause:** `MAX_STATUS_GENERATED_AGE_HOURS=30` lower-bounds the daily Status Refresh cadence (≈24h) plus headroom for missed runs. A breach means Status Refresh failed for 2+ consecutive days OR Vercel is not deploying the latest commit.
+**Cause matrix:**
+
+| Failure line | Threshold (default) | Real cause |
+|---|---|---|
+| `status.json generated > 30h` | `MAX_STATUS_GENERATED_AGE_HOURS=30` | Status Refresh failed 2+ consecutive days OR Vercel is not deploying the latest commit. |
+| `last official source check > 168h` | `MAX_OFFICIAL_CHECK_AGE_HOURS=168` (7d) | No human has bumped any signal's `lastChecked` in a week. Real review gap; not workflow noise. |
+| `headline signal data > 168h` | `MAX_DATA_AGE_HOURS=168` (7d) | No structured data update in a week. Same review-gap remedy. |
+| `Dashboard status is degraded` | Set by `generate-status.mjs` when any `staleReasons` accumulate | Look at `result.failures` for the upstream reason. |
+
+**Important — threshold history:** the prior `MAX_OFFICIAL_CHECK_AGE_HOURS=48` default produced false alarms every weekend because it expected daily human review of `lastChecked` across 16 signals — incompatible with the actual weekly review cadence permitted by CONTENT-STANDARDS §3.4. Raised to 168h on 2026-05-25 to match `MAX_SIGNAL_STALE_HOURS`. Do not tighten without a CONTENT-STANDARDS conversation.
 
 **Recovery:**
-1. Check the latest Status Refresh workflow run. If it succeeded but production is still stale, the issue is in the Vercel deploy.
-2. Check Vercel deploy logs for the `main` branch.
-3. Vercel CLI auth is currently invalid on the maintainer machine (see [HANDOFF.md](HANDOFF.md) Known issues). The Vercel dashboard is the canonical source for deploy state.
+1. Read the issue body — `result.failures` lists the specific failure line(s).
+2. If `Dashboard status is degraded`: regenerate status locally (`npm run generate:status`); inspect `staleReasons`; address the upstream cause (almost always a signal needing a human `lastChecked` bump).
+3. If `status.json generated > 30h`: check the latest Status Refresh workflow run. If it succeeded but production is still stale, the issue is in the Vercel deploy — check Vercel dashboard for `main`-branch deploy state. Vercel CLI auth is currently invalid on the maintainer machine.
+4. If `last official source check > 168h`: a human review of structured signal data is genuinely overdue; pick a high-priority active signal, verify against its primary source, bump `lastChecked` (and `lastUpdated` if anything changed), commit + push. The Status Refresh workflow regenerates `status.json` automatically on the next signal-data commit.
+
+**Prevent this:** the Status Refresh workflow now runs on push to any signal data file, so a human `lastChecked` bump immediately publishes a fresh `status.json`. The hourly monitor only fires when (a) all 16 signals haven't been touched in a week, OR (b) the daily Status Refresh failed twice running, OR (c) the deploy pipeline is broken. None of those should be silent.
 
 ### 2.5 `Official Source Audit` — drift findings
 
