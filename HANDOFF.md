@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (Weval blueprint — rolled back models: block from 6 to 4. Adding `openrouter:mistralai/mistral-7b-instruct` and `openrouter:meta-llama/llama-3-8b-instruct` aborted the grading pass for the whole sandbox run — all 4 successful model responses came back correct but every criterion showed N/A and macro coverage showed 0%. The open-weight floor models were a nice-to-have, not core; production = Gemini, cross-vendor = OpenAI. Settled at 4: gemini-2.5-flash + gpt-4o-mini + gpt-4.1-mini + gpt-4.1-nano.)
+**Last updated:** 2026-05-25 (Weval blueprint — re-added anthropic:claude-3-haiku-20240307 to models: as a sandbox-judge-trigger. Three sandbox runs WITHOUT it returned N/A on every criterion and 0% macro coverage despite correct model responses. Hypothesis: the sandbox's holistic-claude-haiku-4-5 judge layer only spins up when an Anthropic model is present in the blueprint's models: block. The 4-model OpenAI/Gemini sweep stays; operator deselects Claude 3 Haiku in the picker so its 404 column doesn't pollute results, but the yaml-level presence is what wires the judge.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,39 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval blueprint — re-add Claude 3 Haiku as sandbox-judge-trigger (commit TBD)
+
+After 16c38dd dropped to 4 models, the next sandbox run **still** returned N/A on every criterion and 0% macro coverage — even though every model response in the dump was correct (cholera classified correctly, dengue refused, marathon weather → empty array, empty news list → empty items, etc.).
+
+**Diagnostic comparison:**
+
+| Run | Models in yaml | Judge result |
+|---|---|---|
+| Original (1779739989491) | gemini-2.5-flash + gpt-4o-mini + claude-3-haiku-20240307 | ✓ Judges ran. Coverage 70.5%/69.3%/0%. Each criterion had `coverageExtent`, judge reflections, krippendorff alpha. |
+| 6-model attempt (1d6705f) | + mistral + llama (openrouter slugs) | ✗ Judges didn't run. N/A everywhere. 0%. |
+| 4-model rollback (16c38dd) | gemini + 3 OpenAI tiers (no Anthropic) | ✗ Judges didn't run. N/A everywhere. 0%. |
+
+The only models: configuration that produced working judges was the original three, which included `anthropic:claude-3-haiku-20240307`. **Hypothesis:** the sandbox's `holistic-claude-haiku-4-5` judge spins up only when an Anthropic model is present in the blueprint's models: block. With no Anthropic model in the response set, the multi-judge consensus can't be constructed and grading silently no-ops.
+
+This commit tests the hypothesis by re-adding `anthropic:claude-3-haiku-20240307` to models: (where it still 404s on responses — that's fine, it's just acting as a wiring signal to the judge layer). The README sandbox step now explicitly explains: the yaml-level presence is for judge wiring; deselect in the picker to keep the 404 column out of results.
+
+**Files touched:**
+- `weval/biosecurity-gemini-news-classification.yml` — Re-added `anthropic:claude-3-haiku-20240307` as the fifth entry under `models:`. Expanded the inline comment block to document the judge-trigger hypothesis with explicit reference to the failed runs.
+- `weval/README.md` — Sandbox step 4 rewritten: the yaml deliberately lists Claude 3 Haiku for judge wiring; deselect in the picker for response generation.
+- `HANDOFF.md` — this entry + timestamp.
+
+**What this is testing:** whether the sandbox judge layer requires an Anthropic model in `models:` to construct its multi-judge consensus.
+
+**Falsifiable predictions:**
+- If hypothesis correct: next sandbox run shows actual coverage percentages again (with Claude 3 Haiku 0% from 404s, but the other 4 models graded). The criteria show `coverageExtent` and judge reflections, not N/A.
+- If hypothesis wrong: next run still shows N/A everywhere, in which case the issue is account-level quota or sandbox outage — yaml can't fix it. Fallback is CLI runs.
+
+**Verify:**
+- `npm run test:validators && npm run validate:data && npm run audit:autonomy && npm run audit:ai-enrichment && npm run build` — all pass (yaml + docs only).
+- Re-paste the blueprint into the weval.org sandbox; picker auto-checks 5 boxes; manually uncheck `claude-3-haiku-20240307`; run with the remaining 4. If judges grade, hypothesis confirmed.
+
+---
 
 ## ✅ Weval blueprint — roll back from 6 to 4 models after grading abort (commit 16c38dd)
 

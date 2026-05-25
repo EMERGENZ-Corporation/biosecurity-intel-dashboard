@@ -41,12 +41,30 @@ description: |
 #   - openai:gpt-4o-mini                  — OpenAI mid-tier
 #   - openai:gpt-4.1-mini                 — OpenAI newer mid-tier
 #   - openai:gpt-4.1-nano                 — OpenAI floor (cheap; tests prompt robustness)
+#   - anthropic:claude-3-haiku-20240307   — RETIRED model. Kept in the list
+#                                           ONLY because the original sandbox
+#                                           run (1779739989491) included it
+#                                           and the sandbox's LLM-judge layer
+#                                           actually ran end-to-end. Three
+#                                           subsequent runs WITHOUT this
+#                                           entry (1d6705f, 16c38dd) returned
+#                                           "N/A" on every criterion and 0%
+#                                           macro coverage — judges never
+#                                           executed. Hypothesis: the
+#                                           sandbox's holistic-claude-haiku
+#                                           judge is wired to spin up only
+#                                           when an Anthropic model is
+#                                           present in models:. Returning
+#                                           404 on responses is fine — it
+#                                           just shows as a 0% column, but
+#                                           the OTHER models then get graded.
+#                                           DESELECT in the picker at run
+#                                           time so it doesn't pollute the
+#                                           coverage table; the yaml-level
+#                                           presence is what matters for
+#                                           the judge wiring.
 #
 # What is intentionally NOT here:
-#   - anthropic:claude-3-haiku-20240307   — retired; returns 404 on every
-#                                           prompt; the sandbox UI auto-adds
-#                                           this — deselect it at run time
-#                                           (see weval/README.md sandbox notes).
 #   - anthropic:claude-haiku-4-5          — NOT in the weval.org sandbox
 #                                           picker as of 2026-05; used
 #                                           server-side as the JUDGE in the
@@ -68,6 +86,7 @@ models:
   - openai:gpt-4o-mini
   - openai:gpt-4.1-mini
   - openai:gpt-4.1-nano
+  - anthropic:claude-3-haiku-20240307
 tags:
   - public-health
   - biosecurity
