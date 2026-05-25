@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ EMERGENZ agent pipeline installed (commit pending)
+## ✅ EMERGENZ agent pipeline installed (commit f62acc0)
 
 Installed the EMERGENZ agent pipeline from `~/Downloads/emergenz-agents.zip`,
 tailored to this repo. User asked for "review these agents and instructions,
