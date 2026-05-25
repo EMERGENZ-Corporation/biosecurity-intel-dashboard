@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval Phase 1.5 — fit assessment + 26-case Gemini classification blueprint (commit pending)
+## ✅ Weval Phase 1.5 — fit assessment + 26-case Gemini classification blueprint (commit 3128926)
 
 User shared `~/Downloads/weval-fit-analysis.md`, a cross-portfolio assessment of Weval fit across EMERGENZ programs (Core Stack / PRISM / STRATA / MERIDIAN / Biosecurity Dashboard). The analysis recorded the biosecurity dashboard's current Weval fit as `None`, with rationale: "Dashboard is data aggregation and display with verbatim sourced content. No AI inference layer to evaluate." **That rationale is materially incorrect for this repo** — `scripts/enrich-news.mjs` (shipped in `9a26173`) is a live Gemini-driven classifier that writes `signalIds` to public `news.json`, and as of today's timeline auto-promote ship (`67743e2`) those signalIds indirectly gate auto-promote eligibility. The user chose to (a) commit a repo-scoped fit-correction doc, and (3) build the eval suite as Phase 1.5 BEFORE podcast Session 1.
 
