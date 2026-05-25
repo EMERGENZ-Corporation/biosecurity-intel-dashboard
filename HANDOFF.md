@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Pre-podcast forensic pass — all green, 2 docs-only fixes (commit pending)
+## ✅ Pre-podcast forensic pass — all green, 2 docs-only fixes (commit a793529)
 
 User asked for a forensic check on the repo before moving to podcast feature work. Full audit pass — mechanical regression suite + 4 specialist audit agents dispatched in parallel + 2 network-bound source audits + supplemental orphan/TODO/gitignore checks.
 
