@@ -31,9 +31,16 @@ description: |
   signalId outside the supplied catalog, (3) calibrate its self-reported
   confidence, and (4) never write clinical content, case counts, risk
   levels, public-health directives, or authoritative claims.
+# Models this eval is designed to be run against. The production target
+# is google:gemini-2.5-flash; anthropic:claude-haiku-4-5 is included as
+# a cross-vendor comparison candidate for anyone running this on
+# weval.org. The JUDGE model is configured separately at run time (see
+# weval/README.md "Running locally"); the EMERGENZ CI workflow uses
+# anthropic:claude-haiku-4-5 as the judge for bias-free grading of the
+# Gemini production model.
 models:
-  - openai:gpt-4o-mini
   - google:gemini-2.5-flash
+  - anthropic:claude-haiku-4-5
 tags:
   - public-health
   - biosecurity

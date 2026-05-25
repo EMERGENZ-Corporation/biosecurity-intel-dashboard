@@ -17,7 +17,7 @@
  * Environment variables (all optional; sensible defaults documented):
  *   WEVAL_BLUEPRINT          - path to the blueprint YAML (default: weval/biosecurity-gemini-news-classification.yml)
  *   WEVAL_MODEL              - production model under test (default: google:gemini-2.5-flash)
- *   WEVAL_JUDGE_MODEL        - judge model (default: openai:gpt-4o-mini)
+ *   WEVAL_JUDGE_MODEL        - judge model (default: anthropic:claude-haiku-4-5)
  *   WEVAL_BASELINE_DIR       - directory holding committed baselines (default: weval/baselines)
  *   WEVAL_OUTPUT_PATH        - path for the run-result artifact (default: weval-run-result.json)
  *   WEVAL_REGRESSION_FAIL    - "1" to exit non-zero on regression; "0" to exit 0 even on regression (default: "1")
@@ -34,7 +34,10 @@ import { spawnSync } from 'child_process'
 
 const BLUEPRINT = process.env.WEVAL_BLUEPRINT || 'weval/biosecurity-gemini-news-classification.yml'
 const MODEL = process.env.WEVAL_MODEL || 'google:gemini-2.5-flash'
-const JUDGE_MODEL = process.env.WEVAL_JUDGE_MODEL || 'openai:gpt-4o-mini'
+// Judge defaults to Anthropic Claude Haiku — different vendor from the
+// production Gemini model (bias-free), and aligns with EMERGENZ's existing
+// Anthropic stack. Operator can override via env if needed.
+const JUDGE_MODEL = process.env.WEVAL_JUDGE_MODEL || 'anthropic:claude-haiku-4-5'
 const BASELINE_DIR = process.env.WEVAL_BASELINE_DIR || 'weval/baselines'
 const OUTPUT_PATH = process.env.WEVAL_OUTPUT_PATH || 'weval-run-result.json'
 const REGRESSION_FAIL = (process.env.WEVAL_REGRESSION_FAIL || '1') === '1'

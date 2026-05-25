@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (Weval automation stack — scripts/run-weval.mjs wrapper, npm run eval:gemini, .github/workflows/weval-baseline.yml monthly cron with reusable [WEVAL ALERT] issue, weval/baselines/ for committed history, audit:autonomy guards on the new workflow + thresholds, audit:ai-enrichment allowlist updated for the legitimate Weval Gemini reference, AI-ENRICHMENT-POLICY "Current Live Status" extended with the Weval judge use, .env.example documents OPENAI_API_KEY judge secret, RUNBOOK §2.7 cause matrix + setup checklist. Operator one-time setup: add OPENAI_API_KEY repo secret + manually dispatch first workflow run to populate baseline. Cost: ~$1.20-3.60/year at monthly cadence.)
+**Last updated:** 2026-05-25 (Weval judge switched from openai:gpt-4o-mini → anthropic:claude-haiku-4-5. User caught the default-driven choice: Anthropic aligns with EMERGENZ stack, is a Weval partner, is bias-free vs Gemini, and is cost-equivalent to GPT-4o-mini. Operator setup: ANTHROPIC_API_KEY repo secret instead of OPENAI_API_KEY. All workflow / wrapper / docs / audit references flipped.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,47 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval judge — switch from OpenAI to Anthropic Claude (commit pending)
+
+User asked why we used an OpenAI key instead of Claude. Honest answer: I defaulted to `openai:gpt-4o-mini` because it was the canonical "cheap judge" example I'd seen in Weval's docs and because my "different vendor family from production" rule was satisfied by either OpenAI or Anthropic. I didn't think carefully about which different-vendor choice was right for THIS org.
+
+**Anthropic is the better fit for EMERGENZ:**
+
+| Consideration | Favors |
+|---|---|
+| Bias-free vs Gemini production model | Either (both qualify) |
+| EMERGENZ org alignment | **Claude** — running Claude Code now; ANTHROPIC_API_KEY likely already provisioned |
+| Weval partner | **Claude** — Weval is Anthropic-partnered per the cross-portfolio analysis |
+| Cost at monthly cadence | Equivalent (~$1.20-3.60/year either way) |
+| Quality at rubric grading | **Claude** — strong at structured `should` / `should_not` evaluation |
+| One less vendor relationship | **Claude** — avoids adding OpenAI as a net-new dependency |
+
+**Files touched (flips):**
+- `.github/workflows/weval-baseline.yml` — `WEVAL_JUDGE_MODEL: openai:gpt-4o-mini` → `anthropic:claude-haiku-4-5`; `OPENAI_API_KEY` secret reference → `ANTHROPIC_API_KEY`. Inline comment explains the bias-free + org-alignment rationale.
+- `scripts/run-weval.mjs` — `JUDGE_MODEL` default constant + header docstring updated.
+- `scripts/audit-autonomy.mjs` — `requiredText` guards flipped: `WEVAL_JUDGE_MODEL: anthropic:claude-haiku-4-5`, `ANTHROPIC_API_KEY` (was OPENAI_API_KEY).
+- `AI-ENRICHMENT-POLICY.md` "Current Live Status" — Weval judge declaration updated.
+- `.env.example` — `OPENAI_API_KEY=` → `ANTHROPIC_API_KEY=`; default model name.
+- `RUNBOOK.md` §2.7 setup checklist + cli-failure cause matrix flipped to `ANTHROPIC_API_KEY`. §3 (Secret rotation) row replaced: `OPENAI_API_KEY` → `ANTHROPIC_API_KEY` with Anthropic-stack-alignment rationale.
+- `weval/baselines/README.md` — schema example judgeModel field updated.
+- `weval/biosecurity-gemini-news-classification.yml` — `models:` comparison list now `google:gemini-2.5-flash` + `anthropic:claude-haiku-4-5` (was Gemini + GPT). Inline comment clarifies the distinction between `models:` (cross-vendor comparison candidates) and the workflow's `WEVAL_JUDGE_MODEL` env (the actual judge config).
+- `weval/README.md` — local-run CLI example updated to reference both `GEMINI_API_KEY` (production) + `ANTHROPIC_API_KEY` (judge).
+- `HANDOFF.md` — this entry + timestamp.
+
+**Operator one-time setup is now:**
+1. Add `ANTHROPIC_API_KEY` repo secret (not `OPENAI_API_KEY`).
+2. Manually dispatch `Actions → Weval Baseline → Run workflow` once.
+3. Done — monthly cron is live.
+
+If you'd already added `OPENAI_API_KEY` before this commit: it's harmless to leave in place, but no longer referenced — feel free to revoke it.
+
+**Verify:**
+- `npm run test:validators && npm run test:promote-timeline && npm run validate:data && npm run audit:autonomy && npm run audit:ai-enrichment && npm run build` — all pass.
+- `WEVAL_SKIP_CLI=1 npm run eval:gemini` — wrapper writes `judgeModel: "anthropic:claude-haiku-4-5"` in the result artifact. Confirmed locally.
+- `grep -rn "openai\|gpt-4o\|OPENAI" .env.example scripts/ .github/workflows/ docs/ weval/ AI-ENRICHMENT-POLICY.md RUNBOOK.md` returns zero matches.
+
+---
 
 ## ✅ Weval automation stack — wrapper + workflow + alerts + RUNBOOK (commit 86ca3d6)
 

@@ -42,8 +42,8 @@ Each prompt embeds a realistic subset of the production signal catalog (id + nam
    description: |
      ...
    models:
-     - openai:gpt-4o-mini
-     - google:gemini-2.5-flash   # the actual production model
+     - google:gemini-2.5-flash       # the actual production model
+     - anthropic:claude-haiku-4-5    # cross-vendor comparison + the judge in CI
    tags:
      - public-health
      - biosecurity
@@ -89,12 +89,15 @@ Then:
 
 ```bash
 weval run weval/biosecurity-gemini-news-classification.yml \
-  --provider google \
-  --model gemini-2.5-flash \
-  --key "$GEMINI_API_KEY"
+  --model google:gemini-2.5-flash \
+  --judge anthropic:claude-haiku-4-5
+# Requires GEMINI_API_KEY (production model) + ANTHROPIC_API_KEY
+# (judge model) in the local environment. The judge is intentionally a
+# different vendor family from the production model — bias-free grading
+# of the Gemini classifier.
 ```
 
-**Important:** the `GEMINI_API_KEY` here must be the same key used by `scripts/enrich-news.mjs` in production, but **only use it locally** — never check the key into the repo, never expose it through `VITE_*`, and never pin it in a workflow without the existing secret-store discipline. The Weval CLI run is read-only against the model API and does not write back to `src/data/`.
+**Important:** `GEMINI_API_KEY` here must be the same key used by `scripts/enrich-news.mjs` in production; `ANTHROPIC_API_KEY` is Weval-only and never referenced by any other code path. **Only use these keys locally** — never check them into the repo, never expose them through `VITE_*`, and never pin them in a workflow outside `weval-baseline.yml` without the existing secret-store discipline. The Weval CLI run is read-only against the model APIs and does not write back to `src/data/`.
 
 ---
 

@@ -105,9 +105,12 @@ const WORKFLOW_CHECKS = [
       'WEVAL_ACCURACY_DROP_PCT: 10',
       'WEVAL_LIMIT_DROP_PCT: 5',
       // Judge must be a DIFFERENT family from the production model.
-      'WEVAL_JUDGE_MODEL: openai:gpt-4o-mini',
+      // Anthropic Claude Haiku 4.5 chosen for: no self-grading bias vs
+      // Gemini production model + alignment with EMERGENZ Anthropic stack +
+      // Weval is Anthropic-partnered. Switch (2026-05-25) — see HANDOFF.
+      'WEVAL_JUDGE_MODEL: anthropic:claude-haiku-4-5',
       'GEMINI_API_KEY',
-      'OPENAI_API_KEY',
+      'ANTHROPIC_API_KEY',
     ],
   },
   {

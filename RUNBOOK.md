@@ -134,14 +134,14 @@ Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). The
    - Consider pausing the `enrich:news` step in the news workflow until the prompt fix lands. Set `GEMINI_NEWS_ENRICHMENT=0` as a stop-gap (the deterministic fallback covers signal tagging).
 5. **If `cli-failure`** — likely environmental. Check the workflow logs for the CLI exit code and stderr. Could be:
    - Weval CLI version drift (the upstream package name or flag shape changed); patch `WEVAL_CLI_COMMAND` env in the workflow.
-   - `GEMINI_API_KEY` or `OPENAI_API_KEY` repo secret missing or rotated; refresh.
+   - `GEMINI_API_KEY` or `ANTHROPIC_API_KEY` repo secret missing or rotated; refresh.
    - Network issue inside the runner; retry the workflow manually.
 6. **Once fixed**, manually dispatch the workflow (`workflow_dispatch`) to confirm clean run. The reusable issue auto-closes on the next green run.
 
 **Initial setup checklist (one-time):**
 
 - [ ] Repo secret `GEMINI_API_KEY` exists (already set — used by `enrich-news`).
-- [ ] Repo secret `OPENAI_API_KEY` exists for the judge model. Add via Settings → Secrets and variables → Actions.
+- [ ] Repo secret `ANTHROPIC_API_KEY` exists for the Weval judge model (Claude Haiku 4.5). Add via Settings → Secrets and variables → Actions. Different vendor family from Gemini = no self-grading bias; aligns with EMERGENZ Anthropic stack.
 - [ ] First manual run via Actions → Weval Baseline → Run workflow. The first run has no prior baseline so it cannot regress; it just writes the first baseline JSON to `weval/baselines/` and commits it.
 - [ ] After the first commit, the monthly cron is live.
 
@@ -156,7 +156,7 @@ Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). The
 | `BRIGHT_DATA_API_KEY` | `update-news.yml` → `enrich-news.mjs` | Bright Data dashboard → regenerate → update GitHub repo secret + Vercel env var | Per Bright Data quarterly cycle |
 | `biosecurity_web_unlocker` | `update-news.yml` → `BRIGHT_DATA_ZONE` env | Bright Data → zone management (zone names rotate rarely; the secret stores the zone name string) | n/a |
 | `GEMINI_API_KEY` | `update-news.yml` → `enrich-news.mjs`; `weval-baseline.yml` → `run-weval.mjs` | Google AI Studio → revoke + reissue → update GitHub repo secret + Vercel env var | Per Google quarterly cycle |
-| `OPENAI_API_KEY` | `weval-baseline.yml` → Weval judge model (`gpt-4o-mini`). Judge MUST be a different family from the production model under test to avoid self-grading bias. | OpenAI platform → revoke + reissue → update GitHub repo secret. **Not used outside the Weval workflow** — never expose to `update-news.yml`, `enrich-news.mjs`, or anywhere else. | Per OpenAI quarterly cycle |
+| `ANTHROPIC_API_KEY` | `weval-baseline.yml` → Weval judge model (Claude Haiku 4.5). Judge MUST be a different family from the production model under test to avoid self-grading bias. Anthropic chosen because (a) bias-free vs Gemini, (b) aligns with EMERGENZ Anthropic stack, (c) Weval is Anthropic-partnered. | Anthropic Console → revoke + reissue → update GitHub repo secret. **Not used outside the Weval workflow** — never expose to `update-news.yml`, `enrich-news.mjs`, or anywhere else. | Per Anthropic quarterly cycle |
 | `GITHUB_TOKEN` | All workflows | Auto-issued per workflow run; never stored | n/a |
 
 **Rotation procedure** (applies to Bright Data + Gemini):

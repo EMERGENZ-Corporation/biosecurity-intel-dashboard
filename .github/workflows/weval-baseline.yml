@@ -43,17 +43,20 @@ jobs:
         env:
           WEVAL_BLUEPRINT: weval/biosecurity-gemini-news-classification.yml
           WEVAL_MODEL: google:gemini-2.5-flash
-          WEVAL_JUDGE_MODEL: openai:gpt-4o-mini
+          # Judge is Claude Haiku 4.5 — different vendor family from the
+          # production Gemini model (no self-grading bias), and aligns with
+          # EMERGENZ's existing Anthropic stack. Weval is Anthropic-partnered;
+          # Haiku is cost-effective for structured rubric grading.
+          WEVAL_JUDGE_MODEL: anthropic:claude-haiku-4-5
           WEVAL_BASELINE_DIR: weval/baselines
           WEVAL_OUTPUT_PATH: weval-run-result.json
           # Tolerances. Tighten only via deliberate operator decision per RUNBOOK §2.7.
           WEVAL_HALLUCINATION_TOL: 0
           WEVAL_ACCURACY_DROP_PCT: 10
           WEVAL_LIMIT_DROP_PCT: 5
-          # Secrets — both required for an end-to-end run. The judge must be a
-          # DIFFERENT family from the production model to avoid self-grading bias.
+          # Secrets — both required for an end-to-end run.
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Reconcile weval-pipeline issue
         uses: actions/github-script@v8

@@ -16,7 +16,7 @@ Each baseline is the structured output of one Weval CLI run + the derived summar
 {
   "capturedAt": "ISO 8601 UTC",
   "model": "google:gemini-2.5-flash",
-  "judgeModel": "openai:gpt-4o-mini",
+  "judgeModel": "anthropic:claude-haiku-4-5",
   "blueprint": "weval/biosecurity-gemini-news-classification.yml",
   "summary": {
     "totals": { "cases": 26, "passed": 24, "failed": 2 },
