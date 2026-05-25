@@ -75,7 +75,7 @@ Weval supports both web-UI runs (via https://weval.org/sandbox) and CLI runs.
 1. Open https://weval.org/sandbox
 2. Paste the contents of the `.yml` file
 3. Configure your provider keys in the sandbox
-4. **In the model picker, DESELECT `claude-3-haiku-20240307`** — the sandbox adds it automatically as a default, but it is a retired model and every prompt returns `404 model: claude-3-haiku-20240307`, polluting the coverage table with a 0% column. The blueprint's `models:` block already pre-selects the six working candidates the sandbox exposes (Gemini production + a 3-tier OpenAI sweep + two open-weight floor models). `claude-haiku-4-5` (our CI judge) is not in the sandbox picker as of 2026-05 — that's expected; the judge runs server-side in CI only.
+4. **In the model picker, DESELECT `claude-3-haiku-20240307`** — the sandbox adds it automatically as a default, but it is a retired model and every prompt returns `404 model: claude-3-haiku-20240307`, polluting the coverage table with a 0% column. The blueprint's `models:` block pre-selects the 4-model OpenAI tier sweep + Gemini production. `claude-haiku-4-5` (our CI judge) is not in the sandbox picker as of 2026-05 — that's expected; the judge runs server-side in CI only. The open-weight 7B/8B models (mistral, llama) are also intentionally left out — adding `openrouter:` slugs for them on 2026-05-25 aborted the grading pass for the whole run; if you want to compare against them, add them in the picker UI for a one-off run rather than committing them to the YAML.
 5. Run
 
 ### CLI (when scaling beyond ad-hoc runs)

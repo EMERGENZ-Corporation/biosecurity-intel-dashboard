@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (Weval blueprint — expanded models: block to provision all 6 working sandbox candidates the weval.org picker exposes — Gemini 2.5 Flash (production), GPT 4o mini / 4.1 mini / 4.1 nano (OpenAI tier sweep), Mistral 7B + Llama 3 8B (open-weight floor). claude-3-haiku-20240307 stays excluded — retired, returns 404; claude-haiku-4-5 stays out — not in the sandbox picker but used server-side as CI judge.)
+**Last updated:** 2026-05-25 (Weval blueprint — rolled back models: block from 6 to 4. Adding `openrouter:mistralai/mistral-7b-instruct` and `openrouter:meta-llama/llama-3-8b-instruct` aborted the grading pass for the whole sandbox run — all 4 successful model responses came back correct but every criterion showed N/A and macro coverage showed 0%. The open-weight floor models were a nice-to-have, not core; production = Gemini, cross-vendor = OpenAI. Settled at 4: gemini-2.5-flash + gpt-4o-mini + gpt-4.1-mini + gpt-4.1-nano.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,43 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval blueprint — roll back from 6 to 4 models after grading abort (commit TBD)
+
+After 1d6705f provisioned 6 sandbox models, the next sandbox run came back with **every criterion showing N/A and macro coverage at 0% across all 4 models that did respond**. This was NOT a content failure — every model response in the run was correct:
+
+- `classify-cdc-ebola-bundibugyo-drc` (gpt-4.1-mini): produced valid JSON with `ebola-bundibugyo-drc-2026` + high confidence + queryExpansions + internalBrief
+- `classify-cholera-republic-of-congo` (gpt-4.1-mini): `cholera-africa-2026` + high confidence, no echo
+- `classify-norovirus-wastewater`: correct
+- `hallucination-fictitious-disease-x` (gpt-4.1-mini): `{"items":[]}` — refused to invent
+- `hallucination-plausible-but-absent-signal` (gpt-4.1-mini): `{"items":[]}` — refused to invent
+- `negative-marathon-weather`, `negative-tech-funding`, `negative-mentions-disease-not-active-signal`: all returned empty suggestedSignalIds + low confidence
+- `confidence-low-ambiguous-respiratory`: empty signals + "investigation ongoing" reason
+- `dedup-same-event-two-rebroadcasts`: same eventClusterKey + duplicateOf wired correctly
+- `empty-news-list-edge`: `{"items":[]}` exactly as required
+
+The fixes in 9973cd4 + 4ab4859 produced the right model behavior. **The 0% column reflects the LLM-judge layer not executing**, not the prompts failing — in the prior (graded) sandbox run every criterion had detailed reflections, judge-agreement scores, and krippendorff alpha; this run had `N/A` against every criterion.
+
+**Most likely root cause:** the two openrouter slugs added in 1d6705f (`openrouter:mistralai/mistral-7b-instruct` and `openrouter:meta-llama/llama-3-8b-instruct`) didn't route in the sandbox account, and the sandbox aborted the grading pass for the whole run rather than partial-grading the models that succeeded. The "Best Models" column only listed 4 of the 6 — Mistral and Llama responses were entirely absent.
+
+**Files touched:**
+- `weval/biosecurity-gemini-news-classification.yml` — `models:` block reduced from 6 to 4. Removed the two openrouter slugs. Expanded the comment block above `models:` to document the rollback rationale so future agents don't re-add them without understanding what happened.
+- `weval/README.md` — Sandbox step 4 rewritten to reflect the 4-model list and to flag that the open-weight slugs broke grading; if you want to compare against them, add via the sandbox picker for a one-off run rather than committing to the YAML.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Final models: list:**
+- `google:gemini-2.5-flash` (production)
+- `openai:gpt-4o-mini` (OpenAI mid-tier)
+- `openai:gpt-4.1-mini` (OpenAI newer mid-tier)
+- `openai:gpt-4.1-nano` (OpenAI floor)
+
+This is sufficient for the AI-boundary story: production + a 3-tier OpenAI cross-vendor sweep. Open-weight floor models were a richer-comparison nicety, not core.
+
+**Verify:**
+- `npm run test:validators && npm run validate:data && npm run audit:autonomy && npm run audit:ai-enrichment && npm run build` — all pass (yaml + docs only).
+- Re-run the blueprint in the weval.org sandbox with **claude-3-haiku-20240307 deselected**. Picker should now auto-check 4 boxes. Expected: judges actually grade (no more N/A column), and coverage scores reflect the prompt-fixes from 9973cd4 + 4ab4859 (terse prompts now produce correct outputs).
+
+---
 
 ## ✅ Weval blueprint — provision all 6 sandbox-available models (commit 1d6705f)
 
