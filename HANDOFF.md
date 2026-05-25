@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ A11y sweep — code-level audit + 2 targeted fixes (commit pending)
+## ✅ A11y sweep — code-level audit + 2 targeted fixes (commit 139d4ee)
 
 Closes backlog item 8. Static a11y audit of all 34 `.tsx` files in `src/pages/` + `src/components/` plus the App shell. Baseline was already strong (deliberate landmark structure, zero `<div onClick>` anti-patterns, dialog roles + focus trap on the acknowledgment modal, filter-chip pattern uses `role="group"` + `<button aria-pressed>`, severity always conveyed by color + label text, all SVGs are correctly marked `aria-hidden` or `role="img"` + `aria-label`). Two real gaps found and fixed.
 
