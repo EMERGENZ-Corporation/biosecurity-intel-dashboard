@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Podcast — §13 decisions locked + §18 sign-off complete (commit pending)
+## ✅ Podcast — §13 decisions locked + §18 sign-off complete (commit 813de30)
 
 User walked through the 8 open §13 decisions in PODCAST-EXPORT-DESIGN.md and locked each, plus two important amendments to the design defaults. §18 sign-off items all satisfied. **Session 1 is ready to begin on explicit go-signal — no code written yet.**
 
