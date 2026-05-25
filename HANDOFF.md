@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-24 (EMERGENZ agent pipeline installed: 14 agents for Claude Code + Codex, 4 repo-specific; slash commands, hooks, CLAUDE.md)
+**Last updated:** 2026-05-24 (backlog cleanup: RUNBOOK.md authored, api/v1 commit policy documented, Tier 1 RSS gate decision recorded as strict, source-drift 2026-05-24 triage documented, items 4 & 5 closed)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,34 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Backlog cleanup — RUNBOOK, api/v1 commit policy, RSS-gate decision, source-drift triage, items 4 & 5 closed (commit pending)
+
+User asked to remove backlog items 4 and 5 from the repo and do items 1, 2, 7, 8, 9, 10. This commit ships the docs-only work for items 1, 7, 9, 10 plus the closure of items 4 & 5. Items 2 (timeline auto-promote) and 8 (a11y sweep) are queued for follow-up sessions; design and agent sign-offs for item 2 are already in hand (see "Outstanding work" below).
+
+**Files touched:**
+- `RUNBOOK.md` — **new file (item 9)**. 10-section operational runbook: scheduled workflows at a glance, workflow failure recovery (news, status refresh, status monitor, source audit, CI), secret rotation procedure (Bright Data + Gemini), deploy rollback via Vercel dashboard, data corruption recovery (atomic-write contract, restore-from-prior-commit procedure), source registry maintenance including the `knownBlocked` allowlist procedure, `public/api/v1/*` commit policy reference, known operational tradeoffs (strict Tier 1 RSS gate, fail-open AI enrichment, Vercel CLI auth gap), verification cadence, and pointers to all other governance docs.
+- `CONTRIBUTING.md` — **policy addition (item 10)**. New "public/api/v1/* commit policy" section: artifacts stay tracked in git as a deliberate snapshot for diff-review + deterministic Vercel deploy + external API consumers. Five-rule contract: never hand-edit; regenerate + commit in same commit as the data change; generator changes get a HANDOFF entry; CI doesn't regenerate (only validates); the "treat-as-build-artifact + gitignore" alternative was considered and rejected on 2026-05-24.
+- `docs/SOURCE-DRIFT-2026-05-24.md` — **new file (item 1)**. Triage of 13 drifted Tier 1/2 source pages from `audit:source-drift` 2026-05-24, bucketed A (rotating index, safe to refresh after eyes-on — 4 sources: `africa-cdc-outbreaks`, `paho-epi-alerts`, `fda-safety-alerts`, `wastewaterscan`), B (structured-data-backing, SME-required — 4 sources backing the Andes hantavirus signal: `ecdc-andes-surveillance`, `ecdc-andes-rra`, `who-andes-rra-v2`, `who-don601`), and C (reference/guidance, light review — 5 sources). Per-source URL + signal-references map. `lastVerified` was NOT updated in `signal-sources.json` by this session — that requires eyes-on confirmation per CONTENT-STANDARDS §4.1; the doc explicitly delegates the A-bucket refresh to the operator in a follow-up commit.
+- `HANDOFF.md` — this entry, plus the timestamp update and backlog cleanup (items 4 & 5 closed, items 7, 9, 10 marked shipped, item 1 partially shipped, item 2 status updated with design + sign-off references).
+
+**Key decisions recorded:**
+- **Item 7 — Tier 1 RSS gate stays strict** (any critical Tier 1 feed failure during active monitoring aborts the news workflow). Rejected alternatives: majority-fail gate, soft-and-alert-only. Rationale: data-integrity > availability. Documented in RUNBOOK §8 "Known operational tradeoffs."
+- **Item 10 — `public/api/v1/*` stays committed**. Rejected alternative: gitignore + regen-at-build. Rationale: diff visibility per PR, deterministic Vercel deploy, cacheable snapshot for external `/api/v1/` consumers. Documented in CONTRIBUTING.md + RUNBOOK §7.
+- **Item 4 (WHO Press / WastewaterSCAN commercial-licensing waivers) — closed**: no longer tracked as an open dashboard concern. This was deferred from commit `396f39b` as an existential compliance risk; it remains a real obligation IF a paid tier is ever introduced, but the current dashboard is non-commercial / public-good. The repo will not carry it as an active backlog item.
+- **Item 5 (USPTO trademark search for EMERGENZ) — closed**: no longer tracked here. This is a corporate brand-protection task, not a dashboard repo task. Out of scope.
+
+**Item 2 (timeline auto-promote) — status:** design + 3 of 4 required agent sign-offs in hand (architecture-agent: full design; content-standards-agent: PASS-with-5-conditions; ai-enrichment-policy-agent: PASS-with-doc-update plus exact addition text for AI-ENRICHMENT-POLICY.md "Current Live Status"). Implementation pending in next session. Decisions baked in: strict Tier 1 authority allowlist {CDC, WHO, ECDC}; severity-gate at `concern` or `action`; 14-day age cap; per-run cap 20; per-signal cap 5/7d; verbatim title/description (never paraphrased); skip on same-day collision with any existing event; `provenance: "auto-news-tier1"` discriminator + `newsId`/`authority`/`link`/`promotedAt` fields; UI shows auto and curated events indistinguishably; `EMERGENZ Data Bot` commit identity per CONTENT-STANDARDS §3.1; conditions from content-standards must be hard-coded guards not advisory.
+
+**Item 8 (a11y sweep) — status:** queued for follow-up session. Code-level sweep already shipped historically (acknowledgment modal focus trap, grouped `aria-pressed` filter chips). Next pass needs dev-server + axe/Lighthouse pass for heading hierarchy, alt text, focus order, color contrast, keyboard nav.
+
+**Verify:**
+- Read [RUNBOOK.md](RUNBOOK.md) — confirm §1 workflow table, §2 recovery procedures, §3 secret rotation, §7 api/v1 policy, §8 tradeoffs.
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) §"public/api/v1/* commit policy".
+- Read [docs/SOURCE-DRIFT-2026-05-24.md](docs/SOURCE-DRIFT-2026-05-24.md) — confirm A/B/C bucketing and the operator handoff for the A-bucket refresh.
+- `npm run test:validators && npm run validate:data && npm run build` — all pass; no data files were touched this session.
+
+---
 
 ## ✅ EMERGENZ agent pipeline installed (commit f62acc0)
 
@@ -1636,9 +1664,16 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 
 ## ⏳ Outstanding work (backlog)
 
-- **Tier 1/2 source-drift review (medium).** The 2026-05-23 forensic audit flagged 8 fingerprint changes on ECDC ANDES surveillance/RRA, WHO ANDES RRA v2 / DON601, NETEC VHF/Hantavirus, PAHO epi alerts, and WHO mass-gatherings pages. Requires SME content review of each changed page to confirm clinical facts are unchanged before re-fingerprinting. Blocked on: SME availability. Scope: medium (per-page review + targeted `audit:source-drift` re-run).
+- **Tier 1/2 source-drift review (medium, partially documented).** Triage of 13 drifted pages documented at [docs/SOURCE-DRIFT-2026-05-24.md](docs/SOURCE-DRIFT-2026-05-24.md). **Bucket A (operator, ~10 min):** open 4 URLs + eyeball + refresh `lastVerified` to 2026-05-24 for `africa-cdc-outbreaks`, `paho-epi-alerts`, `fda-safety-alerts`, `wastewaterscan` in `src/data/signal-sources.json`. **Bucket B (SME, this week):** confirm Andes hantavirus structured fields against the current ECDC + WHO source pages — 4 sources. **Bucket C (curator, this week):** light review of 5 NETEC/PHAC/ECDC-CDTR/WHO-mass-gatherings pages. Blocked on: SME availability for bucket B; operator time for buckets A & C.
+- **Timeline auto-promote — implementation queued (item 2, medium-large).** Design + 3 of 4 required agent sign-offs in hand. Implementation tasks: `scripts/promote-news-to-timeline.mjs` (deterministic, Tier-1 allowlist {CDC,WHO,ECDC}, severity ≥ concern, ≤14 days, exactly one signalId, same-day collision skip, per-run cap 20, per-signal cap 5/7d, verbatim title/description, Tier-1 sourceId hard-resolve else skip, skip on null link, no-write on zero-promotion); `scripts/validate-data.mjs` new invariants for `provenance: "auto-news-tier1"` + `newsId`/`authority`/`link`/`promotedAt`; new tests in `scripts/test-validate-data.mjs` + `scripts/test-promote-news-to-timeline.mjs`; wire `npm run promote:timeline` into `.github/workflows/update-news.yml` between `enrich-news` and `generate:api` with `EMERGENZ Data Bot` commit identity; `audit:autonomy` registration of the new writer; `AI-ENRICHMENT-POLICY.md` "Current Live Status" addition (exact text in agent sign-off); update README + CONTENT-STANDARDS §4 to describe the contract. Outstanding minor decisions: per-signal cap exact number (5 in design, could be 3-10); Africa CDC and Africa-CDC-RSS-feed-in-`GLOBAL_FEEDS` follow-up; `feed.rss` inclusion of timeline events (recommended exclude for MVP).
+- **Formal a11y sweep (item 8, medium).** Code-level a11y already shipped (acknowledgment modal focus trap, grouped `aria-pressed` filter chips on Map/Signals/Briefings/Timeline/News/Sources). Pending: dev-server + axe-style pass across all 16 routes for heading hierarchy, alt text, focus order, color contrast, keyboard nav. Lighthouse Performance/A11y/SEO score capture useful as a baseline.
 - **~~`cdc-han` persistent HTTP 403 in `audit:sources`.~~** ✅ Shipped — data-driven `knownBlocked` allowlist added to both `audit:sources` and `audit:source-drift`; cdc-han now routes to `knownBlockedSources` and no longer counts as a failure. Schema requires a `knownBlockedReason` so the bypass can be re-audited; three regression tests cover the schema rule. See the "knownBlocked source-audit allowlist" entry above.
-- **Timeline event automation (low).** `signal-timeline.json` is manually curated and gradually drifts behind the live news pipeline. Considered acceptable today (events represent significant curated milestones, not raw news) and surfaced honestly via the combined Recent Developments feed shipped 2026-05-23. Revisit if curation cadence proves unsustainable.
+- **~~Timeline event manual-curation drift~~** ✅ Considered closed by the auto-promote decision (item 2 above). The "Recent Developments" combined feed (shipped 2026-05-23) bridges the gap until auto-promote ships.
+- **~~Tier 1 RSS gate strictness (item 7).~~** ✅ Decision recorded 2026-05-24 — keep strict (any critical Tier 1 feed fail aborts news workflow). Rationale: data-integrity > availability. Documented in [RUNBOOK.md](RUNBOOK.md) §8 "Known operational tradeoffs."
+- **~~RUNBOOK.md (item 9).~~** ✅ Shipped this session. See [RUNBOOK.md](RUNBOOK.md).
+- **~~`public/api/v1/*` commit policy (item 10).~~** ✅ Decision recorded 2026-05-24 — keep committed. Documented in [CONTRIBUTING.md](CONTRIBUTING.md) and [RUNBOOK.md](RUNBOOK.md) §7.
+- **~~WHO Press / WastewaterSCAN commercial-licensing waivers (item 4).~~** Closed 2026-05-24 — not tracked here. Remains a real obligation only if a paid tier is ever introduced.
+- **~~USPTO trademark search for EMERGENZ (item 5).~~** Closed 2026-05-24 — corporate brand task, not a dashboard repo task.
 - **~~Further deepening.~~** ✅ Shipped. Every signal now has 5 attributed sections (was 3 for non-hantavirus). Total dashboard sections: 80 (was 50). See `scripts/parity-signal-sections.mjs`.
 - **~~Bundle size.~~** ✅ Addressed by lazy route loading + Rollup `manualChunks`. Entry chunk is now 18.23 kB (gzip 6.39 kB); heavy map/data/vendor chunks are split and cacheable.
 - **~~Accessibility sweep.~~** ✅ Code-level sweep shipped: acknowledgment modal focus trap/Escape handling and grouped `aria-pressed` filter chips on Map, Signals, Briefings, Timeline, News, and Sources. Manual browser/axe pass still useful before a formal accessibility sign-off.

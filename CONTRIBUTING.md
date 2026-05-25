@@ -63,6 +63,22 @@ The public `status.json` contract is published at `https://biosecurity-intel.eme
 
 ---
 
+## `public/api/v1/*` commit policy
+
+The files in `public/api/v1/` (`signals.json`, `news.json`, `signal-sources.json`, `signal-timeline.json`, `feed.rss`) are **tracked in git** as a deliberate snapshot of the public API surface. They are regenerated from `src/data/*` by `scripts/generate-api.mjs`.
+
+Rules:
+
+1. **Never hand-edit `public/api/v1/*`.** Data flows one direction: `src/data/*` → `generate-api.mjs` → `public/api/v1/*`. Direct edits will be overwritten on the next workflow run.
+2. **When you change underlying data** (`src/data/signals.json`, `signal-timeline.json`, `signal-sources.json`, or anything else that flows into the generator), run `npm run generate:api` and commit both the data change and the regenerated artifacts in the **same commit**. This keeps the diff reviewable and the deployed snapshot in sync with the data of record.
+3. **When you change the generator itself** (`scripts/generate-api.mjs`), commit the script + the regenerated artifacts in the same commit, and add a `HANDOFF.md` entry explaining the schema/shape change. Downstream consumers of `/api/v1/*` will see the diff.
+4. CI's `npm run build` does not regenerate artifacts; it does validate them. A PR whose `public/api/v1/*` diff doesn't match its `src/data/*` diff (or its generator diff) should be flagged by review.
+5. Artifacts are kept in git (not gitignored) because (a) the diff is reviewable per PR, (b) Vercel gets a deterministic deploy target, and (c) external consumers of `/api/v1/*` benefit from a cacheable, versioned snapshot. The "treat as build artifact and gitignore" alternative was considered and rejected on 2026-05-24.
+
+See [RUNBOOK.md](RUNBOOK.md) §7 for the operational view of this policy.
+
+---
+
 ## Questions
 
 Open a GitHub issue or contact EMERGENZ Systems via the repository contact page.
