@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-25T17:58:36.289Z",
+  "generatedAt": "2026-05-25T18:02:03.892Z",
   "endpoint": "/api/v1/signal-sources.json",
   "count": 38,
   "signalSources": [
@@ -405,7 +405,7 @@
       "sourceType": "expert-weekly-report",
       "primary": true,
       "url": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-9-13-may-2026-week-20",
-      "lastVerified": "2026-05-19",
+      "lastVerified": "2026-05-25",
       "domains": [
         "vhf",
         "respiratory",
@@ -549,7 +549,7 @@
       "primary": true,
       "sourceTier": 1,
       "url": "https://www.who.int/activities/managing-health-risks-during-mass-gatherings",
-      "lastVerified": "2026-05-22",
+      "lastVerified": "2026-05-25",
       "domains": [
         "mass_gathering",
         "travel"
