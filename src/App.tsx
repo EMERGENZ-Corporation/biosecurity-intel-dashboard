@@ -26,6 +26,8 @@ const TriageCardPrint = lazy(() => import('./pages/TriageCardPrint'))
 function PageLoader() {
   return (
     <div
+      role="status"
+      aria-live="polite"
       style={{
         fontFamily: "'IBM Plex Mono', monospace",
         fontSize: '0.75rem',

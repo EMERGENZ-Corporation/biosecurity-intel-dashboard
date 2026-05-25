@@ -73,6 +73,7 @@ export default function Resources() {
           <select
             value={domain}
             onChange={(e) => setDomain(e.target.value as ThreatCategory | 'all')}
+            aria-label="Filter resources by domain"
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
               fontSize: '0.6875rem',
@@ -95,6 +96,7 @@ export default function Resources() {
           <select
             value={sourceType}
             onChange={(e) => setSourceType(e.target.value as SourceType | 'all')}
+            aria-label="Filter resources by type"
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
               fontSize: '0.6875rem',
