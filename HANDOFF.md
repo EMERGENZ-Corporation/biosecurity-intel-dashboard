@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Bucket C source-drift partial — 2 of 5 refreshed via WebFetch (commit pending)
+## ✅ Bucket C source-drift partial — 2 of 5 refreshed via WebFetch (commit 4c98622)
 
 Continued item-1 follow-through. Light WebFetch review of the 5 Bucket C reference / guidance sources from [docs/SOURCE-DRIFT-2026-05-24.md](docs/SOURCE-DRIFT-2026-05-24.md). 2 confirmed alive + on-topic; 3 returned HTTP 403 from this environment in the same pattern as fda.gov (NETEC repository and canada.ca both blocking the WebFetch user-agent). Refreshed only the 2 I could verify; deferred the rest to a 2-minute operator browser check.
 
