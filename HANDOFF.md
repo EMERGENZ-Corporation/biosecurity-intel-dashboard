@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval judge — switch from OpenAI to Anthropic Claude (commit pending)
+## ✅ Weval judge — switch from OpenAI to Anthropic Claude (commit 0ededd2)
 
 User asked why we used an OpenAI key instead of Claude. Honest answer: I defaulted to `openai:gpt-4o-mini` because it was the canonical "cheap judge" example I'd seen in Weval's docs and because my "different vendor family from production" rule was satisfied by either OpenAI or Anthropic. I didn't think carefully about which different-vendor choice was right for THIS org.
 
