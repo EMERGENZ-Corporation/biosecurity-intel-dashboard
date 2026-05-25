@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval blueprint — fix 10 structural defects from sandbox run analysis (commit TBD)
+## ✅ Weval blueprint — fix 10 structural defects from sandbox run analysis (commit 9973cd4)
 
 Second Claude Code session (different Anthropic account, Linux container) identified 10 defects in `weval/biosecurity-gemini-news-classification.yml` from sandbox run 1779739989491 and prepared a fix. The commit could not be pushed from that environment due to 403 (no org write access). This commit replays the same changes from the primary local clone.
 
