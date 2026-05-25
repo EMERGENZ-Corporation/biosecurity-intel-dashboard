@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "degraded",
-  "generatedAt": "2026-05-25T17:47:38.217Z",
+  "generatedAt": "2026-05-25T17:58:35.485Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 48,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-23T00:00:00.000Z",
     "lastChecked": "2026-05-23T12:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-23T12:00:00.000Z",
-    "dataAgeHours": 65.79394944444445,
-    "officialCheckAgeHours": 53.79394944444444
+    "dataAgeHours": 65.9765236111111,
+    "officialCheckAgeHours": 53.97652361111111
   },
   "signals": {
     "total": 16,
@@ -170,6 +170,6 @@
     ]
   },
   "staleReasons": [
-    "Last source check 53.8h old"
+    "Last source check 54.0h old"
   ]
 }
