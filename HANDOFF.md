@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval automation stack — wrapper + workflow + alerts + RUNBOOK (commit pending)
+## ✅ Weval automation stack — wrapper + workflow + alerts + RUNBOOK (commit 86ca3d6)
 
 User asked whether the Weval process is something Claude Code / Codex / Cowork can run with minimal operator involvement. Answer: yes, with three operator gates (initial setup, cost approval, publication/adjudication). User selected "ship full stack now" + "skip Cowork (GHA sufficient)". This commit ships the automation.
 
