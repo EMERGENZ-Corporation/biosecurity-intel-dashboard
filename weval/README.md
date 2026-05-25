@@ -75,7 +75,7 @@ Weval supports both web-UI runs (via https://weval.org/sandbox) and CLI runs.
 1. Open https://weval.org/sandbox
 2. Paste the contents of the `.yml` file
 3. Configure your provider keys in the sandbox
-4. **In the model picker, DESELECT `anthropic:claude-3-haiku-20240307`** — the sandbox adds it automatically as a default, but it is a retired model and every prompt returns `404 model: claude-3-haiku-20240307`, polluting the coverage table with a 0% column. The `models:` block in the YAML controls what we actually want to evaluate (`google:gemini-2.5-flash` + `openai:gpt-4o-mini`); anything else added by the sandbox UI is noise.
+4. **In the model picker, DESELECT `claude-3-haiku-20240307`** — the sandbox adds it automatically as a default, but it is a retired model and every prompt returns `404 model: claude-3-haiku-20240307`, polluting the coverage table with a 0% column. The blueprint's `models:` block already pre-selects the six working candidates the sandbox exposes (Gemini production + a 3-tier OpenAI sweep + two open-weight floor models). `claude-haiku-4-5` (our CI judge) is not in the sandbox picker as of 2026-05 — that's expected; the judge runs server-side in CI only.
 5. Run
 
 ### CLI (when scaling beyond ad-hoc runs)

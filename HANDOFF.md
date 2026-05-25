@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (Weval blueprint — second-pass fixes from re-reading sandbox run 1779739989491: added "Task: classify…" task-framing prefix to all 18 terse prompts so models stop echoing the input; made should/should_not criteria tolerant of `signalIds` field-name variant (models often drop the `suggested` prefix); documented the sandbox Claude 3 Haiku auto-add pitfall in weval/README.md.)
+**Last updated:** 2026-05-25 (Weval blueprint — expanded models: block to provision all 6 working sandbox candidates the weval.org picker exposes — Gemini 2.5 Flash (production), GPT 4o mini / 4.1 mini / 4.1 nano (OpenAI tier sweep), Mistral 7B + Llama 3 8B (open-weight floor). claude-3-haiku-20240307 stays excluded — retired, returns 404; claude-haiku-4-5 stays out — not in the sandbox picker but used server-side as CI judge.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,23 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval blueprint — provision all 6 sandbox-available models (commit TBD)
+
+User shared the weval.org sandbox model picker. The sandbox exposes 7 candidates; one (`claude-3-haiku-20240307`) is retired and 404s, the remaining 6 are usable. Expanded the blueprint's `models:` block to pre-select all 6 — Gemini production + a full OpenAI tier sweep (4o-mini → 4.1-mini → 4.1-nano) + two open-weight floor models (Mistral 7B + Llama 3 8B). The floor models will probably fail noisily — that's the point: a prompt that holds up at 7B/8B is a prompt that holds up everywhere, and the spread between top-tier and floor is itself the most useful signal for the AI-boundary story.
+
+**Files touched:**
+- `weval/biosecurity-gemini-news-classification.yml` — `models:` block extended from 2 entries to 6. Added inline rationale block above the list documenting the tier layout, what's intentionally excluded (retired Haiku, the CI judge), and why.
+- `weval/README.md` — Sandbox step 4 rewritten to reflect the new pre-selected list. The deselect-Claude-3-Haiku instruction stays (the sandbox UI auto-adds it regardless of the YAML).
+- `HANDOFF.md` — this entry + timestamp.
+
+**Why this matters for the AI-boundary story:** publishing a Weval run with 6 models (production + 3 OpenAI tiers + 2 open-weight) gives reviewers/funders concrete evidence that (a) the Gemini classifier holds up against multiple cross-vendor comparison candidates, (b) the hard-limit adherence (no clinical advice, no case counts, no risk ratings, no fabricated URLs) is robust across model capability tiers, and (c) we're not cherry-picking favorable comparison candidates. The 7B/8B floor failures, if they happen, demonstrate that our prompt design *needs* a capable model — which is exactly the story for "Gemini in production is appropriate, not over-engineered."
+
+**Verify:**
+- `npm run test:validators && npm run validate:data && npm run audit:autonomy && npm run audit:ai-enrichment && npm run build` — all pass (yaml + docs only).
+- Re-paste the blueprint into the weval.org sandbox; verify the picker auto-checks 6 boxes (Gemini, gpt-4o-mini, gpt-4.1-mini, gpt-4.1-nano, mistral-7b-instruct-v0.3, llama-3-8b-instruct) and leaves claude-3-haiku-20240307 unchecked.
+
+---
 
 ## ✅ Weval blueprint — second-pass fixes from sandbox re-read (commit 4ab4859)
 

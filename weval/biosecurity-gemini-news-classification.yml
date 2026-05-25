@@ -32,17 +32,38 @@ description: |
   confidence, and (4) never write clinical content, case counts, risk
   levels, public-health directives, or authoritative claims.
 # Models this eval is designed to be run against. The production target
-# is google:gemini-2.5-flash; openai:gpt-4o-mini is included as a
-# cross-vendor comparison candidate for sandbox runs on weval.org (the
-# sandbox routes Gemini via openrouter: prefix; anthropic:claude-haiku-4-5
-# is not available in the weval.org sandbox model picker as of 2026-05).
-# The JUDGE model is configured separately at run time (see
-# weval/README.md "Running locally"); the EMERGENZ CI workflow uses
-# anthropic:claude-haiku-4-5 as the judge for bias-free grading of the
-# Gemini production model.
+# is google:gemini-2.5-flash; the remaining entries are cross-vendor /
+# cross-tier comparison candidates that the weval.org sandbox exposes
+# in its model picker as of 2026-05.
+#
+# Tier layout, deliberate:
+#   - google:gemini-2.5-flash             — PRODUCTION (what we actually ship)
+#   - openai:gpt-4o-mini                  — OpenAI mid-tier
+#   - openai:gpt-4.1-mini                 — OpenAI newer mid-tier
+#   - openai:gpt-4.1-nano                 — OpenAI floor (cheap; tests prompt robustness)
+#   - openrouter:mistralai/mistral-7b...  — open-weight floor (7B)
+#   - openrouter:meta-llama/llama-3-8b... — open-weight floor (8B)
+#
+# What is intentionally NOT here:
+#   - anthropic:claude-3-haiku-20240307   — retired; returns 404 on every
+#                                           prompt; the sandbox UI auto-adds
+#                                           this — deselect it at run time
+#                                           (see weval/README.md sandbox notes).
+#   - anthropic:claude-haiku-4-5          — NOT in the weval.org sandbox
+#                                           picker as of 2026-05; used
+#                                           server-side as the JUDGE in the
+#                                           EMERGENZ CI workflow only.
+#
+# The JUDGE model is configured separately at run time (see weval/README.md
+# "Running locally"); the EMERGENZ CI workflow uses anthropic:claude-haiku-4-5
+# as the judge for bias-free grading of the Gemini production model.
 models:
   - google:gemini-2.5-flash
   - openai:gpt-4o-mini
+  - openai:gpt-4.1-mini
+  - openai:gpt-4.1-nano
+  - openrouter:mistralai/mistral-7b-instruct
+  - openrouter:meta-llama/llama-3-8b-instruct
 tags:
   - public-health
   - biosecurity
