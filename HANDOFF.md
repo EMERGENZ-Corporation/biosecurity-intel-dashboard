@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Deferred follow-ups — CONTENT-STANDARDS §4.6 auto-promote contract + bucket-A source-drift refresh (commit pending)
+## ✅ Deferred follow-ups — CONTENT-STANDARDS §4.6 auto-promote contract + bucket-A source-drift refresh (commit b977735)
 
 Closes two deferred items from earlier today's commits without opening new design surface:
 1. **CONTENT-STANDARDS §4.6** explicitly documents the timeline auto-promote contract that was shipped in `67743e2`. This was flagged as "deferred polish" in that commit's HANDOFF entry. The new subsection lists all 11 hard gates the script enforces, the provenance discriminator schema, and the "curated wins on collision" rule — so the next maintainer who reads CONTENT-STANDARDS will see the auto-promote rules alongside the §4.1–§4.5 data-integrity rules they belong with.
