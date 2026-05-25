@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (Weval judge switched from openai:gpt-4o-mini → anthropic:claude-haiku-4-5. User caught the default-driven choice: Anthropic aligns with EMERGENZ stack, is a Weval partner, is bias-free vs Gemini, and is cost-equivalent to GPT-4o-mini. Operator setup: ANTHROPIC_API_KEY repo secret instead of OPENAI_API_KEY. All workflow / wrapper / docs / audit references flipped.)
+**Last updated:** 2026-05-25 (Weval blueprint — fixed 10 structural defects found in sandbox run 1779739989491: "Same instructions" context-leaks, negative-case items[0] paradoxes, missing JSON shapes in confidence/dedup prompts, and models list updated to use openai:gpt-4o-mini as sandbox comparison candidate.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,25 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval blueprint — fix 10 structural defects from sandbox run analysis (commit TBD)
+
+Second Claude Code session (different Anthropic account, Linux container) identified 10 defects in `weval/biosecurity-gemini-news-classification.yml` from sandbox run 1779739989491 and prepared a fix. The commit could not be pushed from that environment due to 403 (no org write access). This commit replays the same changes from the primary local clone.
+
+**Defects fixed:**
+- `models:` comparison candidate — `anthropic:claude-haiku-4-5` not available in weval.org sandbox picker; replaced with `openai:gpt-4o-mini` (comment updated to explain sandbox vs CI judge distinction)
+- `classify-cholera-republic-of-congo` — "Same instructions and JSON shape as above" context-leak; weval runs each case in isolation; made self-contained with explicit hard limits + shape
+- `classify-avian-influenza-h5-dairy` — same context-leak; same fix
+- `negative-marathon-weather`, `negative-tech-funding`, `negative-mentions-disease-not-active-signal` — `should`/`should_not` criteria referenced `items[0]` but correct behavior for off-topic input may produce `items=[]`; all guards now use "items is empty, OR…" form
+- `hallucination-fictitious-disease-x`, `hallucination-plausible-but-absent-signal` — same items[0] paradox; same fix
+- `confidence-high-explicit-official-han`, `confidence-low-ambiguous-respiratory`, `confidence-medium-tier3-rebroadcast` — bare `Return JSON.` prompts with no shape; added explicit JSON shape and relevant hard limits
+- `dedup-same-event-two-rebroadcasts` — `duplicateOf`/`eventClusterKey` fields referenced in criteria but not declared in prompt shape; shape now includes both fields
+
+**Files touched:**
+- `weval/biosecurity-gemini-news-classification.yml` — all 10 fixes applied
+- `HANDOFF.md` — this entry + timestamp
+
+**Verify:** Open the corrected blueprint in the weval.org sandbox, select `google:gemini-2.5-flash` (openrouter) + `openai:gpt-4o-mini`; negative and hallucination cases should no longer fail on the items[0] paradox.
 
 ## ✅ Weval judge — switch from OpenAI to Anthropic Claude (commit 0ededd2)
 
