@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (Weval blueprint — fixed 10 structural defects found in sandbox run 1779739989491: "Same instructions" context-leaks, negative-case items[0] paradoxes, missing JSON shapes in confidence/dedup prompts, and models list updated to use openai:gpt-4o-mini as sandbox comparison candidate.)
+**Last updated:** 2026-05-25 (Weval blueprint — second-pass fixes from re-reading sandbox run 1779739989491: added "Task: classify…" task-framing prefix to all 18 terse prompts so models stop echoing the input; made should/should_not criteria tolerant of `signalIds` field-name variant (models often drop the `suggested` prefix); documented the sandbox Claude 3 Haiku auto-add pitfall in weval/README.md.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,30 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval blueprint — second-pass fixes from sandbox re-read (commit TBD)
+
+User re-shared the same sandbox run (1779739989491) after 9973cd4 landed. Re-reading the raw model outputs surfaced three classes of remaining failures that the first-pass fix didn't fully address:
+
+1. **Models echo the input instead of classifying.** Even with a shape line added, terse prompts like "Return JSON in the shape: {…}" cause Gemini and GPT-4o-mini to either reproduce the input JSON verbatim or hallucinate new news items not in the input. The four prompts that scored 100% all start with a "You are assisting … Allowed tasks … Hard limits … Return exactly this shape" preamble. The terse prompts that just specify the shape don't tell the model to *classify* — so it defaults to echoing.
+2. **Models use `signalIds` instead of `suggestedSignalIds`.** When the model invents a flat structure, criteria checking the exact path `items[0].suggestedSignalIds` evaluate as "field absent" and the judge marks every related criterion unmet — even when the model's behavior was correct in intent (or, in the dengue case, wrong for the right-to-flag reason of catalog violation).
+3. **Sandbox UI auto-adds `anthropic:claude-3-haiku-20240307`** (a retired model). Every call to it returns `404 model: claude-3-haiku-20240307` and the 0% column distorts the macro coverage table. This isn't a YAML issue — the `models:` block is right — but operators didn't know to deselect it.
+
+**Files touched:**
+- `weval/biosecurity-gemini-news-classification.yml` — Added `Task: classify each news item by selecting matching signalIds from the supplied catalog.` prefix to 18 prompts (every prompt that wasn't already running the full "You are assisting…" production-style preamble): `classify-cholera-republic-of-congo`, `classify-avian-influenza-h5-dairy`, `classify-lassa-nigeria`, `classify-norovirus-wastewater`, `negative-marathon-weather`, `negative-tech-funding`, `negative-mentions-disease-not-active-signal`, `hallucination-fictitious-disease-x`, `hallucination-plausible-but-absent-signal`, `hallucination-invented-authority`, `confidence-high-explicit-official-han`, `confidence-low-ambiguous-respiratory`, `confidence-medium-tier3-rebroadcast`, `limit-no-clinical-treatment-advice`, `limit-no-case-counts`, `limit-no-risk-rating-language`, `limit-no-public-health-directive`, `limit-no-fabricated-url`, `limit-no-invented-numeric-data`, `multi-tag-andes-cross-country`, `dedup-same-event-two-rebroadcasts`, `empty-news-list-edge`. Also added explicit JSON shape to the limit-no-* and hallucination-invented-authority and multi-tag prompts (which previously had `Return JSON.` alone, leading to free-form output). Reworded should/should_not criteria in `negative-tech-funding`, `hallucination-fictitious-disease-x`, and `hallucination-plausible-but-absent-signal` to accept `signalIds` as well as `suggestedSignalIds` so the judge scores intent, not exact path. Also added `cholera-africa-2026` as a should_not for the dengue case (since the sandbox showed Gemini and GPT both wrongly assigning cholera to dengue).
+- `weval/README.md` — New step 4 in the "Web sandbox" run instructions explicitly tells operators to deselect `anthropic:claude-3-haiku-20240307` in the sandbox model picker. The retired-model 404 column was distorting the macro coverage table in run 1779739989491.
+- `HANDOFF.md` — this entry + timestamp.
+
+**What this is NOT:**
+- Not a change to the production Gemini prompt at `scripts/enrich-news.mjs` — only the eval blueprint is touched.
+- Not a change to the CI judge (still `anthropic:claude-haiku-4-5`) or to the production model (still `google:gemini-2.5-flash`).
+- Not a publication to weval.org — the sandbox still needs to re-run cleanly first.
+
+**Verify:**
+- `npm run test:validators && npm run validate:data && npm run audit:autonomy && npm run audit:ai-enrichment && npm run build` — all pass (yaml + docs only; no source / data changes).
+- Re-run the blueprint in the weval.org sandbox with **Claude 3 Haiku 20240307 deselected**. Expected: significantly higher coverage on `classify-cholera-republic-of-congo`, `confidence-high-explicit-official-han`, `negative-marathon-weather`, `hallucination-plausible-but-absent-signal`, and `dedup-same-event-two-rebroadcasts` (these scored 33-50% in the pre-fix run due to the echo-input and field-name-mismatch failure modes).
+
+---
 
 ## ✅ Weval blueprint — fix 10 structural defects from sandbox run analysis (commit 9973cd4)
 

@@ -75,7 +75,8 @@ Weval supports both web-UI runs (via https://weval.org/sandbox) and CLI runs.
 1. Open https://weval.org/sandbox
 2. Paste the contents of the `.yml` file
 3. Configure your provider keys in the sandbox
-4. Run
+4. **In the model picker, DESELECT `anthropic:claude-3-haiku-20240307`** — the sandbox adds it automatically as a default, but it is a retired model and every prompt returns `404 model: claude-3-haiku-20240307`, polluting the coverage table with a 0% column. The `models:` block in the YAML controls what we actually want to evaluate (`google:gemini-2.5-flash` + `openai:gpt-4o-mini`); anything else added by the sandbox UI is noise.
+5. Run
 
 ### CLI (when scaling beyond ad-hoc runs)
 
