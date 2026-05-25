@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Africa CDC RSS feed wired into news pipeline (commit pending)
+## ✅ Africa CDC RSS feed wired into news pipeline (commit a7acd87)
 
 Closes the item-2 follow-up about expanding news feed coverage to Africa CDC. The `africa-cdc-outbreaks` source has been registered in `signal-sources.json` for some time as the **primary** source for `cholera-africa-2026`, `mpox-africa-clade-i-2026`, and `lassa-fever-2026` (and a secondary source for `ebola-bundibugyo-drc-2026`), but no Africa CDC RSS feed was wired into `update-news.mjs` — meaning their news only reached the dashboard via Google News rebroadcast with the generic "Google News" authority label, not as direct Africa CDC items.
 
