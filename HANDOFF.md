@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (bucket C source-drift partial — 2 of 5 sources refreshed via WebFetch alive/on-topic check: ecdc-cdtr (week-20 CDTR covering avian/swine flu + mpox + hantavirus), who-mass-gatherings (Olympics/Hajj preparedness). 3 returned HTTP 403 (NETEC + canada.ca, same harness-side block pattern as fda.gov) and were deferred to operator browser-side check.)
+**Last updated:** 2026-05-25 (Africa CDC RSS feed added to GLOBAL_FEEDS in update-news.mjs — live verified fetching 10 items, dedup-weighted at 85, does NOT participate in auto-promote because Africa CDC is registered Tier 2 in this repo's source registry. Closes the item-2 follow-up about expanding news feed coverage to the Africa CDC primary source for cholera/mpox/lassa signals.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,30 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Africa CDC RSS feed wired into news pipeline (commit pending)
+
+Closes the item-2 follow-up about expanding news feed coverage to Africa CDC. The `africa-cdc-outbreaks` source has been registered in `signal-sources.json` for some time as the **primary** source for `cholera-africa-2026`, `mpox-africa-clade-i-2026`, and `lassa-fever-2026` (and a secondary source for `ebola-bundibugyo-drc-2026`), but no Africa CDC RSS feed was wired into `update-news.mjs` — meaning their news only reached the dashboard via Google News rebroadcast with the generic "Google News" authority label, not as direct Africa CDC items.
+
+**Verified before commit:**
+- Probed `https://africacdc.org/feed/`, `/news-item/feed/`, `/rss.xml`. `/news-item/feed/` is the live RSS 2.0 endpoint serving outbreak-relevant items (top item at time of probe: "Health Leaders Endorse Coordinated Action and Continuity of Essential Services During Ebola Response").
+- Local `npm run update:news` run with the new feed wired in: fetched 10 items from Africa CDC, all 3 Tier 1 feeds continued to succeed, news merge produced 1 newly-added Africa CDC item in `news.json` (the rest were either >30d old or dedup'd against existing coverage). The new item was deterministically tagged to `ebola-bundibugyo-drc-2026` by the keyword matcher — correct.
+- Data change reverted from this commit; the next scheduled `Update News Feed` workflow run will pull Africa CDC items in under the `EMERGENZ Data Bot` identity.
+
+**Files touched:**
+- `scripts/update-news.mjs` — adds the Africa CDC feed to `GLOBAL_FEEDS` (Tier 2, `critical: false`) with an inline comment explaining why it does NOT participate in the timeline auto-promote (Africa CDC is registered as Tier 2 in `signal-sources.json` and the auto-promote allowlist is strict Tier 1 only). Adds `Africa CDC` → 85 to `AUTHORITY_WEIGHT` for dedup tie-breaking (between Tier 1 trio at 95-100 and UKHSA at 80).
+
+**What this does NOT change:**
+- **Timeline auto-promote allowlist** stays `{CDC, WHO, ECDC}`. Africa CDC items can be hand-promoted via curated timeline events, but won't auto-write. Expanding the allowlist to include Africa CDC requires either (a) bumping the source's tier from 2 → 1 in `signal-sources.json` (a CONTENT-STANDARDS §1 policy decision — Africa CDC is a continental health body analogous to ECDC, which IS Tier 1; the parallel reasoning is defensible but needs source-integrity-agent + content-standards-agent sign-off) OR (b) introducing a new "high-trust regional bodies" sub-tier in the auto-promote that's distinct from the §1 tiers. Deferred until there's a real outbreak window worth tuning against.
+- **CONTENT-STANDARDS** is unchanged. The §1 tier table doesn't list Africa CDC as Tier 1; that's a separate policy conversation.
+- **`signal-sources.json`** is unchanged. No registry edits in this commit.
+
+**Verify:**
+- `npm run test:validators`, `npm run validate:data`, `npm run audit:autonomy`, `npm run audit:ai-enrichment`, `npm run build` all pass.
+- `git diff scripts/update-news.mjs` shows only the new feed entry, the new weight map entry, and the inline comment. No other changes.
+- Next `Update News Feed` workflow run will surface Africa CDC items in `news.json` under `authority: "Africa CDC"` with appropriate `signalIds` from the keyword matcher.
+
+---
 
 ## ✅ Bucket C source-drift partial — 2 of 5 refreshed via WebFetch (commit 4c98622)
 

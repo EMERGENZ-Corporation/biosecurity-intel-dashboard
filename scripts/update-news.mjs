@@ -135,6 +135,12 @@ const GLOBAL_FEEDS = [
   { url: 'https://www.gov.uk/government/organisations/uk-health-security-agency.atom', authority: 'UKHSA', critical: false },
   { url: 'https://www.science.org/rss/news_current.xml', authority: 'Science', critical: false },
   { url: 'https://www.cidrap.umn.edu/rss.xml', authority: 'CIDRAP', critical: false },
+  // Africa CDC: added 2026-05-25. Source is registered in signal-sources.json
+  // (Tier 2) and is the primary source for cholera-africa-2026, mpox-africa-clade-i-2026,
+  // and lassa-fever-2026. RSS feed verified live with current Ebola response items.
+  // Does NOT participate in the timeline auto-promote (Tier 1 allowlist only); items
+  // flow only to news.json and can be hand-promoted via curated timeline edits.
+  { url: 'https://africacdc.org/news-item/feed/', authority: 'Africa CDC', critical: false },
   // FDA: source is registered in signal-sources.json (Tier 1, 17 U.S.C. §105).
   // RSS feed URL could not be verified against a live endpoint as of 2026-05-22;
   // covered via per-signal Google News queries for countermeasure/EUA coverage.
@@ -152,7 +158,7 @@ const GLOBAL_FEEDS = [
 // Authority weight for deduplication tie-breaking (higher = preferred)
 const AUTHORITY_WEIGHT = new Map([
   ['CDC', 100], ['WHO', 95], ['ECDC', 95],
-  ['UKHSA', 80], ['CIDRAP', 78],
+  ['Africa CDC', 85], ['UKHSA', 80], ['CIDRAP', 78],
   ['Science', 70], ['STAT News', 60],
   ['BBC Health', 65], ['NBC News', 55], ['CBC News', 55],
   ['ABC News', 55], ['NPR', 55],
