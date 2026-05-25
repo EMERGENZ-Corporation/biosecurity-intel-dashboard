@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Backlog cleanup — RUNBOOK, api/v1 commit policy, RSS-gate decision, source-drift triage, items 4 & 5 closed (commit pending)
+## ✅ Backlog cleanup — RUNBOOK, api/v1 commit policy, RSS-gate decision, source-drift triage, items 4 & 5 closed (commit 4888115)
 
 User asked to remove backlog items 4 and 5 from the repo and do items 1, 2, 7, 8, 9, 10. This commit ships the docs-only work for items 1, 7, 9, 10 plus the closure of items 4 & 5. Items 2 (timeline auto-promote) and 8 (a11y sweep) are queued for follow-up sessions; design and agent sign-offs for item 2 are already in hand (see "Outstanding work" below).
 
