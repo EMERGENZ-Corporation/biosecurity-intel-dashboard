@@ -113,6 +113,22 @@ function main() {
         ],
       },
       {
+        id: 'auto-timeline-promote',
+        cadence: 'After successful news fetch and enrichment',
+        workflow: 'Update News Feed',
+        writes: ['src/data/signal-timeline.json (provenance:"auto-news-tier1" events only)', 'internal promote-timeline-result.json'],
+        guardrails: [
+          'Deterministic, no AI at promotion time; title and description are verbatim from the news item',
+          'Strict Tier 1 authority allowlist: CDC, WHO, ECDC',
+          'Severity gate: signal severity must be concern or action',
+          '14-day age cap, exactly one matched signalId, valid URL link required',
+          'sourceId hard-resolves to a Tier 1 entry in signal-sources.json or the item is skipped',
+          'Same-day collision with any curated or auto event skips silently (curated wins)',
+          'Per-run cap 20; per-signal rolling 7-day cap 5',
+          'Zero-promotion runs write nothing (CONTENT-STANDARDS §4.4)',
+        ],
+      },
+      {
         id: 'status-api-refresh',
         cadence: 'Daily and on source data changes',
         workflow: 'Status Refresh',

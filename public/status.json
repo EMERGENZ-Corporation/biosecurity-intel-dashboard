@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "status": "ok",
-  "generatedAt": "2026-05-25T09:53:22.023Z",
+  "status": "degraded",
+  "generatedAt": "2026-05-25T17:47:38.217Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 48,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-23T00:00:00.000Z",
     "lastChecked": "2026-05-23T12:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-23T12:00:00.000Z",
-    "dataAgeHours": 57.889450833333335,
-    "officialCheckAgeHours": 45.889450833333335
+    "dataAgeHours": 65.79394944444445,
+    "officialCheckAgeHours": 53.79394944444444
   },
   "signals": {
     "total": 16,
@@ -47,7 +47,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-05-25T04:02:00.000Z"
+    "newest": "2026-05-25T15:13:01.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -82,6 +82,25 @@
           "Only high-confidence AI signal tags may be added; deterministic tags are never removed",
           "Bright Data is optional context fallback and never source-of-record",
           "No clinical, risk, legal, licensing, or structured signal fields are AI-written"
+        ]
+      },
+      {
+        "id": "auto-timeline-promote",
+        "cadence": "After successful news fetch and enrichment",
+        "workflow": "Update News Feed",
+        "writes": [
+          "src/data/signal-timeline.json (provenance:\"auto-news-tier1\" events only)",
+          "internal promote-timeline-result.json"
+        ],
+        "guardrails": [
+          "Deterministic, no AI at promotion time; title and description are verbatim from the news item",
+          "Strict Tier 1 authority allowlist: CDC, WHO, ECDC",
+          "Severity gate: signal severity must be concern or action",
+          "14-day age cap, exactly one matched signalId, valid URL link required",
+          "sourceId hard-resolves to a Tier 1 entry in signal-sources.json or the item is skipped",
+          "Same-day collision with any curated or auto event skips silently (curated wins)",
+          "Per-run cap 20; per-signal rolling 7-day cap 5",
+          "Zero-promotion runs write nothing (CONTENT-STANDARDS §4.4)"
         ]
       },
       {
@@ -150,5 +169,7 @@
       }
     ]
   },
-  "staleReasons": []
+  "staleReasons": [
+    "Last source check 53.8h old"
+  ]
 }

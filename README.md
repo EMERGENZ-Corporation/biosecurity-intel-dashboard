@@ -22,6 +22,12 @@ template and preserves its resilience patterns:
 - `npm run enrich:news` — optional server-side Gemini/Bright Data news
   enrichment. Adds only high-confidence news signal tags and internal review
   brief context; fails open when provider keys are absent or unavailable.
+- `npm run promote:timeline` — deterministic auto-promote of Tier 1 news
+  items (CDC/WHO/ECDC) into `signal-timeline.json`. Strict gates: severity
+  ≥ concern, ≤14 days, exactly one matched signalId, Tier 1 sourceId
+  resolvable, no same-day collision, per-run cap 20, per-signal 7-day cap 5.
+  Title and description are verbatim from the news item — never paraphrased.
+  Runs after `enrich:news` in the news workflow.
 - `npm run monitor:status` — independent hourly check of the public
   status endpoint.
 - `npm run audit:autonomy` — regression audit for scheduled update

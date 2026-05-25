@@ -16,6 +16,7 @@ const OUTPUT_PATH = process.env.AUTONOMY_AUDIT_OUTPUT || 'autonomy-audit-result.
 const REQUIRED_PACKAGE_SCRIPTS = [
   'update:news',
   'enrich:news',
+  'promote:timeline',
   'generate:status',
   'generate:api',
   'validate:data',
@@ -34,6 +35,7 @@ const WORKFLOW_CHECKS = [
       "cron: '0 */6 * * *'",
       'npm run update:news',
       'npm run enrich:news',
+      'npm run promote:timeline',
       'npm run generate:api',
       'EMERGENZ Data Bot',
       'MAX_NEWS_ITEMS: 500',
@@ -42,6 +44,7 @@ const WORKFLOW_CHECKS = [
       'ai-news-brief',
       'news-pipeline',
       'biosecurity-data-writers',
+      'src/data/signal-timeline.json',
     ],
   },
   {
@@ -145,6 +148,9 @@ function checkPublicContract(errors) {
   }
   if (!status.automation?.dataWriters?.some((writer) => writer.id === 'ai-news-enrichment')) {
     pushMissing(errors, 'status.json', 'automation.dataWriters must include ai-news-enrichment')
+  }
+  if (!status.automation?.dataWriters?.some((writer) => writer.id === 'auto-timeline-promote')) {
+    pushMissing(errors, 'status.json', 'automation.dataWriters must include auto-timeline-promote')
   }
   if (!Array.isArray(status.automation?.reviewGates) || status.automation.reviewGates.length < 2) {
     pushMissing(errors, 'status.json', 'automation.reviewGates must describe non-autonomous clinical/structured-data boundaries')

@@ -362,6 +362,17 @@ export interface SignalTimelineEvent {
   description: string
   sourceId: string
   category: ThreatCategory
+  /**
+   * Provenance discriminator. Absent = curated (human-authored, default).
+   * "auto-news-tier1" = auto-promoted from a Tier 1 news item by
+   * scripts/promote-news-to-timeline.mjs. Validator requires the
+   * traceability fields below when provenance is "auto-news-tier1".
+   */
+  provenance?: 'curated' | 'auto-news-tier1'
+  newsId?: string
+  authority?: string
+  link?: string
+  promotedAt?: string
 }
 
 export type SourceType =

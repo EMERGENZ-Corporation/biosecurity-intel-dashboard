@@ -21,6 +21,15 @@ authorities, clinical reviewers, source licenses, or the source registry.
   optional AI news enrichment, `public/status.json` generation, static
   `/api/v1/` generation, production status monitoring, and official-source
   review alerts.
+- `scripts/promote-news-to-timeline.mjs` is the deterministic auto-writer for
+  `src/data/signal-timeline.json`. It reads `src/data/news.json` (which may
+  carry AI-assigned `signalIds` from the optional enrichment step), applies
+  hard gates (authority ∈ {CDC, WHO, ECDC}; severity ≥ concern; ≤14 days;
+  exactly one signalId; no same-day collision; per-run and per-signal caps),
+  and writes verbatim title/description only. It does not consult any AI
+  provider at promotion time. `signal-timeline.json` is not a §3.4 curated
+  field; it is pipeline-managed but does not carry confirmed counts, deaths,
+  countries, risk levels, clinical guidance, or PPE guidance.
 
 ## Bright Data Decision
 

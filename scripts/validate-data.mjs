@@ -47,6 +47,8 @@ const RELATIONSHIP_TYPES = new Set([
   'response-resource-conflict',
 ])
 const HYPOTHESIS_DISPOSITIONS = new Set(['active', 'under-investigation', 'discounted'])
+const TIMELINE_PROVENANCE = new Set(['curated', 'auto-news-tier1'])
+const TIER1_NEWS_AUTHORITIES = new Set(['CDC', 'WHO', 'ECDC'])
 const TRIAGE_STALE_DAYS = 365
 const TRIAGE_DOSE_PATTERN = /\b\d+(?:,\d{3})*(?:\.\d+)?\s*(?:mg|mcg|g|iu|units?|ml|mL)(?:\/kg)?\b|\bq\d+h\b|\b(?:BID|TID|QID|q\.?d\.?)\b/i
 
@@ -395,6 +397,43 @@ signalTimeline.forEach((event, index) => {
   }
   if (event.sourceId && !signalSourceIds.has(event.sourceId)) {
     errors.push(`${label}: sourceId "${event.sourceId}" not in signal-sources.json`)
+  }
+  // Provenance discriminator — absent defaults to "curated". Auto-promoted
+  // events require a Tier 1 authority allowlist + newsId/link/promotedAt
+  // traceability + Tier 1 sourceId so the structured-data write contract
+  // (CONTENT-STANDARDS §1, §2.1, §3.1) cannot be quietly weakened.
+  if (event.provenance !== undefined) {
+    if (!TIMELINE_PROVENANCE.has(event.provenance)) {
+      errors.push(`${label}: invalid provenance "${event.provenance}"`)
+    }
+    if (event.provenance === 'auto-news-tier1') {
+      requireFields(event, ['newsId', 'authority', 'link', 'promotedAt'], label)
+      if (event.authority && !TIER1_NEWS_AUTHORITIES.has(event.authority)) {
+        errors.push(`${label}: authority must be Tier 1 (CDC, WHO, ECDC); got "${event.authority}"`)
+      }
+      if (event.link && !isUrl(event.link)) {
+        errors.push(`${label}: link must be valid URL`)
+      }
+      if (event.promotedAt && !isIsoDate(event.promotedAt)) {
+        errors.push(`${label}: promotedAt must be ISO`)
+      }
+      if (
+        event.promotedAt && event.date &&
+        new Date(event.promotedAt).getTime() < new Date(event.date).getTime()
+      ) {
+        errors.push(`${label}: promotedAt must be on or after date`)
+      }
+      if (event.id && !String(event.id).startsWith('auto-')) {
+        errors.push(`${label}: auto-promoted events must use the "auto-" id prefix`)
+      }
+      // Tier 1 sourceId hard-resolve (per content-standards condition 1).
+      if (event.sourceId && signalSourceIds.has(event.sourceId)) {
+        const src = signalSources.find((s) => s.id === event.sourceId)
+        if (src && src.sourceTier !== 1) {
+          errors.push(`${label}: auto-promoted sourceId must reference a Tier 1 source; "${event.sourceId}" is Tier ${src.sourceTier}`)
+        }
+      }
+    }
   }
 })
 

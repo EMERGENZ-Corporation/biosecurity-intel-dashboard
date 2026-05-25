@@ -65,6 +65,12 @@ jobs:
           BRIGHT_DATA_NEWS_CONTEXT: ${{ vars.BRIGHT_DATA_NEWS_CONTEXT || '1' }}
           MAX_BRIGHT_DATA_CONTEXT_ITEMS: 5
 
+      - name: Promote Tier 1 news to signal-timeline
+        id: promote-timeline
+        if: steps.update-news.outcome == 'success'
+        continue-on-error: true
+        run: npm run promote:timeline
+
       - name: Reconcile AI news brief issue
         if: steps.update-news.outcome == 'success'
         uses: actions/github-script@v8
@@ -264,7 +270,7 @@ jobs:
         run: |
           git config user.name "EMERGENZ Data Bot"
           git config user.email "bot@emergenz.org"
-          git add src/data/news.json public/api/v1/
+          git add src/data/news.json src/data/signal-timeline.json public/api/v1/
           if git diff --staged --quiet; then
             echo "No news changes to commit."
             exit 0
