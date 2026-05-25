@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (Weval Phase 1.5 — repo-scoped fit assessment + production-shape Weval blueprint authored. 26 test cases across 5 dimensions (classification accuracy, hallucination resistance, confidence calibration, prompt-limit adherence, edge cases) targeting the Gemini news classifier in scripts/enrich-news.mjs. Refines the cross-portfolio analysis's "None" verdict on biosecurity-dashboard current fit to "Narrow but real" given the Gemini surface now indirectly gates timeline auto-promote.)
+**Last updated:** 2026-05-25 (Weval automation stack — scripts/run-weval.mjs wrapper, npm run eval:gemini, .github/workflows/weval-baseline.yml monthly cron with reusable [WEVAL ALERT] issue, weval/baselines/ for committed history, audit:autonomy guards on the new workflow + thresholds, audit:ai-enrichment allowlist updated for the legitimate Weval Gemini reference, AI-ENRICHMENT-POLICY "Current Live Status" extended with the Weval judge use, .env.example documents OPENAI_API_KEY judge secret, RUNBOOK §2.7 cause matrix + setup checklist. Operator one-time setup: add OPENAI_API_KEY repo secret + manually dispatch first workflow run to populate baseline. Cost: ~$1.20-3.60/year at monthly cadence.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,48 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval automation stack — wrapper + workflow + alerts + RUNBOOK (commit pending)
+
+User asked whether the Weval process is something Claude Code / Codex / Cowork can run with minimal operator involvement. Answer: yes, with three operator gates (initial setup, cost approval, publication/adjudication). User selected "ship full stack now" + "skip Cowork (GHA sufficient)". This commit ships the automation.
+
+**Files touched:**
+- `scripts/run-weval.mjs` — **new file**. Wrapper that invokes the Weval CLI (`npx weval run ...`), parses results JSON, compares against the most recent baseline in `weval/baselines/`, emits `weval-run-result.json` (gitignored) with structured diff, exits non-zero only on regression beyond configurable thresholds. Env-tunable: `WEVAL_BLUEPRINT`, `WEVAL_MODEL`, `WEVAL_JUDGE_MODEL`, `WEVAL_BASELINE_DIR`, `WEVAL_HALLUCINATION_TOL` (default 0), `WEVAL_ACCURACY_DROP_PCT` (default 10), `WEVAL_LIMIT_DROP_PCT` (default 5), `WEVAL_CLI_COMMAND` (default `npx weval`), `WEVAL_SKIP_CLI` (testing). Atomic-write contract for output + baseline. Idempotent: re-running on byte-identical state produces no diff.
+- `package.json` — adds `npm run eval:gemini` script.
+- `weval/baselines/README.md` — **new file**. Documents the baseline file format, naming convention (`YYYY-MM-DD-<model-slug>.json`), regression thresholds, cleanup policy.
+- `.github/workflows/weval-baseline.yml` — **new file**. Monthly cron `0 5 1 * *` (first of each month, 05:00 UTC) + `workflow_dispatch`. Independent concurrency group (does not touch `public/api/v1/` or the data-writer group). Pipeline: install → `npm run eval:gemini` → reconcile `[WEVAL ALERT]` reusable issue (mirrors `news-pipeline` / `status-monitor` / `source-audit` pattern) → commit new baseline as `EMERGENZ Data Bot` on clean run with 5-attempt rebase-and-retry push. Tolerances pinned in workflow env (`WEVAL_HALLUCINATION_TOL: 0`, `WEVAL_ACCURACY_DROP_PCT: 10`, `WEVAL_LIMIT_DROP_PCT: 5`). Judge pinned to `openai:gpt-4o-mini` (different vendor family from production model = no self-grading bias).
+- `scripts/audit-autonomy.mjs` — new entry in `REQUIRED_PACKAGE_SCRIPTS` (`eval:gemini`) + new workflow guard entry (`weval-baseline`) requiring all the load-bearing strings (cron schedule, npm script, reusable-issue label, bot identity, tolerance pins, judge model pin, secret references). Any future PR that loosens these without explicit operator decision fails CI.
+- `scripts/audit-ai-enrichment.mjs` — extended `ALLOWED_REFERENCES` to include `.github/workflows/weval-baseline.yml` and `scripts/run-weval.mjs` as legitimate Gemini API-key references. They don't write to news.json, signal-timeline.json, or any user-facing surface — they only evaluate the production classifier.
+- `AI-ENRICHMENT-POLICY.md` — appended a "Current Live Status" entry for the Weval pipeline. Documents: OpenAI judge is intentionally different-vendor (no self-grading bias), `OPENAI_API_KEY` is Weval-only (never referenced by `enrich-news.mjs` etc.), output lands only in `weval/baselines/` (committed) and `weval-run-result.json` (gitignored), no Weval output writes to `src/data/` or any public surface.
+- `.env.example` — new `OPENAI_API_KEY=`, `WEVAL_MODEL=...`, `WEVAL_JUDGE_MODEL=...` documenting the Weval-only secrets and defaults.
+- `.gitignore` — ignores `weval-run-result.json` runtime artifact.
+- `RUNBOOK.md` — new §2.7 ("Weval Baseline — Gemini classifier regression or run failure") with 6-row cause matrix mapping every result.failures shape to its real cause and remediation; 6-step recovery procedure covering hallucination / accuracy-drop / limit-adherence-drop / cli-failure; one-time setup checklist; cost expectation. Also extended §3 (Secret rotation) with an `OPENAI_API_KEY` row noting Weval-only scope.
+- `HANDOFF.md` — this entry + timestamp.
+
+**What each agent / operator does now:**
+
+| Phase | Runner | Operator action |
+|---|---|---|
+| A. Author / extend blueprints | Claude Code / Codex | None (the blueprint is the spec) |
+| B. Initial baseline run | GitHub Actions (`workflow_dispatch`) | **One-time setup**: add `OPENAI_API_KEY` repo secret; click "Run workflow" once |
+| C. Monthly re-runs | GitHub Actions cron | None |
+| D. Regression alerts | GHA opens `[WEVAL ALERT]` issue | Triage per RUNBOOK §2.7 cause matrix |
+| E. Publication to weval.org | Operator (fork `weval-org/configs` + PR) | Decision gate; not gated on the automation |
+| F. Baseline acceptance | GHA commits on clean run | None unless adjudicating a regression |
+
+**Cost:** ~$0.10-0.30 per full run · monthly cadence · ~$1.20-3.60/year. Well below noise floor.
+
+**What this is NOT:**
+- Not a PR-level gate (would cost too much; monthly is the right cadence for a narrow classifier)
+- Not yet published to weval.org (operator decision gate; not automated)
+- Not running locally without `OPENAI_API_KEY` (judge model required); locally, `WEVAL_SKIP_CLI=1 npm run eval:gemini` exercises the wrapper without making API calls
+
+**Verify:**
+- `npm run test:validators && npm run test:promote-timeline && npm run validate:data && npm run audit:autonomy && npm run audit:ai-enrichment && npm run build` — all pass.
+- `WEVAL_SKIP_CLI=1 npm run eval:gemini` — wrapper runs end-to-end without making API calls; writes `weval-run-result.json` with `mode: "cli-skipped"`. Confirmed locally.
+- After merging this commit, operator: Settings → Secrets and variables → Actions → add `OPENAI_API_KEY`. Then Actions → Weval Baseline → Run workflow. First successful run will commit the first baseline under bot identity.
+
+---
 
 ## ✅ Weval Phase 1.5 — fit assessment + 26-case Gemini classification blueprint (commit 3128926)
 

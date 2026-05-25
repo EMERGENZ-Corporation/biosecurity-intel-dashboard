@@ -16,6 +16,7 @@
         "update:news": "node scripts/update-news.mjs",
         "enrich:news": "node scripts/enrich-news.mjs",
         "promote:timeline": "node scripts/promote-news-to-timeline.mjs",
+        "eval:gemini": "node scripts/run-weval.mjs",
         "audit:autonomy": "node scripts/audit-autonomy.mjs",
         "audit:ai-enrichment": "node scripts/audit-ai-enrichment.mjs",
         "audit:sources": "node scripts/audit-official-sources.mjs",

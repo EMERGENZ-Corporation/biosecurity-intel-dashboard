@@ -102,6 +102,51 @@ Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). The
 2. The most common cause is a typo in a `relatedSignals[].signalId` (referential integrity), a stale `triageCard.lastReviewed` (>365 days), or a `news.json` description >280 chars.
 3. Never bypass with `--no-verify` or `--force`. Fix the underlying issue.
 
+### 2.7 `Weval Baseline` — Gemini classifier regression or run failure
+
+**Symptom:** reusable issue `weval-pipeline` opens or updates with `[WEVAL ALERT] Gemini classifier regression or run failure`.
+
+**Cause matrix:**
+
+| Failure line | Default threshold | Real cause |
+|---|---|---|
+| `hallucination: N hallucination(s) detected; tolerance is 0` | `WEVAL_HALLUCINATION_TOL=0` | Gemini emitted a signalId outside the supplied catalog. Hard zero-tolerance; a single hallucination indicates the prompt-limit boundary is no longer effective. |
+| `accuracy-drop (classification-positive)` | `WEVAL_ACCURACY_DROP_PCT=10` pp | Gemini classification quality dropped >10pp on positive cases vs. prior baseline. Most often a model update; sometimes a blueprint case has drifted out of relevance. |
+| `accuracy-drop (classification-negative)` | Same | Gemini started tagging off-topic news. Could indicate context-window confusion or an over-eager update. |
+| `limit-adherence-drop` | `WEVAL_LIMIT_DROP_PCT=5` pp | Gemini started writing clinical content, case counts, risk ratings, or other prohibited output. This is a CONTENT-STANDARDS §4.1 boundary violation. |
+| `cli-failure: …` | n/a | Weval CLI not installed in the runner, judge model unreachable, blueprint malformed, etc. |
+| `cli-skipped: …` | n/a | `WEVAL_SKIP_CLI=1` was set — not a real failure, but the workflow should not be configured this way in CI. |
+
+**Threshold history:** the wrapper at `scripts/run-weval.mjs` defaults `WEVAL_HALLUCINATION_TOL=0`, `WEVAL_ACCURACY_DROP_PCT=10`, `WEVAL_LIMIT_DROP_PCT=5`. Same values pinned in `.github/workflows/weval-baseline.yml`. `audit:autonomy` guards against silent regression of these values. Do not tighten without an explicit decision logged in HANDOFF.
+
+**Recovery procedure (operator):**
+
+1. Read the issue body — `result.regressions` lists every failing check with quantified deltas.
+2. **If `hallucination`** — open the most recent run's `weval-run-result.json` (artifact, not committed). Read the failing case's prompt + Gemini response. Two possible adjudications:
+   - **(a) Genuine boundary failure**: Gemini invented a signalId. Investigate `scripts/enrich-news.mjs` prompt for any drift; consider tightening the prompt's "Use only the provided news items and signal catalog" clause. Patch + retest.
+   - **(b) Test case is wrong**: the blueprint case unfairly penalized a correct behavior. Patch the blueprint's `should_not` line. Add a HANDOFF entry explaining why the rubric changed.
+3. **If `accuracy-drop`** — likely a Gemini model update. Two possible adjudications:
+   - **(a) Real regression**: Gemini is now worse at classification. Consider escalating to a more capable model (`gemini-2.5-pro` or another vendor); document in `AI-ENRICHMENT-POLICY.md` and update the production env in `update-news.yml`.
+   - **(b) Test drift**: the blueprint case is no longer representative (e.g., a news item description format changed industry-wide). Patch the blueprint; HANDOFF entry.
+4. **If `limit-adherence-drop`** — this is the most serious. Treat as a CONTENT-STANDARDS §4.1 incident:
+   - Investigate which prohibited output category breached (clinical content / case counts / risk rating / URLs / numerics).
+   - Tighten the production prompt in `scripts/enrich-news.mjs` immediately.
+   - Consider pausing the `enrich:news` step in the news workflow until the prompt fix lands. Set `GEMINI_NEWS_ENRICHMENT=0` as a stop-gap (the deterministic fallback covers signal tagging).
+5. **If `cli-failure`** — likely environmental. Check the workflow logs for the CLI exit code and stderr. Could be:
+   - Weval CLI version drift (the upstream package name or flag shape changed); patch `WEVAL_CLI_COMMAND` env in the workflow.
+   - `GEMINI_API_KEY` or `OPENAI_API_KEY` repo secret missing or rotated; refresh.
+   - Network issue inside the runner; retry the workflow manually.
+6. **Once fixed**, manually dispatch the workflow (`workflow_dispatch`) to confirm clean run. The reusable issue auto-closes on the next green run.
+
+**Initial setup checklist (one-time):**
+
+- [ ] Repo secret `GEMINI_API_KEY` exists (already set — used by `enrich-news`).
+- [ ] Repo secret `OPENAI_API_KEY` exists for the judge model. Add via Settings → Secrets and variables → Actions.
+- [ ] First manual run via Actions → Weval Baseline → Run workflow. The first run has no prior baseline so it cannot regress; it just writes the first baseline JSON to `weval/baselines/` and commits it.
+- [ ] After the first commit, the monthly cron is live.
+
+**Cost expectation:** ~$0.10–$0.30 per full run (26 cases × judge calls). Monthly cadence → ~$1.20–$3.60/year. Tighten `WEVAL_HALLUCINATION_TOL`, accuracy / limit thresholds, or judge model only with deliberate cost-impact awareness.
+
 ---
 
 ## 3. Secret rotation
@@ -110,7 +155,8 @@ Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). The
 |---|---|---|---|
 | `BRIGHT_DATA_API_KEY` | `update-news.yml` → `enrich-news.mjs` | Bright Data dashboard → regenerate → update GitHub repo secret + Vercel env var | Per Bright Data quarterly cycle |
 | `biosecurity_web_unlocker` | `update-news.yml` → `BRIGHT_DATA_ZONE` env | Bright Data → zone management (zone names rotate rarely; the secret stores the zone name string) | n/a |
-| `GEMINI_API_KEY` | `update-news.yml` → `enrich-news.mjs` | Google AI Studio → revoke + reissue → update GitHub repo secret + Vercel env var | Per Google quarterly cycle |
+| `GEMINI_API_KEY` | `update-news.yml` → `enrich-news.mjs`; `weval-baseline.yml` → `run-weval.mjs` | Google AI Studio → revoke + reissue → update GitHub repo secret + Vercel env var | Per Google quarterly cycle |
+| `OPENAI_API_KEY` | `weval-baseline.yml` → Weval judge model (`gpt-4o-mini`). Judge MUST be a different family from the production model under test to avoid self-grading bias. | OpenAI platform → revoke + reissue → update GitHub repo secret. **Not used outside the Weval workflow** — never expose to `update-news.yml`, `enrich-news.mjs`, or anywhere else. | Per OpenAI quarterly cycle |
 | `GITHUB_TOKEN` | All workflows | Auto-issued per workflow run; never stored | n/a |
 
 **Rotation procedure** (applies to Bright Data + Gemini):

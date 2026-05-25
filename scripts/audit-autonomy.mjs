@@ -17,6 +17,7 @@ const REQUIRED_PACKAGE_SCRIPTS = [
   'update:news',
   'enrich:news',
   'promote:timeline',
+  'eval:gemini',
   'generate:status',
   'generate:api',
   'validate:data',
@@ -87,6 +88,26 @@ const WORKFLOW_CHECKS = [
       // a CONTENT-STANDARDS §3.4 conversation.
       'MAX_OFFICIAL_CHECK_AGE_HOURS: 168',
       'MAX_DATA_AGE_HOURS: 168',
+    ],
+  },
+  {
+    id: 'weval-baseline',
+    path: '.github/workflows/weval-baseline.yml',
+    requiredText: [
+      // Monthly cron; first of the month at 05:00 UTC.
+      "cron: '0 5 1 * *'",
+      'npm run eval:gemini',
+      'weval-pipeline',
+      'EMERGENZ Data Bot',
+      // Tolerances pinned at the workflow layer so they can be tuned without
+      // changing the wrapper script. Do not tighten without RUNBOOK §2.7 review.
+      'WEVAL_HALLUCINATION_TOL: 0',
+      'WEVAL_ACCURACY_DROP_PCT: 10',
+      'WEVAL_LIMIT_DROP_PCT: 5',
+      // Judge must be a DIFFERENT family from the production model.
+      'WEVAL_JUDGE_MODEL: openai:gpt-4o-mini',
+      'GEMINI_API_KEY',
+      'OPENAI_API_KEY',
     ],
   },
   {

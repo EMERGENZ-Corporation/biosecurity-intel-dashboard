@@ -1,0 +1,191 @@
+name: Weval Baseline
+
+on:
+  schedule:
+    # First of every month at 05:00 UTC. Lands before the daily Status Refresh
+    # cron and outside the Update News Feed cron windows.
+    - cron: '0 5 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+# Independent of the data-writer concurrency group — does not touch
+# public/api/v1/, signals.json, news.json, etc.
+concurrency:
+  group: biosecurity-weval-baseline
+  cancel-in-progress: false
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Weval eval against production Gemini model
+        id: weval-run
+        continue-on-error: true
+        run: npm run eval:gemini
+        env:
+          WEVAL_BLUEPRINT: weval/biosecurity-gemini-news-classification.yml
+          WEVAL_MODEL: google:gemini-2.5-flash
+          WEVAL_JUDGE_MODEL: openai:gpt-4o-mini
+          WEVAL_BASELINE_DIR: weval/baselines
+          WEVAL_OUTPUT_PATH: weval-run-result.json
+          # Tolerances. Tighten only via deliberate operator decision per RUNBOOK §2.7.
+          WEVAL_HALLUCINATION_TOL: 0
+          WEVAL_ACCURACY_DROP_PCT: 10
+          WEVAL_LIMIT_DROP_PCT: 5
+          # Secrets — both required for an end-to-end run. The judge must be a
+          # DIFFERENT family from the production model to avoid self-grading bias.
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Reconcile weval-pipeline issue
+        uses: actions/github-script@v8
+        env:
+          WEVAL_OUTCOME: ${{ steps.weval-run.outcome }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs')
+            const marker = '<!-- emergenz-weval-pipeline -->'
+            const title = '[WEVAL ALERT] Gemini classifier regression or run failure'
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            const result = fs.existsSync('weval-run-result.json')
+              ? JSON.parse(fs.readFileSync('weval-run-result.json', 'utf8'))
+              : { ok: process.env.WEVAL_OUTCOME === 'success', reason: 'no result artifact written' }
+
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'weval-pipeline',
+                color: '6F42C1',
+                description: 'Weval AI eval pipeline alerts',
+              })
+            } catch (error) {
+              if (error.status !== 422) throw error
+            }
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'weval-pipeline',
+              per_page: 20,
+            })
+            const existing = issues.find((issue) => issue.title === title || issue.body?.includes(marker))
+
+            if (process.env.WEVAL_OUTCOME === 'success' && result.ok) {
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  body: [
+                    'Weval pipeline recovered.',
+                    `Cases: \`${result.summary?.totals?.cases ?? '?'}\` · passed=\`${result.summary?.totals?.passed ?? '?'}\` · failed=\`${result.summary?.totals?.failed ?? '?'}\``,
+                    `Hallucinations: \`${result.summary?.hallucinations ?? '?'}\``,
+                    `New baseline: \`${result.nextBaseline || 'not written'}\``,
+                    `Run: ${runUrl}`,
+                  ].join('\n'),
+                })
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  state: 'closed',
+                })
+              }
+              return
+            }
+
+            const regressions = (result.regressions || []).map((r) => `- **${r.kind}**${r.category ? ` (${r.category})` : ''}: ${r.detail}`).join('\n')
+            const body = [
+              marker,
+              '## Weval baseline alert',
+              '',
+              `Workflow outcome: \`${process.env.WEVAL_OUTCOME}\``,
+              `Run-result ok: \`${result.ok}\``,
+              `Reason: \`${result.reason || 'unspecified'}\``,
+              `Model: \`${result.model || 'unknown'}\``,
+              `Judge: \`${result.judgeModel || 'unknown'}\``,
+              `Prior baseline: \`${result.priorBaseline || 'none'}\``,
+              '',
+              '### Regressions',
+              regressions || '- none reported (run may have failed before scoring)',
+              '',
+              '### Summary',
+              result.summary ? `\`\`\`json\n${JSON.stringify(result.summary, null, 2)}\n\`\`\`` : '- no summary available',
+              '',
+              `Run: ${runUrl}`,
+              '',
+              '_Auto-generated by the EMERGENZ Weval baseline workflow. See RUNBOOK §2.7 for triage steps. This issue is reused to prevent alert spam._',
+            ].join('\n')
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['weval-pipeline'],
+              })
+            }
+
+      - name: Commit refreshed baseline
+        if: steps.weval-run.outcome == 'success'
+        run: |
+          git config user.name "EMERGENZ Data Bot"
+          git config user.email "bot@emergenz.org"
+          git add weval/baselines/
+          if git diff --staged --quiet; then
+            echo "No baseline changes to commit (run produced byte-identical baseline or regression suppressed write)."
+            exit 0
+          fi
+          git commit -m "chore(weval): baseline refresh $(date -u +%Y-%m-%d)"
+          pushed=false
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase -X theirs origin main || {
+              echo "Rebase conflict on attempt $attempt — aborting rebase."
+              git rebase --abort 2>/dev/null || true
+              exit 1
+            }
+            if git push; then
+              pushed=true
+              echo "Push succeeded on attempt $attempt."
+              break
+            fi
+            echo "Push rejected (attempt $attempt/5). Retrying in $((attempt * 3))s..."
+            sleep $((attempt * 3))
+          done
+          if [ "$pushed" = false ]; then
+            echo "All push attempts failed after 5 retries."
+            exit 1
+          fi
+
+      - name: Fail workflow when Weval run failed
+        if: steps.weval-run.outcome != 'success'
+        run: exit 1

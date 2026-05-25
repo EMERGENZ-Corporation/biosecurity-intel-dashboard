@@ -30,6 +30,18 @@ authorities, clinical reviewers, source licenses, or the source registry.
   provider at promotion time. `signal-timeline.json` is not a §3.4 curated
   field; it is pipeline-managed but does not carry confirmed counts, deaths,
   countries, risk levels, clinical guidance, or PPE guidance.
+- `scripts/run-weval.mjs` invokes the Weval CLI against
+  `weval/biosecurity-gemini-news-classification.yml` on a monthly cron
+  (`.github/workflows/weval-baseline.yml`) to evaluate the production
+  Gemini classifier. **The Weval judge model is OpenAI `gpt-4o-mini`** —
+  intentionally a different vendor family from the production model under
+  test, to avoid self-grading bias. The judge is used ONLY by the Weval
+  pipeline; `OPENAI_API_KEY` is a separate repo secret never referenced by
+  `enrich-news.mjs`, `update-news.mjs`, or any other code path. Weval
+  outputs land in `weval/baselines/` (committed) and `weval-run-result.json`
+  (gitignored). No Weval output writes to `src/data/`, `public/`, or any
+  user-facing surface. See `docs/WEVAL-FIT-DASHBOARD.md` and `RUNBOOK.md`
+  §2.7 for scope and operational procedure.
 
 ## Bright Data Decision
 

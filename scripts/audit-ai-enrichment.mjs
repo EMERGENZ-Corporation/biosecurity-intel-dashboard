@@ -106,7 +106,16 @@ const CLIENT_EXPOSED_KEY_PATTERN = /\bVITE_[A-Z0-9_]*(GEMINI|GOOGLE_GENERATIVE|B
 const ALLOWED_REFERENCES = new Set([
   '.env.example',
   '.github/workflows/update-news.yml',
+  // The Weval baseline workflow legitimately references GEMINI_API_KEY to
+  // evaluate the production classifier; it does NOT write to news.json,
+  // signal-timeline.json, or any user-facing surface. Judge model is
+  // OpenAI (different vendor family) to avoid self-grading bias. See
+  // AI-ENRICHMENT-POLICY.md "Current Live Status" and docs/WEVAL-FIT-DASHBOARD.md.
+  '.github/workflows/weval-baseline.yml',
   'scripts/enrich-news.mjs',
+  // run-weval.mjs reads GEMINI_API_KEY from the environment to pass through
+  // to the Weval CLI. It does not write to any structured-data path.
+  'scripts/run-weval.mjs',
   'scripts/generate-status.mjs',
   'scripts/audit-autonomy.mjs',
   'scripts/audit-ai-enrichment.mjs',
