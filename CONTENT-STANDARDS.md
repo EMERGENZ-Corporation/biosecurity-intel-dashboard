@@ -141,7 +141,7 @@ The pipeline must use a 72-hour sliding window for article deduplication — not
 
 `scripts/promote-news-to-timeline.mjs` is the only automated writer permitted to add events to `src/data/signal-timeline.json`. The contract is:
 
-- **Deterministic only.** No AI is consulted at promotion time. Title and description are verbatim from the source news item — never paraphrased, never summarized, never AI-rewritten.
+- **Deterministic only.** No AI is consulted at promotion time. Title and description are verbatim from the source news item — never paraphrased, never summarized, never AI-rewritten. The only permitted transformation is a trailing `…` truncation when the source title exceeds 140 characters (a layout concession; never on the description). The full original title is always recoverable by following the event's `link` field.
 - **Strict Tier 1 authority allowlist:** `CDC`, `WHO`, `ECDC`. Items from any other authority — including registered Tier 1 sources whose RSS isn't yet wired into `GLOBAL_FEEDS` (Africa CDC, FDA, etc.) — are skipped.
 - **Signal severity gate:** the matched signal's `severity` must be `concern` or `action`. `monitor` and `watch` items skip.
 - **Provenance discriminator** is required on every auto-promoted event: `provenance: "auto-news-tier1"`, plus mandatory `newsId`, `authority`, `link`, and `promotedAt` for full traceability back to the source news item.
