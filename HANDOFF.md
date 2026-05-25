@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval blueprint — roll back from 6 to 4 models after grading abort (commit TBD)
+## ✅ Weval blueprint — roll back from 6 to 4 models after grading abort (commit 16c38dd)
 
 After 1d6705f provisioned 6 sandbox models, the next sandbox run came back with **every criterion showing N/A and macro coverage at 0% across all 4 models that did respond**. This was NOT a content failure — every model response in the run was correct:
 
