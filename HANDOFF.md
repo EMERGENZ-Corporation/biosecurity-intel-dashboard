@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (podcast §13 open decisions locked + §18 sign-off complete. Voice=af_bella, daily 06:00 UTC, Kokoro intro/outro, self-SME for lexicon + new build-lexicon-seed.mjs tool, RSS author=EMERGENZ Corporation, disclaimer in iTunes summary, post-2-week directory submission, pre-gen audio, no filtered downloads in v1. PODCAST-EXPORT-DESIGN.md now reflects APPROVED status. Session 1 ready to begin on explicit go-signal.)
+**Last updated:** 2026-05-25 (Weval Phase 1.5 — repo-scoped fit assessment + production-shape Weval blueprint authored. 26 test cases across 5 dimensions (classification accuracy, hallucination resistance, confidence calibration, prompt-limit adherence, edge cases) targeting the Gemini news classifier in scripts/enrich-news.mjs. Refines the cross-portfolio analysis's "None" verdict on biosecurity-dashboard current fit to "Narrow but real" given the Gemini surface now indirectly gates timeline auto-promote.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,48 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval Phase 1.5 — fit assessment + 26-case Gemini classification blueprint (commit pending)
+
+User shared `~/Downloads/weval-fit-analysis.md`, a cross-portfolio assessment of Weval fit across EMERGENZ programs (Core Stack / PRISM / STRATA / MERIDIAN / Biosecurity Dashboard). The analysis recorded the biosecurity dashboard's current Weval fit as `None`, with rationale: "Dashboard is data aggregation and display with verbatim sourced content. No AI inference layer to evaluate." **That rationale is materially incorrect for this repo** — `scripts/enrich-news.mjs` (shipped in `9a26173`) is a live Gemini-driven classifier that writes `signalIds` to public `news.json`, and as of today's timeline auto-promote ship (`67743e2`) those signalIds indirectly gate auto-promote eligibility. The user chose to (a) commit a repo-scoped fit-correction doc, and (3) build the eval suite as Phase 1.5 BEFORE podcast Session 1.
+
+**Files touched:**
+- `docs/WEVAL-FIT-DASHBOARD.md` — **new file**. Repo-scoped fit assessment refining the cross-portfolio analysis. Documents the four Gemini output channels (`suggestedSignalIds`, `duplicateOf`/`eventClusterKey`, `confidence`, `internalBrief`), explains why stakes increased after `67743e2`, scopes Phase 1.5 to signal-ID classification only, and forward-links to Phase 2 expansion when AI synthesis features ship.
+- `weval/biosecurity-gemini-news-classification.yml` — **new file**. 26 Weval test cases in upstream YAML format. Each prompt mirrors the production `enrich-news.mjs` prompt shape (system instructions + signal catalog JSON + items array). Catalog is intentionally slimmer than production (no summary, no geography) — a conservative lower bound, since production gives Gemini more context. Dimensions:
+  - **Classification accuracy (positive)** — 8 cases (CDC HAN Ebola DRC, WHO mpox clade I, ECDC Andes hantavirus, measles Bangladesh out-of-scope check, cholera Republic of Congo, H5 dairy worker, Lassa Nigeria, Norovirus wastewater)
+  - **Classification accuracy (negative)** — 3 cases (Boston Marathon weather, AI startup funding, historical retrospective)
+  - **Hallucination resistance** — 3 cases (fictitious "Pathogen Y", plausible-but-absent dengue, invented authority)
+  - **Confidence calibration** — 3 cases (explicit official HAN → expect `high`; ambiguous respiratory cluster → expect `low`; Tier 3 rebroadcast → expect `medium`/`high`)
+  - **Prompt-limit adherence** — 6 cases (clinical treatment bait, case counts, risk ratings, public-health directives, fabricated URLs, fabricated numerics)
+  - **Edge cases** — 3 cases (multi-country Andes geography should NOT trigger `measles-us-2026`, WHO + Reuters same-event dedup, empty news list)
+- `weval/README.md` — **new file**. How to author (mirror production prompt; concrete `should`/`should_not` propositions), how to run (web sandbox + CLI), how to publish (fork `weval-org/configs`, PR, no publication without local-baseline run + operator sign-off), explicit list of what's NOT covered (timeline auto-promote, podcast script gen, synthetic voice rendering, validators/audits/build).
+- `HANDOFF.md` — this entry + timestamp.
+
+**Rationale for "(a) and (3)" — Phase 1.5 BEFORE podcast Session 1:**
+- Podcast Sessions 1-6 will introduce public "synthetic voice" disclosure language that funders/reviewers will scrutinize alongside any AI claims
+- A shipped Weval suite (even unpublished, in-repo) materially strengthens the AI-boundary story
+- Bounded work (~4-8 hours of authoring; ~75 KB of YAML + ~300 lines of docs)
+- Doesn't block podcast — Session 1 can begin once this commit lands
+- Establishes the eval pattern for Phase 2 AI features (clinical brief synthesis etc.) when they arrive
+
+**What this is NOT:**
+- Not a CI gate — running the eval against the live Gemini model costs API calls; ad-hoc/manual for now, automatable later
+- Not published to weval.org yet — that requires a clean local baseline run + operator sign-off
+- Not an evaluation of `promote-news-to-timeline.mjs` (deterministic; covered by the 12-test unit suite + 8 validator regressions)
+- Not an evaluation of the podcast pipeline (deterministic; will be covered by Session 1 unit tests)
+
+**Verify:**
+- `npm run test:validators && npm run validate:data && npm run audit:autonomy && npm run audit:ai-enrichment && npm run build` — all pass (docs-only commit, no source / data / script changes).
+- Read [`docs/WEVAL-FIT-DASHBOARD.md`](docs/WEVAL-FIT-DASHBOARD.md) for the refined assessment.
+- Read [`weval/README.md`](weval/README.md) for run/publish procedure.
+- Open [`weval/biosecurity-gemini-news-classification.yml`](weval/biosecurity-gemini-news-classification.yml) in a YAML editor; confirm 26 prompt entries and the `title` / `models` / `tags` header.
+
+**Open follow-ups:**
+- Run the suite locally against `google:gemini-2.5-flash` to capture a baseline (deferred — needs operator-managed `GEMINI_API_KEY` and Weval CLI install). HANDOFF the baseline scores when run.
+- Submit to `weval-org/configs` as a contributed blueprint (deferred — needs baseline + operator sign-off on public publication).
+- Add `weval:gemini` npm script wrapper once Weval CLI is installed for the operator (deferred — Phase 1.5 was authoring only).
+
+---
 
 ## ✅ Podcast — §13 decisions locked + §18 sign-off complete (commit 813de30)
 
