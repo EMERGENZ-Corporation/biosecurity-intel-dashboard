@@ -1,7 +1,8 @@
 # Podcast Export — Design Document
 
-**Status:** DRAFT — read-and-approve. No code written.
+**Status:** APPROVED — §13 decisions locked 2026-05-25, §18 sign-off complete. Session 1 ready to begin on explicit go-signal.
 **Authored:** 2026-05-23
+**Approved:** 2026-05-25
 **Scope:** Add a podcast export to the Briefings page so EMS, healthcare, and public-health staff can listen to current briefings on the move, with no paid services, no robotic-sounding voice, and no degradation of the dashboard's content-integrity standards.
 
 > **Model recommendation per `AGENTS.md`:** Implementation touches CI/CD, generated public artifacts, AI/enrichment policy, public clinical content, and the autonomy contract. **A stronger reasoning model is required for the build phase.** This design doc itself is low-risk authoring and can be reviewed/edited on any model.
@@ -398,18 +399,18 @@ Cross-link to the methodology synthetic-audio section, mirroring the existing pa
 
 ---
 
-## 13. Open decisions (lock before build)
+## 13. Open decisions — LOCKED 2026-05-25
 
-| # | Decision | Owner | Default if no decision |
-|---|----------|-------|------------------------|
-| 1 | Voice selection (af_bella / af_sarah / am_michael / etc.) | EMERGENZ brand owner | `af_bella` |
-| 2 | Generation cadence (06:00 UTC daily? weekly?) | EMERGENZ ops | 06:00 UTC daily |
-| 3 | Intro/outro voicing — Kokoro or human-voiced? | EMERGENZ brand owner | Kokoro, fixed voice |
-| 4 | Lexicon seed list and curator (SME) | Clinical reviewer | First pass derived from current briefings; SME named in §15 |
-| 5 | RSS metadata (podcast title, host name, category, artwork) | EMERGENZ brand owner | "EMERGENZ Biosecurity Briefing" / "Medical Intelligence Unit" / News > Health News |
-| 6 | Apple / Spotify directory submission timing | EMERGENZ ops | After 2 weeks of stable daily episodes |
-| 7 | Per-card audio: pre-generate vs on-demand at click time | Build session | Pre-generate (matches design above) |
-| 8 | Filtered podcast download (respect severity/category UI filter)? | Product | No in v1 — combined episode is always full Watch+ |
+| # | Decision | Resolution |
+|---|----------|-----------|
+| 1 | Voice | **`af_bella`** — neutral American Female, broadcast-style. Closest Kokoro voice to NPR news-anchor tone. |
+| 2 | Generation cadence | **06:00 UTC daily** — aligned with news pipeline freshness; lands before US East Coast morning briefings. |
+| 3 | Intro/outro voicing | **Kokoro, fixed voice** (same `af_bella`). Synthetic-voice intro reinforces the disclosure; human intro could imply human narration of the body. Versioned (`intro-v1.wav`, `outro-v1.wav`). |
+| 4 | Lexicon seed + SME | **Self-SME for v1**, AND new tooling: `scripts/build-lexicon-seed.mjs` will scan `signals.json` `bodyMarkdown` + signal names + clinical terminology and emit a candidate lexicon to `src/data/tts-lexicon-candidates.json`. Self-SME reviews each candidate (provenance + phonetic), promotes approved entries into `src/data/tts-lexicon.json`. Validator enforces provenance fields on the promoted file only. |
+| 5 | RSS metadata | Title: **`EMERGENZ Biosecurity Briefing`**. Author: **`EMERGENZ Corporation`** (changed from "Medical Intelligence Unit"). Category: **News > Health News**. Artwork: placeholder EMERGENZ wordmark on brand color, upgrade later. **`<itunes:summary>` carries the authorship + synthetic-voice disclaimer matching CONTENT-STANDARDS** — synthetic voice, source-cited, advisory only, not source-of-record, verify all clinical guidance against linked sources. |
+| 6 | Apple / Spotify directory submission | After **14 consecutive green `audit:podcast` runs** (~2 weeks of stable daily episodes). Operational step, not part of automated pipeline. |
+| 7 | Per-card audio | **Pre-generate.** ~16 MB total; matches Vercel Blob retention design; instant availability for EMS in-rig use case. |
+| 8 | Filtered podcast download | **No in v1.** Combined episode is always full Watch+. Filtering requires on-demand generation, contradicts §7. |
 
 ---
 
@@ -419,9 +420,12 @@ This is too large for one session. Proposed sequence, each session ending with a
 
 **Session 1 — Foundations**
 - `scripts/generate-podcast-script.mjs` (deterministic, no TTS yet — emits JSON scripts to disk for review)
-- `src/data/tts-lexicon.json` seed list
+- `scripts/build-lexicon-seed.mjs` (new per §13 #4 lock) — scans `signals.json` content + signal names, derives candidate medical terms, writes `src/data/tts-lexicon-candidates.json`. Self-SME promotes approved entries (with phonetic + source citation) into `src/data/tts-lexicon.json`.
+- `src/data/tts-lexicon.json` (initially small; grows from self-SME promotions over time)
+- Validator additions in `scripts/validate-data.mjs` for the promoted lexicon (provenance, every term appears in current briefings)
 - New sections in `CONTENT-STANDARDS.md` and `AI-ENRICHMENT-POLICY.md`
 - No CI changes yet
+- No TTS yet
 
 **Session 2 — TTS pipeline**
 - Kokoro-82M integration script (`scripts/render-podcast-audio.mjs`)
@@ -496,9 +500,9 @@ Each session ends with required verification (`test:validators`, `validate:data`
 
 Before any code in this design lands on main, the following must be locked:
 
-1. ✅ This design doc reviewed and approved by EMERGENZ (no changes pending).
-2. ⬜ Open decisions §13 resolved.
-3. ⬜ SME identified for lexicon curation and intro/outro voicing approval.
-4. ⬜ Confirmation that a stronger reasoning model will be used for Sessions 1-6.
+1. ✅ This design doc reviewed and approved by EMERGENZ (locked 2026-05-25).
+2. ✅ Open decisions §13 resolved (see table above; all 8 locked 2026-05-25).
+3. ✅ SME identified for lexicon curation and intro/outro voicing approval — **self-SME for v1**, supported by the new `build-lexicon-seed.mjs` tool that auto-derives candidate terms from `signals.json`.
+4. ✅ Confirmation that a stronger reasoning model will be used for Sessions 1-6 — **`claude-opus-4.7-1m`** (current session model) per AGENTS.md halt-list.
 
-When all four are satisfied, Session 1 can begin.
+All four satisfied. **Session 1 ready to begin on explicit go-signal.**

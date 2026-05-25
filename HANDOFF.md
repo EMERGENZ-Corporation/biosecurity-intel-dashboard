@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (pre-podcast forensic pass — mechanical suite + 4 specialist audit agents (source-integrity, content-standards, security-posture, handoff-discipline) + network audits. All PASS. Two small docs-only fixes shipped from the audit: stale "commit pending" SHA backfilled for the knownBlocked entry; CONTENT-STANDARDS §4.6 clarified that the 140-char title truncation with `…` is the only permitted transformation.)
+**Last updated:** 2026-05-25 (podcast §13 open decisions locked + §18 sign-off complete. Voice=af_bella, daily 06:00 UTC, Kokoro intro/outro, self-SME for lexicon + new build-lexicon-seed.mjs tool, RSS author=EMERGENZ Corporation, disclaimer in iTunes summary, post-2-week directory submission, pre-gen audio, no filtered downloads in v1. PODCAST-EXPORT-DESIGN.md now reflects APPROVED status. Session 1 ready to begin on explicit go-signal.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,61 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Podcast — §13 decisions locked + §18 sign-off complete (commit pending)
+
+User walked through the 8 open §13 decisions in PODCAST-EXPORT-DESIGN.md and locked each, plus two important amendments to the design defaults. §18 sign-off items all satisfied. **Session 1 is ready to begin on explicit go-signal — no code written yet.**
+
+**Locked decisions (PODCAST-EXPORT-DESIGN.md §13):**
+
+| # | Decision | Resolution |
+|---|---|---|
+| 1 | Voice | `af_bella` — neutral American Female, broadcast-style |
+| 2 | Cadence | 06:00 UTC daily |
+| 3 | Intro/outro voicing | Kokoro, same `af_bella` voice, versioned WAVs |
+| 4 | Lexicon SME | **Self-SME for v1, plus new tooling** (see amendment 1 below) |
+| 5 | RSS metadata | Title: `EMERGENZ Biosecurity Briefing`; **Author: `EMERGENZ Corporation`** (amendment 2 below); Category: News > Health News; placeholder artwork |
+| 6 | Apple/Spotify submission | After 14 consecutive green `audit:podcast` runs (~2 weeks soak) |
+| 7 | Per-card audio | Pre-generate (16 MB total; instant availability for EMS use case) |
+| 8 | Filtered podcast download | No in v1 |
+
+**Amendment 1 (lexicon tooling):** Decision 4 was self-SME, but the user added: "you need to write a tool to make the lexicon based off of the data in the dashboard itself. this should be doable." New script added to Session 1 scope: `scripts/build-lexicon-seed.mjs` — scans `signals.json` `bodyMarkdown` + signal names + clinical terminology heuristics and emits a candidate lexicon to `src/data/tts-lexicon-candidates.json`. Self-SME reviews each candidate (provenance + phonetic), promotes approved entries into `src/data/tts-lexicon.json`. Validator enforces provenance fields only on the promoted file. This makes the SME workload a curation pass against an auto-generated candidate list rather than a from-scratch authoring task.
+
+**Amendment 2 (RSS metadata):** Author changed from "Medical Intelligence Unit" → **`EMERGENZ Corporation`**. The `<itunes:summary>` field must carry the same authorship + synthetic-voice disclaimer language as CONTENT-STANDARDS — synthetic voice, source-cited, advisory only, never source-of-record, verify all clinical guidance against linked sources. This is now part of Session 3 (RSS) scope.
+
+**§18 sign-off (all four ✅):**
+
+| Item | Status |
+|---|---|
+| 1. Design doc reviewed and approved | ✅ |
+| 2. §13 decisions resolved | ✅ |
+| 3. SME identified for lexicon | ✅ Self-SME + auto-derived candidate list |
+| 4. Stronger reasoning model for build sessions | ✅ `claude-opus-4.7-1m` (current) — AGENTS.md halt-list satisfied |
+
+**Files touched:**
+- `PODCAST-EXPORT-DESIGN.md` — header status DRAFT → APPROVED; §13 table rewritten with locked resolutions including the lexicon tooling addition and RSS author change; Session 1 scope updated to include `build-lexicon-seed.mjs` and the candidate/approved lexicon split; §18 all four items marked ✅.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Session 1 scope (now finalized — execute on go-signal):**
+
+1. `scripts/generate-podcast-script.mjs` — deterministic, no TTS yet. Emits per-card + daily combined scripts to JSON on disk for review. Strips markdown, applies lexicon (if any), emits expected duration + SHA-256.
+2. `scripts/build-lexicon-seed.mjs` — auto-derives candidate medical terms from `signals.json`. Writes `src/data/tts-lexicon-candidates.json`. Idempotent; doesn't touch the approved `tts-lexicon.json`.
+3. `src/data/tts-lexicon.json` — initially small (only terms self-SME has already approved); grows over time.
+4. `scripts/validate-data.mjs` — new invariants for the approved lexicon (provenance fields, every term appears in current briefings).
+5. `CONTENT-STANDARDS.md` — new §4.7 (or appropriate placement) "Synthetic audio output" matching the design §12.
+6. `AI-ENRICHMENT-POLICY.md` — new "Synthetic voice" section under "Current Live Status" matching the design §12.
+7. `scripts/test-validate-data.mjs` — regression tests for the new lexicon invariants.
+8. HANDOFF entry in the same commit, push to main.
+
+**No CI changes, no TTS, no Blob upload in Session 1.** All file outputs are local for human review before Sessions 2-6 add the rendering, upload, audit, and UI layers.
+
+**Verify (Session 1 done state):**
+- `scripts/generate-podcast-script.mjs` run produces well-formed JSON scripts for all 16 signals + daily combined.
+- `scripts/build-lexicon-seed.mjs` run produces a candidate lexicon JSON with ~50-100 terms, each carrying source attribution back to the signal it was lifted from.
+- `npm run test:validators && npm run validate:data && npm run audit:autonomy && npm run audit:ai-enrichment && npm run build` all pass.
+- CONTENT-STANDARDS §4.7 and AI-ENRICHMENT-POLICY synthetic-voice sections present.
+
+---
 
 ## ✅ Pre-podcast forensic pass — all green, 2 docs-only fixes (commit a793529)
 
