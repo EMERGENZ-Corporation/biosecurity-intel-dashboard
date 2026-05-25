@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-25T18:06:26.242Z",
+  "generatedAt": "2026-05-25T18:14:29.206Z",
   "endpoint": "/api/v1/signal-timeline.json",
-  "count": 41,
+  "count": 43,
   "signalTimeline": [
     {
       "id": "tl-andes-2026-05-19-ecdc-update",
@@ -372,6 +372,34 @@
       "description": "MV Hondius departs Ushuaia, Argentina with 147 passengers and crew from 23 nationalities on an Antarctic expedition cruise.",
       "sourceId": "cdc-han-528",
       "category": "zoonotic"
+    },
+    {
+      "id": "auto-who-d43a1f4f",
+      "signalId": "ebola-bundibugyo-drc-2026",
+      "date": "2026-05-22",
+      "title": "First meeting of the IHR Emergency Committee regarding the epidemic of Ebola Bundibugyo virus disease in the Democratic Republic of the Con…",
+      "description": "The Committee’s advice aligned with the determination by the WHO Director-General that the event constitutes a public health emergency of international concern (PHEIC), but does not meet the criteria for pandemic emergency. The DG, considering the advice of the Committee, he...",
+      "sourceId": "who-disease-outbreak-news",
+      "category": "vhf",
+      "provenance": "auto-news-tier1",
+      "newsId": "who-d43a1f4f",
+      "authority": "WHO",
+      "link": "https://www.who.int/news/item/22-05-2026-first-meeting-of-the-ihr-emergency-committee-regarding-the-epidemic-of-ebola-bundibugyo-virus-disease-in-the-democratic-republic-of-the-congo-and-uganda-2026-temporary-recommendations",
+      "promotedAt": "2026-05-25T18:14:26.835Z"
+    },
+    {
+      "id": "auto-cdc-1ed6b636",
+      "signalId": "ebola-bundibugyo-drc-2026",
+      "date": "2026-05-23",
+      "title": "Enhanced Ebola Airport Screening Expands to Atlanta",
+      "description": "Enhanced Ebola Airport Screening Expands to Atlanta",
+      "sourceId": "cdc-current-outbreaks",
+      "category": "vhf",
+      "provenance": "auto-news-tier1",
+      "newsId": "cdc-1ed6b636",
+      "authority": "CDC",
+      "link": "https://tools.cdc.gov/api/embed/downloader/download.asp?m=132608&c=765626",
+      "promotedAt": "2026-05-25T18:14:26.835Z"
     }
   ]
 }
