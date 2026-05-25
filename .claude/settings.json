@@ -1,0 +1,33 @@
+{
+  "_comment": "biosecurity-intel-dashboard autonomous-mode hooks. Fires automatically at lifecycle events so the user doesn't have to remember to invoke source-integrity / security-posture / handoff-discipline agents manually.",
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "_comment": "Block writes/edits to source-attribution-sensitive paths and curated data files until the matching agent has reviewed (writes .claude/.source-reviewed-this-session).",
+        "matcher": "Write|Edit",
+        "command": "bash .claude/hooks/check-source-integrity.sh"
+      },
+      {
+        "_comment": "Block commands likely to commit a file containing a common secret pattern.",
+        "matcher": "Bash",
+        "command": "bash .claude/hooks/check-secret-leak.sh"
+      }
+    ],
+
+    "PostToolUse": [
+      {
+        "_comment": "After any Edit or Write, remind to run test-agent's verification cadence before commit.",
+        "matcher": "Write|Edit",
+        "command": "echo 'Reminder: run test-agent (npm run test:validators && npm run validate:data && npm run build) before commit. Run handoff-discipline-agent to confirm HANDOFF.md entry.'"
+      }
+    ],
+
+    "Stop": [
+      {
+        "_comment": "On session stop, remind about HANDOFF.md discipline and push-before-shipped rule.",
+        "command": "bash .claude/hooks/maybe-handoff.sh"
+      }
+    ]
+  }
+}

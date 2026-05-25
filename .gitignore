@@ -150,8 +150,15 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 
-# Claude Code internal
-.claude/
+# Claude Code — ignore everything by default, then opt back in the shared
+# per-repo configuration (agents, slash commands, hooks, settings.json).
+# Local-only files (settings.local.json, launch.json, handoffs/, session
+# markers) stay ignored.
+.claude/*
+!.claude/agents/
+!.claude/commands/
+!.claude/hooks/
+!.claude/settings.json
 
 node_modules/
 dist/

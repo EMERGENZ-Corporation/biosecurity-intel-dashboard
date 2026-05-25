@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-23 (knownBlocked source-audit allowlist — cdc-han HTTP 403 noise resolved)
+**Last updated:** 2026-05-24 (EMERGENZ agent pipeline installed: 14 agents for Claude Code + Codex, 4 repo-specific; slash commands, hooks, CLAUDE.md)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,76 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ EMERGENZ agent pipeline installed (commit pending)
+
+Installed the EMERGENZ agent pipeline from `~/Downloads/emergenz-agents.zip`,
+tailored to this repo. User asked for "review these agents and instructions,
+install the ones that you need in this repo and make any changes or additional
+agents that you need for both claude code and codex." Selected 10 of the 14
+generic agents (skipping `compliance-agent`, `mhdds-taxonomy-agent`,
+`prism-agent`, `meridian-agent` — none apply here) and authored 4 new
+repo-specific agents that cover the equivalent disciplines for this dashboard:
+`source-integrity-agent`, `content-standards-agent`,
+`ai-enrichment-policy-agent`, `handoff-discipline-agent`. Mirrored every agent
+for both Claude Code (`.claude/agents/*.md`) and Codex (`.codex/agents/*.toml`).
+Wired up slash commands (`/route /review /ship /handoff`), three lifecycle
+hooks, and a CLAUDE.md tailored to this repo's posture (source-backed,
+non-clinical, fail-open enrichment, push-before-shipped).
+
+**Files touched:**
+- `.claude/agents/*.md` — 14 Claude Code subagent definitions (pipeline-router,
+  repo-scanner, architecture-agent, ui-wireframe-agent, source-integrity-agent
+  (new), content-standards-agent (new), ai-enrichment-policy-agent (new),
+  evidence-binding-agent, grant-claims-agent, security-posture-agent,
+  test-agent, deployment-agent, documentation-agent, handoff-discipline-agent
+  (new)). Decision trees, surfaces, and verification cadence all rewritten for
+  this repo (no STRATA/MHDDS/PRISM/MERIDIAN branches).
+- `.claude/commands/*.md` — `route.md`, `review.md`, `ship.md`, `handoff.md`,
+  scoped to this repo's audit set and verification cadence.
+- `.claude/hooks/check-secret-leak.sh` — regex-blocks writes with common secret
+  patterns. Skips `.env.example`, `.source-fingerprints/`, dist/handoffs.
+- `.claude/hooks/check-source-integrity.sh` — replaces the package's taxonomy
+  hook; blocks edits to source registry, curated data files, CONTENT-STANDARDS,
+  and AI-ENRICHMENT-POLICY unless the right agent has written
+  `.claude/.source-reviewed-this-session`.
+- `.claude/hooks/maybe-handoff.sh` — Stop hook reminding about HANDOFF
+  discipline + push-before-shipped (per saved feedback memory).
+- `.claude/settings.json` — PreToolUse + PostToolUse + Stop hook wiring.
+- `.codex/agents/*.toml` — 14 Codex .toml mirrors of every Claude agent. Model
+  fields use `REPLACE_WITH_*` placeholders (per install guide); replace once
+  with the Codex provider's model IDs.
+- `.codex/config.toml` — sets `default_agent = "pipeline-router"`, max_threads
+  3, max_depth 2, summary_only logging.
+- `AGENTS.md` — appended new "Agent Pipeline" section: inventory, slash
+  commands, halt conditions, hooks summary, Codex placeholder mapping. Pre-
+  existing sections preserved.
+- `CLAUDE.md` — new file. Claude Code-specific guidance, agent inventory with
+  model strings, token-control rules, hooks summary, project context anchors.
+- `.gitignore` — was fully ignoring `.claude/`; replaced with an allowlist
+  pattern so `agents/`, `commands/`, `hooks/`, and `settings.json` get
+  versioned while `settings.local.json`, `launch.json`, `handoffs/`, and the
+  session marker file stay local.
+
+**Why this matters:**
+- The router halts on: new dependency, new external source, clinical/predictive
+  language, new AI provider, fail-open weakening, attribution removal,
+  `VITE_*` secret exposure, CSP loosening, Tier 3/4 in structured field.
+  These mirror the load-bearing safety boundaries embedded in CONTENT-STANDARDS
+  and AI-ENRICHMENT-POLICY.
+- Hooks are belt-and-suspenders for the saved feedback memories
+  (AGENTS.md discipline, HANDOFF-log discipline, push-before-shipped).
+
+**Verify:**
+- `npm run test:validators && npm run validate:data && npm run build` — all
+  pass. No source files changed.
+- `git ls-files --others --exclude-standard -- .claude/` lists 14 agents, 4
+  commands, 3 hooks, 1 settings.json (settings.local.json + launch.json stay
+  ignored).
+- After `git add` + commit + push, run `/agents` in Claude Code to confirm all
+  14 are loaded.
+
+---
 
 ## ✅ knownBlocked source-audit allowlist (commit pending)
 

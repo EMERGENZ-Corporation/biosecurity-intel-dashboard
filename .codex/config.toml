@@ -1,0 +1,13 @@
+# .codex/config.toml -- biosecurity-intel-dashboard Codex configuration
+
+[agents]
+max_threads = 3
+max_depth = 2
+job_max_runtime_seconds = 900
+
+# Default first agent for any invocation that does not explicitly name one.
+default_agent = "pipeline-router"
+
+[logging]
+truncate_long_logs = true
+summary_only = true
