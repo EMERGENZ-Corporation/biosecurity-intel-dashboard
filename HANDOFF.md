@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (a11y sweep — closes backlog item 8: 34-file static audit, 2 targeted fixes (Resources selects + PageLoader live-region), full audit report at docs/A11Y-SWEEP-2026-05-25.md, follow-up Lighthouse/axe pass scoped for next session)
+**Last updated:** 2026-05-25 (deferred follow-ups: CONTENT-STANDARDS §4.6 added describing the auto-promote contract; bucket A source-drift refreshed lastVerified to 2026-05-25 for 3 of 4 sources after WebFetch alive-and-on-topic check — FDA URL deferred because WebFetch returns 404 against all fda.gov pages in this environment, almost certainly a harness-side block since audit:source-drift had successfully fingerprinted the same page earlier today)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,30 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Deferred follow-ups — CONTENT-STANDARDS §4.6 auto-promote contract + bucket-A source-drift refresh (commit pending)
+
+Closes two deferred items from earlier today's commits without opening new design surface:
+1. **CONTENT-STANDARDS §4.6** explicitly documents the timeline auto-promote contract that was shipped in `67743e2`. This was flagged as "deferred polish" in that commit's HANDOFF entry. The new subsection lists all 11 hard gates the script enforces, the provenance discriminator schema, and the "curated wins on collision" rule — so the next maintainer who reads CONTENT-STANDARDS will see the auto-promote rules alongside the §4.1–§4.5 data-integrity rules they belong with.
+2. **Bucket A source-drift refresh** (item 1 follow-through) for the 3 rotating index pages I could WebFetch-verify alive and on-topic: `africa-cdc-outbreaks` (currently surfacing the DRC/Uganda Ebola outbreak alerts), `paho-epi-alerts` (currently listing Ebola, Seasonal Influenza, Mpox, Pertussis, Yellow Fever epi alerts with entries through May 2026), `wastewaterscan` (dashboard alive with National + regional navigation). `lastVerified` advanced from `2026-05-22` to `2026-05-25` for these three only.
+
+**Files touched:**
+- `CONTENT-STANDARDS.md` — new §4.6 "Auto-promoted timeline events (deterministic)" subsection between §4.5 (72-hour sliding window) and the §5 separator. ~25 lines covering: deterministic-only, Tier 1 allowlist, severity gate, provenance schema, Tier-1 sourceId hard-resolve, link required, curated-wins collision rule, volume caps, zero-promotion no-write, bot identity, ID prefix. Closes with the "validate-data + 12-test promoter suite enforce these" invariant and a final paragraph clarifying that legacy curated events have no provenance field and that the UI renders both kinds indistinguishably.
+- `src/data/signal-sources.json` — three `lastVerified` advances (`africa-cdc-outbreaks`, `paho-epi-alerts`, `wastewaterscan`) from 2026-05-22 → 2026-05-25. No other fields touched.
+- `public/api/v1/signal-sources.json` — regenerated from `src/data/` via `npm run generate:api`. Surfaces the three new lastVerified dates to the public API consumers.
+- `public/api/v1/feed.rss` etc. — generation-timestamp drift only.
+
+**The FDA outlier:** `fda-safety-alerts` was the 4th bucket-A source from the 2026-05-24 triage. WebFetch returned HTTP 404 against the registered URL (`https://www.fda.gov/news-events/public-health-focus`) AND against `https://www.fda.gov/`, `https://www.fda.gov/news-events`, and `https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts` — every fda.gov path I tried. This is almost certainly a WebFetch-environment block, not a real FDA outage, because `npm run audit:source-drift` earlier in this same session successfully fingerprinted the page and reported drift on `contentHash + etag + lastModified` (i.e. the page returned a real response with new content). The defensible move: do NOT refresh `fda-safety-alerts.lastVerified` based on a signal I can't trust. Backlog now carries this as a separate browser-side verification step for the operator.
+
+**Verify:**
+- `npm run validate:data` → OK.
+- `npm run audit:autonomy` → OK (5 workflows, 6 endpoints, 11 scripts).
+- `npm run audit:ai-enrichment` → OK (84 files scanned).
+- `npm run generate:api && npm run build` → both clean.
+- Open `/about` after deploy → no UI change expected (CONTENT-STANDARDS.md is a governance doc, not rendered).
+- `git diff src/data/signal-sources.json` → only `lastVerified` field changes on the 3 named entries, no other fields touched.
+
+---
 
 ## ✅ A11y sweep — code-level audit + 2 targeted fixes (commit 139d4ee)
 
@@ -1753,7 +1777,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 
 ## ⏳ Outstanding work (backlog)
 
-- **Tier 1/2 source-drift review (medium, partially documented).** Triage of 13 drifted pages documented at [docs/SOURCE-DRIFT-2026-05-24.md](docs/SOURCE-DRIFT-2026-05-24.md). **Bucket A (operator, ~10 min):** open 4 URLs + eyeball + refresh `lastVerified` to 2026-05-24 for `africa-cdc-outbreaks`, `paho-epi-alerts`, `fda-safety-alerts`, `wastewaterscan` in `src/data/signal-sources.json`. **Bucket B (SME, this week):** confirm Andes hantavirus structured fields against the current ECDC + WHO source pages — 4 sources. **Bucket C (curator, this week):** light review of 5 NETEC/PHAC/ECDC-CDTR/WHO-mass-gatherings pages. Blocked on: SME availability for bucket B; operator time for buckets A & C.
+- **Tier 1/2 source-drift review (medium, mostly cleared).** Triage of 13 drifted pages documented at [docs/SOURCE-DRIFT-2026-05-24.md](docs/SOURCE-DRIFT-2026-05-24.md). **Bucket A status:** 3 of 4 refreshed 2026-05-25 via WebFetch alive/on-topic check (`africa-cdc-outbreaks`, `paho-epi-alerts`, `wastewaterscan`). **`fda-safety-alerts` remaining (operator, 1 min):** browser-side eyeball-check of `https://www.fda.gov/news-events/public-health-focus`; if alive and serving FDA advisories, advance `lastVerified` to today. WebFetch returned 404 from this environment but `audit:source-drift` had fingerprinted the page successfully earlier in the same session — interpreted as a harness-side block, not a real outage. **Bucket B (SME, this week):** confirm Andes hantavirus structured fields against the current ECDC + WHO source pages — 4 sources. **Bucket C (curator, this week):** light review of 5 NETEC/PHAC/ECDC-CDTR/WHO-mass-gatherings pages. Blocked on: SME availability for bucket B; operator time for the FDA spot-check + bucket C.
 - **~~Timeline auto-promote (item 2).~~** ✅ Shipped 2026-05-25 — see the "Timeline auto-promote — deterministic Tier 1 news → signal-timeline.json" entry above. Deferred polish (CONTENT-STANDARDS §4 subsection naming the contract; per-signal cap tuning once a screaming-pace outbreak window is observed; Africa CDC RSS feed addition; auto events in `feed.rss`) is tracked in that entry's "Outstanding follow-up" section.
 - **~~Formal a11y sweep (item 8).~~** ✅ Static audit shipped 2026-05-25 — full report at [docs/A11Y-SWEEP-2026-05-25.md](docs/A11Y-SWEEP-2026-05-25.md). Closed 2 real gaps: Resources page selects (no programmatic label) and PageLoader (no live region). Remaining 9 follow-up items in the sweep doc require a browser session: Lighthouse score capture, axe-DevTools across 16 routes, keyboard-only walkthrough, color-contrast verification on muted-text labels. Target Lighthouse A11y ≥ 95 once the follow-up session runs.
 - **~~`cdc-han` persistent HTTP 403 in `audit:sources`.~~** ✅ Shipped — data-driven `knownBlocked` allowlist added to both `audit:sources` and `audit:source-drift`; cdc-han now routes to `knownBlockedSources` and no longer counts as a failure. Schema requires a `knownBlockedReason` so the bypass can be re-audited; three regression tests cover the schema rule. See the "knownBlocked source-audit allowlist" entry above.

@@ -137,6 +137,26 @@ This prevents spurious rebuilds and preserves data integrity when feeds are temp
 
 The pipeline must use a 72-hour sliding window for article deduplication — not a `lastChecked` timestamp. A `lastChecked` cutoff permanently excludes articles missed during feed outages. The sliding window self-heals after any feed failure.
 
+### 4.6 Auto-promoted timeline events (deterministic)
+
+`scripts/promote-news-to-timeline.mjs` is the only automated writer permitted to add events to `src/data/signal-timeline.json`. The contract is:
+
+- **Deterministic only.** No AI is consulted at promotion time. Title and description are verbatim from the source news item — never paraphrased, never summarized, never AI-rewritten.
+- **Strict Tier 1 authority allowlist:** `CDC`, `WHO`, `ECDC`. Items from any other authority — including registered Tier 1 sources whose RSS isn't yet wired into `GLOBAL_FEEDS` (Africa CDC, FDA, etc.) — are skipped.
+- **Signal severity gate:** the matched signal's `severity` must be `concern` or `action`. `monitor` and `watch` items skip.
+- **Provenance discriminator** is required on every auto-promoted event: `provenance: "auto-news-tier1"`, plus mandatory `newsId`, `authority`, `link`, and `promotedAt` for full traceability back to the source news item.
+- **`sourceId` must hard-resolve to a Tier 1 entry in `signal-sources.json`** under the matching authority. If no Tier 1 source is registered for the signal under that authority, the item is skipped — the script never invents a sourceId.
+- **No `link`, no promotion.** Items with null or invalid `link` are skipped (attribution requirement, §2.1).
+- **Curated wins on collision.** Any existing event (curated OR auto) with the same `signalId` + same UTC day blocks the promotion. The auto-promoter never overwrites human curation.
+- **Volume caps:** per-run max 20 promotions; per-signal rolling 7-day max 5 auto events.
+- **Zero-promotion runs write nothing** (§4.4 above applies — no file write, no commit).
+- **Bot identity:** the workflow step commits as `EMERGENZ Data Bot <bot@emergenz.org>` (§3.1).
+- **ID prefix `auto-{newsId}`** is required and validated.
+
+These invariants are enforced by `scripts/validate-data.mjs` and a 12-test unit suite (`scripts/test-promote-news-to-timeline.mjs`) — any code change that weakens them will be caught by `npm run test:validators && npm run test:promote-timeline` in CI.
+
+Existing curated events have no `provenance` field (treated as `"curated"` by default). The UI renders auto and curated events indistinguishably — the underlying authority and attribution are what matters to users; provenance is a maintainer concern surfaced through `automation.dataWriters` in `public/status.json`.
+
 ---
 
 ## 5. Public-Facing vs. Internal Information

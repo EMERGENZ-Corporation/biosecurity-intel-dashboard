@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-25T17:47:39.361Z",
+  "generatedAt": "2026-05-25T17:57:04.677Z",
   "endpoint": "/api/v1/signal-sources.json",
   "count": 38,
   "signalSources": [
@@ -293,7 +293,7 @@
       "sourceType": "surveillance-dashboard",
       "primary": true,
       "url": "https://africacdc.org",
-      "lastVerified": "2026-05-22",
+      "lastVerified": "2026-05-25",
       "domains": [
         "vhf",
         "vaccine_preventable",
@@ -369,7 +369,7 @@
       "sourceType": "wastewater",
       "primary": true,
       "url": "https://data.wastewaterscan.org/",
-      "lastVerified": "2026-05-22",
+      "lastVerified": "2026-05-25",
       "domains": [
         "environmental",
         "respiratory",
@@ -388,7 +388,7 @@
       "sourceType": "outbreak-news",
       "primary": true,
       "url": "https://www.paho.org/en/epidemiological-alerts-and-updates",
-      "lastVerified": "2026-05-22",
+      "lastVerified": "2026-05-25",
       "domains": [
         "vaccine_preventable",
         "vector_borne",
