@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Timeline auto-promote — deterministic Tier 1 news → signal-timeline.json (commit pending)
+## ✅ Timeline auto-promote — deterministic Tier 1 news → signal-timeline.json (commit 67743e2)
 
 Ships backlog item 2 — auto-promote of Tier 1 (CDC/WHO/ECDC) news items into `signal-timeline.json` via a new deterministic script with hard guards on every condition the architecture-agent, content-standards-agent, and ai-enrichment-policy-agent flagged. No AI at promotion time. Title/description are verbatim. Schema is additive and backward-compatible: existing curated events have no `provenance` field (defaults to "curated"), auto-promoted events carry `provenance: "auto-news-tier1"` + `newsId`, `authority`, `link`, `promotedAt` for full traceability. UI surfaces auto and curated events indistinguishably per the architecture-agent design (provenance is a maintainer concern, not a user concern; authority is what matters and is already attributed).
 
