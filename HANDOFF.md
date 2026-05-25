@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval blueprint — re-add Claude 3 Haiku as sandbox-judge-trigger (commit TBD)
+## ✅ Weval blueprint — re-add Claude 3 Haiku as sandbox-judge-trigger (commit 59cc31b)
 
 After 16c38dd dropped to 4 models, the next sandbox run **still** returned N/A on every criterion and 0% macro coverage — even though every model response in the dump was correct (cholera classified correctly, dengue refused, marathon weather → empty array, empty news list → empty items, etc.).
 
