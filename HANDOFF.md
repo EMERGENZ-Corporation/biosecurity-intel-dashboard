@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval blueprint — provision all 6 sandbox-available models (commit TBD)
+## ✅ Weval blueprint — provision all 6 sandbox-available models (commit 1d6705f)
 
 User shared the weval.org sandbox model picker. The sandbox exposes 7 candidates; one (`claude-3-haiku-20240307`) is retired and 404s, the remaining 6 are usable. Expanded the blueprint's `models:` block to pre-select all 6 — Gemini production + a full OpenAI tier sweep (4o-mini → 4.1-mini → 4.1-nano) + two open-weight floor models (Mistral 7B + Llama 3 8B). The floor models will probably fail noisily — that's the point: a prompt that holds up at 7B/8B is a prompt that holds up everywhere, and the spread between top-tier and floor is itself the most useful signal for the AI-boundary story.
 
