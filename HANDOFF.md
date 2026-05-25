@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Fix: Production Status Monitor false-alarm threshold (commit pending)
+## ✅ Fix: Production Status Monitor false-alarm threshold (commit 480b7d6)
 
 **Failure:** "Production Status Monitor: All jobs have failed" notification from GitHub Actions. Hourly check against the deployed `status.json` had been failing for at least the last 24h.
 
