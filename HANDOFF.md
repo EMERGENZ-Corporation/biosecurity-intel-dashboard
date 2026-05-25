@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval blueprint — second-pass fixes from sandbox re-read (commit TBD)
+## ✅ Weval blueprint — second-pass fixes from sandbox re-read (commit 4ab4859)
 
 User re-shared the same sandbox run (1779739989491) after 9973cd4 landed. Re-reading the raw model outputs surfaced three classes of remaining failures that the first-pass fix didn't fully address:
 
