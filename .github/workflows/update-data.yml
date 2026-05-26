@@ -117,14 +117,14 @@ jobs:
           PRODUCTION_URL: https://biosecurity-intel.emergenzsystems.org
           VERIFY_PRODUCTION_ATTEMPTS: 16
           VERIFY_PRODUCTION_DELAY_MS: 30000
-          MAX_OFFICIAL_CHECK_AGE_HOURS: 48
+          MAX_OFFICIAL_CHECK_AGE_HOURS: 168
 
       - name: Alert on stale dashboard data
         if: success()
         uses: actions/github-script@v8
         env:
           MAX_DATA_AGE_HOURS: 168
-          MAX_OFFICIAL_CHECK_AGE_HOURS: 48
+          MAX_OFFICIAL_CHECK_AGE_HOURS: 168
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |

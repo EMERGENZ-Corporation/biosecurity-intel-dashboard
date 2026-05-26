@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-26 (.codex/config.toml [agents] section renamed to [orchestration] — fixes startup error in Codex and second Claude Code account.)
+**Last updated:** 2026-05-26 (Status Refresh verifier/stale-alert thresholds aligned to 168h review cadence — fixes persistent 48h false-failure loop.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,17 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Status Refresh — align production verifier to 168h source-review policy (commit 2e3673a)
+
+User reported persistent `Status Refresh: All jobs have failed` emails. Latest failed run `26444622719` reached `Verify production deployment` after successfully committing `public/status.json`, then failed attempts 2–16 with `lastOfficialSourceCheck 69.8h old (max 48h)`. This was the same stale-threshold false alarm already fixed for `generate-status`, `status-monitor`, `.env.example`, and `RUNBOOK.md`; `update-data.yml` still carried two stale `48` env pins, and `verify-production.mjs` still defaulted to `48`.
+
+**Files touched:**
+- `.github/workflows/update-data.yml` — changed `MAX_OFFICIAL_CHECK_AGE_HOURS` from `48` to `168` for both the `Verify production deployment` step and stale-data issue reconciliation.
+- `scripts/verify-production.mjs` — changed fallback default from `48` to `168` and added a short comment tying the verifier to the weekly human-review cadence.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** `npm.cmd run test:validators && npm.cmd run validate:data && npm.cmd run audit:autonomy && npm.cmd run build`; then rerun or wait for `Status Refresh` — a deployed `lastOfficialSourceCheck` around 70–80h old should pass because it is inside the documented 168h policy.
 
 ## ✅ Fix .codex/config.toml [agents] section — restore Codex + Claude Code access (commit b74fada)
 
