@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-26 (Overview data-health card clarified — uses status contract stale-signal policy and separates signal/news clocks.)
+**Last updated:** 2026-05-26 (UI visual-depth pass — subtle hex background, denser Overview layout, restore tag created.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,20 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ UI visual-depth pass — hex background and denser Overview layout (commit pending)
+
+User asked for a transparent hex background pattern and a less AI-generated, less scroll-heavy Overview, with no lost information, intact data streams, no clipping, and a clean way to revert. Created and pushed restore tag `restore/pre-ui-depth-pass-2026-05-26` at known-good commit `12dda01` before changing UI. The implementation is frontend-only: data files, scripts, generated public API files, workflows, and source registries are unchanged.
+
+**Files touched:**
+- `src/index.css` — added a fixed, low-opacity hex pattern layer behind the app, kept app content above it, and disabled the texture in print output.
+- `src/pages/Overview.tsx` — added subtle translucent panel depth, kept all existing Overview streams, added the Data health explainer, and placed the map preview plus recent developments side-by-side on desktop to reduce vertical scroll without removing items.
+- `SCRATCH.md` — informal Codex subagent usage note requested by the user.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Restore point:** `git switch main && git reset --hard restore/pre-ui-depth-pass-2026-05-26` restores the exact pre-pass state locally. To ship the rollback, push main after confirming.
+
+**Verify:** `npm.cmd run test:validators && npm.cmd run validate:data && npm.cmd run build`; inspect `/` at desktop and mobile widths for readable text, no clipped map/recent panels, and unchanged links to `/news`, `/timeline`, `/map`, `/status`, and signal details.
 
 ## ✅ Overview — clarify data-health card and stale-signal policy (commit e722838)
 

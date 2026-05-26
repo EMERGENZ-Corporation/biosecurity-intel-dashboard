@@ -71,7 +71,7 @@ function StatChip({ label, value, color }: { label: string; value: string | numb
         flexDirection: 'column',
         gap: '0.125rem',
         padding: '0.5rem 0.875rem',
-        backgroundColor: 'var(--color-bg-tertiary)',
+        backgroundColor: 'rgba(30, 41, 59, 0.82)',
         border: '1px solid var(--color-border)',
         borderRadius: '4px',
         minWidth: '120px',
@@ -117,11 +117,13 @@ function Section({
   return (
     <div
       style={{
-        backgroundColor: 'var(--color-bg-secondary)',
+        backgroundColor: 'rgba(17, 24, 39, 0.88)',
         border: '1px solid var(--color-border)',
         borderLeft: accent ? `3px solid ${accent}` : '1px solid var(--color-border)',
         borderRadius: '6px',
-        padding: '1rem 1.25rem',
+        padding: '0.875rem 1rem',
+        boxShadow: '0 12px 32px rgba(0, 0, 0, 0.16)',
+        backdropFilter: 'blur(4px)',
       }}
     >
       <div
@@ -265,10 +267,12 @@ export default function Overview() {
         style={{
           padding: '1.25rem 1.5rem',
           marginBottom: '1rem',
-          backgroundColor: 'var(--color-bg-secondary)',
+          backgroundColor: 'rgba(17, 24, 39, 0.9)',
           border: '1px solid var(--color-border)',
           borderLeft: '3px solid var(--color-emergenz)',
           borderRadius: '6px',
+          boxShadow: '0 16px 42px rgba(0, 0, 0, 0.18)',
+          backdropFilter: 'blur(4px)',
         }}
       >
         <h1
@@ -338,7 +342,7 @@ export default function Overview() {
             display: 'block',
             padding: '1.25rem 1.5rem',
             marginBottom: '1rem',
-            backgroundColor: 'var(--color-bg-secondary)',
+            backgroundColor: 'rgba(17, 24, 39, 0.9)',
             border: '1px solid var(--color-border)',
             borderLeft: `4px solid ${SEVERITY_COLORS[headlineThreat.severity]}`,
             borderRadius: '6px',
@@ -346,6 +350,8 @@ export default function Overview() {
             color: 'inherit',
             position: 'relative',
             overflow: 'hidden',
+            boxShadow: '0 16px 42px rgba(0, 0, 0, 0.18)',
+            backdropFilter: 'blur(4px)',
           }}
         >
           <div
@@ -489,9 +495,11 @@ export default function Overview() {
           gap: '0.5rem',
           marginBottom: '1rem',
           padding: '0.75rem',
-          backgroundColor: 'var(--color-bg-secondary)',
+          backgroundColor: 'rgba(17, 24, 39, 0.88)',
           border: '1px solid var(--color-border)',
           borderRadius: '6px',
+          boxShadow: '0 12px 32px rgba(0, 0, 0, 0.14)',
+          backdropFilter: 'blur(4px)',
         }}
       >
         <StatChip label="Active signals" value={signals.filter((s) => s.status === 'active').length} />
@@ -727,6 +735,9 @@ export default function Overview() {
               <div>Curated signal data: {lastDataUpdate ? formatDateTime(lastDataUpdate) : '—'}</div>
               <div>Official source review: {lastSourceReview ? formatDateTime(lastSourceReview) : '—'}</div>
               <div>Latest news item: {latestNewsUpdate ? formatDateTime(latestNewsUpdate) : '—'}</div>
+              <div style={{ color: 'var(--color-text-muted)', lineHeight: 1.45 }}>
+                Curated fields update on human review; news updates automatically.
+              </div>
               <div>Source records: {statusJson.sources?.total ?? '—'}</div>
               <div>News items indexed: {news.length}</div>
               {staleSignalIds.length > 0 && (
@@ -852,8 +863,17 @@ export default function Overview() {
         </div>
       )}
 
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(0, 1fr)',
+          gap: '1rem',
+          marginBottom: '1rem',
+          alignItems: 'start',
+        }}
+      >
       {/* Map preview */}
-      <div style={{ marginBottom: '1rem' }}>
+      <div style={{ minWidth: 0 }}>
         <Section
           title="Signal map preview"
           extra={<SeeAllLink to="/map" label="Open full map" />}
@@ -866,6 +886,7 @@ export default function Overview() {
 
       {/* Recent developments — combined chronological feed of curated
           timeline events and automated news items */}
+      <div style={{ minWidth: 0 }}>
       <Section
         title="Recent developments"
         extra={<SeeAllLink to="/timeline" label="Full timeline" />}
@@ -956,6 +977,8 @@ export default function Overview() {
           })}
         </div>
       </Section>
+      </div>
+      </div>
     </div>
   )
 }
