@@ -1,9 +1,93 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-26T19:54:31.903Z",
+  "generatedAt": "2026-05-26T20:21:41.593Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "google-news-1c35b8bf",
+      "authority": "Google News",
+      "title": "New AI tools identify potential drugs for rare Ebola virus - News-Medical",
+      "description": "New AI tools identify potential drugs for rare Ebola virus News-Medical",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQV2o4WnhtaXJJejRteGlOcmxRaWY4OG5pZWpaWC04VWttaGZWYWVXZGlBUFhjLU5QNjF1S1hNaUN5M0lCWlVjeGJfUVdxSG91S3lpeTFhVGtTSzdjREV2TXNEdnEzcDVmZ0NjZ2lIaTNQR1JvMkl1clRlSHppeEg5LVNCVVlHVGhmX0d2M3NGR0ZHWkNhdlc4QUFPUDhUdGdjdnVXRDEwSjhPdw?oc=5",
+      "pubDate": "Tue, 26 May 2026 20:15:00 GMT",
+      "timestamp": 1779826500000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-8ab58a81",
+      "authority": "Google News",
+      "title": "Brit hospitalised with hantavirus in the Netherlands after cruise ship outbreak returns to UK - AOL.com",
+      "description": "Brit hospitalised with hantavirus in the Netherlands after cruise ship outbreak returns to UK AOL.com",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNQUtjLS1TQW1QUEh4ejYtMG9FUzFYSk9pVDVsaWo4OHllT2t0QS1FU2VhNXROLXhvWS1aTUpJMXVMdDlnQkhmYVV0ZzI3REpycW1HVHBFN1hxdjVxc2RCTlFpQk9NWTlSZ2Z6dW1mZ29ydWlmb3JRWGdqTDV0Y0EyR3pJbXpRSWk3N3NBeGFYSGtocDJjMmc?oc=5",
+      "pubDate": "Tue, 26 May 2026 20:13:05 GMT",
+      "timestamp": 1779826385000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "google-news-8305c7a6",
+      "authority": "Google News",
+      "title": "CDC to host webinar for clinicians on managing Ebola - American Hospital Association",
+      "description": "CDC to host webinar for clinicians on managing Ebola American Hospital Association",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPZ2tMbzktVjFCblNaMHNjbTlvWVlISkpYeEYwZjdoT2JOSjF5aUZJSnlPX2lEcWRZakdoVEdTaWNCV3dQVGR4d3hMbnhsNnR1cmlNd01qNXFXZ2dFeHhSM2lNYkF2NEVTX2VXSUtERzNWMDdpQ3dEVWNHc1RKSjY2X1dDVnJvd2dMeHlCbUw2ODE?oc=5",
+      "pubDate": "Tue, 26 May 2026 20:12:52 GMT",
+      "timestamp": 1779826372000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-4f806526",
+      "authority": "Google News",
+      "title": "Three Kansans discharged after exposure to hantavirus patient who died - The Topeka Capital-Journal",
+      "description": "Three Kansans discharged after exposure to hantavirus patient who died The Topeka Capital-Journal",
+      "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPZ0R4UVhyMGUtZkg3T19seHJoZHhhU3Q1U0xsdldEMmZPQmdTdmRoQ1hMbG44UXg0N2Z4ek5rQjJPSkFkMGlFbTl3S0p6bk85d0NmSDZ0Yk5fZFdmZkEyNnUwelRuZHZWMzdaQVFFRzcwb1R2enNhNFlPU04zV1hIMm9fZ2ZJMTU5OGJwNnIyRnRjVUpjX1FwTV9wWklxeDFUQVRJOXdXUHF1S2N3czJkM1d2VmZDTVBWSS1DNUlIZmlpVzltOU5KNzhxcVp1VFFCcnoxRVpSdXJVb0U?oc=5",
+      "pubDate": "Tue, 26 May 2026 20:01:00 GMT",
+      "timestamp": 1779825660000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "google-news-1697f01e",
+      "authority": "Google News",
+      "title": "Briton treated in Netherlands for hantavirus returns to UK - The Independent",
+      "description": "Briton treated in Netherlands for hantavirus returns to UK The Independent",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNOS10Qk5YdEFnSUV1R3lNY3E4TU8zTFA1VTFSdHdRMUpqVGtidFBCUzVqY2VDaEF4NFBUdG1yYjBVWWo2b1JsVjdrbXdtQ2l6YzVDczNBUE1xVTRRc1ZaM1BhSFZwME1uWGI1X1lxV0tlbEhMcU9talV1N3BVVHB0UGJfMkFsZUo0QUlIMDFqV3l6dmFBLVU0TkFqM0huYkV2LWJzcw?oc=5",
+      "pubDate": "Tue, 26 May 2026 19:59:00 GMT",
+      "timestamp": 1779825540000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "google-news-0a562aa6",
+      "authority": "Google News",
+      "title": "Hantavirus in the British Overseas Territories - Friends of the British Overseas Territories",
+      "description": "Hantavirus in the British Overseas Territories Friends of the British Overseas Territories",
+      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1rRUxiWks5cjBxNXZ0RFRST1ljb0xheWxWbm1JYU9qdVQ3bG9XN2pycVBCWFhENDY0czg4V3hVTVBYN0JGal9pNmJndGE3cmJzSGMxNFFRaXhNbkdySWpYZF9NcFg1QzlCNDBLV1djbmRqcjg?oc=5",
+      "pubDate": "Tue, 26 May 2026 19:57:50 GMT",
+      "timestamp": 1779825470000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "google-news-7754174b",
+      "authority": "Google News",
+      "title": "CDC asks staff to volunteer to help with Ebola screenings at airports amid outbreak - Yahoo",
+      "description": "CDC asks staff to volunteer to help with Ebola screenings at airports amid outbreak Yahoo",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQS2pIcHVwMTBxU0ZnZTJDWk43Y2dnZ0hSWU9zbkp5dXVSX2QtWWl4NTMyREhtYV8zMzZVczFhXy0zUEJUcFVfMXFFcDh5eFNocl9JRzdQUnBlSVEyTk95eG9VR3ZxSWhUN3Vya01BR01rUTEzQm9QcThKamxkc1A3SlIxRXJsTzIwQ2l2M0ZFMVhtbElXQW1TanFZUDM?oc=5",
+      "pubDate": "Tue, 26 May 2026 19:53:08 GMT",
+      "timestamp": 1779825188000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
     {
       "id": "google-news-2ec29950",
       "authority": "Google News",
@@ -113,6 +197,18 @@
       ]
     },
     {
+      "id": "google-news-f35be329",
+      "authority": "Google News",
+      "title": "Missionary Doctor Who Contracted Ebola in Stable Recovery - Billy Graham Evangelistic Association",
+      "description": "Missionary Doctor Who Contracted Ebola in Stable Recovery Billy Graham Evangelistic Association",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNam5mcElSTHRhMFBkekRBQkZGSWljcmJTZWFKWWlCalNqc0tqdEZNUHZTaFBPd3RiYmFub1lMWHpNeWRyV3hwNGtkYnRPdXh5UGViYS1BeU5FSUdaZVRpeDNOY1prdTdIM1hYYWZCRzZHOXlhYWM1Q0NOSXoyOERBZHdTa1d2OTdLNjRxUHNkdmRoOE44UllkRV9aUmpWRHVGMnZmRG5WZU5YYlJE?oc=5",
+      "pubDate": "Tue, 26 May 2026 18:19:56 GMT",
+      "timestamp": 1779819596000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-c8d27392",
       "authority": "Google News",
       "title": "International Cruise Travel Faces Fresh Safety Spotlight After Deadly Hantavirus Scare on Expedition Ship - Travel And Tour World",
@@ -158,6 +254,18 @@
       "timestamp": 1779818400000,
       "signalIds": [
         "mpox-africa-clade-i-2026"
+      ]
+    },
+    {
+      "id": "google-news-975bff27",
+      "authority": "Google News",
+      "title": "Ebola disease outbreak in the Democratic Republic of the Congo and Uganda - ECDC",
+      "description": "Ebola disease outbreak in the Democratic Republic of the Congo and Uganda ECDC",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPT0psTk9uZ21BWHlDdl81ek1SYk8tS3QyRkc3ZVkzSlVlUTRaejNhWTdLd2FKem9iMWgtRHVUTHktSXczX0t2UHFMLUNZbzhObHR4dXZzdFBtTWgtY1FrcE5ucTlFMWNVUWFKUDV6c2hnOFR6WXpZVU8zTk5jUk1GWDh2b29RMGwySzZYNFZvd05RdWgxeHNIU0VYaw?oc=5",
+      "pubDate": "Tue, 26 May 2026 17:58:51 GMT",
+      "timestamp": 1779818331000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
       ]
     },
     {
@@ -264,6 +372,18 @@
       "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPMGItNDNFQVNrRjhwTEt0R213dFFpSHFHN3BJc1p1OFhheUtSMUZwVHpqbTBkZzJiX05KVG5nRXNraUNGaTZsVDBQSmU0a3cwNlNvcHdtSzdtOTdkMkpobHlFU05zc0hnRDF2UGtjQTVKbDVQS3gzWUl4bTFwNkwzOWNaM2ViV3dfVlJCX0lsMWJaVTZLTjduUF9rV3c1UENQTDZwZjI2Z3U5U3JPTHp6OA?oc=5",
       "pubDate": "Tue, 26 May 2026 17:26:42 GMT",
       "timestamp": 1779816402000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-fe9d2ffd",
+      "authority": "Google News",
+      "title": "Ebola Outbreak Is Now Third Largest in History. Here’s What to Know. - WSJ",
+      "description": "Ebola Outbreak Is Now Third Largest in History. Here’s What to Know. WSJ",
+      "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5aSll6WkNvelRTTlBtNXF5NWJrZDl2ejRmXzg2Mld6anB4Ri1KNFQxSVNma0QzcXFkZWtOWXBpX0hURXBIaFNZN24tMHF4RkFWcnpCdktLbVlGMXk2U2dQTFBROE1sMWpINnFPUkdkanZrc2RM?oc=5",
+      "pubDate": "Tue, 26 May 2026 17:22:00 GMT",
+      "timestamp": 1779816120000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
       ]
@@ -5764,124 +5884,6 @@
       "signalIds": [
         "andes-hantavirus-mv-hondius-2026"
       ]
-    },
-    {
-      "id": "google-news-0b8782b1",
-      "authority": "Google News",
-      "title": "How South African scientists identified hantavirus on a cruise ship thousands of miles away - Idaho State Journal",
-      "description": "How South African scientists identified hantavirus on a cruise ship thousands of miles away Idaho State Journal",
-      "link": "https://news.google.com/rss/articles/CBMilAJBVV95cUxOV2pVYVdjMTBZdlB3WS02RkxxT0U1elBiejlNd2ZZQ3dZZFFPajd2aDN1WU5RQ05UZ0NfZG93WGx3VE5jVEdGaGpLSlBzOExzWG4wVVN5aHBpZE9QV0lseTJud0FQNGJDSVpvbUdOMVBvT05WN2hlWnRDQ19aelBTeUN4NldkRTJudmhvVEFkbTlxcTJCZUhqUUZ1Tk5qQVJ6eFpCUnBZZG1kT0UwblFyTmliMlE0U0VEdk1LSDVfbWliU1BYM1dzTUhmZlZwQWlvTlRoYnI3R3RIUE1zVHdWa3lzWm42SWo5NXVXZkNPNGxyZlN5NUdEUWdfR01MSFBqUUIyUDFxUnlKa0lMV1FSYXg4TkI?oc=5",
-      "pubDate": "Sat, 23 May 2026 08:04:32 GMT",
-      "timestamp": 1779523472000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-27f04a79",
-      "authority": "Google News",
-      "title": "How South African scientists identified hantavirus on a cruise ship thousands of miles away - wdtimes.com",
-      "description": "How South African scientists identified hantavirus on a cruise ship thousands of miles away wdtimes.com",
-      "link": "https://news.google.com/rss/articles/CBMihgJBVV95cUxOQ3NpeC1RZE9MQjllRFkyRnJ0VndnTER5VEM2cG9rajJnZjZBTUFuUndOaEJvQUZPT1dXbDR4MllIV214c2ZHaTVuSWhtWUZrN0FTR1FVNWhKQlVoU1lXVnFfeTd1NGtJYlNITE85ZjZrUzJibWxQZ3NXUjF1Zi1zVlZIRHRDTXpzNktPekVadnRXRkl4Y0RXTDJudHV3bE5aYWJwUnhWVU43U21HRGlZX2s5bGdpN2dSYUJCTFg0eXhUd2lxUTFPaUNBY2MxM0JJQ094SEdoWmE0VWZIZ1hjdDZNQkhLaHljRXZiMVh4aGxBMG15UzBMajBnSi1xdndsT3JKZW1R?oc=5",
-      "pubDate": "Sat, 23 May 2026 08:04:32 GMT",
-      "timestamp": 1779523472000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-c36f9f88",
-      "authority": "Google News",
-      "title": "How South African scientists identified hantavirus on a cruise ship thousands of miles away - Temple Daily Telegram",
-      "description": "How South African scientists identified hantavirus on a cruise ship thousands of miles away Temple Daily Telegram",
-      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQQWR3TkZKZTNFWmw3U25pbzdXRUFoV0VsZzNIT0c3b083a2t3ZHU0U2ZoakhrbUdkdXFHQldobW9kVE1BVXpkZ081em96WU1XLVR3b21qZmRGV1RmVGp6ZTQ5NGlKOS1mQS1xcW5uRXFnSHpyYkFMaW54dHBoOEZsc0UybTBobGJZYW5fMXBTRVZ2ZkpVV0E?oc=5",
-      "pubDate": "Sat, 23 May 2026 08:04:32 GMT",
-      "timestamp": 1779523472000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-9fb9ce39",
-      "authority": "Google News",
-      "title": "How South African scientists identified hantavirus on a cruise ship thousands of miles away - Rocky Mount Telegram",
-      "description": "How South African scientists identified hantavirus on a cruise ship thousands of miles away Rocky Mount Telegram",
-      "link": "https://news.google.com/rss/articles/CBMilgJBVV95cUxQU0lMYWpjUW5YTWxZd05raGVTdnFjRnViTEtZSkVfVlY2ZHFOYjNmeEktU1lEYXQ1X0tWUWw0dThzLVFXajYyRjBUc3BLaTg3blV3bVJLT3pfdTBTY1k3R29vcEVmTG85Wlpzc3dTeHZmMnlfMk00OXdhckZEdXk4RXk3VkZleVlZdTV4bW9CcXhKeTl1ekNqbEZ3c3Zmby1xb1ZLVVZtZjZoTWxIUVhtWnd2XzFOSmNKNHpQLXhWUjgzdFdxRTB4UjE3Z0JGWUFPRlNQQTRhMjJPZmNsUlVhQ0J5V2Mzb1F4VnFZMjVzNFAwWE10VGJ6dFRQMmhoVHZKQkxGalZ2b291b0JGcjBTX1hTUTd0Zw?oc=5",
-      "pubDate": "Sat, 23 May 2026 08:04:32 GMT",
-      "timestamp": 1779523472000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-b4421941",
-      "authority": "Google News",
-      "title": "How South African scientists identified hantavirus on a cruise ship thousands of miles away - AP News",
-      "description": "How South African scientists identified hantavirus on a cruise ship thousands of miles away AP News",
-      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOMV9oSDhNOVo4cF82Y2ZZX0tDM0ZFMUpsTnRrT01KR0NxZFR3Ul9aWUh1dktuZDlFenVTUEp2Smx2S3d3X0FOS25keVNSNm5PZTN3XzVhVHZia204b0FKQ0tUaEs2RmdiN192S3hPQWJTLTlOZ2VlQ1Q4d3dCeWhuYm42Y0dkRFFhTVFpOE9Wb29uRTVCbHN4SkwzWEFqSXVOSnI5X2x1MA?oc=5",
-      "pubDate": "Sat, 23 May 2026 08:04:00 GMT",
-      "timestamp": 1779523440000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-fc2aae4a",
-      "authority": "Google News",
-      "title": "Hantavirus, Type II Diabetes Trial, Maricopa Community College Funding - Arizona PBS",
-      "description": "Hantavirus, Type II Diabetes Trial, Maricopa Community College Funding Arizona PBS",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQbENTdmFsb1RicDV4eE5neFVDV3VtYVdGelVXbjNxVXJCLXpSQm1ISlZCTjBwS2Rqdnh6a0ZHV19lTGVOaVExdTRFQ2lGTXAxblJZcUNLaXlhRGVvYlp5SW9KLVdTa2R1dTA0ZnozeUhXbUFYUVphQzJ3bFN1bHRGYkNVTjdCc2M5SGdrTU5xRWwtdXoybzhhSUR1U1M0UENBcDZJOTB3?oc=5",
-      "pubDate": "Sat, 23 May 2026 07:07:30 GMT",
-      "timestamp": 1779520050000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-ea711bb2",
-      "authority": "Google News",
-      "title": "Warning as Norovirus outbreak confirmed at Cavan Hospital - The Impartial Reporter",
-      "description": "Warning as Norovirus outbreak confirmed at Cavan Hospital The Impartial Reporter",
-      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxObkpxOVdlQ3pybWd3OFZoMjlzVXJCY3hheEhaaTVpU3VIcmdsT0hod3M0bmFkYU1waXBNM1VsV3dDVEFMdU5oUXNOTTNpNm85UTlQSFdKdzl1N0NXOWlvRDBwbWJTRzNUTmROREN3MGtPY2liQzloVUJ0UTdmMTNaQWtwZUVWUkc2T044Sl9xbTdiSUo0MjN3SEVyY1JIZXk1QUE?oc=5",
-      "pubDate": "Sat, 23 May 2026 07:04:15 GMT",
-      "timestamp": 1779519855000,
-      "signalIds": [
-        "norovirus-wastewater-2026"
-      ]
-    },
-    {
-      "id": "google-news-18d99c07",
-      "authority": "Google News",
-      "title": "Hantavirus in the news - West Valley View",
-      "description": "Hantavirus in the news West Valley View",
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQTS1DWUNzbWNZbmhsbFdmdXhReDNKY25oRTFjb3FRMncxb1F0SWVLN3FLNVZMa1pjQk9kOS1rT1RJVzBpMEZJTU1wR20wNlFCRUNTLWVwTW1lcVotS1A5MkdQNm96NlhUSkVmZkhRNjI0UGE1eFkzek92QTlkUHhQd0pDMnhEVWJTVUR1Nm53Y1I3QlNSenJkbk1HMmNZVEFhWC05dkJiOTEtdGNYUmdINzVB?oc=5",
-      "pubDate": "Sat, 23 May 2026 07:00:00 GMT",
-      "timestamp": 1779519600000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-e7c52e93",
-      "authority": "Google News",
-      "title": "Ugandans rue link to Bundibugyo, the Ebola virus type named after a district of cocoa farmers - San Francisco Chronicle",
-      "description": "Ugandans rue link to Bundibugyo, the Ebola virus type named after a district of cocoa farmers San Francisco Chronicle",
-      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPWE12ZG5aQkU1RXk3N2pLZXg5OWc4cXk2WXo5OWdyVjJfaVJTa0dHWTBZX1JmTkM2aWlacGF1NlBGYi1OVTJ6MDdUM3o1MjBVMVJ4cG5JNTlwVEx0Skk0RUl1anQ2a0phZVRXaFlwVGJRS0U3dDJMZFZ0QlE4Q2tHaXFFWUNaVFFqS2ZnNjRENXFXV1pOeUdIN2lQVGxrOHhUOV82ekhaZTVYbWc?oc=5",
-      "pubDate": "Sat, 23 May 2026 06:32:31 GMT",
-      "timestamp": 1779517951000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "bbc-health-c7b5e92d",
-      "authority": "BBC Health",
-      "title": "Excessive social media 'negatively impacts wellbeing'",
-      "description": "The World Happiness Reports finds the more time spent on social media the greater loss of wellbeing.",
-      "link": "https://www.bbc.com/news/articles/cgmp493wpj0o?at_medium=RSS&at_campaign=rss",
-      "pubDate": "Sat, 23 May 2026 06:27:17 GMT",
-      "timestamp": 1779517637000,
-      "signalIds": []
     }
   ]
 }
