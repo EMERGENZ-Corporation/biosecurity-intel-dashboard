@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ UI visual-depth pass — hex background and denser Overview layout (commit pending)
+## ✅ UI visual-depth pass — hex background and denser Overview layout (commit 8e7a4f9)
 
 User asked for a transparent hex background pattern and a less AI-generated, less scroll-heavy Overview, with no lost information, intact data streams, no clipping, and a clean way to revert. Created and pushed restore tag `restore/pre-ui-depth-pass-2026-05-26` at known-good commit `12dda01` before changing UI. The implementation is frontend-only: data files, scripts, generated public API files, workflows, and source registries are unchanged.
 
