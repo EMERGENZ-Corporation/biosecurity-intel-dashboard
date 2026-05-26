@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Status page — clarify freshness clocks (commit pending)
+## ✅ Status page — clarify freshness clocks (commit 2fbbe4d)
 
 User flagged the Status page as confusing because it showed `Data last updated` from the curated structured-signal timestamp while also showing a much newer `Newest news item`. The page now names the distinct clocks explicitly: status generation time, curated signal-data update time, official source-review time, and latest news item time. The old "Dashboard depth" card was renamed "Content volume" so counts are not mixed with freshness semantics.
 
