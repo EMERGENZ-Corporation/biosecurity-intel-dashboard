@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-26 (Travel & Importation domain lens — 10 linked signals, guarded by validators.)
+**Last updated:** 2026-05-26 (Overview hero clock labels clarified.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,16 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Overview hero — split freshness clocks (commit pending)
+
+User flagged the hero text `Current as of May 22, 2026, 05:00 PM PDT` as confusing after the earlier Status/Data health clarification work. The hero no longer uses the broad `Current as of` phrase for the structured signal timestamp; it now labels separate clocks for curated signal data and latest news so the page does not imply that every stream stopped on the signal-data date.
+
+**Files touched:**
+- `src/pages/Overview.tsx` — removed the derived `currentAsOf` label and replaced it with `Curated signal data` plus `Latest news` timestamps in the hero metadata row.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** visit `/` — the hero should show `Curated signal data: ...` and `Latest news: ...` before `Status: OK`, with no `Current as of` phrasing.
 
 ## ✅ Travel & Importation domain lens (commit 58aebc4)
 

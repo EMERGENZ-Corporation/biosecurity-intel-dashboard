@@ -255,11 +255,6 @@ export default function Overview() {
   // Headline threat = highest-severity active signal, used for the hero card.
   const headlineThreat = ranked.find((s) => s.status === 'active') ?? ranked[0]
 
-  // "Current as of" — most recent of dashboard.lastUpdated and any signal lastUpdated
-  const currentAsOf = lastDataUpdate
-    ? new Date(lastDataUpdate)
-    : new Date(Math.max(...signals.map((s) => new Date(s.lastUpdated).getTime())))
-
   return (
     <div style={{ maxWidth: '1300px' }}>
       {/* Hero "what is this?" panel — orientation for first-time users */}
@@ -313,7 +308,11 @@ export default function Overview() {
           }}
         >
           <span style={{ color: 'var(--color-emergenz)', fontWeight: 700 }}>
-            Current as of {formatDateTime(currentAsOf.toISOString())}
+            Curated signal data: {lastDataUpdate ? formatDateTime(lastDataUpdate) : '—'}
+          </span>
+          <span>·</span>
+          <span>
+            Latest news: {latestNewsUpdate ? formatDateTime(latestNewsUpdate) : '—'}
           </span>
           <span>·</span>
           <span>
