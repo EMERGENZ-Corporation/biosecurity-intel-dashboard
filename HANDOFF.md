@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Travel & Importation domain lens (commit pending)
+## ✅ Travel & Importation domain lens (commit 58aebc4)
 
 User flagged that Travel & Importation showing 0 signals looked like a classification or research failure. The fix keeps `signal.category` as the primary pathogen/operational domain, adds `operationalLenses` for cross-cutting domains, and exposes Travel & Importation as a secondary lens across 10 existing source-backed signals. This avoids misclassifying Ebola, measles, chikungunya, etc. while making the travel/importation domain useful in Overview counts and page filters.
 
