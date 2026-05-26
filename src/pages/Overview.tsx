@@ -11,7 +11,6 @@ import {
   signalTimeline,
   rankSignals,
   categoryCounts,
-  isSignalStale,
   highestSeverity,
   formatDateTime,
   SEVERITY_COLORS,
@@ -178,7 +177,7 @@ export default function Overview() {
   const priorityQueue = ranked.slice(0, 5)
   const categories = categoryCounts(signals)
   const highest = highestSeverity(signals)
-  const staleSignals = signals.filter((signal) => isSignalStale(signal))
+  const staleSignalIds = statusJson.signals?.staleSignalIds ?? []
 
   // Recent developments — combined chronological feed of curated timeline
   // events and automated news items. Without combining, this section looks
@@ -248,6 +247,8 @@ export default function Overview() {
   }
 
   const lastDataUpdate = statusJson.dashboard?.lastUpdated
+  const lastSourceReview = statusJson.dashboard?.lastOfficialSourceCheck
+  const latestNewsUpdate = statusJson.news?.newest
 
   // Headline threat = highest-severity active signal, used for the hero card.
   const headlineThreat = ranked.find((s) => s.status === 'active') ?? ranked[0]
@@ -502,9 +503,9 @@ export default function Overview() {
         <StatChip label="Domains in scope" value={Object.keys(categories).length} />
         <StatChip
           label="Stale signals"
-          value={staleSignals.length}
+          value={staleSignalIds.length}
           color={
-            staleSignals.length > 0 ? 'var(--color-accent-orange)' : 'var(--color-accent-green)'
+            staleSignalIds.length > 0 ? 'var(--color-accent-orange)' : 'var(--color-accent-green)'
           }
         />
         <StatChip label="News items" value={news.length} />
@@ -696,7 +697,10 @@ export default function Overview() {
             </div>
           </Section>
 
-          <Section title="Data currency">
+          <Section
+            title="Data health"
+            extra={<SeeAllLink to="/status" label="Details" />}
+          >
             <div
               style={{
                 display: 'flex',
@@ -720,12 +724,23 @@ export default function Overview() {
                   {statusJson.status?.toUpperCase()}
                 </span>
               </div>
-              <div>Data last updated: {lastDataUpdate ? formatDateTime(lastDataUpdate) : '—'}</div>
+              <div>Curated signal data: {lastDataUpdate ? formatDateTime(lastDataUpdate) : '—'}</div>
+              <div>Official source review: {lastSourceReview ? formatDateTime(lastSourceReview) : '—'}</div>
+              <div>Latest news item: {latestNewsUpdate ? formatDateTime(latestNewsUpdate) : '—'}</div>
               <div>Source records: {statusJson.sources?.total ?? '—'}</div>
-              <div>News items: {news.length}</div>
-              {staleSignals.length > 0 && (
+              <div>News items indexed: {news.length}</div>
+              {staleSignalIds.length > 0 && (
                 <div style={{ color: 'var(--color-accent-orange)' }}>
-                  Stale signals: {staleSignals.map((s) => s.id).join(', ')}
+                  {staleSignalIds.length} signal{staleSignalIds.length === 1 ? '' : 's'} need review
+                  {' · '}
+                  <Link to="/status" style={{ color: 'var(--color-accent-orange)' }}>
+                    View status
+                  </Link>
+                </div>
+              )}
+              {staleSignalIds.length === 0 && (
+                <div style={{ color: 'var(--color-accent-green)' }}>
+                  No stale signals under the {statusJson.thresholds?.maxSignalStaleHours ?? 168}h review policy
                 </div>
               )}
             </div>

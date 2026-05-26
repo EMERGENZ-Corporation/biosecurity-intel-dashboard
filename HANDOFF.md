@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-26 (Status page freshness labels clarified — separates status generation, curated signal data, source review, and latest news.)
+**Last updated:** 2026-05-26 (Overview data-health card clarified — uses status contract stale-signal policy and separates signal/news clocks.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,16 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Overview — clarify data-health card and stale-signal policy (commit pending)
+
+User flagged the Overview "Data currency" card as confusing because it mixed structured-data timestamps with news volume and listed every signal ID as stale. Root cause: Overview used the local `isSignalStale()` helper default of 72h, while `public/status.json`, Status Refresh, and the production monitor use the documented 168h source-review window. The card now reads as a compact public-facing "Data health" summary, separates curated signal data from latest news, and uses `statusJson.signals.staleSignalIds` instead of recalculating staleness locally.
+
+**Files touched:**
+- `src/pages/Overview.tsx` — removed local stale calculation, reads stale IDs from the status contract, renamed "Data currency" to "Data health", separated curated signal data / official source review / latest news rows, and replaced the raw ID wall with a count + `/status` link.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** visit `/` — the right rail should show "Data health"; stale signals should be `No stale signals under the 168h review policy` when `/status.json` has an empty `signals.staleSignalIds` array.
 
 ## ✅ Status page — clarify freshness clocks (commit 2fbbe4d)
 
