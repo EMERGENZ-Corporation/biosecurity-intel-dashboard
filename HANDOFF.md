@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Overview — clarify data-health card and stale-signal policy (commit pending)
+## ✅ Overview — clarify data-health card and stale-signal policy (commit e722838)
 
 User flagged the Overview "Data currency" card as confusing because it mixed structured-data timestamps with news volume and listed every signal ID as stale. Root cause: Overview used the local `isSignalStale()` helper default of 72h, while `public/status.json`, Status Refresh, and the production monitor use the documented 168h source-review window. The card now reads as a compact public-facing "Data health" summary, separates curated signal data from latest news, and uses `statusJson.signals.staleSignalIds` instead of recalculating staleness locally.
 
