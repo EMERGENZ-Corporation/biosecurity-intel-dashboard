@@ -176,6 +176,37 @@ try {
     'url must be valid',
   )
 
+  // operationalLenses discipline — cross-cutting domains must remain typed,
+  // and travel evidence must not become invisible in domain filters.
+  expectFailure(
+    'invalid-operational-lens',
+    (signals) => {
+      signals[0].operationalLenses = ['not-a-domain']
+    },
+    'invalid operational lens "not-a-domain"',
+  )
+
+  expectFailure(
+    'travel-route-marker-without-travel-lens',
+    (signals) => {
+      const signal = signals.find((item) =>
+        Array.isArray(item.mapMarkers) && item.mapMarkers.some((marker) => marker.type === 'ship_route'),
+      )
+      signal.operationalLenses = []
+    },
+    'ship_route/flight_tracing markers require operationalLenses to include "travel"',
+  )
+
+  expectFailure(
+    'travel-domain-evidence-without-exposed-signals',
+    (signals) => {
+      signals.forEach((signal) => {
+        signal.operationalLenses = (signal.operationalLenses ?? []).filter((lens) => lens !== 'travel')
+      })
+    },
+    'travel domain has source or marker evidence but no signals expose category/operationalLenses "travel"',
+  )
+
   // knownBlocked discipline — flagging a source as known-blocked without a
   // reason is forbidden so the bypass can be re-audited later.
   expectSourcesFailure(

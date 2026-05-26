@@ -49,6 +49,22 @@ function categoryCounts(signals) {
   return counts
 }
 
+function domainCounts(signals) {
+  const counts = {}
+  for (const s of signals) {
+    counts[s.category] ??= { primary: 0, linked: 0, total: 0 }
+    counts[s.category].primary += 1
+    for (const lens of s.operationalLenses ?? []) {
+      counts[lens] ??= { primary: 0, linked: 0, total: 0 }
+      counts[lens].linked += 1
+    }
+  }
+  for (const key of Object.keys(counts)) {
+    counts[key].total = counts[key].primary + counts[key].linked
+  }
+  return counts
+}
+
 function readJsonOptional(path) {
   try { return JSON.parse(readFileSync(path, 'utf8')) } catch { return null }
 }
@@ -219,6 +235,7 @@ function main() {
       active: activeSignals.length,
       highestSeverity: highestSeverity(activeSignals),
       byCategory: categoryCounts(signals),
+      byDomain: domainCounts(signals),
       staleSignalIds,
       timelineEvents: timeline.length,
       totalMapMarkers: signals.reduce((sum, s) => sum + (Array.isArray(s.mapMarkers) ? s.mapMarkers.length : 0), 0),

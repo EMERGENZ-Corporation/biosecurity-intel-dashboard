@@ -3,6 +3,9 @@
     "id": "andes-hantavirus-mv-hondius-2026",
     "name": "Andes virus hantavirus cluster — MV Hondius travel-linked",
     "category": "zoonotic",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Andes orthohantavirus",
     "geography": [
       "Argentina",
@@ -948,6 +951,9 @@
     "id": "ebola-bundibugyo-drc-2026",
     "name": "Ebola disease — Bundibugyo virus, Democratic Republic of the Congo",
     "category": "vhf",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Bundibugyo ebolavirus",
     "geography": [
       "Democratic Republic of the Congo",
@@ -1333,6 +1339,9 @@
     "id": "measles-us-2026",
     "name": "Measles — United States",
     "category": "vaccine_preventable",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Measles morbillivirus",
     "geography": [
       "United States",
@@ -1671,6 +1680,9 @@
     "id": "mpox-africa-clade-i-2026",
     "name": "Mpox — clade I, Africa & travel-linked importations",
     "category": "zoonotic",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Monkeypox virus (clade I)",
     "geography": [
       "Democratic Republic of the Congo",
@@ -2417,6 +2429,9 @@
     "id": "cholera-africa-2026",
     "name": "Cholera — sub-Saharan Africa, including Republic of Congo",
     "category": "enteric",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Vibrio cholerae O1",
     "geography": [
       "Republic of Congo",
@@ -2686,6 +2701,9 @@
     "id": "seasonal-influenza-2026",
     "name": "Seasonal influenza — Northern Hemisphere late season",
     "category": "respiratory",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Influenza A/B",
     "geography": [
       "United States",
@@ -3551,6 +3569,9 @@
     "id": "lassa-fever-2026",
     "name": "Lassa fever — West Africa endemic burden",
     "category": "vhf",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Lassa mammarenavirus",
     "geography": [
       "Nigeria",
@@ -3869,6 +3890,9 @@
     "id": "chikungunya-2026",
     "name": "Chikungunya — global outbreak activity",
     "category": "vector_borne",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Chikungunya virus",
     "geography": [
       "Brazil",
@@ -4236,6 +4260,9 @@
     "id": "screwworm-onehealth-2026",
     "name": "New World screwworm — active cases and sterile fly dispersal zone",
     "category": "zoonotic",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Cochliomyia hominivorax",
     "geography": [
       "Central America",
@@ -4429,6 +4456,9 @@
     "id": "fifa-world-cup-2026-prep",
     "name": "FIFA World Cup 2026 — mass-gathering preparedness",
     "category": "mass_gathering",
+    "operationalLenses": [
+      "travel"
+    ],
     "pathogen": "Multiple pathogens (event-based surveillance)",
     "geography": [
       "United States",

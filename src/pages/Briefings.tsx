@@ -13,6 +13,7 @@ import {
   intelToneStyle,
   NEUTRAL_TONE,
   severityTone,
+  signalMatchesDomain,
 } from '../utils/signals'
 import {
   type Signal,
@@ -82,6 +83,17 @@ function BriefingCard({ signal }: { signal: Signal }) {
         >
           {categoryLabel(signal.category)}
         </span>
+        {signal.operationalLenses?.map((lens) => (
+          <span
+            key={lens}
+            className="intel-pill is-muted"
+            style={{
+              ...intelToneStyle(categoryTone(lens)),
+            }}
+          >
+            {categoryLabel(lens)}
+          </span>
+        ))}
         <span
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
@@ -238,7 +250,7 @@ export default function Briefings() {
   const filtered = useMemo(() => {
     const subset = signals.filter((s) => {
       if (severity !== 'all' && s.severity !== severity) return false
-      if (category !== 'all' && s.category !== category) return false
+      if (category !== 'all' && !signalMatchesDomain(s, category)) return false
       return true
     })
     // Briefings emphasize concern/action by default — sort by severity rank then ranking helper
@@ -319,7 +331,7 @@ export default function Briefings() {
           })}
         </div>
 
-        <div role="group" aria-label="Briefing category filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Briefing domain filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
@@ -330,7 +342,7 @@ export default function Briefings() {
               minWidth: '5rem',
             }}
           >
-            Category:
+            Domain:
           </span>
           <button
             type="button"

@@ -8,6 +8,7 @@ import {
   intelToneStyle,
   markerTypeTone,
   severityTone,
+  signalMatchesDomain,
 } from '../utils/signals'
 import {
   SignalSeverity,
@@ -57,7 +58,11 @@ export default function MapPage() {
   const filtered = useMemo(
     () =>
       signals.filter(
-        (s) => activeCategories.has(s.category) && activeSeverities.has(s.severity)
+        (s) =>
+          (Object.keys(THREAT_CATEGORY_LABELS) as ThreatCategory[]).some(
+            (domain) => activeCategories.has(domain) && signalMatchesDomain(s, domain),
+          ) &&
+          activeSeverities.has(s.severity)
       ),
     [activeCategories, activeSeverities]
   )
@@ -120,7 +125,7 @@ export default function MapPage() {
           margin: '0 0 1rem 0',
         }}
       >
-        Geographic view of monitored signals · category, severity, and marker-type filters ·{' '}
+        Geographic view of monitored signals · domain, severity, and marker-type filters ·{' '}
         {totalMarkers} marker{totalMarkers !== 1 ? 's' : ''} visible
       </p>
 
@@ -160,8 +165,8 @@ export default function MapPage() {
         </div>
 
         {/* Category row */}
-        <div role="group" aria-label="Map category filters" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
-          <span style={ROW_LABEL}>Category:</span>
+        <div role="group" aria-label="Map domain filters" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+          <span style={ROW_LABEL}>Domain:</span>
           {(Object.entries(THREAT_CATEGORY_LABELS) as [ThreatCategory, string][]).map(([k, label]) => {
             const active = activeCategories.has(k)
             return (

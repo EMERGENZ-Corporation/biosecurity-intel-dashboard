@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-05-26T09:39:52.902Z",
+  "generatedAt": "2026-05-26T19:46:47.645Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-23T00:00:00.000Z",
     "lastChecked": "2026-05-23T12:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-23T12:00:00.000Z",
-    "dataAgeHours": 81.664695,
-    "officialCheckAgeHours": 69.664695
+    "dataAgeHours": 91.77990138888889,
+    "officialCheckAgeHours": 79.77990138888889
   },
   "signals": {
     "total": 16,
@@ -28,6 +28,58 @@
       "vector_borne": 1,
       "amr_fungal": 1,
       "mass_gathering": 1
+    },
+    "byDomain": {
+      "zoonotic": {
+        "primary": 4,
+        "linked": 0,
+        "total": 4
+      },
+      "travel": {
+        "primary": 0,
+        "linked": 10,
+        "total": 10
+      },
+      "vhf": {
+        "primary": 2,
+        "linked": 0,
+        "total": 2
+      },
+      "vaccine_preventable": {
+        "primary": 1,
+        "linked": 0,
+        "total": 1
+      },
+      "enteric": {
+        "primary": 1,
+        "linked": 0,
+        "total": 1
+      },
+      "respiratory": {
+        "primary": 1,
+        "linked": 0,
+        "total": 1
+      },
+      "environmental": {
+        "primary": 4,
+        "linked": 0,
+        "total": 4
+      },
+      "vector_borne": {
+        "primary": 1,
+        "linked": 0,
+        "total": 1
+      },
+      "amr_fungal": {
+        "primary": 1,
+        "linked": 0,
+        "total": 1
+      },
+      "mass_gathering": {
+        "primary": 1,
+        "linked": 0,
+        "total": 1
+      }
     },
     "staleSignalIds": [],
     "timelineEvents": 43,
@@ -47,7 +99,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-05-26T04:06:22.000Z"
+    "newest": "2026-05-26T15:50:23.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",

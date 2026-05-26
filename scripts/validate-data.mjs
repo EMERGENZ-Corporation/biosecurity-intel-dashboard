@@ -25,6 +25,20 @@ const SIGNAL_SEVERITIES = new Set(['monitor', 'watch', 'concern', 'action'])
 const SIGNAL_CONFIDENCES = new Set(['official', 'corroborated', 'emerging', 'unverified'])
 const SIGNAL_TRENDS = new Set(['increasing', 'stable', 'decreasing', 'unknown'])
 const SIGNAL_STATUSES = new Set(['active', 'monitoring', 'resolved'])
+const MARKER_TYPES = new Set([
+  'case_confirmed',
+  'death',
+  'outbreak_zone',
+  'exposure_event',
+  'monitoring_site',
+  'animal_detection',
+  'vector_zone',
+  'infrastructure',
+  'ship_route',
+  'us_state_monitoring',
+  'flight_tracing',
+])
+const TRAVEL_MARKER_TYPES = new Set(['ship_route', 'flight_tracing'])
 const SOURCE_TYPES = new Set([
   'outbreak-news',
   'expert-weekly-report',
@@ -190,6 +204,21 @@ signals.forEach((signal, index) => {
   if (signal.category && !THREAT_CATEGORIES.has(signal.category)) {
     errors.push(`${label}: invalid category "${signal.category}"`)
   }
+  if (signal.operationalLenses !== undefined) {
+    if (!Array.isArray(signal.operationalLenses)) {
+      errors.push(`${label}: operationalLenses must be an array`)
+    } else {
+      const seenLenses = new Set()
+      signal.operationalLenses.forEach((lens) => {
+        if (!THREAT_CATEGORIES.has(lens)) errors.push(`${label}: invalid operational lens "${lens}"`)
+        if (lens === signal.category) {
+          errors.push(`${label}: operationalLenses must not repeat primary category "${lens}"`)
+        }
+        if (seenLenses.has(lens)) errors.push(`${label}: duplicate operational lens "${lens}"`)
+        seenLenses.add(lens)
+      })
+    }
+  }
   if (signal.severity && !SIGNAL_SEVERITIES.has(signal.severity)) {
     errors.push(`${label}: invalid severity "${signal.severity}"`)
   }
@@ -258,6 +287,9 @@ signals.forEach((signal, index) => {
         }
         if (marker.severity && !SIGNAL_SEVERITIES.has(marker.severity)) {
           errors.push(`${mLabel}: invalid severity "${marker.severity}"`)
+        }
+        if (marker.type && !MARKER_TYPES.has(marker.type)) {
+          errors.push(`${mLabel}: invalid marker type "${marker.type}"`)
         }
       })
     }
@@ -381,6 +413,23 @@ signals.forEach((signal, index) => {
         if (ra.asOf && !isIsoDate(ra.asOf)) errors.push(`${raLabel}: asOf must be ISO`)
       })
     }
+  }
+})
+
+const exposesTravelDomain = (signal) =>
+  signal.category === 'travel' || (Array.isArray(signal.operationalLenses) && signal.operationalLenses.includes('travel'))
+const hasTravelSourceDomain = signalSources.some((source) => Array.isArray(source.domains) && source.domains.includes('travel'))
+const hasTravelMarkerType = signals.some((signal) =>
+  Array.isArray(signal.mapMarkers) && signal.mapMarkers.some((marker) => TRAVEL_MARKER_TYPES.has(marker.type)),
+)
+const travelDomainSignals = signals.filter(exposesTravelDomain)
+if ((hasTravelSourceDomain || hasTravelMarkerType) && travelDomainSignals.length === 0) {
+  errors.push('travel domain has source or marker evidence but no signals expose category/operationalLenses "travel"')
+}
+signals.forEach((signal) => {
+  const hasTravelMarker = Array.isArray(signal.mapMarkers) && signal.mapMarkers.some((marker) => TRAVEL_MARKER_TYPES.has(marker.type))
+  if (hasTravelMarker && !exposesTravelDomain(signal)) {
+    errors.push(`signals (${signal.id}): ship_route/flight_tracing markers require operationalLenses to include "travel"`)
   }
 })
 

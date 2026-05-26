@@ -10,7 +10,7 @@ import {
   signals,
   signalTimeline,
   rankSignals,
-  categoryCounts,
+  domainCoverageCounts,
   highestSeverity,
   formatDateTime,
   SEVERITY_COLORS,
@@ -177,7 +177,7 @@ export default function Overview() {
 
   const ranked = useMemo(() => rankSignals(signals), [])
   const priorityQueue = ranked.slice(0, 5)
-  const categories = categoryCounts(signals)
+  const domainCoverage = domainCoverageCounts(signals)
   const highest = highestSeverity(signals)
   const staleSignalIds = statusJson.signals?.staleSignalIds ?? []
 
@@ -508,7 +508,10 @@ export default function Overview() {
           value={highest ? SEVERITY_LABELS[highest] : '—'}
           color={highest ? SEVERITY_COLORS[highest] : undefined}
         />
-        <StatChip label="Domains in scope" value={Object.keys(categories).length} />
+        <StatChip
+          label="Domains in scope"
+          value={Object.values(domainCoverage).filter((count) => count.total > 0).length}
+        />
         <StatChip
           label="Stale signals"
           value={staleSignalIds.length}
@@ -681,7 +684,14 @@ export default function Overview() {
               {(Object.entries(THREAT_CATEGORY_LABELS) as Array<
                 [keyof typeof THREAT_CATEGORY_LABELS, string]
               >).map(([key, label]) => {
-                const count = categories[key] ?? 0
+                const count = domainCoverage[key]
+                const hasCoverage = count.total > 0
+                const countLabel =
+                  count.linked > 0
+                    ? count.primary > 0
+                      ? `${count.primary} + ${count.linked}`
+                      : `${count.linked} linked`
+                    : `${count.primary}`
                 return (
                   <div
                     key={key}
@@ -690,9 +700,9 @@ export default function Overview() {
                       justifyContent: 'space-between',
                       alignItems: 'center',
                       padding: '0.375rem 0.5rem',
-                      backgroundColor: count > 0 ? 'var(--color-bg-tertiary)' : 'transparent',
+                      backgroundColor: hasCoverage ? 'var(--color-bg-tertiary)' : 'transparent',
                       border:
-                        count > 0 ? '1px solid var(--color-border)' : '1px solid transparent',
+                        hasCoverage ? '1px solid var(--color-border)' : '1px solid transparent',
                       borderRadius: '4px',
                     }}
                   >
@@ -700,16 +710,21 @@ export default function Overview() {
                       style={{
                         fontFamily: "'IBM Plex Mono', monospace",
                         fontSize: '0.6875rem',
-                        color: count > 0 ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
+                        color: hasCoverage ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
                       }}
                     >
                       {label}
                     </span>
                     <span
-                      className={`intel-pill ${count > 0 ? 'is-active' : 'is-muted'}`}
-                      style={intelToneStyle(count > 0 ? categoryTone(key) : { border: '#64748B', glow: 'rgba(100,116,139,0.20)' })}
+                      title={
+                        count.linked > 0
+                          ? `${count.primary} primary, ${count.linked} linked by operational lens`
+                          : `${count.primary} primary`
+                      }
+                      className={`intel-pill ${hasCoverage ? 'is-active' : 'is-muted'}`}
+                      style={intelToneStyle(hasCoverage ? categoryTone(key) : { border: '#64748B', glow: 'rgba(100,116,139,0.20)' })}
                     >
-                      {count}
+                      {countLabel}
                     </span>
                   </div>
                 )

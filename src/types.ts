@@ -310,6 +310,11 @@ export interface Signal {
   id: string
   name: string
   category: ThreatCategory
+  /**
+   * Cross-cutting operational lenses that should surface this signal in
+   * domain views without changing its primary threat category.
+   */
+  operationalLenses?: ThreatCategory[]
   pathogen?: string
   geography: string[]
   severity: SignalSeverity
@@ -408,6 +413,7 @@ export interface StatusSignalSummary {
   active: number
   highestSeverity: SignalSeverity | null
   byCategory: Partial<Record<ThreatCategory, number>>
+  byDomain?: Partial<Record<ThreatCategory, { primary: number; linked: number; total: number }>>
   staleSignalIds: string[]
 }
 

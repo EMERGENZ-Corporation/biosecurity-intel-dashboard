@@ -9,6 +9,7 @@ import {
   categoryTone,
   intelToneStyle,
   severityTone,
+  signalMatchesDomain,
   type IntelTone,
 } from '../utils/signals'
 import { SignalSeverity, ThreatCategory, THREAT_CATEGORY_LABELS } from '../types'
@@ -48,7 +49,7 @@ export default function Signals() {
 
   const filtered = useMemo(() => {
     const subset = signals.filter((signal) => {
-      if (categoryFilter !== 'all' && signal.category !== categoryFilter) return false
+      if (categoryFilter !== 'all' && !signalMatchesDomain(signal, categoryFilter)) return false
       if (severityFilter !== 'all' && signal.severity !== severityFilter) return false
       return true
     })
@@ -86,6 +87,7 @@ export default function Signals() {
             id: s.id,
             name: s.name,
             category: s.category,
+            operationalLenses: s.operationalLenses?.join('; ') ?? '',
             severity: s.severity,
             confidence: s.confidence,
             trend: s.trend,
@@ -128,9 +130,9 @@ export default function Signals() {
           ))}
         </div>
 
-        <div role="group" aria-label="Signal category filter" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div role="group" aria-label="Signal domain filter" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.625rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-            Category:
+            Domain:
           </span>
           <FilterButton active={categoryFilter === 'all'} tone={NEUTRAL_TONE} onClick={() => setCategoryFilter('all')}>All</FilterButton>
           {(Object.entries(THREAT_CATEGORY_LABELS) as Array<[ThreatCategory, string]>).map(([key, label]) => (

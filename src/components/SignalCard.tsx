@@ -143,6 +143,11 @@ export default function SignalCard({ signal, compact = false }: Props) {
         <span className="intel-pill is-muted" style={intelToneStyle(categoryTone(signal.category))}>
           {categoryLabel(signal.category)}
         </span>
+        {signal.operationalLenses?.map((lens) => (
+          <span key={lens} className="intel-pill is-muted" style={intelToneStyle(categoryTone(lens))}>
+            {categoryLabel(lens)}
+          </span>
+        ))}
         <span>·</span>
         <span>
           {signal.geography[0] ?? 'Global'}

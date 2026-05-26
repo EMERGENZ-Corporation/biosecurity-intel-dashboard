@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-26 (Overview layout correction — map moved higher and Recent Developments restored full-width.)
+**Last updated:** 2026-05-26 (Travel & Importation domain lens — 10 linked signals, guarded by validators.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,25 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Travel & Importation domain lens (commit pending)
+
+User flagged that Travel & Importation showing 0 signals looked like a classification or research failure. The fix keeps `signal.category` as the primary pathogen/operational domain, adds `operationalLenses` for cross-cutting domains, and exposes Travel & Importation as a secondary lens across 10 existing source-backed signals. This avoids misclassifying Ebola, measles, chikungunya, etc. while making the travel/importation domain useful in Overview counts and page filters.
+
+**Files touched:**
+- `src/data/signals.json` — added `operationalLenses: ["travel"]` to 10 existing travel/importation-linked signals without changing primary categories or source-backed text.
+- `src/types.ts` — added optional `Signal.operationalLenses` and optional status `byDomain` shape.
+- `src/utils/signals.ts` — added domain matching/counting helpers that combine primary category plus operational lenses.
+- `src/pages/Overview.tsx` — Threat domain coverage now counts linked domains; Travel & Importation shows linked signal coverage instead of 0.
+- `src/pages/Signals.tsx`, `src/pages/MapPage.tsx`, `src/pages/Briefings.tsx`, `src/pages/TimelinePage.tsx` — domain filters now match primary category or operational lens.
+- `src/components/SignalCard.tsx` — cards show operational lens pills alongside primary category.
+- `scripts/validate-data.mjs` — validates operational lenses and fails if travel source/route evidence exists but no signal exposes the travel lens; ship/flight markers now require travel exposure.
+- `scripts/test-validate-data.mjs` — adds regression coverage for invalid operational lenses and missing travel lens exposure.
+- `scripts/generate-status.mjs` — adds `signals.byDomain` to the public status contract.
+- `public/status.json`, `public/api/v1/signals.json`, `public/api/v1/*.json`, `public/api/v1/feed.rss` — regenerated public artifacts after the data/schema change.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** `/` should show Travel & Importation as `10 linked`; `/signals`, `/map`, `/briefings`, and `/timeline` should return travel-linked records when the Travel & Importation domain filter is active. `npm.cmd run test:validators`, `npm.cmd run validate:data`, and `npm.cmd run build` pass.
 
 ## ✅ Overview layout correction — map higher, Recent Developments full-width (commit e367679)
 

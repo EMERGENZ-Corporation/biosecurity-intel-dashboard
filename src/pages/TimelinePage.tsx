@@ -12,6 +12,7 @@ import {
   SEVERITY_COLORS,
   SEVERITY_LABELS,
   severityTone,
+  signalMatchesDomain,
 } from '../utils/signals'
 import {
   type SignalSeverity,
@@ -52,9 +53,13 @@ export default function TimelinePage() {
     const range = DATE_RANGES.find(r => r.id === dateRange)
     const cutoff = range?.days != null ? Date.now() - range.days * 24 * 60 * 60 * 1000 : null
     const subset = signalTimeline.filter((event) => {
-      if (categoryFilter !== 'all' && event.category !== categoryFilter) return false
+      const signal = getSignal(event.signalId)
+      if (
+        categoryFilter !== 'all' &&
+        event.category !== categoryFilter &&
+        (!signal || !signalMatchesDomain(signal, categoryFilter))
+      ) return false
       if (severityFilter !== 'all') {
-        const signal = getSignal(event.signalId)
         if (!signal || signal.severity !== severityFilter) return false
       }
       if (cutoff !== null) {
@@ -183,7 +188,7 @@ export default function TimelinePage() {
           })}
         </div>
 
-        <div role="group" aria-label="Timeline category filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+        <div role="group" aria-label="Timeline domain filter" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
           <span
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
@@ -194,7 +199,7 @@ export default function TimelinePage() {
               minWidth: '5rem',
             }}
           >
-            Category:
+            Domain:
           </span>
           {(['all', ...Object.keys(THREAT_CATEGORY_LABELS)] as Array<ThreatCategory | 'all'>).map((key) => {
             const active = categoryFilter === key

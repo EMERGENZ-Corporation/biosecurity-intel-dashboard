@@ -184,6 +184,42 @@ export function categoryCounts(input: Signal[]): Partial<Record<ThreatCategory, 
   return counts
 }
 
+export interface DomainCoverageCount {
+  primary: number
+  linked: number
+  total: number
+}
+
+export function signalDomains(signal: Signal): ThreatCategory[] {
+  return Array.from(new Set([signal.category, ...(signal.operationalLenses ?? [])]))
+}
+
+export function signalMatchesDomain(signal: Signal, domain: ThreatCategory): boolean {
+  return signal.category === domain || (signal.operationalLenses ?? []).includes(domain)
+}
+
+export function domainCoverageCounts(input: Signal[]): Record<ThreatCategory, DomainCoverageCount> {
+  const counts = Object.fromEntries(
+    Object.keys(THREAT_CATEGORY_LABELS).map((domain) => [
+      domain,
+      { primary: 0, linked: 0, total: 0 },
+    ]),
+  ) as Record<ThreatCategory, DomainCoverageCount>
+
+  for (const signal of input) {
+    counts[signal.category].primary += 1
+    for (const lens of signal.operationalLenses ?? []) {
+      counts[lens].linked += 1
+    }
+  }
+
+  for (const domain of Object.keys(counts) as ThreatCategory[]) {
+    counts[domain].total = counts[domain].primary + counts[domain].linked
+  }
+
+  return counts
+}
+
 export function isSignalStale(signal: Signal, maxAgeHours = 72): boolean {
   const ageMs = Date.now() - new Date(signal.lastChecked).getTime()
   return ageMs > maxAgeHours * 60 * 60 * 1000
