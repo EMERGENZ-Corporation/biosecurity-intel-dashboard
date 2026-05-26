@@ -1,6 +1,6 @@
 # .codex/config.toml -- biosecurity-intel-dashboard Codex configuration
 
-[agents]
+[orchestration]
 max_threads = 3
 max_depth = 2
 job_max_runtime_seconds = 900

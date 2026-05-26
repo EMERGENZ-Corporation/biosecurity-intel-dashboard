@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-25 (Weval blueprint — re-added anthropic:claude-3-haiku-20240307 to models: as a sandbox-judge-trigger. Three sandbox runs WITHOUT it returned N/A on every criterion and 0% macro coverage despite correct model responses. Hypothesis: the sandbox's holistic-claude-haiku-4-5 judge layer only spins up when an Anthropic model is present in the blueprint's models: block. The 4-model OpenAI/Gemini sweep stays; operator deselects Claude 3 Haiku in the picker so its 404 column doesn't pollute results, but the yaml-level presence is what wires the judge.)
+**Last updated:** 2026-05-26 (.codex/config.toml [agents] section renamed to [orchestration] — fixes startup error in Codex and second Claude Code account.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,15 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Fix .codex/config.toml [agents] section — restore Codex + Claude Code access (commit TBD)
+
+`.codex/config.toml` had `[agents]` as a TOML table section containing orchestration settings (max_threads, default_agent = "pipeline-router", etc.). Codex and a second Claude Code account both failed at chat startup with `invalid configuration: invalid type: string "pipeline-router", expected struct AgentRoleToml in 'agents'` — because these tools parse the top-level `agents` key as an array of agent-role structs. Renamed the section to `[orchestration]` to remove the collision. Confirmed fixed in Codex before committing.
+
+**Files touched:**
+- `.codex/config.toml` — renamed `[agents]` section to `[orchestration]`
+
+**Verify:** Open this repo in Codex or a second Claude Code account — chat should start without error.
 
 ## ✅ Weval blueprint — re-add Claude 3 Haiku as sandbox-judge-trigger (commit 59cc31b)
 
