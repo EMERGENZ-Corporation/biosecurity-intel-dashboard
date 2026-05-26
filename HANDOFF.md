@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Overview hero — split freshness clocks (commit pending)
+## ✅ Overview hero — split freshness clocks (commit 18a3a75)
 
 User flagged the hero text `Current as of May 22, 2026, 05:00 PM PDT` as confusing after the earlier Status/Data health clarification work. The hero no longer uses the broad `Current as of` phrase for the structured signal timestamp; it now labels separate clocks for curated signal data and latest news so the page does not imply that every stream stopped on the signal-data date.
 
