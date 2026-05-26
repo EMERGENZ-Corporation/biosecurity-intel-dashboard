@@ -522,6 +522,18 @@ export default function Overview() {
         </div>
       </div>
 
+      {/* Map preview */}
+      <div style={{ marginBottom: '1rem' }}>
+        <Section
+          title="Signal map preview"
+          extra={<SeeAllLink to="/map" label="Open full map" />}
+        >
+          <ErrorBoundary label="Map preview">
+            <SignalsMap signals={signals} height={isMobile ? 280 : 380} />
+          </ErrorBoundary>
+        </Section>
+      </div>
+
       {/* Operational briefings rail — actionable summaries from highest-severity signals */}
       {briefingSignals.length > 0 && (
         <div style={{ marginBottom: '1rem' }}>
@@ -863,30 +875,8 @@ export default function Overview() {
         </div>
       )}
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(0, 1fr)',
-          gap: '1rem',
-          marginBottom: '1rem',
-          alignItems: 'start',
-        }}
-      >
-      {/* Map preview */}
-      <div style={{ minWidth: 0 }}>
-        <Section
-          title="Signal map preview"
-          extra={<SeeAllLink to="/map" label="Open full map" />}
-        >
-          <ErrorBoundary label="Map preview">
-            <SignalsMap signals={signals} height={isMobile ? 280 : 360} />
-          </ErrorBoundary>
-        </Section>
-      </div>
-
       {/* Recent developments — combined chronological feed of curated
           timeline events and automated news items */}
-      <div style={{ minWidth: 0 }}>
       <Section
         title="Recent developments"
         extra={<SeeAllLink to="/timeline" label="Full timeline" />}
@@ -977,8 +967,6 @@ export default function Overview() {
           })}
         </div>
       </Section>
-      </div>
-      </div>
     </div>
   )
 }

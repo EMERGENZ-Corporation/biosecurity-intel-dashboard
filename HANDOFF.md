@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-26 (UI visual-depth pass — subtle hex background, denser Overview layout, restore tag created.)
+**Last updated:** 2026-05-26 (Overview layout correction — map moved higher and Recent Developments restored full-width.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,18 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Overview layout correction — map higher, Recent Developments full-width (commit pending)
+
+User rejected the side-by-side desktop pairing of Signal map preview and Recent Developments from the UI visual-depth pass. The Overview now places the map immediately below the top status strip as a full-width preview, and Recent Developments is restored to its own full-width section so it no longer competes with the map. No data files, source registry files, generated API files, workflows, or pipeline scripts were changed.
+
+**Files touched:**
+- `src/pages/Overview.tsx` — moved Signal map preview higher on the page, removed the desktop two-column map/recent layout, and preserved all existing sections, links, feeds, and cards.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Travel/importation audit note:** primary signal categories still show `travel` / Travel & Importation at 0 signals, while source domains, map marker types, and signal copy do contain travel/importation intelligence. Treat this as a taxonomy/modeling follow-up rather than a missing feed until source-integrity/content review decides whether to add a secondary-domain lens or reclassify any primary signal.
+
+**Verify:** visit `/` — Signal map preview should appear directly after the top status chip strip and span the content width; Recent Developments should appear later as its own full-width section. `npm.cmd run test:validators && npm.cmd run validate:data && npm.cmd run build`.
 
 ## ✅ UI visual-depth pass — hex background and denser Overview layout (commit 8e7a4f9)
 
