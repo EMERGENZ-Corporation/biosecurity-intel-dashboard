@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Fix .codex/config.toml [agents] section — restore Codex + Claude Code access (commit TBD)
+## ✅ Fix .codex/config.toml [agents] section — restore Codex + Claude Code access (commit fbf7aa6)
 
 `.codex/config.toml` had `[agents]` as a TOML table section containing orchestration settings (max_threads, default_agent = "pipeline-router", etc.). Codex and a second Claude Code account both failed at chat startup with `invalid configuration: invalid type: string "pipeline-router", expected struct AgentRoleToml in 'agents'` — because these tools parse the top-level `agents` key as an array of agent-role structs. Renamed the section to `[orchestration]` to remove the collision. Confirmed fixed in Codex before committing.
 
