@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Status Refresh — align production verifier to 168h source-review policy (commit 2e3673a)
+## ✅ Status Refresh — align production verifier to 168h source-review policy (commit 03faebb)
 
 User reported persistent `Status Refresh: All jobs have failed` emails. Latest failed run `26444622719` reached `Verify production deployment` after successfully committing `public/status.json`, then failed attempts 2–16 with `lastOfficialSourceCheck 69.8h old (max 48h)`. This was the same stale-threshold false alarm already fixed for `generate-status`, `status-monitor`, `.env.example`, and `RUNBOOK.md`; `update-data.yml` still carried two stale `48` env pins, and `verify-production.mjs` still defaulted to `48`.
 
