@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Overview layout correction — map higher, Recent Developments full-width (commit pending)
+## ✅ Overview layout correction — map higher, Recent Developments full-width (commit e367679)
 
 User rejected the side-by-side desktop pairing of Signal map preview and Recent Developments from the UI visual-depth pass. The Overview now places the map immediately below the top status strip as a full-width preview, and Recent Developments is restored to its own full-width section so it no longer competes with the map. No data files, source registry files, generated API files, workflows, or pipeline scripts were changed.
 
