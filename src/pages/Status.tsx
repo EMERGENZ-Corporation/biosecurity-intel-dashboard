@@ -10,7 +10,13 @@ interface StatusJson {
     maxDataAgeHours: number
     maxOfficialCheckAgeHours: number
   }
-  dashboard?: Record<string, unknown>
+  dashboard?: {
+    lastUpdated?: string | null
+    lastChecked?: string | null
+    lastOfficialSourceCheck?: string | null
+    dataAgeHours?: number | null
+    officialCheckAgeHours?: number | null
+  }
   sources?: {
     total?: number
     primary?: number
@@ -89,6 +95,10 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
   )
 }
 
+function formatStatusDate(iso?: string | null): string {
+  return iso ? formatDateTime(iso) : '—'
+}
+
 export default function Status() {
   const [live, setLive] = useState<StatusJson | null>(null)
 
@@ -152,7 +162,13 @@ export default function Status() {
           {status.status}
         </div>
         <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
-          Data last updated {status.dashboard?.lastUpdated ? formatDateTime(status.dashboard.lastUpdated as string) : '—'}
+          Status generated {formatStatusDate(status.generatedAt)}
+        </div>
+        <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
+          Curated signal data updated {formatStatusDate(status.dashboard?.lastUpdated)}
+        </div>
+        <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
+          Latest news item {formatStatusDate(status.news?.newest)}
         </div>
       </div>
 
@@ -168,8 +184,12 @@ export default function Status() {
         <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 0.5rem 0' }}>
           Data freshness
         </h2>
-        <Row label="Max data age">{status.thresholds?.maxDataAgeHours ?? '—'}h</Row>
-        <Row label="Max official check age">{status.thresholds?.maxOfficialCheckAgeHours ?? '—'}h</Row>
+        <Row label="Status generated">{formatStatusDate(status.generatedAt)}</Row>
+        <Row label="Curated signal data">{formatStatusDate(status.dashboard?.lastUpdated)}</Row>
+        <Row label="Official source review">{formatStatusDate(status.dashboard?.lastOfficialSourceCheck)}</Row>
+        {status.news?.newest && <Row label="Latest news item">{formatDateTime(status.news.newest)}</Row>}
+        <Row label="Max signal-data age">{status.thresholds?.maxDataAgeHours ?? '—'}h</Row>
+        <Row label="Max source-review age">{status.thresholds?.maxOfficialCheckAgeHours ?? '—'}h</Row>
         {status.signals && (
           <>
             <Row label="Active signals">{status.signals.active ?? '—'} / {status.signals.total ?? '—'}</Row>
@@ -189,13 +209,12 @@ export default function Status() {
         }}
       >
         <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.75rem', color: 'var(--color-text-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 0.5rem 0' }}>
-          Dashboard depth
+          Content volume
         </h2>
         <Row label="Map markers">{status.signals?.totalMapMarkers ?? '—'}</Row>
         <Row label="Detail sections">{status.signals?.totalDetailSections ?? '—'}</Row>
         <Row label="Timeline events">{status.signals?.timelineEvents ?? '—'}</Row>
         <Row label="News items">{status.news?.total ?? '—'}</Row>
-        {status.news?.newest && <Row label="Newest news item">{formatDateTime(status.news.newest)}</Row>}
       </div>
 
       {status.automation && (

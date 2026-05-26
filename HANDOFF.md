@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-26 (Status Refresh verifier/stale-alert thresholds aligned to 168h review cadence — fixes persistent 48h false-failure loop.)
+**Last updated:** 2026-05-26 (Status page freshness labels clarified — separates status generation, curated signal data, source review, and latest news.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,16 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Status page — clarify freshness clocks (commit pending)
+
+User flagged the Status page as confusing because it showed `Data last updated` from the curated structured-signal timestamp while also showing a much newer `Newest news item`. The page now names the distinct clocks explicitly: status generation time, curated signal-data update time, official source-review time, and latest news item time. The old "Dashboard depth" card was renamed "Content volume" so counts are not mixed with freshness semantics.
+
+**Files touched:**
+- `src/pages/Status.tsx` — typed the `dashboard` status shape, added `formatStatusDate`, split the summary/freshness rows into explicit clocks, and renamed "Dashboard depth" to "Content volume".
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** visit `/status` — top card should show `Status generated`, `Curated signal data updated`, and `Latest news item`; the freshness card should show separate rows for curated data and official source review.
 
 ## ✅ Status Refresh — align production verifier to 168h source-review policy (commit 03faebb)
 
