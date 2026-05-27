@@ -222,6 +222,42 @@ export default function MethodologyPage() {
       />
 
       <MethodologySection
+        title="Independent AI evaluation"
+        body={
+          <>
+            <p>
+              The dashboard's current AI surface is intentionally narrow: server-side news
+              classification into existing signal IDs. EMERGENZ maintains a public Weval
+              blueprint for that surface with 26 cases covering classification accuracy,
+              hallucination resistance, confidence calibration, prompt-limit adherence, and
+              edge cases.
+            </p>
+            <p>
+              The run-3 sandbox pass produced 100.0% displayed coverage across the configured
+              OpenAI comparison models and removed the prior consensus-judge failures by using
+              deterministic point functions. The same exported result also showed Weval routing
+              Gemini through an OpenRouter provider path with circuit-breaker failures, so the
+              Gemini limitation is disclosed rather than hidden.
+            </p>
+            <p>
+              The blueprint and baseline notes are available in{' '}
+              <a
+                href="https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/tree/main/weval"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={linkStyle}
+              >
+                the repository's Weval directory
+              </a>
+              . The eval is a transparency mechanism for the AI boundary; it does not replace
+              source attribution, human review of structured public-health fields, or primary
+              authority verification.
+            </p>
+          </>
+        }
+      />
+
+      <MethodologySection
         title="Estimative language"
         body={
           <>

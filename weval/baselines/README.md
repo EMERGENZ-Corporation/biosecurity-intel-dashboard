@@ -2,6 +2,11 @@
 
 Committed historical baselines for `weval/biosecurity-gemini-news-classification.yml`.
 
+`2026-05-27-sandbox-run3-summary.json` is a sandbox-export summary rather than
+a Weval CLI baseline. It records the run-3 displayed coverage and provider
+caveats so public dashboard copy has a committed evidence artifact. Do not use
+it as the production Gemini CLI baseline.
+
 ## Naming
 
 `YYYY-MM-DD-<model-slug>.json` — e.g. `2026-06-01-google-gemini-2.5-flash.json`.

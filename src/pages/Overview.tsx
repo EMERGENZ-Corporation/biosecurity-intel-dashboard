@@ -782,6 +782,32 @@ export default function Overview() {
               )}
             </div>
           </Section>
+
+          <Section
+            title="AI evaluation"
+            extra={<SeeAllLink to="/methodology" label="Methodology" />}
+          >
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.375rem',
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '0.6875rem',
+                color: 'var(--color-text-secondary)',
+                lineHeight: 1.55,
+              }}
+            >
+              <div>
+                Weval blueprint: <span style={{ color: 'var(--color-accent-green)' }}>public review</span>
+              </div>
+              <div>Scope: news-to-signal AI classification</div>
+              <div>Latest sandbox pass: 100.0% displayed coverage</div>
+              <div style={{ color: 'var(--color-text-muted)' }}>
+                Gemini provider-routing caveat is documented in methodology and repo notes.
+              </div>
+            </div>
+          </Section>
         </div>
       </div>
 

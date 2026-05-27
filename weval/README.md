@@ -8,7 +8,7 @@ This directory holds [Weval](https://weval.org) evaluation blueprints scoped to 
 
 | File | Surface under test | Status |
 |---|---|---|
-| [`biosecurity-gemini-news-classification.yml`](biosecurity-gemini-news-classification.yml) | Production Gemini news classifier at `scripts/enrich-news.mjs` | Phase 1.5 - run-3 sandbox blueprint fixed 2026-05-27; hold public PR until provider-circuit caveat is resolved or documented |
+| [`biosecurity-gemini-news-classification.yml`](biosecurity-gemini-news-classification.yml) | Production Gemini news classifier at `scripts/enrich-news.mjs` | Phase 1.5 - run-3 sandbox blueprint fixed 2026-05-27; public PR is appropriate if the provider-circuit caveat is disclosed |
 
 ---
 
@@ -35,7 +35,9 @@ Each prompt embeds a realistic subset of the production signal catalog (id + nam
 
 Run 3 (`biosecurity-gemini-news-classification-run3.yml`, 2026-05-27) produced
 100.0% displayed coverage across 26 prompts and 5 configured models after the
-blueprint was changed to avoid Weval sandbox consensus-judge failures:
+blueprint was changed to avoid Weval sandbox consensus-judge failures. A
+committed summary is stored at
+`weval/baselines/2026-05-27-sandbox-run3-summary.json`.
 
 - Quoted prose rubric lines are preserved as `# rubric note:` comments.
 - Active scoring uses deterministic Weval functions such as `$contains`,
@@ -50,8 +52,8 @@ Important caveat: the Weval sandbox still routed Gemini as
 Gemini prompts while 24 prompts hit provider circuit-breaker errors. Treat run 3
 as a clean blueprint-structure baseline, not yet as a full production Gemini
 baseline. Before publishing to the public Weval library, either get a full
-Gemini run without the OpenRouter circuit breaker or explicitly disclose the
-sandbox limitation in the PR notes.
+Gemini run without the OpenRouter circuit breaker, or disclose the sandbox
+limitation in the PR notes.
 
 ---
 

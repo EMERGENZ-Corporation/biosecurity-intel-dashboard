@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-27 (Weval run-3 blueprint baseline documented.)
+**Last updated:** 2026-05-27 (Weval evaluation transparency added.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,20 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval evaluation transparency on dashboard (commit pending)
+
+User decided the public Weval submission should proceed because the OpenAI comparison models all returned 100% and the remaining Gemini issue appears to be Weval/provider infrastructure rather than the blueprint itself. The dashboard now surfaces the Weval eval as a trust signal while explicitly documenting the Gemini provider-routing caveat, so the public claim is transparent rather than overstated.
+
+**Files touched:**
+- `src/pages/Overview.tsx` — added a compact "AI evaluation" card in the right rail that links to Methodology and states the eval scope, latest sandbox pass, and Gemini caveat.
+- `src/pages/MethodologyPage.tsx` — added an "Independent AI evaluation" section describing the 26-case Weval blueprint, deterministic scoring, run-3 result, and limitation.
+- `weval/README.md` — changed publication posture from "hold public PR" to "public PR is appropriate if the caveat is disclosed."
+- `weval/baselines/2026-05-27-sandbox-run3-summary.json` — committed the run-3 sandbox-export summary that backs the dashboard's displayed-coverage claim and records provider caveats.
+- `weval/baselines/README.md` — clarifies that the run-3 summary is not a production Gemini CLI baseline.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** visit `/` and `/methodology`; the Overview should show the compact AI evaluation card without clipping, and Methodology should describe Weval without claiming Gemini was fully validated through Weval's provider path.
 
 ## ✅ Weval news-classification run-3 baseline (commit 404a14b)
 

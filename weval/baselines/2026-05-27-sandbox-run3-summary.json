@@ -1,0 +1,44 @@
+{
+  "capturedAt": "2026-05-27T00:17:42.399Z",
+  "mode": "weval-sandbox-export",
+  "sandboxId": "1779841037792-8b914268-b213-4106-9fcc-594cfaa44ec9",
+  "configId": "sandbox-1779841037792-8b914268-b213-4106-9fcc-594cfaa44ec9",
+  "blueprint": "weval/biosecurity-gemini-news-classification.yml",
+  "sourceExport": "C:\\Users\\mikem\\Downloads\\weval run 3.txt",
+  "displayedCoverage": {
+    "averagePct": 100.0,
+    "prompts": 26,
+    "models": 5
+  },
+  "modelSummary": {
+    "openai:gpt-4o-mini": {
+      "displayedCoveragePct": 100.0,
+      "completedPrompts": 26,
+      "errors": 0
+    },
+    "openai:gpt-4.1-mini": {
+      "displayedCoveragePct": 100.0,
+      "completedPrompts": 26,
+      "errors": 0
+    },
+    "openai:gpt-4.1-nano": {
+      "displayedCoveragePct": 100.0,
+      "completedPrompts": 26,
+      "errors": 0
+    },
+    "openrouter:google/gemini-2.5-flash": {
+      "displayedCoveragePct": 100.0,
+      "completedPrompts": 2,
+      "errors": 24,
+      "caveat": "Weval sandbox export routed Gemini through OpenRouter and hit provider circuit-breaker failures on 24 prompts."
+    },
+    "anthropic:claude-3-haiku-20240307": {
+      "displayedCoveragePct": null,
+      "completedPrompts": 0,
+      "errors": 26,
+      "caveat": "Retired model kept only for Weval sandbox judge-wiring workaround; deselect in sandbox picker."
+    }
+  },
+  "consensusJudgeFailures": 0,
+  "publicUseNote": "Use as evidence that the run-3 blueprint structure and deterministic checks worked in the sandbox. Do not cite as a full production Gemini baseline until Gemini completes all prompts through a working provider path or the caveat is disclosed."
+}
