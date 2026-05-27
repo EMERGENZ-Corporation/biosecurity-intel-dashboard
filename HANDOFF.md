@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval evaluation transparency on dashboard (commit pending)
+## ✅ Weval evaluation transparency on dashboard (commit fc2dcf1)
 
 User decided the public Weval submission should proceed because the OpenAI comparison models all returned 100% and the remaining Gemini issue appears to be Weval/provider infrastructure rather than the blueprint itself. The dashboard now surfaces the Weval eval as a trust signal while explicitly documenting the Gemini provider-routing caveat, so the public claim is transparent rather than overstated.
 
