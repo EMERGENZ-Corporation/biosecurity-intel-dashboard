@@ -8,7 +8,7 @@ This directory holds [Weval](https://weval.org) evaluation blueprints scoped to 
 
 | File | Surface under test | Status |
 |---|---|---|
-| [`biosecurity-gemini-news-classification.yml`](biosecurity-gemini-news-classification.yml) | Production Gemini news classifier at `scripts/enrich-news.mjs` | Phase 1.5 — authored 2026-05-25, not yet published to weval.org |
+| [`biosecurity-gemini-news-classification.yml`](biosecurity-gemini-news-classification.yml) | Production Gemini news classifier at `scripts/enrich-news.mjs` | Phase 1.5 - run-3 sandbox blueprint fixed 2026-05-27; hold public PR until provider-circuit caveat is resolved or documented |
 
 ---
 
@@ -28,6 +28,30 @@ This directory holds [Weval](https://weval.org) evaluation blueprints scoped to 
 | Edge cases | 3 | Multi-tag restraint, deduplication, empty-input handling |
 
 Each prompt embeds a realistic subset of the production signal catalog (id + name + category) and a synthesized news item modeled on real items in `src/data/news.json`. The catalog is intentionally slimmer than production (no `summary`, no `geography`) — production gives Gemini MORE context, so eval passes here are a conservative lower bound: if Gemini passes with less context, production should pass at least as well.
+
+---
+
+## Current sandbox baseline
+
+Run 3 (`biosecurity-gemini-news-classification-run3.yml`, 2026-05-27) produced
+100.0% displayed coverage across 26 prompts and 5 configured models after the
+blueprint was changed to avoid Weval sandbox consensus-judge failures:
+
+- Quoted prose rubric lines are preserved as `# rubric note:` comments.
+- Active scoring uses deterministic Weval functions such as `$contains`,
+  `$not_contains`, `$not_matches`, `$not_imatches`, and `$is_json`.
+- The known Gemini markdown-fence failure is now tested with `$not_matches:
+  "^\\s*```"` and a matching raw-JSON prompt instruction.
+- The Andes confidence prompt clarifies that `confidence` means classifier
+  confidence, not public-health risk severity.
+
+Important caveat: the Weval sandbox still routed Gemini as
+`openrouter:google/gemini-2.5-flash` in the exported result and completed only 2
+Gemini prompts while 24 prompts hit provider circuit-breaker errors. Treat run 3
+as a clean blueprint-structure baseline, not yet as a full production Gemini
+baseline. Before publishing to the public Weval library, either get a full
+Gemini run without the OpenRouter circuit breaker or explicitly disclose the
+sandbox limitation in the PR notes.
 
 ---
 
@@ -53,13 +77,17 @@ Each prompt embeds a realistic subset of the production signal catalog (id + nam
      prompt: |
        [full production-style prompt with embedded inputs]
      should:
-       - "<concrete, evaluable proposition>"
-       - "<another>"
-     should_not:
-       - "<concrete failure mode>"
+       - $contains: "expected-catalog-id"
+       - $not_contains: "forbidden-catalog-id"
+       - $not_matches: "forbidden-regex"
+       # rubric note: concrete human-readable rationale for maintainers
      citation: "..."
    ```
-5. Each `should` / `should_not` line must be a concrete proposition an LLM judge can evaluate. Avoid vague rubric items like "is correct" or "is good." Favor specifics: "items[0].suggestedSignalIds includes the string 'ebola-bundibugyo-drc-2026'".
+5. Prefer deterministic `$` point functions over quoted prose rubric lines in
+   sandbox-ready blueprints. The 2026-05-26/27 sandbox runs showed quoted prose
+   criteria failing with `All judges failed in consensus mode`, even when the
+   model response was correct. Keep human-readable rationale as `# rubric note:`
+   comments when useful.
 6. Add a row to the "Current blueprints" table above with status `Phase X — authored YYYY-MM-DD`.
 7. Add a HANDOFF entry explaining the surface, its production load-bearing role, and the dimensions tested.
 8. Run locally (see "Running locally" below) and confirm reasonable behavior against `google:gemini-2.5-flash` before any publication.
@@ -114,6 +142,9 @@ When ready (recommended: after at least one local run shows reasonable signal-ID
 
 **No publication should happen without:**
 - A clean local run on `google:gemini-2.5-flash` (the production model)
+- A clean sandbox or CLI result that does not depend on provider circuit-breaker
+  auto-failures being hidden by the displayed coverage summary, or a clear PR
+  note explaining any sandbox provider limitation
 - A HANDOFF entry documenting baseline scores
 - Explicit operator sign-off (publication makes our AI-boundary claims publicly auditable; that's the *point* of doing this, but the timing decision is operator's)
 
@@ -138,4 +169,4 @@ When Phase 2 AI features ship (AI synthesis of weekly briefings, clinical recogn
 - `weval/biosecurity-outbreak-summarization.yml`
 - `weval/biosecurity-search-relevance.yml`
 
-The Phase 1.5 blueprint here is intentionally narrow and patterns the future suites — same prompt-fidelity-to-production approach, same `should` / `should_not` rubric discipline.
+The Phase 1.5 blueprint here is intentionally narrow and patterns the future suites — same prompt-fidelity-to-production approach, same deterministic `$` point-function discipline for sandbox-stable scoring.

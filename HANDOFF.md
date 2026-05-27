@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-26 (Overview hero clock labels clarified.)
+**Last updated:** 2026-05-27 (Weval run-3 blueprint baseline documented.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,19 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval news-classification run-3 baseline (commit d012fa4)
+
+User had Claude adjust the Weval YAML after two sandbox runs, then asked whether to proceed with the Weval fork/public blueprint flow after run 3 showed 100.0% displayed coverage. The repo blueprint now mirrors the run-3 YAML: active scoring uses deterministic `$` point functions, prose rubric lines are preserved as comments, the known Gemini markdown-fence failure is guarded by `$not_matches`, and the Andes prompt clarifies classifier confidence versus public-health risk severity.
+
+**Files touched:**
+- `weval/biosecurity-gemini-news-classification.yml` — replaced with the run-3 sandbox blueprint that avoids consensus-judge failures and preserves deterministic scoring.
+- `weval/README.md` — added the run-3 baseline, publication caveat, deterministic rubric guidance, and public-PR guardrail.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Baseline note:** `weval run 3.txt` showed 100.0% displayed coverage for Gemini/OpenAI comparison models and no consensus-judge failures, but the exported data still routed Gemini as `openrouter:google/gemini-2.5-flash` with only 2 completed Gemini prompts and 24 provider circuit-breaker errors. Treat this as a clean blueprint-structure baseline, not a full production Gemini baseline.
+
+**Verify:** compare `weval/biosecurity-gemini-news-classification.yml` to `C:\Users\mikem\Downloads\biosecurity-gemini-news-classification-run3.yml`; inspect `weval/README.md` "Current sandbox baseline" before clicking Weval's public "Share Your Blueprint" continue button.
 
 ## ✅ Overview hero — split freshness clocks (commit 58a3adc)
 
