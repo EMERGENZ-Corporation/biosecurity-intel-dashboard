@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Weval news-classification run-3 baseline (commit d012fa4)
+## ✅ Weval news-classification run-3 baseline (commit 404a14b)
 
 User had Claude adjust the Weval YAML after two sandbox runs, then asked whether to proceed with the Weval fork/public blueprint flow after run 3 showed 100.0% displayed coverage. The repo blueprint now mirrors the run-3 YAML: active scoring uses deterministic `$` point functions, prose rubric lines are preserved as comments, the known Gemini markdown-fence failure is guarded by `$not_matches`, and the Andes prompt clarifies classifier confidence versus public-health risk severity.
 
