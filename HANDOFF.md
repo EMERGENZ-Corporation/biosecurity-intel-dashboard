@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ EMS World Briefing — strip operator-runbook copy from public page (commit _PENDING_)
+## ✅ EMS World Briefing — strip operator-runbook copy from public page (commit e305310)
 
 User in Austin for EMS World Live realized the surface had been built reactively before the goal was nailed down. The `/ems-world-briefing` page was simultaneously a content surface AND an operator teleprompter — the "Live click script — Operator runbook" panel was literally rendering the demo script to whoever loaded the page. Anyone who picked up the EMERGENZ card and typed the URL later would see "Click first" / "Click last" eyebrows and step-by-step click instructions, exposing the demo flow as marketing artifact rather than public-health intelligence. User chose to keep the surface but strip it to a clean public landing page: content only, no operator-facing copy. The actual operator runbook lives in `docs/AUSTIN-DEMO-RUNBOOK.md` — that doc is the canonical teleprompter, not the public web.
 
