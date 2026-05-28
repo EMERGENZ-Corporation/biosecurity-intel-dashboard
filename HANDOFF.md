@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-27 (Weval evaluation transparency added.)
+**Last updated:** 2026-05-28 (EMS World Briefing renamed.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,19 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ EMS World Briefing live route (commit 4f23ea2)
+
+User asked to rename the conference-ready demo pack to EMS World Briefing and push it live. The event surface now has a visible `/ems-world-briefing` route and nav label, while `/demo` remains as a compatibility alias; a searchable `EMS_WORLD_2026_DEPRECATE_AFTER_2026-05-30` marker flags the route/nav/runbook for removal or integration after the Austin event ends.
+
+**Files touched:**
+- `src/pages/DemoPack.tsx` — renamed visible page copy to EMS World Briefing and added the post-event deprecation/integration marker.
+- `src/App.tsx` — routes `/ems-world-briefing` and keeps `/demo` as an alias.
+- `src/components/NavBar.tsx` — renames the top-nav entry to EMS World Briefing and points it to `/ems-world-briefing`.
+- `docs/AUSTIN-DEMO-RUNBOOK.md` — renames the runbook, updates click paths, and records the post-event marker.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** visit `/ems-world-briefing`; click Start briefings, FIFA signal, and Print triage card. Then run `npm run test:validators`, `npm run validate:data`, and `npm run build`.
 
 ## ✅ Weval evaluation transparency on dashboard (commit fc2dcf1)
 

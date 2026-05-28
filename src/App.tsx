@@ -7,6 +7,7 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 
 // Lazy-load route modules so large data and map libraries stay out of the app shell.
 const Overview = lazy(() => import('./pages/Overview'))
+const DemoPack = lazy(() => import('./pages/DemoPack'))
 const Signals = lazy(() => import('./pages/Signals'))
 const News = lazy(() => import('./pages/News'))
 const SignalDetail = lazy(() => import('./pages/SignalDetail'))
@@ -142,6 +143,8 @@ export default function App() {
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Overview />} />
+              <Route path="/ems-world-briefing" element={<DemoPack />} />
+              <Route path="/demo" element={<DemoPack />} />
               <Route path="/signals" element={<Signals />} />
               <Route path="/signals/:id" element={<SignalDetail />} />
               <Route path="/news" element={<News />} />
