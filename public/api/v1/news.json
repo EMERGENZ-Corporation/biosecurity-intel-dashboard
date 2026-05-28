@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-28T16:22:36.917Z",
+  "generatedAt": "2026-05-28T16:23:42.281Z",
   "endpoint": "/api/v1/news.json",
-  "count": 501,
+  "count": 500,
   "news": [
     {
       "id": "google-news-a61b1436",
@@ -63,6 +63,18 @@
       ]
     },
     {
+      "id": "google-news-45d9fa21",
+      "authority": "Google News",
+      "title": "Africa CDC Chief Condemns Ebola Travel Restrictions And Broken Aid Promises - Health Policy Watch",
+      "description": "Africa CDC Chief Condemns Ebola Travel Restrictions And Broken Aid Promises Health Policy Watch",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxObWhOMnhmWmUyS3NHMEcxOENRbmJLeWRrOS0wNWVrM2JoVTFTdXlIMWZMYjVVeHplSUpRZFpIdWM0MDN6RGVNejZBVDJQZUJHT2l6LU80OGxwZjdhdl9UeWxOTDNCM05yTmUxSmpRQnZaVGFjOVhfcnJ5RnF5NTJoOHdwcGhyZ3JtV3VxZA?oc=5",
+      "pubDate": "Thu, 28 May 2026 16:01:34 GMT",
+      "timestamp": 1779984094000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-cdc4caef",
       "authority": "Google News",
       "title": "Enanta Pharmaceuticals Advances RSV Treatment and Immunology Pip - GuruFocus",
@@ -72,6 +84,18 @@
       "timestamp": 1779983944000,
       "signalIds": [
         "rsv-wastewater-2026"
+      ]
+    },
+    {
+      "id": "google-news-193c47f4",
+      "authority": "Google News",
+      "title": "US, Mexico, Canada announce Ebola-related travel measures for World Cup - Al Jazeera",
+      "description": "US, Mexico, Canada announce Ebola-related travel measures for World Cup Al Jazeera",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPZzdMXzZyOG5GbV81WmdUT3AtUkdVLXEwZDQzS0FicWJnaUE2OVoyenZob2twT1VQbVVSc0tTUHJSUmFkVEtJRGt3QVI0akEwZDRBV09tYVBXaU82ZnQwRC1DNlhSam5zOFV6OHdBOTgxQ29HNno3UFRpd250MmNob1hkaEE5QzNuc3dfQ21ZYlVzVi1fZUpRUUNkZ1JOX1JmeTlRYjFtSFRuS2JGMl8zazVn0gG3AUFVX3lxTE43LXNuN3FZdHpodmVfdVNIUl9JZXVOQlM4RHd3UW9mQ1VhaDQ1RlAtUkVfaG9aUGI2bzhPdHpQLW94djJ5ZGdmbkJScWVtYjdhMHhTQ1I0VnZNdjBQM2hoRDBmWTJWT1ZCZWY4ZzNoSnBBMV9XYldpcXVBbDlGdVBxU1BJUUUtT3BFQUhELU5UT21rY1kzUkZLUFJoZXh3NU5ROVloVWtMOFVESldqbk5NTmlEOFRiMA?oc=5",
+      "pubDate": "Thu, 28 May 2026 15:55:08 GMT",
+      "timestamp": 1779983708000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
       ]
     },
     {
@@ -775,6 +799,18 @@
       ]
     },
     {
+      "id": "abc7-rotavirus-bay-area-2026-05-28",
+      "authority": "ABC News",
+      "title": "Rotavirus levels rising across Bay Area: Here's what to know",
+      "description": "High concentrations of rotavirus across the Bay Area are raising concerns among infectious disease experts; UCSF (Dr. Monica Gandhi) and Stanford WastewaterSCAN (Prof. Alexandria Boehm) report sustained wastewater detection since March 2026, elevated in Gilroy.",
+      "link": "https://abc7news.com/post/rotavirus-levels-rising-bay-area-heres-how-spreads-most-risk/19183311/",
+      "pubDate": "Thu, 28 May 2026 12:00:00 GMT",
+      "timestamp": 1779969600000,
+      "signalIds": [
+        "rotavirus-wastewater-2026-bay-area"
+      ]
+    },
+    {
       "id": "google-news-a1a27c50",
       "authority": "Google News",
       "title": "Measles: Five more children die in 24 hours - newagebd.net",
@@ -942,18 +978,6 @@
       "timestamp": 1779964200000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "abc7-rotavirus-bay-area-2026-05-28",
-      "authority": "ABC News",
-      "title": "Rotavirus levels rising across Bay Area: Here's what to know",
-      "description": "High concentrations of rotavirus across the Bay Area are raising concerns among infectious disease experts; UCSF (Dr. Monica Gandhi) and Stanford WastewaterSCAN (Prof. Alexandria Boehm) report sustained wastewater detection since March 2026, elevated in Gilroy.",
-      "link": "https://abc7news.com/post/rotavirus-levels-rising-bay-area-heres-how-spreads-most-risk/19183311/",
-      "pubDate": "Thu, 28 May 2026 12:00:00 GMT",
-      "timestamp": 1779969600000,
-      "signalIds": [
-        "rotavirus-wastewater-2026-bay-area"
       ]
     },
     {
@@ -4588,6 +4612,16 @@
       ]
     },
     {
+      "id": "abc-news-db247a98",
+      "authority": "ABC News",
+      "title": "Exceptionally early heat wave shatters records and brings deaths in Europe",
+      "description": "A spring heat wave is scorching parts of Western Europe, breaking temperature records and triggering government warnings",
+      "link": "https://abcnews.com/Health/wireStory/exceptionally-early-heat-wave-shatters-records-brings-deaths-133306924",
+      "pubDate": "Wed, 27 May 2026 00:02:03 -0400",
+      "timestamp": 1779854523000,
+      "signalIds": []
+    },
+    {
       "id": "google-news-b373282a",
       "authority": "Google News",
       "title": "North America and Europe could become hotspots for chikungunya virus due to climate change - Medical Xpress",
@@ -5575,6 +5609,18 @@
       ]
     },
     {
+      "id": "google-news-90ae98a0",
+      "authority": "Google News",
+      "title": "Ebola disease outbreak 2026: How MSF is responding - Doctors Without Borders",
+      "description": "Ebola disease outbreak 2026: How MSF is responding Doctors Without Borders",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQaHh3TFlDZ05hYUNDR2swZzQxbWtjYnNBQ0tDTEcxT3NpRmtSR19zeTRsVFpuUVBJU2VpTXZFMjRIZlZTMzM5d25EZUFoR21EeVhGUXdYRVhIc3luMHVfd0NBOWJfWUZJbTlTMXZVUHdkTlZtTi1OdlV6Zlhhcy1OUWYyRjllUENBZVdXSEZkT3V1TG1mQ3c?oc=5",
+      "pubDate": "Tue, 26 May 2026 19:27:55 GMT",
+      "timestamp": 1779823675000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-931bf2b4",
       "authority": "Google News",
       "title": "Lancaster County reports 5 more measles cases; 17 total this year - LancasterOnline",
@@ -5774,66 +5820,6 @@
       "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNOHR4c0NDbEh2eV83elBJcmxqT05mcVhQNXo5VjdPbFZDc0lKdkFzVHBkUmtWS3NuRnlvNG9jbTZGYlotcExzRUVFSnBpbHpQaHZIR2hId281TWZ4TmdHeEhhQUlpTWJvbkZULU1MaEVWN09fX2NFTGFiTlFXTkExZUtMQjBFT29kZnUzSjg0eExWdnRoRExDOWR0T1ZQbFhvT0h3N3hkQjZIa3FuRU9LNHNCQXpLRGlvWkE?oc=5",
       "pubDate": "Tue, 26 May 2026 17:43:24 GMT",
       "timestamp": 1779817404000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-20ff4ba6",
-      "authority": "Google News",
-      "title": "Kennedy faces anti-vax anger over hantavirus treatment legal protections - The Hill",
-      "description": "Kennedy faces anti-vax anger over hantavirus treatment legal protections The Hill",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQdlQtTzc5WlN0OHNTSTJWTVl5UnUwTm5ralc5cm5Qdzl5SmxFb1ZhYzE4NjlLd1hYNVZ4RzdTdjVBS1hNSll5SlE5WnR1M1hhMnpVNHVsUEE3Q2VIdW9TdW5obzVGMEpQbUptUFpzNFBPYk96YkNEXzdYSUs0TldqZ3pXVzV3VllNS3lpLVNRMVJUREFMejM3NmZoSdIBoAFBVV95cUxOR3V2dURDN0lILUtCX3NiRHhqUlEzVlNFUmllZDRjX01jc0VvSUxlUmZPSEIzcFJVdUtJYVZDcFhyclNwU2phMXdBeEQwQ0NEbUVNMUd0aGxWLWFNYXhGN002clptVHdTM2R2Vkd3YzlkY1puXzU2UXJUcGxHdEU3enl2ZjZsWmV6VE50dF9vVGNZUVVvR0VROWpGY3BwQXJu?oc=5",
-      "pubDate": "Tue, 26 May 2026 17:43:00 GMT",
-      "timestamp": 1779817380000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "abc-news-6ec48539",
-      "authority": "ABC News",
-      "title": "The cruise ship at center of a deadly hantavirus outbreak has to undergo extra cleaning",
-      "description": "A cruise ship at the center of a deadly hantavirus outbreak is undergoing further cleaning before it returns to its home port",
-      "link": "https://abcnews.com/Health/wireStory/cruise-ship-center-deadly-hantavirus-outbreak-undergo-extra-133318326",
-      "pubDate": "Tue, 26 May 2026 13:40:15 -0400",
-      "timestamp": 1779817215000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-e84b3dbf",
-      "authority": "Google News",
-      "title": "What we know about the current Ebola outbreak - Johns Hopkins University",
-      "description": "What we know about the current Ebola outbreak Johns Hopkins University",
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE93YVljWU1Cak5vMk52cWQ2bndHbmlZY09NOHg2REtFT2NsakJmZXAzQldyVFlKVVBZSVFkd25VX0NFMUtma0dXczVxd09ObFNHVi0tV0xKcnJQLVBXTTBaM3Rfemd4OS00QjNXUk9n?oc=5",
-      "pubDate": "Tue, 26 May 2026 17:40:00 GMT",
-      "timestamp": 1779817200000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-194719f1",
-      "authority": "Google News",
-      "title": "Another Mpox case reported; CHP issues alert - The SUN HK",
-      "description": "Another Mpox case reported; CHP issues alert The SUN HK",
-      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQbDNwN0Q4MGZyZndFemJWaHBXV04wX0xwZ3lYNWlLa18tNV9SdkRONDVndnV1aElfS1J5QW9lalNTa0szOHdBYmJZS0dHcDMwcnZfbHBDalRYX211Qk82Q1VvRWtTUThlRW1GcU5QOGlkZHpLNV9MZ25xX2RZZ1hHRw?oc=5",
-      "pubDate": "Tue, 26 May 2026 17:38:33 GMT",
-      "timestamp": 1779817113000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "google-news-5ca5c23c",
-      "authority": "Google News",
-      "title": "Ebola Outbreak At Risk Of Becoming ‘Deadliest On Record,’ Humanitarian Group Warns (Live Updates) - Forbes",
-      "description": "Ebola Outbreak At Risk Of Becoming ‘Deadliest On Record,’ Humanitarian Group Warns (Live Updates) Forbes",
-      "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPYzRQaERrbmkxUEdvYjZGcWdxUUlKRlVyaVRWQ3JCNUdFbGZhLUZLMGRRXzRTZllIZkQ0R2hVS0RxX3MzbjhvNnFwNjFSWGVjak42X3ZDRDhrX0xHWm93UjdKejNocU5iX1NTbWNvVHM2aFdSSkd3LURUUWJKdFVEaTZ3UmxZTHZmZ1hZTGJxZDBIaFI3NkZ1azk4TFpjYkYwRzRmYno0WVJRdHFUVHlLaUJWTGlzd2NzcG81UzI1MVNFUElQWS1xQUlyd0gyUy1nRFZ1dy1CY2tOc1FQdEdR?oc=5",
-      "pubDate": "Tue, 26 May 2026 17:36:00 GMT",
-      "timestamp": 1779816960000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
       ]
