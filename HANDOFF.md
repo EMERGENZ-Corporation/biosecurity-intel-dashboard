@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Impact-reporting procedure + `audit:impact` script (commit _PENDING_)
+## ✅ Impact-reporting procedure + `audit:impact` script (commit b41cbd0)
 
 User asked for a way to track dashboard usage for EMERGENZ impact reporting and grant applications, with the constraint "stay within the current parameters of the dashboard if possible." Workshopped before building and surfaced a material conflict: [src/pages/AboutPage.tsx](src/pages/AboutPage.tsx)'s Privacy section publicly commits to "No cookies, tracking pixels, or analytics tools" — adding Vercel Web Analytics (or any client-side telemetry) would silently reverse that commitment, which is exactly the kind of scope drift `grant-claims-agent` exists to flag. User picked Option A: honor the existing privacy promise and report impact via Vercel's server-side request logs (no client code, no cookies, no CSP changes) paired with an artifact-based snapshot from the repo.
 
