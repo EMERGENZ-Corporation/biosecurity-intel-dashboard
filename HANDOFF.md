@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-28 (Rotavirus Bay Area wastewater signal added; SignalDetail pill overflow fixed.)
+**Last updated:** 2026-05-28 (Impact-reporting procedure + audit:impact script — no tracking, privacy promise preserved.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Impact-reporting procedure + `audit:impact` script (commit _PENDING_)
+
+User asked for a way to track dashboard usage for EMERGENZ impact reporting and grant applications, with the constraint "stay within the current parameters of the dashboard if possible." Workshopped before building and surfaced a material conflict: [src/pages/AboutPage.tsx](src/pages/AboutPage.tsx)'s Privacy section publicly commits to "No cookies, tracking pixels, or analytics tools" — adding Vercel Web Analytics (or any client-side telemetry) would silently reverse that commitment, which is exactly the kind of scope drift `grant-claims-agent` exists to flag. User picked Option A: honor the existing privacy promise and report impact via Vercel's server-side request logs (no client code, no cookies, no CSP changes) paired with an artifact-based snapshot from the repo.
+
+This commit ships the artifact-snapshot half + the operator procedure that wires them together. **No client-side tracking is added.** No dependencies added, no CSP loosened, no app code touched, About → Privacy section unchanged.
+
+**Files touched:**
+- `scripts/audit-impact-baseline.mjs` — new read-only script that emits a point-in-time snapshot of what the dashboard publishes: signals by category / severity / confidence / status, geographies covered, map markers and detail sections, primary-source attribution %, freshness against the 168h review cadence, registered sources by tier and type, news ingest with honest "rolling window" framing (news.json is a live ~46–72h window, not cumulative — the script reports actual window span and within-window daily rate rather than misleading "last 30 days" figures). Writes both `impact-baseline-result.json` and `impact-baseline-result.md`.
+- `package.json` — adds `audit:impact` npm script alongside the other `audit:*` scripts. No new dependencies.
+- `.gitignore` — adds `impact-baseline-result.json` and `impact-baseline-result.md` (point-in-time operator artifacts, not source-of-truth).
+- `docs/IMPACT-REPORTING.md` — operator procedure: explicit hard constraint preserving the no-client-analytics promise (forbids future agents from adding `@vercel/analytics`, Plausible, Fathom, GA, etc., without first updating the public Privacy section); quarterly procedure for capturing the artifact snapshot + exporting Vercel request logs (web UI or `vercel metrics` / `vercel logs` CLI); skeleton for the assembled report; explicit list of what this procedure deliberately does not measure (per-user behavior, retention cohorts, funnels) and why; pointers to related audit scripts.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** `npm run audit:impact` (writes both result files); spot-check `impact-baseline-result.md` for grant-ready phrasing; confirm the Privacy section in [src/pages/AboutPage.tsx:459](src/pages/AboutPage.tsx:459) is unchanged; `npm run test:validators`, `npm run validate:data`, `npm run audit:autonomy` all pass.
 
 ## ✅ Rotavirus — Bay Area wastewater rise signal (commit 7ef6b8d)
 

@@ -21,6 +21,7 @@
         "audit:ai-enrichment": "node scripts/audit-ai-enrichment.mjs",
         "audit:sources": "node scripts/audit-official-sources.mjs",
         "audit:source-drift": "node scripts/audit-source-drift.mjs",
+        "audit:impact": "node scripts/audit-impact-baseline.mjs",
         "monitor:status": "node scripts/check-status.mjs",
         "verify:production": "node scripts/verify-production.mjs",
         "preview": "vite preview"
