@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-28 (EMS World Briefing renamed.)
+**Last updated:** 2026-05-28 (Rotavirus Bay Area wastewater signal added; SignalDetail pill overflow fixed.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,29 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Rotavirus — Bay Area wastewater rise signal (commit _PENDING_)
+
+User flagged an ABC 7 Bay Area report (28 May 2026, https://abc7news.com/post/rotavirus-levels-rising-bay-area-heres-how-spreads-most-risk/19183311/) describing rising rotavirus wastewater concentrations across SF Bay Area sites since March 2026, elevated in Gilroy, sourced from Stanford WastewaterSCAN (Prof. Alexandria Boehm) and contextualized by UCSF infectious-disease professor Dr. Monica Gandhi. WastewaterSCAN is already a registered Tier-1 source in `signal-sources.json`, so this signal cites WastewaterSCAN + CDC NWSS as curated sources, with the ABC 7 article attached as a news item (not a curated-source citation). Added as a sibling to `norovirus-wastewater-2026` rather than broadening that signal's scope, so each pathogen keeps a clean lineage and severity. `content-standards-agent` reviewed the proposed payload before writing — required edits were applied: scope language softened from "wastewater trends typically precede clinical case reports" to "can lead… though this relationship varies by jurisdiction and reporting patterns"; unattributed historical mortality figures dropped from `whyItMatters`; news authority normalized to "ABC News".
+
+**Files touched:**
+- `src/data/signals.json` — added `rotavirus-wastewater-2026-bay-area` (category `environmental`, operationalLenses `["enteric"]`, severity `monitor`, trend `increasing`, confidence `official`, two map markers at Stanford and Gilroy, one `operational-guidance` detailSection citing WastewaterSCAN + CDC NWSS).
+- `src/data/news.json` — prepended ABC News article (id `abc7-rotavirus-bay-area-2026-05-28`) linked to the new signal.
+- `public/status.json` — regenerated via `npm run generate:status` (signals total 16 → 17).
+- `public/api/v1/{signals,signal-sources,signal-timeline,news}.json` + `feed.rss` — regenerated via `npm run generate:api`.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** open `/signals/rotavirus-wastewater-2026-bay-area` (h1 "Rotavirus — Bay Area wastewater rise"); confirm the map markers in `/map` show the Stanford and Gilroy monitoring sites; confirm the ABC News article appears at the top of `/news`. Run `npm run test:validators` (passes), `npm run validate:data` (passes — status.signals.total = signals.json length), `npm run build` (passes, 17 signals bundled).
+
+## ✅ SignalDetail field-strip pill overflow fix (commit _PENDING_)
+
+User reported "the category and severity pills are overlapping." Root cause: the field strip on `/signals/:id` used a CSS grid with `repeat(auto-fit, minmax(140px, 1fr))`, but `intel-pill` is `white-space: nowrap`, so longer category labels overflowed their grid cell into the severity cell — measured worst case was "Healthcare-Associated / AMR" at 218 px inside a 140 px column (overlapping the next cell by ~66 px). Bumped the column minmax to 220 px so every existing category label (widest: 218 px) fits with breathing room. Field strip drops from 8 to 5 columns on desktop, which is still readable for the 8 fields shown.
+
+**Files touched:**
+- `src/pages/SignalDetail.tsx` — `gridTemplateColumns` minmax `140px → 220px` on the field strip; added a short comment explaining the constraint so the next agent doesn't shrink it back.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** open `/signals/candida-auris-wastewater-2026` (worst-case label "Healthcare-Associated / AMR") and `/signals/norovirus-wastewater-2026` ("Environmental Surveillance") — the category pill should sit fully inside its cell with a visible gap before the severity pill. Then `npm run test:validators` (passes) and `npm run build` (passes).
 
 ## ✅ EMS World Briefing live route (commit abaa961)
 
@@ -515,6 +538,7 @@ User shared `~/Downloads/weval-fit-analysis.md`, a cross-portfolio assessment of
 - Run the suite locally against `google:gemini-2.5-flash` to capture a baseline (deferred — needs operator-managed `GEMINI_API_KEY` and Weval CLI install). HANDOFF the baseline scores when run.
 - Submit to `weval-org/configs` as a contributed blueprint (deferred — needs baseline + operator sign-off on public publication).
 - Add `weval:gemini` npm script wrapper once Weval CLI is installed for the operator (deferred — Phase 1.5 was authoring only).
+- Evaluate a Bright Data source-reachability audit fallback for allowlisted official/source-registry URLs only. This should use the existing server-side Web Unlocker API key/zone, stay capped and fail-open, and record only diagnostic reachability metadata; it must not write public claims, signal facts, source tiers, clinical language, severity, `status.json`, or dashboard data streams from Bright Data-derived content.
 
 ---
 

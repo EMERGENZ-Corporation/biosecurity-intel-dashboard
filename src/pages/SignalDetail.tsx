@@ -304,11 +304,13 @@ export default function SignalDetail() {
         </h1>
       </div>
 
-      {/* Field strip */}
+      {/* Field strip — minmax must accommodate the widest pill (currently
+          "Healthcare-Associated / AMR" at ~218px) so category pills don't
+          overflow into the severity cell. */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
           gap: '0.75rem',
           marginBottom: '1rem',
           padding: '0.75rem',

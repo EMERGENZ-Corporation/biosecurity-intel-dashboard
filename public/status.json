@@ -1,22 +1,22 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-05-28T09:50:14.307Z",
+  "generatedAt": "2026-05-28T16:20:17.989Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
     "maxSignalStaleHours": 168
   },
   "dashboard": {
-    "lastUpdated": "2026-05-23T00:00:00.000Z",
-    "lastChecked": "2026-05-23T12:00:00.000Z",
-    "lastOfficialSourceCheck": "2026-05-23T12:00:00.000Z",
-    "dataAgeHours": 129.8373075,
-    "officialCheckAgeHours": 117.8373075
+    "lastUpdated": "2026-05-28T00:00:00.000Z",
+    "lastChecked": "2026-05-28T18:00:00.000Z",
+    "lastOfficialSourceCheck": "2026-05-28T18:00:00.000Z",
+    "dataAgeHours": 16.338330555555554,
+    "officialCheckAgeHours": -1.6616694444444444
   },
   "signals": {
-    "total": 16,
-    "active": 14,
+    "total": 17,
+    "active": 15,
     "highestSeverity": "action",
     "byCategory": {
       "zoonotic": 4,
@@ -24,7 +24,7 @@
       "vaccine_preventable": 1,
       "enteric": 1,
       "respiratory": 1,
-      "environmental": 4,
+      "environmental": 5,
       "vector_borne": 1,
       "amr_fungal": 1,
       "mass_gathering": 1
@@ -52,8 +52,8 @@
       },
       "enteric": {
         "primary": 1,
-        "linked": 0,
-        "total": 1
+        "linked": 1,
+        "total": 2
       },
       "respiratory": {
         "primary": 1,
@@ -61,9 +61,9 @@
         "total": 1
       },
       "environmental": {
-        "primary": 4,
+        "primary": 5,
         "linked": 0,
-        "total": 4
+        "total": 5
       },
       "vector_borne": {
         "primary": 1,
@@ -83,8 +83,8 @@
     },
     "staleSignalIds": [],
     "timelineEvents": 43,
-    "totalMapMarkers": 135,
-    "totalDetailSections": 80
+    "totalMapMarkers": 137,
+    "totalDetailSections": 81
   },
   "sources": {
     "total": 38,
@@ -98,8 +98,8 @@
     }
   },
   "news": {
-    "total": 500,
-    "newest": "2026-05-28T04:02:00.000Z"
+    "total": 501,
+    "newest": "2026-05-28T16:09:49.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",

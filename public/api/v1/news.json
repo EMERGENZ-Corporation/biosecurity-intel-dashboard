@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-28T16:16:30.910Z",
+  "generatedAt": "2026-05-28T16:20:18.917Z",
   "endpoint": "/api/v1/news.json",
-  "count": 500,
+  "count": 501,
   "news": [
     {
       "id": "google-news-a61b1436",
@@ -942,6 +942,18 @@
       "timestamp": 1779964200000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "abc7-rotavirus-bay-area-2026-05-28",
+      "authority": "ABC News",
+      "title": "Rotavirus levels rising across Bay Area: Here's what to know",
+      "description": "High concentrations of rotavirus across the Bay Area are raising concerns among infectious disease experts; UCSF (Dr. Monica Gandhi) and Stanford WastewaterSCAN (Prof. Alexandria Boehm) report sustained wastewater detection since March 2026, elevated in Gilroy.",
+      "link": "https://abc7news.com/post/rotavirus-levels-rising-bay-area-heres-how-spreads-most-risk/19183311/",
+      "pubDate": "Thu, 28 May 2026 12:00:00 GMT",
+      "timestamp": 1779969600000,
+      "signalIds": [
+        "rotavirus-wastewater-2026-bay-area"
       ]
     },
     {

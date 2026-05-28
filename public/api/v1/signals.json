@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-28T16:16:30.910Z",
+  "generatedAt": "2026-05-28T16:20:18.917Z",
   "endpoint": "/api/v1/signals.json",
-  "count": 16,
+  "count": 17,
   "signals": [
     {
       "id": "andes-hantavirus-mv-hondius-2026",
@@ -3257,6 +3257,72 @@
             }
           ],
           "lastReviewed": "2026-05-20"
+        }
+      ]
+    },
+    {
+      "id": "rotavirus-wastewater-2026-bay-area",
+      "name": "Rotavirus — Bay Area wastewater rise",
+      "category": "environmental",
+      "operationalLenses": [
+        "enteric"
+      ],
+      "pathogen": "Rotavirus",
+      "geography": [
+        "United States"
+      ],
+      "severity": "monitor",
+      "confidence": "official",
+      "trend": "increasing",
+      "status": "active",
+      "summary": "WastewaterSCAN (Stanford/Emory/Verily) is detecting rising rotavirus concentrations across San Francisco Bay Area wastewater sites since March 2026, with notably elevated signal in Gilroy. Live regional trends: data.wastewaterscan.org/tracker (WastewaterSCAN, CC BY-NC 4.0).",
+      "operationalRelevance": "Pediatric EDs, daycare operators, and long-term-care facilities in the Bay Area should reinforce hand hygiene, environmental disinfection, and dehydration assessment readiness during elevated wastewater periods. Verify the latest regional trend at the WastewaterSCAN dashboard before operational use.",
+      "whyItMatters": "Rotavirus is a leading cause of severe pediatric gastroenteritis globally; before routine infant vaccination in the US, it caused significant pediatric hospitalizations annually. Wastewater surveillance provides a community-level lead indicator that can precede clinical case reports.",
+      "primarySourceId": "wastewaterscan",
+      "sourceIds": [
+        "wastewaterscan",
+        "cdc-nwss"
+      ],
+      "lastUpdated": "2026-05-28T00:00:00Z",
+      "lastChecked": "2026-05-28T18:00:00Z",
+      "mapMarkers": [
+        {
+          "id": "rota-bay-stanford",
+          "lat": 37.4275,
+          "lng": -122.1697,
+          "type": "monitoring_site",
+          "severity": "watch",
+          "label": "WastewaterSCAN — Stanford coordinating site (Bay Area rotavirus signal)"
+        },
+        {
+          "id": "rota-bay-gilroy",
+          "lat": 37.0058,
+          "lng": -121.5683,
+          "type": "monitoring_site",
+          "severity": "watch",
+          "label": "Gilroy — elevated rotavirus wastewater signal (per WastewaterSCAN, reported May 2026)"
+        }
+      ],
+      "detailSections": [
+        {
+          "id": "operational-guidance",
+          "title": "Operational guidance",
+          "bodyMarkdown": "WastewaterSCAN wastewater monitoring has detected rising rotavirus concentrations across San Francisco Bay Area sites since March 2026, with continued growth and notably elevated signal in Gilroy. Wastewater trends can lead clinical case reports by several days, though this relationship varies by jurisdiction and reporting patterns.\n\nRotavirus causes severe acute gastroenteritis primarily in children under five and is one of the leading global causes of pediatric diarrheal mortality. In high-income settings with routine infant vaccination, severe disease is rare but hospitalizations for dehydration still occur. Transmission is fecal-oral, often via contaminated surfaces, hands, and shared utensils in daycare and household settings.\n\nOperationally, Bay Area pediatric EDs, urgent cares, daycare operators, schools, and long-term-care facilities should reinforce hand hygiene with soap and water, environmental disinfection (1:50 household bleach for hard surfaces), and rapid dehydration assessment for symptomatic children. Verify the latest regional trend at the WastewaterSCAN dashboard before operational use.",
+          "attribution": {
+            "authority": "WastewaterSCAN",
+            "documentTitle": "WastewaterSCAN — pathogen surveillance dashboard",
+            "date": "2026-05-28",
+            "url": "https://data.wastewaterscan.org/"
+          },
+          "additionalAttributions": [
+            {
+              "authority": "CDC",
+              "documentTitle": "CDC National Wastewater Surveillance System (NWSS)",
+              "date": "2026-05-28",
+              "url": "https://www.cdc.gov/nwss/"
+            }
+          ],
+          "lastReviewed": "2026-05-28"
         }
       ]
     },
