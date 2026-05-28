@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Rotavirus — Bay Area wastewater rise signal (commit _PENDING_)
+## ✅ Rotavirus — Bay Area wastewater rise signal (commit 7ef6b8d)
 
 User flagged an ABC 7 Bay Area report (28 May 2026, https://abc7news.com/post/rotavirus-levels-rising-bay-area-heres-how-spreads-most-risk/19183311/) describing rising rotavirus wastewater concentrations across SF Bay Area sites since March 2026, elevated in Gilroy, sourced from Stanford WastewaterSCAN (Prof. Alexandria Boehm) and contextualized by UCSF infectious-disease professor Dr. Monica Gandhi. WastewaterSCAN is already a registered Tier-1 source in `signal-sources.json`, so this signal cites WastewaterSCAN + CDC NWSS as curated sources, with the ABC 7 article attached as a news item (not a curated-source citation). Added as a sibling to `norovirus-wastewater-2026` rather than broadening that signal's scope, so each pathogen keeps a clean lineage and severity. `content-standards-agent` reviewed the proposed payload before writing — required edits were applied: scope language softened from "wastewater trends typically precede clinical case reports" to "can lead… though this relationship varies by jurisdiction and reporting patterns"; unattributed historical mortality figures dropped from `whyItMatters`; news authority normalized to "ABC News".
 
@@ -141,7 +141,7 @@ User flagged an ABC 7 Bay Area report (28 May 2026, https://abc7news.com/post/ro
 
 **Verify:** open `/signals/rotavirus-wastewater-2026-bay-area` (h1 "Rotavirus — Bay Area wastewater rise"); confirm the map markers in `/map` show the Stanford and Gilroy monitoring sites; confirm the ABC News article appears at the top of `/news`. Run `npm run test:validators` (passes), `npm run validate:data` (passes — status.signals.total = signals.json length), `npm run build` (passes, 17 signals bundled).
 
-## ✅ SignalDetail field-strip pill overflow fix (commit _PENDING_)
+## ✅ SignalDetail field-strip pill overflow fix (commit 7ef6b8d)
 
 User reported "the category and severity pills are overlapping." Root cause: the field strip on `/signals/:id` used a CSS grid with `repeat(auto-fit, minmax(140px, 1fr))`, but `intel-pill` is `white-space: nowrap`, so longer category labels overflowed their grid cell into the severity cell — measured worst case was "Healthcare-Associated / AMR" at 218 px inside a 140 px column (overlapping the next cell by ~66 px). Bumped the column minmax to 220 px so every existing category label (widest: 218 px) fits with breathing room. Field strip drops from 8 to 5 columns on desktop, which is still readable for the 8 fields shown.
 
