@@ -176,6 +176,26 @@ try {
     'url must be valid',
   )
 
+  // Briefings-priority coverage — every signal must have at least one section
+  // whose id is in src/utils/briefings-priority.json, so /briefings and
+  // /ems-world-briefing always have an operationally-actionable section to
+  // surface without falling through to an arbitrary first section.
+  expectFailure(
+    'signal-without-briefings-priority-section',
+    (signals) => {
+      // Rename every detailSection id on the first signal so none match any
+      // priority list entry. This simulates a future signal that ships with
+      // only signal-specific section ids (e.g. only 'epidemiology' + 'history')
+      // and lacks any of the operationally-actionable canonical ids.
+      const signal = signals[0]
+      signal.detailSections = signal.detailSections.map((section, i) => ({
+        ...section,
+        id: `non-priority-fixture-${i}`,
+      }))
+    },
+    'detailSections lacks any briefings-priority section',
+  )
+
   // operationalLenses discipline — cross-cutting domains must remain typed,
   // and travel evidence must not become invisible in domain filters.
   expectFailure(

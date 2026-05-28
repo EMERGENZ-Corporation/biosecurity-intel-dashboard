@@ -13,6 +13,7 @@ import {
   severityTone,
   signals,
 } from '../utils/signals'
+import { pickBriefingSection } from '../utils/briefings'
 import type { Signal, SignalDetailSection } from '../types'
 
 const FIFA_SIGNAL_ID = 'fifa-world-cup-2026-prep'
@@ -43,22 +44,6 @@ const TRIAGE_SIGNAL_ID = 'measles-us-2026'
 // to /briefings in App.tsx so any externally-bookmarked URL lands somewhere
 // useful instead of NotFound.
 // =====================================================================
-
-const BRIEFING_SECTION_PRIORITY = [
-  'ems-specific',
-  'ems-transport-protocols',
-  'operational-guidance',
-  'protocols-and-guidance',
-  'clinical-profile',
-]
-
-function pickBriefingSection(signal: Signal): SignalDetailSection | undefined {
-  for (const id of BRIEFING_SECTION_PRIORITY) {
-    const section = signal.detailSections?.find((candidate) => candidate.id === id)
-    if (section) return section
-  }
-  return signal.detailSections?.[0]
-}
 
 function excerpt(body: string, limit = 260): string {
   const normalized = body.replace(/\s+/g, ' ').trim()

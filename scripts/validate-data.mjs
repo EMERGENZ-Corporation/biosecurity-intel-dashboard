@@ -9,6 +9,25 @@ const files = {
   signalSources: `${DATA_DIR}/signal-sources.json`,
 }
 
+// Briefings priority — shared with src/utils/briefings.ts. The /briefings and
+// /ems-world-briefing pages pick the first matching section from this list.
+// Every signal must contain at least one section with an id in this list, so
+// the picker never has to fall through to an arbitrary first section and so
+// new signals automatically have an operationally-actionable card without a
+// manual "create a briefing" step.
+const BRIEFING_PRIORITY = (() => {
+  try {
+    const config = JSON.parse(readFileSync('src/utils/briefings-priority.json', 'utf8'))
+    if (!Array.isArray(config.priority)) {
+      throw new Error('briefings-priority.json: priority must be an array')
+    }
+    return config.priority
+  } catch (error) {
+    console.error(`[validate-data] FAILED: briefings-priority.json read error: ${error.message}`)
+    process.exit(1)
+  }
+})()
+
 const THREAT_CATEGORIES = new Set([
   'vhf',
   'respiratory',
@@ -311,6 +330,17 @@ signals.forEach((signal, index) => {
           errors.push(`${label}.detailSections[${sIndex}]: updatedAt must be ISO`)
         }
       })
+      // Briefings coverage — every signal must surface at least one section
+      // from the canonical briefings priority list (src/utils/briefings-priority.json).
+      // Without this, /briefings and /ems-world-briefing would fall through to
+      // an arbitrary first section that may not be operationally-actionable.
+      const sectionIds = signal.detailSections.map((s) => s.id)
+      const hasBriefingCoverage = sectionIds.some((id) => BRIEFING_PRIORITY.includes(id))
+      if (!hasBriefingCoverage) {
+        errors.push(
+          `${label}: detailSections lacks any briefings-priority section. Add at least one of: ${BRIEFING_PRIORITY.join(', ')}. See src/utils/briefings-priority.json.`,
+        )
+      }
     }
   }
   // relatedSignals — enforce referential integrity (typo'd signal IDs silently

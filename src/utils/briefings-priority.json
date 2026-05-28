@@ -1,0 +1,15 @@
+{
+  "_comment": "Canonical priority order for the section surfaced as a 'briefing' card on /briefings and /ems-world-briefing. Each signal MUST contain at least one detail-section whose id appears here, otherwise the picker has no operationally-actionable section to surface (validated by scripts/validate-data.mjs). Shared between src/utils/briefings.ts (UI picker) and scripts/validate-data.mjs (data validator). Order is most-EMS-specific → most-generic: EMS-targeted sections first, operational/clinical/IPC fallbacks last.",
+  "priority": [
+    "ems-specific",
+    "ems-transport-protocols",
+    "ems-surge-readiness",
+    "operational-guidance",
+    "protocols-and-guidance",
+    "clinical-management",
+    "clinical-profile",
+    "ppe-and-ipc",
+    "ppe-and-isolation",
+    "infection-prevention"
+  ]
+}

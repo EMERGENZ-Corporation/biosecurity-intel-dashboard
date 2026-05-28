@@ -15,32 +15,15 @@ import {
   severityTone,
   signalMatchesDomain,
 } from '../utils/signals'
+import { pickBriefingSection } from '../utils/briefings'
 import {
   type Signal,
-  type SignalDetailSection,
   type SignalSeverity,
   type ThreatCategory,
   THREAT_CATEGORY_LABELS,
 } from '../types'
 
 const SEVERITY_OPTIONS: SignalSeverity[] = ['monitor', 'watch', 'concern', 'action']
-
-// Prefer the operationally-actionable section per signal in this order.
-const SECTION_PRIORITY = [
-  'ems-specific',
-  'operational-guidance',
-  'protocols-and-guidance',
-  'clinical-profile',
-  'ppe-and-ipc',
-]
-
-function pickBriefingSection(signal: Signal): SignalDetailSection | null {
-  for (const id of SECTION_PRIORITY) {
-    const section = signal.detailSections?.find((s) => s.id === id)
-    if (section) return section
-  }
-  return signal.detailSections?.[0] ?? null
-}
 
 function BriefingCard({ signal }: { signal: Signal }) {
   const section = pickBriefingSection(signal)
