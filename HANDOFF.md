@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ EMS World Briefing — flag for removal after 2026-05-30 (commit _PENDING_)
+## ✅ EMS World Briefing — flag for removal after 2026-05-30 (commit 018aaea)
 
 User decided that the `/ems-world-briefing` surface should be removed after EMS World Live: Austin ends (2026-05-30), not kept as a permanent landing. Rationale: the page has no unique value-add over the standing dashboard — the FIFA signal, measles triage card, and `/briefings` page all live at their own routes and survive removal. The page itself was always a marketing curation, and after the event ends it becomes a "what is this for?" surface for any visitor who arrives without conference context.
 
