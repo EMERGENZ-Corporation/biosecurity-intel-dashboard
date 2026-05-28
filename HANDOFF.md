@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-28 (Impact-reporting procedure + audit:impact script — no tracking, privacy promise preserved.)
+**Last updated:** 2026-05-28 (EMS World Briefing stripped to clean public landing — operator runbook off the public page.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,34 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ EMS World Briefing — strip operator-runbook copy from public page (commit _PENDING_)
+
+User in Austin for EMS World Live realized the surface had been built reactively before the goal was nailed down. The `/ems-world-briefing` page was simultaneously a content surface AND an operator teleprompter — the "Live click script — Operator runbook" panel was literally rendering the demo script to whoever loaded the page. Anyone who picked up the EMERGENZ card and typed the URL later would see "Click first" / "Click last" eyebrows and step-by-step click instructions, exposing the demo flow as marketing artifact rather than public-health intelligence. User chose to keep the surface but strip it to a clean public landing page: content only, no operator-facing copy. The actual operator runbook lives in `docs/AUSTIN-DEMO-RUNBOOK.md` — that doc is the canonical teleprompter, not the public web.
+
+**Removed from public page:**
+- Entire "Live click script" panel (operator step-by-step instructions). The runbook in `docs/AUSTIN-DEMO-RUNBOOK.md` already captures this and is the right place for it.
+- "Austin live briefing path" header eyebrow → "EMS-facing snapshot".
+- "Click first" panel eyebrow on Active operational briefings → "Concern + Action signals".
+- "Click last" panel eyebrow on Printable triage card → "Single-page clinical card".
+- "Active demo briefings" mini-metric label → "Active briefings".
+- "A short, conference-ready path through the dashboard..." header description → audience-facing copy describing what the surface contains and disclaiming it's not a clinical decision system.
+- "Use this to show how high-priority active signals become fast operational reads..." briefings-panel description → "High-severity signals the dashboard is actively tracking. Each card opens the full briefing with primary-source attribution and last-checked date visible."
+- "Show the printable workflow, then point out the source link..." triage-panel description → "Single-page clinical triage card sourced to a Tier 1 authority. Designed for ED nurses, EMS captains, and EOC briefers. Use alongside agency protocols and medical director directives — this is an operational reference, not a clinical decision system."
+- `EMS_WORLD_2026_DEPRECATE_AFTER_2026-05-30` deprecation marker comment (decision now made: keep as permanent EMS-facing landing, no event-specific deprecation needed).
+- Unused `BRIEFING_ROUTE` constant (only referenced by the removed click-script panel).
+
+**Kept (unchanged behavior):**
+- 3-CTA header (Start briefings, FIFA signal, Print triage card).
+- 3 mini-metrics, 3 content panels (active briefings, FIFA 2026, printable triage card).
+- All signal references, picker logic, source footer attribution, and the `?print=1` auto-fire on triage card.
+
+**Files touched:**
+- `src/pages/DemoPack.tsx` — removed operator-runbook panel and operator-facing copy; rewrote eyebrows + descriptions to be audience-facing; retired deprecation marker; added a top-of-file comment recording the file's purpose now that it's permanent (file name unchanged for historical reasons).
+- `docs/AUSTIN-DEMO-RUNBOOK.md` — replaced "Post-Event Marker" section with a "Post-Event Decision (2026-05-28)" section recording the keep-as-permanent decision and reaffirming this doc as the canonical operator script.
+- `HANDOFF.md` — this entry + timestamp.
+
+**Verify:** open `/ems-world-briefing` and confirm: header eyebrow says "EMS-FACING SNAPSHOT" (not "Austin live briefing path"); 3 panels visible (Active operational briefings, FIFA 2026 signal, Printable triage card); no "Live click script" / "Click first" / "Click last" / "demo" copy anywhere on the page; FIFA panel still shows source-attributed section excerpt; clicking "Print triage card" still opens the measles triage card in a new tab and auto-fires the print dialog. `npm run build` passes (verified, 1.85s).
 
 ## ✅ Impact-reporting procedure + `audit:impact` script (commit b41cbd0)
 

@@ -17,12 +17,14 @@ import type { Signal, SignalDetailSection } from '../types'
 
 const FIFA_SIGNAL_ID = 'fifa-world-cup-2026-prep'
 const TRIAGE_SIGNAL_ID = 'measles-us-2026'
-const BRIEFING_ROUTE = '/ems-world-briefing'
 
-// EMS_WORLD_2026_DEPRECATE_AFTER_2026-05-30:
-// Temporary conference surface. After EMS World Live: Austin ends, either
-// integrate this flow into the standing dashboard navigation or remove the
-// event-specific route/nav label/runbook.
+// /ems-world-briefing — EMS-facing landing page for the dashboard.
+// Originally built as a temp conference surface for EMS World Live: Austin
+// (2026-05-28). Kept as a permanent EMS-facing intro: 3 high-severity active
+// briefings + the FIFA 2026 mass-gathering preparedness signal + the measles
+// printable triage card. Operator-runbook content lives in
+// docs/AUSTIN-DEMO-RUNBOOK.md, not on the public page.
+// File name is DemoPack.tsx for historical reasons.
 
 const BRIEFING_SECTION_PRIORITY = [
   'ems-specific',
@@ -287,7 +289,7 @@ export default function DemoPack() {
             marginBottom: '0.375rem',
           }}
         >
-          Austin live briefing path
+          EMS-facing snapshot
         </div>
         <h1
           style={{
@@ -310,9 +312,12 @@ export default function DemoPack() {
             maxWidth: '850px',
           }}
         >
-          A short, conference-ready path through the dashboard: active operational briefings, the
-          FIFA 2026 preparedness signal, and one printable triage card with source footer intact.
-          This is situational awareness, not a clinical decision system.
+          Source-backed biosecurity intelligence framed for EMS providers: the active
+          concern- and action-level briefings the dashboard is tracking right now, the FIFA
+          2026 mass-gathering preparedness signal, and a printable measles triage card. Every
+          item below links to its full source-attributed view. This is situational awareness,
+          not a clinical decision system — follow your agency protocols and medical director
+          directives.
         </p>
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.875rem' }}>
           <ActionLink to="/briefings" primary>
@@ -335,7 +340,7 @@ export default function DemoPack() {
           marginBottom: '1rem',
         }}
       >
-        <MiniMetric label="Active demo briefings" value={activeBriefings.length} />
+        <MiniMetric label="Active briefings" value={activeBriefings.length} />
         <MiniMetric label="FIFA map markers" value={fifaSignal?.mapMarkers?.length ?? '-'} />
         <MiniMetric label="Printable card" value={triageSignal ? 'Ready' : 'Missing'} />
       </div>
@@ -343,7 +348,7 @@ export default function DemoPack() {
       <div style={{ display: 'grid', gap: '1rem' }}>
         <Panel
           title="Active operational briefings"
-          eyebrow="Click first"
+          eyebrow="Concern + Action signals"
           accent="var(--color-emergenz)"
           action={<ActionLink to="/briefings">Open all briefings</ActionLink>}
         >
@@ -356,8 +361,8 @@ export default function DemoPack() {
               margin: '0 0 0.75rem 0',
             }}
           >
-            Use this to show how high-priority active signals become fast operational reads with
-            visible source attribution.
+            High-severity signals the dashboard is actively tracking. Each card opens the full
+            briefing with primary-source attribution and last-checked date visible.
           </p>
           <div
             style={{
@@ -505,7 +510,7 @@ export default function DemoPack() {
         {triageSignal && triageCard && (
           <Panel
             title="Printable triage card"
-            eyebrow="Click last"
+            eyebrow="Single-page clinical card"
             accent="var(--color-accent-orange)"
             action={
               <ActionLink to={`/signals/${triageSignal.id}/triage?print=1`} external primary>
@@ -542,8 +547,10 @@ export default function DemoPack() {
                     margin: 0,
                   }}
                 >
-                  Show the printable workflow, then point out the source link, last-reviewed date,
-                  and operational-reference disclaimer at the bottom of the print card.
+                  Single-page clinical triage card sourced to a Tier 1 authority. Designed for ED
+                  nurses, EMS captains, and EOC briefers. Use alongside agency protocols and
+                  medical director directives — this is an operational reference, not a clinical
+                  decision system.
                 </p>
               </div>
               <div
@@ -569,24 +576,6 @@ export default function DemoPack() {
           </Panel>
         )}
 
-        <Panel title="Live click script" eyebrow="Operator runbook" accent="var(--color-accent-green)">
-          <ol
-            style={{
-              margin: 0,
-              paddingLeft: '1.25rem',
-              fontFamily: "'IBM Plex Sans', sans-serif",
-              fontSize: '0.875rem',
-              color: 'var(--color-text-secondary)',
-              lineHeight: 1.65,
-            }}
-          >
-            <li>Start here at {BRIEFING_ROUTE} and frame the product as source-backed situational awareness.</li>
-            <li>Click Active operational briefings, then open one signal to show source-attributed depth.</li>
-            <li>Return to {BRIEFING_ROUTE} and open the FIFA 2026 signal to show mass-gathering and travel context.</li>
-            <li>Open the printable measles triage card in a new tab; cancel print if you are only previewing.</li>
-            <li>Use Status only if asked about freshness, and use Sources if asked where claims come from.</li>
-          </ol>
-        </Panel>
       </div>
     </div>
   )

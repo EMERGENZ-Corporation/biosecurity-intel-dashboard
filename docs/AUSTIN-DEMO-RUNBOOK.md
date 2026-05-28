@@ -36,6 +36,14 @@ Use this path for EMS World Live: Austin 2026 booth or hallway demos. Keep it sh
 - Use "source-backed situational awareness" and "verify against linked guidance and local protocols."
 - If Wi-Fi is unreliable, stay on `/ems-world-briefing`, the FIFA signal page, and the already opened triage card.
 
-## Post-Event Marker
+## Post-Event Decision (2026-05-28)
 
-`EMS_WORLD_2026_DEPRECATE_AFTER_2026-05-30`: after EMS World Live: Austin ends, integrate this briefing path into the standing dashboard flow or remove the event-specific nav label, route, and runbook.
+The `/ems-world-briefing` page has been kept as a **permanent EMS-facing landing
+page** for the dashboard, not just a temp conference surface. The original
+operator-runbook panel that mirrored this doc on-screen has been removed, so
+the public page is now content-only (3 active briefings, FIFA 2026 signal,
+printable measles triage card). The teleprompter content has moved here, into
+this doc — the canonical operator script for live demos.
+
+This doc remains valid for any in-person EMS demo (Austin or future). After
+EMS World Live: Austin ends, no code change is required.
