@@ -18,13 +18,31 @@ import type { Signal, SignalDetailSection } from '../types'
 const FIFA_SIGNAL_ID = 'fifa-world-cup-2026-prep'
 const TRIAGE_SIGNAL_ID = 'measles-us-2026'
 
-// /ems-world-briefing — EMS-facing landing page for the dashboard.
-// Originally built as a temp conference surface for EMS World Live: Austin
-// (2026-05-28). Kept as a permanent EMS-facing intro: 3 high-severity active
-// briefings + the FIFA 2026 mass-gathering preparedness signal + the measles
-// printable triage card. Operator-runbook content lives in
-// docs/AUSTIN-DEMO-RUNBOOK.md, not on the public page.
-// File name is DemoPack.tsx for historical reasons.
+// EMS_WORLD_2026_REMOVE_AFTER_2026-05-30
+// =====================================================================
+// This page is a TEMPORARY conference surface for EMS World Live: Austin
+// (event ends 2026-05-30). After that date, REMOVE — do not keep.
+//
+// What to remove:
+//   1. This file: src/pages/DemoPack.tsx
+//   2. The lazy import + two <Route> entries in src/App.tsx
+//      (/ems-world-briefing AND the /demo alias)
+//   3. The nav entry in src/components/NavBar.tsx
+//   4. docs/AUSTIN-DEMO-RUNBOOK.md (event-specific)
+//   5. This comment is the searchable removal marker — grep
+//      "EMS_WORLD_2026_REMOVE_AFTER" to find every reference.
+//
+// What NOT to remove — these are standing dashboard content, independent
+// of this surface:
+//   - /signals/fifa-world-cup-2026-prep (the FIFA 2026 preparedness signal)
+//   - /signals/measles-us-2026 and its triage card
+//   - /briefings (the standing briefings page)
+//   - any data in src/data/*.json
+//
+// Optional at removal: add a one-line redirect from /ems-world-briefing
+// to /briefings in App.tsx so any externally-bookmarked URL lands somewhere
+// useful instead of NotFound.
+// =====================================================================
 
 const BRIEFING_SECTION_PRIORITY = [
   'ems-specific',

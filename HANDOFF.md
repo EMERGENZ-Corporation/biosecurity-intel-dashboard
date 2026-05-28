@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-28 (EMS World Briefing stripped to clean public landing — operator runbook off the public page.)
+**Last updated:** 2026-05-28 (EMS World Briefing flagged for removal after 2026-05-30 — content survives, only the tab/route is retired.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,29 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ EMS World Briefing — flag for removal after 2026-05-30 (commit _PENDING_)
+
+User decided that the `/ems-world-briefing` surface should be removed after EMS World Live: Austin ends (2026-05-30), not kept as a permanent landing. Rationale: the page has no unique value-add over the standing dashboard — the FIFA signal, measles triage card, and `/briefings` page all live at their own routes and survive removal. The page itself was always a marketing curation, and after the event ends it becomes a "what is this for?" surface for any visitor who arrives without conference context.
+
+This commit adds the deprecation marker (does **not** remove yet — that happens on or after 2026-05-30). Marker is searchable: `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30`.
+
+**What this commit does:**
+- Replaces the "kept as permanent EMS-facing landing" header comment in `src/pages/DemoPack.tsx` with a detailed removal checklist marked `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30`. The comment enumerates: the four files/routes to remove, the searchable marker, the standing dashboard content that must **not** be removed (FIFA signal, measles triage, briefings, data files), and an optional `/ems-world-briefing` → `/briefings` redirect for any bookmarked URLs.
+- Updates `docs/AUSTIN-DEMO-RUNBOOK.md` "Post-Event Decision" section to record the removal decision (was previously recording the now-reversed keep-as-permanent decision).
+- Adds a backlog item to the "Outstanding work" tail of this file capturing the May 30 removal task with the full checklist inline so the next operator does not need to re-derive it.
+
+**What this commit explicitly does not do:**
+- Does **not** remove any code or routes yet — the page still works for the live Austin demos through 2026-05-30.
+- Does **not** touch any signal, source, news, or content data.
+- Does **not** change page rendering — the previous strip-to-clean-landing commit ([e305310](https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/commit/e305310)) still applies.
+
+**Files touched:**
+- `src/pages/DemoPack.tsx` — header comment swapped from "keep as permanent" to a `REMOVE_AFTER_2026-05-30` checklist marker.
+- `docs/AUSTIN-DEMO-RUNBOOK.md` — "Post-Event Decision" section now records the removal decision and the searchable marker.
+- `HANDOFF.md` — this entry + new backlog item + timestamp.
+
+**Verify:** `grep -r "EMS_WORLD_2026_REMOVE_AFTER" .` returns both `DemoPack.tsx` and `AUSTIN-DEMO-RUNBOOK.md` (and `HANDOFF.md` once committed). `npm run build` passes. `/ems-world-briefing` still renders normally — this is a flag-for-future, not a removal.
 
 ## ✅ EMS World Briefing — strip operator-runbook copy from public page (commit e305310)
 
@@ -2437,6 +2460,8 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 ---
 
 ## ⏳ Outstanding work (backlog)
+
+- **Remove EMS World Briefing surface after 2026-05-30 (small, time-boxed).** EMS World Live: Austin ends 2026-05-30. The `/ems-world-briefing` route was a temp conference surface and has no unique value-add over the standing dashboard (the FIFA signal, measles triage card, and `/briefings` page all live at their own routes and are unaffected). After 2026-05-30, remove: (1) `src/pages/DemoPack.tsx`; (2) the lazy import + both `<Route>` entries in `src/App.tsx` (`/ems-world-briefing` and the `/demo` alias); (3) the nav entry in `src/components/NavBar.tsx`; (4) `docs/AUSTIN-DEMO-RUNBOOK.md`. Searchable marker in code: `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30` — grep for it to find every reference. Full checklist is in the comment at the top of `DemoPack.tsx`. Optional at removal: add a one-line redirect from `/ems-world-briefing` → `/briefings` so any externally-bookmarked URL lands somewhere useful instead of NotFound. Do **not** remove any data in `src/data/*.json` — the FIFA, measles, and briefings content stays.
 
 - **Tier 1/2 source-drift review (medium, mostly cleared).** Triage of 13 drifted pages documented at [docs/SOURCE-DRIFT-2026-05-24.md](docs/SOURCE-DRIFT-2026-05-24.md). **Status as of 2026-05-25:** 5 of 13 refreshed via WebFetch (`africa-cdc-outbreaks`, `paho-epi-alerts`, `wastewaterscan`, `ecdc-cdtr`, `who-mass-gatherings`). **4 deferred to operator browser-side check (~5 min total)** because WebFetch is blocked by their hosts in this environment: `fda-safety-alerts`, `netec-vhf-ppe-matrix`, `netec-hantavirus-lab-resources`, `phac-andes-media-update` (the PHAC one drifted on `lastModified` only, suggesting a cosmetic header update — likely safe to refresh on sight). **Bucket B (SME, this week):** confirm Andes hantavirus structured fields against the current ECDC + WHO source pages — 4 sources (`ecdc-andes-surveillance`, `ecdc-andes-rra`, `who-andes-rra-v2`, `who-don601`). Blocked on: SME availability for bucket B; ~5 minutes of operator browser time for the four WebFetch-blocked sources.
 - **~~Timeline auto-promote (item 2).~~** ✅ Shipped 2026-05-25 — see the "Timeline auto-promote — deterministic Tier 1 news → signal-timeline.json" entry above. Deferred polish (CONTENT-STANDARDS §4 subsection naming the contract; per-signal cap tuning once a screaming-pace outbreak window is observed; Africa CDC RSS feed addition; auto events in `feed.rss`) is tracked in that entry's "Outstanding follow-up" section.

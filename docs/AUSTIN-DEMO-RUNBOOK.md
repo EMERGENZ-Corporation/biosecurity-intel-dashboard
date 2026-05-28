@@ -36,14 +36,23 @@ Use this path for EMS World Live: Austin 2026 booth or hallway demos. Keep it sh
 - Use "source-backed situational awareness" and "verify against linked guidance and local protocols."
 - If Wi-Fi is unreliable, stay on `/ems-world-briefing`, the FIFA signal page, and the already opened triage card.
 
-## Post-Event Decision (2026-05-28)
+## Post-Event Removal (after 2026-05-30)
 
-The `/ems-world-briefing` page has been kept as a **permanent EMS-facing landing
-page** for the dashboard, not just a temp conference surface. The original
-operator-runbook panel that mirrored this doc on-screen has been removed, so
-the public page is now content-only (3 active briefings, FIFA 2026 signal,
-printable measles triage card). The teleprompter content has moved here, into
-this doc — the canonical operator script for live demos.
+**Decision (2026-05-28):** After EMS World Live: Austin ends on 2026-05-30,
+the `/ems-world-briefing` surface is **removed** from the dashboard — it has no
+unique value-add over the standing dashboard (the FIFA signal, measles triage
+card, and briefings all live at their own routes and are unaffected). This doc
+is also removed at that time.
 
-This doc remains valid for any in-person EMS demo (Austin or future). After
-EMS World Live: Austin ends, no code change is required.
+**Searchable marker in code:** `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30`. Grep
+for it to find every reference that needs deletion. The full removal checklist
+is in the comment at the top of `src/pages/DemoPack.tsx`.
+
+What survives removal (standing dashboard content, independent of this surface):
+
+- `/signals/fifa-world-cup-2026-prep` — FIFA 2026 preparedness signal
+- `/signals/measles-us-2026` and the printable triage card route
+- `/briefings` — standing briefings page
+- All data in `src/data/*.json`
+
+This doc remains valid for the live Austin demos until 2026-05-30.
