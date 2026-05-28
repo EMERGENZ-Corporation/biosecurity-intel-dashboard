@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ EMS World Briefing live route (commit 4f23ea2)
+## ✅ EMS World Briefing live route (commit abaa961)
 
 User asked to rename the conference-ready demo pack to EMS World Briefing and push it live. The event surface now has a visible `/ems-world-briefing` route and nav label, while `/demo` remains as a compatibility alias; a searchable `EMS_WORLD_2026_DEPRECATE_AFTER_2026-05-30` marker flags the route/nav/runbook for removal or integration after the Austin event ends.
 
