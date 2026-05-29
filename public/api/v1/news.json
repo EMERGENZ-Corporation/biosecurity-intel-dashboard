@@ -1,9 +1,463 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-29T09:39:51.251Z",
+  "generatedAt": "2026-05-29T10:06:44.100Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "google-news-2af962bb",
+      "authority": "Google News",
+      "title": "Inside the Nebraska quarantine facility responding to hantavirus - Science Friday",
+      "description": "Inside the Nebraska quarantine facility responding to hantavirus Science Friday",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNZGRBVHRMRUl2YUQyYzBmZFdfc1lVN09xYTNmd01RNVF6ak1IN21FTkpyM2NlUEVQMkZZNjBQZThyUkhkT0RzcVE5ZEpiNEhkVEUtU2ttRm5Ca1FBT0pnYjc4dGg3bGN1cHFsTUFvWGhHbU1wOEhrV2xXTU04RGMtSzZHdG94cDBSTmZKU2drUXB2QQ?oc=5",
+      "pubDate": "Fri, 29 May 2026 10:04:15 GMT",
+      "timestamp": 1780049055000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "africa-cdc-c82b3530",
+      "authority": "Africa CDC",
+      "title": "Meet Herryman Moono &#124; Kofi Annan Fellowship 5th Cohort Graduate",
+      "description": "Currently serving as the Director of Research Planning and Strategy at Zambia’s National Health Insurance Management Authority (NHIMA), Herryman Moono graduated from the Kofi Annan Fellowship in Global Health Leadership Program (KAF-GHLP) in 2023. He joined the 2022–2023 Kofi...",
+      "link": "https://africacdc.org/news-item/meet-herryman-moono-kofi-annan-fellowship-5th-cohort-graduate/",
+      "pubDate": "Fri, 29 May 2026 09:44:35 +0000",
+      "timestamp": 1780047875000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-9bee0f94",
+      "authority": "Google News",
+      "title": "Boston residents encouraged to get mpox vaccine amid uptick in cases - WCVB",
+      "description": "Boston residents encouraged to get mpox vaccine amid uptick in cases WCVB",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNVi1BQnhuWWpqUHJ2ZXNmNUt4a0hvSmRwMEJSOV9UYzBnZHN0dnlxY1pKOW5aUUhNSjJlUkI4bjI3NkkwbnhLb25wM1ZnblRuckdIakZ1Y21jWmhIZ3VlN1htdV9PMVpjY1NGelNLOXhLQmVtNXlnNHlTT0ZadGVJbXBrcXdxendBU3pGWXBxb3RiTUZXcTFTTTN4X3pKSlRvMlJLQzRqV3dhUQ?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:44:00 GMT",
+      "timestamp": 1780047840000,
+      "signalIds": [
+        "mpox-africa-clade-i-2026"
+      ]
+    },
+    {
+      "id": "google-news-3376eaa7",
+      "authority": "Google News",
+      "title": "906 Suspected Cases and 223 Suspected Deaths From Bundibugyo Strain of Ebola, WHO Says - U.S. News & World Report",
+      "description": "906 Suspected Cases and 223 Suspected Deaths From Bundibugyo Strain of Ebola, WHO Says U.S. News & World Report",
+      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQb2Fsakl6azRtSFhrdTRIMl8zTmZackVnZFl5QXV1b0c1LVlodlMzOUlGa0lEUHVDUURaVmd4VEhXcE42eGhfSnhyWTVLZ19zV2RKSGYwT0N4U05YdmNEYVl3V2xDVU1fanQ4Z2l0TlFiczZwX3dyTENYN0V4VEpRYkNka0VvVllUbExESENmbWVJM1pSVXJ3Nm0zMF85MlB4dHRBTlA0REFHTjBSQmx2TGNzN2hOQzJ2cGNkT0pCcGR4ODJ3aXFqVEpSS2NodkZvVTVOOUtR?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:43:41 GMT",
+      "timestamp": 1780047821000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-85cce63d",
+      "authority": "Google News",
+      "title": "US Ebola center in Kenya runs into legal hurdles - Semafor",
+      "description": "US Ebola center in Kenya runs into legal hurdles Semafor",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORU9rWUYxdUc0bUcxOFAzX1hCdW9LdnNpQVF2ZmRBaUhUV3dnM1I1VjRaQXp2T3pGYTV3VWpYUTA2bno1NXRzYjA0Y180VS1LQkt4OXl2a3NLV1ZianlGa0VhYUF2NmlCSDdydUNpM0xUZWFRUnVTekZDdXpscUw1aWVIdERTVmJ4V2htTEtmRUc?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:39:00 GMT",
+      "timestamp": 1780047540000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "abc-news-e0baffea",
+      "authority": "ABC News",
+      "title": "WHO chief lands in Congo to address rare Ebola outbreak amid distrust and insecurity",
+      "description": "The head of the World Health Organization has arrived in Congo's capital to support efforts against a rare Ebola outbreak",
+      "link": "https://abcnews.com/Health/wireStory/chief-lands-congo-address-rare-ebola-outbreak-amid-133410764",
+      "pubDate": "Fri, 29 May 2026 05:33:37 -0400",
+      "timestamp": 1780047217000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-606b9667",
+      "authority": "Google News",
+      "title": "Norovirus Cases Decline at Athens’ Hospital - tovima.com",
+      "description": "Norovirus Cases Decline at Athens’ Hospital tovima.com",
+      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9FVnVaOVBtUW03OGxrSzVmdFFfaHZLTkVxQkY4eXhOUHlCTEtBQS01WmhwNTVnMVg0NFVfYWQtSW4zVl84MGs3N2tCS05pcUFkaWIzdVVzSG9uWWZua3QwazdQMmJzS0ZDbmxER1dwcXhpaDM0S3NocmsybWVYbkXSAYQBQVVfeXFMTXg3OXNoNHlGRW54WlBCdGN1Z1dkclFvbDRHemtpRHVnNmtKU25BeS13ZmJVS1o5SU0yTWM4b2o2MWtFb3NhdUVHZnBXRVVabFphSWpKREVDOTFXZFNibTJOU015b2x6NFo4Ujg1VWdsQlZxb2pmMjhEWDh6RDNwVDhzcmVT?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:33:16 GMT",
+      "timestamp": 1780047196000,
+      "signalIds": [
+        "norovirus-wastewater-2026"
+      ]
+    },
+    {
+      "id": "google-news-c4e6d0b4",
+      "authority": "Google News",
+      "title": "WHO DON Update: Hantavirus outbreak linked to cruise ship travel, Multi-locations - Avian Flu Diary",
+      "description": "WHO DON Update: Hantavirus outbreak linked to cruise ship travel, Multi-locations Avian Flu Diary",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPZ0pWVGw5X2l1N2RKQjlFbmZqaGVzc0RvTzZubW1nU0NHcVROQWNoMGxzNC1ia1BIcGJyU1Q1aVN5VWhEbkpXc0VVZHZ2Mm1XeFZvYndvMVNqZmo0dmxndTdSM0E3aWRXZGszVmQyOFRjbjJ1ZTY2eGZxcVc4a2ZnV2ptM2w?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:32:00 GMT",
+      "timestamp": 1780047120000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026",
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-070dac7a",
+      "authority": "Google News",
+      "title": "906 suspected cases and 223 suspected deaths from Bundibugyo strain of Ebola, WHO says - Reuters",
+      "description": "906 suspected cases and 223 suspected deaths from Bundibugyo strain of Ebola, WHO says Reuters",
+      "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOdmFaUlA1Q2ZuLVNtenhNcWpxcTNvQ05Jd2VtNlowTHhvWnVsVFF5VDJCRWFYNldhaTk5c09rM2EtNW9hX0RqS1M2SF9FbmlrZTc4WW10Q19kMlhIdXVVMWlfaTB2SnhJVGhyMndZaG5URXRsRU84RUVpN1hIN2d0ZzNqM0NTVzEtdVJ4NVZqZW5HTk5US3JyNERTb1d4Tl8tWGxFTURkUk5NanQxdk9OZUxIT3JMRWd4am1DVHA1WGJVOFNxeWx5V1ZYVFE2VklqWS1mT3FOWXd3MkVsVXc?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:31:43 GMT",
+      "timestamp": 1780047103000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-a879188b",
+      "authority": "Google News",
+      "title": "In Vaccine-Skeptical California County, A Potential Playbook To Contain Measles - HealthDay",
+      "description": "In Vaccine-Skeptical California County, A Potential Playbook To Contain Measles HealthDay",
+      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOMWJORzBqdVItSEEwQmMtTm9kanpOdVBTbFk2YUJPaE5xX3RfV3FaRzJfSEdTYUZaZkg5TnhnenNZVFRDUXVDN3B4LXBwdDNKTUhzaXJKSjVvSUg5cW1zMV9xcFJVb0o4R0Ewa05kc21vSHZ6ajkwWHB6X0U5ZVlMNXJZdkJvUFV3SE96cEg5ZFBKREdzazdlWDcwaXozWVh2eVNHbGVXZzhnOTZXUjZlNE9EMThYcVlaT3JMcTgyOXdkYlUxMGZJNGRB?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:30:00 GMT",
+      "timestamp": 1780047000000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
+      "id": "google-news-cdbb68e0",
+      "authority": "Google News",
+      "title": "World is ‘way behind’ on Ebola, former CDC director warns - NewsNation",
+      "description": "World is ‘way behind’ on Ebola, former CDC director warns NewsNation",
+      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE93aVpiNHY1V2ItclFBS2lOVmVLa0VUaXh5Q2R1YW1VYnQ1OF9kdVl1dFZCcjZuZFk1Q1dpMnVQOHFKYl9zUWpMS3pseHB1U0dzSTg1cWNoZy15eHJhWUJXZU1HblUzZkFFNjVPQVJJU2RyVnFjNEFheHlxUkdSd9IBgwFBVV95cUxOYUhyUERHdy04TnFRdUdQTHVXVktWam9FX2F0SmhYVVBneDJxYi1Ydy1lV0F0NHFVdVNQRlNuTUx6SjJqZ2ZVY002NWxIM1RaWlVvX3JITDVxZjBFS3lXcXlxSXNBTzYyeTNRSUhEQmJWVE8yTGNwbTFGVXJ0d0gtRW9vYw?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:21:52 GMT",
+      "timestamp": 1780046512000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-61b3ca6f",
+      "authority": "Google News",
+      "title": "WHO chief lands in Congo to address rare Ebola outbreak amid distrust and insecurity - WRAL",
+      "description": "WHO chief lands in Congo to address rare Ebola outbreak amid distrust and insecurity WRAL",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOcUNkRVRwamJocm5NMzNWX1E1bkExTk02TVZ6UFpFMmFHaWw2Umh2TzY1dmcxUVU1RktxZE1SeVFvYnZWYVlLbzhldURCMnhYelB4UXVNeU45MUFiMkdkMVdpM0dkcEdVb1dPV3lBaTNYNnpTZU83bm5IY2pLc2VMS2pHaV81WmI4eTkwVGZQd0JYS3E2cFlZcFNrY3lFbG1haWl0U2RkQVVBSkNHQkYwMTh6Ui1HRFEzNTljUw?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:13:48 GMT",
+      "timestamp": 1780046028000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-62de24c9",
+      "authority": "Google News",
+      "title": "Kenyan Court Suspends Plans for Ebola Quarantine Unit for Americans - The New York Times",
+      "description": "Kenyan Court Suspends Plans for Ebola Quarantine Unit for Americans The New York Times",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPUjlFdHFuYi1HOVJUcmF4OXlqaGROVTBZUS1US3lrMGtqUVRuYlg0Z0hHdzNvSC1HNklSZ0RKenMwcjV2S2UtdHpabTFEeFJXRnUtcjVQMWpnZmxmcmxXZnNfbDB2U3NlNl9SZ01SR2E2SmQ3cXlVZi0zOWQ3RHY5YVpoNlpLVlFheHdV?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:05:39 GMT",
+      "timestamp": 1780045539000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-f36eab34",
+      "authority": "Google News",
+      "title": "Three new measles cases in metro Atlanta confirmed by state - AJC.com",
+      "description": "Three new measles cases in metro Atlanta confirmed by state AJC.com",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPMzE2RjRLaDlOTXhmUmhBamY1YWxyMFFEem1QblVsZC0yMEIyaVVBZGliSVZHa3NrOTdIVERsUE1xVHQ4VFFOYUN1M2FHNWVIVWdpcnpLcDBqSFFQUV9HQXNDblF4Q05wWS1GMS1QR2tPLVBfMDVLcGptWHB3UjJXRTFYcmJuZk5hRjBQeUdHYkNvM05hZHRKag?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:01:06 GMT",
+      "timestamp": 1780045266000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
+      "id": "google-news-b857638f",
+      "authority": "Google News",
+      "title": "Ebola and hantavirus outbreaks raise questions about Trump's health agency cuts - CBS News",
+      "description": "Ebola and hantavirus outbreaks raise questions about Trump's health agency cuts CBS News",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQRzgwS0N6LVN5VlhVb1hManFjZFdaU1dianMxY05nR0tjNTZBeUZad0J0N2o1cVN0T0hvdVhXREp6OHFOMnBiVG1FUktYODFEZVFubV9lWVZBUGRlaVdqeEtnZWRUZzBSeUJQQnZrSlVROC1LVm1OQllvLWdMd0VkUEVyMDliNlk?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:00:12 GMT",
+      "timestamp": 1780045212000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026",
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "nbc-news-f3d65df9",
+      "authority": "NBC News",
+      "title": "Vomiting virus is spreading across most of the U.S.",
+      "description": "Flu season may be mostly behind us, but levels of norovirus, the nasty, highly contagious stomach bug, are rising, according to wastewater data.",
+      "link": "https://www.nbcnews.com/health/health-news/norovirus-gastrointestinal-symptoms-spreading-us-wastewater-rcna347108",
+      "pubDate": "Fri, 29 May 2026 09:00:00 GMT",
+      "timestamp": 1780045200000,
+      "signalIds": [
+        "seasonal-influenza-2026",
+        "norovirus-wastewater-2026"
+      ]
+    },
+    {
+      "id": "google-news-ab5429a9",
+      "authority": "Google News",
+      "title": "Vomiting virus is spreading across most of the U.S. - NBC News",
+      "description": "Vomiting virus is spreading across most of the U.S. NBC News",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQcVpmNlFHMWNfVjZHZ0Y1cHA1bEtXcm1tQzZEMThFOXprNHNLaF9sWlpaYjIzZXp2dUVoeWUzUDVFU3JDaHRWS1lYbE92eFBrci1HdWMxZDR1U0lXUUxrOE52RVlGakUxVDFOdmtTSXVEQ2xSS2taSDB4bmF6ZmpfeHpYdHlGSVEydVIwZzh6bmd3SDNaTW1GeHczMFh1V0JMX0Fra2ZRdW5ZMVQzLVY0SFZzZw?oc=5",
+      "pubDate": "Fri, 29 May 2026 09:00:00 GMT",
+      "timestamp": 1780045200000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-4f5739bd",
+      "authority": "Google News",
+      "title": "Kenya court suspends US plan for Ebola quarantine facility for Americans - ABC News - Breaking News, Latest News and Videos",
+      "description": "Kenya court suspends US plan for Ebola quarantine facility for Americans ABC News - Breaking News, Latest News and Videos",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNYXRxWkNoYTJGcF9QYzlaNHF5ZUJzdUM0MkhLVkQtcjdLU2RVc3NWSXQyaXdSa3BMTkVpY29tdHVBZ2phby15TE5mc0Q2am1jWFIzeGpISlplR1NLYWVnaHNmS214R2xSSVhCbkROS2pBX3RqSVpQWkI0WjFnYlNPVkUwdHNlLTJZLXpEYzI0YWlOM1A3eWVhNEYyVFdraThXcXN30gGoAUFVX3lxTE5Tb2lRY3lCSzdKS1Q5SEt1cWhRYml0anVOWVJCU1p1MkRfSjNRNWhuRU84WUwxVm9hdGpCSV9XLVM3WnN1alV3Snp1cE0tTzJ6RHFKV0tRemY5RTZkdy1mVXJMMGVLNzk0VXo1M3NteFc0U3FJNzM0a3M3a0xVNUFNMUNIbnhIRFYxeGpMellwQ2tub2xmT1ZKNTA5ZXJDbTJRN3pTekNvTg?oc=5",
+      "pubDate": "Fri, 29 May 2026 08:54:55 GMT",
+      "timestamp": 1780044895000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "ukhsa-93c75764",
+      "authority": "UKHSA",
+      "title": "Guidance: The national gonorrhoea vaccination programme using 4CMenB vaccine: frequently asked questions",
+      "description": "Answers to frequently raised questions relating to the national gonorrhoea vaccination programme using 4CMenB vaccine.",
+      "link": "https://www.gov.uk/government/publications/the-national-gonorrhoea-vaccination-programme-using-4cmenb-vaccine-frequently-asked-questions",
+      "pubDate": "2026-05-29T08:31:11Z",
+      "timestamp": 1780043471000,
+      "signalIds": []
+    },
+    {
+      "id": "ukhsa-563eec10",
+      "authority": "UKHSA",
+      "title": "Research: Safer radiotherapy: triannual event analysis and learning",
+      "description": "Analysis and learning from radiotherapy and near miss data reported voluntarily by UK radiotherapy providers and the relevant reporting authorities.",
+      "link": "https://www.gov.uk/government/publications/safer-radiotherapy-triannual-event-analysis-and-learning",
+      "pubDate": "2026-05-29T08:30:00Z",
+      "timestamp": 1780043400000,
+      "signalIds": []
+    },
+    {
+      "id": "ukhsa-0d4bfce3",
+      "authority": "UKHSA",
+      "title": "Research: Measles epidemiology 2023 to 2026",
+      "description": "Number of laboratory-confirmed cases of measles in England.",
+      "link": "https://www.gov.uk/government/publications/measles-epidemiology-2023-to-2026",
+      "pubDate": "2026-05-29T08:30:00Z",
+      "timestamp": 1780043400000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
+      "id": "stat-news-13fbef8f",
+      "authority": "STAT News",
+      "title": "Opinion: I’m a weight-loss doctor. Here’s why I worry about GLP-1 ‘microdoses’",
+      "description": "Long term, we don’t know what tiny doses of GLP-1s for cosmetic weight loss can do, writes a weight-loss doctor.",
+      "link": "https://www.statnews.com/2026/05/29/glp-1-microdose-popular-but-unsupported-by-evidence/?utm_campaign=rss",
+      "pubDate": "Fri, 29 May 2026 08:30:00 +0000",
+      "timestamp": 1780043400000,
+      "signalIds": []
+    },
+    {
+      "id": "stat-news-a1c15372",
+      "authority": "STAT News",
+      "title": "STAT+: The woman behind the world’s biggest longevity competition",
+      "description": "Jamie Justice of XPRIZE Healthspan on the most promising research and \"purely scammy\" treatments in the world of longevity.",
+      "link": "https://www.statnews.com/2026/05/29/xprize-healthspan-longevity-science-jamie-justice-q-and-a/?utm_campaign=rss",
+      "pubDate": "Fri, 29 May 2026 08:30:00 +0000",
+      "timestamp": 1780043400000,
+      "signalIds": []
+    },
+    {
+      "id": "ukhsa-5bc1bd03",
+      "authority": "UKHSA",
+      "title": "Official Statistics: Weekly all-cause mortality surveillance: week ending 31 May 2026",
+      "description": "How the actual number of deaths in England compare with expected numbers for each week.",
+      "link": "https://www.gov.uk/government/statistics/announcements/weekly-all-cause-mortality-surveillance-week-ending-7-june-2026",
+      "pubDate": "2026-05-29T08:23:27Z",
+      "timestamp": 1780043007000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-1dd81175",
+      "authority": "Google News",
+      "title": "Kenya court halts opening of US Ebola quarantine facility in the country - BBC",
+      "description": "Kenya court halts opening of US Ebola quarantine facility in the country BBC",
+      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE45THRDSFBicFdvOG1tTkVPZEduOXJDd0hRbE1qbGpxOUxJeHh6dmQ3M1c4azJCd0dOa1dlTEY3TVJ3QnRGT2FEeUZiczVSRkhNUEFpdWZ4QnEtUQ?oc=5",
+      "pubDate": "Fri, 29 May 2026 08:20:43 GMT",
+      "timestamp": 1780042843000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "ukhsa-41fb8a74",
+      "authority": "UKHSA",
+      "title": "Official Statistics: National flu and COVID-19 surveillance report, week 23 report: data to week 22 (data up to 31 May 2026)",
+      "description": "National influenza and COVID-19 report, monitoring COVID-19 activity, seasonal flu and other seasonal respiratory illnesses.",
+      "link": "https://www.gov.uk/government/statistics/announcements/national-flu-and-covid-19-surveillance-report-week-23-report-data-to-week-22-data-up-to-31-may-2026",
+      "pubDate": "2026-05-29T08:05:01Z",
+      "timestamp": 1780041901000,
+      "signalIds": [
+        "seasonal-influenza-2026"
+      ]
+    },
+    {
+      "id": "abc-news-1a432b25",
+      "authority": "ABC News",
+      "title": "Kenya court suspends US plan for Ebola quarantine facility for Americans",
+      "description": "A court in Kenya has suspended a U.S. plan to establish a quarantine facility for Americans exposed to a rare Ebola virus in northeastern Congo",
+      "link": "https://abcnews.com/Health/wireStory/kenya-court-suspends-us-plan-ebola-quarantine-facility-133410257",
+      "pubDate": "Fri, 29 May 2026 03:51:05 -0400",
+      "timestamp": 1780041065000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-3a901559",
+      "authority": "Google News",
+      "title": "WA Health reports seven cases of Mpox in the last week - OUTinPerth",
+      "description": "WA Health reports seven cases of Mpox in the last week OUTinPerth",
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNNkVXR3RrcDlMUktXWGg0TUtNM29nYWtiWjB2a2Y0VXZhb0IzSy1uam5LTjNscnNUQTF2bXVLQmRXVFFSdHhkdVlOaDNCdTNUZGJVVmV1VHFBblpoUEIybXRCdlhzZzliRG9uRF9sZDV5M0tRWmJPeld6OWEwbHhDREZsZjJVR29QOXc?oc=5",
+      "pubDate": "Fri, 29 May 2026 07:36:12 GMT",
+      "timestamp": 1780040172000,
+      "signalIds": [
+        "mpox-africa-clade-i-2026"
+      ]
+    },
+    {
+      "id": "ukhsa-45dc37eb",
+      "authority": "UKHSA",
+      "title": "Guidance: Pertussis: guidelines for public health management",
+      "description": "Guidance for healthcare professionals on the public health management of pertussis (whooping cough).",
+      "link": "https://www.gov.uk/government/publications/pertussis-guidelines-for-public-health-management",
+      "pubDate": "2026-05-29T07:14:25Z",
+      "timestamp": 1780038865000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-eba01b58",
+      "authority": "Google News",
+      "title": "WSU study finds high prevalence of the hantavirus in parts o... - The Lewiston Tribune",
+      "description": "WSU study finds high prevalence of the hantavirus in parts o... The Lewiston Tribune",
+      "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNY08xVUdfWU9JWmw1aTNCZGtKbndvejdEQktDYWZHZ0pzVEZzV2duRVBwak5Lb2lVeXVJejZtZzc0a3p2eE5xQnlJRG5kQnAxSHJRc19PWHhKR3c4b3daM0Q4Z1NmVXdaU0prQkhGWWNqUVQ4UTlNVnhGUDJQMjBpUU80cTlYWnRHVHZwWndDazE3VXVQRlp3Sm5SUl8xcDNkMTQxWWtHOXNJWEdqYVUzeWhRWFhadFVMNGpQblhQc09NMTQ?oc=5",
+      "pubDate": "Fri, 29 May 2026 07:11:25 GMT",
+      "timestamp": 1780038685000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "google-news-97120f05",
+      "authority": "Google News",
+      "title": "Kenyan court orders suspension of US plan for Ebola quarantine facility - Reuters",
+      "description": "Kenyan court orders suspension of US plan for Ebola quarantine facility Reuters",
+      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPTjU4bk1hREoxRm5sbXc5UDFaM0RUYVMtYTRaQms0bTF2dHpJMHdjTVRSeHBtX05MMDdZTUlVRjNseFRSQnZnUzdCT3RzUUZWb0dXLV8xcGplV3UyTDRlZ0ZJZDBhNmVSOEtKWXVqLS1oRXJjdHMtVDhHOXV0aFZETDZ0NUhHbW43eVdSeEItRHBxX3IzLWtubTh5b2VBWHdxWHY0eGJNeTZBQm5rTExoV2M2MGdicVZ3czR0aDNOaWpGb25rQWk1MjlpZWx6LWVFdmtNbg?oc=5",
+      "pubDate": "Fri, 29 May 2026 06:23:00 GMT",
+      "timestamp": 1780035780000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-f2c10f84",
+      "authority": "Google News",
+      "title": "US government sued over experimental RSV vaccine deaths of infants - IOL",
+      "description": "US government sued over experimental RSV vaccine deaths of infants IOL",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQWnl4NVdFeW1ZLUVpV0hUV2FCTU91TTY2M3RuWmprS2RZdDNfX2xsT09PbDl2M0ZQYkhKaHljN1FNU3ZhRlhUX0xVQWkxWG5kekQ1RllMWXUycjRYY292NkdjZDViX0t2dVZwcmxwMS1kYUpNeEthR053XzVyWXpZdy1TRzBHd1pRYWF5WmRqakJSSm5WdHVsVzNtZDBnMDkzZ3JqelJSdEVHaFU?oc=5",
+      "pubDate": "Fri, 29 May 2026 06:21:28 GMT",
+      "timestamp": 1780035688000,
+      "signalIds": [
+        "rsv-wastewater-2026"
+      ]
+    },
+    {
+      "id": "google-news-d9ada4f0",
+      "authority": "Google News",
+      "title": "QIAGEN Supports Infectious Disease Research and Surveillance Efforts for Bundibugyo Ebolavirus Outbreak - BioSpace",
+      "description": "QIAGEN Supports Infectious Disease Research and Surveillance Efforts for Bundibugyo Ebolavirus Outbreak BioSpace",
+      "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQR2JGTVg2VHZsOWQwdFJ0S0xsa2ZpTEdFeUNoUEItdHlsNmJUMnlyNDNPVmk1QnhPY2dqQ0MwWVVwS05FYjFfOHBuOThvVUs4REk2ZnVYTVVSU0FrT183Vkxqc0ZhczhHSDFwUlRGLW1ZZlJxbjA4RWZfWFNaRXZVbjAyRWk2UVpVandmS0tuSzBKUnlTRHg2MHBjLVJmRTU3dFdBWlcxbWVtaHN4WDNUS29QVU4yNHJXdi0xZG1YcS15UE5NTnFYdzB1Nm9WOWNLSmwwakpiZEd2a1k?oc=5",
+      "pubDate": "Fri, 29 May 2026 06:10:00 GMT",
+      "timestamp": 1780035000000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "abc-news-fac0b949",
+      "authority": "ABC News",
+      "title": "Canadian man expected to plead guilty to selling lethal substances",
+      "description": "A Canadian man accused of selling lethal substances online to people who took them to end their own lives is expected to plead guilty to 14 counts of counseling or aiding suicide",
+      "link": "https://abcnews.com/Health/wireStory/canadian-man-expected-plead-guilty-selling-lethal-substances-133409250",
+      "pubDate": "Fri, 29 May 2026 02:02:11 -0400",
+      "timestamp": 1780034531000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-ab9b89e0",
+      "authority": "Google News",
+      "title": "Burials and tears as Ebola outbreak continues to spread in DRC – in pictures - The Guardian",
+      "description": "Burials and tears as Ebola outbreak continues to spread in DRC – in pictures The Guardian",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNWHVUNDNLdmNkZHdpczVkUEYtQ1VHSlo2MlBpQTJha3dmcW9BVUNCWHp3N24tMGhEX1piVkZwWnNjUFBPVE9qem5ON2VtSS1XTVphc1Z0WUxyckVuSmZLUEp6ZTZzdEg4OHdEcDd5d0RMcUV2UTdzcnROX3RYMURIbWloQ2JCb1FCUEhydw?oc=5",
+      "pubDate": "Fri, 29 May 2026 06:00:00 GMT",
+      "timestamp": 1780034400000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-27e1de29",
+      "authority": "Google News",
+      "title": "MoPH highlights importance of RSV vaccination to protect mothers and infants - The Peninsula Qatar",
+      "description": "MoPH highlights importance of RSV vaccination to protect mothers and infants The Peninsula Qatar",
+      "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxObFl2WVoyR25VSVhkY040cnh4YWd1OHFTVHc2YXVlZndIRHpYaE1fODZOYWFNY2NoWHVVRVB1OTBXMENycXFQM2ZDUGRQYnA0dEQ5U2FsN2xtOVZlaVN4dFdFWXBoc2VoSWFDcnlJZHVYdmtKV2FtVWI0WXk4QjNfNjQyYjFMLXVZalVORkdjTE4zdURWUkVNdmxyQU5hWWVpRTEzdi1jWTNhbEhMU3hqc25IcVVMRHZHUWN1SjVpbUUwaFk?oc=5",
+      "pubDate": "Fri, 29 May 2026 05:49:31 GMT",
+      "timestamp": 1780033771000,
+      "signalIds": [
+        "rsv-wastewater-2026"
+      ]
+    },
+    {
+      "id": "abc-news-6c812f90",
+      "authority": "ABC News",
+      "title": "Aid supplies reach heart of Congo's Ebola outbreak as WHO head travels to Kinshasa",
+      "description": "Aid supplies have been rushed in to the center of Congo's Ebola outbreak where medical workers are struggling with equipment shortages, distrustful locals and armed groups",
+      "link": "https://abcnews.com/Health/wireStory/aid-supplies-reach-heart-congos-ebola-outbreak-head-133381821",
+      "pubDate": "Fri, 29 May 2026 01:21:57 -0400",
+      "timestamp": 1780032117000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-e456c3ac",
+      "authority": "Google News",
+      "title": "Tinubu calls for increased vigilance against Ebola, Lassa Fever - The Nation Newspaper",
+      "description": "Tinubu calls for increased vigilance against Ebola, Lassa Fever The Nation Newspaper",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNbkJpME1rTkdqNXUtX21nMTg1dW5fdzFvUm8zdTdMZURnc21Ic3ZTVXJtNG5ydW5pVzYxZ2lrWFZ1V3NMSDdfUlY1d2FnYlJJaDZtRGc1Q2s0S1ViOTNxRUpGcXhtNS1uUkxKNjh0aFhOb1puNjl4ZDdDVlNUUmVXbDAxbzFzV2t2OFdCR0pqejRmVEI4cG9ZbTR6MNIBoAFBVV95cUxNbWlmREtWWTg0UkNEYlJDa19Nc2dtM3VjOUJHbU5BWDhBTmwtODFuOXVVTFBoOGFZSGJ6MzNqODhveXRKY0RhNXdaZFBmT2xwbk1IYnYzeW4yWTNiekNwM1NCYXdKb3JYMVJQUV9Xa2pCY0JpeWxJMEt1N1RKNjZXV3htOFlNVHh6VF9SSVRMZ1RfOVlnS0V1azdKREpKRE5o?oc=5",
+      "pubDate": "Fri, 29 May 2026 05:11:02 GMT",
+      "timestamp": 1780031462000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026",
+        "lassa-fever-2026"
+      ]
+    },
+    {
+      "id": "google-news-6b18f5ed",
+      "authority": "Google News",
+      "title": "Hantavirus-exposed cruise passengers may soon be allowed to return home - WAPT",
+      "description": "Hantavirus-exposed cruise passengers may soon be allowed to return home WAPT",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQNFFLQ29QUFo4NEk2V3dFU0RfR0EyTjYyOHNsT3ZaSXRTZlZnNEVjWUsyV0JJc3VQM2JzTVZEMElyU291cGUtTWJ3cFdrZ1VRYS1JY2I3YTE1VEQxS3pzTVdmeTNWZ094NlFaR3JlcUgxcXhVbWoxdXdwQjJRb05wcmRIY1Zady1oX0RMR3A5ZEY?oc=5",
+      "pubDate": "Fri, 29 May 2026 05:01:00 GMT",
+      "timestamp": 1780030860000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
     {
       "id": "google-news-beda1a97",
       "authority": "Google News",
@@ -14,6 +468,18 @@
       "timestamp": 1780027200000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-4d92a6a9",
+      "authority": "Google News",
+      "title": "Angola Reports 13 Positive Cases of Mpox - allAfrica.com",
+      "description": "Angola Reports 13 Positive Cases of Mpox allAfrica.com",
+      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9TWkNpbmcyS184ME1QMDUxV3dYc3BpekFaQmlLLVp3QnBqOUo0Nlc5MDdmNy1RaDFRSHVsWk9SYmtaQ2hCQVAwazBzZUliekVBamhycVBteWhyYWM?oc=5",
+      "pubDate": "Fri, 29 May 2026 03:59:13 GMT",
+      "timestamp": 1780027153000,
+      "signalIds": [
+        "mpox-africa-clade-i-2026"
       ]
     },
     {
@@ -369,6 +835,18 @@
       ]
     },
     {
+      "id": "google-news-16e5a42a",
+      "authority": "Google News",
+      "title": "US Ebola quarantine facility in Kenya to open Friday - The Hill",
+      "description": "US Ebola quarantine facility in Kenya to open Friday The Hill",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQTDAxdHNDQ01Ia2hJME4xLWhZYkFwTFByaXVpM05HSXZqWFhHMnlEc09CR1UtNnladFhKWWRHRkNhTnh2c1VodW9QZExFbmlINklLUEp5cUpzSlVIaVBZR0RVTGFtdUhOLWVZbXVsQWZDbEQyeUF2UnZmUi1XaFZPVWp5aGrSAYoBQVVfeXFMUEo0NnVwQmI3Qk52eHRMZnRCcmRIV2JybTBsWEFha2JCdHNUUVV3VUFDMGdiU29MT1dUUGZFQ1hfQS1qcWt1MFNFYjZVMnc5YkEzeWxHVjdzeFpoT1RqcGx1XzRuM25adENFa1dOY0tDbDJoeURhY29QOWFnV21FV0lVdDhrV3pvTUhB?oc=5",
+      "pubDate": "Thu, 28 May 2026 21:54:00 GMT",
+      "timestamp": 1780005240000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-df6c0463",
       "authority": "Google News",
       "title": "Oregon school measles risk rises as vaccine rates hit new low - KEZI",
@@ -412,6 +890,18 @@
       "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQdFRNaWhLV1hwM280RlB4WU8tc1RJRzJFT25wMGxBcGJBSjRjdzd3Zl8wcEc3bVd4dUZnaXEyZmtuS3Y5Ukgxa05LT1IzWGZJV3VQOWxfYXpaVW80ZGxORl9mQXZLZ25yMGdEMXpIZUNORHJqNjhicF9XSWpYVl9nR1pHYXJsTFQ1UjZr?oc=5",
       "pubDate": "Thu, 28 May 2026 21:23:07 GMT",
       "timestamp": 1780003387000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-5e768930",
+      "authority": "Google News",
+      "title": "Health Alert: Worldwide Caution – Updated Public Health Arrival Restrictions and Enhanced Ebola Disease Screening – May 28, 2026 - U.S. Embassy in Costa Rica (.gov)",
+      "description": "Health Alert: Worldwide Caution – Updated Public Health Arrival Restrictions and Enhanced Ebola Disease Screening – May 28, 2026 U.S. Embassy in Costa Rica (.gov)",
+      "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNU29zdHA2cXFhc3BuT01rektWVG54QlEtQ05kOWtXejEtVmtJOWtiSEVWZm1aT1AxWkNCejc4X0FYU3Y3OUh5TzNCa0QxUFZtR0lGMlFQUlZjMGhnVHlXaHFZMXZSeXlXdkFyVk1ZWUQwQURHQW5rc20zeXQ3bS1IXzczZHdEMGppUmdXTEZteTJhNERlaEpPNW1udUt5UUtxaFJvcW5iTmJrSmNYdzRwZVdWU1dKNFJ0U0R0YW1rc2tHZURyVGRlUTh5LV91WUY2ZmdWYlBVNU0zNzNKQUNraExR?oc=5",
+      "pubDate": "Thu, 28 May 2026 21:06:31 GMT",
+      "timestamp": 1780002391000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
       ]
@@ -594,6 +1084,18 @@
       "signalIds": []
     },
     {
+      "id": "google-news-f7f85526",
+      "authority": "Google News",
+      "title": "Beaufort Memorial physician warns measles remains a concern as travel picks up - WJCL",
+      "description": "Beaufort Memorial physician warns measles remains a concern as travel picks up WJCL",
+      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQX0ViX2lmQ1NEdlIxVGVpNFlGUUVRZmNkN0JsZzZpS3JPTnl5NlF2UFdoX1o5X1hwdWJnYmtfcTlQSUVHb3RxOURlNTB1eVV2eXF6RXZVR05oYjV0R2xxUnJuTnlmaXptQm9ad0xSTk1EY2hVWEhocl8taUU4S3hRbw?oc=5",
+      "pubDate": "Thu, 28 May 2026 20:03:00 GMT",
+      "timestamp": 1779998580000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
       "id": "google-news-804e0132",
       "authority": "Google News",
       "title": "Canada, U.S., Mexico announce Ebola travel measures for FIFA World Cup - CBC",
@@ -615,6 +1117,18 @@
       "timestamp": 1779998094000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-d233600b",
+      "authority": "Google News",
+      "title": "Opinion | Why are we repeating the same mistakes with hantavirus that we made with COVID-19? - Toronto Star",
+      "description": "Opinion | Why are we repeating the same mistakes with hantavirus that we made with COVID-19? Toronto Star",
+      "link": "https://news.google.com/rss/articles/CBMihwJBVV95cUxQd0NKdlZjTnQzQ3B2ZTdhZU5UT0V3YW9KcVNYY21jVlo5TzQxb0pPdHZsbnZYd2VMdVFJb1g0OURkaUQ3UlA4T3NsVTZVUUtHRVFxdUxXTDBfcFZBckgzbU9oVkFmYzhwZXBQdEhKcDViMjFaTjgxaEdoN3F0MkR3cVJXSHMzT1lvMVpJSWpUOGFXM2VNMzloVlQzcklYc1BvMGVIYUpuSGIteHlGcm5WclRTTFZKa1c1cTJibVVYdEFoZV9hYnpGVUMwRnJLRktMSDNaWjIyaDllUV8tUGVYTlA4MU5lREp3UE9DRGFsMmV4Wmh3UU1LNDg4MzRzcjdpdm4wWElEMA?oc=5",
+      "pubDate": "Thu, 28 May 2026 19:53:58 GMT",
+      "timestamp": 1779998038000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
       ]
     },
     {
@@ -1037,6 +1551,18 @@
       "signalIds": []
     },
     {
+      "id": "google-news-cfe39f68",
+      "authority": "Google News",
+      "title": "A Timeline of RFK Jr.’s Mixed Messaging on the Measles Vaccine - FactCheck.org",
+      "description": "A Timeline of RFK Jr.’s Mixed Messaging on the Measles Vaccine FactCheck.org",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPakE2THhYdVcydHBxOERwdmpzY0xJX3dkNWNLLS1iYkFkQ19sU2hiY012cnVoT3lSVjVqU1owTGZsNG4tNmhqbjFfSXpPbnk5ekExUGt2TkxWRkQyZkdtbVNtRW42Ym02eGxwYWNXSm8zWlFqUmlmekpXY3pjTXViWUd4SUQzNl9lWk90UDhReS1OekdqWl9rMGVHUXM?oc=5",
+      "pubDate": "Thu, 28 May 2026 16:45:12 GMT",
+      "timestamp": 1779986712000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
       "id": "google-news-87c0dfe6",
       "authority": "Google News",
       "title": "Ben Crump files federal lawsuit accusing U.S. government of targeting Black infants for secret 1960s vaccine testing - revolt.tv",
@@ -1232,6 +1758,18 @@
       "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9Sc1JhX3g0R2VhNWFWRVVqQnhEQVRTX2N1UlR6Vk1MOEFNSmtUdVpyZEU0cHBIeGlQRXNJUDFnTDlrTGhncDl5b3daTlRkU2dlOGtHbm5yM1daZ1EycVdWcTF0NnZLNGVTaXgxTTlSM2tYeEljeWQzNW5zR3VYd9IBgwFBVV95cUxNRXYxc2RBN0pHSTQ5aUxBUUh1S0dRVGExY0RSV09kQnAtUmVfY094REsyVGNBUEFSSEM3alVTemN0QUlZXzNOZ3RIVFg0QTJnaklrUlp2OFpaTWxyRWVfbWVDOGE1YlVpaVQtZkVxQl9DOV9ZdzVaakNqNFJVUmVlUjExTQ?oc=5",
       "pubDate": "Thu, 28 May 2026 15:39:53 GMT",
       "timestamp": 1779982793000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "google-news-d7c16f2f",
+      "authority": "Google News",
+      "title": "Hantavirus outbreak stable at 13 cases: WHO - Yahoo",
+      "description": "Hantavirus outbreak stable at 13 cases: WHO Yahoo",
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPVHpLclVWYkNlSjBncGtmeEhELTJ0VE90NzAyeGxuZHVPYzREaDFBRDI5dHZ3eFB6bmhvTEVsU0hhVzd6TU1mdVZoU1NMSXZNUF95SWhvV251SUpZb0pOQ2NlV1lMRzNDaWZfRk9XMUJia0lMTEFDTVAyZDhSMTZ4VDhYTHJVYlB1cGVOM3FFMUZ3eHpwanVoX0hn?oc=5",
+      "pubDate": "Thu, 28 May 2026 15:39:47 GMT",
+      "timestamp": 1779982787000,
       "signalIds": [
         "andes-hantavirus-mv-hondius-2026"
       ]
@@ -3425,6 +3963,18 @@
       ]
     },
     {
+      "id": "google-news-011620c3",
+      "authority": "Google News",
+      "title": "Supporting Community Response to Stop Ebola - unicef usa",
+      "description": "Supporting Community Response to Stop Ebola unicef usa",
+      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBMVWhHSXVyNWE2cTVZZ3VRMGJRRzJRanRWSFEydTlvWUtlZk5hemZLT2hCZ0J0SW9CSkVDcUUxZGUtczJOZ2JVTkRqMk5HS2RPQ2g3aDB1bDJ0Y1Y1SGRleEFPN3pFcFN1OTJ3TW5QTURvTXRDNWdUSlRtc0t2aG8?oc=5",
+      "pubDate": "Wed, 27 May 2026 21:07:39 GMT",
+      "timestamp": 1779916059000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-a8c23be4",
       "authority": "Google News",
       "title": "Japan measles cases up nearly 300% in 2026 - Outbreak News Today",
@@ -3919,6 +4469,18 @@
       "timestamp": 1779902880000,
       "signalIds": [
         "mpox-africa-clade-i-2026"
+      ]
+    },
+    {
+      "id": "google-news-90ae98a0",
+      "authority": "Google News",
+      "title": "Ebola disease outbreak 2026: How MSF is responding - Doctors Without Borders",
+      "description": "Ebola disease outbreak 2026: How MSF is responding Doctors Without Borders",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQaHh3TFlDZ05hYUNDR2swZzQxbWtjYnNBQ0tDTEcxT3NpRmtSR19zeTRsVFpuUVBJU2VpTXZFMjRIZlZTMzM5d25EZUFoR21EeVhGUXdYRVhIc3luMHVfd0NBOWJfWUZJbTlTMXZVUHdkTlZtTi1OdlV6Zlhhcy1OUWYyRjllUENBZVdXSEZkT3V1TG1mQ3c?oc=5",
+      "pubDate": "Wed, 27 May 2026 17:27:09 GMT",
+      "timestamp": 1779902829000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
       ]
     },
     {
@@ -5250,562 +5812,6 @@
       "timestamp": 1779878338000,
       "signalIds": [
         "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-68832e45",
-      "authority": "Google News",
-      "title": "Virginia monitoring cases amid surge in measles infections - C-VILLE Weekly",
-      "description": "Virginia monitoring cases amid surge in measles infections C-VILLE Weekly",
-      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQemhBbTJ3aTBGcENWb3RCSmhzQU1MbjFmX2F0T1MyUWFVSV9nZVNjOGtKdkcyT2stU2U1SU1XMGxzbU5FWHctV3JfcE5fUmNreUVQZURtUGZqUi0tRkhfVmJpM0FpN2ZOLUhJSENpV2h6eDRtOTJ4UmRKZ2Y5Y19qTC1QamU3dw?oc=5",
-      "pubDate": "Wed, 27 May 2026 10:06:22 GMT",
-      "timestamp": 1779876382000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-000dca32",
-      "authority": "Google News",
-      "title": "Ebola’s threat in Uganda extends far beyond public health - The Hill",
-      "description": "Ebola’s threat in Uganda extends far beyond public health The Hill",
-      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOTWkwUWZRSGExRWZmWXU5dlV6OTJ5SXlSNnNOWkVFWEEtcVhoR3M5YjItMFBrNk5pU3RWdEFBVkdNME85dkJJWmEzcXlwY3BaMnk0d0lPWlVpMVB4TlFiNHFaVXdlVWRuWElwWVNCeEZHNkhqcjVZbGotRTFBVVNIeFRB0gGHAUFVX3lxTE4tdV9RUFFzR1VaNXRnZmZxSENvWWl0QUkwM19OUzdUMGZOa2dsSm1lWTFUVWNoRW5QMHFwdEQxTV8wMmJWX1Bab3FYTnluYzZUT0NIMlhMZXpFR3Q5SXZFdDlxSXhQay1adlV1WERhR2ktV2pNXzFfSlFPczhHZzkwNlZ5djAwQQ?oc=5",
-      "pubDate": "Wed, 27 May 2026 10:00:00 GMT",
-      "timestamp": 1779876000000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-7adedd69",
-      "authority": "Google News",
-      "title": "Measles: Death toll rises to 560 with five more deaths in 24 hours - The Daily Star",
-      "description": "Measles: Death toll rises to 560 with five more deaths in 24 hours The Daily Star",
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNZVBYclM5MER6NUxlQ3dBY1hCVnE2bmF1OUp6RjhSeDRqYV9TbWNfYjNrdnBXWUdBZ0hFU3hSLU5HdnNoRXRTTTMwWFJPcjNFUlFXc1ZRWVRtTmM5UnRmeHcwclkyRzBhT2IwWmw2a1lWMFVuUGNVTTB3anZISGFqbHZEN1ZFSTQzT3NXck55dWVEUUg0UTdiS3dBbVgtZlpHY3UtcnZJOHhRcV8tMnE2ZQ?oc=5",
-      "pubDate": "Wed, 27 May 2026 09:57:22 GMT",
-      "timestamp": 1779875842000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-dda35e05",
-      "authority": "Google News",
-      "title": "Measles death toll climbs to 560 in Bangladesh, five more die in 24 hours - newagebd.net",
-      "description": "Measles death toll climbs to 560 in Bangladesh, five more die in 24 hours newagebd.net",
-      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOYkp5M0hWYnAxTTFXQlRqcTRFR2xSOU53Y0F3SGJQWnZ0SXVJSEhpY1paSFNCY2hYdTNnWWJLVmRqazlJVkg5cDg5Ti1OcUVuaC1WRHRGQ1NMSExkdndBWnpIQWZ3OEdOTnhfRVV3dXotZXRUcWNHbTJaNUNRaUYta2paXzBOMVZlaFNSWEptMXpjU0puQUZMMXhYZVdfSEdQUVh1QWZJdFQ2b09zbTc2OHhqelFWZDlXS1pLNUh5d2tzSlFK?oc=5",
-      "pubDate": "Wed, 27 May 2026 09:39:05 GMT",
-      "timestamp": 1779874745000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-eb69d646",
-      "authority": "UKHSA",
-      "title": "Official Statistics: Weekly all-cause mortality surveillance: week ending 21 June 2026",
-      "description": "How the actual number of deaths in England compare with expected numbers for each week.",
-      "link": "https://www.gov.uk/government/statistics/announcements/weekly-all-cause-mortality-surveillance-week-ending-28-june-2026",
-      "pubDate": "2026-05-27T09:37:24Z",
-      "timestamp": 1779874644000,
-      "signalIds": []
-    },
-    {
-      "id": "ukhsa-bc4ff19d",
-      "authority": "UKHSA",
-      "title": "Official Statistics: Cover of vaccination evaluated rapidly (COVER) programme 2025 to 2026: quarterly data",
-      "description": "Percentage of children immunised under the cover of vaccination evaluated rapidly (COVER) programme for quarter 4, from 1 January 2026 to 31 March 2026.",
-      "link": "https://www.gov.uk/government/statistics/announcements/cover-of-vaccination-evaluated-rapidly-cover-programme-2025-to-2026-quarterly-data--4",
-      "pubDate": "2026-05-27T09:37:17Z",
-      "timestamp": 1779874637000,
-      "signalIds": []
-    },
-    {
-      "id": "ukhsa-2455f877",
-      "authority": "UKHSA",
-      "title": "Official Statistics: Respiratory syncytial virus (RSV) older adults vaccination coverage in England: April 2026",
-      "description": "Insights on the vaccine uptake and commentary on the RSV (respiratory syncytial virus) vaccination programme for older adults.",
-      "link": "https://www.gov.uk/government/statistics/announcements/respiratory-syncytial-virus-rsv-older-adults-vaccination-coverage-in-england-april-2026",
-      "pubDate": "2026-05-27T09:36:51Z",
-      "timestamp": 1779874611000,
-      "signalIds": [
-        "rsv-wastewater-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-26871377",
-      "authority": "UKHSA",
-      "title": "Official Statistics: Respiratory syncytial virus (RSV) maternal vaccination coverage in England: January 2026",
-      "description": "Insights on the vaccine uptake and commentary on the RSV (respiratory syncytial virus) vaccination programme for pregnant women.",
-      "link": "https://www.gov.uk/government/statistics/announcements/respiratory-syncytial-virus-rsv-maternal-vaccination-coverage-in-england-january-2026",
-      "pubDate": "2026-05-27T09:36:45Z",
-      "timestamp": 1779874605000,
-      "signalIds": [
-        "rsv-wastewater-2026"
-      ]
-    },
-    {
-      "id": "google-news-51a7b141",
-      "authority": "Google News",
-      "title": "Dozens of hikers fall ill along Pacific Crest Trail near Wrightwood - Victorville Daily Press",
-      "description": "Dozens of hikers fall ill along Pacific Crest Trail near Wrightwood Victorville Daily Press",
-      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQR3poODJNR0tPcGRJZ3g3RFZKbFFCUVU3clZoN3RCZFlnckp4b1NWVXVhTVJXUTlDV21Td1JtQmwzQzYxUTlhLVYtMXd4cjk4dlJMTnAxQnExZHF0QXRfSTNOQ2xXWXRtaUxSbG04elczNlRJMk1fNjBKSy1LM3gzTHphbDYtMWJQNXJibjlobEFqdmFmS1VJM21hLVd2N0xEQWdGZm9PS2hZcGpxZWt4c1BSN2xybFMzWl9zYw?oc=5",
-      "pubDate": "Wed, 27 May 2026 09:31:00 GMT",
-      "timestamp": 1779874260000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-55f82e24",
-      "authority": "Google News",
-      "title": "Hantavirus cases from cruise ship outbreak rise to 13 - Türkiye Today",
-      "description": "Hantavirus cases from cruise ship outbreak rise to 13 Türkiye Today",
-      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNekxGZnd0d3A0dUNJbENHNWhvVlAtdTduTnRlUUdubUZsY0JzZVdqd0t4c2FSRGNmd3RYMDRzT05PTVlDQkZ5cWlSOU1tY1E0NUxuYl9yMjNra0RzYU83Q3hoUy1weWR2Q0Q3d1pMbnVSeU9Fa2xON2JBLUpBM2l1bEp2SlJmaDczczJ4M3BNbmlMMlJRVE9OZjVoMHBFNDFKZ3c?oc=5",
-      "pubDate": "Wed, 27 May 2026 09:22:44 GMT",
-      "timestamp": 1779873764000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-0933eb9e",
-      "authority": "Google News",
-      "title": "SNES: Hantavirus Ship Shines Light on Problem SNES Tackles – Initiating Coverage - Yahoo Finance",
-      "description": "SNES: Hantavirus Ship Shines Light on Problem SNES Tackles – Initiating Coverage Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOREw3ajB3VjMxWVowdGJ2RG1zcFZuSzZNeGxVcF9mb2cxR2NxZklwN0tGcDNaLXBSVjBhME00TDhQNzVYZTRHMVBFYkFLUTJ0TExFY2xpT2hIdVRQZm5oSnptZHhtM0dNdkVlZ0J3YkZDRVlGcXFlX1JHWnM5eXNnMmtNX3JzQXVLd1JZNXIxRnNEb2xYWlM1cWg2UHlNSl9qMkJlQQ?oc=5",
-      "pubDate": "Wed, 27 May 2026 09:18:00 GMT",
-      "timestamp": 1779873480000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-a8ae0756",
-      "authority": "Google News",
-      "title": "Contagion of conspiracy theories makes Ebola epidemic harder to contain - The Washington Post",
-      "description": "Contagion of conspiracy theories makes Ebola epidemic harder to contain The Washington Post",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOY2VoLXl5YWpQc0wwWFFWNHItZi1zdkxRM095TG44WFBoUVB1VlhlNGZMZkY2djNsazJJQV81WVlEd0pmQk5CbFZVR2gxazhIRUdoeVliM0E5ZEY2dGkwcjZCRXFZUFo1Y0pBbkRiaUQyajZhVUVjdlBERWJYWmNmTjZueHJDQTk3X0dKZHlsVzJGcXhxRE0xSTRKcw?oc=5",
-      "pubDate": "Wed, 27 May 2026 09:16:03 GMT",
-      "timestamp": 1779873363000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-61f8a5fa",
-      "authority": "Google News",
-      "title": "Thailand to Quarantine Travelers From Ebola Areas for 21 Days - Bloomberg.com",
-      "description": "Thailand to Quarantine Travelers From Ebola Areas for 21 Days Bloomberg.com",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOQWQ2STMxc3U3UHZXYTlkUHN1aGpadkwzb20yYXI3QkUzOEJwZHJlN0thb3VXMmhlWmVLRjhvZjJHbl9rTFZMWk5EN19ISUtMRnUzeUFhek1RRnJ4XzFsXzJmVmx3OTVCdlBSb1hUVFZTNFRKelpSSDlIeEpZZTFZelVTczhsLW5XZFFCMmYtaVZhUlR0MWpMQ0RQVmM3QlNleEgwOGcyMHRHcF9KdmxIdlk4Yl9TRWM0?oc=5",
-      "pubDate": "Wed, 27 May 2026 08:58:12 GMT",
-      "timestamp": 1779872292000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-f13127e3",
-      "authority": "Google News",
-      "title": "Hantavirus cases from cruise outbreak rise to 13 following new case in Spain: WHO - TRT World",
-      "description": "Hantavirus cases from cruise outbreak rise to 13 following new case in Spain: WHO TRT World",
-      "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBfeWlVLVg0WDB4RXV6eUNLVWxGT0xzc2RLV0pveTROQlZ3NmU0YlU1cHZZWFd0bkVzV3E4c0o5bDFLZ3VKZHFKM1dsZFo5VGRzVW5xREdFREc?oc=5",
-      "pubDate": "Wed, 27 May 2026 08:49:18 GMT",
-      "timestamp": 1779871758000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "bbc-health-24d27b05",
-      "authority": "BBC Health",
-      "title": "Endometriosis: 'I thought I was dying'",
-      "description": "The BBC's Ellie Colton shares her experience of living with endometriosis - and meets a scientist hoping to cut the length of time it takes to be diagnosed with a simple new test.",
-      "link": "https://www.bbc.com/videos/clyp9djzvwzo?at_medium=RSS&at_campaign=rss",
-      "pubDate": "Wed, 27 May 2026 08:43:19 GMT",
-      "timestamp": 1779871399000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-ab79ee8c",
-      "authority": "Google News",
-      "title": "Public health hot topic: Hantavirus - Islands' Sounder",
-      "description": "Public health hot topic: Hantavirus Islands' Sounder",
-      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPZHJWX1dzZ0JuR0NjX3ZrMmFiRHowVWdDNGo4ejN2UXlva2tkVFlLMERRd3I1S2ZLUlpkX0tjc1ZveXVoanZwOHVaZG00VWNqS19tRHh4bGxzOXgwZnJVTnR0ZUp2Q2lIenB2MUs4Rkc0WjJqb0JVZVlNbUZIWUFIakV5VQ?oc=5",
-      "pubDate": "Wed, 27 May 2026 08:33:18 GMT",
-      "timestamp": 1779870798000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-4dcc1541",
-      "authority": "Google News",
-      "title": "Should you avoid cruises after recent hantavirus concerns? Experts answer - The Indian Express",
-      "description": "Should you avoid cruises after recent hantavirus concerns? Experts answer The Indian Express",
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQTEktVDJaVmkwNE1RUmRhcVhJdGxlcUsyU09rb29yVUdPMGtwTkZRNGdoeGE3eUpfSEpyZmNGUElYaFRETVRMWk51QXY5UUR3YXlzMUlucXNMU0xvZWwxWHdoY0R6VWRaX3p4bWNzLWlCTlR2SmJkX21iM3JJVkFDNVlpay12ck5ackhqdDZ6TExLNXpDcjFQT0hrcWtqRFEzc1BuTEdfZUZ0Y2E0OXU1Z2530gG4AUFVX3lxTE1XYUlnMVZJZGFRdHJGOUlqeEJUOTZDSi1QVFdtTkJyWldabzJWUm52ZkZDdTJqeFZEZmc1U0dpVjRxNDJSdUJyc0NYMVl3aXFUZ1FWUEpxMVdnZDU5WGJWa0JhZWFvYzI1SVN4OHQydUFBVzh4cUlyMklJcFhDRGNMaGZkb3hRbEw2am0wRlpnUGFGbWJ1WkxObHJiYkFVdE15VmtNcTY0ZWp0UWRDWmdiVDBLNVFTTEU?oc=5",
-      "pubDate": "Wed, 27 May 2026 08:30:01 GMT",
-      "timestamp": 1779870601000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-7f681358",
-      "authority": "UKHSA",
-      "title": "Research: Hantavirus statistical releases",
-      "description": "Statistical release in response to cases of hantavirus in the UK connected to the outbreak on the MV Hondius cruise ship.",
-      "link": "https://www.gov.uk/government/publications/hantavirus-statistical-releases",
-      "pubDate": "2026-05-27T08:30:00Z",
-      "timestamp": 1779870600000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "stat-news-c7e83d76",
-      "authority": "STAT News",
-      "title": "Opinion: Sen. Dick Durbin: Trump is letting Big Tobacco target children",
-      "description": "“Trump has willingly exposed an entire generation of children to Big Tobacco’s nicotine addiction,” writes Sen. Dick Durbin.",
-      "link": "https://www.statnews.com/2026/05/27/flavored-vapes-e-cigarettes-fda-trump-durbin/?utm_campaign=rss",
-      "pubDate": "Wed, 27 May 2026 08:30:00 +0000",
-      "timestamp": 1779870600000,
-      "signalIds": []
-    },
-    {
-      "id": "stat-news-856f9189",
-      "authority": "STAT News",
-      "title": "Opinion: The patients demanding unvaccinated blood transfusions",
-      "description": "If you've been vaccinated against Covid-19, some patients might not want your donated blood.",
-      "link": "https://www.statnews.com/2026/05/27/unvaccinated-blood-transfusions-directed-donation-interview/?utm_campaign=rss",
-      "pubDate": "Wed, 27 May 2026 08:30:00 +0000",
-      "timestamp": 1779870600000,
-      "signalIds": []
-    },
-    {
-      "id": "stat-news-853994e3",
-      "authority": "STAT News",
-      "title": "STAT+: How Stanford patients help expose ‘fault lines’ in health AI adoption",
-      "description": "Stanford Health Care started asking patients about new AI tools before they are implemented. Here's what patients are telling them.",
-      "link": "https://www.statnews.com/2026/05/27/stanford-patient-panels-feedback-on-ai-shaping-health-care/?utm_campaign=rss",
-      "pubDate": "Wed, 27 May 2026 08:30:00 +0000",
-      "timestamp": 1779870600000,
-      "signalIds": []
-    },
-    {
-      "id": "stat-news-939b0516",
-      "authority": "STAT News",
-      "title": "&#8216;Are we just going to give up and die like every other generation?&#8217;",
-      "description": "Inside the longevity conference that brings together founders, investors, biohackers, and the generally death-averse to discuss how to forestall — or even beat — our demise.",
-      "link": "https://www.statnews.com/2026/05/27/longevity-movement-shift-fringe-idea-to-big-business/?utm_campaign=rss",
-      "pubDate": "Wed, 27 May 2026 08:30:00 +0000",
-      "timestamp": 1779870600000,
-      "signalIds": []
-    },
-    {
-      "id": "stat-news-2004c479",
-      "authority": "STAT News",
-      "title": "Opinion: It’s the end of science as we know it, and I feel fine",
-      "description": "“Science itself is inherently resilient — that is, after all, why it’s science,” writes Jonathan Jackson.",
-      "link": "https://www.statnews.com/2026/05/27/science-enterprise-replication-crisis-ivory-tower-community/?utm_campaign=rss",
-      "pubDate": "Wed, 27 May 2026 08:30:00 +0000",
-      "timestamp": 1779870600000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-b9909fd7",
-      "authority": "Google News",
-      "title": "Repatriation flight video falsely shared as evidence of staged hantavirus crisis - AFP Fact Check",
-      "description": "Repatriation flight video falsely shared as evidence of staged hantavirus crisis AFP Fact Check",
-      "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBwVWMzZG9JenZkSnZvV0hwUm45cDg2NEtCS2tNRHNMWFNUUzB5X1JTVmRTZ09MYXBLenM1Z1A5cnJSZXVPeGdtR20ta3lmc1VQQVVLaTEtd3U?oc=5",
-      "pubDate": "Wed, 27 May 2026 08:12:45 GMT",
-      "timestamp": 1779869565000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-4f0467c9",
-      "authority": "Google News",
-      "title": "Aid group Samaritan's Purse plans 50-bed Ebola unit in Congo - Reuters",
-      "description": "Aid group Samaritan's Purse plans 50-bed Ebola unit in Congo Reuters",
-      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPVmxjcGItVEFEQTJmTmtJclNxWXhuaWFISTRkVXo0N2dTY29wU0laYjE0RzREbldvSEZUZzhycTNzTHVsWjVzcnNCOU9TVzRXQzdMZHEyTHJ4enJTR1BtYk1OQVQtUGd2NDRJam9NR3RMRmphWkQ1M0ZZaldUV0hsektnLW1tQklQeklxZE83bVUzTUNjTUdpZXhxcktfZ0U4RVNJS0w5MlpET2NwekFLXzlzWnJaSGFVd1lJNWR4Zks3WmQ4bGg0?oc=5",
-      "pubDate": "Wed, 27 May 2026 08:11:28 GMT",
-      "timestamp": 1779869488000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-5c21d5a0",
-      "authority": "Google News",
-      "title": "WHO: Hantavirus cases rise to 13, no new deaths - Breakingthenews.net",
-      "description": "WHO: Hantavirus cases rise to 13, no new deaths Breakingthenews.net",
-      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQZGJJNUNMMjlURzVNTXp5VHpDUWhUVHMwd05LR09pQVRmdHJmVVEtMzZrVmE3ZU9EcmlkZWxEQnlmOFk1TnphLWN2QnpfNnNOSFN1VzlRQ2hVZFVvci13M2lPUkRDbkRSenZITXJkcVhNTVFFdExIVGF2eTM1VVBfZm5KaFA5M0RtUnFRVWsyZ1pkZTNCOEE?oc=5",
-      "pubDate": "Wed, 27 May 2026 08:07:00 GMT",
-      "timestamp": 1779869220000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-c64f47d3",
-      "authority": "Google News",
-      "title": "DRC flight suspension and Uganda border curbs isolate Ebola-hit Bunia - Al Jazeera",
-      "description": "DRC flight suspension and Uganda border curbs isolate Ebola-hit Bunia Al Jazeera",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOV1hkVEQ2R3QwUkphZmZvOXFLSm9YX0pTQW9vaTlzNWRYVlJCLUVKc3Y2TGdSQWtKdElnZGdZdVJrZ01nbFpxVGl5eXN6SUwyNHRyY2ZpMnlmMkNKUmgtd1dUT2wyT2d0el9Nd19pYk0wdUZnZ2REOU15NnFnZ2lrR2lVdG9DZ24wY1p0NEFXcnhvMERERzlxTDREWVFfUE1Dam1xYzNzc1JYYzRnUzZV0gG0AUFVX3lxTE4yV0VEVGZKUGNpQzA2bzhpR0JrS0NlNDcwN010SlJsMHVtSGtTYk14cmozek85M04zU2hidmxlOUZOUDg1NTlwd0c5X3Awd2thQW1ZdWtjUGdKeThBRm5DRE9EZVZpa00xUEdjaWFTc1JRdmo2TlJIc3B0amNoR0VHcFU2c3I3MUVTMlVFZjJEc2p0eFJtUUg1aGxWSUc2aGVzQi16ZUFDSHg3RVc2ZlJidkZZSg?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:56:06 GMT",
-      "timestamp": 1779868566000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-1b73334b",
-      "authority": "Google News",
-      "title": "Ebola Outbreak in DRC and Uganda: Situation Report #2 (May 26, 2026) - ReliefWeb",
-      "description": "Ebola Outbreak in DRC and Uganda: Situation Report #2 (May 26, 2026) ReliefWeb",
-      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQUWYza3htZUNreWhPSGhEUXRseFRobHN4dU13WGxGU0VKVzdMdmh3M3NhdE5RWVhZbG02eXNNcDFYaTROVF9iZXk0bGpXMkViSFk0NmtjdmVfWjZRVkc1ck8wZ3czY09DNV8xaU9EOEpVNFdvTkxlOGpUUVFTWjVuWlBNa2JzbmZBN2VNZ0NYd0NuMzU4MUhsSlM3ck1UdmNNa29hRmd1MVdkQjQ2cm4tSndQLWppUQ?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:41:31 GMT",
-      "timestamp": 1779867691000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-9d44130e",
-      "authority": "Google News",
-      "title": "US to set up quarantine facility in Kenya for Americans exposed to Ebola, WSJ reports - CNBC Africa",
-      "description": "US to set up quarantine facility in Kenya for Americans exposed to Ebola, WSJ reports CNBC Africa",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMnQwMVhOTmxoRW1BT3lOc1BFbHlBeHA5NEliMUxhNFo2Q20xUkgxNmwteE5uRFlKeDhOLXBsdndkRGRvMVN0cUktelIwZ19ldmFjcWpsbVZLZlFkQWRrTkItQk5hTHlURUFGd2RmdTlWWW0wVnZZRWc4eUdGNFFNOUlCN0xfV3ZPaUt5SzNJenB4aGctNkVFS2hneXljdjBiWFgzX0pXeFZuaFF2cVpiQmtwLVFRaUhl?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:40:26 GMT",
-      "timestamp": 1779867626000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-8bb95d71",
-      "authority": "Google News",
-      "title": "‘Low Risk’ as Africa Hantavirus Cases Spur Surveillance - The Good Men Project",
-      "description": "‘Low Risk’ as Africa Hantavirus Cases Spur Surveillance The Good Men Project",
-      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPM2U4SHdUNExsUFlOUHVFM3JPaVY1SGtGNUw0MjV0bm5Yb3AzSnF4djBJdlp3Ni1CN1N0SUJOT3NtLU5ZUUJMQm45NXM1WVJ0TWJSaUV6d2wwMzRmQm1MRzBBblJYTGVEWk5WTTc5c01HMW4xOVFpblRQOGw3M0p6LWZRWDd3SXFQLXhXUUFseDNPbDJ0WEJseldZLTJWcHc?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:35:17 GMT",
-      "timestamp": 1779867317000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-7741f16a",
-      "authority": "Google News",
-      "title": "Bahamas, Canada, Thailand impose Ebola-related travel restrictions - upi.com",
-      "description": "Bahamas, Canada, Thailand impose Ebola-related travel restrictions upi.com",
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOUHFmMUs2UER1bDA0cWIxWGRpLUNWSVFNR3B0Q2NMRGYwRTU0eERtU3ljUUhxOVpzYi1NZHowQnB2OFNta2NoRmJUNDkxN19qTWFvdV9zYVRteW1vOHlwcmZZLTlEalYwQ3E2aEVCbThQd1c5aEowRmdLNTlQZU1lVkxBTm5kR3EySktNZFdORVZOTkRYMmJscFA4VlFmZ2pCMmlsMVFtWGs4aDVOXzZVSFZn0gG3AUFVX3lxTFBzNG1lY1NnVVpSTmtpRk12TFVTUGRuUWdHUGFZT2dBeVpIOVl4aEdsQ1FvMVJaTFJWYXdGaGw1SDV0MHVpNXB1ME5iekE2RWNDYzdIZFdCQW1XM0xPQmxha0RMVVE4QlRwcThDMGV2N1FmaVllTl9ZaGc3VllobUtubjVkSGNBQUxISUVXTGhLUzgybG55eFBONkhldDdJZGxOZk9UME9PSDFBcUg1RG5vVW5RZG5KVQ?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:30:16 GMT",
-      "timestamp": 1779867016000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-72f9ebb8",
-      "authority": "Google News",
-      "title": "Hantavirus cases from cruise outbreak rise to 13 following new case in Spain, WHO says - The Straits Times",
-      "description": "Hantavirus cases from cruise outbreak rise to 13 following new case in Spain, WHO says The Straits Times",
-      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQSm1LNHVCOHVtaVBMZkNlSGRyRHUySzZWT3plcWYwckh0QVI3bGlKekJLMExQVzF5UVMxUC0wclBqWVM0R3lNTEpicTJucDVaczZCVGlHSTB2cG83SzJfV3RVR2tmRHdlYXltM284V0lZTE9jcmQ1MzN0ZFZ5R0VvR3dmbGFjdnZCQUN5S2pPclo4eGZBVlVzSnpaM0xqUy14a0hENjZ6anh0dUt5dFQ5b2JwZEJxMElYWXExX2ZTM2l6THNTZ0E?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:24:21 GMT",
-      "timestamp": 1779866661000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-ac0433ee",
-      "authority": "Google News",
-      "title": "Hantavirus cases from cruise outbreak rise to 13 following new case in Spain, WHO says - Reuters",
-      "description": "Hantavirus cases from cruise outbreak rise to 13 following new case in Spain, WHO says Reuters",
-      "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQamxkN3RlZzFPWTVabWpreHNDaGp2SnVOckZ3STNTWTBGdXZGUHFUaU9fNTNjeFFoWWFYM2k0NE85SXE1OF9wWms5QnZNVkZlX05WbkdheFJ5cDBJUTVqYldQbXdfVm1lTjZZTldUZjRzOWUtRjEzdzYwaVYxMVIyZEpxd0ZmU2NSS19CeTV1cVh5dmNWeUVBNG9KejhYYU5yS3ZDU20xQ191MXowRUpRU2N1OFhlRUt1MU5Taks0V1dOQkN3bTljYW1WZGw2SkFoRmVneUNvV2QyV1MwcE1v?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:20:42 GMT",
-      "timestamp": 1779866442000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-dafbf5d9",
-      "authority": "Google News",
-      "title": "Health authorities are monitoring the influenza season in South Africa - NICD",
-      "description": "Health authorities are monitoring the influenza season in South Africa NICD",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOdURsbndPbTk4UWY3Rkk1WXZYUXQ5SlZTZTRjVTFQVGRaRmYzQ0t2YjZ6WkdjQVFkejVBYWFPdFRWVnlTanItTFp2OUVrQzBtTnJsVTBWZkZ4V2g5NXZfbnRyTlItMEg1UThJUWF6eGdHdXlxNjRPa2VlVWthMmlpY2swbEJPeVJSODJIdy1ZYkV3R1Z3aTBkWWdR?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:08:12 GMT",
-      "timestamp": 1779865692000,
-      "signalIds": [
-        "seasonal-influenza-2026"
-      ]
-    },
-    {
-      "id": "google-news-03667129",
-      "authority": "Google News",
-      "title": "Gov. Pillen Describes State Agency Efforts in Dealing with Hantavirus Situation - Alliance Times-Herald",
-      "description": "Gov. Pillen Describes State Agency Efforts in Dealing with Hantavirus Situation Alliance Times-Herald",
-      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNR1c3RDBSSndBUjRKWTBHY3BNZDBLRjk3OUlRWEx0aldTeXdPS0RKUXg3aHFfaWpza3UxOVdiSFAzX0FoQThhMEd2N1lmbjN5am9EcFlySjhhNEhHUlNuclBVeDhHaDRDNmtLS3V6YlA4N3Z3cWYzREd6TFFCZVlUSlZQWDNOV2FYaFpQT0xzd3lva0k3aU40R2hPMkNPSld4aUl0RkJRMDQ?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:02:57 GMT",
-      "timestamp": 1779865377000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-975bff27",
-      "authority": "Google News",
-      "title": "Ebola disease outbreak in the Democratic Republic of the Congo and Uganda - European Centre for Disease Prevention and Control",
-      "description": "Ebola disease outbreak in the Democratic Republic of the Congo and Uganda European Centre for Disease Prevention and Control",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPT0psTk9uZ21BWHlDdl81ek1SYk8tS3QyRkc3ZVkzSlVlUTRaejNhWTdLd2FKem9iMWgtRHVUTHktSXczX0t2UHFMLUNZbzhObHR4dXZzdFBtTWgtY1FrcE5ucTlFMWNVUWFKUDV6c2hnOFR6WXpZVU8zTk5jUk1GWDh2b29RMGwySzZYNFZvd05RdWgxeHNIU0VYaw?oc=5",
-      "pubDate": "Wed, 27 May 2026 07:00:00 GMT",
-      "timestamp": 1779865200000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-ce9f6058",
-      "authority": "Google News",
-      "title": "Ebola outbreak draws attention to longstanding virus spillover risks in western Uganda - Mongabay",
-      "description": "Ebola outbreak draws attention to longstanding virus spillover risks in western Uganda Mongabay",
-      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPazhsbmU2cVNEb293TGlGNkpBNjVUREJkSVpJbUswckt5REhCTmxBa3daUHVRU0R6c1lJNUkzdV9WZWR3M0xPNUJ2Qzl3ZGticE5mZS1odkdYWGN2VDdQZDRBREo4eHZRbmFldGtZT0lPbzgwT2N5MUQ0RzUwMVhnM0tuaWlrd1A3ekhPWTVHN3RjZkJDaDlkRFN2NEM1TEtLZ0c1b3dRUktweEJ4RFl0U25zSXRZak9UY3J5Sm930gHDAUFVX3lxTE1HMGp3blJiVm5xS2taX1B1V3hGVHJKdG1SLTR1SlVyUVVDanJTZVlvMnJnTHpYck9NSGpEQ3lYLXVIRGxFcVF5cHdzU1hMZXpXeG5JcUxyazNIT0hnUTBqXzZ2d081THhnTGtWQldsb3JhSWJkUVRVbDlsaWFSUzhXaU9SNW9QLU9OTVlBeWk4YnJneHV0V2NrX0VJRXUxNDFqcU9vei1URVNHTFNkR2xKeEVCNDFhLUZnSk9sczdoc2QxTQ?oc=5",
-      "pubDate": "Wed, 27 May 2026 06:39:54 GMT",
-      "timestamp": 1779863994000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-8c56ba26",
-      "authority": "Google News",
-      "title": "Captain of Hantavirus cruise horror quarantined in Poland - TVP World",
-      "description": "Captain of Hantavirus cruise horror quarantined in Poland TVP World",
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQeG1wWnVNTDZQTV96WDdrMHdEc2hXQjRzRTlDT0xZNEZ6TW9yX1NCVUpGQ2pmbmVxMXhjSU1xQlJLZEpsaU9BX0JCazdHYkZxVTd5RjQ0b3pTU2xydGE5LWgwS21fX1V2V1dabjM1c1NjT3ZfZzVfUGMtcXpDZGhST1Vva0ZHTkh1d2hjTVdYeEs2X0NWTnp6XzZuWlcxZzAtbWlB?oc=5",
-      "pubDate": "Wed, 27 May 2026 06:36:00 GMT",
-      "timestamp": 1779863760000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "abc-news-a9639e3c",
-      "authority": "ABC News",
-      "title": "Canada will require self-isolation for people traveling from Congo, Sudan and Uganda due to Ebola",
-      "description": "The Canadian government says travelers from Ebola-affected regions will be required to self-isolate for 21 days, while immigration authorities are temporarily suspending decisions on applications from Congo, South Sudan and Uganda",
-      "link": "https://abcnews.com/Health/wireStory/canada-require-isolation-people-traveling-congo-sudan-uganda-133330607",
-      "pubDate": "Wed, 27 May 2026 02:33:41 -0400",
-      "timestamp": 1779863621000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-52e22834",
-      "authority": "Google News",
-      "title": "Inside an African lab that helped crack the hantavirus outbreak - sightmagazine.com.au",
-      "description": "Inside an African lab that helped crack the hantavirus outbreak sightmagazine.com.au",
-      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPSDV5OXdGWHRvcDVyd0FLMF9XeGhBRTFHVVdTV1YxSzZGWHRFV2ZKT0tlMzB1R1cyMnBvM1BOYkFHaUpaejFLS1g3T0c5RE1idXVPaTlrZkdSdHdOMFdubUx1VHJRODRmWHpMX3FEMUFYQ3Zxek1ab1A1UzQ0UFA4WVBxZ0tISlRXSEZGVFdVeEsxOTJDQi1aSzhpLVN2bGc?oc=5",
-      "pubDate": "Wed, 27 May 2026 06:33:12 GMT",
-      "timestamp": 1779863592000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "abc-news-c67302b2",
-      "authority": "ABC News",
-      "title": "In Congo displacement camp, fighting Ebola with sand, oatmeal and one thermometer but no water",
-      "description": "There is one handwashing station and one infrared thermometer to fight the Ebola epidemic in this camp for 10,000 displaced people in Bunia, a city at the heart of the outbreak in eastern Congo",
-      "link": "https://abcnews.com/Health/wireStory/congo-displacement-camp-fighting-ebola-sand-oatmeal-thermometer-133334319",
-      "pubDate": "Wed, 27 May 2026 02:31:19 -0400",
-      "timestamp": 1779863479000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "abc-news-a03ded9f",
-      "authority": "ABC News",
-      "title": "For one Ukrainian war amputee, rebuilding is painful after a Russian strike killed her husband",
-      "description": "A Ukrainian woman has transformed her life after losing a limb in a Russian missile attack that also killed her husband",
-      "link": "https://abcnews.com/Health/wireStory/ukrainian-war-amputee-rebuilding-painful-after-russian-strike-133337108",
-      "pubDate": "Wed, 27 May 2026 02:12:37 -0400",
-      "timestamp": 1779862357000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-8ffb27f0",
-      "authority": "Google News",
-      "title": "Mozambique: New UN framework provides €1.7M for anticipatory cholera response - CLUB OF MOZAMBIQUE",
-      "description": "Mozambique: New UN framework provides €1.7M for anticipatory cholera response CLUB OF MOZAMBIQUE",
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOQW1wYi05N3Zxc0xTRktONHAzX2pQbTlGdEU1QlFEN25SWlVUSEJnYzBSaFRoMDV5a2FtNUdZMWI3VjlBM2NaV19CMVI0M2tDUzJfUGJOTG5qWmtrcUhxUEtvbXpjVVkyQXNiYnhMN2NadUtyR2FrS0k1TkRqVnozb2RDOHd3dDNCNjBhcVFRcW1ZWm54QUswVWhoVjd4Tk5Pd18wUzNRQUZZeGpJZGlJYw?oc=5",
-      "pubDate": "Wed, 27 May 2026 06:10:17 GMT",
-      "timestamp": 1779862217000,
-      "signalIds": [
-        "cholera-africa-2026"
-      ]
-    },
-    {
-      "id": "google-news-6436e5ee",
-      "authority": "Google News",
-      "title": "IRC warns Ebola outbreak could become 'deadliest on record' - Euronews.com",
-      "description": "IRC warns Ebola outbreak could become 'deadliest on record' Euronews.com",
-      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOMG5yQktKanp5OExSZGw3X1o5NFI3VVdZRldvWWU4R3RBUnJoRDlyRlV6WXJPMGRub09rSTRtNnRYNTBUNWp4OVlDNDZaTFJQcXF6NjFHd2IzNzl4dHZIY1g1OTdONm95blg5WnpBQk1raVBxZzczZkV2SnhIck1JNUh4YUxuQm9NVERPckhoY0gzSl85QWFWUkNkcjh3WEgtUjJHYkhWbG56MFI1dzJjRl9SYkMxX2tqZDFNQ0NFbXZfYkw1S0E?oc=5",
-      "pubDate": "Wed, 27 May 2026 06:09:34 GMT",
-      "timestamp": 1779862174000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-1b46630b",
-      "authority": "Google News",
-      "title": "Australian travellers urged to check measles immunity - Australian Broadcasting Corporation",
-      "description": "Australian travellers urged to check measles immunity Australian Broadcasting Corporation",
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQUkNjT281SUw0WmtRQmtEdUlvNWNVOFlLdEFEXy1VUlg5aFZ5TFF1c0l1X0RHb1RPUDVCS1ZTU0FYWDVkSTNWakRhVzVHd2ZCTWVkTmk1Q0NhRmF0U3ozT29OUmdZVElxN3hHSks1dzI5VDRLb1FGNnVxck9JWEdGWGdTOVN6ZFBVeGFKWWpBalEyaTJGa1dDZk5QQnBLYXVkMXh4cTU5RzdLNV9RbWN4dk5OYw?oc=5",
-      "pubDate": "Wed, 27 May 2026 05:25:16 GMT",
-      "timestamp": 1779859516000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-0b3a57e4",
-      "authority": "Google News",
-      "title": "Cholera kills 27 in Borno - Daily Trust",
-      "description": "Cholera kills 27 in Borno Daily Trust",
-      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBnMU5hT1VOUUduQlVrX1pqSk9PM1d2ZkFmY2ktX2M0UTc5eDZnU3M0bHZiMVhFZzR2TW9KMUp6VXhOQjBacWQ5Tk10ZFpLOWhRTUpubUQ5SHl0djJlMmc?oc=5",
-      "pubDate": "Wed, 27 May 2026 05:09:50 GMT",
-      "timestamp": 1779858590000,
-      "signalIds": [
-        "cholera-africa-2026"
-      ]
-    },
-    {
-      "id": "google-news-4a602018",
-      "authority": "Google News",
-      "title": "Measles outbreak in Bangladesh kills over 500 children - World Socialist Web Site",
-      "description": "Measles outbreak in Bangladesh kills over 500 children World Socialist Web Site",
-      "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5QYl9wTzhVeFQyYmdFSE1lUkROdlpkN09FU0djRFVFMENkWHk0SEZiel91YUxmTVlHNzY4VUtKcE1pNlVQdjhHSnNlcFVpekktSkRBUTh3b1JzejVCek5xcU9Gdm9PY19Y?oc=5",
-      "pubDate": "Wed, 27 May 2026 05:02:19 GMT",
-      "timestamp": 1779858139000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-714e8e92",
-      "authority": "Google News",
-      "title": "27 die of cholera in Borno, 2,715 cases recorded - Blueprint Newspapers",
-      "description": "27 die of cholera in Borno, 2,715 cases recorded Blueprint Newspapers",
-      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE93ZWJoVUxmSDVWaXhfZGQ0ZHViRm44NHJ3VTA1a2YzZ3AtVFJEdTBvRGdwd1ZNaXMyaUpzdm82YTZuM1hBTE5Lcld3N2dUUTZVdDIzenN5YVFoZmlmWlQtM01ZSTY0TEVJXzRaSmh6SjktaXJIWnBz?oc=5",
-      "pubDate": "Wed, 27 May 2026 05:02:01 GMT",
-      "timestamp": 1779858121000,
-      "signalIds": [
-        "cholera-africa-2026"
       ]
     }
   ]
