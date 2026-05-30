@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Human Review Digest — consolidated "what needs a human" process (commit pending — backfill after commit)
+## ✅ Human Review Digest — consolidated "what needs a human" process (commit 0df46ac)
 
 Triggered by a `Production Status Monitor` failure email. Diagnosed: the deployed `/status.json` self-reports `degraded` because 16 of 17 signals' `lastChecked` exceeded the 168h (7-day) human-review threshold — `lastChecked` is a humans-only attestation (CONTENT-STANDARDS §3.4), so the monitor was working as designed, not a code/deploy bug (Status Refresh + Vercel healthy, status.json generated 11h ago). User chose **not** to silently bump timestamps (that would fabricate a review) and instead asked for a process that "flags any item, function or action of the dashboard that needs human intervention/review and gives a recommendation/summary of actions… the dashboard can't be babysat, it needs to be functionally autonomous (i.e. review-gated, not unattended) and only involve humans when safety/review is needed."
 
