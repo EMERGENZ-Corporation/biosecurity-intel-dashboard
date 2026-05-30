@@ -20,7 +20,7 @@
     "confidence": "official",
     "trend": "stable",
     "status": "active",
-    "summary": "Andes hantavirus cluster linked to a South America–Antarctica expedition cruise aboard MV Hondius. 11 reported cases (9 confirmed, 2 probable) and 3 deaths across multiple countries, with multinational case-finding and post-exposure monitoring continuing.",
+    "summary": "Andes hantavirus cluster linked to a South America–Antarctica expedition cruise aboard MV Hondius. 13 reported cases (11 confirmed, 2 probable) and 3 deaths across multiple countries, with multinational case-finding and post-exposure monitoring continuing.",
     "operationalRelevance": "Long incubation (up to 6 weeks) means travelers and returning expedition staff can present in jurisdictions far from the source. EMS and emergency departments handling unexplained respiratory failure in returning travelers should consider hantavirus pulmonary syndrome and use airborne precautions during aerosol-generating procedures.",
     "whyItMatters": "Andes virus is the only hantavirus with documented person-to-person transmission. The Radboud UMC quarantine event after an incorrect blood-sampling procedure shows healthcare worker exposure is a real operational risk if PPE and specimen handling deviate from protocol.",
     "currentSituation": "ECDC, WHO, CDC, and PHAC continue active surveillance and have issued aligned guidance. WHO global risk remains LOW; ECDC risk for the EU/EEA remains VERY LOW. CDC issued HAN 528 for clinical awareness in the United States.",
@@ -28,7 +28,7 @@
     "metrics": [
       {
         "label": "Confirmed/probable cases",
-        "value": 11,
+        "value": 13,
         "sourceId": "ecdc-andes-surveillance"
       },
       {
@@ -859,8 +859,8 @@
       "phac-andes-media-update",
       "euronews-radboud-quarantine"
     ],
-    "lastUpdated": "2026-05-19T23:23:55.802Z",
-    "lastChecked": "2026-05-22T20:55:00.000Z",
+    "lastUpdated": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "riskAssessments": [
       {
         "authority": "WHO",
@@ -3970,7 +3970,7 @@
       "paho-epi-alerts"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-22T20:55:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "chikv-br-mg",
@@ -4538,7 +4538,7 @@
       "cdc-current-outbreaks"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-22T20:55:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "fifa-us-metlife",

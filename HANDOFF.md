@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-30 (EMS World Briefing surface removed post-event; /ems-world-briefing + /demo now redirect to /briefings. Clears the review-digest removal marker.)
+**Last updated:** 2026-05-30 (Signal re-verification pass: andes-hantavirus corrected to current ECDC figures; chikungunya + FIFA re-attested against live sources. Source-pull surfaced more re-pointing/number work — see entry.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,22 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Signal re-verification pass — andes corrected, chikungunya + FIFA re-attested (commit pending — backfill after commit)
+
+Driven by the new review-digest backlog (16 stale signals). Two background research agents fetched each stale signal's primary source live (2026-05-30) and compared current state to the signal's claims; content-standards-agent reviewed the resulting curated edits and wrote the session source-review marker before any signals.json write.
+
+Edits this commit (signals.json only — status.json + public/api/v1/* regenerate automatically via the push-triggered Status Refresh workflow, so they are deliberately not hand-edited here):
+- **andes-hantavirus-mv-hondius-2026** — numeric correction from the cited ECDC primary source, which now shows the outbreak at 13 cases (11 confirmed, 2 probable), 3 deaths (was 11 / 9 confirmed). Updated the summary + the `Confirmed/probable cases` metric (sourceId unchanged: ecdc-andes-surveillance) and bumped lastUpdated + lastChecked. Left "Countries=9" (ECDC, not cleanly re-confirmable on the page) and "US states=11" (different source: cdc-hantavirus-situation-summary) untouched.
+- **chikungunya-2026** — re-attested (lastChecked → 2026-05-30); PAHO alerts page shows a current Chikungunya alert (10 Feb 2026). No data change.
+- **fifa-world-cup-2026-prep** — re-attested (lastChecked → 2026-05-30); WHO mass-gatherings page references 2026 FIFA World Cup prep. No data change.
+
+**Files touched:**
+- `src/data/signals.json` — 3 signals as above.
+
+**Still open (proposed to maintainer, not yet applied) — source re-pointing + number refreshes the research surfaced:** measles (re-point to `cdc.gov/measles/data-research/`; live count now 1,983/30 vs signal 1,952/29), cholera (Africa CDC weekly EI report), ebola-bundibugyo (WHO DON item 2026-DON605, dated 29 May 2026 with full DRC/Uganda figures), mpox (WHO mpox sitrep #65 — Africa CDC mpox pages 404/stale), avian-influenza-h5 (re-point to CDC bird-flu situation summary — current authority for the 71 human-case figure; USDA is animal-health only), lassa (NCDC weekly SitRep — URL needs manual confirm, domain blocked to the research agent). These touch signal-sources.json and need source-integrity-agent review.
+
+**Verify:** `npm run validate:data` passes. `npm run review:digest` drops from 16 → 13 NEEDS-HUMAN. The andes signal detail page shows 13 cases (11 confirmed). status.json/API refresh on the next Status Refresh run triggered by this push.
 
 ## ✅ EMS World Briefing surface removed post-event (commit 2d33be7)
 
