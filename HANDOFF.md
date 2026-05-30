@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Signal re-verification pass — andes corrected, chikungunya + FIFA re-attested (commit pending — backfill after commit)
+## ✅ Signal re-verification pass — andes corrected, chikungunya + FIFA re-attested (commit 67aec58)
 
 Driven by the new review-digest backlog (16 stale signals). Two background research agents fetched each stale signal's primary source live (2026-05-30) and compared current state to the signal's claims; content-standards-agent reviewed the resulting curated edits and wrote the session source-review marker before any signals.json write.
 
