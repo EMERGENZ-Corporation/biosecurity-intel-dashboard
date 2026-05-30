@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ EMS World Briefing surface removed post-event (commit pending — backfill after commit)
+## ✅ EMS World Briefing surface removed post-event (commit 2d33be7)
 
 Completes the backlog item "Remove EMS World Briefing surface after 2026-05-30" and the `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30` marker. EMS World Live: Austin ended 2026-05-30; the `/ems-world-briefing` route was a temporary conference surface with no unique value over the standing dashboard. This was the first NEEDS-HUMAN item the new review-digest flagged (scheduled-code-removal) — removing it clears that item (digest dropped 17 → 16).
 
