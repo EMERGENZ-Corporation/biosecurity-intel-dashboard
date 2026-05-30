@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "status": "ok",
-  "generatedAt": "2026-05-29T09:39:50.528Z",
+  "status": "degraded",
+  "generatedAt": "2026-05-30T08:19:14.039Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-28T00:00:00.000Z",
     "lastChecked": "2026-05-28T18:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-28T18:00:00.000Z",
-    "dataAgeHours": 33.66403555555556,
-    "officialCheckAgeHours": 15.664035555555555
+    "dataAgeHours": 56.320566666666664,
+    "officialCheckAgeHours": 38.320566666666664
   },
   "signals": {
     "total": 17,
@@ -81,8 +81,16 @@
         "total": 1
       }
     },
-    "staleSignalIds": [],
-    "timelineEvents": 43,
+    "staleSignalIds": [
+      "andes-hantavirus-mv-hondius-2026",
+      "mpox-africa-clade-i-2026",
+      "seasonal-influenza-2026",
+      "lassa-fever-2026",
+      "chikungunya-2026",
+      "screwworm-onehealth-2026",
+      "fifa-world-cup-2026-prep"
+    ],
+    "timelineEvents": 44,
     "totalMapMarkers": 137,
     "totalDetailSections": 81
   },
@@ -99,7 +107,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-05-29T04:00:00.000Z"
+    "newest": "2026-05-30T03:25:43.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -221,5 +229,7 @@
       }
     ]
   },
-  "staleReasons": []
+  "staleReasons": [
+    "7 signal(s) older than 168h"
+  ]
 }
