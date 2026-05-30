@@ -25,6 +25,7 @@ const REQUIRED_PACKAGE_SCRIPTS = [
   'audit:sources',
   'audit:source-drift',
   'monitor:status',
+  'review:digest',
   'verify:production',
 ]
 
@@ -88,6 +89,15 @@ const WORKFLOW_CHECKS = [
       // a CONTENT-STANDARDS §3.4 conversation.
       'MAX_OFFICIAL_CHECK_AGE_HOURS: 168',
       'MAX_DATA_AGE_HOURS: 168',
+    ],
+  },
+  {
+    id: 'review-digest',
+    path: '.github/workflows/review-digest.yml',
+    requiredText: [
+      "cron: '30 6 * * *'",
+      'npm run review:digest',
+      'review-digest',
     ],
   },
   {

@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-28 (Briefings picker centralized + validator enforces coverage — no content auto-generation, halt condition preserved.)
+**Last updated:** 2026-05-30 (Human Review Digest — consolidated read-only "what needs a human" process + daily review-digest issue; never auto-edits curated fields.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,28 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Human Review Digest — consolidated "what needs a human" process (commit pending — backfill after commit)
+
+Triggered by a `Production Status Monitor` failure email. Diagnosed: the deployed `/status.json` self-reports `degraded` because 16 of 17 signals' `lastChecked` exceeded the 168h (7-day) human-review threshold — `lastChecked` is a humans-only attestation (CONTENT-STANDARDS §3.4), so the monitor was working as designed, not a code/deploy bug (Status Refresh + Vercel healthy, status.json generated 11h ago). User chose **not** to silently bump timestamps (that would fabricate a review) and instead asked for a process that "flags any item, function or action of the dashboard that needs human intervention/review and gives a recommendation/summary of actions… the dashboard can't be babysat, it needs to be functionally autonomous (i.e. review-gated, not unattended) and only involve humans when safety/review is needed."
+
+Built a read-only consolidated digest, architecture reviewed first (inventoried 22 recurring review gates). It classifies items into **NEEDS-HUMAN** (gate tripped/will trip) and **AUTONOMOUS-WATCH** (approaching threshold), and for each emits the exact file, field, primary-source URL, and action. Gates covered: per-signal `lastChecked` >168h; `triageCard.lastReviewed` >365d (CI blocker); Tier 1/2 source `lastVerified` >30d or malformed; detail-section drift >365d (advisory); and scheduled `_REMOVE_AFTER_`/`_DEPRECATE_AFTER_` code markers past due (caught the EMS World marker due 2026-05-30 as its first real hit). It also folds present `*-result.json` monitor artifacts in as status pointers. **Report-only (exit 0)** — the hourly `status-monitor` stays the hard red-X gate; the digest is the actionable to-do board. `REVIEW_DIGEST_STRICT=1` gives a local non-zero gate. It never writes a curated field (would fabricate an attestation).
+
+A new daily workflow (06:30 UTC) runs it and reconciles one reusable `review-digest` issue (mirrors the `status-monitor` reconcile pattern; `contents:read` + `issues:write`, no secrets), so a person gets a prioritized action list instead of a bare red X. Registered in `audit:autonomy` (script + workflow) so CI guards it against silent deletion, and disclosed in the public `status.json` `automation.monitors` block.
+
+**Files touched:**
+- `scripts/review-digest.mjs` — new. Read-only digest generator; writes only `review-digest-result.json`. No network.
+- `.github/workflows/review-digest.yml` — new. Daily digest + reusable `review-digest` issue reconciliation.
+- `package.json` — added `review:digest` script.
+- `.gitignore` — ignore `review-digest-result.json`.
+- `scripts/audit-autonomy.mjs` — added `review:digest` to `REQUIRED_PACKAGE_SCRIPTS` and a `review-digest` `WORKFLOW_CHECKS` entry.
+- `scripts/generate-status.mjs` — added `human-review-digest` to `automation.monitors`.
+- `public/status.json`, `public/api/v1/*` — regenerated so the committed contract matches the code (status remains `degraded` — 16/17 signals genuinely stale; no masking).
+- `RUNBOOK.md` — new §2.8 documenting the digest, buckets, and how to clear a NEEDS-HUMAN item.
+
+**Note for next agent:** the 16 stale signals are a *real* review gap, not noise — they need primary-source re-verification + a `lastChecked` bump by a human, not an automated timestamp touch. The digest now tells you exactly which and how.
+
+**Verify:** `npm run review:digest` (prints NEEDS-HUMAN/WATCH groups, exit 0); `npm run audit:autonomy` (OK — 7 workflows, 13 npm scripts); `npm run test:validators && npm run validate:data && npm run build` all pass.
 
 ## ✅ Briefings picker centralized + validator enforces coverage (commit 315d9a8)
 

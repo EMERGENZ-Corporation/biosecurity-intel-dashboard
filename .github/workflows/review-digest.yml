@@ -1,0 +1,155 @@
+name: Human Review Digest
+
+on:
+  schedule:
+    # Daily at 06:30 UTC — 30 minutes after Status Refresh (06:00) so the
+    # underlying signal data is fresh. Summarizes every recurring human-review
+    # gate into ONE actionable issue so the dashboard runs unattended and only
+    # pulls a person in when review is genuinely due.
+    - cron: '30 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build human-review digest
+        id: digest
+        # Report-only: the Production Status Monitor remains the hard red-X gate.
+        # This step never fails the workflow; it produces the actionable list.
+        run: npm run review:digest
+
+      - name: Reconcile review digest issue
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs')
+            const marker = '<!-- emergenz-review-digest -->'
+            const title = '[REVIEW DIGEST] Dashboard items needing human attention'
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            const result = JSON.parse(fs.readFileSync('review-digest-result.json', 'utf8'))
+
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'review-digest',
+                color: '0E8A16',
+                description: 'Consolidated human-review / human-intervention digest',
+              })
+            } catch (error) {
+              if (error.status !== 422) throw error
+            }
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'review-digest',
+              per_page: 20,
+            })
+            const existing = issues.find((issue) =>
+              issue.title === title || issue.body?.includes(marker)
+            )
+
+            if (result.ok) {
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  body: [
+                    'All clear — no human action is currently due. The autonomous pipeline is healthy.',
+                    `Checked at: \`${result.checkedAt}\``,
+                    `Run: ${runUrl}`,
+                  ].join('\n'),
+                })
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  state: 'closed',
+                })
+              }
+              return
+            }
+
+            const byCategory = new Map()
+            for (const item of result.needsHuman) {
+              if (!byCategory.has(item.category)) byCategory.set(item.category, [])
+              byCategory.get(item.category).push(item)
+            }
+
+            const lines = [
+              marker,
+              '## Human review needed',
+              '',
+              `**${result.counts.needsHuman}** item(s) need human attention; **${result.counts.watch}** approaching a threshold (watch).`,
+              '',
+              '> This is the actionable to-do list, not a production outage. Production health is tracked separately by the `status-monitor` issue. Items below need a human because they touch curated, humans-only fields (CONTENT-STANDARDS §3.4) or scheduled code removals — the pipeline must not auto-edit them.',
+              '',
+            ]
+
+            for (const [category, items] of byCategory) {
+              lines.push(`### ${category} (${items.length})`)
+              for (const item of items) {
+                lines.push(`- **[${item.severity}] ${item.title}**`)
+                lines.push(`  - ${item.recommendedAction.summary}`)
+                lines.push(`  - \`${item.recommendedAction.file}\`${item.recommendedAction.field ? ` · \`${item.recommendedAction.field}\`` : ''}`)
+                if (item.recommendedAction.primarySource?.url) {
+                  lines.push(`  - Source: ${item.recommendedAction.primarySource.url}`)
+                }
+              }
+              lines.push('')
+            }
+
+            const failingMonitors = (result.monitors || []).filter((m) => !m.ok)
+            if (failingMonitors.length > 0) {
+              lines.push('### related autonomous monitors')
+              for (const m of failingMonitors) {
+                lines.push(`- \`${m.id}\` is reporting a failure — see the \`${m.issueLabel}\` issue for details.`)
+              }
+              lines.push('')
+            }
+
+            lines.push(`Checked at: \`${result.checkedAt}\``)
+            lines.push(`Run: ${runUrl}`)
+            lines.push('')
+            lines.push('_Auto-generated by the EMERGENZ human-review digest. This issue is reused to prevent alert spam, and closes automatically when no items remain._')
+
+            const body = lines.join('\n')
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['review-digest'],
+              })
+            }

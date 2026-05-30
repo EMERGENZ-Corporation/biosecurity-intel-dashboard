@@ -188,6 +188,12 @@ function main() {
         action: 'Checks deployed /status.json and opens one reusable status-monitor issue on failure.',
       },
       {
+        id: 'human-review-digest',
+        cadence: 'Daily',
+        workflow: 'Human Review Digest',
+        action: 'Consolidates configured recurring human-review gates (signal/source/clinical freshness, scheduled code removals) into one reusable review-digest issue with the specific action to clear each item. Report-only; never edits curated data.',
+      },
+      {
         id: 'official-source-audit',
         cadence: 'Daily',
         workflow: 'Official Source Audit',

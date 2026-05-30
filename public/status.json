@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "degraded",
-  "generatedAt": "2026-05-30T08:19:14.039Z",
+  "generatedAt": "2026-05-30T20:21:09.908Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-28T00:00:00.000Z",
     "lastChecked": "2026-05-28T18:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-28T18:00:00.000Z",
-    "dataAgeHours": 56.320566666666664,
-    "officialCheckAgeHours": 38.320566666666664
+    "dataAgeHours": 68.35275222222222,
+    "officialCheckAgeHours": 50.35275222222222
   },
   "signals": {
     "total": 17,
@@ -83,10 +83,19 @@
     },
     "staleSignalIds": [
       "andes-hantavirus-mv-hondius-2026",
+      "ebola-bundibugyo-drc-2026",
+      "measles-us-2026",
       "mpox-africa-clade-i-2026",
+      "avian-influenza-h5-2026",
+      "cholera-africa-2026",
       "seasonal-influenza-2026",
+      "covid-wastewater-2026",
+      "norovirus-wastewater-2026",
+      "rsv-wastewater-2026",
+      "hmpv-wastewater-2026",
       "lassa-fever-2026",
       "chikungunya-2026",
+      "candida-auris-wastewater-2026",
       "screwworm-onehealth-2026",
       "fifa-world-cup-2026-prep"
     ],
@@ -107,7 +116,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-05-30T03:25:43.000Z"
+    "newest": "2026-05-30T19:15:00.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -204,6 +213,12 @@
         "action": "Checks deployed /status.json and opens one reusable status-monitor issue on failure."
       },
       {
+        "id": "human-review-digest",
+        "cadence": "Daily",
+        "workflow": "Human Review Digest",
+        "action": "Consolidates configured recurring human-review gates (signal/source/clinical freshness, scheduled code removals) into one reusable review-digest issue with the specific action to clear each item. Report-only; never edits curated data."
+      },
+      {
         "id": "official-source-audit",
         "cadence": "Daily",
         "workflow": "Official Source Audit",
@@ -230,6 +245,6 @@
     ]
   },
   "staleReasons": [
-    "7 signal(s) older than 168h"
+    "16 signal(s) older than 168h"
   ]
 }

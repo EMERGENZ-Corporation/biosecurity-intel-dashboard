@@ -23,6 +23,7 @@
         "audit:source-drift": "node scripts/audit-source-drift.mjs",
         "audit:impact": "node scripts/audit-impact-baseline.mjs",
         "monitor:status": "node scripts/check-status.mjs",
+        "review:digest": "node scripts/review-digest.mjs",
         "verify:production": "node scripts/verify-production.mjs",
         "preview": "vite preview"
     },

@@ -147,6 +147,27 @@ Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). The
 
 **Cost expectation:** ~$0.10–$0.30 per full run (26 cases × judge calls). Monthly cadence → ~$1.20–$3.60/year. Tighten `WEVAL_HALLUCINATION_TOL`, accuracy / limit thresholds, or judge model only with deliberate cost-impact awareness.
 
+### 2.8 `Human Review Digest` — review-digest issue
+
+**Symptom:** reusable issue `review-digest` (titled `[REVIEW DIGEST] Dashboard items needing human attention`) opens or updates with a grouped, prioritized list of items needing a human.
+
+**What it is:** the digest answers "what do I, a human, actually need to do?" — it is the actionable to-do board, not an outage signal. It consolidates the configured recurring review gates that require a curated-field edit a person must attest (CONTENT-STANDARDS §3.4) or a scheduled code removal. It is **report-only and never fails the workflow** (`npm run review:digest`, exit 0; set `REVIEW_DIGEST_STRICT=1` for a local non-zero gate). The hard red-X enforcement stays with the hourly `status-monitor` (§2.4). Run it any time: `npm run review:digest`.
+
+**Why a separate channel:** the Production Status Monitor only tells you production is degraded; it does not tell you which signals, which sources, or what to change. The digest does, with the exact file, field, and primary-source URL for each item. Keeping them separate prevents the bare red-X (production health) from being confused with the to-do list (curation work).
+
+**Buckets:**
+
+- **NEEDS-HUMAN** — a gate has tripped or will trip on the next run; act now. Sources: signal `lastChecked` >168h; `triageCard.lastReviewed` >365d (a CI blocker — fix before the next data commit); Tier 1/2 source `lastVerified` >30d or malformed; a `_REMOVE_AFTER_`/`_DEPRECATE_AFTER_` code marker whose date has passed.
+- **AUTONOMOUS-WATCH** — within policy but approaching a threshold (signal 120–168h, source 21–30d, triage 300–365d, detail sections >365d). Pre-warning only; no red-X is imminent.
+
+**Recovery (clear a NEEDS-HUMAN item):**
+1. Open the `review-digest` issue. Each item names the file, field, and (for signals/sources) the primary-source URL.
+2. Verify the item against its primary source — this is the human attestation the curated timestamp represents; do not bump a timestamp without doing the review. For `triageCard.lastReviewed` items (category: clinical-content-freshness), verification must be performed by a reviewer with the clinical domain knowledge to assess whether the guidance still matches the cited authority — not just any human.
+3. Edit the named field (`signals.json` `lastChecked` / `triageCard.lastReviewed`, or `signal-sources.json` `lastVerified`) to today's ISO date; commit + push. For a removal marker, complete the checklist in the file/`HANDOFF.md` or revise the marker date if the decision changed.
+4. Status Refresh regenerates `status.json` on push to signal data; the next daily digest run closes the issue automatically once no NEEDS-HUMAN items remain.
+
+**Important:** the digest is deterministic and reads only local data + present `*-result.json` artifacts. It makes no network calls and must never write a curated field — that would fabricate a human-review attestation. If it ever does, that is a CONTENT-STANDARDS §3.4 regression, not a feature.
+
 ---
 
 ## 3. Secret rotation
