@@ -9,8 +9,8 @@ const files = {
   signalSources: `${DATA_DIR}/signal-sources.json`,
 }
 
-// Briefings priority — shared with src/utils/briefings.ts. The /briefings and
-// /ems-world-briefing pages pick the first matching section from this list.
+// Briefings priority — shared with src/utils/briefings.ts. The /briefings
+// page picks the first matching section from this list.
 // Every signal must contain at least one section with an id in this list, so
 // the picker never has to fall through to an arbitrary first section and so
 // new signals automatically have an operationally-actionable card without a
@@ -332,8 +332,8 @@ signals.forEach((signal, index) => {
       })
       // Briefings coverage — every signal must surface at least one section
       // from the canonical briefings priority list (src/utils/briefings-priority.json).
-      // Without this, /briefings and /ems-world-briefing would fall through to
-      // an arbitrary first section that may not be operationally-actionable.
+      // Without this, /briefings would fall through to an arbitrary first
+      // section that may not be operationally-actionable.
       const sectionIds = signal.detailSections.map((s) => s.id)
       const hasBriefingCoverage = sectionIds.some((id) => BRIEFING_PRIORITY.includes(id))
       if (!hasBriefingCoverage) {

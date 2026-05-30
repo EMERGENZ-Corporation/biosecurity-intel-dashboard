@@ -3,9 +3,8 @@
  * "briefings" view of the dashboard.
  *
  * A "briefing" is a derived view of a Signal, not a separate content type.
- * /briefings and /ems-world-briefing both render briefing cards by picking
- * ONE detail section from each signal using the priority order in
- * briefings-priority.json.
+ * The /briefings page renders briefing cards by picking ONE detail section
+ * from each signal using the priority order in briefings-priority.json.
  *
  * The priority list is shared with scripts/validate-data.mjs, which fails
  * the build if any signal lacks at least one matching section. That guard

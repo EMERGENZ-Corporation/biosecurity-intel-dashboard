@@ -177,9 +177,9 @@ try {
   )
 
   // Briefings-priority coverage — every signal must have at least one section
-  // whose id is in src/utils/briefings-priority.json, so /briefings and
-  // /ems-world-briefing always have an operationally-actionable section to
-  // surface without falling through to an arbitrary first section.
+  // whose id is in src/utils/briefings-priority.json, so /briefings always
+  // has an operationally-actionable section to surface without falling through
+  // to an arbitrary first section.
   expectFailure(
     'signal-without-briefings-priority-section',
     (signals) => {

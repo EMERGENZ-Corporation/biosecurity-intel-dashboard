@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-30 (Human Review Digest — consolidated read-only "what needs a human" process + daily review-digest issue; never auto-edits curated fields.)
+**Last updated:** 2026-05-30 (EMS World Briefing surface removed post-event; /ems-world-briefing + /demo now redirect to /briefings. Clears the review-digest removal marker.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ EMS World Briefing surface removed post-event (commit pending — backfill after commit)
+
+Completes the backlog item "Remove EMS World Briefing surface after 2026-05-30" and the `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30` marker. EMS World Live: Austin ended 2026-05-30; the `/ems-world-briefing` route was a temporary conference surface with no unique value over the standing dashboard. This was the first NEEDS-HUMAN item the new review-digest flagged (scheduled-code-removal) — removing it clears that item (digest dropped 17 → 16).
+
+Removed the surface and pointed old URLs at the standing briefings page. Standing content (FIFA signal, measles triage, `/briefings`, all `src/data/*.json`) is untouched per the checklist.
+
+**Files touched:**
+- `src/pages/DemoPack.tsx` — deleted (the conference page).
+- `docs/AUSTIN-DEMO-RUNBOOK.md` — deleted (event-specific operator runbook).
+- `src/App.tsx` — dropped the lazy `DemoPack` import; `/ems-world-briefing` and `/demo` now render `<Navigate to="/briefings" replace />` (bookmarked URLs land somewhere useful instead of 404). Imports `Navigate`.
+- `src/components/NavBar.tsx` — removed the "EMS World Briefing" nav entry.
+- `src/utils/briefings.ts`, `src/utils/briefings-priority.json`, `scripts/validate-data.mjs`, `scripts/test-validate-data.mjs` — updated stale comments that referenced the now-removed `/ems-world-briefing` route (no logic change).
+
+**Verify:** `npm run build` + `npm run test:validators` + `npm run validate:data` pass. In the browser, `/ems-world-briefing` and `/demo` both redirect to `/briefings` (verified live: pathname resolves to `/briefings`, nav no longer shows "EMS World Briefing", `/briefings` renders 12 signals). `npm run review:digest` no longer reports the `scheduled-code-removal` item. `grep -ri "EMS_WORLD_2026_REMOVE_AFTER" src scripts .github` returns nothing.
 
 ## ✅ Human Review Digest — consolidated "what needs a human" process (commit 0df46ac)
 
@@ -2511,7 +2526,7 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 
 ## ⏳ Outstanding work (backlog)
 
-- **Remove EMS World Briefing surface after 2026-05-30 (small, time-boxed).** EMS World Live: Austin ends 2026-05-30. The `/ems-world-briefing` route was a temp conference surface and has no unique value-add over the standing dashboard (the FIFA signal, measles triage card, and `/briefings` page all live at their own routes and are unaffected). After 2026-05-30, remove: (1) `src/pages/DemoPack.tsx`; (2) the lazy import + both `<Route>` entries in `src/App.tsx` (`/ems-world-briefing` and the `/demo` alias); (3) the nav entry in `src/components/NavBar.tsx`; (4) `docs/AUSTIN-DEMO-RUNBOOK.md`. Searchable marker in code: `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30` — grep for it to find every reference. Full checklist is in the comment at the top of `DemoPack.tsx`. Optional at removal: add a one-line redirect from `/ems-world-briefing` → `/briefings` so any externally-bookmarked URL lands somewhere useful instead of NotFound. Do **not** remove any data in `src/data/*.json` — the FIFA, measles, and briefings content stays.
+- **✅ DONE (2026-05-30, see top of log) — Remove EMS World Briefing surface after 2026-05-30 (small, time-boxed).** EMS World Live: Austin ends 2026-05-30. The `/ems-world-briefing` route was a temp conference surface and has no unique value-add over the standing dashboard (the FIFA signal, measles triage card, and `/briefings` page all live at their own routes and are unaffected). After 2026-05-30, remove: (1) `src/pages/DemoPack.tsx`; (2) the lazy import + both `<Route>` entries in `src/App.tsx` (`/ems-world-briefing` and the `/demo` alias); (3) the nav entry in `src/components/NavBar.tsx`; (4) `docs/AUSTIN-DEMO-RUNBOOK.md`. Searchable marker in code: `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30` — grep for it to find every reference. Full checklist is in the comment at the top of `DemoPack.tsx`. Optional at removal: add a one-line redirect from `/ems-world-briefing` → `/briefings` so any externally-bookmarked URL lands somewhere useful instead of NotFound. Do **not** remove any data in `src/data/*.json` — the FIFA, measles, and briefings content stays.
 
 - **Tier 1/2 source-drift review (medium, mostly cleared).** Triage of 13 drifted pages documented at [docs/SOURCE-DRIFT-2026-05-24.md](docs/SOURCE-DRIFT-2026-05-24.md). **Status as of 2026-05-25:** 5 of 13 refreshed via WebFetch (`africa-cdc-outbreaks`, `paho-epi-alerts`, `wastewaterscan`, `ecdc-cdtr`, `who-mass-gatherings`). **4 deferred to operator browser-side check (~5 min total)** because WebFetch is blocked by their hosts in this environment: `fda-safety-alerts`, `netec-vhf-ppe-matrix`, `netec-hantavirus-lab-resources`, `phac-andes-media-update` (the PHAC one drifted on `lastModified` only, suggesting a cosmetic header update — likely safe to refresh on sight). **Bucket B (SME, this week):** confirm Andes hantavirus structured fields against the current ECDC + WHO source pages — 4 sources (`ecdc-andes-surveillance`, `ecdc-andes-rra`, `who-andes-rra-v2`, `who-don601`). Blocked on: SME availability for bucket B; ~5 minutes of operator browser time for the four WebFetch-blocked sources.
 - **~~Timeline auto-promote (item 2).~~** ✅ Shipped 2026-05-25 — see the "Timeline auto-promote — deterministic Tier 1 news → signal-timeline.json" entry above. Deferred polish (CONTENT-STANDARDS §4 subsection naming the contract; per-signal cap tuning once a screaming-pace outbreak window is observed; Africa CDC RSS feed addition; auto events in `feed.rss`) is tracked in that entry's "Outstanding follow-up" section.

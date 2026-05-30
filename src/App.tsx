@@ -1,5 +1,5 @@
 import { Suspense, lazy, useState } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import DisclaimerBanner from './components/DisclaimerBanner'
 import AcknowledgmentModal, { hasAcknowledged } from './components/AcknowledgmentModal'
@@ -7,7 +7,6 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 
 // Lazy-load route modules so large data and map libraries stay out of the app shell.
 const Overview = lazy(() => import('./pages/Overview'))
-const DemoPack = lazy(() => import('./pages/DemoPack'))
 const Signals = lazy(() => import('./pages/Signals'))
 const News = lazy(() => import('./pages/News'))
 const SignalDetail = lazy(() => import('./pages/SignalDetail'))
@@ -143,8 +142,9 @@ export default function App() {
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Overview />} />
-              <Route path="/ems-world-briefing" element={<DemoPack />} />
-              <Route path="/demo" element={<DemoPack />} />
+              {/* EMS World Live: Austin surface removed after 2026-05-30; redirect bookmarked URLs to the standing briefings page. */}
+              <Route path="/ems-world-briefing" element={<Navigate to="/briefings" replace />} />
+              <Route path="/demo" element={<Navigate to="/briefings" replace />} />
               <Route path="/signals" element={<Signals />} />
               <Route path="/signals/:id" element={<SignalDetail />} />
               <Route path="/news" element={<News />} />
