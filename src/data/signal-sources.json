@@ -702,5 +702,35 @@
     ],
     "sourceTier": 2,
     "notes": "Nigeria's national public health authority Lassa fever page (URL provided/confirmed by maintainer). NCDC also publishes weekly Lassa fever situation reports; consult those for current case/death figures before publishing any quantified Lassa claim."
+  },
+  {
+    "id": "africa-cdc-ei-weekly",
+    "authority": "Africa CDC",
+    "authorityFull": "Africa Centres for Disease Control and Prevention",
+    "title": "Africa CDC — Epidemic Intelligence Weekly Report (May 2026)",
+    "sourceType": "expert-weekly-report",
+    "primary": true,
+    "url": "https://africacdc.org/download/africa-cdc-epidemic-intelligence-weekly-report-may-2026/",
+    "lastVerified": "2026-05-30",
+    "domains": [
+      "enteric"
+    ],
+    "sourceTier": 1,
+    "notes": "Africa CDC's live continent-wide epidemic-intelligence weekly report; continent-level figures (e.g. cholera totals) live inside the linked weekly PDF, not scrapeable HTML. URL is month-dated — update as new reports publish. The /disease-outbreak/ archive is stale through 2024 and must not be used."
+  },
+  {
+    "id": "who-mpox-sitrep",
+    "authority": "WHO",
+    "authorityFull": "World Health Organization",
+    "title": "WHO Mpox — Multi-country outbreak External Situation Report",
+    "sourceType": "expert-weekly-report",
+    "primary": true,
+    "url": "https://www.who.int/publications/m/item/multi-country-outbreak-of-mpox--external-situation-report--65---30-april-2026",
+    "lastVerified": "2026-05-30",
+    "domains": [
+      "zoonotic"
+    ],
+    "sourceTier": 1,
+    "notes": "WHO mpox External Situation Report (#65, 30 Apr 2026). Clade-aware multi-country figures live inside the linked PDF. Africa CDC mpox pages were 404/stale, so WHO is the better live authority for this signal."
   }
 ]

@@ -1725,15 +1725,16 @@
     "summary": "Mpox clade I and travel-linked importation monitoring remain operationally significant for clinical recognition, specimen routing, and laboratory clade differentiation. Verify current country-level trends and any importation details against specific Africa CDC, WHO, or CDC updates before publication.",
     "operationalRelevance": "Clinicians should consider mpox in compatible rash illnesses with relevant travel or contact history. Confirm specimen pathways for orthopoxvirus PCR and laboratory clade differentiation; isolate suspected cases per CDC interim guidance.",
     "whyItMatters": "Clade I has historically been associated with higher severity than clade IIb. Detection in non-endemic jurisdictions raises importation and clinical-readiness implications.",
-    "primarySourceId": "africa-cdc-outbreaks",
+    "primarySourceId": "who-mpox-sitrep",
     "sourceIds": [
+      "who-mpox-sitrep",
       "africa-cdc-outbreaks",
       "who-disease-outbreak-news",
       "cdc-current-outbreaks",
       "cdc-han"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-22T20:55:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "mpox-drc-equateur",
@@ -2475,13 +2476,14 @@
     "summary": "Africa CDC reported 40,707 cholera cases continent-wide from January 1 through May 14, 2026 — a 65% year-over-year decline compared to the same period in 2025. Despite the overall volume decrease, case fatality ratios remain elevated in conflict-affected and low-healthcare-access settings. Sudan, Ethiopia, Somalia, Mozambique, Malawi, and Zimbabwe continue reporting active transmission.",
     "operationalRelevance": "Humanitarian, public health, and EMS preparedness teams supporting affected regions should plan for WASH-driven case surges, oral rehydration capacity, and cross-border transmission. Travel medicine clinicians should review cholera vaccination recommendations for high-risk travelers.",
     "whyItMatters": "Cholera spread is tightly coupled to WASH conditions, climate shocks, and population movement. Cross-border transmission risk requires current country-level verification.",
-    "primarySourceId": "africa-cdc-outbreaks",
+    "primarySourceId": "africa-cdc-ei-weekly",
     "sourceIds": [
+      "africa-cdc-ei-weekly",
       "africa-cdc-outbreaks",
       "who-disease-outbreak-news"
     ],
     "lastUpdated": "2026-05-23T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "cholera-sd-khartoum",
@@ -2700,7 +2702,7 @@
       {
         "label": "Africa-wide cases (Jan 1–May 14, 2026)",
         "value": 40707,
-        "sourceId": "africa-cdc-outbreaks"
+        "sourceId": "africa-cdc-ei-weekly"
       }
     ],
     "relatedSignals": [
@@ -2753,7 +2755,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-22T20:55:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "flu-us-cdc",
@@ -2941,7 +2943,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "covid-us-boston",
@@ -3149,7 +3151,7 @@
       "cdc-nwss"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "noro-us-stanford",
@@ -3367,7 +3369,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "rsv-us-atlanta",
@@ -3524,7 +3526,7 @@
       "cdc-nwss"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "hmpv-us-cambridge",
@@ -4193,7 +4195,7 @@
       "cdc-current-outbreaks"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "cauris-us-ny",
@@ -4372,7 +4374,7 @@
       "woah-wahis"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-22T20:55:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "screw-pa",
