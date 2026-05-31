@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Podcast build deferred — hosting/visibility decision recorded (commit pending — backfill after commit)
+## ✅ Podcast build deferred — hosting/visibility decision recorded (commit c7cf3ab)
 
 Asked whether the podcast export (`PODCAST-EXPORT-DESIGN.md`) could be built within one session. It can't — by its own §14 it's a 6-session feature with hard external dependencies (Kokoro-82M TTS runtime, SME audio review, Vercel Blob credentials, a 2-week green soak). After confirming the live dashboard could be kept clean but the public repo cannot hide in-progress code without a private repo, the maintainer **deferred the build** ("too much to tackle sequentially") and locked the hosting decision for when it resumes.
 
