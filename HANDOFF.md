@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Phase B — re-point 4 signals to specific authoritative sources (commit pending — backfill after commit)
+## ✅ Phase B — re-point 4 signals to specific authoritative sources (commit f0500b8)
 
 Follow-on to the signal re-verification pass. The source-pull found that several signals' primarySource pointed at an index/homepage or the wrong authority. Re-pointed 4 of the 6 candidates to the exact authoritative pages and added 4 new source-registry entries. source-integrity-agent reviewed the signal-sources.json additions + re-points (session marker); the load-bearing DON-index source (who-disease-outbreak-news, used by auto-timeline-promote) was preserved unchanged. I independently re-fetched the CDC measles + WHO DON pages via WebFetch before publishing any number.
 
