@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-30 (Signal re-verification pass: andes-hantavirus corrected to current ECDC figures; chikungunya + FIFA re-attested against live sources. Source-pull surfaced more re-pointing/number work — see entry.)
+**Last updated:** 2026-05-30 (Phase B source re-pointing: avian-flu/ebola/measles/lassa re-pointed to specific authoritative pages + 4 new Tier 1/2 sources; ebola + measles figures refreshed and independently verified. Cholera + mpox deferred — see backlog.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,32 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Phase B — re-point 4 signals to specific authoritative sources (commit pending — backfill after commit)
+
+Follow-on to the signal re-verification pass. The source-pull found that several signals' primarySource pointed at an index/homepage or the wrong authority. Re-pointed 4 of the 6 candidates to the exact authoritative pages and added 4 new source-registry entries. source-integrity-agent reviewed the signal-sources.json additions + re-points (session marker); the load-bearing DON-index source (who-disease-outbreak-news, used by auto-timeline-promote) was preserved unchanged. I independently re-fetched the CDC measles + WHO DON pages via WebFetch before publishing any number.
+
+New Tier 1/2 sources (src/data/signal-sources.json):
+- `cdc-h5-situation` (Tier 1) — CDC H5 Bird Flu Current Situation Summary.
+- `who-don-ebola-bundibugyo-drc-2026` (Tier 1) — WHO DON item 2026-DON605 (29 May 2026).
+- `cdc-measles-data` (Tier 1) — CDC Measles Cases & Outbreaks data page.
+- `ncdc-lassa-fever` (Tier 2) — NCDC Lassa fever page; URL provided/confirmed by the maintainer (ncdc.gov.ng is JS-rendered and blocked from automated fetch, so this rests on the maintainer's attestation; no quantified Lassa claim was published).
+
+Signal re-points (src/data/signals.json):
+- **avian-influenza-h5-2026** — primarySource USDA→`cdc-h5-situation` (CDC is the authority for the 71-human-case figure; USDA stays in sourceIds for animal detections). 71-cases metric re-sourced to CDC. lastChecked bumped.
+- **ebola-bundibugyo-drc-2026** — primarySource →`who-don-ebola-bundibugyo-drc-2026`; added 5 verified metrics (DRC 125 confirmed / 17 deaths / 906 suspected; Uganda 9 confirmed / 1 death) and folded the figures into the summary. lastUpdated + lastChecked bumped.
+- **measles-us-2026** — primarySource →`cdc-measles-data`; refreshed counts to the current 1,983 cases / 30 outbreaks (as of 28 May 2026) across summary, currentSituation, the 3 metrics, and one alternative-hypothesis evidence line. lastUpdated + lastChecked bumped.
+- **lassa-fever-2026** — primarySource →`ncdc-lassa-fever` (qualitative monitoring signal, no quantified claim). lastChecked bumped.
+
+**Still deferred (backlog — proposed URLs, need source-integrity review + edit):**
+- **cholera-africa-2026** → Africa CDC Epidemic Intelligence weekly report (`africacdc.org/download/africa-cdc-epidemic-intelligence-weekly-report-may-2026/`); the 40,707 figure lives inside the weekly PDF, not scrapeable HTML. Africa CDC `/disease-outbreak/` archive is stale (caps at 2024) — do not use it.
+- **mpox-africa-clade-i-2026** → WHO mpox External Situation Report #65 (`who.int/publications/m/item/multi-country-outbreak-of-mpox--external-situation-report--65---30-april-2026`); Africa CDC mpox pages 404/redirect to a stale 2024 brief, so WHO is the better live authority. Changes the source authority from Africa CDC to WHO — worth a deliberate decision.
+
+**Files touched:**
+- `src/data/signal-sources.json` — 4 new source entries.
+- `src/data/signals.json` — 4 signals re-pointed (+ ebola metrics added, measles numbers refreshed).
+
+**Verify:** `npm run validate:data` passes (referential integrity: all primarySourceIds resolve to Tier 1/2). `npm run review:digest` drops 13 → 9 NEEDS-HUMAN. `npm run build` passes. The ebola signal page now shows DRC/Uganda case metrics; measles shows 1,983/30. status.json/API refresh on the push-triggered Status Refresh.
 
 ## ✅ Signal re-verification pass — andes corrected, chikungunya + FIFA re-attested (commit 67aec58)
 

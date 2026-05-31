@@ -967,10 +967,37 @@
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with Africa CDC confirming active outbreak monitoring in both the DRC and Uganda. Multi-health-zone spread in eastern DRC continues; cross-border movement elevates geographic risk. Specific case and fatality counts require direct verification against the current WHO Disease Outbreak News (who.int/emergencies/disease-outbreak-news) or Africa CDC epidemic intelligence report.",
+    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with Africa CDC confirming active outbreak monitoring in both the DRC and Uganda. Per WHO Disease Outbreak News (29 May 2026), the DRC has reported 125 confirmed cases (17 deaths) and 906 suspected cases (223 suspected deaths, as of 27 May), and Uganda has reported 9 confirmed cases (1 death). Multi-health-zone spread in eastern DRC continues; cross-border movement elevates geographic risk.",
     "operationalRelevance": "Filovirus outbreaks demand strict isolation, source-control PPE, and contact tracing. Healthcare preparedness teams should review travel-history screening, airport and port-of-entry coordination, and laboratory specimen pathways for suspected viral hemorrhagic fever.",
     "whyItMatters": "Bundibugyo virus has caused multiple regional outbreaks since 2007 with case-fatality rates around 30–40%. Cross-border movement in eastern DRC, Uganda, and South Sudan elevates the risk of geographic spread; no licensed vaccine specific to Bundibugyo is currently available.",
     "geographyNotes": "Regional monitoring focuses on DRC and neighbouring countries where cross-border movement can affect surveillance and preparedness. Health-zone-level claims require a specific current outbreak report.",
+    "metrics": [
+      {
+        "label": "DRC confirmed cases (WHO DON, as of 27 May 2026)",
+        "value": 125,
+        "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+      },
+      {
+        "label": "DRC confirmed deaths",
+        "value": 17,
+        "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+      },
+      {
+        "label": "DRC suspected cases",
+        "value": 906,
+        "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+      },
+      {
+        "label": "Uganda confirmed cases (as of 29 May 2026)",
+        "value": 9,
+        "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+      },
+      {
+        "label": "Uganda confirmed deaths",
+        "value": 1,
+        "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+      }
+    ],
     "mapMarkers": [
       {
         "id": "ebola-drc-ituri",
@@ -1029,14 +1056,15 @@
         "label": "Beni — community surveillance & contact tracing hub"
       }
     ],
-    "primarySourceId": "who-disease-outbreak-news",
+    "primarySourceId": "who-don-ebola-bundibugyo-drc-2026",
     "sourceIds": [
+      "who-don-ebola-bundibugyo-drc-2026",
       "who-disease-outbreak-news",
       "africa-cdc-outbreaks",
       "cdc-current-outbreaks"
     ],
-    "lastUpdated": "2026-05-23T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastUpdated": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "detailSections": [
       {
         "id": "clinical-profile",
@@ -1351,17 +1379,18 @@
     "confidence": "official",
     "trend": "increasing",
     "status": "active",
-    "summary": "CDC confirmed 1,952 measles cases across 40 jurisdictions in 2026 (as of May 21), representing 29 outbreaks with 93% of cases outbreak-associated. No deaths reported in 2026. U.S. kindergartener MMR coverage has declined to 92.5% (from 95.2% in 2019–2020), leaving approximately 286,000 kindergarteners unvaccinated — the structural driver of sustained outbreak activity.",
+    "summary": "CDC confirmed 1,983 measles cases across 40 jurisdictions in 2026 (as of May 28), representing 30 outbreaks with 93% of cases outbreak-associated. No deaths reported in 2026. U.S. kindergartener MMR coverage has declined to 92.5% (from 95.2% in 2019–2020), leaving approximately 286,000 kindergarteners unvaccinated — the structural driver of sustained outbreak activity.",
     "operationalRelevance": "EMS and emergency departments should screen for measles in any febrile patient with rash, particularly in unvaccinated populations and clusters. Airborne precautions are required; one infected person in a waiting room can expose every subsequent patient for two hours. Confirm two-dose MMR status for healthcare staff.",
     "whyItMatters": "Measles can spread rapidly in undervaccinated communities and healthcare settings. Continued regional surveillance helps identify immunity gaps and protect elimination status.",
-    "primarySourceId": "cdc-current-outbreaks",
+    "primarySourceId": "cdc-measles-data",
     "sourceIds": [
+      "cdc-measles-data",
       "cdc-current-outbreaks",
       "cdc-han",
       "paho-epi-alerts"
     ],
-    "lastUpdated": "2026-05-23T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastUpdated": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "measles-tx-gaines",
@@ -1553,22 +1582,22 @@
       "sourceAuthority": "CDC HAN",
       "updatedAt": "2026-05-20"
     },
-    "currentSituation": "CDC confirmed 1,952 measles cases YTD as of May 21, 2026, across 40 jurisdictions in 29 discrete outbreaks. Ninety-three percent of cases are outbreak-associated; 9 cases involved international visitors to the U.S. No measles deaths have been reported in 2026. National kindergartener MMR vaccine coverage declined to 92.5% (2024–2025 school year), with an estimated 286,000 unvaccinated kindergarteners representing the principal immunity gap driving ongoing outbreaks.",
+    "currentSituation": "CDC confirmed 1,983 measles cases YTD as of May 28, 2026, across 40 jurisdictions in 30 discrete outbreaks. Ninety-three percent of cases are outbreak-associated; 9 cases involved international visitors to the U.S. No measles deaths have been reported in 2026. National kindergartener MMR vaccine coverage declined to 92.5% (2024–2025 school year), with an estimated 286,000 unvaccinated kindergarteners representing the principal immunity gap driving ongoing outbreaks.",
     "metrics": [
       {
-        "label": "Confirmed US cases YTD (as of May 21, 2026)",
-        "value": 1952,
-        "sourceId": "cdc-current-outbreaks"
+        "label": "Confirmed US cases YTD (as of May 28, 2026)",
+        "value": 1983,
+        "sourceId": "cdc-measles-data"
       },
       {
         "label": "Active outbreaks",
-        "value": 29,
-        "sourceId": "cdc-current-outbreaks"
+        "value": 30,
+        "sourceId": "cdc-measles-data"
       },
       {
         "label": "US jurisdictions with cases",
         "value": 40,
-        "sourceId": "cdc-current-outbreaks"
+        "sourceId": "cdc-measles-data"
       }
     ],
     "relatedSignals": [
@@ -1595,7 +1624,7 @@
       {
         "hypothesis": "Importation from high-incidence countries is the primary ignition mechanism; domestic under-vaccination amplifies but does not initiate outbreaks",
         "proponent": "Travel-medicine community; some state epidemiologists in high-importation states",
-        "evidence": "9 of 1,952 confirmed 2026 cases (0.5%) involved international visitors to the US. Multiple 2026 outbreaks trace to a single import event into a susceptible community. This framing supports border-point vaccination assessment and targeted traveler advisory issuance as co-equal interventions alongside domestic outreach.",
+        "evidence": "9 of 1,983 confirmed 2026 cases (0.5%) involved international visitors to the US. Multiple 2026 outbreaks trace to a single import event into a susceptible community. This framing supports border-point vaccination assessment and targeted traveler advisory issuance as co-equal interventions alongside domestic outreach.",
         "disposition": "active"
       },
       {
@@ -2038,8 +2067,9 @@
     "summary": "H5 avian influenza remains a One Health surveillance priority. CDC has confirmed 71 U.S. human cases since February 2024, all exposure-linked (dairy and poultry workers), with no deaths and no sustained human-to-human transmission. Current CDC public health risk assessment: LOW. U.S. poultry detections are declining from the February 2026 peak (~11.4 million birds); approximately 140,000 birds affected in May 2026. Dairy cattle herd detections continue.",
     "operationalRelevance": "Clinicians evaluating severe respiratory illness in patients with poultry, dairy, or symptomatic-animal exposures should consider avian influenza, contact public health, and use airborne precautions during AGPs. Animal-handler exposures should trigger occupational health follow-up.",
     "whyItMatters": "Animal-human interface signals are the leading indicators for pandemic potential. Detection of subtypes outside their usual host range, even at low human-incidence, warrants sustained surveillance.",
-    "primarySourceId": "usda-aphis-hpai",
+    "primarySourceId": "cdc-h5-situation",
     "sourceIds": [
+      "cdc-h5-situation",
       "usda-aphis-hpai",
       "woah-wahis",
       "cdc-current-outbreaks",
@@ -2047,7 +2077,7 @@
       "cdc-han"
     ],
     "lastUpdated": "2026-05-23T00:00:00Z",
-    "lastChecked": "2026-05-23T12:00:00Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "h5-tx-dairy",
@@ -2316,7 +2346,7 @@
       {
         "label": "US human cases since February 2024 (no deaths)",
         "value": 71,
-        "sourceId": "cdc-current-outbreaks"
+        "sourceId": "cdc-h5-situation"
       }
     ],
     "relatedSignals": [
@@ -3643,13 +3673,14 @@
     "summary": "Lassa fever remains a persistent West Africa VHF monitoring priority, especially in Nigeria and surrounding endemic areas. Verify current epidemiological figures against specific Africa CDC, WHO, or national public health reports before publication.",
     "operationalRelevance": "Clinicians evaluating febrile illness in returning travelers from West Africa should consider Lassa; coordinate with public health for specimen handling and ribavirin treatment guidance.",
     "whyItMatters": "Lassa is a persistent high-burden VHF with seasonal peaks and limited countermeasures; healthcare worker infections continue to be reported.",
-    "primarySourceId": "africa-cdc-outbreaks",
+    "primarySourceId": "ncdc-lassa-fever",
     "sourceIds": [
+      "ncdc-lassa-fever",
       "africa-cdc-outbreaks",
       "who-disease-outbreak-news"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-22T20:55:00.000Z",
+    "lastChecked": "2026-05-30T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "lassa-ng-edo",
