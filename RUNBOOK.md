@@ -57,26 +57,45 @@ Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). The
 
 ### 2.4 `Production Status Monitor` — hourly status check failed
 
-**Symptom:** reusable issue `status-monitor` opens or updates with one or more of: `Dashboard status is degraded`, `status.json generated > 30h ago`, `last official source check > Nh old`, or `status URL unreachable`.
+**Hard vs soft model (changed 2026-05-30).** The monitor now distinguishes two
+classes of condition. Only **hard** failures fail the workflow (red-X + GitHub
+"all jobs failed" email) and open/update the `status-monitor` issue. **Soft**
+conditions (the routine signal-review backlog) exit 0 and are owned by the daily
+**Human Review Digest** (`review-digest` issue) — so a lapsed review cadence no
+longer emails you hourly. This split exists because `degraded`-from-stale-signals
+is review work, not an outage, and the digest already lists the exact action to
+clear each item.
+
+**Symptom (hard — this is what now alerts):** `status-monitor` issue opens/updates
+with `status URL unreachable`, `status.json generation > 30h`, `Unsupported
+schemaVersion`, `Invalid status`, or `Dashboard status is critical`. The workflow
+run goes red.
 
 **Cause matrix:**
 
-| Failure line | Threshold (default) | Real cause |
-|---|---|---|
-| `status.json generated > 30h` | `MAX_STATUS_GENERATED_AGE_HOURS=30` | Status Refresh failed 2+ consecutive days OR Vercel is not deploying the latest commit. |
-| `last official source check > 168h` | `MAX_OFFICIAL_CHECK_AGE_HOURS=168` (7d) | No human has bumped any signal's `lastChecked` in a week. Real review gap; not workflow noise. |
-| `headline signal data > 168h` | `MAX_DATA_AGE_HOURS=168` (7d) | No structured data update in a week. Same review-gap remedy. |
-| `Dashboard status is degraded` | Set by `generate-status.mjs` when any `staleReasons` accumulate | Look at `result.failures` for the upstream reason. |
+| Class | Failure line | Threshold (default) | Real cause |
+|---|---|---|---|
+| HARD | `HTTP …` / timeout fetching status URL | n/a | Production endpoint unreachable — page is down or DNS/Vercel broken. |
+| HARD | `status.json generation > 30h` | `MAX_STATUS_GENERATED_AGE_HOURS=30` | Status Refresh failed 2+ consecutive days OR Vercel is not deploying the latest commit. |
+| HARD | `Unsupported schemaVersion` / `Invalid status` | n/a | Generator emitted a malformed contract — code regression. |
+| HARD | `Dashboard status is critical` | set by `generate-status.mjs` | Reserved for a future critical state; treat as an incident. |
+| SOFT | `Dashboard status is degraded` | `staleReasons` accumulate | Review-cadence lapse. **No email** — see the `review-digest` issue. |
+| SOFT | `Stale signals: …` | `MAX_SIGNAL_STALE_HOURS=168` (7d) | One or more signals not human-reviewed in a week. |
+| SOFT | `headline signal data > 168h` / `last official source check > 168h` | `MAX_DATA_AGE_HOURS` / `MAX_OFFICIAL_CHECK_AGE_HOURS=168` | No structured data update / source re-verification in a week. |
 
-**Important — threshold history:** the prior `MAX_OFFICIAL_CHECK_AGE_HOURS=48` default produced false alarms every weekend because it expected daily human review of `lastChecked` across 16 signals — incompatible with the actual weekly review cadence permitted by CONTENT-STANDARDS §3.4. Raised to 168h on 2026-05-25 to match `MAX_SIGNAL_STALE_HOURS`. Do not tighten without a CONTENT-STANDARDS conversation.
+**Important — threshold history:** the prior `MAX_OFFICIAL_CHECK_AGE_HOURS=48` default produced false alarms every weekend because it expected daily human review of `lastChecked` across 16 signals — incompatible with the actual weekly review cadence permitted by CONTENT-STANDARDS §3.4. Raised to 168h on 2026-05-25 to match `MAX_SIGNAL_STALE_HOURS`. The 2026-05-30 hard/soft split is the more durable fix: soft review lapses no longer page at all. Do not tighten without a CONTENT-STANDARDS conversation.
 
-**Recovery:**
-1. Read the issue body — `result.failures` lists the specific failure line(s).
-2. If `Dashboard status is degraded`: regenerate status locally (`npm run generate:status`); inspect `staleReasons`; address the upstream cause (almost always a signal needing a human `lastChecked` bump).
-3. If `status.json generated > 30h`: check the latest Status Refresh workflow run. If it succeeded but production is still stale, the issue is in the Vercel deploy — check Vercel dashboard for `main`-branch deploy state. Vercel CLI auth is currently invalid on the maintainer machine.
-4. If `last official source check > 168h`: a human review of structured signal data is genuinely overdue; pick a high-priority active signal, verify against its primary source, bump `lastChecked` (and `lastUpdated` if anything changed), commit + push. The Status Refresh workflow regenerates `status.json` automatically on the next signal-data commit.
+**Recovery (HARD failure — `result.hardFailures` in `status-monitor-result.json`):**
+1. If `status URL unreachable` or `schemaVersion`/`Invalid status`: the deployed contract is broken — check the latest deploy and `generate-status.mjs`.
+2. If `status.json generation > 30h`: check the latest Status Refresh workflow run. If it succeeded but production is still stale, the issue is in the Vercel deploy — check Vercel dashboard for `main`-branch deploy state. Vercel CLI auth is currently invalid on the maintainer machine.
+3. If `Dashboard status is critical`: treat as an incident; inspect `staleReasons`.
 
-**Prevent this:** the Status Refresh workflow now runs on push to any signal data file, so a human `lastChecked` bump immediately publishes a fresh `status.json`. The hourly monitor only fires when (a) all 16 signals haven't been touched in a week, OR (b) the daily Status Refresh failed twice running, OR (c) the deploy pipeline is broken. None of those should be silent.
+**Soft conditions (NOT a workflow failure):** work them from the `review-digest`
+issue (RUNBOOK §2.8) — verify each signal/source against its primary source and
+bump `lastChecked`/`lastVerified`. Status Refresh regenerates `status.json` on the
+next signal-data push; once no signal is stale, status returns to `ok`.
+
+**Prevent this:** the Status Refresh workflow runs on push to any signal data file, so a human `lastChecked` bump immediately publishes a fresh `status.json`. After the hard/soft split, the hourly monitor only emails when (a) the production endpoint is unreachable, (b) `status.json` hasn't regenerated in >30h (Status Refresh failed twice running OR the deploy pipeline is broken), (c) the contract is malformed, or (d) status is `critical`. The routine review backlog never pages.
 
 ### 2.5 `Official Source Audit` — drift findings
 

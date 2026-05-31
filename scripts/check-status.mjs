@@ -7,6 +7,19 @@ const OUTPUT_PATH = process.env.STATUS_MONITOR_OUTPUT || 'status-monitor-result.
 // of alerting during normal daily cadence.
 const MAX_GENERATED_AGE_HOURS = Number.parseInt(process.env.MAX_STATUS_GENERATED_AGE_HOURS || '30', 10)
 
+// Hard vs soft failure model (added 2026-05-30):
+//   HARD = production/deploy/contract is broken — page the maintainer (workflow
+//          exits 1, GitHub emails "all jobs failed"). Examples: endpoint
+//          unreachable, schemaVersion wrong, status.json generation stale
+//          (deploy/refresh broken), or status === "critical".
+//   SOFT = the dashboard is UP and serving, but the human signal-review cadence
+//          has lapsed (status "degraded", stale signals, headline/official-source
+//          age). This is review work, not an outage. The daily Human Review
+//          Digest (review-digest issue) already surfaces it with the exact
+//          action to clear each item, so the hourly monitor must NOT hard-fail
+//          (and email) on soft conditions — that is the babysitting noise this
+//          split removes. See RUNBOOK §2.4 and HANDOFF 2026-05-30.
+
 function hoursSince(iso) {
   const age = (Date.now() - new Date(iso).getTime()) / 36e5
   return Number.isFinite(age) ? age : null
@@ -41,42 +54,52 @@ async function fetchStatus() {
 
 async function main() {
   const checkedAt = new Date().toISOString()
-  const failures = []
+  const hardFailures = []
+  const softFailures = []
   let status = null
 
   try {
     status = await fetchStatus()
   } catch (error) {
-    failures.push(error.message)
+    // Endpoint unreachable / HTTP error / timeout — production is not serving.
+    hardFailures.push(error.message)
   }
 
   if (status) {
-    if (status.schemaVersion !== 2) failures.push(`Unsupported schemaVersion: ${status.schemaVersion}`)
-    if (!['ok', 'degraded', 'critical'].includes(status.status)) failures.push(`Invalid status: ${status.status}`)
-    if (status.status !== 'ok') failures.push(`Dashboard status is ${status.status}`)
+    // ── HARD: contract + deploy integrity ────────────────────────────────
+    if (status.schemaVersion !== 2) hardFailures.push(`Unsupported schemaVersion: ${status.schemaVersion}`)
+    if (!['ok', 'degraded', 'critical'].includes(status.status)) {
+      hardFailures.push(`Invalid status: ${status.status}`)
+    }
+    if (status.status === 'critical') hardFailures.push('Dashboard status is critical')
+    // Stale generation means Status Refresh failed repeatedly OR Vercel is not
+    // deploying the latest commit — a real production/deploy problem.
+    addAgeFailure(hardFailures, 'status.json generation', status.generatedAt, MAX_GENERATED_AGE_HOURS)
 
-    addAgeFailure(failures, 'status.json generation', status.generatedAt, MAX_GENERATED_AGE_HOURS)
+    // ── SOFT: human-review-cadence lapses (tracked by the review-digest) ──
+    if (status.status === 'degraded') softFailures.push('Dashboard status is degraded')
 
     const maxDataAge = Number(
       status.thresholds?.maxDataAgeHours ?? process.env.MAX_DATA_AGE_HOURS ?? 168
     )
     const maxOfficialAge = Number(
-      status.thresholds?.maxOfficialCheckAgeHours ?? process.env.MAX_OFFICIAL_CHECK_AGE_HOURS ?? 48
+      status.thresholds?.maxOfficialCheckAgeHours ?? process.env.MAX_OFFICIAL_CHECK_AGE_HOURS ?? 168
     )
     if (status.dashboard?.lastUpdated) {
-      addAgeFailure(failures, 'headline signal data', status.dashboard.lastUpdated, maxDataAge)
+      addAgeFailure(softFailures, 'headline signal data', status.dashboard.lastUpdated, maxDataAge)
     }
     if (status.dashboard?.lastOfficialSourceCheck) {
-      addAgeFailure(failures, 'last official source check', status.dashboard.lastOfficialSourceCheck, maxOfficialAge)
+      addAgeFailure(softFailures, 'last official source check', status.dashboard.lastOfficialSourceCheck, maxOfficialAge)
     }
-
     if (Array.isArray(status.signals?.staleSignalIds) && status.signals.staleSignalIds.length > 0) {
-      failures.push(`Stale signals: ${status.signals.staleSignalIds.join(', ')}`)
+      softFailures.push(`Stale signals: ${status.signals.staleSignalIds.join(', ')}`)
     }
   }
 
+  const failures = [...hardFailures, ...softFailures]
   const result = {
     ok: failures.length === 0,
+    hardFail: hardFailures.length > 0,
     statusUrl: STATUS_URL,
     checkedAt,
     status: status?.status ?? null,
@@ -86,15 +109,26 @@ async function main() {
     lastOfficialSourceCheck: status?.dashboard?.lastOfficialSourceCheck ?? null,
     activeSignals: status?.signals?.active ?? null,
     highestSeverity: status?.signals?.highestSeverity ?? null,
+    hardFailures,
+    softFailures,
     failures,
   }
 
   writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2))
 
-  if (!result.ok) {
-    console.error('[monitor:status] FAILED')
-    for (const failure of failures) console.error(`- ${failure}`)
+  if (result.hardFail) {
+    console.error('[monitor:status] HARD FAILURE — production health')
+    for (const failure of hardFailures) console.error(`- ${failure}`)
     process.exitCode = 1
+    return
+  }
+
+  if (softFailures.length > 0) {
+    // Report-only: the dashboard is healthy; these are review items the daily
+    // review-digest owns. Exit 0 so the hourly monitor does not page/email.
+    console.warn('[monitor:status] REVIEW NEEDED (soft — not a production failure)')
+    for (const failure of softFailures) console.warn(`- ${failure}`)
+    console.log('[monitor:status] OK — production healthy; soft review items tracked by the daily review-digest.')
     return
   }
 
@@ -102,7 +136,15 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error('[monitor:status] FAILED:', error.message)
-  writeFileSync(OUTPUT_PATH, JSON.stringify({ ok: false, statusUrl: STATUS_URL, checkedAt: new Date().toISOString(), failures: [error.message] }, null, 2))
+  // Unexpected script crash counts as a hard failure.
+  console.error('[monitor:status] HARD FAILURE:', error.message)
+  writeFileSync(
+    OUTPUT_PATH,
+    JSON.stringify(
+      { ok: false, hardFail: true, statusUrl: STATUS_URL, checkedAt: new Date().toISOString(), hardFailures: [error.message], softFailures: [], failures: [error.message] },
+      null,
+      2,
+    ),
+  )
   process.exitCode = 1
 })

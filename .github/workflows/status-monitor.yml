@@ -77,14 +77,21 @@ jobs:
               issue.title === title || issue.body?.includes(marker)
             )
 
-            if (result.ok) {
+            // Gate on hardFail only: the status-monitor issue tracks PRODUCTION
+            // health (endpoint reachable, status.json fresh, schema valid, not
+            // critical). Soft review-cadence items (status degraded, stale
+            // signals, headline/official-source age) are owned by the daily
+            // review-digest issue, so they must neither open/keep this issue nor
+            // fail the workflow. See RUNBOOK §2.4 + HANDOFF 2026-05-30.
+            if (!result.hardFail) {
               if (existing) {
                 await github.rest.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: existing.number,
                   body: [
-                    'Production status recovered.',
+                    'Production health recovered (endpoint reachable, status.json fresh, schema valid, not critical).',
+                    'Any remaining signal-review items are tracked by the review-digest issue.',
                     `Checked at: \`${result.checkedAt}\``,
                     `Status URL: ${result.statusUrl}`,
                     `Run: ${runUrl}`,
@@ -102,9 +109,11 @@ jobs:
 
             const body = [
               marker,
-              '## Production status monitor alert',
+              '## Production status monitor alert — production health',
               '',
-              ...result.failures.map((failure) => `- ${failure}`),
+              '> Hard failure: the deployed dashboard is unreachable, stale-generated, schema-invalid, or critical. (Routine signal-review backlog is tracked separately in the review-digest issue, not here.)',
+              '',
+              ...(result.hardFailures || result.failures).map((failure) => `- ${failure}`),
               '',
               `Status URL: ${result.statusUrl}`,
               `Status: \`${result.status}\``,

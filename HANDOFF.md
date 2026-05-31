@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-30 (Phase B source re-pointing: avian-flu/ebola/measles/lassa re-pointed to specific authoritative pages + 4 new Tier 1/2 sources; ebola + measles figures refreshed and independently verified. Cholera + mpox deferred — see backlog.)
+**Last updated:** 2026-05-30 (Production Status Monitor decoupled: hard production failures still page; soft review-cadence lapses (degraded/stale signals) no longer email hourly — the review-digest owns them. Security-posture reviewed.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Production Status Monitor — hard/soft failure split (commit pending — backfill after commit)
+
+The hourly Production Status Monitor was emailing "all jobs failed" every hour because the deployed dashboard self-reports `degraded` whenever any signal is past the 7-day review window — i.e. it hard-failed on a routine human-review-cadence lapse, not an outage. That is the babysitting noise the maintainer explicitly does not want. Split the monitor's conditions:
+- **HARD** (workflow fails → red-X + email, opens/updates the `status-monitor` issue): endpoint unreachable / HTTP error / timeout, `schemaVersion !== 2`, invalid `status`, `status === 'critical'`, and `status.json` generation age > 30h (deploy/refresh broken). Unexpected script crash = hard.
+- **SOFT** (exit 0, no email, no `status-monitor` issue): `status` degraded, stale signals, headline-data age > 168h, official-source-check age > 168h. These are owned by the daily Human Review Digest (`review-digest` issue), which already lists the exact action to clear each.
+
+security-posture-agent reviewed: real outages still hard-fail, no false-green path, no secret/permission/header change. Verified against live (currently-degraded) production: monitor now reports the soft items and **exits 0** (`hardFail: false`).
+
+**Files touched:**
+- `scripts/check-status.mjs` — rewritten with `hardFailures`/`softFailures`; `process.exitCode = 1` only on hard; result JSON gains `hardFail`, `hardFailures`, `softFailures`.
+- `.github/workflows/status-monitor.yml` — reconcile gates the `status-monitor` issue on `!result.hardFail` (was `result.ok`); body shows `hardFailures`; recovery comment clarifies production-health scope. Final fail step + cron + env pins unchanged (audit:autonomy still passes).
+- `RUNBOOK.md` §2.4 — documents the hard/soft model + updated cause matrix.
+
+**Verify:** `STATUS_URL=…/status.json node scripts/check-status.mjs` against the degraded production prints the soft items but exits 0; a hard condition (e.g. unreachable URL) exits 1. `npm run audit:autonomy` OK (7 workflows, 13 scripts).
 
 ## ✅ Phase B — re-point 4 signals to specific authoritative sources (commit f0500b8)
 
