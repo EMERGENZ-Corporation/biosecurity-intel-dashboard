@@ -1,9 +1,33 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-31T02:01:18.363Z",
+  "generatedAt": "2026-05-31T02:02:22.719Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "google-news-bcdd1207",
+      "authority": "Google News",
+      "title": "Colorado health officials confirm measles case in Delta County child - AOL.com",
+      "description": "Colorado health officials confirm measles case in Delta County child AOL.com",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOUmx6WkF3S0hiejRBR0EzTTRGYkxVWkg3WGw0MV9WVkVMTm1yc1VuYkliSDc4ZHpFYWc1ZllYa3d4QkNicHV3SU5UMGJJNVpHcEE1c3dRTWUxeklDaXpaTUFISkItb0xLT29sTVdwUElILVpFWUIxNVNtOEFvalItYnhZaVotcF9j?oc=5",
+      "pubDate": "Sun, 31 May 2026 01:41:10 GMT",
+      "timestamp": 1780191670000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
+      "id": "google-news-a22a9299",
+      "authority": "Google News",
+      "title": "Congo Expands Ebola Testing as Outbreak’s Real Scale Eludes Officials - Bloomberg.com",
+      "description": "Congo Expands Ebola Testing as Outbreak’s Real Scale Eludes Officials Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQZFZadm9FOHBSTXoyNG1fb2MtaUZMaU83NEY4M1Z4WXRaWExGc00wX2dtUUZvSTY1SDFkaGNBQzZBNmwzc3lMdFBCRDdneVRLUEVBcExuSEllNFdJLWdiY0xKZ19Pb0RJRnpVMGFoRUZGaDhPNlZ4M0dSX29lcHdRb1RPYlFzUXI1X2M4OWRPYllKbE0yVWVOU3Y3Yy1TTHBXX2xjSll0RXlXbDNsOEhOWWhleGtodVZ6ZEV6YQ?oc=5",
+      "pubDate": "Sun, 31 May 2026 01:26:00 GMT",
+      "timestamp": 1780190760000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
     {
       "id": "google-news-96567014",
       "authority": "Google News",
@@ -2946,6 +2970,18 @@
       ]
     },
     {
+      "id": "google-news-a77caaad",
+      "authority": "Google News",
+      "title": "No Mpox Cases in Kurdistan Region, Health Minister Confirms - Kurdistan24",
+      "description": "No Mpox Cases in Kurdistan Region, Health Minister Confirms Kurdistan24",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOYk8xNkRreTV1bndPSVoxNk1iN0dkQWlHYVhlNlB6bUZQZ0RxVGxUeEFaNzhmcnB5Mzdnb0E2M3U2Q0VtTnQ1djh1OVYwVVpSVEZXejBFLWQ2MjFrR21rUE5PZjgwaWFxZG1UWnpUWHI5S1dXSmpvRXgyZ0hGeVlhN29CazdZNlF6ZkExWUNVV2d5VURQdkVPdEZvQnZ4bXdiZjFEeA?oc=5",
+      "pubDate": "Fri, 29 May 2026 12:35:00 GMT",
+      "timestamp": 1780058100000,
+      "signalIds": [
+        "mpox-africa-clade-i-2026"
+      ]
+    },
+    {
       "id": "stat-news-f83aef71",
       "authority": "STAT News",
       "title": "STAT+: Up and down the ladder: The latest comings and goings",
@@ -5825,40 +5861,6 @@
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
       ]
-    },
-    {
-      "id": "google-news-20e07fbe",
-      "authority": "Google News",
-      "title": "Atlanta airport now screening for Ebola. Here's latest on outbreak - USA Today",
-      "description": "Atlanta airport now screening for Ebola. Here's latest on outbreak USA Today",
-      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPRzRpWGVUWlFHN2RRbzQ3cWdnSDJ1ZlpGbVJocHpVbDVXVTBUVU1KSkVpekZlQU9LVnV3NmlRYmJ5VURITUlmRnM5RGVoTi1GazVqbFllbzlWZzBZa3BJNGVTQmpyN0F6T3VkU0FER0xldFBnLW5SQmFiRmxUZWNkT19PMmdxWGEzVEF4Ym5XdVYxa05obS1Nd0NzMUZYTTZFNDNvcHE0NmZ3MFh2M3RVRzBJSVBDeWt5NDFsRzg5VFpYOVBJMm84V29n?oc=5",
-      "pubDate": "Thu, 28 May 2026 13:03:00 GMT",
-      "timestamp": 1779973380000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-d87168b7",
-      "authority": "Google News",
-      "title": "Amid Ebola outbreak, WCC extends heartfelt solidarity, prayers for all who are grieving - World Council of Churches",
-      "description": "Amid Ebola outbreak, WCC extends heartfelt solidarity, prayers for all who are grieving World Council of Churches",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNOThIaWdEM3lDZUEybklrWG5QOFdxdEtGT2pwWWc1d1hKUlV2ZkFMZVdqRzZlbnNVZFhxMkdaVHEtNk9TVTJETVRKam1IaVhtRkFwQUhxN1J6MFdsUHFydjllSzdRc0hibjJQR0xuOUFGa0ljbXljbno2NFowUDV0STBheTcwWG1QRlJ1S25pSUZxWEF2S1NadEdPZ2xZVUNHWGc4UjBuemxLY25OV1hqMHM3U3VqcVk?oc=5",
-      "pubDate": "Thu, 28 May 2026 13:01:21 GMT",
-      "timestamp": 1779973281000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-bf9ac5c4",
-      "authority": "UKHSA",
-      "title": "Research: GP out-of-hours syndromic surveillance: weekly bulletins for 2026",
-      "description": "The number of people contacting their GPs outside of surgery hours under the syndromic surveillance system.",
-      "link": "https://www.gov.uk/government/publications/gp-out-of-hours-syndromic-surveillance-weekly-bulletins-for-2026",
-      "pubDate": "2026-05-28T13:00:04Z",
-      "timestamp": 1779973204000,
-      "signalIds": []
     }
   ]
 }
