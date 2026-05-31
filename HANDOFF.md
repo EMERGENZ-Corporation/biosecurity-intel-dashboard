@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-31 (Cleared the last 9 stale signals — cholera/mpox re-pointed (+2 sources), 6 wastewater/flu signals + screwworm re-attested. Dashboard status now `ok`; review-digest backlog 9 → 0.)
+**Last updated:** 2026-05-31 (Podcast build DEFERRED; recorded hosting/visibility decision (§13 #9: main, inert + feature-flagged, docs "forthcoming"). Prior: cleared the last 9 stale signals — status now `ok`.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,22 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Podcast build deferred — hosting/visibility decision recorded (commit pending — backfill after commit)
+
+Asked whether the podcast export (`PODCAST-EXPORT-DESIGN.md`) could be built within one session. It can't — by its own §14 it's a 6-session feature with hard external dependencies (Kokoro-82M TTS runtime, SME audio review, Vercel Blob credentials, a 2-week green soak). After confirming the live dashboard could be kept clean but the public repo cannot hide in-progress code without a private repo, the maintainer **deferred the build** ("too much to tackle sequentially") and locked the hosting decision for when it resumes.
+
+Recorded the decision so it isn't lost (chat is not the record):
+- `PODCAST-EXPORT-DESIGN.md` status line → **DEFERRED 2026-05-31**, resume on go-signal.
+- New `§13 #9` (hosting/visibility): build on `main`, **inert + feature-flagged**; UI not until Session 5 behind a flag; §12 synthetic-audio doc sections worded **forthcoming** (not "active") until the pipeline is live; feature branch rejected (public-repo branches are still browsable); truly-private would need a separate repo — accepted tradeoff is in-repo-visible but never live/claimed.
+
+No code was written. No change to dashboard data, scripts, workflows, or the live site.
+
+**Files touched:**
+- `PODCAST-EXPORT-DESIGN.md` — status line + §13 row #9.
+- `HANDOFF.md` — this entry.
+
+**Verify:** `PODCAST-EXPORT-DESIGN.md` §13 shows the locked #9 hosting decision and the status line reads DEFERRED 2026-05-31.
 
 ## ✅ Cleared the last 9 stale signals — status now `ok` (commit ebe2fcb)
 

@@ -1,6 +1,6 @@
 # Podcast Export — Design Document
 
-**Status:** APPROVED — §13 decisions locked 2026-05-25, §18 sign-off complete. Session 1 ready to begin on explicit go-signal.
+**Status:** APPROVED — §13 decisions locked 2026-05-25, §18 sign-off complete. **Build DEFERRED 2026-05-31** — not started; scope is 6 sessions (§14) and was judged too large to tackle sequentially in one sitting. Resume on an explicit go-signal. Hosting/visibility for the in-progress build is now decided — see §13 #9.
 **Authored:** 2026-05-23
 **Approved:** 2026-05-25
 **Scope:** Add a podcast export to the Briefings page so EMS, healthcare, and public-health staff can listen to current briefings on the move, with no paid services, no robotic-sounding voice, and no degradation of the dashboard's content-integrity standards.
@@ -411,6 +411,7 @@ Cross-link to the methodology synthetic-audio section, mirroring the existing pa
 | 6 | Apple / Spotify directory submission | After **14 consecutive green `audit:podcast` runs** (~2 weeks of stable daily episodes). Operational step, not part of automated pipeline. |
 | 7 | Per-card audio | **Pre-generate.** ~16 MB total; matches Vercel Blob retention design; instant availability for EMS in-rig use case. |
 | 8 | Filtered podcast download | **No in v1.** Combined episode is always full Watch+. Filtering requires on-demand generation, contradicts §7. |
+| 9 | Hosting/visibility of in-progress build (added 2026-05-31) | **Build on `main`, inert + feature-flagged.** This repo is public and `main` auto-deploys, so: (a) the live dashboard must show nothing podcast-related until Session 5 ships the UI **behind a feature flag**; (b) the §12 synthetic-audio sections in `CONTENT-STANDARDS.md` / `AI-ENRICHMENT-POLICY.md` must be worded as **forthcoming** (not "active") until the pipeline is live, to avoid claiming an unshipped capability; (c) a feature branch was considered but rejected — branches in a public repo are still publicly browsable, so it buys nothing over inert-on-main. **Truly hiding in-progress code from the public would require a separate private repo/fork** — accepted tradeoff: in-progress code is visible in-repo but never live or publicly claimed. The §14 "push to main each session" instruction stands, with these inert/flagged/forthcoming constraints layered on. |
 
 ---
 
