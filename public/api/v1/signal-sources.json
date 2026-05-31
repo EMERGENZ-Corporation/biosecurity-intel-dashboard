@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-30T21:08:36.759Z",
+  "generatedAt": "2026-05-31T01:40:15.930Z",
   "endpoint": "/api/v1/signal-sources.json",
-  "count": 38,
+  "count": 42,
   "signalSources": [
     {
       "id": "ecdc-andes-surveillance",
@@ -648,6 +648,65 @@
         "travel"
       ],
       "notes": "Preprint server. Not peer-reviewed — must be labeled as such per CONTENT-STANDARDS.md §1. Use for early-signal context only; never for structured data fields."
+    },
+    {
+      "id": "cdc-h5-situation",
+      "authority": "CDC",
+      "authorityFull": "U.S. Centers for Disease Control and Prevention",
+      "title": "CDC H5 Bird Flu — Current Situation Summary",
+      "sourceType": "outbreak-news",
+      "primary": true,
+      "url": "https://www.cdc.gov/bird-flu/situation-summary/index.html",
+      "lastVerified": "2026-05-30",
+      "domains": [
+        "zoonotic",
+        "respiratory"
+      ],
+      "sourceTier": 1
+    },
+    {
+      "id": "who-don-ebola-bundibugyo-drc-2026",
+      "authority": "WHO",
+      "authorityFull": "World Health Organization",
+      "title": "WHO Disease Outbreak News — Ebola disease (Bundibugyo virus), DRC and Uganda (DON605)",
+      "sourceType": "outbreak-news",
+      "primary": true,
+      "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON605",
+      "lastVerified": "2026-05-30",
+      "publicationDate": "2026-05-29",
+      "domains": [
+        "vhf"
+      ],
+      "sourceTier": 1
+    },
+    {
+      "id": "cdc-measles-data",
+      "authority": "CDC",
+      "authorityFull": "U.S. Centers for Disease Control and Prevention",
+      "title": "CDC Measles Cases and Outbreaks — Data & Research",
+      "sourceType": "surveillance-dashboard",
+      "primary": true,
+      "url": "https://www.cdc.gov/measles/data-research/index.html",
+      "lastVerified": "2026-05-30",
+      "domains": [
+        "vaccine_preventable"
+      ],
+      "sourceTier": 1
+    },
+    {
+      "id": "ncdc-lassa-fever",
+      "authority": "NCDC",
+      "authorityFull": "Nigeria Centre for Disease Control and Prevention",
+      "title": "NCDC — Lassa Fever",
+      "sourceType": "health-advisory",
+      "primary": true,
+      "url": "https://ncdc.gov.ng/diseases/factsheet/47",
+      "lastVerified": "2026-05-30",
+      "domains": [
+        "vhf"
+      ],
+      "sourceTier": 2,
+      "notes": "Nigeria's national public health authority Lassa fever page (URL provided/confirmed by maintainer). NCDC also publishes weekly Lassa fever situation reports; consult those for current case/death figures before publishing any quantified Lassa claim."
     }
   ]
 }
