@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "status": "degraded",
-  "generatedAt": "2026-05-31T01:40:15.167Z",
+  "status": "ok",
+  "generatedAt": "2026-05-31T02:01:17.561Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-30T00:00:00.000Z",
     "lastChecked": "2026-05-30T00:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 25.67088,
-    "officialCheckAgeHours": 25.67088
+    "dataAgeHours": 26.021544722222224,
+    "officialCheckAgeHours": 26.021544722222224
   },
   "signals": {
     "total": 17,
@@ -81,27 +81,17 @@
         "total": 1
       }
     },
-    "staleSignalIds": [
-      "mpox-africa-clade-i-2026",
-      "cholera-africa-2026",
-      "seasonal-influenza-2026",
-      "covid-wastewater-2026",
-      "norovirus-wastewater-2026",
-      "rsv-wastewater-2026",
-      "hmpv-wastewater-2026",
-      "candida-auris-wastewater-2026",
-      "screwworm-onehealth-2026"
-    ],
+    "staleSignalIds": [],
     "timelineEvents": 44,
     "totalMapMarkers": 137,
     "totalDetailSections": 81
   },
   "sources": {
-    "total": 42,
-    "primary": 32,
+    "total": 44,
+    "primary": 34,
     "secondary": 10,
     "byTier": {
-      "tier1": 23,
+      "tier1": 25,
       "tier2": 12,
       "tier3": 4,
       "tier4": 3
@@ -109,7 +99,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-05-30T21:02:18.000Z"
+    "newest": "2026-05-31T00:57:46.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -237,7 +227,5 @@
       }
     ]
   },
-  "staleReasons": [
-    "9 signal(s) older than 168h"
-  ]
+  "staleReasons": []
 }
