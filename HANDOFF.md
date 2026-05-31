@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Cleared the last 9 stale signals — status now `ok` (commit pending — backfill after commit)
+## ✅ Cleared the last 9 stale signals — status now `ok` (commit ebe2fcb)
 
 Final pass on the review-digest backlog (was 9 after Phases A/B). Cleared all 9; `npm run review:digest` now reports 0 NEEDS-HUMAN ("Autonomy healthy") and `generate:status` produces `status: ok`. content-standards/source-integrity session marker was already set this session.
 
