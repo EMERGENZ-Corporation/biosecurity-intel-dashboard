@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-31 (Relicensed MIT → AGPL-3.0 + commercial dual-license for code, CC BY-SA 4.0 for curated content; added NOTICE / CITATION.cff / COMMERCIAL-LICENSE.md / LICENSE-DATA.md, SPDX headers across src+scripts, fixed footer "All rights reserved". Prior: podcast build DEFERRED.)
+**Last updated:** 2026-05-31 (Added MONITORING.md copy-detection checklist + scheduled monthly sweep. Prior: relicensed MIT → AGPL-3.0 + commercial dual-license for code, CC BY-SA 4.0 for curated content; NOTICE / CITATION.cff / COMMERCIAL-LICENSE.md / LICENSE-DATA.md, SPDX headers, footer fix.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,16 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Add MONITORING.md copy-detection checklist (commit <pending — backfilled>)
+
+Follow-up to the AGPL relicense (`49fb347`): committed the monthly copy/plagiarism monitoring checklist so the detection routine isn't lost to chat. Holds the GitHub + web exact-phrase search strings (deployment URL, Zeffy link, distinctive prose), the on-hit evidence/escalation steps, and the forward-only MIT-snapshot caveat. Paired with a scheduled monthly automated sweep that re-runs the same string set.
+
+**Files touched:**
+- `MONITORING.md` (new) — search strings + monthly cadence + escalation steps; source of truth for the scheduled monitor.
+- `HANDOFF.md` — this entry.
+
+**Verify:** open `MONITORING.md`; run the GitHub code-search strings — expect 0 hits outside `EMERGENZ-Corporation` (matches the 2026-05-31 sweep).
 
 ## ✅ Relicense MIT → AGPL-3.0 + commercial dual-license; CC BY-SA 4.0 curated content; attribution hardening (commit 49fb347)
 
