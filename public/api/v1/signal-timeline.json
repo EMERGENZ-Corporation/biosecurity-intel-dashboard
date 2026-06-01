@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-01T11:13:31.807Z",
+  "generatedAt": "2026-06-01T11:49:07.584Z",
   "endpoint": "/api/v1/signal-timeline.json",
-  "count": 44,
+  "count": 45,
   "signalTimeline": [
     {
       "id": "tl-andes-2026-05-19-ecdc-update",
@@ -414,6 +414,20 @@
       "authority": "WHO",
       "link": "https://www.who.int/news/item/28-05-2026-experts-convened-by-who-advise-on-candidate-treatments-and-vaccines-for-ebola-disease-caused-by-bundibugyo-virus",
       "promotedAt": "2026-05-29T15:58:33.159Z"
+    },
+    {
+      "id": "auto-who-de945090",
+      "signalId": "ebola-bundibugyo-drc-2026",
+      "date": "2026-05-31",
+      "title": "Joint statement by the Government of the Democratic Republic of the Congo and WHO concerning the outbreak of Ebola disease caused by the Bu…",
+      "description": "The Government of the Democratic Republic of the Congo (DRC) and the World Health Organization (WHO) reaffirm their strong partnership and shared commitment to protect the health and well-being of the people of Ituri Province and the nation at large, following the joint...",
+      "sourceId": "who-don-ebola-bundibugyo-drc-2026",
+      "category": "vhf",
+      "provenance": "auto-news-tier1",
+      "newsId": "who-de945090",
+      "authority": "WHO",
+      "link": "https://www.who.int/news/item/31-05-2026-joint-statement-by-the-government-of-the-democratic-republic-of-the-congo-and-who-concerning-the-outbreak-of-ebola-disease-caused-by-the-bundibugyo-virus",
+      "promotedAt": "2026-06-01T11:49:05.572Z"
     }
   ]
 }
