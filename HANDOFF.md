@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-31 (Added MONITORING.md copy-detection checklist + scheduled monthly sweep. Prior: relicensed MIT → AGPL-3.0 + commercial dual-license for code, CC BY-SA 4.0 for curated content; NOTICE / CITATION.cff / COMMERCIAL-LICENSE.md / LICENSE-DATA.md, SPDX headers, footer fix.)
+**Last updated:** 2026-05-31 (Added MONITORING.md copy-detection checklist; automated `/schedule` monitor setup FAILED (remote backend down) → backlog note to re-attempt next session. Prior: relicensed MIT → AGPL-3.0 + commercial dual-license for code, CC BY-SA 4.0 for curated content; NOTICE / CITATION.cff / COMMERCIAL-LICENSE.md / LICENSE-DATA.md, SPDX headers, footer fix.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -2643,6 +2643,8 @@ Addresses gaps documented in [HANTAVIRUS-ASSET-AUDIT.md](HANTAVIRUS-ASSET-AUDIT.
 ---
 
 ## ⏳ Outstanding work (backlog)
+
+- **Re-attempt the automated plagiarism-monitor `/schedule` routine (small).** On 2026-05-31 the monthly copy-detection sweep could NOT be registered — Claude Code's remote claude.ai scheduling backend returned a connection error on two attempts. **Next session: re-run `/schedule`** to create a monthly (1st of month, 09:00) routine that web-searches the `MONITORING.md` fingerprint set and reports any third-party reuse outside `EMERGENZ-Corporation` / emergenz-owned domains. Task spec is preserved verbatim in `MONITORING.md` and in the 2026-05-31 relicense session. Blocked on: the remote scheduling backend being reachable. Until then, the manual checklist in `MONITORING.md` is the live mechanism.
 
 - **✅ DONE (2026-05-30, see top of log) — Remove EMS World Briefing surface after 2026-05-30 (small, time-boxed).** EMS World Live: Austin ends 2026-05-30. The `/ems-world-briefing` route was a temp conference surface and has no unique value-add over the standing dashboard (the FIFA signal, measles triage card, and `/briefings` page all live at their own routes and are unaffected). After 2026-05-30, remove: (1) `src/pages/DemoPack.tsx`; (2) the lazy import + both `<Route>` entries in `src/App.tsx` (`/ems-world-briefing` and the `/demo` alias); (3) the nav entry in `src/components/NavBar.tsx`; (4) `docs/AUSTIN-DEMO-RUNBOOK.md`. Searchable marker in code: `EMS_WORLD_2026_REMOVE_AFTER_2026-05-30` — grep for it to find every reference. Full checklist is in the comment at the top of `DemoPack.tsx`. Optional at removal: add a one-line redirect from `/ems-world-briefing` → `/briefings` so any externally-bookmarked URL lands somewhere useful instead of NotFound. Do **not** remove any data in `src/data/*.json` — the FIFA, measles, and briefings content stays.
 
