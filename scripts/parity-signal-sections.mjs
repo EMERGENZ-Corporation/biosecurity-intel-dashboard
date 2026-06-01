@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 /**
  * One-time seeder — bring non-hantavirus signals to section parity with
  * the hantavirus signal (5 sections each).

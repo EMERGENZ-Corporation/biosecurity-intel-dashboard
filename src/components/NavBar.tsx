@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useMediaQuery } from '../hooks/useMediaQuery'

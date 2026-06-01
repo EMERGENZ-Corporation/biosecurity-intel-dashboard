@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { Suspense, lazy, useState } from 'react'
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar'
@@ -192,7 +194,7 @@ export default function App() {
               letterSpacing: '0.04em',
             }}
           >
-            © {new Date().getFullYear()} EMERGENZ Corporation · 501(c)(3) Nonprofit · All rights reserved
+            © {new Date().getFullYear()} EMERGENZ Corporation · 501(c)(3) Nonprofit · Code AGPL-3.0 · Content CC BY-SA 4.0
           </span>
           <a
             href="https://www.emergenz.us"

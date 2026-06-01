@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import type { Signal } from '../types'
 import { SEVERITY_LABELS, SEVERITY_COLORS, CONFIDENCE_LABELS, TREND_LABELS } from '../utils/signals'
 

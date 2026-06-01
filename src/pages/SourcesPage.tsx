@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { useMemo, useState } from 'react'
 import { signalSources, formatDate, SOURCE_TIER_LABELS } from '../utils/signals'
 import { THREAT_CATEGORY_LABELS, type SourceTier } from '../types'

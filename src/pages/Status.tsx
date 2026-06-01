@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { useEffect, useState } from 'react'
 import { formatDateTime } from '../utils/signals'
 import staticStatus from '../../public/status.json'

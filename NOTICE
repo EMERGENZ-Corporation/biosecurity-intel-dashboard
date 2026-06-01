@@ -1,0 +1,56 @@
+EMERGENZ Biosecurity Intelligence Dashboard
+Copyright (C) 2026 EMERGENZ Corporation
+
+This product's source code is licensed under the GNU Affero General Public
+License v3.0 or later (AGPL-3.0-or-later) — see LICENSE. EMERGENZ's own original
+curated content and editorial layer is licensed under CC BY-SA 4.0 — see
+LICENSE-DATA.md. Commercial licensing for both is available from EMERGENZ
+Corporation <info@emergenz.us> — see COMMERCIAL-LICENSE.md.
+
+If you redistribute this software or substantial portions of it, retain this
+NOTICE and the LICENSE file.
+
+================================================================================
+THIRD-PARTY CONTENT & DATA ATTRIBUTIONS
+================================================================================
+This dashboard reproduces and links to content from third parties. That content
+remains the property of the originating authority under its own license, which
+controls your re-use rights. It is NOT covered by EMERGENZ's licenses above and
+is NOT EMERGENZ's to relicense.
+
+1. World Health Organization (WHO) — Disease Outbreak News and publications.
+   (C) World Health Organization. Licensed CC BY-NC-SA 3.0 IGO.
+   https://creativecommons.org/licenses/by-nc-sa/3.0/igo/
+   Non-commercial; share-alike. Commercial use requires a license from WHO.
+
+2. WastewaterSCAN (Stanford University / Emory University / Verily) — wastewater
+   concentration data and surveillance methodology. Licensed CC BY-NC 4.0.
+   https://creativecommons.org/licenses/by-nc/4.0/
+   Non-commercial only; commercial deployment incorporating WastewaterSCAN data
+   requires a separate license from Stanford and Emory
+   <wwscan_stanford_emory@lists.stanford.edu>.
+
+3. U.S. Government works (CDC, FDA, USDA APHIS, NIH, and other U.S. federal
+   agencies) — not subject to copyright protection in the United States under
+   17 U.S.C. 105 (public domain). Attribution provided to indicate origin.
+
+4. Other public-health authorities (ECDC, Africa CDC, PAHO, PHAC, UKHSA, RKI,
+   RIVM, WOAH, and other national/regional agencies) — license varies by source;
+   most permit non-commercial re-use with attribution. Verify against the issuing
+   agency's terms before redistribution.
+
+5. News items (Tier 3 media) — copyright the originating outlet. Titles, short
+   descriptions, and links are displayed under fair-use / news-aggregation
+   conventions; full-text re-use requires the outlet's permission.
+
+--------------------------------------------------------------------------------
+SOFTWARE DEPENDENCIES
+--------------------------------------------------------------------------------
+6. Base map tiles (C) OpenStreetMap contributors and (C) CARTO, used under the
+   OpenStreetMap Open Database License (ODbL) and CARTO's terms of service.
+   https://www.openstreetmap.org/copyright
+
+7. This project depends on open-source npm packages (including Leaflet,
+   react-leaflet, React, and Vite). Each retains its own license as declared in
+   package.json and reproduced under node_modules/<package>/LICENSE. Nothing in
+   this NOTICE alters those licenses.

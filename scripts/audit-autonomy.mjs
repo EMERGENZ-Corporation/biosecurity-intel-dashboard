@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 /**
  * Checks that the dashboard's autonomous update loop is still wired together.
  *

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { useMemo, useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { search, summarize, type SearchHit, type SearchHitKind } from '../utils/search'

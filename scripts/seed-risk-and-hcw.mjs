@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 /**
  * One-time seeder — adds authoritative risk-assessment badges and HCW
  * alert callouts to signals that warrant them per real published authority

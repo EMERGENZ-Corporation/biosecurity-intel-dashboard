@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 /**
  * One-time restoration of hantavirus assets dropped during the multi-threat
  * migration. Source: f4ebe5c^ commit (preserved here as scripts/_old-*.json).

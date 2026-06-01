@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 /**
  * One-time seeder for intel-rigor enhancements per UX-GAP-ANALYSIS §1.7:
  * - WatchIndicator entries surfacing explicit escalation triggers

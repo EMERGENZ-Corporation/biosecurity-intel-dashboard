@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 /**
  * Verifies the deployed Biosecurity Intel Dashboard after each data
  * update. Polls /status.json until schemaVersion 2 is published with

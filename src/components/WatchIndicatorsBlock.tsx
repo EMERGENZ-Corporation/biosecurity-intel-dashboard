@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import type { WatchIndicator } from '../types'
 import { SEVERITY_COLORS, SEVERITY_LABELS } from '../utils/signals'
 

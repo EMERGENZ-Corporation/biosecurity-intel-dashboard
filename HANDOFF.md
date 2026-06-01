@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-31 (Podcast build DEFERRED; recorded hosting/visibility decision (§13 #9: main, inert + feature-flagged, docs "forthcoming"). Prior: cleared the last 9 stale signals — status now `ok`.)
+**Last updated:** 2026-05-31 (Relicensed MIT → AGPL-3.0 + commercial dual-license for code, CC BY-SA 4.0 for curated content; added NOTICE / CITATION.cff / COMMERCIAL-LICENSE.md / LICENSE-DATA.md, SPDX headers across src+scripts, fixed footer "All rights reserved". Prior: podcast build DEFERRED.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,24 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Relicense MIT → AGPL-3.0 + commercial dual-license; CC BY-SA 4.0 curated content; attribution hardening (commit <pending — backfilled>)
+
+User wanted to ensure the project can't be monetized by others without EMERGENZ benefiting ("if it is going to get monetized it should be us that benefits"), while keeping OSI open-source status for grant eligibility (AGPL qualifies; a non-commercial license would not). Chose **AGPL-3.0-or-later + a commercial dual-license** for code, and **CC BY-SA 4.0 + commercial** for EMERGENZ's own curated content/editorial layer. EMERGENZ is sole copyright holder, so relicense is unilateral and **forward-only** — already-published MIT snapshots (incl. the version cloned ~3,421× in the prior 14 days) stay MIT for whoever has them. Triggered by that clone-traffic spike + a plagiarism-detection sweep that found **zero** indexed unattributed copies, so this is preventive and closes the attribution gaps: no per-file headers, no NOTICE/CITATION, `package.json` had no `license`/`author`, and the footer said "All rights reserved" (contradicting the license).
+
+**Files touched:**
+- `LICENSE` — replaced MIT text with canonical AGPL-3.0 (gnu.org, 34,523 bytes).
+- `package.json` — added `"license": "AGPL-3.0-or-later"` and `"author": "EMERGENZ Corporation"`.
+- `NOTICE` (new) — consolidates third-party attributions (WHO CC BY-NC-SA 3.0 IGO, WastewaterSCAN CC BY-NC 4.0, U.S.-gov public-domain, OSM/CARTO tiles, npm deps).
+- `LICENSE-DATA.md` (new) — CC BY-SA 4.0 scope for EMERGENZ's curated content + commercial option.
+- `COMMERCIAL-LICENSE.md` (new) — dual-license notice; commercial inquiries → info@emergenz.us; explicit scope note that third-party non-commercial content is NOT EMERGENZ's to relicense.
+- `CITATION.cff` (new) — machine-readable citation metadata (AGPL-3.0-or-later, v0.1.0).
+- `README.md` — added `## License` section.
+- `src/pages/AboutPage.tsx` — `MIT_LICENSE` const → `CODE_LICENSE_NOTICE` (AGPL standard notice + commercial line); "MIT License" card → "Software License (AGPL-3.0)" with links to LICENSE/COMMERCIAL-LICENSE.md; rewrote §3 "License-aware re-use" (AGPL terms + new CC BY-SA 4.0 paragraph for EMERGENZ content); fixed "open-source under the MIT license" prose. "open-source" wording kept (AGPL is OSI-approved).
+- `src/App.tsx` — footer "All rights reserved" → "Code AGPL-3.0 · Content CC BY-SA 4.0".
+- 75 files under `src/` and `scripts/` — added `// SPDX-License-Identifier: AGPL-3.0-or-later` + copyright headers (`.css` uses `/* */`). Idempotent sweep; JSON data files untouched.
+
+**Verify:** `npm run build` green; `npm run validate:data`, `npm run test:validators`, `npm run audit:ai-enrichment`, `npm run audit:autonomy` all OK. On `/about`, the "Software License (AGPL-3.0)" card renders the AGPL notice + `info@emergenz.us`; footer shows "Code AGPL-3.0 · Content CC BY-SA 4.0"; no "MIT" or "All rights reserved" remain (verified in preview, no console errors). `audit:sources`/`audit:source-drift` failures are pre-existing upstream/network issues (USDA screwworm timeout, CDC HAN 403 known-blocked, 3 upstream contentHash changes) — not caused by this change.
 
 ## ✅ Podcast build deferred — hosting/visibility decision recorded (commit c7cf3ab)
 

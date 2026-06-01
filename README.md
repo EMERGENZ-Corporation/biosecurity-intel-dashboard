@@ -51,3 +51,20 @@ fail open to the deterministic pipeline.
 Agents and operators should read `AGENTS.md` before starting work. It defines
 model-change prompting rules, token-efficiency expectations, and the standard
 verification cadence for Codex/Claude sessions.
+
+## License
+
+The **source code** is licensed under the [GNU Affero General Public License
+v3.0 or later (AGPL-3.0-or-later)](LICENSE). EMERGENZ's **original curated
+content and editorial layer** is licensed under [CC BY-SA 4.0](LICENSE-DATA.md).
+Underlying third-party data and content (WHO, CDC, WastewaterSCAN, news outlets,
+and other authorities) remains under its originators' licenses — see
+[`NOTICE`](NOTICE).
+
+A separate **commercial license** — for use without the AGPL's source-disclosure
+or CC BY-SA's share-alike obligations — is available from EMERGENZ Corporation;
+see [`COMMERCIAL-LICENSE.md`](COMMERCIAL-LICENSE.md), contact info@emergenz.us.
+
+To cite this project, see [`CITATION.cff`](CITATION.cff).
+
+Copyright (C) 2026 EMERGENZ Corporation.

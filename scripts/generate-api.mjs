@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 /**
  * Generates static API endpoints under public/api/v1/ so consumers (analysts,
  * partner agencies, downstream tools) can fetch the dashboard's structured

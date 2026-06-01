@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 /**
  * Unit tests for scripts/promote-news-to-timeline.mjs. Each test sets up an
  * isolated tempdir with fixture inputs, runs the promoter against env-pointed

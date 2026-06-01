@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { readFileSync } from 'fs'
 
 const DATA_DIR = process.env.VALIDATE_DATA_DIR || 'src/data'

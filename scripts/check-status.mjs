@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { writeFileSync } from 'fs'
 
 const STATUS_URL = process.env.STATUS_URL || 'https://biosecurity-intel.emergenzsystems.org/status.json'

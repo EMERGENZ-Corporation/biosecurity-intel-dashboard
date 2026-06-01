@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import type { ReactNode } from 'react'
 
 function SectionHeader({ children }: { children: ReactNode }) {
@@ -65,27 +67,25 @@ function ExternalLink({ href, children }: { href: string; children: ReactNode })
   )
 }
 
-const MIT_LICENSE = `MIT License
+const CODE_LICENSE_NOTICE = `EMERGENZ Biosecurity Intelligence Dashboard
+Copyright (C) 2026 EMERGENZ Corporation
 
-Copyright (c) 2026 EMERGENZ Corporation
+This program is free software: you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.`
+Commercial / proprietary licensing — for use without the AGPL's network
+source-disclosure obligations — is available from EMERGENZ Corporation.
+Contact info@emergenz.us.`
 
 export default function AboutPage() {
   return (
@@ -132,7 +132,9 @@ export default function AboutPage() {
           rules, and a non-fabrication policy enforced in the automated pipeline.
         </Body>
         <Body>
-          The full codebase is open-source under the MIT license. Contributions are welcome via{' '}
+          The full codebase is open-source under the GNU Affero General Public License v3.0
+          (AGPL-3.0); commercial licensing is separately available from EMERGENZ Corporation.
+          Contributions are welcome via{' '}
           <ExternalLink href="https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard">
             github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard
           </ExternalLink>
@@ -469,9 +471,25 @@ export default function AboutPage() {
         </Body>
       </Card>
 
-      {/* MIT License */}
+      {/* Software License */}
       <Card>
-        <SectionHeader>MIT License</SectionHeader>
+        <SectionHeader>Software License (AGPL-3.0)</SectionHeader>
+        <Body>
+          The dashboard's source code is licensed under the{' '}
+          <ExternalLink href="https://www.gnu.org/licenses/agpl-3.0.html">
+            GNU Affero General Public License v3.0
+          </ExternalLink>
+          . The full license text is in the{' '}
+          <ExternalLink href="https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/blob/main/LICENSE">
+            LICENSE
+          </ExternalLink>{' '}
+          file. Commercial / proprietary licensing — without the AGPL's source-disclosure
+          obligation — is available; see{' '}
+          <ExternalLink href="https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/blob/main/COMMERCIAL-LICENSE.md">
+            COMMERCIAL-LICENSE.md
+          </ExternalLink>
+          .
+        </Body>
         <pre
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
@@ -487,7 +505,7 @@ export default function AboutPage() {
             margin: 0,
           }}
         >
-          {MIT_LICENSE}
+          {CODE_LICENSE_NOTICE}
         </pre>
       </Card>
 
@@ -592,12 +610,27 @@ EMERGENZ Biosecurity Intelligence Dashboard (accessed YYYY-MM-DD),
           3. License-aware re-use
         </h3>
         <Body>
-          The dashboard's source code is MIT-licensed (above). Code may be re-used in
-          commercial or non-commercial contexts under MIT terms.
+          The dashboard's source code is licensed under the GNU Affero General Public
+          License v3.0 (AGPL-3.0) (above). You may use, study, modify, and redistribute it
+          under the AGPL — which requires that if you deploy a modified version as a network
+          service, you make the complete corresponding source available to its users. For
+          commercial or proprietary use without the AGPL's source-disclosure obligation, a
+          separate commercial license is available from EMERGENZ Corporation
+          (info@emergenz.us).
         </Body>
         <Body>
-          <strong>The data and content displayed are not all MIT-licensed.</strong>{' '}
-          Underlying content carries the original authority's license, which controls
+          <strong>EMERGENZ's own original curated content and editorial layer</strong> — the
+          selection and arrangement of signals, severity framing, cross-signal analysis, and
+          original prose — is licensed under{' '}
+          <ExternalLink href="https://creativecommons.org/licenses/by-sa/4.0/">
+            CC BY-SA 4.0
+          </ExternalLink>{' '}
+          (attribution + share-alike), with commercial licensing also available from EMERGENZ.
+        </Body>
+        <Body>
+          <strong>The underlying source data and content displayed are not EMERGENZ's to
+          relicense.</strong>{' '}
+          Third-party content carries the original authority's license, which controls
           your re-use rights:
         </Body>
         <ul

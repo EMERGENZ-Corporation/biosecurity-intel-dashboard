@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { signals, signalSources } from './signals'
 import newsData from '../data/news.json'
 import type { NewsItem, Signal, SignalSource } from '../types'

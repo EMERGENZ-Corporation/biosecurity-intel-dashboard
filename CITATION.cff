@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: EMERGENZ Biosecurity Intelligence Dashboard
+message: >-
+  If you use or reference this dashboard, please cite the underlying public-health
+  authority for any individual data point, and cite this project for its
+  aggregation and editorial layer.
+type: software
+authors:
+  - name: EMERGENZ Corporation
+    website: "https://www.emergenz.us"
+repository-code: "https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard"
+url: "https://biosecurity-intel.emergenzsystems.org"
+abstract: >-
+  A static, source-backed biosecurity situational-awareness dashboard that
+  aggregates and contextualizes publicly available information across multiple
+  biological threat domains, with explicit primary-source attribution. Not a
+  clinical decision system, prediction engine, or replacement for official
+  public-health guidance.
+keywords:
+  - biosecurity
+  - public health
+  - situational awareness
+  - outbreak intelligence
+  - open data
+license: AGPL-3.0-or-later
+license-url: "https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/blob/main/LICENSE"
+version: 0.1.0
+date-released: "2026-05-31"

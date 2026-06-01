@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 EMERGENZ Corporation
 import { useMemo, useState } from 'react'
 import SignalsMap from '../components/SignalsMap'
 import { ErrorBoundary } from '../components/ErrorBoundary'
