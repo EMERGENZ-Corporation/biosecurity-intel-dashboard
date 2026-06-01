@@ -48,7 +48,10 @@ is a likely unattributed copy.
 
 ## Automated monitor
 
-A scheduled monthly agent re-runs this search set and reports new hits
-(set up 2026-05-31). **This file is the source of truth for the strings it
-checks** — if the distinctive strings change (e.g. the deployment URL or
-donation link), update them here and in the scheduled task.
+A scheduled monthly agent is intended to re-run this search set automatically.
+Setup via Claude Code's `/schedule` was attempted on 2026-05-31 but the remote
+scheduling backend was unavailable — **until the routine is confirmed active,
+rely on the manual monthly check above.** Re-attempt with `/schedule` (the task
+spec uses the strings in this file). **This file is the source of truth for the
+strings the monitor checks** — if the distinctive strings change (e.g. the
+deployment URL or donation link), update them here and in the scheduled task.

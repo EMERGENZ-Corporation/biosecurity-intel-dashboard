@@ -138,6 +138,8 @@ Follow-up to the AGPL relicense (`49fb347`): committed the monthly copy/plagiari
 
 **Verify:** open `MONITORING.md`; run the GitHub code-search strings — expect 0 hits outside `EMERGENZ-Corporation` (matches the 2026-05-31 sweep).
 
+> Note: the paired automated `/schedule` routine could NOT be registered on 2026-05-31 (remote scheduling backend unavailable). The manual checklist is the live mechanism; re-attempt `/schedule` to activate the automated monthly sweep.
+
 ## ✅ Relicense MIT → AGPL-3.0 + commercial dual-license; CC BY-SA 4.0 curated content; attribution hardening (commit 49fb347)
 
 User wanted to ensure the project can't be monetized by others without EMERGENZ benefiting ("if it is going to get monetized it should be us that benefits"), while keeping OSI open-source status for grant eligibility (AGPL qualifies; a non-commercial license would not). Chose **AGPL-3.0-or-later + a commercial dual-license** for code, and **CC BY-SA 4.0 + commercial** for EMERGENZ's own curated content/editorial layer. EMERGENZ is sole copyright holder, so relicense is unilateral and **forward-only** — already-published MIT snapshots (incl. the version cloned ~3,421× in the prior 14 days) stay MIT for whoever has them. Triggered by that clone-traffic spike + a plagiarism-detection sweep that found **zero** indexed unattributed copies, so this is preventive and closes the attribution gaps: no per-file headers, no NOTICE/CITATION, `package.json` had no `license`/`author`, and the footer said "All rights reserved" (contradicting the license).
