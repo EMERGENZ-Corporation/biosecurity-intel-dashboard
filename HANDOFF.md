@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Add MONITORING.md copy-detection checklist (commit <pending — backfilled>)
+## ✅ Add MONITORING.md copy-detection checklist (commit 40a5f2e)
 
 Follow-up to the AGPL relicense (`49fb347`): committed the monthly copy/plagiarism monitoring checklist so the detection routine isn't lost to chat. Holds the GitHub + web exact-phrase search strings (deployment URL, Zeffy link, distinctive prose), the on-hit evidence/escalation steps, and the forward-only MIT-snapshot caveat. Paired with a scheduled monthly automated sweep that re-runs the same string set.
 
