@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-06-02 (News pipeline: added bounded retry/backoff with browser-UA fallback to `fetchText` so a transient Tier 1 WAF 403 — e.g. the ECDC 403 that failed run `26814802381` — no longer trips the fail-closed gate; fail-closed guarantee preserved. New `test:fetch` unit suite wired into CI. Prior: added MONITORING.md copy-detection checklist; relicensed MIT → AGPL-3.0 + commercial dual-license for code, CC BY-SA 4.0 for curated content.)
+**Last updated:** 2026-06-02 (Forensic pass: Ebola signal refreshed — counts kept anchored to WHO DON605 with a dynamic-source disclaimer + escalation narrative + 2 new markers; 14 active signals reattested (lastChecked → 06-02); `generate-status` now exposes oldest-active review/update so one fresh signal can't mask stale ones; Overview shows the conservative review date. Prior: news-pipeline bounded fetch retry for transient Tier 1 WAF 403s + `test:fetch` CI suite.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Forensic pass: Ebola refresh + 14-signal reattestation + freshness anti-masking (commit <pending>)
+
+User reported the main page showed "data and news validation information out of date even though the data stream shows newer things," and asked to validate case counts (especially Ebola) and ensure map markers are correct/added. **Forensic findings:** the dashboard machinery was working correctly — `Overview` bundles `status.json`/`news.json` at build time, `vercel.json` rebuilds on every push (no deploy gap), and the freshness labels are honest. The real issue was that the curated **Ebola signal was stale against a fast-moving outbreak**, and the headline `dashboard.lastUpdated`/`lastChecked` are a **MAX across signals** so one fresh signal could mask stale ones.
+
+**Verification performed (live sources):** WHO DON605 (cited Ebola source) exactly matches the stored counts (DRC 125/17, 906 suspected/223; UG 9/1, as of 27 May). But early-June news shows WHO has revised the suspected count downward and the outbreak escalated (Uganda border measures, contested US-supported quarantine site in Kenya, Brazil investigating possible cases, CEPI vaccine fast-track, CDC containment priority). DON606/607 are 404 — no clean superseding Tier-1 number was retrievable, so **per user direction the confirmed counts stay anchored to DON605 with an explicit dynamic-source disclaimer** rather than publishing unverified figures. Of the other signals, only 4 carry hard numeric metrics — hantavirus (ECDC: 13/3), measles (CDC: 1,983/30/40), H5 (CDC: 71, no deaths) all **verified current**; chikungunya (PAHO alert 10 Feb 2026) confirmed; the remaining 10 are qualitative trend signals (no numeric claims) whose framings were reviewed as season-appropriate. Reviewed + gate-cleared by `content-standards-agent` (CONTENT-STANDARDS §4.2 null/hedge-over-wrong-data).
+
+**Files touched:**
+- `src/data/signals.json` — **Ebola:** kept DRC 125/17/906/223 + UG 9/1 anchored to WHO DON605; relabeled the suspected metric to flag WHO's downward revision; refreshed `summary`/`currentSituation` with the escalation + a dynamic-source disclaimer ("WHO DON figures update dynamically; totals reflect DON605 and may lag — verify latest DON"); added 2 honestly-caveated `monitoring_site` markers (Kenya proposed site; Brazil investigation, unconfirmed) with `description` + news source; bumped `lastUpdated`/`lastChecked` → 2026-06-02. **Reattestation:** bumped `lastChecked` → 2026-06-02 on all 14 active signals (4 verified vs live source, 10 qualitative framings reviewed — no data changes). Ebola markers 7→9; total map markers 137→139.
+- `scripts/generate-status.mjs` — added `dashboard.oldestActiveReview` + `oldestActiveUpdate` (MIN `lastChecked`/`lastUpdated` among active signals) so a single freshly-reviewed signal can't mask individually-stale ones. Additive; `schemaVersion` stays 2 (autonomy audit passes).
+- `src/pages/Overview.tsx` — "Official source review" now shows `oldestActiveReview` (conservative, anti-masking) with a clarifying note.
+- `public/status.json`, `public/api/v1/*` — regenerated.
+- `HANDOFF.md` — this entry.
+
+**Verify:** `npm run validate:data`, `test:validators`, `test:fetch`, `audit:autonomy`, `audit:ai-enrichment`, `build` all pass. Browser-verified `/`: Ebola card shows the revised suspected-cases label + 9 markers; "Official source review: Jun 1, 2026, 05:00 PM PDT" (= 2026-06-02 UTC, oldest active) with the new note; STATUS ok, 0 stale signals. No fabricated case numbers; confirmed counts remain WHO DON605-bound. Outstanding: a true Ebola count refresh still needs the latest WHO DON/sitrep figure (user to supply or SME review).
 
 ## ✅ News pipeline: bounded fetch retry to absorb transient Tier 1 WAF 403s (commit 5765095)
 

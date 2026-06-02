@@ -860,7 +860,7 @@
       "euronews-radboud-quarantine"
     ],
     "lastUpdated": "2026-05-30T00:00:00.000Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "riskAssessments": [
       {
         "authority": "WHO",
@@ -967,7 +967,7 @@
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with Africa CDC confirming active outbreak monitoring in both the DRC and Uganda. Per WHO Disease Outbreak News (29 May 2026), the DRC has reported 125 confirmed cases (17 deaths) and 906 suspected cases (223 suspected deaths, as of 27 May), and Uganda has reported 9 confirmed cases (1 death). Multi-health-zone spread in eastern DRC continues; cross-border movement elevates geographic risk.",
+    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with Africa CDC confirming active outbreak monitoring in both the DRC and Uganda. Per WHO Disease Outbreak News (DON605, 29 May 2026), the DRC reported 125 confirmed cases (17 deaths) and 906 suspected cases (223 suspected deaths, data as of 27 May), and Uganda reported 9 confirmed cases (1 death). Since that report, early-June 2026 reporting indicates the response has escalated sharply — Uganda border health measures, a proposed US-supported quarantine/care arrangement in Kenya that has drawn public protest, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts — and WHO has revised its suspected-case count as testing reclassifies earlier suspected cases. WHO DON figures update dynamically; the totals shown here reflect DON605 and may lag the latest WHO update — verify against the WHO DON archive before operational use.",
     "operationalRelevance": "Filovirus outbreaks demand strict isolation, source-control PPE, and contact tracing. Healthcare preparedness teams should review travel-history screening, airport and port-of-entry coordination, and laboratory specimen pathways for suspected viral hemorrhagic fever.",
     "whyItMatters": "Bundibugyo virus has caused multiple regional outbreaks since 2007 with case-fatality rates around 30–40%. Cross-border movement in eastern DRC, Uganda, and South Sudan elevates the risk of geographic spread; no licensed vaccine specific to Bundibugyo is currently available.",
     "geographyNotes": "Regional monitoring focuses on DRC and neighbouring countries where cross-border movement can affect surveillance and preparedness. Health-zone-level claims require a specific current outbreak report.",
@@ -983,7 +983,7 @@
         "sourceId": "who-don-ebola-bundibugyo-drc-2026"
       },
       {
-        "label": "DRC suspected cases",
+        "label": "DRC suspected cases (as of 27 May 2026; WHO has since revised this downward — verify latest DON)",
         "value": 906,
         "sourceId": "who-don-ebola-bundibugyo-drc-2026"
       },
@@ -1054,6 +1054,36 @@
         "type": "monitoring_site",
         "severity": "concern",
         "label": "Beni — community surveillance & contact tracing hub"
+      },
+      {
+        "id": "ebola-ke-proposed-site",
+        "lat": -1.2921,
+        "lng": 36.8219,
+        "type": "monitoring_site",
+        "severity": "watch",
+        "label": "Kenya — proposed US-supported Ebola care/quarantine site (contested)",
+        "description": "Early-June 2026 news reporting: a proposed US-supported Ebola quarantine/care arrangement in Kenya has drawn public protest. No confirmed Ebola cases reported in Kenya; this is a planning/coordination development, not an outbreak zone.",
+        "sources": [
+          {
+            "label": "News reporting, early June 2026 (NBC News)",
+            "url": "https://www.nbcnews.com/world/africa/us-ebola-quarantine-plan-protests-kenya-rcna348014"
+          }
+        ]
+      },
+      {
+        "id": "ebola-br-investigation",
+        "lat": -15.7939,
+        "lng": -47.8828,
+        "type": "monitoring_site",
+        "severity": "watch",
+        "label": "Brazil — investigating possible imported case(s) (unconfirmed)",
+        "description": "Early-June 2026 news reporting: Brazil is investigating possible Ebola cases amid the DRC outbreak. Unconfirmed; shown for situational awareness, not as a confirmed case location.",
+        "sources": [
+          {
+            "label": "News reporting, early June 2026 (NBC News)",
+            "url": "https://www.nbcnews.com/world/africa/brazil-investigates-possible-ebola-cases-outbreak-congo-drc-rcna347819"
+          }
+        ]
       }
     ],
     "primarySourceId": "who-don-ebola-bundibugyo-drc-2026",
@@ -1063,8 +1093,8 @@
       "africa-cdc-outbreaks",
       "cdc-current-outbreaks"
     ],
-    "lastUpdated": "2026-05-30T00:00:00.000Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastUpdated": "2026-06-02T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "detailSections": [
       {
         "id": "clinical-profile",
@@ -1253,7 +1283,7 @@
         "rationale": "Indicates PPE protocol failure or IPC breakdown. Historical outbreaks have collapsed when ETU-staff transmission was unaddressed."
       }
     ],
-    "currentSituation": "WHO has declared the Bundibugyo ebolavirus outbreak across multiple health zones in the DRC. Africa CDC has confirmed outbreak monitoring in both DRC and Uganda, reflecting cross-border surveillance activation. No licensed vaccine specific to Bundibugyo virus is currently available. Current case and death totals should be verified against the latest WHO DON before operational briefing — WHO DON archive: who.int/emergencies/disease-outbreak-news.",
+    "currentSituation": "WHO has declared the Bundibugyo ebolavirus outbreak across multiple health zones in the DRC, and Africa CDC has confirmed outbreak monitoring in both the DRC and Uganda. No licensed vaccine specific to Bundibugyo virus is currently available. As of early June 2026, news reporting indicates the situation has escalated beyond the 27 May WHO DON605 snapshot: Uganda has tightened border health measures; a proposed US-supported Ebola quarantine/care site in Kenya has drawn public protest; Brazil has reported investigating possible imported cases (unconfirmed); and a coalition is fast-tracking multiple Ebola vaccine candidates while CDC has named outbreak containment a top priority. WHO has also revised its suspected-case count as laboratory testing reclassifies earlier suspected cases. WHO Disease Outbreak News figures update dynamically: the case and death totals shown on this dashboard reflect WHO DON605 (data as of 27 May 2026) and may not yet reflect the latest WHO update — always verify current totals against the latest WHO DON before operational briefing (WHO DON archive: who.int/emergencies/disease-outbreak-news).",
     "relatedSignals": [
       {
         "signalId": "mpox-africa-clade-i-2026",
@@ -1390,7 +1420,7 @@
       "paho-epi-alerts"
     ],
     "lastUpdated": "2026-05-30T00:00:00.000Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "measles-tx-gaines",
@@ -1734,7 +1764,7 @@
       "cdc-han"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "mpox-drc-equateur",
@@ -2078,7 +2108,7 @@
       "cdc-han"
     ],
     "lastUpdated": "2026-05-23T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "h5-tx-dairy",
@@ -2483,7 +2513,7 @@
       "who-disease-outbreak-news"
     ],
     "lastUpdated": "2026-05-23T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "cholera-sd-khartoum",
@@ -2755,7 +2785,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "flu-us-cdc",
@@ -2943,7 +2973,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "covid-us-boston",
@@ -3151,7 +3181,7 @@
       "cdc-nwss"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "noro-us-stanford",
@@ -3291,9 +3321,13 @@
     "id": "rotavirus-wastewater-2026-bay-area",
     "name": "Rotavirus — Bay Area wastewater rise",
     "category": "environmental",
-    "operationalLenses": ["enteric"],
+    "operationalLenses": [
+      "enteric"
+    ],
     "pathogen": "Rotavirus",
-    "geography": ["United States"],
+    "geography": [
+      "United States"
+    ],
     "severity": "monitor",
     "confidence": "official",
     "trend": "increasing",
@@ -3302,9 +3336,12 @@
     "operationalRelevance": "Pediatric EDs, daycare operators, and long-term-care facilities in the Bay Area should reinforce hand hygiene, environmental disinfection, and dehydration assessment readiness during elevated wastewater periods. Verify the latest regional trend at the WastewaterSCAN dashboard before operational use.",
     "whyItMatters": "Rotavirus is a leading cause of severe pediatric gastroenteritis globally; before routine infant vaccination in the US, it caused significant pediatric hospitalizations annually. Wastewater surveillance provides a community-level lead indicator that can precede clinical case reports.",
     "primarySourceId": "wastewaterscan",
-    "sourceIds": ["wastewaterscan", "cdc-nwss"],
+    "sourceIds": [
+      "wastewaterscan",
+      "cdc-nwss"
+    ],
     "lastUpdated": "2026-05-28T00:00:00Z",
-    "lastChecked": "2026-05-28T18:00:00Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "rota-bay-stanford",
@@ -3369,7 +3406,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "rsv-us-atlanta",
@@ -3526,7 +3563,7 @@
       "cdc-nwss"
     ],
     "lastUpdated": "2026-05-15T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "hmpv-us-cambridge",
@@ -3682,7 +3719,7 @@
       "who-disease-outbreak-news"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "lassa-ng-edo",
@@ -4003,7 +4040,7 @@
       "paho-epi-alerts"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "chikv-br-mg",
@@ -4195,7 +4232,7 @@
       "cdc-current-outbreaks"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastChecked": "2026-06-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "cauris-us-ny",

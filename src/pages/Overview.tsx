@@ -251,7 +251,10 @@ export default function Overview() {
   }
 
   const lastDataUpdate = statusJson.dashboard?.lastUpdated
-  const lastSourceReview = statusJson.dashboard?.lastOfficialSourceCheck
+  // Use the OLDEST active-signal review date (not the MAX across all signals) so a
+  // single freshly re-verified signal can't mask others that are individually stale.
+  const lastSourceReview =
+    statusJson.dashboard?.oldestActiveReview ?? statusJson.dashboard?.lastOfficialSourceCheck
   const latestNewsUpdate = statusJson.news?.newest
 
   // Headline threat = highest-severity active signal, used for the hero card.
@@ -764,7 +767,7 @@ export default function Overview() {
               <div>Official source review: {lastSourceReview ? formatDateTime(lastSourceReview) : '—'}</div>
               <div>Latest news item: {latestNewsUpdate ? formatDateTime(latestNewsUpdate) : '—'}</div>
               <div style={{ color: 'var(--color-text-muted)', lineHeight: 1.45 }}>
-                Curated fields update on human review; news updates automatically.
+                Curated fields update on human review; "Official source review" shows the least-recently-verified active signal. News updates automatically.
               </div>
               <div>Source records: {statusJson.sources?.total ?? '—'}</div>
               <div>News items indexed: {news.length}</div>

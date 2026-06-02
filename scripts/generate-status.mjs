@@ -98,6 +98,19 @@ function main() {
     .map((s) => new Date(s.lastChecked).getTime())
     .reduce((max, t) => (Number.isFinite(t) ? Math.max(max, t) : max), 0)
 
+  // Oldest review/update among ACTIVE signals. The headline lastUpdated/lastChecked
+  // above are a MAX across all signals, so a single freshly-reviewed signal can mask
+  // others that are individually stale. These conservative "oldest active" values let
+  // the UI surface the least-recently-verified active signal instead of hiding it.
+  const activeReviewTimes = activeSignals
+    .map((s) => new Date(s.lastChecked).getTime())
+    .filter((t) => Number.isFinite(t))
+  const activeUpdateTimes = activeSignals
+    .map((s) => new Date(s.lastUpdated).getTime())
+    .filter((t) => Number.isFinite(t))
+  const oldestActiveReview = activeReviewTimes.length ? Math.min(...activeReviewTimes) : null
+  const oldestActiveUpdate = activeUpdateTimes.length ? Math.min(...activeUpdateTimes) : null
+
   const dataAgeHours = latestSignalUpdate ? (Date.now() - latestSignalUpdate) / 36e5 : null
   const officialCheckAgeHours = latestSourceCheck ? (Date.now() - latestSourceCheck) / 36e5 : null
 
@@ -235,6 +248,8 @@ function main() {
       lastUpdated: latestSignalUpdate ? new Date(latestSignalUpdate).toISOString() : null,
       lastChecked: latestSourceCheck ? new Date(latestSourceCheck).toISOString() : null,
       lastOfficialSourceCheck: latestSourceCheck ? new Date(latestSourceCheck).toISOString() : null,
+      oldestActiveReview: oldestActiveReview ? new Date(oldestActiveReview).toISOString() : null,
+      oldestActiveUpdate: oldestActiveUpdate ? new Date(oldestActiveUpdate).toISOString() : null,
       dataAgeHours,
       officialCheckAgeHours,
     },
