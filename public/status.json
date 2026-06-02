@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-06-01T11:13:31.091Z",
+  "generatedAt": "2026-06-02T10:09:01.917Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -11,8 +11,8 @@
     "lastUpdated": "2026-05-30T00:00:00.000Z",
     "lastChecked": "2026-05-30T00:00:00.000Z",
     "lastOfficialSourceCheck": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 59.225303333333336,
-    "officialCheckAgeHours": 59.225303333333336
+    "dataAgeHours": 82.1505325,
+    "officialCheckAgeHours": 82.1505325
   },
   "signals": {
     "total": 17,
@@ -82,7 +82,7 @@
       }
     },
     "staleSignalIds": [],
-    "timelineEvents": 44,
+    "timelineEvents": 45,
     "totalMapMarkers": 137,
     "totalDetailSections": 81
   },
@@ -99,7 +99,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-01T04:35:07.000Z"
+    "newest": "2026-06-02T04:29:11.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
