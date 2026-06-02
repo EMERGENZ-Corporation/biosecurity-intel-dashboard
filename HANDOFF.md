@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Forensic pass: Ebola refresh + 14-signal reattestation + freshness anti-masking (commit <pending>)
+## ✅ Forensic pass: Ebola refresh + 14-signal reattestation + freshness anti-masking (commit 167a9aa)
 
 User reported the main page showed "data and news validation information out of date even though the data stream shows newer things," and asked to validate case counts (especially Ebola) and ensure map markers are correct/added. **Forensic findings:** the dashboard machinery was working correctly — `Overview` bundles `status.json`/`news.json` at build time, `vercel.json` rebuilds on every push (no deploy gap), and the freshness labels are honest. The real issue was that the curated **Ebola signal was stale against a fast-moving outbreak**, and the headline `dashboard.lastUpdated`/`lastChecked` are a **MAX across signals** so one fresh signal could mask stale ones.
 
