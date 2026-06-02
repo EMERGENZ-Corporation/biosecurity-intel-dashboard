@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ News pipeline: bounded fetch retry to absorb transient Tier 1 WAF 403s (commit pending-push)
+## ✅ News pipeline: bounded fetch retry to absorb transient Tier 1 WAF 403s (commit 5765095)
 
 The scheduled "Update News Feed" run failed (run `26814802381`, 2026-06-02 10:47Z) when ECDC — a critical Tier 1 feed — returned a single HTTP 403. `fetchText` had no retry, so one transient WAF/rate-limit blip on CDC/WHO/ECDC tripped the deliberate fail-closed gate (writes no files, exits 1, files the reusable `[PIPELINE ALERT]` issue, #14). ECDC was confirmed live immediately after (WebFetch + a local `update:news` run both returned the feed on the first attempt with the identifying UA), so the failure was transient, not a persistent block. Re-running the failed run succeeded and auto-closed issue #14 (16:18Z). To stop transient blips from paging a human, `fetchText` now retries a bounded number of times.
 
