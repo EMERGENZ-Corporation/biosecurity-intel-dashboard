@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-05-31 (Added MONITORING.md copy-detection checklist; automated `/schedule` monitor setup FAILED (remote backend down) → backlog note to re-attempt next session. Prior: relicensed MIT → AGPL-3.0 + commercial dual-license for code, CC BY-SA 4.0 for curated content; NOTICE / CITATION.cff / COMMERCIAL-LICENSE.md / LICENSE-DATA.md, SPDX headers, footer fix.)
+**Last updated:** 2026-06-02 (News pipeline: added bounded retry/backoff with browser-UA fallback to `fetchText` so a transient Tier 1 WAF 403 — e.g. the ECDC 403 that failed run `26814802381` — no longer trips the fail-closed gate; fail-closed guarantee preserved. New `test:fetch` unit suite wired into CI. Prior: added MONITORING.md copy-detection checklist; relicensed MIT → AGPL-3.0 + commercial dual-license for code, CC BY-SA 4.0 for curated content.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ News pipeline: bounded fetch retry to absorb transient Tier 1 WAF 403s (commit pending-push)
+
+The scheduled "Update News Feed" run failed (run `26814802381`, 2026-06-02 10:47Z) when ECDC — a critical Tier 1 feed — returned a single HTTP 403. `fetchText` had no retry, so one transient WAF/rate-limit blip on CDC/WHO/ECDC tripped the deliberate fail-closed gate (writes no files, exits 1, files the reusable `[PIPELINE ALERT]` issue, #14). ECDC was confirmed live immediately after (WebFetch + a local `update:news` run both returned the feed on the first attempt with the identifying UA), so the failure was transient, not a persistent block. Re-running the failed run succeeded and auto-closed issue #14 (16:18Z). To stop transient blips from paging a human, `fetchText` now retries a bounded number of times.
+
+This **preserves the fail-closed guarantee** (CONTENT-STANDARDS §6.1): a genuinely-down critical feed still fails after the retry budget is exhausted — it only absorbs transient `403/408/429/5xx` and network/timeout errors. Same class of issue the backlog flagged for `cdc-han` persistent-403 ("stronger UA workaround").
+
+**Files touched:**
+- `scripts/update-news.mjs` — `fetchText` now retries (2 extra attempts → 3 total) with linear backoff (600ms, 1200ms) on transient HTTP statuses (403/408/429/500/502/503/504) and network/abort errors; first attempt uses the identifying UA, retries fall back to a browser UA to defeat UA-based WAF challenges; 404 and other permanent statuses fail fast (no retry). Refactored into `fetchAttempt` + `fetchText`; guarded the `main()` invocation behind `import.meta.url === pathToFileURL(process.argv[1]).href` and added `export { fetchText }` so the function is unit-testable without running the pipeline.
+- `scripts/test-fetch-retry.mjs` (new) — 6 unit tests stubbing `global.fetch`: success-first-try uses identifying UA; 403→200 retries with browser-UA fallback; 429 retried; network error retried; 404 fails fast; persistent 403 exhausts 3 attempts then throws.
+- `package.json` — added `test:fetch` script.
+- `.github/workflows/ci.yml` — CI now runs `npm run test:fetch` after `test:validators`.
+- `HANDOFF.md` — this entry.
+
+**Verify:** `npm run test:fetch` → `[test-fetch-retry] OK (6 tests)`. `build`, `validate:data`, `test:validators`, `test:promote-timeline`, `audit:autonomy`, `audit:ai-enrichment` all pass. The data-write path is unchanged (no `news.json` schema/curation change); the fail-closed gate still hard-fails when a critical feed is genuinely down.
 
 ## ✅ Add MONITORING.md copy-detection checklist (commit 40a5f2e)
 

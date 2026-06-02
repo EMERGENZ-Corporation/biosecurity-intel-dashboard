@@ -29,6 +29,9 @@ jobs:
       - name: Run validator regression tests
         run: npm run test:validators
 
+      - name: Run news-fetch retry tests
+        run: npm run test:fetch
+
       - name: Audit autonomous update wiring
         run: npm run audit:autonomy
 

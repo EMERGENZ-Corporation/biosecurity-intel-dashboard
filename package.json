@@ -12,6 +12,7 @@
         "test:parsers": "node scripts/test-official-parsers.mjs",
         "test:validators": "node scripts/test-validate-data.mjs",
         "test:promote-timeline": "node scripts/test-promote-news-to-timeline.mjs",
+        "test:fetch": "node scripts/test-fetch-retry.mjs",
         "validate:data": "node scripts/validate-data.mjs",
         "generate:status": "node scripts/generate-status.mjs",
         "generate:api": "node scripts/generate-api.mjs",
