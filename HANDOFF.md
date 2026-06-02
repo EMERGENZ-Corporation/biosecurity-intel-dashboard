@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Ebola counts corrected to current WHO situation-page figures (commit <pending>)
+## ✅ Ebola counts corrected to current WHO situation-page figures (commit 82809a0)
 
 Follow-up to the forensic pass (`167a9aa`): the user supplied the **WHO emergency situation page** (`who.int/emergencies/situations/ebola-outbreak---drc-2026`) plus a screenshot of its daily-figures graphic — which my fetch tools could not read as text (WHO publishes the live count only as an image sourced from the DRC government's COUSP-DRC daily situation reports, "subject to retrospective revision"). With the authoritative numbers in hand, replaced the DON605-anchored snapshot with the **current WHO figures: DRC 321 confirmed / 48 deaths / 116 suspected (CFR 15%, 6 recovered, as of 31 May 2026); Uganda 9 / 1 (as of 1 June 2026); 330 confirmed / 49 deaths total.** Confirmed rose sharply (125 → 321) and suspected fell (906 → 116) as laboratory testing reclassified suspected cases — the dashboard had been stale in **both** directions. (The same WHO page independently re-confirmed Andes hantavirus at 13 cases / 3 deaths as of 2 June 2026 — no change.)
 
