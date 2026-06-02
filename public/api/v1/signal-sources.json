@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-02T17:56:46.407Z",
+  "generatedAt": "2026-06-02T18:18:59.727Z",
   "endpoint": "/api/v1/signal-sources.json",
-  "count": 44,
+  "count": 45,
   "signalSources": [
     {
       "id": "ecdc-andes-surveillance",
@@ -737,6 +737,21 @@
       ],
       "sourceTier": 1,
       "notes": "WHO mpox External Situation Report (#65, 30 Apr 2026). Clade-aware multi-country figures live inside the linked PDF. Africa CDC mpox pages were 404/stale, so WHO is the better live authority for this signal."
+    },
+    {
+      "id": "who-ebola-drc-2026-situation",
+      "authority": "WHO",
+      "authorityFull": "World Health Organization",
+      "title": "WHO Emergency Situation — Ebola disease (Bundibugyo virus), DRC and Uganda, 2026",
+      "sourceType": "surveillance-dashboard",
+      "primary": true,
+      "url": "https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026",
+      "lastVerified": "2026-06-02",
+      "publicationDate": "2026-06-01",
+      "domains": [
+        "vhf"
+      ],
+      "sourceTier": 1
     }
   ]
 }

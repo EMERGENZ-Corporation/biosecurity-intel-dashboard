@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-06-02 (Forensic pass: Ebola signal refreshed — counts kept anchored to WHO DON605 with a dynamic-source disclaimer + escalation narrative + 2 new markers; 14 active signals reattested (lastChecked → 06-02); `generate-status` now exposes oldest-active review/update so one fresh signal can't mask stale ones; Overview shows the conservative review date. Prior: news-pipeline bounded fetch retry for transient Tier 1 WAF 403s + `test:fetch` CI suite.)
+**Last updated:** 2026-06-02 (Ebola counts corrected to current WHO situation-page figures — DRC 321 confirmed / 48 deaths / 116 suspected (as of 31 May 2026), Uganda 9/1; new `who-ebola-drc-2026-situation` Tier 1 source. Prior same day: forensic pass — 14 active signals reattested, `generate-status` oldest-active anti-masking; news-pipeline bounded fetch retry for transient Tier 1 WAF 403s + `test:fetch` CI suite.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,18 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Ebola counts corrected to current WHO situation-page figures (commit <pending>)
+
+Follow-up to the forensic pass (`167a9aa`): the user supplied the **WHO emergency situation page** (`who.int/emergencies/situations/ebola-outbreak---drc-2026`) plus a screenshot of its daily-figures graphic — which my fetch tools could not read as text (WHO publishes the live count only as an image sourced from the DRC government's COUSP-DRC daily situation reports, "subject to retrospective revision"). With the authoritative numbers in hand, replaced the DON605-anchored snapshot with the **current WHO figures: DRC 321 confirmed / 48 deaths / 116 suspected (CFR 15%, 6 recovered, as of 31 May 2026); Uganda 9 / 1 (as of 1 June 2026); 330 confirmed / 49 deaths total.** Confirmed rose sharply (125 → 321) and suspected fell (906 → 116) as laboratory testing reclassified suspected cases — the dashboard had been stale in **both** directions. (The same WHO page independently re-confirmed Andes hantavirus at 13 cases / 3 deaths as of 2 June 2026 — no change.)
+
+**Files touched:**
+- `src/data/signal-sources.json` — added `who-ebola-drc-2026-situation` (WHO, Tier 1, `surveillance-dashboard`) for the live WHO situation page.
+- `src/data/signals.json` — Ebola: rebuilt `metrics` to the current WHO figures + added a confirmed-CFR metric; re-pointed metric `sourceId` + `primarySourceId` to the new situation source (DON605 retained in `sourceIds` as the historical declaration); rewrote `summary`/`currentSituation` to reflect the corrected scale + trajectory + a daily-update/retrospective-revision caveat; bumped the WHO `riskAssessment` asOf → 2026-06-01. `lastUpdated`/`lastChecked` stay 2026-06-02.
+- `public/status.json`, `public/api/v1/*` — regenerated.
+- `HANDOFF.md` — this entry.
+
+**Verify:** `validate:data`, `test:validators`, `build`, `audit:autonomy`, `audit:ai-enrichment` all pass. Browser `/`: the Ebola hero card shows 321 confirmed / 48 deaths / 116 suspected / 15% CFR (WHO, as of 31 May 2026). Counts are bound to the WHO situation page (Tier 1); no fabricated numbers.
 
 ## ✅ Forensic pass: Ebola refresh + 14-signal reattestation + freshness anti-masking (commit 167a9aa)
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-02T17:56:46.407Z",
+  "generatedAt": "2026-06-02T18:18:59.727Z",
   "endpoint": "/api/v1/signals.json",
   "count": 17,
   "signals": [
@@ -972,35 +972,40 @@
       "confidence": "corroborated",
       "trend": "increasing",
       "status": "active",
-      "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with Africa CDC confirming active outbreak monitoring in both the DRC and Uganda. Per WHO Disease Outbreak News (DON605, 29 May 2026), the DRC reported 125 confirmed cases (17 deaths) and 906 suspected cases (223 suspected deaths, data as of 27 May), and Uganda reported 9 confirmed cases (1 death). Since that report, early-June 2026 reporting indicates the response has escalated sharply — Uganda border health measures, a proposed US-supported quarantine/care arrangement in Kenya that has drawn public protest, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts — and WHO has revised its suspected-case count as testing reclassifies earlier suspected cases. WHO DON figures update dynamically; the totals shown here reflect DON605 and may lag the latest WHO update — verify against the WHO DON archive before operational use.",
+      "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with cross-border spread to Uganda. Per the WHO emergency situation page (data as of 31 May 2026 for the DRC and 1 June 2026 for Uganda), the DRC has reported 321 confirmed cases, 48 confirmed deaths (CFR 15%), and 116 suspected cases, and Uganda has reported 9 confirmed cases (1 death) — 330 confirmed cases and 49 deaths in total. Confirmed cases have risen sharply since the late-May WHO DON605 snapshot (125 confirmed) as laboratory testing reclassified earlier suspected cases, so the suspected count has correspondingly fallen from about 906 to 116. The regional response has escalated: Uganda border health measures, a contested US-supported quarantine/care arrangement in Kenya, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts. WHO updates these figures daily from DRC government (COUSP-DRC) situation reports and they are subject to retrospective revision — verify the latest WHO situation report before operational use.",
       "operationalRelevance": "Filovirus outbreaks demand strict isolation, source-control PPE, and contact tracing. Healthcare preparedness teams should review travel-history screening, airport and port-of-entry coordination, and laboratory specimen pathways for suspected viral hemorrhagic fever.",
       "whyItMatters": "Bundibugyo virus has caused multiple regional outbreaks since 2007 with case-fatality rates around 30–40%. Cross-border movement in eastern DRC, Uganda, and South Sudan elevates the risk of geographic spread; no licensed vaccine specific to Bundibugyo is currently available.",
       "geographyNotes": "Regional monitoring focuses on DRC and neighbouring countries where cross-border movement can affect surveillance and preparedness. Health-zone-level claims require a specific current outbreak report.",
       "metrics": [
         {
-          "label": "DRC confirmed cases (WHO DON, as of 27 May 2026)",
-          "value": 125,
-          "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+          "label": "DRC confirmed cases (WHO, as of 31 May 2026)",
+          "value": 321,
+          "sourceId": "who-ebola-drc-2026-situation"
         },
         {
           "label": "DRC confirmed deaths",
-          "value": 17,
-          "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+          "value": 48,
+          "sourceId": "who-ebola-drc-2026-situation"
         },
         {
-          "label": "DRC suspected cases (as of 27 May 2026; WHO has since revised this downward — verify latest DON)",
-          "value": 906,
-          "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+          "label": "DRC suspected cases (as of 31 May 2026)",
+          "value": 116,
+          "sourceId": "who-ebola-drc-2026-situation"
         },
         {
-          "label": "Uganda confirmed cases (as of 29 May 2026)",
+          "label": "DRC case-fatality rate, confirmed (%)",
+          "value": 15,
+          "sourceId": "who-ebola-drc-2026-situation"
+        },
+        {
+          "label": "Uganda confirmed cases (as of 1 June 2026)",
           "value": 9,
-          "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+          "sourceId": "who-ebola-drc-2026-situation"
         },
         {
           "label": "Uganda confirmed deaths",
           "value": 1,
-          "sourceId": "who-don-ebola-bundibugyo-drc-2026"
+          "sourceId": "who-ebola-drc-2026-situation"
         }
       ],
       "mapMarkers": [
@@ -1091,8 +1096,9 @@
           ]
         }
       ],
-      "primarySourceId": "who-don-ebola-bundibugyo-drc-2026",
+      "primarySourceId": "who-ebola-drc-2026-situation",
       "sourceIds": [
+        "who-ebola-drc-2026-situation",
         "who-don-ebola-bundibugyo-drc-2026",
         "who-disease-outbreak-news",
         "africa-cdc-outbreaks",
@@ -1231,8 +1237,8 @@
           "authority": "WHO",
           "label": "Active Outbreak",
           "description": "Disease Outbreak News",
-          "url": "https://www.who.int/emergencies/disease-outbreak-news",
-          "asOf": "2026-05-20",
+          "url": "https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026",
+          "asOf": "2026-06-01",
           "history": [
             {
               "label": "ALERT",
@@ -1288,7 +1294,7 @@
           "rationale": "Indicates PPE protocol failure or IPC breakdown. Historical outbreaks have collapsed when ETU-staff transmission was unaddressed."
         }
       ],
-      "currentSituation": "WHO has declared the Bundibugyo ebolavirus outbreak across multiple health zones in the DRC, and Africa CDC has confirmed outbreak monitoring in both the DRC and Uganda. No licensed vaccine specific to Bundibugyo virus is currently available. As of early June 2026, news reporting indicates the situation has escalated beyond the 27 May WHO DON605 snapshot: Uganda has tightened border health measures; a proposed US-supported Ebola quarantine/care site in Kenya has drawn public protest; Brazil has reported investigating possible imported cases (unconfirmed); and a coalition is fast-tracking multiple Ebola vaccine candidates while CDC has named outbreak containment a top priority. WHO has also revised its suspected-case count as laboratory testing reclassifies earlier suspected cases. WHO Disease Outbreak News figures update dynamically: the case and death totals shown on this dashboard reflect WHO DON605 (data as of 27 May 2026) and may not yet reflect the latest WHO update — always verify current totals against the latest WHO DON before operational briefing (WHO DON archive: who.int/emergencies/disease-outbreak-news).",
+      "currentSituation": "WHO has declared the Bundibugyo ebolavirus outbreak across multiple health zones in the DRC, with cross-border spread to Uganda. As of 31 May 2026 (DRC) and 1 June 2026 (Uganda), WHO reports 321 confirmed cases and 48 confirmed deaths in the DRC (CFR 15%, 6 recovered, 116 suspected) and 9 confirmed cases (1 death) in Uganda — 330 confirmed and 49 deaths in total. Confirmed cases rose sharply from the 125 reported in WHO DON605 (27 May) as suspected cases were tested and reclassified, and the suspected count fell from about 906 to 116. No licensed vaccine specific to Bundibugyo virus is available, though a coalition is fast-tracking multiple candidates. The response has escalated regionally: Uganda has tightened border health measures, a proposed US-supported Ebola care/quarantine site in Kenya has drawn public protest, Brazil is investigating possible imported cases (unconfirmed), and CDC has named containment a top priority. WHO updates these daily figures from DRC government (COUSP-DRC) situation reports and they are subject to retrospective revision — always verify the latest WHO situation report (who.int/emergencies/situations/ebola-outbreak---drc-2026) before operational briefing.",
       "relatedSignals": [
         {
           "signalId": "mpox-africa-clade-i-2026",
