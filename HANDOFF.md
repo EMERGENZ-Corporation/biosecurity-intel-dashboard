@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ News pipeline: Tier 1 quorum gate so a lone transient ECDC 403 degrades gracefully (commit pending)
+## ✅ News pipeline: Tier 1 quorum gate so a lone transient ECDC 403 degrades gracefully (commit 3b6f301)
 
 The scheduled "Update News Feed" runs failed twice on 2026-06-05 (runs `26995206980` 04:22Z and `27008575166` 10:03Z) when ECDC — a critical Tier 1 feed — returned HTTP 403 from its WAF on all 3 fetch attempts (the bounded retry from `5765095` was exhausted). CDC (1819 items) and WHO (25) both succeeded the same run, yet the old gate (`activeSignalCount > 0 && criticalFailures.length > 0`) discarded the entire run, wrote no files, and paged a human via the reusable `[PIPELINE ALERT]` issue (#17). Both runs self-recovered on the next cycle (15:18Z succeeded, auto-closed #17) — confirming a transient EU WAF blip, not an outage. This was the 4th such false page in ~15 runs (06-02 ×2, 06-03, 06-05). Per the user's decision, replaced the "any critical feed" gate with a **quorum gate**.
 
