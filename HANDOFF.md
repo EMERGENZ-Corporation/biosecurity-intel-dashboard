@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Close coverage gaps vs Brown Pandemic Center Tracking Report — add pertussis + yellow fever signals, broaden avian flu to H9N2 (commit pending)
+## ✅ Close coverage gaps vs Brown Pandemic Center Tracking Report — add pertussis + yellow fever signals, broaden avian flu to H9N2 (commit e6087f7)
 
 User forwarded the Brown University Pandemic Center "Tracking Report" (June 4 2026) and asked to confirm every topic in it is tracked by the dashboard, and to add/modify as needed. Mapped all 18 newsletter threats against the 17 existing signals: 15 already tracked (Ebola, hantavirus, measles, mpox, H5N1, cholera, screwworm, COVID, norovirus, RSV, hMPV, seasonal flu, Lassa, chikungunya, Candida auris, FIFA — plus the dashboard's extra rotavirus signal the newsletter doesn't carry). **Three gaps found and closed: pertussis (whooping cough), yellow fever (Colombia/Tolima), and H9N2 avian influenza** (the existing avian-flu signal was H5/H5N6 only).
 
