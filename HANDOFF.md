@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-06-02 (Ebola counts corrected to current WHO situation-page figures — DRC 321 confirmed / 48 deaths / 116 suspected (as of 31 May 2026), Uganda 9/1; new `who-ebola-drc-2026-situation` Tier 1 source. Prior same day: forensic pass — 14 active signals reattested, `generate-status` oldest-active anti-masking; news-pipeline bounded fetch retry for transient Tier 1 WAF 403s + `test:fetch` CI suite.)
+**Last updated:** 2026-06-05 (News pipeline: Tier 1 **quorum gate** — a lone transient ECDC WAF 403 now degrades gracefully instead of discarding the run and paging; CDC/WHO failure or any 2+ Tier 1 failures still fail closed. New `criticalQuorumBreached()` + `test:gate` CI suite (9 tests). Prior, 2026-06-02: Ebola counts corrected to current WHO situation-page figures — DRC 321 confirmed / 48 deaths / 116 suspected; forensic pass reattested 14 active signals; bounded fetch retry for transient Tier 1 WAF 403s.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,21 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ News pipeline: Tier 1 quorum gate so a lone transient ECDC 403 degrades gracefully (commit pending)
+
+The scheduled "Update News Feed" runs failed twice on 2026-06-05 (runs `26995206980` 04:22Z and `27008575166` 10:03Z) when ECDC — a critical Tier 1 feed — returned HTTP 403 from its WAF on all 3 fetch attempts (the bounded retry from `5765095` was exhausted). CDC (1819 items) and WHO (25) both succeeded the same run, yet the old gate (`activeSignalCount > 0 && criticalFailures.length > 0`) discarded the entire run, wrote no files, and paged a human via the reusable `[PIPELINE ALERT]` issue (#17). Both runs self-recovered on the next cycle (15:18Z succeeded, auto-closed #17) — confirming a transient EU WAF blip, not an outage. This was the 4th such false page in ~15 runs (06-02 ×2, 06-03, 06-05). Per the user's decision, replaced the "any critical feed" gate with a **quorum gate**.
+
+This **preserves the fail-closed guarantee** for the load-bearing authorities: a CDC or WHO failure, or any 2+ simultaneous Tier 1 failures (a correlated outage), still hard-fails and pages. Only a *lone* ECDC failure that survives the retry budget now degrades gracefully — the run still publishes using CDC/WHO + every other healthy feed, records ECDC under `criticalFailures` plus a new `degraded: true` flag in `update-news-result.json`, and logs a warning, but does not discard the run or page. ECDC remains Tier 1 (no source-tier change); only the halt-vs-degrade decision changed.
+
+**Files touched:**
+- `scripts/update-news.mjs` — extracted the gate decision into a pure, exported `criticalQuorumBreached(criticalFailures)` (CDC/WHO = `PRIMARY_CRITICAL_AUTHORITIES`; breach when a primary fails OR ≥2 Tier 1 feeds fail). Gate now calls it; added a graceful-degradation `console.warn` + `degraded` flag on the two success-path result writes. Updated the retry-budget comment to document the two-layer (retry → quorum) defense. `export { fetchText, criticalQuorumBreached }`.
+- `scripts/test-critical-gate.mjs` (new) — 9 unit tests: empty/undefined → not breached; lone ECDC → tolerated; lone CDC/WHO → breached; CDC+ECDC / WHO+ECDC / CDC+WHO / all-three → breached.
+- `package.json` — added `test:gate` script.
+- `.github/workflows/ci.yml` — CI now runs `npm run test:gate` after `test:fetch`.
+- `HANDOFF.md` — this entry.
+
+**Verify:** `npm run test:gate` → `[test-critical-gate] OK (9 tests)`. `test:fetch` (6), `test:validators`, `validate:data`, `audit:autonomy`, `build` all pass. No `news.json` schema/curation change. Behavior change: a run where only ECDC 403s now exits 0, writes `news.json`, and sets `degraded: true` in `update-news-result.json` (no `[PIPELINE ALERT]`); a run where CDC or WHO fails — or any two Tier 1 feeds fail — still exits 1 and pages.
 
 ## ✅ Ebola counts corrected to current WHO situation-page figures (commit 82809a0)
 

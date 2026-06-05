@@ -48,12 +48,14 @@ const RESULT_PATH = 'update-news-result.json'
 const MAX_ITEMS = Number.parseInt(process.env.MAX_NEWS_ITEMS || '500', 10)
 const MAX_AGE_DAYS = Number.parseInt(process.env.MAX_NEWS_AGE_DAYS || '30', 10)
 const FETCH_TIMEOUT_MS = 12000
-// Transient-failure retry budget. Tier 1 feeds (CDC/WHO/ECDC) hard-fail the run
-// during active monitoring, and government/EU sites (notably ECDC) sit behind
-// WAFs that intermittently answer 403/429 to non-browser user agents. Without a
-// retry, a single such blip trips the critical-feed gate and pages a human. We
-// retry a small bounded number of times so a genuinely-down feed still fails
-// (preserving the fail-closed guarantee) but a transient blip does not.
+// Transient-failure retry budget. A breach of the Tier 1 quorum gate
+// (criticalQuorumBreached) hard-fails the run during active monitoring, and
+// government/EU sites (notably ECDC) sit behind WAFs that intermittently answer
+// 403/429 to non-browser user agents. Retry is the FIRST line of defense — a
+// single blip is absorbed here before it reaches the gate. The quorum gate is
+// the SECOND line: a lone ECDC failure that survives the retry budget degrades
+// gracefully rather than paging, while a CDC/WHO failure or any two
+// simultaneous Tier 1 failures still fail closed.
 const FETCH_RETRIES = 2 // additional attempts after the first → 3 total
 const FETCH_RETRY_STATUS = new Set([403, 408, 429, 500, 502, 503, 504])
 const DEFAULT_UA = 'EMERGENZ-Biosecurity-Intel/1.0 (+https://emergenz.us)'
@@ -394,6 +396,25 @@ function writeResult(result) {
 }
 
 // ---------------------------------------------------------------------------
+// Critical-feed quorum gate (pure, exported for tests)
+// ---------------------------------------------------------------------------
+// CDC and WHO are the *primary* Tier 1 authorities: if either is unreachable
+// during active monitoring we refuse to publish a partial dataset and page a
+// human (fail-closed). ECDC is also Tier 1, but it sits behind a WAF that
+// intermittently answers 403/429 even to browser-UA requests (see fetchText),
+// so a LONE ECDC failure that survives the retry budget is tolerated — the run
+// degrades gracefully using CDC/WHO + every other healthy feed rather than
+// discarding the run and paging. Two or more simultaneous Tier 1 failures
+// indicate a correlated outage (not a single flaky-WAF blip) and still halt.
+const PRIMARY_CRITICAL_AUTHORITIES = new Set(['CDC', 'WHO'])
+
+function criticalQuorumBreached(criticalFailures = []) {
+  if (criticalFailures.length === 0) return false
+  if (criticalFailures.length >= 2) return true
+  return criticalFailures.some(failure => PRIMARY_CRITICAL_AUTHORITIES.has(failure.authority))
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
@@ -449,7 +470,7 @@ async function main() {
     }
   })
 
-  if (activeSignalCount > 0 && criticalFailures.length > 0) {
+  if (activeSignalCount > 0 && criticalQuorumBreached(criticalFailures)) {
     writeResult({
       ok: false,
       activeSignalCount,
@@ -458,8 +479,25 @@ async function main() {
       fetchedItems: fresh.length,
       wroteNewsJson: false,
     })
-    console.error('[update-news] critical Tier 1 feed failure during active monitoring - writing no files')
+    console.error(
+      '[update-news] Tier 1 quorum breached during active monitoring ' +
+      `(${criticalFailures.map(f => f.authority).join(', ')}) — writing no files`
+    )
     process.exit(1)
+  }
+
+  // Graceful degradation: a lone, non-primary Tier 1 failure (e.g. a transient
+  // ECDC WAF 403 with CDC + WHO healthy) is tolerated. We still publish using
+  // every healthy feed, but record the degraded authority so it stays visible
+  // in update-news-result.json and the CI log — without discarding the run or
+  // paging a human. The fail-closed guarantee is preserved for CDC/WHO and for
+  // correlated (2+) Tier 1 outages by the quorum gate above.
+  const degraded = criticalFailures.length > 0
+  if (degraded) {
+    console.warn(
+      '[update-news] tolerating non-quorum Tier 1 failure(s), degrading gracefully: ' +
+      criticalFailures.map(f => `${f.authority} (${f.reason})`).join(', ')
+    )
   }
 
   // Build a merged set: start from existing, layer in fresh
@@ -505,6 +543,7 @@ async function main() {
   if (existingSerialized === nextSerialized) {
     writeResult({
       ok: true,
+      degraded,
       activeSignalCount,
       criticalFailures,
       softFailures,
@@ -519,6 +558,7 @@ async function main() {
   atomicWriteFileSync(NEWS_PATH, nextSerialized)
   writeResult({
     ok: true,
+    degraded,
     activeSignalCount,
     criticalFailures,
     softFailures,
@@ -548,4 +588,4 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   })
 }
 
-export { fetchText }
+export { fetchText, criticalQuorumBreached }
