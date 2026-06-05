@@ -1,33 +1,33 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-06-05T09:34:55.299Z",
+  "generatedAt": "2026-06-05T19:21:42.701Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
     "maxSignalStaleHours": 168
   },
   "dashboard": {
-    "lastUpdated": "2026-06-02T00:00:00.000Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
-    "lastOfficialSourceCheck": "2026-06-02T00:00:00.000Z",
+    "lastUpdated": "2026-06-05T00:00:00.000Z",
+    "lastChecked": "2026-06-05T00:00:00.000Z",
+    "lastOfficialSourceCheck": "2026-06-05T00:00:00.000Z",
     "oldestActiveReview": "2026-06-02T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-14T00:00:00.000Z",
-    "dataAgeHours": 81.5820275,
-    "officialCheckAgeHours": 81.5820275
+    "dataAgeHours": 19.361861666666666,
+    "officialCheckAgeHours": 19.361861666666666
   },
   "signals": {
-    "total": 17,
-    "active": 15,
+    "total": 19,
+    "active": 16,
     "highestSeverity": "action",
     "byCategory": {
       "zoonotic": 4,
       "vhf": 2,
-      "vaccine_preventable": 1,
+      "vaccine_preventable": 2,
       "enteric": 1,
       "respiratory": 1,
       "environmental": 5,
-      "vector_borne": 1,
+      "vector_borne": 2,
       "amr_fungal": 1,
       "mass_gathering": 1
     },
@@ -39,8 +39,8 @@
       },
       "travel": {
         "primary": 0,
-        "linked": 10,
-        "total": 10
+        "linked": 11,
+        "total": 11
       },
       "vhf": {
         "primary": 2,
@@ -48,9 +48,9 @@
         "total": 2
       },
       "vaccine_preventable": {
-        "primary": 1,
-        "linked": 0,
-        "total": 1
+        "primary": 2,
+        "linked": 1,
+        "total": 3
       },
       "enteric": {
         "primary": 1,
@@ -59,8 +59,8 @@
       },
       "respiratory": {
         "primary": 1,
-        "linked": 0,
-        "total": 1
+        "linked": 1,
+        "total": 2
       },
       "environmental": {
         "primary": 5,
@@ -68,9 +68,9 @@
         "total": 5
       },
       "vector_borne": {
-        "primary": 1,
+        "primary": 2,
         "linked": 0,
-        "total": 1
+        "total": 2
       },
       "amr_fungal": {
         "primary": 1,
@@ -85,23 +85,23 @@
     },
     "staleSignalIds": [],
     "timelineEvents": 45,
-    "totalMapMarkers": 139,
-    "totalDetailSections": 81
+    "totalMapMarkers": 141,
+    "totalDetailSections": 86
   },
   "sources": {
-    "total": 45,
-    "primary": 35,
+    "total": 47,
+    "primary": 37,
     "secondary": 10,
     "byTier": {
-      "tier1": 26,
-      "tier2": 12,
+      "tier1": 27,
+      "tier2": 13,
       "tier3": 4,
       "tier4": 3
     }
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-04T20:07:00.000Z"
+    "newest": "2026-06-05T18:33:45.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",

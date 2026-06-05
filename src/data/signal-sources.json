@@ -747,5 +747,37 @@
       "vhf"
     ],
     "sourceTier": 1
+  },
+  {
+    "id": "cdc-pertussis-surveillance",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Pertussis (Whooping Cough) Surveillance and Trends",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.cdc.gov/pertussis/php/surveillance/index.html",
+    "lastVerified": "2026-06-05",
+    "domains": [
+      "vaccine_preventable",
+      "respiratory"
+    ],
+    "sourceTier": 1,
+    "notes": "CDC pertussis surveillance landing page (NNDSS-backed). Weekly provisional counts are reporting-lagged; treat exact cumulative totals as provisional and verify against the latest NNDSS tables."
+  },
+  {
+    "id": "paho-yellow-fever-2026",
+    "authority": "PAHO",
+    "authorityFull": "Pan American Health Organization",
+    "title": "PAHO Epidemiological Alert — Sustained Yellow Fever Transmission in the Region of the Americas (13 March 2026)",
+    "sourceType": "health-advisory",
+    "primary": true,
+    "url": "https://www.paho.org/en/news/13-3-2026-paho-reports-sustained-yellow-fever-transmission-parts-south-america",
+    "lastVerified": "2026-06-05",
+    "publicationDate": "2026-03-13",
+    "domains": [
+      "vector_borne"
+    ],
+    "sourceTier": 2,
+    "notes": "PAHO 13 Mar 2026 yellow-fever epidemiological alert. Backs the Tolima 2024–2026 cumulative figures (153 confirmed / 62 deaths, CFR ~41%). More recent national (Colombia INS) counts may be higher; verify against the latest PAHO/INS update before treating as confirmed."
   }
 ]

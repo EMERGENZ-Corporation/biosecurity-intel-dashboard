@@ -90,7 +90,7 @@ const SIGNAL_KEYWORD_OVERRIDES = {
   ],
   'avian-influenza-h5-2026': [
     'avian influenza', 'bird flu', 'h5n1', 'h5 influenza', 'h5nx', 'avian flu',
-    'highly pathogenic avian', 'hpai', 'h5n2', 'h5n9',
+    'highly pathogenic avian', 'hpai', 'h5n2', 'h5n9', 'h9n2', 'h9n2 china',
   ],
   'cholera-africa-2026': [
     'cholera', 'vibrio cholerae', 'cholera outbreak', 'cholera africa',
@@ -128,6 +128,13 @@ const SIGNAL_KEYWORD_OVERRIDES = {
   'fifa-world-cup-2026-prep': [
     'world cup 2026', 'fifa 2026', 'mass gathering disease', 'world cup health',
     'world cup outbreak',
+  ],
+  'pertussis-us-2026': [
+    'pertussis', 'whooping cough', 'bordetella pertussis', 'whooping-cough',
+  ],
+  'yellow-fever-colombia-2026': [
+    'yellow fever', 'fiebre amarilla', 'yellow fever colombia', 'yellow fever tolima',
+    'yellow fever outbreak',
   ],
 }
 

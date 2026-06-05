@@ -2089,9 +2089,9 @@
   },
   {
     "id": "avian-influenza-h5-2026",
-    "name": "Avian influenza — H5/H5N6 zoonotic signals",
+    "name": "Avian influenza — H5/H9N2 zoonotic signals",
     "category": "zoonotic",
-    "pathogen": "Influenza A H5 subtype",
+    "pathogen": "Influenza A (H5 and H9N2 subtypes)",
     "geography": [
       "China",
       "United States (Los Angeles area)",
@@ -2101,7 +2101,7 @@
     "confidence": "corroborated",
     "trend": "stable",
     "status": "active",
-    "summary": "H5 avian influenza remains a One Health surveillance priority. CDC has confirmed 71 U.S. human cases since February 2024, all exposure-linked (dairy and poultry workers), with no deaths and no sustained human-to-human transmission. Current CDC public health risk assessment: LOW. U.S. poultry detections are declining from the February 2026 peak (~11.4 million birds); approximately 140,000 birds affected in May 2026. Dairy cattle herd detections continue.",
+    "summary": "H5 avian influenza remains a One Health surveillance priority. CDC has confirmed 71 U.S. human cases since February 2024, all exposure-linked (dairy and poultry workers), with no deaths and no sustained human-to-human transmission. Current CDC public health risk assessment: LOW. U.S. poultry detections are declining from the February 2026 peak (~11.4 million birds); approximately 140,000 birds affected in May 2026. Dairy cattle herd detections continue. Separately, WHO has reported sporadic human infections with low-pathogenic avian influenza A(H9N2) in China — typically mild, poultry-exposure-linked, and without sustained human-to-human transmission — which this signal also tracks as part of the broader zoonotic avian-influenza picture.",
     "operationalRelevance": "Clinicians evaluating severe respiratory illness in patients with poultry, dairy, or symptomatic-animal exposures should consider avian influenza, contact public health, and use airborne precautions during AGPs. Animal-handler exposures should trigger occupational health follow-up.",
     "whyItMatters": "Animal-human interface signals are the leading indicators for pandemic potential. Detection of subtypes outside their usual host range, even at low human-incidence, warrants sustained surveillance.",
     "primarySourceId": "cdc-h5-situation",
@@ -2113,8 +2113,8 @@
       "who-disease-outbreak-news",
       "cdc-han"
     ],
-    "lastUpdated": "2026-05-23T00:00:00Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
+    "lastUpdated": "2026-06-05T00:00:00.000Z",
+    "lastChecked": "2026-06-05T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "h5-tx-dairy",
@@ -2261,6 +2261,18 @@
         "lastReviewed": "2026-05-21"
       },
       {
+        "id": "h9n2-low-pathogenic-context",
+        "title": "Low-pathogenic A(H9N2) zoonotic context",
+        "bodyMarkdown": "Beyond H5, low-pathogenic avian influenza A(H9N2) circulates widely in poultry across Asia and causes sporadic, usually mild human infections — most often in young children with exposure to live-poultry markets or backyard poultry. WHO's influenza-at-the-human-animal-interface assessments have continued to report such A(H9N2) human cases in China in 2026, with reported cases generally mild and recovered, and no evidence of sustained human-to-human transmission (WHO).\n\nA(H9N2) is monitored as a pandemic-preparedness concern primarily because its internal gene segments are frequently donated, through reassortment, to other avian influenza viruses (including H5 and H7 subtypes), and because some A(H9N2) viruses show increased binding to human-type receptors. Clinically, reported human cases have generally been mild and self-limited, but the subtype's ecology makes ongoing surveillance worthwhile.\n\nClinicians evaluating mild influenza-like illness in a patient with recent live-poultry or freshly-slaughtered-poultry exposure in an A(H9N2)-affected region should document the exposure for public-health awareness; influenza A subtyping is coordinated with public health where indicated. Verify current human A(H9N2) case reporting against WHO sources rather than secondary trackers.",
+        "attribution": {
+          "authority": "WHO",
+          "documentTitle": "WHO Disease Outbreak News / Influenza at the Human-Animal Interface",
+          "date": "2026-06-05",
+          "url": "https://www.who.int/emergencies/disease-outbreak-news"
+        },
+        "lastReviewed": "2026-06-05"
+      },
+      {
         "id": "laboratory-diagnostics",
         "title": "Laboratory diagnostics",
         "bodyMarkdown": "Routine respiratory viral panels typically detect influenza A but do not reliably subtype H5. Suspected H5 cases require dedicated H5-specific RT-PCR, which is performed at state public health laboratories (Laboratory Response Network) with confirmation at CDC. Suspected case identification triggers prioritized state-to-CDC specimen transfer (CDC).\n\nAcceptable specimens include nasopharyngeal swab in viral transport medium, lower-respiratory specimens (sputum, bronchoalveolar lavage) for severely ill patients, and conjunctival swab for patients with conjunctivitis (notable in recent US dairy-worker cases). Specimens should be collected as early as possible after symptom onset.\n\nAntiviral resistance monitoring is conducted on positive specimens through CDC's neuraminidase inhibitor and cap-dependent endonuclease inhibitor resistance surveillance programs. Resistance to current treatments (oseltamivir, baloxavir) has been rare in H5 isolates to date but warrants ongoing monitoring as use expands.\n\nCoordinate suspected case testing with the state epidemiologist and CDC EOC (770-488-7100) before specimen collection. Routine reflex H5 testing of all positive influenza A specimens is not standard at most clinical laboratories; explicit subtyping request is required.",
@@ -2378,7 +2390,7 @@
         "rationale": "Removes a key clinical countermeasure. Would prompt review of antiviral stockpile composition and clinical management algorithms."
       }
     ],
-    "currentSituation": "CDC confirmed 71 U.S. human cases of H5 avian influenza since February 2024 through May 2026 — all with documented animal exposure, no deaths, no antiviral resistance in available human isolates, and no evidence of sustained human-to-human transmission. CDC current public health risk assessment remains LOW. Poultry detections have declined substantially from the February 2026 peak of approximately 11.4 million birds affected to approximately 140,000 birds in May 2026 (USDA APHIS via Brown Pandemic Center Tracking Report, May 21 2026). Dairy cattle herd detections continue across multiple states. Influenza A indicators have plateaued for two consecutive weeks after a nine-week seasonal decline.",
+    "currentSituation": "CDC confirmed 71 U.S. human cases of H5 avian influenza since February 2024 through May 2026 — all with documented animal exposure, no deaths, no antiviral resistance in available human isolates, and no evidence of sustained human-to-human transmission. CDC current public health risk assessment remains LOW. Poultry detections have declined substantially from the February 2026 peak of approximately 11.4 million birds affected to approximately 140,000 birds in May 2026 (USDA APHIS via Brown Pandemic Center Tracking Report, May 21 2026). Dairy cattle herd detections continue across multiple states. Influenza A indicators have plateaued for two consecutive weeks after a nine-week seasonal decline. WHO's influenza-at-the-human-animal-interface reporting also noted additional sporadic human A(H9N2) cases in China in early 2026 (young children with live or backyard poultry exposure, mild illness, all recovered), consistent with the long-standing low-level zoonotic A(H9N2) pattern and not indicating sustained human-to-human transmission.",
     "metrics": [
       {
         "label": "US human cases since February 2024 (no deaths)",
@@ -4788,6 +4800,190 @@
         "signalId": "andes-hantavirus-mv-hondius-2026",
         "relationship": "Argentina and Chile are co-hosting World Cup matches. Both countries are in the Andes hantavirus endemic zone. Large outdoor gatherings and rural venue surroundings (fan zones, camping areas) create rodent-exposure risk for attendees unfamiliar with Andes virus prevention protocols.",
         "type": "geographic-overlap"
+      }
+    ]
+  },
+  {
+    "id": "pertussis-us-2026",
+    "name": "Pertussis (whooping cough) — United States",
+    "category": "vaccine_preventable",
+    "operationalLenses": [
+      "respiratory"
+    ],
+    "pathogen": "Bordetella pertussis",
+    "geography": [
+      "United States"
+    ],
+    "severity": "watch",
+    "confidence": "official",
+    "trend": "decreasing",
+    "status": "monitoring",
+    "summary": "Pertussis is a nationally notifiable vaccine-preventable respiratory disease tracked by CDC through the National Notifiable Diseases Surveillance System (NNDSS). Reported 2026 cases are tracking below the same period in 2025 — a cyclical decline expected after the November 2024 national peak — but declining childhood DTaP/Tdap coverage remains the structural driver keeping pertussis a watch item. Verify current weekly counts against CDC NNDSS before publication; provisional figures are subject to reporting lag and state-level revision.",
+    "operationalRelevance": "EMS and emergency clinicians should consider pertussis in patients (especially infants and the under-vaccinated) with paroxysmal cough, post-tussive emesis, or apnea, and apply droplet precautions. Infants under 1 year are at highest risk of severe disease and death; verify Tdap status for pregnant patients and close contacts.",
+    "whyItMatters": "Pertussis is endemic and cyclical; resurgence years are driven by waning immunity and falling DTaP/Tdap coverage. Infant mortality is the primary harm, and the coverage erosion it shares with measles makes vaccine-preventable disease a sustained surveillance priority.",
+    "primarySourceId": "cdc-pertussis-surveillance",
+    "sourceIds": [
+      "cdc-pertussis-surveillance",
+      "cdc-current-outbreaks",
+      "brown-pandemic-center"
+    ],
+    "lastUpdated": "2026-06-05T00:00:00.000Z",
+    "lastChecked": "2026-06-05T00:00:00.000Z",
+    "detailSections": [
+      {
+        "id": "clinical-profile",
+        "title": "Clinical profile",
+        "bodyMarkdown": "Pertussis (whooping cough) is a respiratory infection caused by the bacterium *Bordetella pertussis*. After an incubation of typically 7–10 days (range 5–21), illness classically progresses through three stages: catarrhal (1–2 weeks of coryza, mild cough, and low-grade fever — clinically indistinguishable from a common cold and the most contagious period), paroxysmal (2–6 weeks of fits of rapid coughing often followed by a high-pitched inspiratory \"whoop\" and post-tussive emesis), and convalescent (gradual recovery over weeks to months) (CDC).\n\nInfants under 1 year — particularly those too young to be fully vaccinated — are at highest risk of severe disease, including apnea, pneumonia, seizures, encephalopathy, and death; in young infants the classic whoop and even cough may be absent, with apnea or cyanosis the only sign. Adolescents and adults often have milder, atypical, or prolonged cough and serve as reservoirs that transmit to vulnerable infants.\n\nPertussis is a nationally notifiable condition; suspected cases should be reported to the local or state health department. Diagnosis is by PCR (highest yield within the first ~3 weeks of cough) and/or culture early in illness, with serology playing a role later. Droplet precautions apply for suspected cases. Treatment and post-exposure prophylaxis use macrolide antibiotics — verify the current agent, eligibility, and dosing against CDC guidance and local protocol before administration.\n\nPrevention is through DTaP (for children) and Tdap (for adolescents, adults, and during every pregnancy at 27–36 weeks to passively protect the newborn). Protection wanes over time, which contributes to the disease's cyclical resurgence pattern.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Pertussis (Whooping Cough) Surveillance and Trends",
+          "date": "2026-06-05",
+          "url": "https://www.cdc.gov/pertussis/php/surveillance/index.html"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "CDC Current Outbreaks",
+            "date": "2026-06-05",
+            "url": "https://www.cdc.gov/outbreaks/"
+          }
+        ],
+        "lastReviewed": "2026-06-05"
+      },
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Pertussis is endemic in the United States with cyclical peaks every 3–5 years; reported cases last peaked nationally in November 2024. CDC tracks cases through the National Notifiable Diseases Surveillance System (NNDSS), with weekly provisional counts published on the CDC pertussis surveillance pages. Because of reporting lag and verification, the most current local picture is held by state and local health departments (CDC).\n\nPreliminary 2026 data show fewer reported cases than the same period in 2025, consistent with the expected post-peak decline of a cyclical disease. This decline does not remove the underlying risk: declining DTaP/Tdap coverage — the same vaccine-hesitancy driver implicated in the measles resurgence — erodes the population immunity that limits outbreak size, and clusters continue to be reported across multiple states.\n\nOperationally, clinicians should maintain suspicion for pertussis in prolonged or paroxysmal cough, prioritize protection of infants (the group with the highest morbidity and mortality), apply droplet precautions for suspected cases, and coordinate testing, treatment, and post-exposure prophylaxis with public health. Verify current case counts and guidance against CDC NNDSS and the CDC pertussis pages rather than secondary trackers.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "CDC Pertussis (Whooping Cough) Surveillance and Trends",
+          "date": "2026-06-05",
+          "url": "https://www.cdc.gov/pertussis/php/surveillance/index.html"
+        },
+        "lastReviewed": "2026-06-05"
+      }
+    ],
+    "riskAssessments": [
+      {
+        "authority": "CDC",
+        "label": "Nationally Notifiable",
+        "description": "US pertussis surveillance & trends (NNDSS)",
+        "url": "https://www.cdc.gov/pertussis/php/surveillance/index.html",
+        "asOf": "2026-06-05"
+      }
+    ]
+  },
+  {
+    "id": "yellow-fever-colombia-2026",
+    "name": "Yellow fever — Colombia (Tolima) & the Americas",
+    "category": "vector_borne",
+    "operationalLenses": [
+      "travel",
+      "vaccine_preventable"
+    ],
+    "pathogen": "Yellow fever virus",
+    "geography": [
+      "Colombia",
+      "Bolivia",
+      "Peru",
+      "Brazil",
+      "Pan-American region"
+    ],
+    "severity": "concern",
+    "confidence": "corroborated",
+    "trend": "increasing",
+    "status": "active",
+    "summary": "PAHO reports sustained yellow fever transmission across parts of South America, with cases expanding beyond traditional Amazonian risk zones. The department of Tolima, Colombia — where human cases had not been seen in over a century — is the current epicenter and concentrates the highest case and death counts in the country. Transmission is driven overwhelmingly by unvaccinated individuals. Verify current national figures against PAHO and Colombia's Instituto Nacional de Salud (INS) before publication; counts are revised as cases are laboratory-confirmed.",
+    "operationalRelevance": "Travel-medicine and emergency clinicians should verify yellow fever vaccination status in patients with compatible illness (fever, jaundice, hemorrhage) and recent exposure in affected areas of South America, and counsel travelers to endemic or outbreak zones to receive yellow fever vaccine at least 10 days before travel. The yellow fever vaccine is a single dose providing lifelong protection for most people.",
+    "whyItMatters": "Yellow fever is a vaccine-preventable viral hemorrhagic fever with a high case-fatality rate among those who progress to severe (toxic-phase) disease. Expansion outside historical risk zones into unvaccinated populations, and detection in periurban areas, raises the risk of larger outbreaks and of importation by unvaccinated travelers.",
+    "primarySourceId": "paho-yellow-fever-2026",
+    "sourceIds": [
+      "paho-yellow-fever-2026",
+      "paho-epi-alerts",
+      "who-disease-outbreak-news",
+      "brown-pandemic-center"
+    ],
+    "lastUpdated": "2026-06-05T00:00:00.000Z",
+    "lastChecked": "2026-06-05T00:00:00.000Z",
+    "mapMarkers": [
+      {
+        "id": "yf-co-tolima",
+        "lat": 4.4389,
+        "lng": -75.2322,
+        "type": "outbreak_zone",
+        "severity": "action",
+        "label": "Tolima, Colombia (Ibagué region) — yellow fever outbreak epicenter"
+      },
+      {
+        "id": "yf-co-tolima-south",
+        "lat": 3.7236,
+        "lng": -75.4836,
+        "type": "case_confirmed",
+        "severity": "concern",
+        "label": "Southern Tolima (Chaparral / Ataco / Planadas) — affected municipalities"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "clinical-profile",
+        "title": "Clinical profile",
+        "bodyMarkdown": "Yellow fever is an acute viral hemorrhagic fever caused by yellow fever virus (a flavivirus) and transmitted by *Aedes* and *Haemagogus* mosquitoes. After an incubation of 3–6 days, most infections are mild or asymptomatic. A subset enters an acute phase (fever, myalgia, headache, nausea); roughly 15% progress, after a brief remission, to a toxic phase with high fever, jaundice (the \"yellow\" of the name), bleeding, and renal failure. Case-fatality among those who enter the toxic phase is high (PAHO; WHO).\n\nThere is no specific antiviral treatment; management is supportive and best delivered where care for viral hemorrhagic fever is available. Diagnosis is by RT-PCR early in illness and serology (IgM) later, with confirmation at reference laboratories; cross-reactivity with other flaviviruses (dengue, Zika) and recent vaccination complicates serologic interpretation.\n\nYellow fever is vaccine-preventable: a single dose of the live-attenuated vaccine provides lifelong protection for most people and should be given at least 10 days before travel to a risk area. The current outbreak in Tolima and across the Americas has occurred overwhelmingly in unvaccinated people, underscoring immunization coverage as the central control measure. Clinicians should consider yellow fever in travelers returning from affected areas with compatible illness and report suspected cases to public health.",
+        "attribution": {
+          "authority": "PAHO",
+          "documentTitle": "PAHO Epidemiological Alert — Yellow Fever in the Region of the Americas",
+          "date": "2026-03-13",
+          "url": "https://www.paho.org/en/news/13-3-2026-paho-reports-sustained-yellow-fever-transmission-parts-south-america"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "WHO",
+            "documentTitle": "WHO Disease Outbreak News",
+            "date": "2026-06-05",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news"
+          }
+        ],
+        "lastReviewed": "2026-06-05"
+      },
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "PAHO has issued epidemiological alerts (most recently 13 March 2026) describing sustained yellow fever transmission in the Region of the Americas and expansion beyond historical Amazonian risk zones into areas such as Tolima, Colombia and São Paulo state, Brazil. Affected countries in the current period include Bolivia, Colombia, Peru, Brazil, and Venezuela; within Colombia, Tolima concentrates the highest case and death counts (PAHO).\n\nThe outbreak is driven overwhelmingly by gaps in vaccination coverage. Response measures led by national authorities include intensified vaccination campaigns in affected municipalities, vector control targeting *Aedes* and *Haemagogus* mosquitoes, and risk communication. WHO recommends yellow fever vaccination for residents of and travelers to risk areas, and International Health Regulations vaccination-certificate requirements apply for entry to many countries.\n\nOperationally, US and international clinicians should verify yellow fever vaccination status in travelers to affected areas, counsel vaccination at least 10 days before travel, and maintain suspicion for yellow fever in returning travelers with fever and jaundice or hemorrhage. Verify current case counts and affected-area designations against PAHO and Colombia's Instituto Nacional de Salud (INS) rather than secondary trackers, as figures are revised with laboratory confirmation.",
+        "attribution": {
+          "authority": "PAHO",
+          "documentTitle": "PAHO Epidemiological Alert — Yellow Fever in the Region of the Americas",
+          "date": "2026-03-13",
+          "url": "https://www.paho.org/en/news/13-3-2026-paho-reports-sustained-yellow-fever-transmission-parts-south-america"
+        },
+        "lastReviewed": "2026-06-05"
+      }
+    ],
+    "currentSituation": "PAHO's 13 March 2026 epidemiological alert reported sustained yellow fever transmission in parts of South America, with the department of Tolima, Colombia the epicenter of the country's outbreak: 153 confirmed human cases and 62 deaths (case-fatality ~41%) in the 2024–2026 period, in an area with no human cases for over a century. PAHO emphasized geographic expansion beyond traditional risk zones (including into São Paulo state, Brazil) and that most cases occurred in unvaccinated individuals. National (Colombia INS) reporting through mid-2026 indicates the Tolima toll has continued to rise — secondary trackers including the Brown Pandemic Center Tracking Report (4 June 2026) cite figures on the order of ~198 confirmed cases and ~87 deaths as of early June — but those higher counts await confirmation in a primary PAHO or INS update and are not published here as confirmed. Colombia has intensified vaccination, vector control, and risk communication in affected municipalities.",
+    "metrics": [
+      {
+        "label": "Tolima confirmed cases, 2024–2026 (PAHO, as of 13 Mar 2026 alert)",
+        "value": 153,
+        "sourceId": "paho-yellow-fever-2026"
+      },
+      {
+        "label": "Tolima deaths, 2024–2026 (CFR ~41%, PAHO 13 Mar 2026)",
+        "value": 62,
+        "sourceId": "paho-yellow-fever-2026"
+      }
+    ],
+    "riskAssessments": [
+      {
+        "authority": "PAHO",
+        "label": "Epidemiological Alert",
+        "description": "Sustained yellow fever transmission in the Americas; expansion beyond the Amazon",
+        "url": "https://www.paho.org/en/news/13-3-2026-paho-reports-sustained-yellow-fever-transmission-parts-south-america",
+        "asOf": "2026-03-13"
+      },
+      {
+        "authority": "WHO",
+        "label": "Regional Concern",
+        "description": "Yellow fever resurgence in the Region of the Americas",
+        "url": "https://www.who.int/emergencies/disease-outbreak-news",
+        "asOf": "2026-03-13"
       }
     ]
   }

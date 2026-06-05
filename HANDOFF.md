@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-06-05 (News pipeline: Tier 1 **quorum gate** — a lone transient ECDC WAF 403 now degrades gracefully instead of discarding the run and paging; CDC/WHO failure or any 2+ Tier 1 failures still fail closed. New `criticalQuorumBreached()` + `test:gate` CI suite (9 tests). Prior, 2026-06-02: Ebola counts corrected to current WHO situation-page figures — DRC 321 confirmed / 48 deaths / 116 suspected; forensic pass reattested 14 active signals; bounded fetch retry for transient Tier 1 WAF 403s.)
+**Last updated:** 2026-06-05 (Coverage gaps vs Brown Pandemic Center Tracking Report (June 4 2026) closed: added **pertussis-us-2026** + **yellow-fever-colombia-2026** signals and broadened avian flu to **H5/H9N2**; signals 17 → 19, sources 45 → 47, all figures primary-source-bound + hedged. Earlier same day: Tier 1 **quorum gate** so a lone transient ECDC WAF 403 degrades gracefully (`criticalQuorumBreached()` + `test:gate`). Prior, 2026-06-02: Ebola counts corrected to WHO situation-page figures; 14-signal reattestation; bounded fetch retry for transient Tier 1 WAF 403s.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,26 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Close coverage gaps vs Brown Pandemic Center Tracking Report — add pertussis + yellow fever signals, broaden avian flu to H9N2 (commit pending)
+
+User forwarded the Brown University Pandemic Center "Tracking Report" (June 4 2026) and asked to confirm every topic in it is tracked by the dashboard, and to add/modify as needed. Mapped all 18 newsletter threats against the 17 existing signals: 15 already tracked (Ebola, hantavirus, measles, mpox, H5N1, cholera, screwworm, COVID, norovirus, RSV, hMPV, seasonal flu, Lassa, chikungunya, Candida auris, FIFA — plus the dashboard's extra rotavirus signal the newsletter doesn't carry). **Three gaps found and closed: pertussis (whooping cough), yellow fever (Colombia/Tolima), and H9N2 avian influenza** (the existing avian-flu signal was H5/H5N6 only).
+
+All figures are bound to **primary** sources, not the newsletter (the newsletter is `brown-pandemic-center`, Tier 3, kept as the discovery trigger only). Signals are intentionally lean (chikungunya-style: clinical-profile + operational-guidance detailSections, riskAssessments, no triageCard/hcwAlert) and hedge per CONTENT-STANDARDS §4.2:
+- **pertussis-us-2026** (vaccine_preventable, status `monitoring`, trend `decreasing`): CDC-NNDSS-bound, **no hard metrics** — 2026 counts are provisional/reporting-lagged, so the cyclical post-Nov-2024 decline + DTaP/Tdap coverage erosion are framed qualitatively.
+- **yellow-fever-colombia-2026** (vector_borne; travel + vaccine_preventable lenses; status `active`): metrics bound ONLY to the **PAHO 13 Mar 2026 alert (Tolima 153 confirmed / 62 deaths, CFR ~41%, 2024–2026)**. The newsletter's higher June figures (~198 / ~87) appear only in `currentSituation`, explicitly marked "await confirmation … not published here as confirmed" (the Ebola hedge pattern). 2 Tolima map markers.
+- **avian-influenza-h5-2026**: renamed → "Avian influenza — H5/H9N2 zoonotic signals", pathogen → "Influenza A (H5 and H9N2 subtypes)"; added WHO-attributed `h9n2-low-pathogenic-context` detailSection + summary/currentSituation notes (sporadic mild China cases, poultry exposure, no sustained h2h, per WHO IHAI early-2026); reused existing `who-disease-outbreak-news` source; bumped dates → 2026-06-05.
+
+Reviewed + marker-cleared by `source-integrity-agent` (both new sources PASS: tier/attribution/schema) and `content-standards-agent` (draft PASS + a concrete-diff re-review PASS: hedge discipline, no clinical-decision-system drift, no prescriptive doses, attribution present).
+
+**Files touched:**
+- `src/data/signals.json` — +2 signals (pertussis-us-2026, yellow-fever-colombia-2026); broadened avian-influenza-h5-2026 (name/pathogen/summary/currentSituation + new h9n2-low-pathogenic-context section, dates → 2026-06-05). Total signals 17 → 19 (16 active, 3 monitoring).
+- `src/data/signal-sources.json` — +2 sources: `cdc-pertussis-surveillance` (CDC, Tier 1, surveillance-dashboard), `paho-yellow-fever-2026` (PAHO, Tier 2, health-advisory). Total 45 → 47.
+- `scripts/update-news.mjs` — `SIGNAL_KEYWORD_OVERRIDES` entries for the 2 new signals; added `h9n2`/`h9n2 china` to the avian-flu override (yellow fever is `active` → gets a Google News feed; pertussis is `monitoring` → tagged but no auto-feed).
+- `public/status.json`, `public/api/v1/*` — regenerated (signals=16/19, status ok).
+- `HANDOFF.md` — this entry.
+
+**Verify:** `validate:data`, `test:validators`, `test:gate` (9), `test:fetch` (6), `audit:autonomy`, `audit:ai-enrichment`, `build` all pass. Browser `/`: pertussis + yellow fever appear in the signal list; yellow fever shows on `/map` (2 Tolima markers); avian-flu card reads "H5/H9N2". No fabricated current case counts — pertussis carries none; yellow fever's hard numbers are PAHO-confirmed with the June figures explicitly hedged. NOTE: pre-existing `usda-aphis-screwworm-status` timed out in `audit:sources` (transient USDA WAF, unrelated to this change; both new source URLs passed reachability). Outstanding: refresh yellow-fever metrics when a primary PAHO/INS June update confirms the higher Tolima toll.
 
 ## ✅ News pipeline: Tier 1 quorum gate so a lone transient ECDC 403 degrades gracefully (commit 3b6f301)
 
