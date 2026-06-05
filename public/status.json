@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-06-04T09:45:26.688Z",
+  "generatedAt": "2026-06-05T09:34:55.299Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-02T00:00:00.000Z",
     "oldestActiveReview": "2026-06-02T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-14T00:00:00.000Z",
-    "dataAgeHours": 57.75741333333333,
-    "officialCheckAgeHours": 57.75741333333333
+    "dataAgeHours": 81.5820275,
+    "officialCheckAgeHours": 81.5820275
   },
   "signals": {
     "total": 17,
@@ -101,7 +101,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-04T04:29:49.000Z"
+    "newest": "2026-06-04T20:07:00.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
