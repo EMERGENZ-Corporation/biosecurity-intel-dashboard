@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-05T20:03:10.822Z",
+  "generatedAt": "2026-06-06T04:05:18.431Z",
   "endpoint": "/api/v1/signal-timeline.json",
-  "count": 45,
+  "count": 46,
   "signalTimeline": [
     {
       "id": "tl-andes-2026-05-19-ecdc-update",
@@ -428,6 +428,20 @@
       "authority": "WHO",
       "link": "https://www.who.int/news/item/31-05-2026-joint-statement-by-the-government-of-the-democratic-republic-of-the-congo-and-who-concerning-the-outbreak-of-ebola-disease-caused-by-the-bundibugyo-virus",
       "promotedAt": "2026-06-01T11:49:05.572Z"
+    },
+    {
+      "id": "auto-cdc-3e76724d",
+      "signalId": "ebola-bundibugyo-drc-2026",
+      "date": "2026-06-05",
+      "title": "Update on Ebola Outbreak in the Democratic Republic of the Congo and Uganda, 6/5/2026",
+      "description": "Update on Ebola Outbreak in the Democratic Republic of the Congo and Uganda, 6/5/2026",
+      "sourceId": "cdc-current-outbreaks",
+      "category": "vhf",
+      "provenance": "auto-news-tier1",
+      "newsId": "cdc-3e76724d",
+      "authority": "CDC",
+      "link": "https://tools.cdc.gov/api/embed/downloader/download.asp?m=132608&c=765752",
+      "promotedAt": "2026-06-06T04:05:16.571Z"
     }
   ]
 }
