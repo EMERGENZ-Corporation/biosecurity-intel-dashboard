@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "status": "ok",
-  "generatedAt": "2026-06-05T19:22:44.071Z",
+  "status": "degraded",
+  "generatedAt": "2026-06-06T08:26:09.517Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-05T00:00:00.000Z",
     "oldestActiveReview": "2026-06-02T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-14T00:00:00.000Z",
-    "dataAgeHours": 19.37890888888889,
-    "officialCheckAgeHours": 19.37890888888889
+    "dataAgeHours": 32.43597694444444,
+    "officialCheckAgeHours": 32.43597694444444
   },
   "signals": {
     "total": 19,
@@ -83,8 +83,11 @@
         "total": 1
       }
     },
-    "staleSignalIds": [],
-    "timelineEvents": 45,
+    "staleSignalIds": [
+      "screwworm-onehealth-2026",
+      "fifa-world-cup-2026-prep"
+    ],
+    "timelineEvents": 46,
     "totalMapMarkers": 141,
     "totalDetailSections": 86
   },
@@ -101,7 +104,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-05T18:33:45.000Z"
+    "newest": "2026-06-06T03:19:09.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -229,5 +232,7 @@
       }
     ]
   },
-  "staleReasons": []
+  "staleReasons": [
+    "2 signal(s) older than 168h"
+  ]
 }
