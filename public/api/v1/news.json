@@ -1,9 +1,199 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-06T08:42:25.133Z",
+  "generatedAt": "2026-06-06T13:58:23.547Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "stat-news-4fcd7d01",
+      "authority": "STAT News",
+      "title": "STAT+: Detailed data show Pfizer’s monthly obesity drug continues to show potential",
+      "description": "Detailed data from a midstage study offered further evidence that the obesity drug Pfizer acquired from the biotech Metsera could be dosed monthly.",
+      "link": "https://www.statnews.com/2026/06/06/pfizer-obesity-drug-berobenatide-metsera-results/?utm_campaign=rss",
+      "pubDate": "Sat, 06 Jun 2026 13:00:00 +0000",
+      "timestamp": 1780750800000,
+      "signalIds": []
+    },
+    {
+      "id": "nbc-news-4514d7ac",
+      "authority": "NBC News",
+      "title": "The next goal for weight loss drugs? Fewer injections",
+      "description": "For millions of people taking weight loss drugs, the next breakthrough may not be more weight loss.",
+      "link": "https://www.nbcnews.com/health/health-news/weekly-monthly-glp1-weight-loss-drug-injection-rcna347873",
+      "pubDate": "Sat, 06 Jun 2026 13:00:00 GMT",
+      "timestamp": 1780750800000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-e4a0bd3f",
+      "authority": "Google News",
+      "title": "Health expert: U.S Ebola risk low, but time to prepare - WKOW",
+      "description": "Health expert: U.S Ebola risk low, but time to prepare WKOW",
+      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPbFZ5THhyM3hYdDUzR2JBTmx2VzdDdkZtWEdlcUtGYy1ZUGJ5VFZrQkRLNTZiNGFHLXRrVFQxVFFiVFRNel9BSzAtRjFibVhKaXZtbmFEWDhGMDc3c1REbTYtOWhObDdsUTlkbWRDRm5jeE1MUGVIREVIWWVZRXVCa0Z5UmpJdlJMbG5GRFlZOUdrVDRHSDQzdEZOTVhyR3dUcndJbXlQaDE1OG9UdGo4Y3NNM0syaDZ2WkxZOEJVTnpFTUJsQ0c4?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 12:29:00 GMT",
+      "timestamp": 1780748940000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-2c3feec7",
+      "authority": "Google News",
+      "title": "US measles cases surge past 2,000 as outbreak continues to spread - The News International",
+      "description": "US measles cases surge past 2,000 as outbreak continues to spread The News International",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNWmNjY184R18yNUg2TUU0ZWR5eFc3S0RjSjRYckI3REJxSFR0RDY0allGcWh1MENPV3FVWTlkLWhseGlxNS12ZUdlYzZJVFRaelVROUJTeVlsckpydE1oeXh0Qm5YeGZMMmhxSkE0UTd5N1M3b1F6NzlJOUR5S1p0dE5QY1ZxTF9qZlVGOVZXOFRLY3NsMnFkUjFja2wyV1p4MFBxNjY2b0tsdw?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 12:09:00 GMT",
+      "timestamp": 1780747740000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
+      "id": "google-news-513fb449",
+      "authority": "Google News",
+      "title": "1 in 10 Columbia County students missing vaccinations as measles, whooping cough on the rise - Columbia County Spotlight",
+      "description": "1 in 10 Columbia County students missing vaccinations as measles, whooping cough on the rise Columbia County Spotlight",
+      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOcFQ0T19lUVpEcDlQNE9xVG5zbVE0YU9hTVNla0hIOEhQdXMyTWs2WnliQlBWaVZaS294V1UyTkZDalQ1SnByM0loUkVjSl9aaUNGczdwWUhXdXZ5N2g2YlhscE9JNF9hdWY2S2J2a0NNMmxfTzB2dW1ORFhRMTF1cnhFeVAyR0tOSURmNFYxTnEtT0NiRVJtZlZUcHZraXpZNk1YVFFVQ0JoaDZ3NjdBaXVYNzNaM2VqbEJBOXJjMHhqcFZ6YkZGNXdybl93T3h2eFQ3MVJB?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 12:03:42 GMT",
+      "timestamp": 1780747422000,
+      "signalIds": [
+        "measles-us-2026",
+        "pertussis-us-2026"
+      ]
+    },
+    {
+      "id": "google-news-aa4d9085",
+      "authority": "Google News",
+      "title": "US doctor treated for Ebola released from German hospital - politico.eu",
+      "description": "US doctor treated for Ebola released from German hospital politico.eu",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQUmx5RkMxRTYzTnYwNWhpNGhEbThpSDRvTzM2YXQ2WlZkWUtBTElHYThEbjVJai1VMG1SUWdiQ3F1M3lnUC1sejJEb1pRM1hxX1VqeGNWY2FnSTBhYzhGS1Y5cWNiTlZ2c2VQejRpQk1vcHFlMzA5cE42VEprMDRzZkktOUYtSFg2WTBkTktQZVkyNzJpUmFDTHY2QWx5QW5sS2c?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 12:02:49 GMT",
+      "timestamp": 1780747369000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-7dc326b8",
+      "authority": "Google News",
+      "title": "Ebola: Confirmed cases top 450 in DRC - Outbreak News Today",
+      "description": "Ebola: Confirmed cases top 450 in DRC Outbreak News Today",
+      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9UeC10TUkxU2RRYmlOeDkzNUphM3A2UlFpRFJkMkRoc1hFVFVFZWg2TmFJa192NFhEamNSOElweUFoVmZPUndvVWhWS1RQVmRhVThhdW82TnZ0dzdpeTlNcnc5cGh4VzNzdk9qUzk4M2Rpd0pVcEp0Ni03a0JnZw?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 11:28:57 GMT",
+      "timestamp": 1780745337000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-59bd88c5",
+      "authority": "Google News",
+      "title": "Wastewater Surveillance’s Role in Identifying Measles Outbreaks - Contagion Live",
+      "description": "Wastewater Surveillance’s Role in Identifying Measles Outbreaks Contagion Live",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNQ2JfMDgwMEZfUlhsemNzM18xS2VLaGRkLUctVl92T3V0OGFlcS12UEVfaTAxSlEyMlAwLW5ZRGhUVjVvaWgtR3luMDVuR3NkckRaem1uc0pxQ0c3UUJWRGlIei1XSGZ5alhRckZCc2FwUTg5VE5xMVEtVVYtc0F2VmNZV1FGcGpuaXd6MlIxWlR1RkJ5LWNlWUdja2N2RzA?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 11:16:15 GMT",
+      "timestamp": 1780744575000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
+      "id": "npr-a91f3dc3",
+      "authority": "NPR",
+      "title": "A park famed for rare gorillas gears up to fight Ebola and protect its primates",
+      "description": "In Virunga National Park, rangers are on the front lines — playing a critical role to contain the surging virus while coping with an upsurge in conflict-related violence.",
+      "link": "https://www.npr.org/2026/06/06/g-s1-126287/ebola-gorillas-democratic-republic-congo",
+      "pubDate": "Sat, 06 Jun 2026 07:01:22 -0400",
+      "timestamp": 1780743682000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-4ef4270b",
+      "authority": "Google News",
+      "title": "A park famed for rare gorillas gears up to fight Ebola and protect its primates - NPR",
+      "description": "A park famed for rare gorillas gears up to fight Ebola and protect its primates NPR",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQOExYa2U5SDMtVVVseEpPZDdDSUxObnpzVWY2SlR4cTk2bWpuUlVrRnc5Y3psSGZ1UGw2eGhjcWI4RWhzS1FuQWlDLXlpclZTN0ZtU0Q0OXhnS1I3d0psNllFUlZhS0Uwd2FRanRUZXJZRGk2LUg3cGZuMFQ4bHJxbDNnNHBHWjRCcE1Z?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 11:01:22 GMT",
+      "timestamp": 1780743682000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-68cf13d9",
+      "authority": "Google News",
+      "title": "5 things Dr. Sanjay Gupta wants you to know about Ebola - CNN",
+      "description": "5 things Dr. Sanjay Gupta wants you to know about Ebola CNN",
+      "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5sMVBoUUdtT0VhSWNNaXFyQi1yOHZNWF9TRW1FN0l0OTVfUjlEWHZmTkRPRE9VRHJ2Wm1KY2QwMHY2Tm93V2pERjNnMFRkR24yMFhqSFVFZVg0SFRKUm9qVDRSdlFkcDNoYjNJ?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 10:00:07 GMT",
+      "timestamp": 1780740007000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-b78a8913",
+      "authority": "Google News",
+      "title": "CDC MMWR: Modeled Scenario Projections for the Ebola Disease Outbreak Caused by Bundibugyo Virus, 2026 - Avian Flu Diary",
+      "description": "CDC MMWR: Modeled Scenario Projections for the Ebola Disease Outbreak Caused by Bundibugyo Virus, 2026 Avian Flu Diary",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQMmpGcG40R2M0NHFsMkhYUWxaSnVpX1RidnhhTVAxbV9sZ3BZZ1JPWnE1ZGdIcnNkc1NuMTQtamNqUWZwTmQ3SWMtNUVyRmQ0NVVUV0E1WmdON0VKWXFvN1Rsd2pjU1ppNHJIUW4zemVmYnV0b0lFR3pFa3Iwejd3QW03RGZPRkhI?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 09:56:00 GMT",
+      "timestamp": 1780739760000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026",
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-29ca3bd9",
+      "authority": "Google News",
+      "title": "Traders face big losses after Uganda closes Congo border over Ebola contagion fears - AP News",
+      "description": "Traders face big losses after Uganda closes Congo border over Ebola contagion fears AP News",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNZ1hoVWFHdGIzdDRPbURqbUpxSERMdzBjak9zV2JUU2tiNk5NWU94TEg0SS1lazJMbVhHUGNkdHc2U19qS2hxMjNKZVZ0YUkzRmZZRWZaWTlWWDNiMG9ORVJyM0lqWWE1Z1UtVm5QbEZDazJqMHpxTTVNZE9VMVVWLU5DY09vb3piUEFab01R?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 09:07:00 GMT",
+      "timestamp": 1780736820000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-5187a8c5",
+      "authority": "Google News",
+      "title": "As Ebola Spreads in East Africa, Will China Step Up? - The New York Times",
+      "description": "As Ebola Spreads in East Africa, Will China Step Up? The New York Times",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOYzRSNWFNSFd5Y0RDQ1BSM01iVXpRejBqMmVBM056RFhRS3NYb2NQMVRPTmw0b1R0QTQxU0UwNWVSU2xQb1JyWUhGQTVHaEFZMTZ5ZnZDbHpoYWRfWTNyYWY0S0JMNEVGZEZXM1lET2VGcnhJbS1hRzlqa0VrZ21HMFlEX19SS08xVWVpZjZHMk1UZC0xVG9YWHl2b0RpbUVqdDBN?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 09:01:43 GMT",
+      "timestamp": 1780736503000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-4121f7ab",
+      "authority": "Google News",
+      "title": "Gounder Fills In Details Behind Ebola, GLP-1, and Trump Headlines - KFF Health News",
+      "description": "Gounder Fills In Details Behind Ebola, GLP-1, and Trump Headlines KFF Health News",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQR3l2R0lRUFpWQWtwMm02WkZJZ1lGRVZ3cmpvY003dzhYN1hFdXpFT3lkMC0wTXlPM3V1VFA2cHFwdzAtUW5TUGVtRmN5bHRzT3FFdkJ1MzcwVHVYWHp5aUo1M0FYTFloY2FFUnRhSEo1blp0aFRtTWFiUFBQV29wQTNKZnpmNXN6bmREMGN4Z3l0QVUyUnBNV3N3TTJSMHZ6QlZwaEZLcjdpUUVqdHZR?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 09:00:28 GMT",
+      "timestamp": 1780736428000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-dd7c8be2",
+      "authority": "Google News",
+      "title": "The World Has Learned From the Last Ebola Outbreak, but Gaps Remain - The New York Times",
+      "description": "The World Has Learned From the Last Ebola Outbreak, but Gaps Remain The New York Times",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOTFlTbUtKMFVCSlJnUzZlVE5fdDJsTXI4YnpmbE9DNUZkZVhtU0ExNnpKcUFPajZCY2ozcG1nR3d3Ni05MmU4enZ2dWYtLUhPdElfYTJKS0NkTFQ1WW9hWktfc0MtQk83YkZyUGthYzRiMGxTNXFJcGpxbV9neDFIV3llQndCVVU0cFNYQTZ6dFRqWHZzX2R1dVhDT3dmb05YdTBSN2U5M1gzNVI1Q3dJSGdZSjd2eW9FaDRR?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 09:00:20 GMT",
+      "timestamp": 1780736420000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
     {
       "id": "google-news-100dc982",
       "authority": "Google News",
@@ -51,6 +241,19 @@
       ]
     },
     {
+      "id": "google-news-0ce45a84",
+      "authority": "Google News",
+      "title": "News: Ebola outbreak in the Democratic Republic of the Congo (DRC) - hpsc.ie",
+      "description": "News: Ebola outbreak in the Democratic Republic of the Congo (DRC) hpsc.ie",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPREFXOGY0VlB6d3lMaDFSemlhcFk3bEt1RFh3cXNhN29SazZrc3hnd3J5MHFMTjd5Mi1DYjlrbHIxTzBpcGM5UjFUdk1ETkhlNk1QMlB4VkxnMmFHS2tJSVlLZjl2WG1RVkY1bDVacDRTZnc1V3Jyb1lpUjg0VkczUVFneGNNeHpTcW11TWJxOVlhQQ?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 08:22:45 GMT",
+      "timestamp": 1780734165000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026",
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-2618ce9e",
       "authority": "Google News",
       "title": "Faith, fear and trust: Inside DR Congo’s fight against Ebola - Global Issues.org",
@@ -92,6 +295,18 @@
       "timestamp": 1780732800000,
       "signalIds": [
         "mpox-africa-clade-i-2026"
+      ]
+    },
+    {
+      "id": "google-news-aa82c6e7",
+      "authority": "Google News",
+      "title": "Argentina to expand hantavirus search to second province as probe on cruise ship outbreak widens - The Straits Times",
+      "description": "Argentina to expand hantavirus search to second province as probe on cruise ship outbreak widens The Straits Times",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPYTQ0a0daSVdOdnFseFg3dnh6dFBVTkxiTHdmUHByaVlTZmZ2di1jWjR5NVZaV29MY21ub0VTb3RTSWwxNUJkR2VvdjJ6WVdTRkdRNTVaamNVR19tbHNBcHlEYXpGLVVjNXkyQ3phVmFzczEyNDY3cmVuLUM3M2stNzNqRVRTb1drN1NrMkM3czdpRVFLOHY5OA?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 07:50:00 GMT",
+      "timestamp": 1780732200000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
       ]
     },
     {
@@ -191,6 +406,18 @@
       ]
     },
     {
+      "id": "google-news-4ae41261",
+      "authority": "Google News",
+      "title": "Understanding HMPV Virus – Symptoms, Prevention, And Treatment | Science Greed (Otk28qpAD2) - Fathom Journal",
+      "description": "Understanding HMPV Virus – Symptoms, Prevention, And Treatment | Science Greed (Otk28qpAD2) Fathom Journal",
+      "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE16cXZqOXdNbDZlX1M1SEZMTGxuanJkM0RoRWtDa0pkamgwOUZYTi1kOERnM0lsVVZZeDdzLTY1X0JOekRfUnpReGo0c3NiUElWMEpvcUtvSnhuTURIYXNudUhqYVlSZTVlMExpcExkOUtqQU82dUE?oc=5",
+      "pubDate": "Sat, 06 Jun 2026 03:19:05 GMT",
+      "timestamp": 1780715945000,
+      "signalIds": [
+        "hmpv-wastewater-2026"
+      ]
+    },
+    {
       "id": "google-news-a85daef2",
       "authority": "Google News",
       "title": "Congo outbreak could rival the largest Ebola epidemic on record, CDC warns - The Washington Post",
@@ -225,6 +452,16 @@
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
       ]
+    },
+    {
+      "id": "cbc-news-5fede5b8",
+      "authority": "CBC News",
+      "title": "Vancouver man detained in Georgia for carrying ADHD meds, family says",
+      "description": "A Vancouver man is facing months of detainment in the Eastern European country of Georgia after his family says he did not have a prescription for his attention deficit hyperactivity disorder (ADHD) medication.",
+      "link": "https://www.cbc.ca/news/canada/british-columbia/vancouver-man-georgia-detained-adhd-9.7225936?cmp=rss",
+      "pubDate": "Fri, 05 Jun 2026 21:30:13 EDT",
+      "timestamp": 1780709413000,
+      "signalIds": []
     },
     {
       "id": "abc-news-26f62c6d",
@@ -296,6 +533,18 @@
       "timestamp": 1780702308000,
       "signalIds": [
         "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "cbc-news-7afc05fc",
+      "authority": "CBC News",
+      "title": "FIFA changes water bottle rules at World Cup matches after fans, politicians kick up a fuss",
+      "description": "FIFA has decided to allow fans to bring one factory-sealed disposable water bottle to its World Cup 2026 matches in Canada and the United States.",
+      "link": "https://www.cbc.ca/news/canada/toronto/new-water-bottle-policy-fifa-9.7225820?cmp=rss",
+      "pubDate": "Fri, 05 Jun 2026 19:29:50 EDT",
+      "timestamp": 1780702190000,
+      "signalIds": [
+        "fifa-world-cup-2026-prep"
       ]
     },
     {
@@ -426,6 +675,18 @@
       "timestamp": 1780700068000,
       "signalIds": [
         "measles-us-2026"
+      ]
+    },
+    {
+      "id": "cbc-news-ebf769d1",
+      "authority": "CBC News",
+      "title": "CFIA announces temporary ban of Texas livestock to prevent spread of screwworm",
+      "description": "The Canadian Food Inspection Agency announced Friday that it would temporarily restrict livestock from entering Canada from affected parts of the United States, after screwworm, a flesh-eating parasite, was confirmed on a farm in Texas.",
+      "link": "https://www.cbc.ca/news/politics/canada-temporary-us-livestock-ban-screwworm-9.7225687?cmp=rss",
+      "pubDate": "Fri, 05 Jun 2026 18:27:27 EDT",
+      "timestamp": 1780698447000,
+      "signalIds": [
+        "screwworm-onehealth-2026"
       ]
     },
     {
@@ -936,6 +1197,18 @@
       ]
     },
     {
+      "id": "google-news-90ae98a0",
+      "authority": "Google News",
+      "title": "Ebola disease outbreak 2026: How MSF is responding - Doctors Without Borders",
+      "description": "Ebola disease outbreak 2026: How MSF is responding Doctors Without Borders",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQaHh3TFlDZ05hYUNDR2swZzQxbWtjYnNBQ0tDTEcxT3NpRmtSR19zeTRsVFpuUVBJU2VpTXZFMjRIZlZTMzM5d25EZUFoR21EeVhGUXdYRVhIc3luMHVfd0NBOWJfWUZJbTlTMXZVUHdkTlZtTi1OdlV6Zlhhcy1OUWYyRjllUENBZVdXSEZkT3V1TG1mQ3c?oc=5",
+      "pubDate": "Fri, 05 Jun 2026 19:47:28 GMT",
+      "timestamp": 1780688848000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-577672e9",
       "authority": "Google News",
       "title": "5 things to know about the hantavirus in Mohave County - The Kingman Daily Miner",
@@ -1029,6 +1302,18 @@
       "timestamp": 1780685863000,
       "signalIds": [
         "measles-us-2026"
+      ]
+    },
+    {
+      "id": "google-news-03cc6b5b",
+      "authority": "Google News",
+      "title": "Faith, fear and trust: Inside DR Congo’s fight against Ebola - UN News",
+      "description": "Faith, fear and trust: Inside DR Congo’s fight against Ebola UN News",
+      "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9ZdWdFVV9CUzRFVjlKTkp2ZDVsLWc0VVJSOWFOYXJrSkRzQXBFb0pSbkVRSXdXSzE0aE83elhhcXdGcUtvdTVpVE82cjVONHU5dTVRdHYxcw?oc=5",
+      "pubDate": "Fri, 05 Jun 2026 18:56:06 GMT",
+      "timestamp": 1780685766000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
       ]
     },
     {
@@ -5547,291 +5832,6 @@
       "signalIds": [
         "measles-us-2026"
       ]
-    },
-    {
-      "id": "google-news-687b59e4",
-      "authority": "Google News",
-      "title": "Nearly 180 Camp East Montana detainees in quarantine after measles exposure - AOL.com",
-      "description": "Nearly 180 Camp East Montana detainees in quarantine after measles exposure AOL.com",
-      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQaXMySmtlT3RQU1o3ckRaTVJwR2pmY19CYi1xcDlMNTVwTFMxblMwSkFHY3UyNm12a1BSMTFTSEdOTUM4SmZQa0FIWGROaWdyN1ZqTGp5TEVyMV84MHVtTDF6dV9WWV9FMzdUQjFYVC1heEZTRFB2UVJOOUExZ0ZuUA?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 02:48:40 GMT",
-      "timestamp": 1780541320000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-b761275a",
-      "authority": "Google News",
-      "title": "‘There’s a global measles epidemic’: RFK Jr. addresses measles during Central Virginia outbreak - WRIC ABC 8News",
-      "description": "‘There’s a global measles epidemic’: RFK Jr. addresses measles during Central Virginia outbreak WRIC ABC 8News",
-      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQdHZ5QVY0RGszaDVVVlU0VFpjSGZwbEd6X0RZZDFES2pES2d6Y3Q0OHRYbTRpV2FMZExxT2hXa2NHcVBEY1d0M3plZ0ZfNlNKVG9VbllycTM3QzJPakNaaDQzWFFOS1NoTnhaODN1OWxTRDNYanI5b0Jpc2lUNDlmdlZsRkoyY0RUODhwV3FhcjhDZDVrcWgtOVUxZHJqSzh3d1l6RGt3VkNfd2FZWllCQVVQeGNhSTlPeXlyQVY4ZXdFSGJYZlJj0gHMAUFVX3lxTE1SRjFMWlN3UU9ndUtzSk5nMkNGYWdwa3NYWjlwWHNzNl95Yml6UVFwMTJqcTFKc3drajNBaDBRNmpwalpyMTVfd1dDQ3VQV24yRlBzeEJnVFlCaTFNa1IzcmMzQXJuRjZxckowOUdxZ0hhNzlvTFhEdm1iRDk1cEllY2FZNTJyc2lyWHVrX1NiR3ZlYjNmUElRanU2N19xZG9JN1RDWlhkVHllX2w3SW1OUzN5RGNIcFU2ck9GYzlKSWVLRVI1eW1tREd6TA?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 02:44:25 GMT",
-      "timestamp": 1780541065000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-ca9d4e77",
-      "authority": "Google News",
-      "title": "COVID-19 Travel Lessons for Hantavirus, Ebola - respiratory-therapy.com",
-      "description": "COVID-19 Travel Lessons for Hantavirus, Ebola respiratory-therapy.com",
-      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNa0U0Rkx5RkFELUliYWxoNlhzYnRzUFJqdjRiaTVnSHBYNnpZa3hEZlJJSHN3U28wdUFrN3JJR1RrRmpMR0xtdEJLZFBhSGMzcUpSdnUtVktIakJZeGUyRF9xUlo0RVRCdG5yNE5TRUtoNGlXUDFnNU5Ga1lHUTZmV0NaR2FtaUxJVGlFTWF3OG5PX1pObHpyRnc2U015RVlobFgzMlFfSkQtM2tGS3RvWkJmSS04RGg3eTQyVVJqN3ljY3VtbnZuV19LNEk4QQ?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 02:41:10 GMT",
-      "timestamp": 1780540870000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026",
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-2e2c8222",
-      "authority": "Google News",
-      "title": "2 scientists charged with bringing deactivated mpox virus into the US - WMAR 2 News",
-      "description": "2 scientists charged with bringing deactivated mpox virus into the US WMAR 2 News",
-      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPVFFOdzV1Qi0wdjdpcjVDOVk3N09EZkFTSmR5Wjc2S2hUT3RxeVJWRzFMNmtsX0w2dVRkUUgzdFJiNUhNMng5dGVDalpOQUt3MjVwMkJpall2cnVScGhqa2pDNVNWLXFaZS1hekpjR2puV21mSXdlRWlDLWRUSzRJYVRWdVhVdHBIOEpIM0cxQmxLMTJIc0ltVXViVWg3bEhBWm53dUFOTW1XbjQwNWxlY1VFQ01BNHBpaGhnTllB?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 02:16:25 GMT",
-      "timestamp": 1780539385000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "google-news-6f0c0f73",
-      "authority": "Google News",
-      "title": "Could the hantavirus spark the next pandemic? - NUS - National University of Singapore",
-      "description": "Could the hantavirus spark the next pandemic? NUS - National University of Singapore",
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5JcVBnUlhjd2dYVXRzX2tYbTNVNUJtRTN5dnpneXNlSFNoUDFSbndlRXN1ak9UblpGZDdhTkdaRzlqdWttaXdvdFJaMXpDNDNxX2pzOC1ESVVsQURKUHl2eUh3dEZNWjRGVmZmcjl3?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 02:12:53 GMT",
-      "timestamp": 1780539173000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-1321ca01",
-      "authority": "Google News",
-      "title": "Dr. Gupta answers 2 important questions about Ebola - CNN",
-      "description": "Dr. Gupta answers 2 important questions about Ebola CNN",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOaHk4UmREMlMtcndWZm43OHRHZ0ZmeWl4N05VY2Z6R1BPNGpjdXFVWkE4NXVOOWc0VmtBSzZ5S214Rkx3YlNwOFdMMEtFY2VOMmFRMW5kaGVlNjNnNUp5NUhSYXN5SERUdWxPQlJJWjg3eFNqRVJ5R3J5ZzBRV0dkWjEwVzVEUldwbkVlVzdwU0xxX3pjOVNuVWR1Nm0yVHk5?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:46:00 GMT",
-      "timestamp": 1780537560000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-f87b3c70",
-      "authority": "Google News",
-      "title": "Researchers announce promising developments in hantavirus drugs following cruise ship outbreak - Українські Національні Новини (УНН)",
-      "description": "Researchers announce promising developments in hantavirus drugs following cruise ship outbreak Українські Національні Новини (УНН)",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPcXBBeHNJd19GMXVOaFNBekZrRlFvTHdvZ3NsV1Z3WjlxdFNDTGFvZGlJZlJ2dGhVdmNGd2N3Tzg4MGlDdGRIWlV3WHNvMFBGOWtPTmhCWFBrMlNCZ05PLVNSUjJpQkdpWWJSUjdBQ2lnSUt0VTd3cC03RUZnWkY5UURJTjhQTDZHMGpHenZWdFlKYlUydjlYMmVmbzVYamRUeVVhZXRDNm1aQXhPVFRVTkNVZlBPMmJB0gG3AUFVX3lxTFBrcHJySzlMNVA2TUhqRlJ1Qm9LeUwtY0txQUZpOVpqdURFUmtMT25udXVzOFB3aVdVcGZPeUR4Q3BaRzQtRC1tb3NSOU5uT3pIbmVQemxFRFBjNWxTM0Z3WU52TkNfbDRCeTRoT0ZnVXpENHlvT29NS3pSenFmZ0Q2ZzBHem1QbUlqMWFfaThrdEV1aWhqNnVaVEpqSUk5ZFRmZU5YNnI0YjgtVnJpZkdYcDRZT1NYRQ?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:39:40 GMT",
-      "timestamp": 1780537180000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-0c2c3086",
-      "authority": "Google News",
-      "title": "Ebola burial team attacked and 11 patients flee care in widening outbreak in Congo - The Japan Times",
-      "description": "Ebola burial team attacked and 11 patients flee care in widening outbreak in Congo The Japan Times",
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNa21qbzBwVE44VkFHMEFTLWhMbGlOVVMwdjFnTktaZ2FMS2tHZ3R6cXZ5N0Y2UjB3aFAtOTl0eGhrRTFTSHRZWjhCLUtfUl9KZ3M4azZjbC0xVUVjRm5LZGhOd3ZJb3RTaGxORFVuNXFoVkNuVnlaMExnZ1VHQUpqMWdHaW9ac1hZa2pOSg?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:33:00 GMT",
-      "timestamp": 1780536780000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-02fd5060",
-      "authority": "Google News",
-      "title": "2 scientists charged with bringing deactivated mpox virus into the US - TMJ4 News",
-      "description": "2 scientists charged with bringing deactivated mpox virus into the US TMJ4 News",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOQ01xamN1Vng1TkZXNy14RkoxdUZ1XzlLYnQxMnh6ZTFrdmNoLWgySkhua3RUNzl1QkFfb283cFNPUzg4Q2otRzE3S2Y1X09FWlFJTU1KaHdhelpJOVI2dEFWU09MQ3BObDF3TmtWbE90bFVHdERRcHFIV2FJOU9uRXdNZEtOSmlMLV9XcGVJVWlVOUw1RE16SFJZZTNRcWdmbUZ2dlQxNnM5NjVhNHJYdG51VEtmRXc?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:32:27 GMT",
-      "timestamp": 1780536747000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "google-news-fc5236cf",
-      "authority": "Google News",
-      "title": "2 scientists charged with bringing deactivated mpox virus into the US and lying to authorities - Indiana Gazette Online",
-      "description": "2 scientists charged with bringing deactivated mpox virus into the US and lying to authorities Indiana Gazette Online",
-      "link": "https://news.google.com/rss/articles/CBMijAJBVV95cUxQTVB3Wi1veklrT2FVVXBGbTd3LXllSG1nSE1QRUdqNWQtTEQ3MGY2MDZGU3dUTEF2czktTHpIbTJEdnZuWVpibnhJNHdUYjlwX3E0MmdWNnBQN0J2WjVzelE5SV9NZjJyaXNBWWVmSmhKXzltZFpDVHlFenl1NzEwanNIYUJFUkpOYldrVENITWpDZmFVb1NlMTZRaGRkbUhmdVlFMjBDaEdBcDZfdzFKaThpdzY2YTg3cnRsR3g5R3dKWUgzdG1xdUZ4SDdVQ2p0NHJSc2UxaDktZ2Z5blpYQ2NLVzYzMHVQRENrSGlFcTJJcnJ2QzYtdndORzBzT3JhVWZnS3huRFRjc2ht?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:30:00 GMT",
-      "timestamp": 1780536600000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "google-news-aea070f7",
-      "authority": "Google News",
-      "title": "CNN’s Dr. Sanjay Gupta breaks down two important questions surrounding Ebola - CNN",
-      "description": "CNN’s Dr. Sanjay Gupta breaks down two important questions surrounding Ebola CNN",
-      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQTDN1dTgyalpwdGV2S1Ywdk8yVjh2Z0ZuLS1NZXNXOWlZWmxucFpqd1Rjb1BmTWZsNkRpZmxaOVRPT1dkN0JZZTk0TVFtMW1Zb2Z2Y29tVDBJcDZUaWRpYlFxNGwyMWxiSlpBZ1h6cXJZVndmSXByeldfZDl2NTUzbjdoS3ZGbjhDVFpfYXJB?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:09:58 GMT",
-      "timestamp": 1780535398000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-d2a6bed9",
-      "authority": "Google News",
-      "title": "RAW: VA: RFK JR ON VIRGINIA MEASLES OUTBREAK - Local 3 News",
-      "description": "RAW: VA: RFK JR ON VIRGINIA MEASLES OUTBREAK Local 3 News",
-      "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQa0ZCcjZsRGVNeGZCeWhyVC1uR1ZsSUFzNldQLVVqdFhlWGFiWDRBQWUyU0dBaXF0TUIxdU0zSTJFOXJyZmtOTmdQRmNlQkJqSmVZTHFTMmVuOURMNklZWEM1UUZZRVk2QTB1QjlsVm10M1lRdUNOSFVaX194VV84dnFHTGF2RUVnUHMweEY2U3dSMkM2WEtrWElUeUNIRVkwc3pVMGJ0VnFDeGROLVJuS1FIZ1ZFUG1FYzNKV2Z3TGxEaGp6ejY3NXZHLWM2VEly?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:07:26 GMT",
-      "timestamp": 1780535246000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-eac87420",
-      "authority": "Google News",
-      "title": "Health workers struggle to contain Ebola outbreak - THIRTEEN - New York Public Media",
-      "description": "Health workers struggle to contain Ebola outbreak THIRTEEN - New York Public Media",
-      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE94VXFyNzZjYUE4UXVLZXVjM2xBUVB0bVFSSTJTS0JJTGU4Q3RlY2hPR2o4R0lsRFJMRkpVT2hGaFRRZ0FvQ3N0NmhUXzF3em5VWEZIN1RmcTl3NFNjMnptZDBfZDlkRDNick9IM1J1M0ZCdTNmUEdacG05aEdfUQ?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:04:07 GMT",
-      "timestamp": 1780535047000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-9fbff4b8",
-      "authority": "Google News",
-      "title": "Several ICE detainees in quarantine after possible measles exposure - BorderReport",
-      "description": "Several ICE detainees in quarantine after possible measles exposure BorderReport",
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOdzczWFR1TTRybkNiV1dMMDgzQ1dZdlBXeTBuSGE4ZXR6TFQ0UWpQVzFUaVByTlpnelA4NVZpX0t4QjZwSm9kVXVuX2FYTHJkWWpUc3doTnIzQy1EZzZhRVd0dGl5OEFjQ3Rya0hBMTFEN29SRERMa0FGVEJYZGJUZzhQM0lrcmdfdms4ekJGN3RJWjE0eHYwbHNXX1N0UGRDTWhEVzZoSFNJd0lOWW9lbXhn?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 01:03:18 GMT",
-      "timestamp": 1780534998000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-ccabe32e",
-      "authority": "Google News",
-      "title": "2 scientists charged with bringing deactivated mpox virus into the US - Scripps News",
-      "description": "2 scientists charged with bringing deactivated mpox virus into the US Scripps News",
-      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNeTF0eVFIeDlBU00xOVcxd2E5V0g3U2JyX2tVVHdpVzVkMkdvMy1JNmlhOGhCbGdUV05FU3lCSnNvTUpqUlRONHNpSGN0ckJ5UjNQdGp1TU5iOEEwc0k4T242YVFWdXBmRm9Md0ZRdmJZc0REQzVIMUpxQmZCTkg1WXh0QURBZnVWZUFuNC0zMWlrUEdtMGlPUlBWS3ZqekdCeXpCa2FCT3o1Tnh1QlowQm9hMy1yeVZNaFE?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 00:49:02 GMT",
-      "timestamp": 1780534142000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "google-news-4655a868",
-      "authority": "Google News",
-      "title": "After SC measles outbreak declined, a new case is found in a new part of the state - AOL.com",
-      "description": "After SC measles outbreak declined, a new case is found in a new part of the state AOL.com",
-      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1EWXFvNTlBY3FaQ3BfQS1FRFBvTGhyQkFhY0t3OWp5VUtlWEEyZkNkb0pJTW9HVE5mYXB5emNLNGVNd3FXNFhzZnR0MVY5dFdYdkg4M1p5UWNNMl8yeFI5elpZcjVaZ0t6b1dTaTJ2YllfWDR5ci1Zd21BRmNWQQ?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 00:42:16 GMT",
-      "timestamp": 1780533736000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-5a07c7ed",
-      "authority": "Google News",
-      "title": "Ebola Burial Team Attacked, 11 Patients Flee Care in Widening Outbreak in Congo - Bloomberg.com",
-      "description": "Ebola Burial Team Attacked, 11 Patients Flee Care in Widening Outbreak in Congo Bloomberg.com",
-      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQUENBRThhY0xhN2pPS0Nsdm1MZDNaWUpkS1o2eV9ybG5YQ3dNQkU4NEd6OWxIN1NhSlVBWllySUxZb01RaVI2MTVDRUZwb3pMaWN4b0pjYlVUZnItTmY5X0FIeVF3VmdER3B1Q1FKX0NYMnpVa1dwbllTMEQwZTBGUGNuYkJJU0ZsQTNTNThfdUY1UVRXNG9McnEzTGxlVmp5Y0JpeUdnVUY4MkJrbDFmS1hmZTRHNmwtU0hFTGRuRWhHd2JJRXctOQ?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 00:26:00 GMT",
-      "timestamp": 1780532760000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-ab2c772e",
-      "authority": "Google News",
-      "title": "2 scientists charged with bringing deactivated mpox virus into the US - WCPO 9 Cincinnati",
-      "description": "2 scientists charged with bringing deactivated mpox virus into the US WCPO 9 Cincinnati",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNa3JRbzZBNy1CMS1OYUU3VWp0T293cTI0R1B2N2F4YzZ5UWgtSUsxSzNNbGVScGFVSi1jNlZyUkhxY1FCU0RlRV9BdlhhRGVrRUVKOEN5M2oyT2RXbmxNaURzc0NPcTBnSVNmS0xTeXJRLUdmLUZ1enV3V0kzTTBRRzh2RFJtMzJFUHRwMzduSTRReExjUlUzazN0NjkyTVVnTTV0Mk5vbEdMZkgwZWVkOVRnRDhJZkU?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 00:21:31 GMT",
-      "timestamp": 1780532491000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "google-news-4791a7a8",
-      "authority": "Google News",
-      "title": "Bend doctor returns home to finish quarantine after hantavirus outbreak on cruise ship - OregonLive.com",
-      "description": "Bend doctor returns home to finish quarantine after hantavirus outbreak on cruise ship OregonLive.com",
-      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQd2RzN2MxZ3d3cFpDU284V0VjNW53VVE1OG4ycFN0a1ptVGRvbDRUUlIwekZPWks3Y0RrcDdWNERjQmZqWkhyYVVQRkplVFZ5UUs4clk5Um9pZGg1RXU1TVdZVHVQSkdpdDN0ejdvME1ndjA0d1p1UzBVbjNHOWw5RGNuR19JM3FrLVZpRGwtX0Y3elNqQ084YUZNUGNLa2xUM3RhVDBMYnJNa3FTRzIwcXlTRzRsR0RDVFJudlBITTh2Y2RQejh6T1NsNlZZZ9IB4gFBVV95cUxOMjRxYWdyQl9ONkx2OVVQbm5XUXVWaFNlREhIbEJ5cmdqTXI1cFZLN2Q2UmtDNHBHQUc2Y3M3dmd3ZWFWQWFiVWx3dlFEM2VpcDZkOW15Qk1RcTNSMWVjbnpfM05hTDhma2VGRFJ5ZmhtTDY4QV9QZDVtVXJ3Q09sQ2pOc1htd08tR2luR3lDNlZzZVpOOXM2NHZuRmJZelcxeDhKdTN5eGl5TjFPZHMyeWEyRkM3TjdLRVV5dlJPbWdDQ2g1OVBWN2RmX0QtdWZBZ2g2Q1g1aFRzbWJ1OWdmanhR?oc=5",
-      "pubDate": "Thu, 04 Jun 2026 00:01:00 GMT",
-      "timestamp": 1780531260000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "google-news-85324fef",
-      "authority": "Google News",
-      "title": "NIH researchers charged with trying to smuggle monkeypox into US: DOJ - NewsNation",
-      "description": "NIH researchers charged with trying to smuggle monkeypox into US: DOJ NewsNation",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWDZVVUw2UjFuc3FGRkFhSXNPTUhfZW8wR3lBajRUMFg3aDZQQzZNYXpGRmEwU0NsWXB1UnFLNG9SWUw1WUxWTldPNzc3UE1ybXRWNVJZdzdsNzF2V0xpQU9KVmpCZVFSWmpsYW41a2xjaFFlb0R4UE5zdGozeFU2QXZ6U1_SAYoBQVVfeXFMTUJHUWRjQ2RzVjhlaGd4akV1RW9EWGh2SEhDcnBpTURJSXpISUdVaXR5OWJfWmVXYjBTM1dfdXExUTFxNTIxNmFqWUJSV3JwSDJPTXYwV2ttR1dYTGoyQ0FQQWMzZDVzeFlxZ0phQ203aElTb1VTTGJlZGRqeGxDdFE2dE9vdVBjRDV3?oc=5",
-      "pubDate": "Wed, 03 Jun 2026 23:55:26 GMT",
-      "timestamp": 1780530926000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "google-news-689d671a",
-      "authority": "Google News",
-      "title": "Monkeypox strain intercepted by CBP at Detroit border | Fox 10 Talks | FOX 10 Phoenix - FOX 10 Phoenix",
-      "description": "Monkeypox strain intercepted by CBP at Detroit border | Fox 10 Talks | FOX 10 Phoenix FOX 10 Phoenix",
-      "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9FM216TjRnWUk2aWdjUzFIVTZRZFdBX3hvV1NRY0ZvWmNjdzg0aHZ4ck5ldXBXc2FMU2dDek1hNzRTcmNHUi01S0RFX3c4V2RHajBhX2U2QXNUWm8zN0l6MUtTNDRLUdIBa0FVX3lxTFA1dzRSYmpzMHZ2X3ItNUUyTHh0c1V3bmJiZUo2NEhIVWkzOVFhcXY2STVXZ005Q0ozT3MtSnk2WXU5c1ktVm9PZGdLQ1BiUHlaMC1Ea3dRXzlUakdkSkR5TUdYMUxUcXZEVmpB?oc=5",
-      "pubDate": "Wed, 03 Jun 2026 23:50:31 GMT",
-      "timestamp": 1780530631000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "google-news-3948cd24",
-      "authority": "Google News",
-      "title": "Tools to fight hantavirus show promise despite limited funding. Now researchers hope to continue - ABC News - Breaking News, Latest News and Videos",
-      "description": "Tools to fight hantavirus show promise despite limited funding. Now researchers hope to continue ABC News - Breaking News, Latest News and Videos",
-      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPYUZnYzAydmN6VjZfak0zSzJyaFUwYjJnMzNkOHhyWjR6cVVPMHdGdng1UXRDU1hZZEJKRG1TaWJNOHRkS3hhczk3b19OR0pCOXRVVHZLR0ZUbDVuY2V1UXV4Zi15NUl2RGlETm1NUTU0MWdKSFJTZWtWcUdvblQ4LV9xWGwwbkh6OHhZZE1QeUJ4VG05RlpoRmZvNHJuajNkUHBwOWlzRTRKZ9IBrwFBVV95cUxPWVdzdkJfemZYbW15UFdFTDFsS21kVnI1N2IwU3pMckJKcFlqNkt6Y3JXYWhNQmJZaTU5NkRVVy1MZExjdjAwczhCQ1o5QjhhRk0yU2ZJWlNCUXV5dHVqaU11OHJMZy1fcjVMT1kyZW8yZlNnNExUNC1hWHk1aHdIZGszZnZuNklTRFVSb01wM2xVbkpYOUFseklCTFlxM3lTbVQ2U09DWkhQRzBzbmhr?oc=5",
-      "pubDate": "Wed, 03 Jun 2026 23:48:06 GMT",
-      "timestamp": 1780530486000,
-      "signalIds": [
-        "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "bbc-health-1928c546",
-      "authority": "BBC Health",
-      "title": "What a hair loss breakthrough could mean for women like me",
-      "description": "As scientists edge closer to new treatments for hair loss, Victoria Derbyshire examines what such breakthroughs could mean for women.",
-      "link": "https://www.bbc.com/news/articles/cg7p8n9g2klo?at_medium=RSS&at_campaign=rss",
-      "pubDate": "Wed, 03 Jun 2026 23:42:35 GMT",
-      "timestamp": 1780530155000,
-      "signalIds": []
-    },
-    {
-      "id": "bbc-health-fe957f19",
-      "authority": "BBC Health",
-      "title": "Breakthrough ovarian cancer drug offers patients more time and better quality of life",
-      "description": "Women taking the drug tell the BBC it has given them their lives back.",
-      "link": "https://www.bbc.com/news/articles/ce8p57y35lzo?at_medium=RSS&at_campaign=rss",
-      "pubDate": "Wed, 03 Jun 2026 23:34:59 GMT",
-      "timestamp": 1780529699000,
-      "signalIds": []
     }
   ]
 }
