@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "degraded",
-  "generatedAt": "2026-06-08T10:21:39.198Z",
+  "generatedAt": "2026-06-09T09:27:33.554Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-05T00:00:00.000Z",
     "oldestActiveReview": "2026-06-02T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-14T00:00:00.000Z",
-    "dataAgeHours": 82.36088833333334,
-    "officialCheckAgeHours": 82.36088833333334
+    "dataAgeHours": 105.45932055555555,
+    "officialCheckAgeHours": 105.45932055555555
   },
   "signals": {
     "total": 19,
@@ -84,6 +84,20 @@
       }
     },
     "staleSignalIds": [
+      "andes-hantavirus-mv-hondius-2026",
+      "ebola-bundibugyo-drc-2026",
+      "measles-us-2026",
+      "mpox-africa-clade-i-2026",
+      "cholera-africa-2026",
+      "seasonal-influenza-2026",
+      "covid-wastewater-2026",
+      "norovirus-wastewater-2026",
+      "rotavirus-wastewater-2026-bay-area",
+      "rsv-wastewater-2026",
+      "hmpv-wastewater-2026",
+      "lassa-fever-2026",
+      "chikungunya-2026",
+      "candida-auris-wastewater-2026",
       "screwworm-onehealth-2026",
       "fifa-world-cup-2026-prep"
     ],
@@ -104,7 +118,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-08T04:16:47.000Z"
+    "newest": "2026-06-09T04:01:00.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -233,6 +247,6 @@
     ]
   },
   "staleReasons": [
-    "2 signal(s) older than 168h"
+    "16 signal(s) older than 168h"
   ]
 }
