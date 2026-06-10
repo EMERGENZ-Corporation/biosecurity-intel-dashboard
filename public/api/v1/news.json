@@ -1,9 +1,21 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-10T19:00:00.384Z",
+  "generatedAt": "2026-06-10T19:02:45.340Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "google-news-761816bd",
+      "authority": "Google News",
+      "title": "Video: Hundreds of Kenyans Protest U.S. Ebola Unit - The New York Times",
+      "description": "Video: Hundreds of Kenyans Protest U.S. Ebola Unit The New York Times",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPbDl2ZnBZZW9XeHN3Vm1DUmd3M2U4aHRKZGdZM0sxcHlnMnhHQ1hSY1dES0E2ZUE2a1lzR2ZreFFmQ0pVVl9qZUVGU0F2Nm5TQ1Y4TEZNWHR1Q3ZzYVBmcmN1Z2J2RmdPZm45V3ZxdU5ITlI1Y0JsbG9LOFJDaEtVMWJSVV9EcVctSnpMR3dyMVR5ZzRtMDVnMUdCaXJsQ2hsUUxGSA?oc=5",
+      "pubDate": "Wed, 10 Jun 2026 19:01:28 GMT",
+      "timestamp": 1781118088000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
     {
       "id": "google-news-e4fa0c27",
       "authority": "Google News",
@@ -573,6 +585,18 @@
       ]
     },
     {
+      "id": "google-news-3a8a842a",
+      "authority": "Google News",
+      "title": "Cameroon urges separatists to allow health access as Mpox spreads - Channel Africa",
+      "description": "Cameroon urges separatists to allow health access as Mpox spreads Channel Africa",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQcWNkTzdMUlVpVHlkeDNzbV9UN05mVWdEZTFTSHZ2M0FFbFZKZ0kwSlVlY2pONExxNGdwMXVPemRSaG5ubG1MRFZVdW9ySkxaazJKR2gwLTVuR24wYThaVUJpMVNuRzJtMFZ2dnVIcmF5VENLWUQtYzRhUDBGUFVCNXhQNlRNNWl3SURBVDNCT0NPYUNyWEdZaG9zRlhZckFTdkJPcVMzTGVvanlwbzNCTkxMcFQ3a3Z2?oc=5",
+      "pubDate": "Wed, 10 Jun 2026 13:44:20 GMT",
+      "timestamp": 1781099060000,
+      "signalIds": [
+        "mpox-africa-clade-i-2026"
+      ]
+    },
+    {
       "id": "google-news-c43ca236",
       "authority": "Google News",
       "title": "UKHSA Says No Change To Public Health Risk To The UK Population From Hantavirus, Which Remains Very Low - TradingView",
@@ -1115,6 +1139,18 @@
       ]
     },
     {
+      "id": "google-news-de4a63c5",
+      "authority": "Google News",
+      "title": "Centre asks States and UTs for screening and testing of all suspect cases of Mpox - News On AIR",
+      "description": "Centre asks States and UTs for screening and testing of all suspect cases of Mpox News On AIR",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOV1d2TzlZZEsxUmM4VldNX2ZLOWVaME1talQ2bzdMSmY1Q2wweVA0WWkxZnlSdVRVY2d1UUpWNTZRc2tFdGR3TW1iTkI2cXFidjlOMk96Ti1sOHpHbnlGalQyZFRpWXp4QklTYUNJLUNVM2d5U3diSGJuV2VRbDhzVUt6SDlsTU9BcmUzWFdIRnFnQmkzendRX0RTMzJfNmVvQXFaQmJYMXdFMm8?oc=5",
+      "pubDate": "Wed, 10 Jun 2026 07:15:53 GMT",
+      "timestamp": 1781075753000,
+      "signalIds": [
+        "mpox-africa-clade-i-2026"
+      ]
+    },
+    {
       "id": "google-news-a73a4d48",
       "authority": "Google News",
       "title": "Duale, UN envoy hold talks on Ebola, Mpox threats as SHA registration hits 31.5m - the-star.co.ke",
@@ -1169,6 +1205,18 @@
       "timestamp": 1781072559000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-73b144bb",
+      "authority": "Google News",
+      "title": "Health Ministry Reports Suspected Mpox Case; Patient Stable and Isolated - News On AIR",
+      "description": "Health Ministry Reports Suspected Mpox Case; Patient Stable and Isolated News On AIR",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPVV95SEx6WUJKc0c1em5XdEtBWXYtUkFJMnhVYWd6QllZRUZ3S3JmYmxSU3VsQ1cydVZJbVdxUWJmYWtlem1ReXdMMS1RUTlmbVlRRTQtLTJ0TVRhNy1hNVh1alVtajVybHhmREZQM0ZsaGVsYm43eWJiWjhUMHZtSTdVSFJOSl82ZEc4RzNrb3FURWpuVkRRU3BxN3FQQQ?oc=5",
+      "pubDate": "Wed, 10 Jun 2026 06:13:36 GMT",
+      "timestamp": 1781072016000,
+      "signalIds": [
+        "mpox-africa-clade-i-2026"
       ]
     },
     {
@@ -5784,50 +5832,6 @@
       "timestamp": 1780924699000,
       "signalIds": [
         "andes-hantavirus-mv-hondius-2026"
-      ]
-    },
-    {
-      "id": "stat-news-3d228461",
-      "authority": "STAT News",
-      "title": "STAT+: J&#038;J spends $1 billion to enter KRAS race for cancer treatments",
-      "description": "Johnson &#038; Johnson said it will purchase the startup Firefly Bio for $1 billion in an effort to expand its work in the suddenly buzzy field of KRAS inhibitors.",
-      "link": "https://www.statnews.com/2026/06/08/johnson-and-johnson-firefly-cancer-kras-treatment/?utm_campaign=rss",
-      "pubDate": "Mon, 08 Jun 2026 13:17:20 +0000",
-      "timestamp": 1780924640000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-1a65693c",
-      "authority": "Google News",
-      "title": "The hunt for a new Ebola vaccine: two scientists explain the challenges - The Conversation",
-      "description": "The hunt for a new Ebola vaccine: two scientists explain the challenges The Conversation",
-      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNbUpUZmlxTXlTa3NRWW4xelAyRUMtS1BRR210MGRLT0h1N0JhN28xWnJuUUFOUnphZmNvVlFCbGFYY3hHOVM3ZE9HZWVzcFN1Z2VMcWcxczVOZU4wWW1zQ3RsX0o1TnVMUExJZl8tbkd4eXQ5dW81NktfMVhWRGt4MHI2M0JsdmhxemZkc2cwMl9EazlzVE5jVUFyVWdsalppeG5OMDJGWGk?oc=5",
-      "pubDate": "Mon, 08 Jun 2026 13:16:08 GMT",
-      "timestamp": 1780924568000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "science-news-1c1c23b4",
-      "authority": "Science News",
-      "title": "AI cracked an Erdős math problem. Now experts want guardrails",
-      "description": "The result is correct but challenges core norms of mathematics: checking proofs, crediting ideas and keeping research open to everyone.",
-      "link": "https://www.sciencenews.org/article/ai-guardrails-erdos-math-problem",
-      "pubDate": "Mon, 08 Jun 2026 13:00:00 +0000",
-      "timestamp": 1780923600000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-34fbdf5e",
-      "authority": "Google News",
-      "title": "Inside WHO and Africa CDC’s $518M Ebola response plan - Devex",
-      "description": "Inside WHO and Africa CDC’s $518M Ebola response plan Devex",
-      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxON3dma0Q0WVlqS1BPWmlqNFN1d1BHZUI5SXNlWnNqcGdoLTduYk04Q1ZrUF9nUjFmZ0d3c3BYaFhRbWhDbE11WGhDcHRiUjhzRlJET1llbGxDamduNHQxYTVfZ1N3dnVEY1Nmc2lIdUlmSWdHaVMzUWk1cVRFUmN6Z3VRLW9oTzJCSjBhV0tEUQ?oc=5",
-      "pubDate": "Mon, 08 Jun 2026 12:59:48 GMT",
-      "timestamp": 1780923588000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
       ]
     }
   ]
