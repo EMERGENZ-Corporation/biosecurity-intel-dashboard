@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ News enrichment: suppress the per-run [AI BRIEF] comment on a persistent Gemini auth denial (commit <pending>)
+## ✅ News enrichment: suppress the per-run [AI BRIEF] comment on a persistent Gemini auth denial (commit 54a8f0a)
 
 Follow-up to the fail-soft fix below. Gemini enrichment has been failing open on a persistent `403 "Your project has been denied access … PERMISSION_DENIED"` (an account/billing problem on the `GEMINI_API_KEY` project, fixed out-of-band). Because the failure recurs every 6h and `aiAttempted` stays `true`, the "Reconcile AI news brief issue" step was posting a fresh "Gemini denied" comment to the reusable `[AI BRIEF]` issue #6 on every scheduled run — accumulating noise. This makes a persistent auth denial stop spamming that issue while transient failures (rate limits, 5xx, timeouts) still surface.
 
