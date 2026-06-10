@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ News workflow: make issue-reconciliation steps fail-soft so an alerting blip can't discard a good news fetch (commit <pending>)
+## ✅ News workflow: make issue-reconciliation steps fail-soft so an alerting blip can't discard a good news fetch (commit 3359500)
 
 The `Update News Feed` run at **2026-06-10 15:53Z** failed. Triage: `update:news` succeeded (fetched + wrote 500 items), `enrich:news` failed open on a Gemini `403 PERMISSION_DENIED` (by design), and `promote:timeline` ran clean. The run died in the **"Reconcile news pipeline issue"** `actions/github-script@v8` step on a transient `HttpError 401 "Requires authentication"` from `POST /repos/.../labels`. The token was valid — the immediately-preceding "Reconcile AI news brief issue" step had successfully commented on issue #6 one second earlier (`15:53:59Z`) — so this was a one-off GitHub API auth blip, not a misconfiguration.
 
