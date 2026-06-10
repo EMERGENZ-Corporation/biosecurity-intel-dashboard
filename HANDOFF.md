@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ News enrichment: raise Gemini call timeout to 120s (30s was aborting every run) (commit <pending>)
+## ✅ News enrichment: raise Gemini call timeout to 120s (30s was aborting every run) (commit b3369e3)
 
 After the `GEMINI_API_KEY` was rotated to a personal-Gmail key (the `@emergenz.org` Workspace account was the source of the persistent `403 PERMISSION_DENIED` — see entry below), the auth block cleared. But two back-to-back dispatched runs (2026-06-10 18:59Z, 19:02Z) then both failed with `(transient) "This operation was aborted"` at ~31s — i.e. the script's default 30s `GEMINI_NEWS_TIMEOUT_MS` ceiling. `gemini-2.5-flash` runs with thinking on by default and we ask it for structured JSON over up to 80 news items, which consistently exceeds 30s on this account. Raised the workflow's `GEMINI_NEWS_TIMEOUT_MS` to **120000** (overridable via a repo variable of the same name). This is a ceiling, not a fixed wait — the call returns as soon as the model responds — and the enrich step is `continue-on-error` with no tight job wall-clock, so a longer ceiling is safe.
 
