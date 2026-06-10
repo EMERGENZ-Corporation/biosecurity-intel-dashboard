@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-06-05 (Coverage gaps vs Brown Pandemic Center Tracking Report (June 4 2026) closed: added **pertussis-us-2026** + **yellow-fever-colombia-2026** signals and broadened avian flu to **H5/H9N2**; signals 17 → 19, sources 45 → 47, all figures primary-source-bound + hedged. Earlier same day: Tier 1 **quorum gate** so a lone transient ECDC WAF 403 degrades gracefully (`criticalQuorumBreached()` + `test:gate`). Prior, 2026-06-02: Ebola counts corrected to WHO situation-page figures; 14-signal reattestation; bounded fetch retry for transient Tier 1 WAF 403s.)
+**Last updated:** 2026-06-10 (Fixed the `Update News Feed` workflow: the two issue-reconciliation `github-script` steps now use `continue-on-error: true`, so a transient GitHub API 401 in the advisory alerting path can no longer skip the data commit and discard a good news fetch — root cause of the 2026-06-10 15:53Z run failure. Job red/green stays governed by the final "Fail workflow when news update failed" gate. Also noted: Gemini enrichment is failing open on a persistent `403 project denied` and needs out-of-band key/billing restoration.) Earlier, 2026-06-05 (Coverage gaps vs Brown Pandemic Center Tracking Report (June 4 2026) closed: added **pertussis-us-2026** + **yellow-fever-colombia-2026** signals and broadened avian flu to **H5/H9N2**; signals 17 → 19, sources 45 → 47, all figures primary-source-bound + hedged. Earlier same day: Tier 1 **quorum gate** so a lone transient ECDC WAF 403 degrades gracefully (`criticalQuorumBreached()` + `test:gate`). Prior, 2026-06-02: Ebola counts corrected to WHO situation-page figures; 14-signal reattestation; bounded fetch retry for transient Tier 1 WAF 403s.)
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
 > **Rule for any agent (including future-me):** Every change must be logged here in the same commit that ships the change. No exceptions — even one-line label renames. The user has explicitly asked that this file stay continuously current. If you forget, fix it in a follow-up commit immediately.
@@ -127,6 +127,19 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ News workflow: make issue-reconciliation steps fail-soft so an alerting blip can't discard a good news fetch (commit <pending>)
+
+The `Update News Feed` run at **2026-06-10 15:53Z** failed. Triage: `update:news` succeeded (fetched + wrote 500 items), `enrich:news` failed open on a Gemini `403 PERMISSION_DENIED` (by design), and `promote:timeline` ran clean. The run died in the **"Reconcile news pipeline issue"** `actions/github-script@v8` step on a transient `HttpError 401 "Requires authentication"` from `POST /repos/.../labels`. The token was valid — the immediately-preceding "Reconcile AI news brief issue" step had successfully commented on issue #6 one second earlier (`15:53:59Z`) — so this was a one-off GitHub API auth blip, not a misconfiguration.
+
+**Root-cause bug (not the blip):** the two `Reconcile … issue` steps were the only non-gate steps in the workflow *without* `continue-on-error: true`. When the alerting step threw, the job entered a failed state, so the downstream **Regenerate public API** and **Commit updated news.json** steps — whose bare `if: steps.update-news.outcome == 'success'` carries an implicit `success()` — were skipped. Net effect: a successful 500-item fetch was computed and then **silently discarded** by a failure in an advisory alerting step (`origin/main` HEAD stayed at the prior 10:14 run's commit). No permanent data loss; the next scheduled run re-fetches. Fix aligns these steps with the workflow's existing fail-open pattern (`update:news`, `enrich:news`, `promote:timeline` already use `continue-on-error`); job red/green stays correctly governed by the dedicated final **"Fail workflow when news update failed"** gate, which keys off the real data outcome.
+
+**Files touched:**
+- `.github/workflows/update-news.yml` — added `continue-on-error: true` (with an explanatory comment) to the "Reconcile AI news brief issue" and "Reconcile news pipeline issue" `github-script` steps.
+
+**Separate finding (pre-existing, not the failure cause, no code change):** Gemini enrichment has been returning `403 "Your project has been denied access. Please contact support."` — AI enrichment is effectively disabled and failing open as policy requires, but the `GEMINI_API_KEY` project access needs to be restored out-of-band (account/billing), and the `[AI BRIEF]` issue #6 accrues a "denied" notice each run until then.
+
+**Verify:** `gh workflow run "Update News Feed"` on `main`, then confirm the run is green and a `chore(news): automated update …` commit lands on `origin/main`. To prove the resilience directly, the reconcile steps may fail soft (orange ✓) without failing the job.
 
 ## ✅ Close coverage gaps vs Brown Pandemic Center Tracking Report — add pertussis + yellow fever signals, broaden avian flu to H9N2 (commit e6087f7)
 

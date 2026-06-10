@@ -73,6 +73,9 @@ jobs:
 
       - name: Reconcile AI news brief issue
         if: steps.update-news.outcome == 'success'
+        # Advisory alerting only — a transient GitHub API error here must never
+        # block the news.json commit below, so this step fails soft.
+        continue-on-error: true
         uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -160,6 +163,13 @@ jobs:
             }
 
       - name: Reconcile news pipeline issue
+        # Advisory alerting only. The job's red/green is governed by the final
+        # "Fail workflow when news update failed" gate, which keys off the
+        # actual data outcome — a transient GitHub API 401 in this alerting
+        # path must not fail the run or skip the commit below. (Regression
+        # observed 2026-06-10 15:53Z: a one-off 401 here discarded a good
+        # 500-item news fetch because the commit step was skipped.)
+        continue-on-error: true
         uses: actions/github-script@v8
         env:
           UPDATE_NEWS_OUTCOME: ${{ steps.update-news.outcome }}
