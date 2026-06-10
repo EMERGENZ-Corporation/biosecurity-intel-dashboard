@@ -88,6 +88,12 @@ jobs:
             if (!fs.existsSync('ai-news-enrichment-result.json')) return
             const result = JSON.parse(fs.readFileSync('ai-news-enrichment-result.json', 'utf8'))
             if (!result.aiAttempted) return
+            // A persistent credential/authorization denial (e.g. Gemini 403
+            // PERMISSION_DENIED) repeats every run and won't self-heal, so skip
+            // the per-run brief comment to avoid spamming the reusable issue.
+            // The denial stays visible in the workflow run logs and the
+            // ai-news-enrichment-result.json artifact. Transient failures still post.
+            if (result.failureClass === 'auth-denied') return
 
             try {
               await github.rest.issues.createLabel({

@@ -64,6 +64,17 @@ function truncate(text = '', max = 900) {
   return cleaned.length <= max ? cleaned : `${cleaned.slice(0, max - 3).trimEnd()}...`
 }
 
+// Classify a Gemini failure so the workflow can decide whether to surface it.
+// A persistent credential/authorization problem (denied/revoked project access,
+// invalid key) repeats every run and won't self-heal, so it should not keep
+// commenting on the reusable AI-brief issue. Transient problems (rate limits,
+// 5xx, timeouts, network) may clear on the next run and stay worth surfacing.
+function classifyGeminiFailure(message = '') {
+  return /HTTP 40[13]\b|PERMISSION_DENIED|UNAUTHENTICATED|API[_ ]KEY[_ ]INVALID|API key not valid|denied access/i.test(message)
+    ? 'auth-denied'
+    : 'transient'
+}
+
 function normalizeHost(url) {
   try {
     return new URL(url).hostname.replace(/^www\./, '')
@@ -379,12 +390,14 @@ async function main() {
     })
     console.log(`[enrich-news] Gemini enrichment OK - considered ${recentNews.length} items, added ${merge.publicTagAdds} public tag(s)`)
   } catch (error) {
+    const failureClass = classifyGeminiFailure(error.message)
     writeResult({
       ok: true,
       mode: 'deterministic-fallback',
       aiAttempted: true,
       aiUsed: false,
       reason: error.message,
+      failureClass,
       geminiModel: GEMINI_MODEL,
       newsItemsConsidered: recentNews.length,
       newsJsonChanged: false,
@@ -394,7 +407,7 @@ async function main() {
         failures: brightData.failures,
       },
     })
-    console.warn(`[enrich-news] Gemini enrichment unavailable; deterministic news pipeline remains active: ${error.message}`)
+    console.warn(`[enrich-news] Gemini enrichment unavailable (${failureClass}); deterministic news pipeline remains active: ${error.message}`)
   }
 }
 
