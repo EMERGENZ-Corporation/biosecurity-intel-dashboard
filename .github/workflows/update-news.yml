@@ -58,6 +58,13 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-2.5-flash' }}
           GEMINI_NEWS_ENRICHMENT: ${{ vars.GEMINI_NEWS_ENRICHMENT || '1' }}
+          # The script default (30s) is too tight for gemini-2.5-flash producing
+          # structured JSON over ~80 news items (thinking is on by default) — it
+          # aborted at ~31s on the 2026-06-10 runs. Give the call room; the step
+          # is continue-on-error and the job has no tight wall-clock budget. The
+          # call returns as soon as the model responds, so this is a ceiling, not
+          # a fixed wait. Override via the GEMINI_NEWS_TIMEOUT_MS repo variable.
+          GEMINI_NEWS_TIMEOUT_MS: ${{ vars.GEMINI_NEWS_TIMEOUT_MS || '120000' }}
           MAX_AI_NEWS_ITEMS: 80
           MAX_AI_PUBLIC_TAG_ADDS: 80
           BRIGHT_DATA_API_KEY: ${{ secrets.BRIGHT_DATA_API_KEY }}
