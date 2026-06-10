@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-10T19:06:31.492Z",
+  "generatedAt": "2026-06-10T19:10:17.991Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
@@ -14,6 +14,18 @@
       "timestamp": 1781118088000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-0f2c2aeb",
+      "authority": "Google News",
+      "title": "Erie County Department of Health announces a second confirmed case of measles - WKBW",
+      "description": "Erie County Department of Health announces a second confirmed case of measles WKBW",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNbFRPVi1xTDF2THpFaWM5clp1cG91VDd0ckVHTm9YUElVXzVFMkFsV2JEdUlJVGNjYnp2MG9KeEpiNldHZE1hX2xNdm9TdFdrVC12aUtwMlR5cjN3b056VWE1NzRLVFpnRldaMFNsM3JUN2drTVFBSVdQa283V2g2bGxlRTNUMEFOMGpLQkdJV3huZzMwSnMtaWxzeUVsYWVHejNkRnA2dmU3bXBYQXZhY2Fxckc?oc=5",
+      "pubDate": "Wed, 10 Jun 2026 18:54:04 GMT",
+      "timestamp": 1781117644000,
+      "signalIds": [
+        "measles-us-2026"
       ]
     },
     {
@@ -5822,16 +5834,6 @@
       "link": "https://www.today.com/video/how-kids-are-using-ai-and-the-warning-signs-to-look-out-for-264727109534",
       "pubDate": "Mon, 08 Jun 2026 13:28:37 GMT",
       "timestamp": 1780925317000,
-      "signalIds": []
-    },
-    {
-      "id": "stat-news-1807e377",
-      "authority": "STAT News",
-      "title": "STAT+: Pharmalittle: We&#8217;re reading about Lilly and Pfizer obesity drug data, Roche and J&#038;J deals, and more",
-      "description": "Lilly disclosed new data that provide more details on the safety and tolerability of its next-generation obesity drug retatrutide",
-      "link": "https://www.statnews.com/pharmalot/2026/06/08/lilly-pfizer-obesity-drug-trial-data-roche-deal/?utm_campaign=rss",
-      "pubDate": "Mon, 08 Jun 2026 13:28:35 +0000",
-      "timestamp": 1780925315000,
       "signalIds": []
     }
   ]
