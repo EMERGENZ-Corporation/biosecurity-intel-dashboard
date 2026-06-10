@@ -135,7 +135,9 @@ After the `GEMINI_API_KEY` was rotated to a personal-Gmail key (the `@emergenz.o
 **Files touched:**
 - `.github/workflows/update-news.yml` — added `GEMINI_NEWS_TIMEOUT_MS: ${{ vars.GEMINI_NEWS_TIMEOUT_MS || '120000' }}` to the enrichment step env.
 
-**Verify:** dispatch `Update News Feed`; the enrich step log should flip from `Gemini enrichment unavailable (transient): This operation was aborted` to `Gemini enrichment OK - considered N items …`. If it still times out at 120s, the next lever is reducing `MAX_AI_NEWS_ITEMS` (80 → ~40) and/or disabling thinking (`thinkingConfig.thinkingBudget: 0`) in `enrich-news.mjs` — both cut latency, the latter with a possible Weval-baseline shift.
+**Verify:** dispatch `Update News Feed`; the enrich step log should flip from `Gemini enrichment unavailable (transient): This operation was aborted` to `Gemini enrichment OK - considered N items …`.
+
+**Follow-up + decision (2026-06-10):** With the 120s ceiling, four dispatched test runs showed free-tier `gemini-2.5-flash` is genuinely too slow/overloaded for this workload (80 items + thinking-on + structured JSON): it alternates between `503 "This model is currently experiencing high demand"` (returned in ~11s) and responses that exceed 120s (hit the new ceiling). Auth and the too-short-timeout are both fixed; the remaining failures are upstream capacity/latency. **The user chose to leave enrichment best-effort / fail-open** rather than disable thinking, cut `MAX_AI_NEWS_ITEMS`, switch to `gemini-2.5-flash-lite`, or enable paid billing. Consequence: transient `503`/timeout failures post a fallback `[AI BRIEF]` comment to issue #6 each run (only *auth-denied* is suppressed) — accepted noise. **Future agents: do not re-tune the model/workload to "fix" these recurring transient Gemini failures without the user's explicit go-ahead.** The deterministic news pipeline is unaffected either way.
 
 ## ✅ News enrichment: suppress the per-run [AI BRIEF] comment on a persistent Gemini auth denial (commit 54a8f0a)
 
