@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-12T15:32:34.193Z",
+  "generatedAt": "2026-06-12T20:02:39.980Z",
   "endpoint": "/api/v1/signal-sources.json",
   "count": 47,
   "signalSources": [
@@ -13,7 +13,7 @@
       "primary": true,
       "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
       "publicationDate": "2026-05-19",
-      "lastVerified": "2026-05-22",
+      "lastVerified": "2026-06-12",
       "domains": [
         "zoonotic",
         "travel"
@@ -388,7 +388,7 @@
       "sourceType": "outbreak-news",
       "primary": true,
       "url": "https://www.paho.org/en/epidemiological-alerts-and-updates",
-      "lastVerified": "2026-05-25",
+      "lastVerified": "2026-06-12",
       "domains": [
         "vaccine_preventable",
         "vector_borne",
@@ -657,7 +657,7 @@
       "sourceType": "outbreak-news",
       "primary": true,
       "url": "https://www.cdc.gov/bird-flu/situation-summary/index.html",
-      "lastVerified": "2026-05-30",
+      "lastVerified": "2026-06-12",
       "domains": [
         "zoonotic",
         "respiratory"
@@ -687,7 +687,7 @@
       "sourceType": "surveillance-dashboard",
       "primary": true,
       "url": "https://www.cdc.gov/measles/data-research/index.html",
-      "lastVerified": "2026-05-30",
+      "lastVerified": "2026-06-12",
       "domains": [
         "vaccine_preventable"
       ],
@@ -731,7 +731,7 @@
       "sourceType": "expert-weekly-report",
       "primary": true,
       "url": "https://www.who.int/publications/m/item/multi-country-outbreak-of-mpox--external-situation-report--65---30-april-2026",
-      "lastVerified": "2026-05-30",
+      "lastVerified": "2026-06-12",
       "domains": [
         "zoonotic"
       ],
@@ -746,7 +746,7 @@
       "sourceType": "surveillance-dashboard",
       "primary": true,
       "url": "https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026",
-      "lastVerified": "2026-06-02",
+      "lastVerified": "2026-06-12",
       "publicationDate": "2026-06-01",
       "domains": [
         "vhf"
@@ -761,7 +761,7 @@
       "sourceType": "surveillance-dashboard",
       "primary": true,
       "url": "https://www.cdc.gov/pertussis/php/surveillance/index.html",
-      "lastVerified": "2026-06-05",
+      "lastVerified": "2026-06-12",
       "domains": [
         "vaccine_preventable",
         "respiratory"

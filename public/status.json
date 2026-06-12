@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "degraded",
-  "generatedAt": "2026-06-12T09:59:22.400Z",
+  "generatedAt": "2026-06-12T20:02:39.150Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -9,12 +9,12 @@
   },
   "dashboard": {
     "lastUpdated": "2026-06-05T00:00:00.000Z",
-    "lastChecked": "2026-06-05T00:00:00.000Z",
-    "lastOfficialSourceCheck": "2026-06-05T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
+    "lastOfficialSourceCheck": "2026-06-12T00:00:00.000Z",
     "oldestActiveReview": "2026-06-02T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-14T00:00:00.000Z",
-    "dataAgeHours": 177.98955555555557,
-    "officialCheckAgeHours": 177.98955555555557
+    "dataAgeHours": 188.04420833333333,
+    "officialCheckAgeHours": 20.044208333333334
   },
   "signals": {
     "total": 19,
@@ -84,11 +84,6 @@
       }
     },
     "staleSignalIds": [
-      "andes-hantavirus-mv-hondius-2026",
-      "ebola-bundibugyo-drc-2026",
-      "measles-us-2026",
-      "mpox-africa-clade-i-2026",
-      "avian-influenza-h5-2026",
       "cholera-africa-2026",
       "seasonal-influenza-2026",
       "covid-wastewater-2026",
@@ -97,11 +92,9 @@
       "rsv-wastewater-2026",
       "hmpv-wastewater-2026",
       "lassa-fever-2026",
-      "chikungunya-2026",
       "candida-auris-wastewater-2026",
       "screwworm-onehealth-2026",
       "fifa-world-cup-2026-prep",
-      "pertussis-us-2026",
       "yellow-fever-colombia-2026"
     ],
     "timelineEvents": 46,
@@ -121,7 +114,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-12T04:18:00.000Z"
+    "newest": "2026-06-12T15:04:15.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -250,8 +243,7 @@
     ]
   },
   "staleReasons": [
-    "19 signal(s) older than 168h",
-    "Headline data 178.0h old",
-    "Last source check 178.0h old"
+    "12 signal(s) older than 168h",
+    "Headline data 188.0h old"
   ]
 }
