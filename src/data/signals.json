@@ -20,7 +20,7 @@
     "confidence": "official",
     "trend": "stable",
     "status": "active",
-    "summary": "Andes hantavirus cluster linked to a South America–Antarctica expedition cruise aboard MV Hondius. 13 reported cases (11 confirmed, 2 probable) and 3 deaths across multiple countries, with multinational case-finding and post-exposure monitoring continuing.",
+    "summary": "Andes hantavirus cluster linked to a South America–Antarctica expedition cruise aboard MV Hondius. 13 reported cases (12 confirmed, 1 probable) and 3 deaths across multiple countries, with multinational case-finding and post-exposure monitoring continuing.",
     "operationalRelevance": "Long incubation (up to 6 weeks) means travelers and returning expedition staff can present in jurisdictions far from the source. EMS and emergency departments handling unexplained respiratory failure in returning travelers should consider hantavirus pulmonary syndrome and use airborne precautions during aerosol-generating procedures.",
     "whyItMatters": "Andes virus is the only hantavirus with documented person-to-person transmission. The Radboud UMC quarantine event after an incorrect blood-sampling procedure shows healthcare worker exposure is a real operational risk if PPE and specimen handling deviate from protocol.",
     "currentSituation": "ECDC, WHO, CDC, and PHAC continue active surveillance and have issued aligned guidance. WHO global risk remains LOW; ECDC risk for the EU/EEA remains VERY LOW. CDC issued HAN 528 for clinical awareness in the United States.",
@@ -860,7 +860,7 @@
       "euronews-radboud-quarantine"
     ],
     "lastUpdated": "2026-05-30T00:00:00.000Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "riskAssessments": [
       {
         "authority": "WHO",
@@ -967,39 +967,34 @@
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with cross-border spread to Uganda. Per the WHO emergency situation page (data as of 31 May 2026 for the DRC and 1 June 2026 for Uganda), the DRC has reported 321 confirmed cases, 48 confirmed deaths (CFR 15%), and 116 suspected cases, and Uganda has reported 9 confirmed cases (1 death) — 330 confirmed cases and 49 deaths in total. Confirmed cases have risen sharply since the late-May WHO DON605 snapshot (125 confirmed) as laboratory testing reclassified earlier suspected cases, so the suspected count has correspondingly fallen from about 906 to 116. The regional response has escalated: Uganda border health measures, a contested US-supported quarantine/care arrangement in Kenya, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts. WHO updates these figures daily from DRC government (COUSP-DRC) situation reports and they are subject to retrospective revision — verify the latest WHO situation report before operational use.",
+    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with cross-border spread to Uganda. Per WHO Disease Outbreak News DON606 (data as of 6 June 2026), the DRC has reported 515 confirmed cases and 91 confirmed deaths (CFR 17.7%), and Uganda has reported 19 confirmed cases (2 deaths) plus one probable case who died — 534 confirmed cases and 93 deaths in total (overall CFR 17.4%), with at least 17 people recovered. WHO notes the reported CFR is likely an underestimate, as many deaths occurring before the outbreak declaration remain under investigation. Confirmed cases have risen sharply from the late-May DON605 snapshot (125 confirmed) as laboratory testing reclassified earlier suspected cases. The regional response has escalated: Uganda border health measures, a contested US-supported quarantine/care arrangement in Kenya, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts. WHO updates these figures from DRC government (COUSP-DRC) situation reports and they are subject to retrospective revision — verify the latest WHO situation report before operational use.",
     "operationalRelevance": "Filovirus outbreaks demand strict isolation, source-control PPE, and contact tracing. Healthcare preparedness teams should review travel-history screening, airport and port-of-entry coordination, and laboratory specimen pathways for suspected viral hemorrhagic fever.",
     "whyItMatters": "Bundibugyo virus has caused multiple regional outbreaks since 2007 with case-fatality rates around 30–40%. Cross-border movement in eastern DRC, Uganda, and South Sudan elevates the risk of geographic spread; no licensed vaccine specific to Bundibugyo is currently available.",
     "geographyNotes": "Regional monitoring focuses on DRC and neighbouring countries where cross-border movement can affect surveillance and preparedness. Health-zone-level claims require a specific current outbreak report.",
     "metrics": [
       {
-        "label": "DRC confirmed cases (WHO, as of 31 May 2026)",
-        "value": 321,
+        "label": "DRC confirmed cases (WHO, as of 6 June 2026)",
+        "value": 515,
         "sourceId": "who-ebola-drc-2026-situation"
       },
       {
         "label": "DRC confirmed deaths",
-        "value": 48,
-        "sourceId": "who-ebola-drc-2026-situation"
-      },
-      {
-        "label": "DRC suspected cases (as of 31 May 2026)",
-        "value": 116,
+        "value": 91,
         "sourceId": "who-ebola-drc-2026-situation"
       },
       {
         "label": "DRC case-fatality rate, confirmed (%)",
-        "value": 15,
+        "value": 17.7,
         "sourceId": "who-ebola-drc-2026-situation"
       },
       {
-        "label": "Uganda confirmed cases (as of 1 June 2026)",
-        "value": 9,
+        "label": "Uganda confirmed cases (as of 6 June 2026)",
+        "value": 19,
         "sourceId": "who-ebola-drc-2026-situation"
       },
       {
         "label": "Uganda confirmed deaths",
-        "value": 1,
+        "value": 2,
         "sourceId": "who-ebola-drc-2026-situation"
       }
     ],
@@ -1100,7 +1095,7 @@
       "cdc-current-outbreaks"
     ],
     "lastUpdated": "2026-06-02T00:00:00.000Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "detailSections": [
       {
         "id": "clinical-profile",
@@ -1415,7 +1410,7 @@
     "confidence": "official",
     "trend": "increasing",
     "status": "active",
-    "summary": "CDC confirmed 1,983 measles cases across 40 jurisdictions in 2026 (as of May 28), representing 30 outbreaks with 93% of cases outbreak-associated. No deaths reported in 2026. U.S. kindergartener MMR coverage has declined to 92.5% (from 95.2% in 2019–2020), leaving approximately 286,000 kindergarteners unvaccinated — the structural driver of sustained outbreak activity.",
+    "summary": "CDC confirmed 2,073 measles cases across 40 jurisdictions in 2026 (as of June 11), representing 30 outbreaks with 93% of cases outbreak-associated. No deaths reported in 2026. U.S. kindergartener MMR coverage has declined to 92.5% (from 95.2% in 2019–2020), leaving approximately 286,000 kindergarteners unvaccinated — the structural driver of sustained outbreak activity.",
     "operationalRelevance": "EMS and emergency departments should screen for measles in any febrile patient with rash, particularly in unvaccinated populations and clusters. Airborne precautions are required; one infected person in a waiting room can expose every subsequent patient for two hours. Confirm two-dose MMR status for healthcare staff.",
     "whyItMatters": "Measles can spread rapidly in undervaccinated communities and healthcare settings. Continued regional surveillance helps identify immunity gaps and protect elimination status.",
     "primarySourceId": "cdc-measles-data",
@@ -1426,7 +1421,7 @@
       "paho-epi-alerts"
     ],
     "lastUpdated": "2026-05-30T00:00:00.000Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "measles-tx-gaines",
@@ -1621,8 +1616,8 @@
     "currentSituation": "CDC confirmed 1,983 measles cases YTD as of May 28, 2026, across 40 jurisdictions in 30 discrete outbreaks. Ninety-three percent of cases are outbreak-associated; 9 cases involved international visitors to the U.S. No measles deaths have been reported in 2026. National kindergartener MMR vaccine coverage declined to 92.5% (2024–2025 school year), with an estimated 286,000 unvaccinated kindergarteners representing the principal immunity gap driving ongoing outbreaks.",
     "metrics": [
       {
-        "label": "Confirmed US cases YTD (as of May 28, 2026)",
-        "value": 1983,
+        "label": "Confirmed US cases YTD (as of June 11, 2026)",
+        "value": 2073,
         "sourceId": "cdc-measles-data"
       },
       {
@@ -1660,7 +1655,7 @@
       {
         "hypothesis": "Importation from high-incidence countries is the primary ignition mechanism; domestic under-vaccination amplifies but does not initiate outbreaks",
         "proponent": "Travel-medicine community; some state epidemiologists in high-importation states",
-        "evidence": "9 of 1,983 confirmed 2026 cases (0.5%) involved international visitors to the US. Multiple 2026 outbreaks trace to a single import event into a susceptible community. This framing supports border-point vaccination assessment and targeted traveler advisory issuance as co-equal interventions alongside domestic outreach.",
+        "evidence": "10 of 2,073 confirmed 2026 cases (0.5%) involved international visitors to the US. Multiple 2026 outbreaks trace to a single import event into a susceptible community. This framing supports border-point vaccination assessment and targeted traveler advisory issuance as co-equal interventions alongside domestic outreach.",
         "disposition": "active"
       },
       {
@@ -1770,7 +1765,7 @@
       "cdc-han"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "mpox-drc-equateur",
@@ -2114,7 +2109,7 @@
       "cdc-han"
     ],
     "lastUpdated": "2026-06-05T00:00:00.000Z",
-    "lastChecked": "2026-06-05T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "h5-tx-dairy",
@@ -2390,10 +2385,10 @@
         "rationale": "Removes a key clinical countermeasure. Would prompt review of antiviral stockpile composition and clinical management algorithms."
       }
     ],
-    "currentSituation": "CDC confirmed 71 U.S. human cases of H5 avian influenza since February 2024 through May 2026 — all with documented animal exposure, no deaths, no antiviral resistance in available human isolates, and no evidence of sustained human-to-human transmission. CDC current public health risk assessment remains LOW. Poultry detections have declined substantially from the February 2026 peak of approximately 11.4 million birds affected to approximately 140,000 birds in May 2026 (USDA APHIS via Brown Pandemic Center Tracking Report, May 21 2026). Dairy cattle herd detections continue across multiple states. Influenza A indicators have plateaued for two consecutive weeks after a nine-week seasonal decline. WHO's influenza-at-the-human-animal-interface reporting also noted additional sporadic human A(H9N2) cases in China in early 2026 (young children with live or backyard poultry exposure, mild illness, all recovered), consistent with the long-standing low-level zoonotic A(H9N2) pattern and not indicating sustained human-to-human transmission.",
+    "currentSituation": "CDC confirmed 71 U.S. human cases of H5 avian influenza since February 2024 through May 2026 — all with documented animal exposure, one reported death, no antiviral resistance in available human isolates, and no evidence of sustained human-to-human transmission. CDC current public health risk assessment remains LOW. Poultry detections have declined substantially from the February 2026 peak of approximately 11.4 million birds affected to approximately 140,000 birds in May 2026 (USDA APHIS via Brown Pandemic Center Tracking Report, May 21 2026). Dairy cattle herd detections continue across multiple states. Influenza A indicators have plateaued for two consecutive weeks after a nine-week seasonal decline. WHO's influenza-at-the-human-animal-interface reporting also noted additional sporadic human A(H9N2) cases in China in early 2026 (young children with live or backyard poultry exposure, mild illness, all recovered), consistent with the long-standing low-level zoonotic A(H9N2) pattern and not indicating sustained human-to-human transmission.",
     "metrics": [
       {
-        "label": "US human cases since February 2024 (no deaths)",
+        "label": "US human cases since February 2024 (1 death)",
         "value": 71,
         "sourceId": "cdc-h5-situation"
       }
@@ -4058,7 +4053,7 @@
       "paho-epi-alerts"
     ],
     "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "chikv-br-mg",
@@ -4828,7 +4823,7 @@
       "brown-pandemic-center"
     ],
     "lastUpdated": "2026-06-05T00:00:00.000Z",
-    "lastChecked": "2026-06-05T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "detailSections": [
       {
         "id": "clinical-profile",
