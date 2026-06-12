@@ -967,28 +967,28 @@
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with cross-border spread to Uganda. Per WHO Disease Outbreak News DON606 (data as of 6 June 2026), the DRC has reported 515 confirmed cases and 91 confirmed deaths (CFR 17.7%), and Uganda has reported 19 confirmed cases (2 deaths) plus one probable case who died — 534 confirmed cases and 93 deaths in total (overall CFR 17.4%), with at least 17 people recovered. WHO notes the reported CFR is likely an underestimate, as many deaths occurring before the outbreak declaration remain under investigation. Confirmed cases have risen sharply from the late-May DON605 snapshot (125 confirmed) as laboratory testing reclassified earlier suspected cases. The regional response has escalated: Uganda border health measures, a contested US-supported quarantine/care arrangement in Kenya, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts. WHO updates these figures from DRC government (COUSP-DRC) situation reports and they are subject to retrospective revision — verify the latest WHO situation report before operational use.",
+    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with cross-border spread to Uganda. As of June 11, 2026 (Brown Pandemic Center Tracking Report, sourcing WHO), the DRC has reported 635 confirmed cases and 127 confirmed deaths (CFR ~20%), across 25 affected health zones in Ituri, North Kivu, and South Kivu. Uganda has reported 19 confirmed cases (2 confirmed deaths, 1 probable death) — a total of at least 654 cases and 130 deaths across both countries. Contact-tracing compliance is above 80% in North/South Kivu but only 43% in Ituri. Nakivale refugee camp (Southwest Uganda, population ~150,000) identified 13 suspected cases, all quarantined. The regional response has escalated: Uganda border health measures, a contested US-supported quarantine/care arrangement in Kenya, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts. These figures are updated from WHO-derived reporting and are subject to retrospective revision — verify the latest WHO situation report before operational use.",
     "operationalRelevance": "Filovirus outbreaks demand strict isolation, source-control PPE, and contact tracing. Healthcare preparedness teams should review travel-history screening, airport and port-of-entry coordination, and laboratory specimen pathways for suspected viral hemorrhagic fever.",
     "whyItMatters": "Bundibugyo virus has caused multiple regional outbreaks since 2007 with case-fatality rates around 30–40%. Cross-border movement in eastern DRC, Uganda, and South Sudan elevates the risk of geographic spread; no licensed vaccine specific to Bundibugyo is currently available.",
     "geographyNotes": "Regional monitoring focuses on DRC and neighbouring countries where cross-border movement can affect surveillance and preparedness. Health-zone-level claims require a specific current outbreak report.",
     "metrics": [
       {
-        "label": "DRC confirmed cases (WHO, as of 6 June 2026)",
-        "value": 515,
+        "label": "DRC confirmed cases (as of June 11, 2026)",
+        "value": 635,
         "sourceId": "who-ebola-drc-2026-situation"
       },
       {
-        "label": "DRC confirmed deaths",
-        "value": 91,
+        "label": "DRC confirmed deaths (CFR ~20%)",
+        "value": 127,
         "sourceId": "who-ebola-drc-2026-situation"
       },
       {
-        "label": "DRC case-fatality rate, confirmed (%)",
-        "value": 17.7,
+        "label": "DRC health zones affected",
+        "value": 25,
         "sourceId": "who-ebola-drc-2026-situation"
       },
       {
-        "label": "Uganda confirmed cases (as of 6 June 2026)",
+        "label": "Uganda confirmed cases (as of June 11, 2026)",
         "value": 19,
         "sourceId": "who-ebola-drc-2026-situation"
       },
@@ -1092,9 +1092,10 @@
       "who-don-ebola-bundibugyo-drc-2026",
       "who-disease-outbreak-news",
       "africa-cdc-outbreaks",
-      "cdc-current-outbreaks"
+      "cdc-current-outbreaks",
+      "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-02T00:00:00.000Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
     "lastChecked": "2026-06-12T00:00:00.000Z",
     "detailSections": [
       {
@@ -1284,7 +1285,7 @@
         "rationale": "Indicates PPE protocol failure or IPC breakdown. Historical outbreaks have collapsed when ETU-staff transmission was unaddressed."
       }
     ],
-    "currentSituation": "WHO has declared the Bundibugyo ebolavirus outbreak across multiple health zones in the DRC, with cross-border spread to Uganda. As of 31 May 2026 (DRC) and 1 June 2026 (Uganda), WHO reports 321 confirmed cases and 48 confirmed deaths in the DRC (CFR 15%, 6 recovered, 116 suspected) and 9 confirmed cases (1 death) in Uganda — 330 confirmed and 49 deaths in total. Confirmed cases rose sharply from the 125 reported in WHO DON605 (27 May) as suspected cases were tested and reclassified, and the suspected count fell from about 906 to 116. No licensed vaccine specific to Bundibugyo virus is available, though a coalition is fast-tracking multiple candidates. The response has escalated regionally: Uganda has tightened border health measures, a proposed US-supported Ebola care/quarantine site in Kenya has drawn public protest, Brazil is investigating possible imported cases (unconfirmed), and CDC has named containment a top priority. WHO updates these daily figures from DRC government (COUSP-DRC) situation reports and they are subject to retrospective revision — always verify the latest WHO situation report (who.int/emergencies/situations/ebola-outbreak---drc-2026) before operational briefing.",
+    "currentSituation": "As of June 11, 2026, the Bundibugyo ebolavirus outbreak has expanded substantially. The DRC reports 635 confirmed cases (up from 344 the prior week) and 127 confirmed deaths across 25 health zones in Ituri, North Kivu, and South Kivu — a CFR of approximately 20%. Contact-tracing compliance remains strong in North/South Kivu (>80%) but lags in Ituri (43%), the most active front. Uganda reports 19 confirmed cases (2 confirmed deaths, 1 probable death); Nakivale refugee camp in Southwest Uganda (population ~150,000) has quarantined 13 suspected cases identified June 11. The American physician treated in Germany has recovered. No licensed vaccine specific to Bundibugyo virus is available; multi-candidate accelerated trials are ongoing. The response has escalated regionally: Uganda border health measures, a contested US-supported Ebola care/quarantine arrangement in Kenya, and a Brazilian investigation of possible imported cases (unconfirmed). These figures are WHO-derived and subject to retrospective revision — verify the latest WHO situation report before operational briefing. Source: Brown Pandemic Center Tracking Report, June 11, 2026 (WHO primary).",
     "relatedSignals": [
       {
         "signalId": "mpox-africa-clade-i-2026",
@@ -1410,7 +1411,7 @@
     "confidence": "official",
     "trend": "increasing",
     "status": "active",
-    "summary": "CDC confirmed 2,073 measles cases across 40 jurisdictions in 2026 (as of June 11), representing 30 outbreaks with 93% of cases outbreak-associated. No deaths reported in 2026. U.S. kindergartener MMR coverage has declined to 92.5% (from 95.2% in 2019–2020), leaving approximately 286,000 kindergarteners unvaccinated — the structural driver of sustained outbreak activity.",
+    "summary": "CDC confirmed 2,312 measles cases in 2026 as of June 11 — the highest US annual total since 1991 — representing 30 outbreaks with 93% of cases outbreak-associated. The 2026 total has already surpassed the full-year 2025 total (2,074 cases). Weekly new cases are 42 (7 states; down from 52 the prior week), suggesting a modest deceleration. No deaths reported in 2026. U.S. kindergartener MMR coverage has declined to 92.5% (from 95.2% in 2019–2020), leaving approximately 286,000 kindergarteners unvaccinated — the structural driver of sustained outbreak activity.",
     "operationalRelevance": "EMS and emergency departments should screen for measles in any febrile patient with rash, particularly in unvaccinated populations and clusters. Airborne precautions are required; one infected person in a waiting room can expose every subsequent patient for two hours. Confirm two-dose MMR status for healthcare staff.",
     "whyItMatters": "Measles can spread rapidly in undervaccinated communities and healthcare settings. Continued regional surveillance helps identify immunity gaps and protect elimination status.",
     "primarySourceId": "cdc-measles-data",
@@ -1617,7 +1618,7 @@
     "metrics": [
       {
         "label": "Confirmed US cases YTD (as of June 11, 2026)",
-        "value": 2073,
+        "value": 2312,
         "sourceId": "cdc-measles-data"
       },
       {
@@ -1753,7 +1754,7 @@
     "confidence": "corroborated",
     "trend": "stable",
     "status": "active",
-    "summary": "Mpox clade I and travel-linked importation monitoring remain operationally significant for clinical recognition, specimen routing, and laboratory clade differentiation. Verify current country-level trends and any importation details against specific Africa CDC, WHO, or CDC updates before publication.",
+    "summary": "Mpox clade I and travel-linked importation monitoring remain operationally significant for clinical recognition, specimen routing, and laboratory clade differentiation. Madagascar reports 3,241 total cases (1,976 confirmed) and 7 deaths as of June 9, up 6.5% since May 31. Mauritius confirmed its first locally acquired mpox case (June 4, 2026). Reunion reports 15 total 2026 cases (3 new, including 2 locally acquired and 1 imported from Madagascar — presumed clade Ib). Hong Kong reports 2 new cases linked to a sauna cluster (5 epidemiologically connected). Pakistan (Lahore) has 54 cumulative cases (predominantly clade Ib). Verify current country-level trends and any importation details against specific Africa CDC, WHO, or CDC updates before publication.",
     "operationalRelevance": "Clinicians should consider mpox in compatible rash illnesses with relevant travel or contact history. Confirm specimen pathways for orthopoxvirus PCR and laboratory clade differentiation; isolate suspected cases per CDC interim guidance.",
     "whyItMatters": "Clade I has historically been associated with higher severity than clade IIb. Detection in non-endemic jurisdictions raises importation and clinical-readiness implications.",
     "primarySourceId": "who-mpox-sitrep",
@@ -1762,9 +1763,10 @@
       "africa-cdc-outbreaks",
       "who-disease-outbreak-news",
       "cdc-current-outbreaks",
-      "cdc-han"
+      "cdc-han",
+      "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-05-14T00:00:00Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
     "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
@@ -2096,7 +2098,7 @@
     "confidence": "corroborated",
     "trend": "stable",
     "status": "active",
-    "summary": "H5 avian influenza remains a One Health surveillance priority. CDC has confirmed 71 U.S. human cases since February 2024, all exposure-linked (dairy and poultry workers), with no deaths and no sustained human-to-human transmission. Current CDC public health risk assessment: LOW. U.S. poultry detections are declining from the February 2026 peak (~11.4 million birds); approximately 140,000 birds affected in May 2026. Dairy cattle herd detections continue. Separately, WHO has reported sporadic human infections with low-pathogenic avian influenza A(H9N2) in China — typically mild, poultry-exposure-linked, and without sustained human-to-human transmission — which this signal also tracks as part of the broader zoonotic avian-influenza picture.",
+    "summary": "H5 avian influenza remains a One Health surveillance priority. CDC has confirmed 71 U.S. human cases since February 2024, all exposure-linked (dairy and poultry workers), with no deaths and no sustained human-to-human transmission. Current CDC public health risk assessment: LOW. U.S. dairy cattle herd infections reached 51 new herds in 2026 (49 Idaho, 1 Texas, 1 Utah) for a total of 1,141 affected herds since March 2024. Poultry detections continue to decline from the February 2026 peak (~11.4 million birds); approximately 250,000 birds affected in May 2026. Three pediatric H5/H9N2 cases were reported in the past week (Bangladesh H5N1, China H9N2, India H5N1) — all mild with full recovery. H5N1 wastewater detections are ongoing in New Jersey (since November 2025) and expanded to Illinois and Oregon counties. WHO has reported sporadic human A(H9N2) cases in China — poultry-exposure-linked, mild, without sustained human-to-human transmission.",
     "operationalRelevance": "Clinicians evaluating severe respiratory illness in patients with poultry, dairy, or symptomatic-animal exposures should consider avian influenza, contact public health, and use airborne precautions during AGPs. Animal-handler exposures should trigger occupational health follow-up.",
     "whyItMatters": "Animal-human interface signals are the leading indicators for pandemic potential. Detection of subtypes outside their usual host range, even at low human-incidence, warrants sustained surveillance.",
     "primarySourceId": "cdc-h5-situation",
@@ -2385,7 +2387,7 @@
         "rationale": "Removes a key clinical countermeasure. Would prompt review of antiviral stockpile composition and clinical management algorithms."
       }
     ],
-    "currentSituation": "CDC confirmed 71 U.S. human cases of H5 avian influenza since February 2024 through May 2026 — all with documented animal exposure, one reported death, no antiviral resistance in available human isolates, and no evidence of sustained human-to-human transmission. CDC current public health risk assessment remains LOW. Poultry detections have declined substantially from the February 2026 peak of approximately 11.4 million birds affected to approximately 140,000 birds in May 2026 (USDA APHIS via Brown Pandemic Center Tracking Report, May 21 2026). Dairy cattle herd detections continue across multiple states. Influenza A indicators have plateaued for two consecutive weeks after a nine-week seasonal decline. WHO's influenza-at-the-human-animal-interface reporting also noted additional sporadic human A(H9N2) cases in China in early 2026 (young children with live or backyard poultry exposure, mild illness, all recovered), consistent with the long-standing low-level zoonotic A(H9N2) pattern and not indicating sustained human-to-human transmission.",
+    "currentSituation": "CDC confirmed 71 U.S. human cases of H5 avian influenza since February 2024 — all with documented animal exposure, no antiviral resistance in available human isolates, and no evidence of sustained human-to-human transmission. CDC current public health risk assessment remains LOW. Dairy cattle: 51 herds confirmed affected in 2026 (49 Idaho, 1 Texas, 1 Utah), for a cumulative 1,141 herds since March 2024. Poultry detections have declined substantially from the February 2026 peak (~11.4 million birds) to ~250,000 birds in May 2026. H5N1 wastewater detections are ongoing in New Jersey (since November 2025) and expanded to Cook County IL and multiple Oregon counties as of June 2026. Internationally, pediatric H5N1 cases were reported in Bangladesh and India (both recovered) and an H9N2 case in China (10th of 2026, recovered) in the past week. WHO's influenza-at-the-human-animal-interface reporting notes the persistent low-level zoonotic A(H9N2) pattern in China remains unchanged — no sustained human-to-human transmission. Source: Brown Pandemic Center Tracking Report, June 11, 2026 (USDA APHIS/CDC primary).",
     "metrics": [
       {
         "label": "US human cases since February 2024 (1 death)",
@@ -2525,9 +2527,17 @@
       "africa-cdc-outbreaks",
       "who-disease-outbreak-news"
     ],
-    "lastUpdated": "2026-05-23T00:00:00Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
+      {
+        "id": "cholera-ng-borno",
+        "lat": 11.8464,
+        "lng": 13.1603,
+        "type": "outbreak_zone",
+        "severity": "action",
+        "label": "Nigeria — Borno State (7,800 cases; 160% weekly spike, June 9)"
+      },
       {
         "id": "cholera-sd-khartoum",
         "lat": 15.5007,
@@ -2740,7 +2750,7 @@
         "asOf": "2026-05-20"
       }
     ],
-    "currentSituation": "Africa CDC epidemic intelligence recorded 40,707 cholera cases across the continent from January 1 through May 14, 2026, representing a 65% year-over-year decline from the same period in 2025 (Africa CDC; Brown Pandemic Center Tracking Report, May 21 2026). Despite declining case volume, case fatality ratios remain disproportionately high in settings with conflict, population displacement, and constrained WASH infrastructure. Active outbreak settings include Sudan (Khartoum conflict zone), Ethiopia, Somalia, Mozambique, Malawi, Zambia, and Zimbabwe.",
+    "currentSituation": "Africa CDC epidemic intelligence recorded 40,707 cholera cases across the continent from January 1 through May 14, 2026, representing a 65% year-over-year decline from the same period in 2025 (Africa CDC Weekly Epidemic Intelligence; Brown Pandemic Center Tracking Report, May 21, 2026). Despite declining continental volume, acute surges continue in specific settings. Nigeria's Borno State reported 7,800 cases as of June 9, 2026 — a 160% increase from approximately 3,000 the prior week — linked to a contaminated community dam; 74 deaths (Nigeria CDC, Brown Pandemic Center, June 11, 2026). Sudan reports 124,000 cases and 3,500+ deaths across all 18 states for 2024-early 2026. Active outbreak settings include Sudan (Khartoum conflict zone), Ethiopia, Somalia, Mozambique, Malawi, Zambia, and Zimbabwe. Case fatality ratios remain disproportionately elevated in conflict-affected and WASH-constrained settings.",
     "metrics": [
       {
         "label": "Africa-wide cases (Jan 1–May 14, 2026)",
@@ -3722,17 +3732,18 @@
     "confidence": "corroborated",
     "trend": "stable",
     "status": "active",
-    "summary": "Lassa fever remains a persistent West Africa VHF monitoring priority, especially in Nigeria and surrounding endemic areas. Verify current epidemiological figures against specific Africa CDC, WHO, or national public health reports before publication.",
+    "summary": "Lassa fever remains a persistent West Africa VHF monitoring priority, especially in Nigeria and surrounding endemic areas. Nigeria CDC reported 829 total cases (208 confirmed deaths) through epidemiological week 21, 2026. In a positive development, the LASSARAB Phase 1 vaccine trial (University of Maryland) is showing promising antibody production in 54 volunteers. Verify current epidemiological figures against Nigeria NCDC, Africa CDC, or WHO reports before publication.",
     "operationalRelevance": "Clinicians evaluating febrile illness in returning travelers from West Africa should consider Lassa; coordinate with public health for specimen handling and ribavirin treatment guidance.",
     "whyItMatters": "Lassa is a persistent high-burden VHF with seasonal peaks and limited countermeasures; healthcare worker infections continue to be reported.",
     "primarySourceId": "ncdc-lassa-fever",
     "sourceIds": [
       "ncdc-lassa-fever",
       "africa-cdc-outbreaks",
-      "who-disease-outbreak-news"
+      "who-disease-outbreak-news",
+      "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-06-02T00:00:00.000Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "lassa-ng-edo",
@@ -3903,6 +3914,18 @@
         "lastReviewed": "2026-05-20"
       }
     ],
+    "metrics": [
+      {
+        "label": "Nigeria total cases, 2026 through EW21 (Nigeria CDC)",
+        "value": 829,
+        "sourceId": "ncdc-lassa-fever"
+      },
+      {
+        "label": "Nigeria confirmed deaths, 2026 through EW21",
+        "value": 208,
+        "sourceId": "ncdc-lassa-fever"
+      }
+    ],
     "riskAssessments": [
       {
         "authority": "WHO",
@@ -4038,6 +4061,7 @@
     "pathogen": "Chikungunya virus",
     "geography": [
       "Brazil",
+      "French Guiana",
       "Multiple PAHO countries",
       "Indian Ocean / Asia"
     ],
@@ -4045,14 +4069,15 @@
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "Chikungunya surveillance remains active across parts of the Americas and other mosquito-active regions. Verify current country burden and case totals against specific PAHO or WHO updates before publication.",
+    "summary": "Chikungunya surveillance remains active across parts of the Americas and other mosquito-active regions. A notable new focus is French Guiana, with 513 confirmed cases through June 2026, prompting a CDC Level 2 Travel Health Notice (June 4, 2026). Brazil reports 86,970 total cases (32,691 confirmed) through mid-2026. Verify current country burden and case totals against specific PAHO or WHO updates before publication.",
     "operationalRelevance": "Travel medicine clinicians and EMS systems in mosquito-active regions should plan for chikungunya in symptomatic returning travelers; review vaccination recommendations for at-risk populations.",
     "whyItMatters": "Chikungunya causes acute and prolonged arthralgia disproportionately affecting older adults and can stress outpatient capacity in outbreak regions.",
     "primarySourceId": "paho-epi-alerts",
     "sourceIds": [
-      "paho-epi-alerts"
+      "paho-epi-alerts",
+      "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-05-14T00:00:00Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
     "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
@@ -4216,10 +4241,10 @@
       },
       {
         "authority": "CDC",
-        "label": "Travel Health Notice",
-        "description": "US traveler risk in endemic regions",
-        "url": "https://www.cdc.gov/outbreaks/",
-        "asOf": "2026-05-20"
+        "label": "Level 2 Travel Health Notice — French Guiana",
+        "description": "CDC Level 2 (Practice Enhanced Precautions) for French Guiana due to active chikungunya outbreak (513 confirmed cases)",
+        "url": "https://wwwnc.cdc.gov/travel/notices",
+        "asOf": "2026-06-04"
       }
     ]
   },
@@ -4409,22 +4434,24 @@
     "geography": [
       "Central America",
       "Mexico",
-      "U.S. southern border zone"
+      "U.S. southern border zone",
+      "United States (Texas, New Mexico)"
     ],
     "severity": "watch",
     "confidence": "corroborated",
-    "trend": "stable",
-    "status": "monitoring",
-    "summary": "USDA APHIS and animal-health partners continue New World screwworm preparedness and status monitoring for the United States, Mexico, and Central America. Verify current detections, trade restrictions, and dispersal-zone details against the APHIS current-status page and WOAH WAHIS.",
+    "trend": "increasing",
+    "status": "active",
+    "summary": "New World screwworm is now confirmed in the United States, with 7 active cases as of June 11, 2026. A first-ever detection in New Mexico was confirmed June 7 (Lea County dog); a Texas case was confirmed in Zavala County on June 3. Central America and Mexico report a combined 185,000+ cases. Canada's CFIA halted US livestock imports from affected regions on June 5. Combined US+regional case trajectory is increasing. USDA APHIS and animal-health partners continue preparedness, surveillance, and sterile-fly release operations. Verify current detections, trade restrictions, and dispersal-zone details against the APHIS current-status page and WOAH WAHIS.",
     "operationalRelevance": "Veterinary, agricultural, and border-preparedness teams should maintain detection and response posture. Clinicians at the U.S. southern border should be aware of rare but possible myiasis in travelers and ranch workers.",
-    "whyItMatters": "Screwworm resurgence has economic and public health implications across the human-animal interface and can disrupt livestock movement and food security.",
+    "whyItMatters": "Screwworm resurgence has economic and public health implications across the human-animal interface and can disrupt livestock movement and food security. Confirmed US cases for the first time since eradication in 1966 represent a significant sentinel event.",
     "primarySourceId": "usda-aphis-screwworm-status",
     "sourceIds": [
       "usda-aphis-screwworm-status",
-      "woah-wahis"
+      "woah-wahis",
+      "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-05-14T00:00:00Z",
-    "lastChecked": "2026-05-30T00:00:00.000Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "screw-pa",
@@ -4465,6 +4492,22 @@
         "type": "monitoring_site",
         "severity": "concern",
         "label": "US southern border, Texas — APHIS surveillance"
+      },
+      {
+        "id": "screw-us-tx-zavala",
+        "lat": 28.8692,
+        "lng": -99.7582,
+        "type": "animal_detection",
+        "severity": "action",
+        "label": "Zavala County, Texas — confirmed US case (June 3, 2026)"
+      },
+      {
+        "id": "screw-us-nm-lea",
+        "lat": 32.7395,
+        "lng": -103.3739,
+        "type": "animal_detection",
+        "severity": "action",
+        "label": "Lea County, New Mexico — first confirmed NM case (dog, June 7, 2026)"
       },
       {
         "id": "screw-usda-aphis",
@@ -4811,9 +4854,9 @@
     ],
     "severity": "watch",
     "confidence": "official",
-    "trend": "decreasing",
+    "trend": "stable",
     "status": "monitoring",
-    "summary": "Pertussis is a nationally notifiable vaccine-preventable respiratory disease tracked by CDC through the National Notifiable Diseases Surveillance System (NNDSS). Reported 2026 cases are tracking below the same period in 2025 — a cyclical decline expected after the November 2024 national peak — but declining childhood DTaP/Tdap coverage remains the structural driver keeping pertussis a watch item. Verify current weekly counts against CDC NNDSS before publication; provisional figures are subject to reporting lag and state-level revision.",
+    "summary": "Pertussis is a nationally notifiable vaccine-preventable respiratory disease tracked by CDC through the National Notifiable Diseases Surveillance System (NNDSS). 2026 cumulative cases reached 5,134 (through week ending May 30), with 43 new cases that week — an 87% increase from 23 the prior week — indicating the post-peak deceleration has reversed. California leads with 759 cumulative cases; Washington (348) and Ohio (300) follow. Verify current weekly counts against CDC NNDSS before publication; provisional figures are subject to reporting lag and state-level revision.",
     "operationalRelevance": "EMS and emergency clinicians should consider pertussis in patients (especially infants and the under-vaccinated) with paroxysmal cough, post-tussive emesis, or apnea, and apply droplet precautions. Infants under 1 year are at highest risk of severe disease and death; verify Tdap status for pregnant patients and close contacts.",
     "whyItMatters": "Pertussis is endemic and cyclical; resurgence years are driven by waning immunity and falling DTaP/Tdap coverage. Infant mortality is the primary harm, and the coverage erosion it shares with measles makes vaccine-preventable disease a sustained surveillance priority.",
     "primarySourceId": "cdc-pertussis-surveillance",
@@ -4822,7 +4865,7 @@
       "cdc-current-outbreaks",
       "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-05T00:00:00.000Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
     "lastChecked": "2026-06-12T00:00:00.000Z",
     "detailSections": [
       {
@@ -4858,6 +4901,13 @@
         "lastReviewed": "2026-06-05"
       }
     ],
+    "metrics": [
+      {
+        "label": "Confirmed US cases YTD (through week ending May 30, 2026)",
+        "value": 5134,
+        "sourceId": "cdc-pertussis-surveillance"
+      }
+    ],
     "riskAssessments": [
       {
         "authority": "CDC",
@@ -4886,9 +4936,9 @@
     ],
     "severity": "concern",
     "confidence": "corroborated",
-    "trend": "increasing",
+    "trend": "stable",
     "status": "active",
-    "summary": "PAHO reports sustained yellow fever transmission across parts of South America, with cases expanding beyond traditional Amazonian risk zones. The department of Tolima, Colombia — where human cases had not been seen in over a century — is the current epicenter and concentrates the highest case and death counts in the country. Transmission is driven overwhelmingly by unvaccinated individuals. Verify current national figures against PAHO and Colombia's Instituto Nacional de Salud (INS) before publication; counts are revised as cases are laboratory-confirmed.",
+    "summary": "PAHO reports sustained yellow fever transmission across parts of South America, with cases expanding beyond traditional Amazonian risk zones. The department of Tolima, Colombia — where human cases had not been seen in over a century — is the current epicenter and concentrates the highest case and death counts in the country. Transmission is driven overwhelmingly by unvaccinated individuals. As of the week of June 11, the Colombia outbreak has stabilized with no new cases or deaths reported in the most recent week (Brown Pandemic Center, June 11 2026). CDC has issued Level 2 Travel Health Notices for Colombia and Venezuela. Verify current national figures against PAHO and Colombia's Instituto Nacional de Salud (INS) before publication; counts are revised as cases are laboratory-confirmed.",
     "operationalRelevance": "Travel-medicine and emergency clinicians should verify yellow fever vaccination status in patients with compatible illness (fever, jaundice, hemorrhage) and recent exposure in affected areas of South America, and counsel travelers to endemic or outbreak zones to receive yellow fever vaccine at least 10 days before travel. The yellow fever vaccine is a single dose providing lifelong protection for most people.",
     "whyItMatters": "Yellow fever is a vaccine-preventable viral hemorrhagic fever with a high case-fatality rate among those who progress to severe (toxic-phase) disease. Expansion outside historical risk zones into unvaccinated populations, and detection in periurban areas, raises the risk of larger outbreaks and of importation by unvaccinated travelers.",
     "primarySourceId": "paho-yellow-fever-2026",
@@ -4898,8 +4948,8 @@
       "who-disease-outbreak-news",
       "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-05T00:00:00.000Z",
-    "lastChecked": "2026-06-05T00:00:00.000Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
+    "lastChecked": "2026-06-12T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "yf-co-tolima",
@@ -4952,16 +5002,16 @@
         "lastReviewed": "2026-06-05"
       }
     ],
-    "currentSituation": "PAHO's 13 March 2026 epidemiological alert reported sustained yellow fever transmission in parts of South America, with the department of Tolima, Colombia the epicenter of the country's outbreak: 153 confirmed human cases and 62 deaths (case-fatality ~41%) in the 2024–2026 period, in an area with no human cases for over a century. PAHO emphasized geographic expansion beyond traditional risk zones (including into São Paulo state, Brazil) and that most cases occurred in unvaccinated individuals. National (Colombia INS) reporting through mid-2026 indicates the Tolima toll has continued to rise — secondary trackers including the Brown Pandemic Center Tracking Report (4 June 2026) cite figures on the order of ~198 confirmed cases and ~87 deaths as of early June — but those higher counts await confirmation in a primary PAHO or INS update and are not published here as confirmed. Colombia has intensified vaccination, vector control, and risk communication in affected municipalities.",
+    "currentSituation": "PAHO's 13 March 2026 epidemiological alert reported sustained yellow fever transmission in parts of South America, with the department of Tolima, Colombia, the epicenter of the country's outbreak. The alert cited 25 confirmed human cases and 13 deaths in Tolima for epidemiological weeks 1–7 of 2026 (CFR ~52%) — a population that had not seen human yellow fever cases in over a century. PAHO emphasized geographic expansion beyond traditional Amazonian risk zones (including São Paulo state, Brazil) and that the vast majority of cases occurred in unvaccinated individuals. As of the week of June 11, the Brown Pandemic Center Tracking Report notes the Colombia outbreak has stabilized with no new cases or deaths reported in the most recent week. CDC has issued Level 2 Travel Health Notices for both Colombia and Venezuela. Colombia has intensified vaccination campaigns, vector control, and risk communication in affected municipalities; verify current case totals against PAHO or Colombia INS before operational use.",
     "metrics": [
       {
-        "label": "Tolima confirmed cases, 2024–2026 (PAHO, as of 13 Mar 2026 alert)",
-        "value": 153,
+        "label": "Tolima confirmed cases, 2026 EW1–7 (PAHO, 13 Mar 2026 alert)",
+        "value": 25,
         "sourceId": "paho-yellow-fever-2026"
       },
       {
-        "label": "Tolima deaths, 2024–2026 (CFR ~41%, PAHO 13 Mar 2026)",
-        "value": 62,
+        "label": "Tolima deaths, 2026 EW1–7 (CFR ~52%, PAHO 13 Mar 2026 alert)",
+        "value": 13,
         "sourceId": "paho-yellow-fever-2026"
       }
     ],
@@ -4979,6 +5029,13 @@
         "description": "Yellow fever resurgence in the Region of the Americas",
         "url": "https://www.who.int/emergencies/disease-outbreak-news",
         "asOf": "2026-03-13"
+      },
+      {
+        "authority": "CDC",
+        "label": "Level 2 Travel Health Notice",
+        "description": "CDC Level 2 (Practice Enhanced Precautions) for Colombia and Venezuela due to active yellow fever transmission",
+        "url": "https://wwwnc.cdc.gov/travel/notices",
+        "asOf": "2026-06-11"
       }
     ]
   }
