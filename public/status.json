@@ -1,24 +1,24 @@
 {
   "schemaVersion": 2,
   "status": "degraded",
-  "generatedAt": "2026-06-12T20:02:39.150Z",
+  "generatedAt": "2026-06-12T20:28:15.920Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
     "maxSignalStaleHours": 168
   },
   "dashboard": {
-    "lastUpdated": "2026-06-05T00:00:00.000Z",
+    "lastUpdated": "2026-06-12T00:00:00.000Z",
     "lastChecked": "2026-06-12T00:00:00.000Z",
     "lastOfficialSourceCheck": "2026-06-12T00:00:00.000Z",
     "oldestActiveReview": "2026-06-02T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-14T00:00:00.000Z",
-    "dataAgeHours": 188.04420833333333,
-    "officialCheckAgeHours": 20.044208333333334
+    "dataAgeHours": 20.47108888888889,
+    "officialCheckAgeHours": 20.47108888888889
   },
   "signals": {
     "total": 19,
-    "active": 16,
+    "active": 17,
     "highestSeverity": "action",
     "byCategory": {
       "zoonotic": 4,
@@ -84,21 +84,17 @@
       }
     },
     "staleSignalIds": [
-      "cholera-africa-2026",
       "seasonal-influenza-2026",
       "covid-wastewater-2026",
       "norovirus-wastewater-2026",
       "rotavirus-wastewater-2026-bay-area",
       "rsv-wastewater-2026",
       "hmpv-wastewater-2026",
-      "lassa-fever-2026",
       "candida-auris-wastewater-2026",
-      "screwworm-onehealth-2026",
-      "fifa-world-cup-2026-prep",
-      "yellow-fever-colombia-2026"
+      "fifa-world-cup-2026-prep"
     ],
     "timelineEvents": 46,
-    "totalMapMarkers": 141,
+    "totalMapMarkers": 144,
     "totalDetailSections": 86
   },
   "sources": {
@@ -114,7 +110,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-12T15:04:15.000Z"
+    "newest": "2026-06-12T19:54:32.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -243,7 +239,6 @@
     ]
   },
   "staleReasons": [
-    "12 signal(s) older than 168h",
-    "Headline data 188.0h old"
+    "8 signal(s) older than 168h"
   ]
 }
