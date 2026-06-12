@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Official source review — clear lapsed 168h gate; correct Ebola/measles/H5/Andes figures (commit pending)
+## ✅ Official source review — clear lapsed 168h gate; correct Ebola/measles/H5/Andes figures (commit 45963a0)
 
 The daily `Status Refresh` workflow began failing at `verify:production` because `lastOfficialSourceCheck` (the max signal `lastChecked`) had aged past the 168h ceiling — the 7-day human source-review gate lapsed at 00:00Z on 2026-06-12 (freshest `lastChecked` was 2026-06-05; run measured 178.1h). The data refresh + deploy themselves succeeded; only the review-SLA assertion failed. Per the autonomy philosophy the fix is a real source review, not silencing the gate. The user asked me to prep + apply the review and approved the corrections below. Each signal was re-verified against its live Tier 1 primary.
 
