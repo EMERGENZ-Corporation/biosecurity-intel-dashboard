@@ -1,20 +1,20 @@
 {
   "schemaVersion": 2,
-  "status": "degraded",
-  "generatedAt": "2026-06-13T08:49:01.113Z",
+  "status": "ok",
+  "generatedAt": "2026-06-13T18:44:10.037Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
     "maxSignalStaleHours": 168
   },
   "dashboard": {
-    "lastUpdated": "2026-06-12T00:00:00.000Z",
-    "lastChecked": "2026-06-12T00:00:00.000Z",
-    "lastOfficialSourceCheck": "2026-06-12T00:00:00.000Z",
-    "oldestActiveReview": "2026-06-02T00:00:00.000Z",
-    "oldestActiveUpdate": "2026-05-14T00:00:00.000Z",
-    "dataAgeHours": 32.81697611111111,
-    "officialCheckAgeHours": 32.81697611111111
+    "lastUpdated": "2026-06-13T00:00:00.000Z",
+    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastOfficialSourceCheck": "2026-06-13T00:00:00.000Z",
+    "oldestActiveReview": "2026-06-12T00:00:00.000Z",
+    "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
+    "dataAgeHours": 18.736121666666666,
+    "officialCheckAgeHours": 18.736121666666666
   },
   "signals": {
     "total": 19,
@@ -83,16 +83,7 @@
         "total": 1
       }
     },
-    "staleSignalIds": [
-      "seasonal-influenza-2026",
-      "covid-wastewater-2026",
-      "norovirus-wastewater-2026",
-      "rotavirus-wastewater-2026-bay-area",
-      "rsv-wastewater-2026",
-      "hmpv-wastewater-2026",
-      "candida-auris-wastewater-2026",
-      "fifa-world-cup-2026-prep"
-    ],
+    "staleSignalIds": [],
     "timelineEvents": 46,
     "totalMapMarkers": 144,
     "totalDetailSections": 86
@@ -110,7 +101,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-13T04:18:00.000Z"
+    "newest": "2026-06-13T14:00:00.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -238,7 +229,5 @@
       }
     ]
   },
-  "staleReasons": [
-    "8 signal(s) older than 168h"
-  ]
+  "staleReasons": []
 }
