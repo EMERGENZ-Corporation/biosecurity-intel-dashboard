@@ -1,9 +1,31 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-13T18:44:11.131Z",
+  "generatedAt": "2026-06-13T19:46:57.637Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "bbc-health-14dfb6d1",
+      "authority": "BBC Health",
+      "title": "Resident doctors cancel strike after new offer from government",
+      "description": "The walkout had been due to start at 07:00 BST on Monday and last all week.",
+      "link": "https://www.bbc.com/news/articles/cj9g1wgxng2o?at_medium=RSS&at_campaign=rss",
+      "pubDate": "Sat, 13 Jun 2026 19:36:47 GMT",
+      "timestamp": 1781379407000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-b9d0350f",
+      "authority": "Google News",
+      "title": "Make RSV vaccination part of your winter health routine - Melton & Moorabool | Star Weekly",
+      "description": "Make RSV vaccination part of your winter health routine Melton & Moorabool | Star Weekly",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQOXQwZkpCNjZKWHR2R3p0dk1HQ2poMTgwcTJGMUhYSVpycnAyNGViZ1FESkxQOVdhczI0N28zVkNBdkZOeTJ6RVAtVXZrOUhUdHZLYlJpM2t1cEdHM0F3MEJ4c0dlcXA0d0pJc2ZGcW8xbEl0ejVDYk1iSTBmemZ4dVNuLXYwUGtkTXEtcDJ0OW12Z3BjWWp6VmRmZmpHX1J3RHBzSFVR?oc=5",
+      "pubDate": "Sat, 13 Jun 2026 19:02:47 GMT",
+      "timestamp": 1781377367000,
+      "signalIds": [
+        "rsv-wastewater-2026"
+      ]
+    },
     {
       "id": "google-news-2c9082aa",
       "authority": "Google News",
@@ -14,6 +36,30 @@
       "timestamp": 1781375216000,
       "signalIds": [
         "measles-us-2026"
+      ]
+    },
+    {
+      "id": "google-news-78311d01",
+      "authority": "Google News",
+      "title": "Screwworm outbreak avoids crisis, but partisan blame persists - Washington Examiner",
+      "description": "Screwworm outbreak avoids crisis, but partisan blame persists Washington Examiner",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOWEVubWZHYXlsYTJ2REZXbkNwTkxhdmcyVGxOUkp0am96azZnRGVtQkhpNGlTamJ5Y1VvbGxKenE4dG1qbzJXSUVKV09VdkNxMzV2bzNFeVg0MUUzaklKR2VzdXFwa09sSzM3YmJ3X0lWbTg3T0NGc0FoVUo1VllDNS1jWFp3S3pkQjI0WlNnYm9waHdEdWc?oc=5",
+      "pubDate": "Sat, 13 Jun 2026 18:00:00 GMT",
+      "timestamp": 1781373600000,
+      "signalIds": [
+        "screwworm-onehealth-2026"
+      ]
+    },
+    {
+      "id": "google-news-14195f3f",
+      "authority": "Google News",
+      "title": "Congo's burial teams fight Ebola one coffin at a time - Yahoo",
+      "description": "Congo's burial teams fight Ebola one coffin at a time Yahoo",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPbFB2U2pOYlFCcEE0RXFIQXZXWDNDUlZMMkV4aTRqbll3Vzdla0x1TGZFTVA3M3FRQVdCcjMwSUtJdFhJYmxJSEJydkczVF9mMlNYVHExUFFJZHN6Qk12NnRWMERtbTcycmRpRktYVXctRUY0UTdOeWE3Mld6T0FRTzNKUEQ4RmM?oc=5",
+      "pubDate": "Sat, 13 Jun 2026 17:50:34 GMT",
+      "timestamp": 1781373034000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
       ]
     },
     {
@@ -202,6 +248,18 @@
       "title": "New World screwworm cases in Texas rise to 10, new quarantine zones established - FOX 7 Austin",
       "description": "New World screwworm cases in Texas rise to 10, new quarantine zones established FOX 7 Austin",
       "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNSndadk5zOEJYTUJaMTUwcWpBS1ppNHNTdlRfYWlhVHozY2ZEYllSWm9xMFNmNWxiQmRUWFpFMUJQNDJ3T2ZhTkxheFdSNVhBaDg1XzBOSkFHSjhOal9jVWFOZXFTNTQwaUZNNkFvOUlxemVIcmNlOGNEc0RSOWhpLWFOcTJYTjdmNWZ3NlRWbHVqTWVjejRMeDV6RFZJNmViM1pRN193Z9IBrAFBVV95cUxPcEo2SlNKQTJSdk9fN0JILVJZWVJCUEp6RUxzN3phb3hWcGhfcWlqYkU0cFhJQlZFXzRZNC1WaVRlMXMtNDBPanJPZXZPOWxCVHI3MW9LQUlfQUtzMndRejRtT3BGVmpjeGtGRjczUVQzT2l2bC1sX0ZOMEJaRXFsN3g5Qi1QcjhQdVN0UkR6RlRQS1kzQzBfSEtEOUI5WFlRNnQtNW1KUmVsV3Zz?oc=5",
+      "pubDate": "Sat, 13 Jun 2026 14:11:14 GMT",
+      "timestamp": 1781359874000,
+      "signalIds": [
+        "screwworm-onehealth-2026"
+      ]
+    },
+    {
+      "id": "google-news-28b57798",
+      "authority": "Google News",
+      "title": "New World screwworm cases in Texas rise to 10, new quarantine zones established - Yahoo",
+      "description": "New World screwworm cases in Texas rise to 10, new quarantine zones established Yahoo",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOWll6MFdaWUlwc0Y5Zm9pM3pQWFVXUGx2ME81bW5pZThJblhIQkhpeVA1YnJ3eDEzMWVwVVhuY2E3MUROUGh3NUtjenJNeHh2alY5R2U3dWREeDh0U3BvU1NLRzdKbTFiMUFDQXgzVkpucUZDeWpUdGY3dW93MHMtdmk5NDVmQ1dhVFE0UVd1OFk4V0RKVHc?oc=5",
       "pubDate": "Sat, 13 Jun 2026 14:11:14 GMT",
       "timestamp": 1781359874000,
       "signalIds": [
@@ -923,6 +981,18 @@
       "title": "No hantavirus found in second Argentine province: ministry - ET HealthWorld",
       "description": "No hantavirus found in second Argentine province: ministry ET HealthWorld",
       "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQNHhIODFQNDR3NXY3QmNjaUtFV1BCbjdqeTdjSnZ4cDdRZXl3ZWJfZ245S1ZKV0FNWUJsSExDSld1N1BTdFBkOEpDel9xOUR2dHh3dEhqbjVEcWJ5cGtCWHl2UmxIaXRhcDI5TGNLQU5DOFlsTnY2MTJ5VDZVUVpoNGZrUDR3bEZwOTRpTnZqbWVoNjNuVHpaUVpNRTlQWThDQWIyOUZuUS1yMHNVMjA2SmFVY25RUjBzRC0wekR4Mkc1XzTSAcgBQVVfeXFMTjNhX1hnX2VJbGZ2TnNmVlp0cTdObUQxT0M3TUVRQ09zejVGMldjT09MLWJ0Zk5QMmZJZUs5dWZJXzZEMzAwZHdsc3M1QXFkMmpidThuM0FoT3V3M2pOdElkWGJ6V1J2aTlxQ1ZtY2VXWm5ObWtTVGdNNjFHZTBmYnZPZnZMUW5vUDJYeU1FZ0JVc3Z1NGdUdXdtdmJ2VXRnXzFtdUNWVFBfdndFeGZ4UDl4OGNhbjBqSGhTVVdoc1cwVXJoR1dSVzg?oc=5",
+      "pubDate": "Sat, 13 Jun 2026 02:13:39 GMT",
+      "timestamp": 1781316819000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
+    },
+    {
+      "id": "google-news-4c3c9b60",
+      "authority": "Google News",
+      "title": "No hantavirus found in second Argentine province: ministry - ET HealthWorld",
+      "description": "No hantavirus found in second Argentine province: ministry ET HealthWorld",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOM2FfWGdfZUlsZnZOc2ZWWnRxN05tRDFPQzdNRVFDT3N6NUYyV2NPT0wtYnRmTlAyZkllSzl1ZklfNkQzMDBkd2xzczVBcWQyamJ1OG4zQWhPdXczak50SWRYYnpXUnZpOXFDVm1jZVdabk5ta1NUZ002MUdlMGZidk9mdkxRbm9QMlh5TUVnQlVzdnU0Z1R1d212YnZVdGdfMW11Q1ZUUF92d0V4ZnhQOXg4Y2FuMGpIaFNVV2hzVzBVcmhHV1JXONIByAFBVV95cUxOM2FfWGdfZUlsZnZOc2ZWWnRxN05tRDFPQzdNRVFDT3N6NUYyV2NPT0wtYnRmTlAyZkllSzl1ZklfNkQzMDBkd2xzczVBcWQyamJ1OG4zQWhPdXczak50SWRYYnpXUnZpOXFDVm1jZVdabk5ta1NUZ002MUdlMGZidk9mdkxRbm9QMlh5TUVnQlVzdnU0Z1R1d212YnZVdGdfMW11Q1ZUUF92d0V4ZnhQOXg4Y2FuMGpIaFNVV2hzVzBVcmhHV1JXOA?oc=5",
       "pubDate": "Sat, 13 Jun 2026 02:13:39 GMT",
       "timestamp": 1781316819000,
       "signalIds": [
@@ -2507,6 +2577,16 @@
       "signalIds": []
     },
     {
+      "id": "bbc-health-26db2bd6",
+      "authority": "BBC Health",
+      "title": "Cancellations 'unavoidable' during hospital strike",
+      "description": "The British Medical Association has announced more strike action in an ongoing dispute over pay.",
+      "link": "https://www.bbc.com/news/articles/ckg89vk7em7o?at_medium=RSS&at_campaign=rss",
+      "pubDate": "Fri, 12 Jun 2026 15:03:33 GMT",
+      "timestamp": 1781276613000,
+      "signalIds": []
+    },
+    {
       "id": "google-news-290545c0",
       "authority": "Google News",
       "title": "Exclusive: Oceanwide CEO on hantavirus outbreak, impact and recovery - Cruise Trade News",
@@ -2954,6 +3034,18 @@
       "pubDate": "Fri, 12 Jun 2026 12:35:26 Z",
       "timestamp": 1781267726000,
       "signalIds": []
+    },
+    {
+      "id": "google-news-7287e3e7",
+      "authority": "Google News",
+      "title": "San Quentin prison reports possible hantavirus case - The Mercury News",
+      "description": "San Quentin prison reports possible hantavirus case The Mercury News",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPZ1BmZDdZa0hkSGFNUGdEWEY0cjh5TTFSbmI0bzAxSWhxMHUzM0tzUVU0VDJFS3BuTGhhcmZjWkV0bE9JblFDZlRIcTdsdXM1SVcyenphQ2R3MlRiQ0hxVC15T1poM1BVQjU2QkQ1YnZtUE1tMnFtakxZaTIxS0JSb0Y5NjBMZ0hibV95Qm9XTkR5NVduSXfSAZsBQVVfeXFMTkh1UnYtZXZxeEluU09hSlBJM1dWMHB3T3k0ZTJxWlFYXzY1TElRNlJGSXlfLXpwR0c0a1RnbURSRWF0SVBibHBKT1JkOWRSQmlsYmFYazYtd3E1NWw1bGFXSEJCeU9UcTNYb25TLS1PazRzeUNaLXBQU191WnhpMllQcVhlVld2NEc1T1llejVQMkNMREMxTWloRk0?oc=5",
+      "pubDate": "Fri, 12 Jun 2026 12:25:57 GMT",
+      "timestamp": 1781267157000,
+      "signalIds": [
+        "andes-hantavirus-mv-hondius-2026"
+      ]
     },
     {
       "id": "google-news-799a3303",
@@ -3677,6 +3769,30 @@
       ]
     },
     {
+      "id": "google-news-c1a9ae85",
+      "authority": "Google News",
+      "title": "New World Screwworm in the U.S.: What It Means for North Carolina - NC State University",
+      "description": "New World Screwworm in the U.S.: What It Means for North Carolina NC State University",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPb3o4TmV1YWVrclFHTTRwZE1pbmNRWlVGSHVEWDlPMzJHZ0Z6bE9MUkJpMlNmUzBLc0gyS0V2NDk0TWJKWjZZdWIwcG5MQkJFQXhmX3pkYUl0RW1kYXJRZFp5Z21CUTloNUk3d1AzN3ZMWjhiM01JZVhVLXlxNWtsc0NyT0VvWDdUWkFWeEpWdGYzWDBC?oc=5",
+      "pubDate": "Fri, 12 Jun 2026 07:00:00 GMT",
+      "timestamp": 1781247600000,
+      "signalIds": [
+        "screwworm-onehealth-2026"
+      ]
+    },
+    {
+      "id": "google-news-b51ff358",
+      "authority": "Google News",
+      "title": "Cholera: Borno records 35 deaths, 3,646 cases in 1 week - Daily Trust",
+      "description": "Cholera: Borno records 35 deaths, 3,646 cases in 1 week Daily Trust",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNUkJnakpZUXB3WlJRQ0N3VnN2M1MzZkxBZTF2dk41eDA4VzV1eWYxS1oxMklGc3JIRUFPUXg5dGsxTTFicFpFb2lHOHNPZ2FCcmVIY3Y5UHQzeUYtcFZEeldSZ3JzTS1mLWlaUFRjUHRGXzNraUJZNWx5R2Q4VXBOUjZB?oc=5",
+      "pubDate": "Fri, 12 Jun 2026 05:43:11 GMT",
+      "timestamp": 1781242991000,
+      "signalIds": [
+        "cholera-africa-2026"
+      ]
+    },
+    {
       "id": "google-news-f999dcc2",
       "authority": "Google News",
       "title": "Media release: AMA SA urges RSV vaccination before the peak - Australian Medical Association",
@@ -3758,6 +3874,18 @@
       "timestamp": 1781236800000,
       "signalIds": [
         "rsv-wastewater-2026"
+      ]
+    },
+    {
+      "id": "google-news-f33d2998",
+      "authority": "Google News",
+      "title": "Residents protest 35-year-old Ogun dumpsite, warn of cholera outbreak - The Guardian Nigeria News",
+      "description": "Residents protest 35-year-old Ogun dumpsite, warn of cholera outbreak The Guardian Nigeria News",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdENWVVZSNkFXWDRvS3lhNmFQWDN0LUwzSlpkeUFFelNJNU9INmJ6cnJwbWZyaUdRblg0Z0VDdTdQUmJvdU1LMm80Z3VNUWd3Qko4QXpQbVlsOFJHbWhVVGRrazNaUjB3RjZBZTdZYl9OV2Fhc0tCa3NXNjkxVUljQ1dXZng4cGpVRUFBUXlHajA2eWVBZWg5NnRIQklTZlNONGtQdTVfSjkySEhn?oc=5",
+      "pubDate": "Fri, 12 Jun 2026 04:00:00 GMT",
+      "timestamp": 1781236800000,
+      "signalIds": [
+        "cholera-africa-2026"
       ]
     },
     {
@@ -4468,6 +4596,18 @@
       "timestamp": 1781209173000,
       "signalIds": [
         "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-2e757b86",
+      "authority": "Google News",
+      "title": "Slotkin Helps Lead Effort Pushing for USDA Action on New World Screwworm Outbreak - U.S. Senate (.gov)",
+      "description": "Slotkin Helps Lead Effort Pushing for USDA Action on New World Screwworm Outbreak U.S. Senate (.gov)",
+      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQaEZNUk41Z2JQU2tCTkQwY2ZVSmtBRncxbkxUVU81NDh6WDFnV194aFRyRDgwWjI2cFBIMmJ5S01EN1NpMFdoLVJ5bmNjMTg1VEV4WWkzRmlHN2VZSWdsWEFJWEY5MHJLblZWZHVGZllySXhtdVlTSzhaakczNE1udjdncjJnVDl3TEZUaXlCenZBcWVlLWYyaVh3UGc2V25NUThvUW84NmRHQmZmZ181dUJycXJXNXFkbkJkd0hVQWk4dw?oc=5",
+      "pubDate": "Thu, 11 Jun 2026 20:17:39 GMT",
+      "timestamp": 1781209059000,
+      "signalIds": [
+        "screwworm-onehealth-2026"
       ]
     },
     {
@@ -5538,6 +5678,16 @@
       ]
     },
     {
+      "id": "google-news-2c543c86",
+      "authority": "Google News",
+      "title": "Boston Wastewater Monitoring - Boston.gov",
+      "description": "Boston Wastewater Monitoring Boston.gov",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPWVIxcEJPUF94THpzYWV0M0I4cElhNGdYMldxQk5kZlh1T2JjcDlqOFpaQ091X3FwbXd3U1dCMllvdzdTaHB0SV9fMXZIeHhHNE1MNVVmZzJHMEhLSTltaEZkaFlQUXNySGdYQjBiVnZLMEtNYXE1WFVmLWwxd1ZwcWI1aGdBV3o4Z3hRUl9fMEdxT21GMkI2Wk12Vk5tUGduZXcwTFl3?oc=5",
+      "pubDate": "Thu, 11 Jun 2026 16:26:30 GMT",
+      "timestamp": 1781195190000,
+      "signalIds": []
+    },
+    {
       "id": "google-news-35d007df",
       "authority": "Google News",
       "title": "Maharashtra govt directs Medical colleges to make arrangements in wake of HMPV - News On AIR",
@@ -5722,146 +5872,6 @@
       "pubDate": "Thu, 11 Jun 2026 15:17:04 GMT",
       "timestamp": 1781191024000,
       "signalIds": []
-    },
-    {
-      "id": "abc-news-6135ba69",
-      "authority": "ABC News",
-      "title": "FDA's e-cigarette authorization: Fruity vapes not significantly better than tobacco ones",
-      "description": "A new memo from U.S. health regulators is raising questions about a recent decision to authorize the first fruit-flavored e-cigarettes for adult smokers",
-      "link": "https://abcnews.com/Health/wireStory/fdas-cigarette-authorization-fruity-vapes-significantly-tobacco-133785755",
-      "pubDate": "Thu, 11 Jun 2026 11:11:16 -0400",
-      "timestamp": 1781190676000,
-      "signalIds": []
-    },
-    {
-      "id": "bbc-health-e2c72469",
-      "authority": "BBC Health",
-      "title": "Why did it take so long for me to be diagnosed?",
-      "description": "Ellie Colton was finally diagnosed with endometriosis after years of debilitating pain. She meets a scientist developing a simple diagnostic test that could help many women.",
-      "link": "https://www.bbc.com/videos/c20y7k26p7xo?at_medium=RSS&at_campaign=rss",
-      "pubDate": "Thu, 11 Jun 2026 15:05:57 GMT",
-      "timestamp": 1781190357000,
-      "signalIds": []
-    },
-    {
-      "id": "bbc-health-3829044b",
-      "authority": "BBC Health",
-      "title": "How do weight-loss drugs like Mounjaro and Wegovy work?",
-      "description": "Wegovy and Mounjaro are available to certain patients on the NHS, and can also be bought privately.",
-      "link": "https://www.bbc.com/news/articles/c981044pgvyo?at_medium=RSS&at_campaign=rss",
-      "pubDate": "Thu, 11 Jun 2026 15:03:19 GMT",
-      "timestamp": 1781190199000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-02aae8ff",
-      "authority": "Google News",
-      "title": "Why measles is worrying doctors ahead of the World Cup - NBC News",
-      "description": "Why measles is worrying doctors ahead of the World Cup NBC News",
-      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPbkdUMjZJal9UNVdRd1YyWVhHQ0FWejZzOG5adGtGNUVQVGNrVHFfSDFOOS1iQmpLcjhlODlKcWdoZl9DVXRqVE1STUtNbEhqbWhjeThNdDR1eW9GSU5zbHNMMEQ5azhTRnFVeVN2OXl4ekNhbmh1bFFZTV9lRUJybFR5bTJyV2dTbEJFVkNUbjZxVXJWV3NOWXdIWFRnNklUZFhoODRrcw?oc=5",
-      "pubDate": "Thu, 11 Jun 2026 15:01:49 GMT",
-      "timestamp": 1781190109000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "bbc-health-1380082b",
-      "authority": "BBC Health",
-      "title": "Weight-loss drug Wegovy to be available in pill form in UK for first time",
-      "description": "Manufacturer Novo Nordisk says a daily tablet of the drug could be more convenient for some people than weekly injections.",
-      "link": "https://www.bbc.com/news/articles/c9d2pl10lqzo?at_medium=RSS&at_campaign=rss",
-      "pubDate": "Thu, 11 Jun 2026 15:00:13 GMT",
-      "timestamp": 1781190013000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-ad2558dd",
-      "authority": "Google News",
-      "title": "With Measles Roaring Back, the Search for a Drug is On - The New York Times",
-      "description": "With Measles Roaring Back, the Search for a Drug is On The New York Times",
-      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNQUxqTUF1VjJadTFhLVNQSHd3cVlPN01hS0t0MnY0MWw1ZEdhTWM1MEhZV2s3ck90UFJ6aS11TVpPSkt3ejhiVnFvQW9nWkFqbUpBdzVocjMzclk1UWp4TmdDTDJ0ZnIyTHd6cFRfNFFlQ1FvUlVUYXgxaHhxNE44R0Rn?oc=5",
-      "pubDate": "Thu, 11 Jun 2026 15:00:03 GMT",
-      "timestamp": 1781190003000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "science-news-7b3f11a5",
-      "authority": "Science News",
-      "title": "Clocks made from an atomic nucleus just ticked on for the first time",
-      "description": "First dreamed up decades ago, the world's first nuclear clocks are set to improve quickly, becoming more precise and aiding the hunt for dark matter.",
-      "link": "https://www.sciencenews.org/article/nuclear-clock-atomic-nucleus-first",
-      "pubDate": "Thu, 11 Jun 2026 15:00:00 +0000",
-      "timestamp": 1781190000000,
-      "signalIds": []
-    },
-    {
-      "id": "stat-news-69ce8230",
-      "authority": "STAT News",
-      "title": "STAT+: A suspicious denial pattern in Medicare Advantage",
-      "description": "Major Medicare Advantage plans almost always reversed their denials on appeal, raising big questions about barriers to care.",
-      "link": "https://www.statnews.com/2026/06/11/medicare-advantage-prior-authorization-denials-trustees-report-prescription-drug-costs/?utm_campaign=rss",
-      "pubDate": "Thu, 11 Jun 2026 14:55:52 +0000",
-      "timestamp": 1781189752000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-10c3e026",
-      "authority": "Google News",
-      "title": "Ebola outbreak map: Cases hit 600 in Africa, drawing US attention - USA Today",
-      "description": "Ebola outbreak map: Cases hit 600 in Africa, drawing US attention USA Today",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPMmV1U2dXa09NTXZnWDFtVm9vTXdpZTJzNktBSW5fSEtJYXhycExrZDRQd3RBRThQcmVLbWZkbEZzalhfSHZVcTR4SDIzajI4RGFySTJEcklmMTFxeDZHU0piRl9sR2tCTnNkYVlFNkpPNndjMHBVekx4YnVPTXFwcGlTNU1QRm9mZ0hlaXFrTlRBa2ljV3VacThTM3VHTkE2VFFKMk9n?oc=5",
-      "pubDate": "Thu, 11 Jun 2026 14:50:00 GMT",
-      "timestamp": 1781189400000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-d60659f5",
-      "authority": "Google News",
-      "title": "VDH advises unvaccinated to avoid large gatherings in Buckingham - The Farmville Herald",
-      "description": "VDH advises unvaccinated to avoid large gatherings in Buckingham The Farmville Herald",
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxONG9pTGVEclFCbUQ5WkJERmdCSmZfMFZTODg4RnNGbm50VEJVRnFaaXFmaWV2SDJXNVVxNU96dzRxcDZFMXhJdFRzTWFFVUd3WEsxcDdkUjhuQ2Z5akxjMkpSOFJuZlNyYjZVa3EzMDVYWG85ZTRjVS1YcUgzVzdhOE1MT1dyOF9qTWEtMmZhSi1NdVl5SlQ5T1loNlFtWXRXbHJr?oc=5",
-      "pubDate": "Thu, 11 Jun 2026 14:45:51 GMT",
-      "timestamp": 1781189151000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-99ceffe8",
-      "authority": "Google News",
-      "title": "U.S. Measles Cases Top 2,000 for Second Straight Year - Democracy Now!",
-      "description": "U.S. Measles Cases Top 2,000 for Second Straight Year Democracy Now!",
-      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPWmpUbXhYbm83emVSVFVnZktLeHl6ZGphRWg4eUNjM0xmUHdGNUZ1MWtCYVFRdlpmWUhwUlJoT0lBOWlhR0hKZ1Bmb0dUVmRiblFBUkhLdUt4ZFpLUjNHODVKdnR3REVZSlZNQnNENHMxRk5zRHZfWlpTT0Vfdy1Od1RkWktXVDctOE14dEdQU3FYT2pkclk2bEphc3N3WVFwdkE?oc=5",
-      "pubDate": "Thu, 11 Jun 2026 14:37:28 GMT",
-      "timestamp": 1781188648000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-f4a64958",
-      "authority": "UKHSA",
-      "title": "Research: Outbreaks under monitoring in 2026",
-      "description": "Latest information on global disease events under monitoring.",
-      "link": "https://www.gov.uk/government/publications/outbreaks-under-monitoring-in-2026",
-      "pubDate": "2026-06-11T14:30:22Z",
-      "timestamp": 1781188222000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-4401af78",
-      "authority": "Google News",
-      "title": "CDC chief: ‘No evidence’ USAID cuts hampered Ebola response - The Hill",
-      "description": "CDC chief: ‘No evidence’ USAID cuts hampered Ebola response The Hill",
-      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQXzFMeDA1T2NDXzBySnhFb1FtN2hEa0J3OVVyczcwSEptaFhqNWc4UUNXd0R6dGdoRkp6NDhvbTgtSXYzNjJIdDRFWWdmbXFtem5FYXFyWFJrZFhWVFNmc3RyT1ZvVHQyUkFvOXFCV201Z29HTzBpeENHZGFzYld0WngwbWE3R21QVzFrMmhHdVZKeU9SYXfSAZsBQVVfeXFMT2c4bEdHWEhIX2tMLXZxdkRIb3ozWHlibTB1R29mek11alU3R3MtVncyVTN1S3pFXzc4dFJmLWtLcjNkbGRZNmdwbktLWHZaMVlPcXlURWhNdEZUdGVON3NKQi1sdzk5ZWZyXzFNVGlKb01MTXM3SlY2RlBOc2c1R25iVnBISHBRV0dsUlhJYmgyTjNXbEwxbE9PeTA?oc=5",
-      "pubDate": "Thu, 11 Jun 2026 14:28:00 GMT",
-      "timestamp": 1781188080000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
     }
   ]
 }
