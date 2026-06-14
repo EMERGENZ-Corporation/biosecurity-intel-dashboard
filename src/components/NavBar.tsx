@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { to: '/signals', label: 'Signals' },
   { to: '/news', label: 'News' },
   { to: '/map', label: 'Map' },
+  { to: '/host-cities', label: 'Host Cities' },
   { to: '/timeline', label: 'Timeline' },
   { to: '/briefings', label: 'Briefings' },
   { to: '/resources', label: 'Resources' },

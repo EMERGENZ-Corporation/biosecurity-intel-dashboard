@@ -24,6 +24,7 @@ const ComparePage = lazy(() => import('./pages/ComparePage'))
 const MethodologyPage = lazy(() => import('./pages/MethodologyPage'))
 const NetworkPage = lazy(() => import('./pages/NetworkPage'))
 const TriageCardPrint = lazy(() => import('./pages/TriageCardPrint'))
+const HostCityBioSignals = lazy(() => import('./pages/HostCityBioSignals'))
 
 function PageLoader() {
   return (
@@ -151,6 +152,7 @@ export default function App() {
               <Route path="/signals/:id" element={<SignalDetail />} />
               <Route path="/news" element={<News />} />
               <Route path="/map" element={<MapPage />} />
+              <Route path="/host-cities" element={<HostCityBioSignals />} />
               <Route path="/timeline" element={<TimelinePage />} />
               <Route path="/briefings" element={<Briefings />} />
               <Route path="/resources" element={<Resources />} />

@@ -465,6 +465,155 @@ signals.forEach((signal) => {
   }
 })
 
+// ── Host-city biosurveillance (FIFA World Cup 2026 surveillance layer) ─────
+// Curated, human-write-only. Per-domain status / overall severity / freshness
+// are NEVER stored here — they are DERIVED from publicDisplayAllowed
+// observations (src/utils/hostCityBioSignals.ts), so an "elevated city with no
+// backing observation" is impossible by construction. This block validates the
+// raw invariants that make that derivation safe. The file is OPTIONAL
+// (graceful-absent) so CI stays green before the layer is populated.
+const HOST_CITY_FILE = `${DATA_DIR}/host-city-biosurveillance.json`
+const HOST_CITY_DOMAINS = new Set([
+  'respiratory', 'enteric', 'vaccine_preventable', 'zoonotic', 'vector_borne', 'environmental',
+])
+const HOST_CITY_OBS_TYPES = new Set([
+  'wastewater', 'clinical-surveillance', 'outbreak-alert', 'health-advisory', 'animal-vector', 'other',
+])
+const HOST_CITY_OBS_STATUS = new Set([
+  'normal', 'elevated', 'increasing', 'decreasing', 'stale', 'unavailable', 'unknown',
+])
+const HOST_CITY_COUNTRIES = new Set(['United States', 'Canada', 'Mexico'])
+
+let hostCityBio = null
+try {
+  hostCityBio = JSON.parse(readFileSync(HOST_CITY_FILE, 'utf8'))
+} catch (error) {
+  // ENOENT = layer not populated yet; skip silently (graceful absent).
+  if (error.code !== 'ENOENT') errors.push(`${HOST_CITY_FILE}: ${error.message}`)
+}
+
+if (hostCityBio) {
+  const root = 'host-city-biosurveillance'
+  if (hostCityBio.schemaVersion !== 1) {
+    errors.push(`${root}: schemaVersion must be 1; got ${hostCityBio.schemaVersion}`)
+  }
+  if (!hostCityBio.parentSignalId || !signalIds.has(hostCityBio.parentSignalId)) {
+    errors.push(`${root}: parentSignalId "${hostCityBio.parentSignalId}" not in signals.json`)
+  }
+  if (hostCityBio.lastReviewed && !isIsoDate(hostCityBio.lastReviewed)) {
+    errors.push(`${root}: lastReviewed must be an ISO date string`)
+  }
+  const cities = Array.isArray(hostCityBio.hostCities) ? hostCityBio.hostCities : null
+  if (!cities) {
+    errors.push(`${root}: hostCities must be an array`)
+  } else {
+    checkDuplicate(cities, (c) => c.id, `${root} city ids`)
+    const allObsIds = []
+    cities.forEach((city, i) => {
+      const cl = `${root}.hostCities[${i}] (${city.id ?? 'no-id'})`
+      requireFields(city, [
+        'id', 'displayName', 'country', 'regionOrState', 'metroArea',
+        'latitude', 'longitude', 'eventRole', 'sourceCoverageSummary', 'sourceIds', 'observations',
+      ], cl)
+      if (city.country && !HOST_CITY_COUNTRIES.has(city.country)) {
+        errors.push(`${cl}: invalid country "${city.country}"`)
+      }
+      if (city.eventRole && city.eventRole !== 'host_city') {
+        errors.push(`${cl}: eventRole must be "host_city"`)
+      }
+      if (typeof city.latitude !== 'number' || city.latitude < -90 || city.latitude > 90) {
+        errors.push(`${cl}: invalid latitude`)
+      }
+      if (typeof city.longitude !== 'number' || city.longitude < -180 || city.longitude > 180) {
+        errors.push(`${cl}: invalid longitude`)
+      }
+      if (Array.isArray(city.sourceIds)) {
+        city.sourceIds.forEach((sid) => {
+          if (!signalSourceIds.has(sid)) errors.push(`${cl}: sourceIds references unknown "${sid}"`)
+        })
+      } else {
+        errors.push(`${cl}: sourceIds must be an array`)
+      }
+      if (!Array.isArray(city.observations)) {
+        errors.push(`${cl}: observations must be an array`)
+      } else {
+        city.observations.forEach((obs, j) => {
+          const ol = `${cl}.observations[${j}] (${obs.id ?? 'no-id'})`
+          if (obs.id) allObsIds.push(obs.id)
+          requireFields(obs, [
+            'id', 'hostCityId', 'domain', 'pathogenOrSyndrome', 'observationType',
+            'status', 'severity', 'confidence', 'sourceId', 'sourceUrl', 'lastVerified',
+            'summary', 'publicDisplayAllowed',
+          ], ol)
+          if (obs.hostCityId && obs.hostCityId !== city.id) {
+            errors.push(`${ol}: hostCityId "${obs.hostCityId}" does not match parent city "${city.id}"`)
+          }
+          if (obs.domain && !HOST_CITY_DOMAINS.has(obs.domain)) {
+            errors.push(`${ol}: invalid domain "${obs.domain}"`)
+          }
+          if (obs.observationType && !HOST_CITY_OBS_TYPES.has(obs.observationType)) {
+            errors.push(`${ol}: invalid observationType "${obs.observationType}"`)
+          }
+          if (obs.status && !HOST_CITY_OBS_STATUS.has(obs.status)) {
+            errors.push(`${ol}: invalid status "${obs.status}"`)
+          }
+          if (obs.severity && !SIGNAL_SEVERITIES.has(obs.severity)) {
+            errors.push(`${ol}: invalid severity "${obs.severity}"`)
+          }
+          if (obs.confidence && !SIGNAL_CONFIDENCES.has(obs.confidence)) {
+            errors.push(`${ol}: invalid confidence "${obs.confidence}"`)
+          }
+          if (obs.sourceId && !signalSourceIds.has(obs.sourceId)) {
+            errors.push(`${ol}: sourceId "${obs.sourceId}" not in signal-sources.json`)
+          }
+          if (obs.sourceUrl && !isUrl(obs.sourceUrl)) {
+            errors.push(`${ol}: sourceUrl must be a valid URL`)
+          }
+          if (obs.lastVerified && !isIsoDate(obs.lastVerified)) {
+            errors.push(`${ol}: lastVerified must be an ISO date string`)
+          }
+          if (obs.sampleDate && !isIsoDate(obs.sampleDate)) errors.push(`${ol}: sampleDate must be ISO`)
+          if (obs.reportDate && !isIsoDate(obs.reportDate)) errors.push(`${ol}: reportDate must be ISO`)
+          if (
+            obs.reportingLagDays !== undefined &&
+            (typeof obs.reportingLagDays !== 'number' || obs.reportingLagDays < 0)
+          ) {
+            errors.push(`${ol}: reportingLagDays must be a non-negative number`)
+          }
+          if (obs.publicDisplayAllowed !== undefined && typeof obs.publicDisplayAllowed !== 'boolean') {
+            errors.push(`${ol}: publicDisplayAllowed must be boolean`)
+          }
+          // A publicly displayed observation must carry full attribution AND a
+          // date to derive freshness from (otherwise the public rollup cannot be
+          // computed safely — see CONTENT-STANDARDS §2.1 / §4.2).
+          if (obs.publicDisplayAllowed === true) {
+            if (!obs.sourceId || !obs.sourceUrl) {
+              errors.push(`${ol}: public observation must have sourceId and sourceUrl (attribution)`)
+            }
+            if (!obs.reportDate && !obs.sampleDate) {
+              errors.push(`${ol}: public observation must have reportDate or sampleDate (freshness is derived from it)`)
+            }
+          }
+          // reportingLagDays must equal reportDate - sampleDate when all present.
+          if (
+            obs.reportingLagDays !== undefined && obs.sampleDate && obs.reportDate &&
+            isIsoDate(obs.sampleDate) && isIsoDate(obs.reportDate)
+          ) {
+            const lag = Math.round(
+              (new Date(obs.reportDate).getTime() - new Date(obs.sampleDate).getTime()) / 86400000,
+            )
+            if (lag !== obs.reportingLagDays) {
+              errors.push(`${ol}: reportingLagDays (${obs.reportingLagDays}) != reportDate - sampleDate (${lag})`)
+            }
+          }
+        })
+      }
+    })
+    // Observation ids must be globally unique across all cities.
+    checkDuplicate(allObsIds.map((id) => ({ id })), (o) => o.id, `${root} observation ids`)
+  }
+}
+
 checkDuplicate(signalTimeline, (event) => event.id, 'signal-timeline ids')
 signalTimeline.forEach((event, index) => {
   const label = `signal-timeline[${index}]`

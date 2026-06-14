@@ -98,6 +98,7 @@ The following fields are always manually authored and must never be set or overw
 | All entries | `us-monitoring.json` | State-level data requires DOH source verification |
 | All entries | `ems-briefing.json` | Clinical guidance requires clinical review |
 | All entries | `flights.json` | Flight tracing requires human verification |
+| All entries | `host-city-biosurveillance.json` | Per-city observations require human source verification and the `publicDisplayAllowed` review gate; per-city status is derived, never hand-set |
 
 ---
 

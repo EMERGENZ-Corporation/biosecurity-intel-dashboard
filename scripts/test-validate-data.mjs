@@ -441,6 +441,169 @@ try {
     'link must be valid URL',
   )
 
+  // ── Host-city biosurveillance ────────────────────────────────────────────
+  // Per-domain status / overall severity / freshness are DERIVED in the UI, not
+  // stored, so an "elevated city with no backing observation" is unrepresentable.
+  // These tests lock the raw-observation invariants that keep that derivation
+  // safe: attribution, freshness-derivability, referential integrity, enums.
+  function makeHostCityCaseDir(name) {
+    const { dataDir, publicDir } = makeCaseDir(name)
+    return { dataDir, publicDir, hostCityPath: join(dataDir, 'host-city-biosurveillance.json') }
+  }
+
+  function runHostCity(name, mutate) {
+    const { dataDir, publicDir, hostCityPath } = makeHostCityCaseDir(name)
+    const doc = readJson(hostCityPath)
+    mutate(doc, dataDir)
+    writeJson(hostCityPath, doc)
+    return runValidator(dataDir, publicDir)
+  }
+
+  function expectHostCityFailure(name, mutate, expectedText) {
+    const result = runHostCity(name, mutate)
+    const output = `${result.stderr}\n${result.stdout}`
+    if (result.status === 0) throw new Error(`${name}: expected failure, got pass`)
+    if (!output.includes(expectedText)) {
+      throw new Error(`${name}: expected output to include "${expectedText}"\n${output}`)
+    }
+  }
+
+  function expectHostCityPass(name, mutate) {
+    const result = runHostCity(name, mutate)
+    if (result.status !== 0) {
+      throw new Error(`${name}: expected pass, got failure\n${result.stderr}${result.stdout}`)
+    }
+  }
+
+  // A valid, publicly-displayable observation built from a real registered source.
+  function validObservation(dataDir, cityId, overrides = {}) {
+    const sources = readJson(join(dataDir, 'signal-sources.json'))
+    const src = sources[0]
+    return {
+      id: `obs-fixture-${cityId}`,
+      hostCityId: cityId,
+      domain: 'respiratory',
+      pathogenOrSyndrome: 'Influenza A (wastewater)',
+      observationType: 'wastewater',
+      status: 'elevated',
+      severity: 'watch',
+      confidence: 'official',
+      sampleDate: '2026-06-10',
+      reportDate: '2026-06-13',
+      reportingLagDays: 3,
+      sourceId: src.id,
+      sourceUrl: 'https://www.cdc.gov/nwss/example',
+      lastVerified: '2026-06-14',
+      summary: 'Fixture observation for validator regression coverage.',
+      publicDisplayAllowed: true,
+      ...overrides,
+    }
+  }
+
+  // A well-formed, source-backed public observation must validate.
+  expectHostCityPass('host-city-valid-public-observation', (doc, dataDir) => {
+    doc.hostCities[0].observations.push(validObservation(dataDir, doc.hostCities[0].id))
+  })
+
+  // A public observation must be able to derive freshness from a date.
+  expectHostCityFailure(
+    'host-city-public-observation-missing-date',
+    (doc, dataDir) => {
+      const obs = validObservation(dataDir, doc.hostCities[0].id)
+      delete obs.sampleDate
+      delete obs.reportDate
+      delete obs.reportingLagDays
+      doc.hostCities[0].observations.push(obs)
+    },
+    'public observation must have reportDate or sampleDate',
+  )
+
+  // Required attribution: a public observation cannot lack its source URL.
+  expectHostCityFailure(
+    'host-city-public-observation-missing-attribution',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(validObservation(dataDir, doc.hostCities[0].id, { sourceUrl: '' }))
+    },
+    'public observation must have sourceId and sourceUrl',
+  )
+
+  // Referential integrity: observation sourceId must resolve in signal-sources.json.
+  expectHostCityFailure(
+    'host-city-observation-unknown-source',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(validObservation(dataDir, doc.hostCities[0].id, { sourceId: 'not-a-real-source' }))
+    },
+    'not in signal-sources.json',
+  )
+
+  // An observation cannot be filed under a city it does not belong to.
+  expectHostCityFailure(
+    'host-city-observation-city-mismatch',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(
+        validObservation(dataDir, doc.hostCities[0].id, { hostCityId: 'some-other-city' }),
+      )
+    },
+    'does not match parent city',
+  )
+
+  // Enum discipline on observation domain.
+  expectHostCityFailure(
+    'host-city-observation-invalid-domain',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(validObservation(dataDir, doc.hostCities[0].id, { domain: 'not-a-domain' }))
+    },
+    'invalid domain "not-a-domain"',
+  )
+
+  // City sourceIds must resolve in the registry.
+  expectHostCityFailure(
+    'host-city-unknown-source-ref',
+    (doc) => {
+      doc.hostCities[0].sourceIds = ['not-a-real-source']
+    },
+    'sourceIds references unknown "not-a-real-source"',
+  )
+
+  // The parent signal must exist (binds the layer to the FIFA umbrella).
+  expectHostCityFailure(
+    'host-city-invalid-parent-signal',
+    (doc) => {
+      doc.parentSignalId = 'not-a-real-signal'
+    },
+    'parentSignalId "not-a-real-signal" not in signals.json',
+  )
+
+  // Observation ids must be globally unique across cities.
+  expectHostCityFailure(
+    'host-city-duplicate-observation-id',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(validObservation(dataDir, doc.hostCities[0].id, { id: 'dup-obs' }))
+      doc.hostCities[1].observations.push(
+        validObservation(dataDir, doc.hostCities[1].id, { id: 'dup-obs', hostCityId: doc.hostCities[1].id }),
+      )
+    },
+    'observation ids: duplicate',
+  )
+
+  // reportingLagDays must equal reportDate - sampleDate.
+  expectHostCityFailure(
+    'host-city-reporting-lag-mismatch',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(validObservation(dataDir, doc.hostCities[0].id, { reportingLagDays: 99 }))
+    },
+    'reportingLagDays (99)',
+  )
+
+  // Country enum discipline.
+  expectHostCityFailure(
+    'host-city-invalid-country',
+    (doc) => {
+      doc.hostCities[0].country = 'Atlantis'
+    },
+    'invalid country "Atlantis"',
+  )
+
   console.log('[test-validate-data] OK')
 } finally {
   rmSync(tempRoot, { recursive: true, force: true })

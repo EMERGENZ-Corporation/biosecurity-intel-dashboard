@@ -3,6 +3,7 @@
 import signalsData from '../data/signals.json'
 import timelineData from '../data/signal-timeline.json'
 import sourcesData from '../data/signal-sources.json'
+import hostCityData from '../data/host-city-biosurveillance.json'
 import type { CSSProperties } from 'react'
 import {
   Signal,
@@ -12,11 +13,13 @@ import {
   ThreatCategory,
   THREAT_CATEGORY_LABELS,
   MarkerType,
+  HostCityBiosurveillance,
 } from '../types'
 
 export const signals = signalsData as Signal[]
 export const signalTimeline = timelineData as SignalTimelineEvent[]
 export const signalSources = sourcesData as SignalSource[]
+export const hostCityBiosurveillance = hostCityData as HostCityBiosurveillance
 
 const sourceById = new Map(signalSources.map((source) => [source.id, source]))
 const signalById = new Map(signals.map((signal) => [signal.id, signal]))
