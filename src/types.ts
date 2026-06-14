@@ -437,3 +437,128 @@ export interface NewsItem {
   pubDate: string
   timestamp: number
 }
+
+// ---------------------------------------------------------------------------
+// Host-city biosurveillance (FIFA World Cup 2026 surveillance layer).
+//
+// Curated, human-write-only (src/data/host-city-biosurveillance.json). Only the
+// city *identity* and source-backed *observations* are stored. Per-domain status
+// columns, overall severity, confidence, and source-freshness are NEVER stored —
+// they are DERIVED from publicly-displayable observations by
+// src/utils/hostCityBioSignals.ts, so an "elevated city with no backing
+// observation" cannot exist by construction. The parent FIFA signal's severity
+// is intentionally DECOUPLED from this rollup (it must not auto-trip the
+// news→timeline promoter). Situational awareness only — not prediction.
+// ---------------------------------------------------------------------------
+
+/** Biological domains a host-city observation can speak to. Subset of ThreatCategory. */
+export type HostCityDomain =
+  | 'respiratory'
+  | 'enteric'
+  | 'vaccine_preventable'
+  | 'zoonotic'
+  | 'vector_borne'
+  | 'environmental'
+
+export type HostCityObservationType =
+  | 'wastewater'
+  | 'clinical-surveillance'
+  | 'outbreak-alert'
+  | 'health-advisory'
+  | 'animal-vector'
+  | 'other'
+
+/** Raw, source-attributed observation status (collection-level). */
+export type HostCityObservationStatus =
+  | 'normal'
+  | 'elevated'
+  | 'increasing'
+  | 'decreasing'
+  | 'stale'
+  | 'unavailable'
+  | 'unknown'
+
+/** Derived per-domain rollup status shown on the city card. */
+export type HostCityDomainStatus =
+  | 'normal'
+  | 'elevated'
+  | 'increasing'
+  | 'decreasing'
+  | 'unavailable'
+  | 'unknown'
+
+/** Derived source-freshness state for a city. */
+export type HostCityFreshnessStatus = 'current' | 'stale' | 'unavailable' | 'unknown'
+
+export interface HostCityObservation {
+  id: string
+  /** Must equal the parent HostCityRecord.id. */
+  hostCityId: string
+  domain: HostCityDomain
+  pathogenOrSyndrome: string
+  observationType: HostCityObservationType
+  status: HostCityObservationStatus
+  severity: SignalSeverity
+  confidence: SignalConfidence
+  /** Date the sample was collected (wastewater) where applicable. ISO. */
+  sampleDate?: string
+  /** Date the source reported the value. ISO. Required (sampleDate as fallback) for public obs. */
+  reportDate?: string
+  reportingLagDays?: number
+  /** Resolves to an entry in signal-sources.json. */
+  sourceId: string
+  /** Deep link to the specific source page supporting THIS observation. */
+  sourceUrl: string
+  lastVerified: string
+  summary: string
+  /**
+   * Review gate. false = staged / under review: hidden from the public surface
+   * and excluded from every derivation (status columns, severity, freshness).
+   */
+  publicDisplayAllowed: boolean
+}
+
+export interface HostCityRecord {
+  id: string
+  displayName: string
+  country: 'United States' | 'Canada' | 'Mexico'
+  regionOrState: string
+  /** Metro / sewershed area — surveillance is metro-level, NOT stadium-level. */
+  metroArea: string
+  latitude: number
+  longitude: number
+  eventRole: 'host_city'
+  /** Optional stadium name, kept distinct from the surveillance metro. */
+  venueName?: string
+  /** Plain-language note on what public surveillance coverage exists (or doesn't). */
+  sourceCoverageSummary: string
+  /** Registry refs (signal-sources.json). May be empty before coverage is registered. */
+  sourceIds: string[]
+  /** Source-backed observations. May be empty (the valid default). */
+  observations: HostCityObservation[]
+  notes?: string
+}
+
+export interface HostCityBiosurveillance {
+  schemaVersion: 1
+  /** Must resolve to a signal in signals.json (the FIFA umbrella). */
+  parentSignalId: string
+  lastReviewed: string
+  hostCities: HostCityRecord[]
+}
+
+/** Computed by src/utils/hostCityBioSignals.ts — never stored on disk. */
+export interface DerivedHostCityStatus {
+  respiratoryStatus: HostCityDomainStatus
+  entericStatus: HostCityDomainStatus
+  vaccinePreventableStatus: HostCityDomainStatus
+  zoonoticVectorStatus: HostCityDomainStatus
+  environmentalStatus: HostCityDomainStatus
+  overallBioSignalStatus: SignalSeverity
+  /** Floor (most conservative) of public-observation confidences, or null when none. */
+  confidence: SignalConfidence | null
+  sourceFreshnessStatus: HostCityFreshnessStatus
+  /** Max report/sample date among public observations, or null. */
+  lastUpdated: string | null
+  publicObservationCount: number
+}

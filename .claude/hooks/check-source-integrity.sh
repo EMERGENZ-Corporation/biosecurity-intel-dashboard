@@ -19,6 +19,7 @@ SENSITIVE_PATHS=(
   "src/data/us-monitoring.json"
   "src/data/ems-briefing.json"
   "src/data/flights.json"
+  "src/data/host-city-biosurveillance.json"
   ".source-fingerprints/"
   "AI-ENRICHMENT-POLICY.md"
   "CONTENT-STANDARDS.md"

@@ -374,6 +374,112 @@ function checkRemovalMarkers() {
   }
 }
 
+// ── G21: host-city biosurveillance observation freshness ────────────────────
+// Mirrors src/utils/hostCityBioSignals.ts. A host city's public status is
+// DERIVED from publicDisplayAllowed observations; during the FIFA window stale
+// "elevated" data is the highest-consequence failure (CONTENT-STANDARDS §4.2).
+// This surfaces (a) cities whose freshest public observation is stale and
+// (b) observations still awaiting publish review, so neither rots unseen.
+// Cities with zero public observations are the honest "Not monitored" default
+// and are intentionally NOT flagged.
+const HOST_CITY_PATH = `${DATA_DIR}/host-city-biosurveillance.json`
+const WC_EVENT_START = '2026-06-11'
+const WC_EVENT_END = '2026-07-19'
+const HOST_CITY_STALE_DAYS_EVENT = 7
+const HOST_CITY_STALE_DAYS_OFF = 30
+const HOST_CITY_WATCH_FRACTION = 0.7 // pre-warn at 70% of the stale threshold
+
+function withinEventWindow(ms) {
+  return ms >= new Date(WC_EVENT_START).getTime() && ms <= new Date(`${WC_EVENT_END}T23:59:59Z`).getTime()
+}
+
+function checkHostCityFreshness() {
+  const doc = readJsonOptional(HOST_CITY_PATH)
+  if (!doc || !Array.isArray(doc.hostCities)) return // layer absent or empty — nothing to age
+  const inEvent = withinEventWindow(now)
+  const staleDays = inEvent ? HOST_CITY_STALE_DAYS_EVENT : HOST_CITY_STALE_DAYS_OFF
+  const watchDays = staleDays * HOST_CITY_WATCH_FRACTION
+
+  for (const city of doc.hostCities) {
+    const observations = Array.isArray(city.observations) ? city.observations : []
+    const pub = observations.filter((o) => o.publicDisplayAllowed === true)
+    const pending = observations.filter((o) => o.publicDisplayAllowed === false)
+
+    // Staged observations should not sit forgotten behind the review gate.
+    if (pending.length > 0) {
+      push({
+        id: `host-city-pending-review--${city.id}`,
+        classification: 'AUTONOMOUS-WATCH',
+        severity: 'watch',
+        category: 'host-city-biosurveillance',
+        title: `${city.displayName}: ${pending.length} host-city observation(s) awaiting publish review`,
+        why: 'Observations with publicDisplayAllowed:false are excluded from the public surface until a human clears them (CONTENT-STANDARDS §3.4). Surfaced so staged signals are not forgotten.',
+        governingStandard: 'CONTENT-STANDARDS §3.4 (review-gated publishing)',
+        threshold: { name: 'publicDisplayAllowed', value: false, unit: 'flag' },
+        observed: { pendingCount: pending.length },
+        recommendedAction: {
+          summary: 'Verify each staged observation against its source, then set publicDisplayAllowed:true (or remove it).',
+          file: HOST_CITY_PATH,
+          field: `hostCities[id=${city.id}].observations[].publicDisplayAllowed`,
+          command: 'after verifying, set publicDisplayAllowed:true; commit + push.',
+          primarySource: null,
+        },
+      })
+    }
+
+    if (pub.length === 0) continue // no public signal = honest "Not monitored"
+
+    let newest = null
+    for (const o of pub) {
+      const d = o.reportDate || o.sampleDate
+      const t = d ? new Date(d).getTime() : NaN
+      if (Number.isFinite(t) && (newest === null || t > newest)) newest = t
+    }
+    if (newest === null) continue
+    const days = (now - newest) / 864e5
+
+    if (days > staleDays) {
+      push({
+        id: `host-city-stale--${city.id}`,
+        classification: 'NEEDS-HUMAN',
+        severity: 'concern',
+        category: 'host-city-biosurveillance',
+        title: `${city.displayName}: newest public biosignal is ${days.toFixed(0)}d old (>${staleDays}d${inEvent ? ', event window' : ''})`,
+        why: 'A host city publishes source-backed biosignals but its freshest public observation is stale. The UI derives sourceFreshnessStatus="stale" from this; stale "elevated" data during the event is a patient-safety-adjacent failure (CONTENT-STANDARDS §4.2).',
+        governingStandard: 'CONTENT-STANDARDS §4.2; src/utils/hostCityBioSignals.ts',
+        threshold: { name: 'hostCityStaleDays', value: staleDays, unit: 'days' },
+        observed: { ageDays: Number(days.toFixed(0)), publicObservations: pub.length, eventWindow: inEvent },
+        recommendedAction: {
+          summary: 'Re-verify the city observations against their sources; refresh reportDate/lastVerified, mark the observation status stale, or remove it.',
+          file: HOST_CITY_PATH,
+          field: `hostCities[id=${city.id}].observations[]`,
+          command: 'update reportDate/lastVerified after re-verifying; commit + push.',
+          primarySource: null,
+        },
+      })
+    } else if (days > watchDays) {
+      push({
+        id: `host-city-aging--${city.id}`,
+        classification: 'AUTONOMOUS-WATCH',
+        severity: 'watch',
+        category: 'host-city-biosurveillance',
+        title: `${city.displayName}: public biosignal aging (${days.toFixed(0)}d of ${staleDays}d)`,
+        why: 'Approaching the host-city staleness threshold; refreshing now keeps the public freshness badge "current".',
+        governingStandard: 'src/utils/hostCityBioSignals.ts',
+        threshold: { name: 'hostCityStaleDays', value: staleDays, unit: 'days' },
+        observed: { ageDays: Number(days.toFixed(0)), publicObservations: pub.length, eventWindow: inEvent },
+        recommendedAction: {
+          summary: 'Re-verify and refresh the city observation dates within the next few days.',
+          file: HOST_CITY_PATH,
+          field: `hostCities[id=${city.id}].observations[]`,
+          command: 'update reportDate/lastVerified after re-verifying; commit + push.',
+          primarySource: null,
+        },
+      })
+    }
+  }
+}
+
 // ── Monitors summary: fold in present *-result.json artifacts as pointers ────
 // Read-only ok/age pointers only — each monitor owns its own detailed issue, so
 // we do not restate their findings here.
@@ -438,6 +544,7 @@ function main() {
   checkTriageCards(signals)
   checkSourceVerification(sources)
   checkDetailSectionDrift(signals)
+  checkHostCityFreshness()
   checkRemovalMarkers()
 
   const sortBySeverity = (a, b) => (SEVERITY_RANK[b.severity] ?? 0) - (SEVERITY_RANK[a.severity] ?? 0)
