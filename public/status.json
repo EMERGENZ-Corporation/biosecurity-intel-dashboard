@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-06-14T09:21:14.069Z",
+  "generatedAt": "2026-06-14T23:55:56.718Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-13T00:00:00.000Z",
     "oldestActiveReview": "2026-06-12T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 33.35390805555556,
-    "officialCheckAgeHours": 33.35390805555556
+    "dataAgeHours": 47.93242166666667,
+    "officialCheckAgeHours": 47.93242166666667
   },
   "signals": {
     "total": 19,
@@ -89,19 +89,19 @@
     "totalDetailSections": 86
   },
   "sources": {
-    "total": 47,
-    "primary": 37,
+    "total": 48,
+    "primary": 38,
     "secondary": 10,
     "byTier": {
+      "tier2": 14,
       "tier1": 27,
-      "tier2": 13,
       "tier3": 4,
       "tier4": 3
     }
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-14T04:30:25.000Z"
+    "newest": "2026-06-14T19:37:04.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
