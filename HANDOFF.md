@@ -128,7 +128,7 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
-## ✅ Host City BioSignals — source-backed FIFA World Cup 2026 host-city biosurveillance layer (commit 30ad2a1)
+## ✅ Host City BioSignals — source-backed FIFA World Cup 2026 host-city biosurveillance layer (commit b40742a)
 
 New feature answering "what biological signals are reported in/around World Cup 2026 host cities, and how reliable/current are the sources?" Workshopped + adversarially reviewed before build. Ships honest-empty: 16 host cities, ZERO observations, every domain shown as "Not monitored" — no invented data, no inferred coverage.
 
