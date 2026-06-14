@@ -228,16 +228,34 @@ function CityCard({ city, derived }: CityWithStatus) {
           ))}
         </div>
       ) : (
-        <div
-          style={{
-            fontFamily: "'IBM Plex Sans', sans-serif",
-            fontSize: '0.75rem',
-            color: 'var(--color-text-muted)',
-            fontStyle: 'italic',
-            lineHeight: 1.5,
-          }}
-        >
-          {city.sourceCoverageSummary}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          {city.sourceIds.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+              {city.sourceIds.map((sid) => {
+                const s = sourcesById.get(sid)
+                return s ? (
+                  <SourceChip
+                    key={sid}
+                    authority={s.authority}
+                    documentTitle={s.title}
+                    date={`verified ${formatDate(s.lastVerified)}`}
+                    url={s.url}
+                  />
+                ) : null
+              })}
+            </div>
+          )}
+          <span
+            style={{
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: '0.75rem',
+              color: 'var(--color-text-muted)',
+              fontStyle: 'italic',
+              lineHeight: 1.5,
+            }}
+          >
+            {city.sourceCoverageSummary}
+          </span>
         </div>
       )}
     </div>
