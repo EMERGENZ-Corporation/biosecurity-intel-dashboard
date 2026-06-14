@@ -1,5 +1,24 @@
 [
   {
+    "id": "phac-nwmp",
+    "authority": "PHAC",
+    "authorityFull": "Public Health Agency of Canada — National Wastewater Monitoring Program",
+    "title": "PHAC / Statistics Canada National Wastewater Monitoring — COVID-19, influenza, RSV, mpox",
+    "sourceType": "wastewater",
+    "primary": true,
+    "url": "https://health-infobase.canada.ca/wastewater/",
+    "lastVerified": "2026-06-14",
+    "domains": [
+      "respiratory",
+      "environmental"
+    ],
+    "geography": [
+      "Canada"
+    ],
+    "notes": "PHAC + Statistics Canada Canadian Wastewater Survey; includes Toronto and Metro Vancouver; tracks COVID-19, influenza, RSV, mpox; updated Tuesdays and Fridays.",
+    "sourceTier": 2
+  },
+  {
     "id": "ecdc-andes-surveillance",
     "authority": "ECDC",
     "authorityFull": "European Centre for Disease Prevention and Control",

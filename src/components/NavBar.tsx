@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { to: '/signals', label: 'Signals' },
   { to: '/news', label: 'News' },
   { to: '/map', label: 'Map' },
-  { to: '/host-cities', label: 'Host Cities' },
+  { to: '/host-cities', label: 'FIFA 2026' },
   { to: '/timeline', label: 'Timeline' },
   { to: '/briefings', label: 'Briefings' },
   { to: '/resources', label: 'Resources' },
