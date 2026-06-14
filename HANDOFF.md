@@ -158,7 +158,9 @@ New feature answering "what biological signals are reported in/around World Cup 
 
 **Verify:** `npm run validate:data && npm run test:validators && npm run build` (all PASS); `node scripts/review-digest.mjs` (0 host-city items at zero observations); browser `/host-cities` shows 16 cities, all "Not monitored", working filters, required disclaimer.
 
-**Follow-on (operational, not feature-blocking):** register real public sources (e.g. CDC NWSS Tier 1, WastewaterSCAN Tier 2, provincial dashboards) in `signal-sources.json` via `source-integrity-agent`, then add verified observations — no redesign needed. Plan an event-sunset/archival state after 2026-07-19.
+**Update (same PR):** Header nav label renamed "Host Cities" → "FIFA 2026" (route `/host-cities` and page title unchanged). Real public wastewater sources now wired: the 11 US host cities reference the existing `cdc-nwss` (Tier 1) registry entry; Toronto + Vancouver reference a newly-registered `phac-nwmp` (PHAC / Statistics Canada National Wastewater Monitoring, Tier 2); the 3 Mexican cities stay `sourceIds: []` / "Not monitored" (no verified public municipal program found — the coverage asymmetry is now legible). Covered domains render "No current data" (monitored, awaiting observation) with clickable source links on each card; observations remain empty (zero fabricated values). `source-integrity-agent` review: SAFE, no blockers.
+
+**Follow-on (operational, not feature-blocking):** add verified observations referencing these sources (e.g. NWSS state viral-activity levels, WastewaterSCAN site data). The NWSS/SCAN/PHAC dashboards are JS-rendered (no static values extractable), so observation values require manual curation or an API integration — not fabricated. No redesign needed. Plan an event-sunset/archival state after 2026-07-19.
 
 ## ✅ Official source review — clear lapsed 168h gate; correct Ebola/measles/H5/Andes figures (commit 45963a0)
 
