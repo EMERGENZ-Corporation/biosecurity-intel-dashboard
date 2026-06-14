@@ -148,7 +148,7 @@ New feature answering "what biological signals are reported in/around World Cup 
 - `src/utils/hostCityBioSignals.ts` — NEW. Deterministic derivation (promotion rules; convergence = ≥2 distinct source authorities; event-aware freshness 7d in-window / 30d off).
 - `src/utils/signals.ts` — exports `hostCityBiosurveillance`.
 - `src/pages/HostCityBioSignals.tsx` — NEW `/host-cities` page (country/status/domain/confidence filters, city cards, `SourceChip` attribution, disclaimer linking to `/resources`).
-- `src/App.tsx`, `src/components/NavBar.tsx` — lazy route + "Host Cities" nav entry.
+- `src/App.tsx`, `src/components/NavBar.tsx` — lazy route + "FIFA 2026" nav entry (header label is event-scoped; route stays `/host-cities` and page title stays "HOST CITY BIOSIGNALS").
 - `scripts/validate-data.mjs` — host-city validation block.
 - `scripts/test-validate-data.mjs` — 11 host-city regression tests.
 - `scripts/review-digest.mjs` — G21 host-city freshness + pending-review gate (NEEDS-HUMAN/WATCH; never auto-edits).
