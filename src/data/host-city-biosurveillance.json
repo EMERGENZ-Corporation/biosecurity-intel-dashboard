@@ -831,7 +831,25 @@
       "sourceIds": [
         "phac-nwmp"
       ],
-      "observations": []
+      "observations": [
+        {
+          "id": "auto-phac-toronto-sars-cov-2-2024-06-23",
+          "hostCityId": "toronto",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "elevated",
+          "severity": "watch",
+          "confidence": "official",
+          "sampleDate": "2024-06-23",
+          "sourceId": "phac-nwmp",
+          "sourceUrl": "https://health-infobase.canada.ca/wastewater/",
+          "lastVerified": "2026-06-15",
+          "summary": "PHAC wastewater respiratory surveillance for Metro Toronto: SARS-CoV-2 viral activity level \"High\" (highest among 4 sites; trend: varies across sites; data to 2024-06-23). COVID-19 only — PHAC influenza/RSV not yet ingested.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-phac"
+        }
+      ]
     },
     {
       "id": "vancouver",
@@ -847,7 +865,25 @@
       "sourceIds": [
         "phac-nwmp"
       ],
-      "observations": []
+      "observations": [
+        {
+          "id": "auto-phac-vancouver-sars-cov-2-2024-06-23",
+          "hostCityId": "vancouver",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "elevated",
+          "severity": "watch",
+          "confidence": "official",
+          "sampleDate": "2024-06-23",
+          "sourceId": "phac-nwmp",
+          "sourceUrl": "https://health-infobase.canada.ca/wastewater/",
+          "lastVerified": "2026-06-15",
+          "summary": "PHAC wastewater respiratory surveillance for Metro Vancouver: SARS-CoV-2 viral activity level \"High\" (highest among 5 sites; trend: varies across sites; data to 2024-06-23). COVID-19 only — PHAC influenza/RSV not yet ingested.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-phac"
+        }
+      ]
     },
     {
       "id": "mexico-city",
