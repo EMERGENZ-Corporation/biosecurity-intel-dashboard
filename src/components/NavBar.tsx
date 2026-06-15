@@ -53,6 +53,7 @@ export default function NavBar() {
     backgroundColor: isActive ? 'var(--color-bg-tertiary)' : 'transparent',
     transition: 'color 0.15s, background-color 0.15s',
     display: 'block' as const,
+    whiteSpace: 'nowrap' as const,
   })
 
   return (

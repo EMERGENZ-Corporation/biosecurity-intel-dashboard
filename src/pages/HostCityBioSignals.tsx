@@ -297,9 +297,8 @@ export default function HostCityBioSignals() {
       <h1 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '1.125rem', fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 0.25rem 0' }}>
         HOST CITY BIOSIGNALS
       </h1>
-      <p style={monoLabel({ textTransform: 'none', margin: '0 0 1rem 0' })}>
-        FIFA World Cup 2026 host-city biosurveillance · {allCities.length} cities · {withCoverage} with registered
-        sources · {withObs} with source-backed observations
+      <p style={monoLabel({ textTransform: 'none', margin: '0 0 1rem 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' })}>
+        FIFA World Cup 2026 host-city biosurveillance · {allCities.length} cities · {withCoverage} with registered sources · {withObs} with source-backed observations
       </p>
 
       {/* Disclaimer — required, non-negotiable */}
