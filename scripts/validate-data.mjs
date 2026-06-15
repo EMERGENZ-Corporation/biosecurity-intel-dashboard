@@ -483,7 +483,14 @@ const HOST_CITY_OBS_STATUS = new Set([
   'normal', 'elevated', 'increasing', 'decreasing', 'stale', 'unavailable', 'unknown',
 ])
 const HOST_CITY_COUNTRIES = new Set(['United States', 'Canada', 'Mexico'])
-const HOST_CITY_PROVENANCE = new Set(['curated', 'auto-nwss'])
+// Automated host-city writers and their contract. `maxTier` bounds the source
+// tier each writer may cite (NWSS/CDC = Tier 1; PHAC = Tier 2). Each writer
+// owns exactly its own provenance and is enforced identically otherwise.
+const HOST_CITY_AUTO_CONTRACTS = {
+  'auto-nwss': { prefix: 'auto-nwss-', maxTier: 1 },
+  'auto-phac': { prefix: 'auto-phac-', maxTier: 2 },
+}
+const HOST_CITY_PROVENANCE = new Set(['curated', ...Object.keys(HOST_CITY_AUTO_CONTRACTS)])
 
 let hostCityBio = null
 try {
@@ -596,32 +603,36 @@ if (hostCityBio) {
             }
           }
           // Provenance discriminator — absent defaults to "curated". Auto-ingested
-          // NWSS observations carry a hardened contract so the deterministic
-          // writer cannot be quietly weakened (CONTENT-STANDARDS §4.7).
+          // observations (auto-nwss, auto-phac) carry a hardened contract so the
+          // deterministic writers cannot be quietly weakened (CONTENT-STANDARDS
+          // §4.7 / §4.8): respiratory wastewater only, severity ≤ watch, a date
+          // for freshness, a tier-bounded registered source, and an id prefix.
           if (obs.provenance !== undefined && !HOST_CITY_PROVENANCE.has(obs.provenance)) {
             errors.push(`${ol}: invalid provenance "${obs.provenance}"`)
           }
-          if (obs.provenance === 'auto-nwss') {
-            if (obs.id && !String(obs.id).startsWith('auto-nwss-')) {
-              errors.push(`${ol}: auto-nwss observations must use the "auto-nwss-" id prefix`)
+          const autoContract = obs.provenance && HOST_CITY_AUTO_CONTRACTS[obs.provenance]
+          if (autoContract) {
+            const p = obs.provenance
+            if (obs.id && !String(obs.id).startsWith(autoContract.prefix)) {
+              errors.push(`${ol}: ${p} observations must use the "${autoContract.prefix}" id prefix`)
             }
             if (obs.domain && obs.domain !== 'respiratory') {
-              errors.push(`${ol}: auto-nwss observations must be domain "respiratory"; got "${obs.domain}"`)
+              errors.push(`${ol}: ${p} observations must be domain "respiratory"; got "${obs.domain}"`)
             }
             if (obs.observationType && obs.observationType !== 'wastewater') {
-              errors.push(`${ol}: auto-nwss observations must be observationType "wastewater"; got "${obs.observationType}"`)
+              errors.push(`${ol}: ${p} observations must be observationType "wastewater"; got "${obs.observationType}"`)
             }
             if (obs.severity === 'concern' || obs.severity === 'action') {
-              errors.push(`${ol}: auto-nwss severity must not exceed "watch"; got "${obs.severity}"`)
+              errors.push(`${ol}: ${p} severity must not exceed "watch"; got "${obs.severity}"`)
             }
             if (!obs.reportDate && !obs.sampleDate) {
-              errors.push(`${ol}: auto-nwss observation must have reportDate or sampleDate`)
+              errors.push(`${ol}: ${p} observation must have reportDate or sampleDate`)
             }
-            // Tier 1 sourceId hard-resolve (auto data is official-source-only).
+            // Tier-bounded sourceId hard-resolve (auto data is official-source-only).
             if (obs.sourceId && signalSourceIds.has(obs.sourceId)) {
               const src = signalSources.find((s) => s.id === obs.sourceId)
-              if (src && src.sourceTier !== 1) {
-                errors.push(`${ol}: auto-nwss sourceId must reference a Tier 1 source; "${obs.sourceId}" is Tier ${src.sourceTier}`)
+              if (src && src.sourceTier > autoContract.maxTier) {
+                errors.push(`${ol}: ${p} sourceId must reference a Tier ${autoContract.maxTier} or better source; "${obs.sourceId}" is Tier ${src.sourceTier}`)
               }
             }
           }

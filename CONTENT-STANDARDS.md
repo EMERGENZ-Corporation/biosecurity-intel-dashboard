@@ -174,6 +174,17 @@ Existing curated events have no `provenance` field (treated as `"curated"` by de
 
 These invariants are enforced by `scripts/validate-data.mjs` and two unit suites (`scripts/test-validate-data.mjs` auto-nwss cases + `scripts/test-ingest-nwss-host-cities.mjs`) — `npm run test:validators && npm run test:ingest-nwss` in CI catches any weakening.
 
+### 4.8 Auto-ingested host-city observations — Canada / PHAC (deterministic)
+
+`scripts/ingest-phac-host-cities.mjs` is the Canadian counterpart to §4.7, writing `provenance:"auto-phac"` observations for the Canadian host cities (Toronto, Vancouver). It inherits the entire §4.7 contract (deterministic, severity capped at `watch`, self-healing freshness, fail-open, idempotent, never overwrites curated or other-provenance data) with these source-specific points:
+
+- **PHAC is Tier 2**, so `auto-phac` observations resolve `sourceId` to `phac-nwmp` (Tier ≤ 2 permitted by the validator; `auto-nwss` remains Tier 1 only). Provenance id prefix is `auto-phac-`.
+- **PHAC's own category is mapped verbatim.** PHAC publishes two CSVs: a continuous `viral_load` file (NOT used — converting a continuous load to a status would require inventing thresholds, a computed epidemiological judgement reserved for humans per §7.2) and a *trend* file carrying PHAC's own `latestLevel` (`Low`/`Medium`/`High`/`New`). Only the categorical `latestLevel` drives status: `High → elevated`, `Low`/`Medium → normal`, `New`/unmapped → **skipped**.
+- **Observations are dated from PHAC's historical file**, not the ingest date, so a stalled feed still ages to "stale" (self-healing). The trend snapshot itself is undated.
+- **SARS-CoV-2 only** for now. PHAC's influenza/RSV are in a separate program feed not yet wired; the summary states this explicitly. (Documented follow-on.)
+
+Enforced by the same validator and `npm run test:ingest-phac`.
+
 ---
 
 ## 5. Public-Facing vs. Internal Information

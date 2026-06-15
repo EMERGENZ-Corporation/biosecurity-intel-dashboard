@@ -678,6 +678,53 @@ try {
     'auto-nwss observations must be domain "respiratory"',
   )
 
+  // --- auto-phac provenance contract (CONTENT-STANDARDS §4.8, Tier 2) ---------
+
+  // A Tier 2 PHAC source (phac-nwmp) is allowed for auto-phac observations.
+  function validAutoPhacObservation(dataDir, city, overrides = {}) {
+    const sources = readJson(join(dataDir, 'signal-sources.json'))
+    const tier2 = sources.find((s) => s.id === 'phac-nwmp') ?? sources.find((s) => s.sourceTier === 2) ?? sources[0]
+    return validObservation(dataDir, city.id, {
+      id: `auto-phac-${city.id}-sars-cov-2-1999-01-01`,
+      domain: 'respiratory',
+      observationType: 'wastewater',
+      pathogenOrSyndrome: 'SARS-CoV-2 (wastewater)',
+      status: 'elevated',
+      severity: 'watch',
+      confidence: 'official',
+      sampleDate: '1999-01-01',
+      reportDate: '1999-01-07',
+      reportingLagDays: 6,
+      sourceId: tier2.id,
+      provenance: 'auto-phac',
+      ...overrides,
+    })
+  }
+
+  expectHostCityPass('host-city-auto-phac-valid-tier2', (doc, dataDir) => {
+    doc.hostCities[0].observations.push(validAutoPhacObservation(dataDir, doc.hostCities[0]))
+  })
+
+  expectHostCityFailure(
+    'host-city-auto-phac-bad-id-prefix',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(
+        validAutoPhacObservation(dataDir, doc.hostCities[0], { id: 'auto-nwss-wrong-prefix-1999-01-01' }),
+      )
+    },
+    'must use the "auto-phac-" id prefix',
+  )
+
+  expectHostCityFailure(
+    'host-city-auto-phac-severity-cap',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(
+        validAutoPhacObservation(dataDir, doc.hostCities[0], { severity: 'action' }),
+      )
+    },
+    'auto-phac severity must not exceed "watch"',
+  )
+
   console.log('[test-validate-data] OK')
 } finally {
   rmSync(tempRoot, { recursive: true, force: true })

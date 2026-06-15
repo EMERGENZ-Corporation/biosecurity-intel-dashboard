@@ -32,6 +32,9 @@ jobs:
       - name: Run NWSS ingestion transform tests
         run: npm run test:ingest-nwss
 
+      - name: Run PHAC ingestion transform tests
+        run: npm run test:ingest-phac
+
       - name: Run news-fetch retry tests
         run: npm run test:fetch
 

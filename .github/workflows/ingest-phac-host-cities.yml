@@ -1,15 +1,16 @@
-name: Ingest NWSS Host-City Wastewater
+name: Ingest PHAC Host-City Wastewater
 
-# Deterministic weekly ingestion of CDC NWSS state-level wastewater viral
-# activity levels into host-city respiratory observations. Runs hands-off:
-# fails open on any CDC outage, writes nothing when there is no change, and
-# commits real data as the EMERGENZ Data Bot. See CONTENT-STANDARDS §4.7 and
-# docs/HOST-CITY-NWSS-INGESTION.md.
+# Deterministic weekly ingestion of PHAC (Health Canada) wastewater viral
+# activity levels into the Canadian host-city respiratory observations
+# (Toronto, Vancouver). Counterpart to the NWSS (US) workflow; same hands-off
+# discipline. See CONTENT-STANDARDS §4.8.
 
 on:
   schedule:
-    # Saturday 12:00 UTC — after CDC's weekly Friday NWSS release.
-    - cron: '0 12 * * 6'
+    # Sunday 13:00 UTC — staggered a day after the NWSS (US) Saturday run so the
+    # two writers don't race on host-city-biosurveillance.json (rebase-retry
+    # below also tolerates it).
+    - cron: '0 13 * * 0'
   workflow_dispatch:
     inputs:
       policy:
@@ -20,8 +21,6 @@ on:
         options: [auto, staged, off]
 
 concurrency:
-  # Shared with the PHAC workflow — both write host-city-biosurveillance.json,
-  # so they serialize rather than race.
   group: host-city-ingest
   cancel-in-progress: false
 
@@ -32,10 +31,7 @@ jobs:
   ingest:
     runs-on: ubuntu-latest
     env:
-      # The single operator knob (see script header). Flip here to pause.
-      NWSS_PUBLISH_POLICY: ${{ github.event.inputs.policy || 'auto' }}
-      # Optional Socrata token for higher rate limits (no secret required to run).
-      NWSS_APP_TOKEN: ${{ secrets.NWSS_APP_TOKEN }}
+      PHAC_PUBLISH_POLICY: ${{ github.event.inputs.policy || 'auto' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -48,14 +44,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Ingest NWSS host-city observations
-        id: ingest
-        run: npm run ingest:nwss
+      - name: Ingest PHAC host-city observations
+        run: npm run ingest:phac
 
       - name: Validate data
-        # Validates the freshly-ingested observations against the full schema +
-        # auto-nwss contract. Code-level unit suites live in ci.yml (the code
-        # gate), not here (the data-refresh gate).
         run: npm run validate:data
 
       - name: Regenerate public status + API
@@ -72,11 +64,7 @@ jobs:
             echo "No host-city changes to commit."
             exit 0
           fi
-          git commit -m "chore(host-cities): NWSS wastewater refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          # Push with rebase-and-retry to tolerate concurrent bot writes to
-          # public/status.json and public/api/v1/. -X theirs resolves conflicts
-          # on generated files by taking remote; regenerate after rebase so the
-          # final committed state is consistent.
+          git commit -m "chore(host-cities): PHAC wastewater refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           pushed=false
           for attempt in 1 2 3 4 5; do
             git pull --rebase -X theirs origin main || {
@@ -97,6 +85,6 @@ jobs:
             sleep $((attempt * 3))
           done
           if [ "$pushed" != "true" ]; then
-            echo "::error::Failed to push NWSS host-city refresh after 5 attempts."
+            echo "::error::Failed to push PHAC host-city refresh after 5 attempts."
             exit 1
           fi

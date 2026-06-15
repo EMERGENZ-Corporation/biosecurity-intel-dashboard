@@ -518,12 +518,13 @@ export interface HostCityObservation {
   publicDisplayAllowed: boolean
   /**
    * Write provenance. Absent / 'curated' = human-authored. 'auto-nwss' =
-   * written by scripts/ingest-nwss-host-cities.mjs (deterministic CDC NWSS
-   * ingestion). Auto observations carry extra validator constraints
-   * (Tier 1 source, 'auto-nwss-' id prefix, respiratory/wastewater, severity
-   * capped at 'watch') — see CONTENT-STANDARDS §4.7.
+   * scripts/ingest-nwss-host-cities.mjs (deterministic CDC NWSS, Tier 1).
+   * 'auto-phac' = scripts/ingest-phac-host-cities.mjs (deterministic PHAC,
+   * Tier 2). Auto observations carry extra validator constraints (tier-bounded
+   * source, provenance-specific id prefix, respiratory/wastewater, severity
+   * capped at 'watch') — see CONTENT-STANDARDS §4.7 / §4.8.
    */
-  provenance?: 'curated' | 'auto-nwss'
+  provenance?: 'curated' | 'auto-nwss' | 'auto-phac'
 }
 
 export interface HostCityRecord {

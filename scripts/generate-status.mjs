@@ -181,6 +181,20 @@ function main() {
         ],
       },
       {
+        id: 'phac-host-city-ingest',
+        cadence: 'Weekly (Sunday, staggered after the NWSS run)',
+        workflow: 'Ingest PHAC Host-City Wastewater',
+        writes: ['src/data/host-city-biosurveillance.json (provenance:"auto-phac" observations only)', 'internal ingest-phac-result.json'],
+        guardrails: [
+          'Deterministic, no AI; PHAC\'s own categorical level (Low/Medium/High) mapped verbatim, "New"/unmapped skipped',
+          'Tier 2 phac-nwmp source; respiratory wastewater, auto-phac- id prefix; SARS-CoV-2 only (flu/RSV not yet ingested)',
+          'Severity capped at "watch"; observation dated from PHAC\'s historical file (self-healing freshness)',
+          'Replaces only prior auto-phac observations; never touches curated data, US auto-nwss data, or city identity',
+          'Canadian host cities only (Toronto, Vancouver)',
+          'Fail-open on PHAC outage; zero-change runs write nothing (CONTENT-STANDARDS §4.8)',
+        ],
+      },
+      {
         id: 'status-api-refresh',
         cadence: 'Daily and on source data changes',
         workflow: 'Status Refresh',
