@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-06-15T05:31:11.309Z",
+  "generatedAt": "2026-06-15T05:33:44.469Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-13T00:00:00.000Z",
     "oldestActiveReview": "2026-06-12T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 53.51980833333333,
-    "officialCheckAgeHours": 53.51980833333333
+    "dataAgeHours": 53.562352777777775,
+    "officialCheckAgeHours": 53.562352777777775
   },
   "signals": {
     "total": 19,

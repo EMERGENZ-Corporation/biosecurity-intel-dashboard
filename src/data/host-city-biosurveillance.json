@@ -831,7 +831,59 @@
       "sourceIds": [
         "phac-nwmp"
       ],
-      "observations": []
+      "observations": [
+        {
+          "id": "auto-phac-toronto-sars-cov-2-2026-05-31",
+          "hostCityId": "toronto",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-05-31",
+          "sourceId": "phac-nwmp",
+          "sourceUrl": "https://health-infobase.canada.ca/wastewater/",
+          "lastVerified": "2026-06-15",
+          "summary": "PHAC National Wastewater Monitoring for Toronto: SARS-CoV-2 (wastewater) viral activity level \"Low\" (week of 2026-05-31; PHAC city-level aggregate; trend: Decreasing).",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-phac"
+        },
+        {
+          "id": "auto-phac-toronto-influenza-a-2026-05-31",
+          "hostCityId": "toronto",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-05-31",
+          "sourceId": "phac-nwmp",
+          "sourceUrl": "https://health-infobase.canada.ca/wastewater/",
+          "lastVerified": "2026-06-15",
+          "summary": "PHAC National Wastewater Monitoring for Toronto: Influenza A (wastewater) viral activity level \"Low\" (week of 2026-05-31; PHAC city-level aggregate; trend: Decreasing).",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-phac"
+        },
+        {
+          "id": "auto-phac-toronto-rsv-2026-05-31",
+          "hostCityId": "toronto",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-05-31",
+          "sourceId": "phac-nwmp",
+          "sourceUrl": "https://health-infobase.canada.ca/wastewater/",
+          "lastVerified": "2026-06-15",
+          "summary": "PHAC National Wastewater Monitoring for Toronto: RSV (wastewater) viral activity level \"Low\" (week of 2026-05-31; PHAC city-level aggregate; trend: Decreasing).",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-phac"
+        }
+      ]
     },
     {
       "id": "vancouver",
@@ -847,7 +899,59 @@
       "sourceIds": [
         "phac-nwmp"
       ],
-      "observations": []
+      "observations": [
+        {
+          "id": "auto-phac-vancouver-sars-cov-2-2026-05-31",
+          "hostCityId": "vancouver",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-05-31",
+          "sourceId": "phac-nwmp",
+          "sourceUrl": "https://health-infobase.canada.ca/wastewater/",
+          "lastVerified": "2026-06-15",
+          "summary": "PHAC National Wastewater Monitoring for Vancouver: SARS-CoV-2 (wastewater) viral activity level \"Low\" (week of 2026-05-31; PHAC city-level aggregate; trend: Decreasing).",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-phac"
+        },
+        {
+          "id": "auto-phac-vancouver-influenza-a-2026-05-31",
+          "hostCityId": "vancouver",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-05-31",
+          "sourceId": "phac-nwmp",
+          "sourceUrl": "https://health-infobase.canada.ca/wastewater/",
+          "lastVerified": "2026-06-15",
+          "summary": "PHAC National Wastewater Monitoring for Vancouver: Influenza A (wastewater) viral activity level \"Low\" (week of 2026-05-31; PHAC city-level aggregate; trend: No Change).",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-phac"
+        },
+        {
+          "id": "auto-phac-vancouver-rsv-2026-05-31",
+          "hostCityId": "vancouver",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-05-31",
+          "sourceId": "phac-nwmp",
+          "sourceUrl": "https://health-infobase.canada.ca/wastewater/",
+          "lastVerified": "2026-06-15",
+          "summary": "PHAC National Wastewater Monitoring for Vancouver: RSV (wastewater) viral activity level \"Low\" (week of 2026-05-31; PHAC city-level aggregate; trend: No Change).",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-phac"
+        }
+      ]
     },
     {
       "id": "mexico-city",
