@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "status": "ok",
-  "generatedAt": "2026-06-14T23:55:56.718Z",
+  "generatedAt": "2026-06-15T01:23:31.180Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-13T00:00:00.000Z",
     "oldestActiveReview": "2026-06-12T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 47.93242166666667,
-    "officialCheckAgeHours": 47.93242166666667
+    "dataAgeHours": 49.39199444444444,
+    "officialCheckAgeHours": 49.39199444444444
   },
   "signals": {
     "total": 19,
@@ -155,6 +155,23 @@
           "Same-day collision with any curated or auto event skips silently (curated wins)",
           "Per-run cap 20; per-signal rolling 7-day cap 5",
           "Zero-promotion runs write nothing (CONTENT-STANDARDS §4.4)"
+        ]
+      },
+      {
+        "id": "nwss-host-city-ingest",
+        "cadence": "Weekly (Saturday, after CDC Friday NWSS release)",
+        "workflow": "Ingest NWSS Host-City Wastewater",
+        "writes": [
+          "src/data/host-city-biosurveillance.json (provenance:\"auto-nwss\" observations only)",
+          "internal ingest-nwss-result.json"
+        ],
+        "guardrails": [
+          "Deterministic, no AI; CDC categorical activity levels mapped verbatim, unmappable values skipped",
+          "Tier 1 cdc-nwss source hard-resolve; respiratory wastewater, auto-nwss- id prefix",
+          "Severity capped at \"watch\" — auto data never trips concern/action",
+          "Replaces only prior auto-nwss observations; never touches curated data or city identity",
+          "US host cities only (state-level NWSS); Canada/Mexico out of scope",
+          "Fail-open on CDC outage; zero-change runs write nothing (CONTENT-STANDARDS §4.7)"
         ]
       },
       {

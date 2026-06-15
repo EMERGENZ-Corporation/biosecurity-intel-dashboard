@@ -604,6 +604,77 @@ try {
     'invalid country "Atlantis"',
   )
 
+  // --- auto-nwss provenance contract (CONTENT-STANDARDS §4.7) -----------------
+
+  // A well-formed auto-nwss observation must validate.
+  function validAutoNwssObservation(dataDir, city, overrides = {}) {
+    const sources = readJson(join(dataDir, 'signal-sources.json'))
+    const tier1 = sources.find((s) => s.sourceTier === 1) ?? sources[0]
+    return validObservation(dataDir, city.id, {
+      id: `auto-nwss-${city.id}-sars-cov-2-2026-06-06`,
+      domain: 'respiratory',
+      observationType: 'wastewater',
+      pathogenOrSyndrome: 'SARS-CoV-2 (wastewater)',
+      status: 'elevated',
+      severity: 'watch',
+      confidence: 'official',
+      sampleDate: '2026-06-06',
+      reportDate: '2026-06-12',
+      reportingLagDays: 6,
+      sourceId: tier1.id,
+      provenance: 'auto-nwss',
+      ...overrides,
+    })
+  }
+
+  expectHostCityPass('host-city-auto-nwss-valid', (doc, dataDir) => {
+    doc.hostCities[0].observations.push(validAutoNwssObservation(dataDir, doc.hostCities[0]))
+  })
+
+  // Unknown provenance value is rejected.
+  expectHostCityFailure(
+    'host-city-auto-nwss-invalid-provenance',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(
+        validAutoNwssObservation(dataDir, doc.hostCities[0], { provenance: 'bogus' }),
+      )
+    },
+    'invalid provenance "bogus"',
+  )
+
+  // The deterministic id prefix is mandatory.
+  expectHostCityFailure(
+    'host-city-auto-nwss-bad-id-prefix',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(
+        validAutoNwssObservation(dataDir, doc.hostCities[0], { id: 'obs-not-auto-prefixed' }),
+      )
+    },
+    'must use the "auto-nwss-" id prefix',
+  )
+
+  // Auto data must not escalate beyond "watch".
+  expectHostCityFailure(
+    'host-city-auto-nwss-severity-cap',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(
+        validAutoNwssObservation(dataDir, doc.hostCities[0], { severity: 'concern' }),
+      )
+    },
+    'auto-nwss severity must not exceed "watch"',
+  )
+
+  // Auto data is respiratory wastewater only.
+  expectHostCityFailure(
+    'host-city-auto-nwss-wrong-domain',
+    (doc, dataDir) => {
+      doc.hostCities[0].observations.push(
+        validAutoNwssObservation(dataDir, doc.hostCities[0], { domain: 'enteric' }),
+      )
+    },
+    'auto-nwss observations must be domain "respiratory"',
+  )
+
   console.log('[test-validate-data] OK')
 } finally {
   rmSync(tempRoot, { recursive: true, force: true })

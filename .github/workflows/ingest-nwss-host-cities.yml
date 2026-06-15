@@ -1,0 +1,102 @@
+name: Ingest NWSS Host-City Wastewater
+
+# Deterministic weekly ingestion of CDC NWSS state-level wastewater viral
+# activity levels into host-city respiratory observations. Runs hands-off:
+# fails open on any CDC outage, writes nothing when there is no change, and
+# commits real data as the EMERGENZ Data Bot. See CONTENT-STANDARDS §4.7 and
+# docs/HOST-CITY-NWSS-INGESTION.md.
+
+on:
+  schedule:
+    # Saturday 12:00 UTC — after CDC's weekly Friday NWSS release.
+    - cron: '0 12 * * 6'
+  workflow_dispatch:
+    inputs:
+      policy:
+        description: 'Publish policy (auto = live, staged = review gate, off = kill switch)'
+        required: false
+        default: 'auto'
+        type: choice
+        options: [auto, staged, off]
+
+concurrency:
+  group: nwss-host-city-ingest
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    env:
+      # The single operator knob (see script header). Flip here to pause.
+      NWSS_PUBLISH_POLICY: ${{ github.event.inputs.policy || 'auto' }}
+      # Optional Socrata token for higher rate limits (no secret required to run).
+      NWSS_APP_TOKEN: ${{ secrets.NWSS_APP_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ingest NWSS host-city observations
+        id: ingest
+        run: npm run ingest:nwss
+
+      - name: Validate data
+        run: npm run validate:data
+
+      - name: Run validator + ingestion test suites
+        run: |
+          npm run test:validators
+          npm run test:ingest-nwss
+
+      - name: Regenerate public status + API
+        run: |
+          npm run generate:status
+          npm run generate:api
+
+      - name: Commit updated host-city observations
+        run: |
+          git config user.name "EMERGENZ Data Bot"
+          git config user.email "bot@emergenz.org"
+          git add src/data/host-city-biosurveillance.json public/status.json public/api/v1/
+          if git diff --staged --quiet; then
+            echo "No host-city changes to commit."
+            exit 0
+          fi
+          git commit -m "chore(host-cities): NWSS wastewater refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # Push with rebase-and-retry to tolerate concurrent bot writes to
+          # public/status.json and public/api/v1/. -X theirs resolves conflicts
+          # on generated files by taking remote; regenerate after rebase so the
+          # final committed state is consistent.
+          pushed=false
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase -X theirs origin main || {
+              echo "Rebase conflict on attempt $attempt — aborting."
+              git rebase --abort 2>/dev/null || true
+              exit 1
+            }
+            node scripts/generate-status.mjs
+            node scripts/generate-api.mjs
+            git add public/status.json public/api/v1/
+            git diff --staged --quiet || git commit --amend --no-edit
+            if git push; then
+              pushed=true
+              echo "Push succeeded on attempt $attempt."
+              break
+            fi
+            echo "Push rejected (attempt $attempt/5). Retrying in $((attempt * 3))s..."
+            sleep $((attempt * 3))
+          done
+          if [ "$pushed" != "true" ]; then
+            echo "::error::Failed to push NWSS host-city refresh after 5 attempts."
+            exit 1
+          fi

@@ -167,6 +167,20 @@ function main() {
         ],
       },
       {
+        id: 'nwss-host-city-ingest',
+        cadence: 'Weekly (Saturday, after CDC Friday NWSS release)',
+        workflow: 'Ingest NWSS Host-City Wastewater',
+        writes: ['src/data/host-city-biosurveillance.json (provenance:"auto-nwss" observations only)', 'internal ingest-nwss-result.json'],
+        guardrails: [
+          'Deterministic, no AI; CDC categorical activity levels mapped verbatim, unmappable values skipped',
+          'Tier 1 cdc-nwss source hard-resolve; respiratory wastewater, auto-nwss- id prefix',
+          'Severity capped at "watch" — auto data never trips concern/action',
+          'Replaces only prior auto-nwss observations; never touches curated data or city identity',
+          'US host cities only (state-level NWSS); Canada/Mexico out of scope',
+          'Fail-open on CDC outage; zero-change runs write nothing (CONTENT-STANDARDS §4.7)',
+        ],
+      },
+      {
         id: 'status-api-refresh',
         cadence: 'Daily and on source data changes',
         workflow: 'Status Refresh',

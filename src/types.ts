@@ -516,6 +516,14 @@ export interface HostCityObservation {
    * and excluded from every derivation (status columns, severity, freshness).
    */
   publicDisplayAllowed: boolean
+  /**
+   * Write provenance. Absent / 'curated' = human-authored. 'auto-nwss' =
+   * written by scripts/ingest-nwss-host-cities.mjs (deterministic CDC NWSS
+   * ingestion). Auto observations carry extra validator constraints
+   * (Tier 1 source, 'auto-nwss-' id prefix, respiratory/wastewater, severity
+   * capped at 'watch') — see CONTENT-STANDARDS §4.7.
+   */
+  provenance?: 'curated' | 'auto-nwss'
 }
 
 export interface HostCityRecord {
