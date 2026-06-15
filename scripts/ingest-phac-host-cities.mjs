@@ -6,33 +6,33 @@
  * viral activity levels into host-city observations for the Canadian host cities
  * (Toronto, Vancouver).
  *
- * Counterpart to scripts/ingest-nwss-host-cities.mjs (US/CDC). Same trust model,
- * same structural safety (deterministic verbatim mapping, severity capped at
- * `watch`, self-healing freshness, fail-open, idempotent). Differences:
+ * Counterpart to scripts/ingest-nwss-host-cities.mjs (US/CDC). Same trust model
+ * and structural safety: deterministic verbatim mapping, severity capped at
+ * `watch`, anti-stale guard, fail-open, idempotent. PHAC specifics:
  *
- *  - Source is PHAC (Tier 2), provenance `auto-phac` (not `auto-nwss`).
- *  - PHAC publishes TWO CSVs at stable URLs:
- *      • trend file — per-site `latestLevel` (Low/Medium/High/New) + `latestTrend`
- *        (PHAC's OWN categorical classification — we map it verbatim, exactly as
- *        we map CDC's. The raw `viral_load` file is continuous and is NOT used,
- *        because turning a continuous load into a status would require inventing
- *        thresholds — a computed epidemiological judgement reserved for humans,
- *        CONTENT-STANDARDS §7.2.)
- *      • main file — historical rows with a real `Date`, used only to date the
- *        observation (the trend file is an undated "latest" snapshot). Dating the
- *        observation from real data — not the ingest date — is what lets the UI
- *        degrade to "stale" if PHAC stops updating (self-healing).
- *  - COVID-19 only (`measureid: covN2`). PHAC's flu/RSV are in a separate program
- *    feed not yet wired; the respiratory tile reflects SARS-CoV-2 wastewater and
- *    the summary says so. (Documented follow-on.)
+ *  - Source: PHAC National Wastewater Monitoring (Health Infobase), Tier 2,
+ *    provenance `auto-phac`.
+ *  - Reads ONE file: the current trend table at /src/data/wastewater/
+ *    `wastewater_trend.csv`. It is self-contained — each row carries PHAC's own
+ *    categorical `Viral_Activity_Level` AND a `weekStart` date, so no second
+ *    (aggregate) fetch is needed for dating. (The legacy `covidLive/...` path is
+ *    RETIRED — it froze at 2024-06 — and must not be used for live status.)
+ *  - PHAC publishes a city-level aggregate row (`grouping == "City"`); we use it
+ *    verbatim rather than re-aggregating sites ourselves. If a city has only
+ *    site rows for a pathogen, we fall back to the highest site level.
+ *  - Pathogens: covN2 → SARS-CoV-2, fluA → Influenza A, rsv → RSV (parity with
+ *    the NWSS writer; fluB is not surfaced).
+ *  - The continuous `min`/`max` metrics are NOT used — only PHAC's categorical
+ *    level, mapped verbatim (turning a continuous value into a status would be a
+ *    computed epidemiological judgement reserved for humans, CONTENT-STANDARDS
+ *    §7.2).
  *
- * Publish policy knob (identical semantics to the NWSS writer):
- *   PHAC_PUBLISH_POLICY = 'auto' (default) | 'staged' | 'off'
+ * Publish policy knob: PHAC_PUBLISH_POLICY = 'auto' (default) | 'staged' | 'off'.
  *
  * USAGE
  *   node scripts/ingest-phac-host-cities.mjs            # fetch + write per policy
  *   node scripts/ingest-phac-host-cities.mjs --dry-run  # print plan, write nothing
- *   PHAC_TREND_FIXTURE / PHAC_MAIN_FIXTURE              # local CSV files (offline/testing)
+ *   PHAC_TREND_FIXTURE=path.csv node ...                # local CSV (offline/testing)
  */
 
 import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'fs'
@@ -45,31 +45,41 @@ const HOST_CITY_PATH = process.env.PHAC_HOST_CITY_PATH || 'src/data/host-city-bi
 const SOURCES_PATH = process.env.PHAC_SOURCES_PATH || 'src/data/signal-sources.json'
 const OUTPUT_PATH = process.env.PHAC_OUTPUT_PATH || 'ingest-phac-result.json'
 
+// Current PHAC National Wastewater Monitoring trend table. Self-contained
+// (categorical level + weekStart). Configurable; do NOT hardcode in logic.
 const TREND_URL =
   process.env.PHAC_TREND_URL ||
-  'https://health-infobase.canada.ca/src/data/covidLive/wastewater/covid19-wastewater-trend.csv'
-const MAIN_URL =
-  process.env.PHAC_MAIN_URL ||
-  'https://health-infobase.canada.ca/src/data/covidLive/wastewater/covid19-wastewater.csv'
-// Always-valid human landing page cited as each observation's sourceUrl
-// (the interactive dashboard is JS-rendered, so no fragile per-city deep link).
+  'https://health-infobase.canada.ca/src/data/wastewater/wastewater_trend.csv'
+// The aggregate table (historical/site detail) exists at the same directory
+// (`wastewater_aggregate.csv`) but is NOT needed: the trend rows already carry
+// weekStart. Kept here for reference / future detail use.
+const AGGREGATE_URL =
+  process.env.PHAC_AGGREGATE_URL ||
+  'https://health-infobase.canada.ca/src/data/wastewater/wastewater_aggregate.csv'
+// Always-valid human landing page cited as each observation's sourceUrl.
 const DASHBOARD_URL = 'https://health-infobase.canada.ca/wastewater/'
 
 const SOURCE_ID = process.env.PHAC_SOURCE_ID || 'phac-nwmp'
-const COVID_MEASURE_ID = 'covN2'
-const PATHOGEN = { display: 'SARS-CoV-2 (wastewater)', slug: 'sars-cov-2' }
 
-// PHAC's own categorical levels, ordered low→high. "New" = newly-onboarded site
-// with insufficient history → skipped (no confident level; no fabrication).
-export const PHAC_LEVEL_RANK = { Low: 0, Medium: 1, High: 2 }
+// measureid → display + id-slug. Parity with the NWSS writer (3 respiratory
+// pathogens). fluB is present in the feed but intentionally not surfaced.
+const PATHOGENS = [
+  { measureid: 'covN2', display: 'SARS-CoV-2 (wastewater)', slug: 'sars-cov-2' },
+  { measureid: 'fluA', display: 'Influenza A (wastewater)', slug: 'influenza-a' },
+  { measureid: 'rsv', display: 'RSV (wastewater)', slug: 'rsv' },
+]
 
-// cityId → PHAC `region` value. Defaults to the city displayName (Toronto/
-// Vancouver match PHAC region names exactly); override here if PHAC renames.
-const PHAC_REGION_BY_CITY = { toronto: 'Toronto', vancouver: 'Vancouver' }
+// PHAC's own categorical viral activity levels, ordered quiet→high. "NA2"/blank
+// and any unrecognized value are excluded (→ skip; no fabrication).
+export const PHAC_LEVEL_RANK = { 'Non-detect': 0, Low: 1, Moderate: 2, High: 3 }
 
-// Anti-stale guard — see the NWSS writer. PHAC's public covidLive feed has at
-// times frozen for long stretches; this ensures a frozen feed yields honest
-// "No current data" instead of publishing an old level as if it were current.
+// cityId → PHAC `city` value (verified live). Configurable for future renames.
+const PHAC_CITY_BY_ID = { toronto: 'Toronto', vancouver: 'Metro Vancouver' }
+
+// Anti-stale guard — see the NWSS writer. If the newest usable weekStart is
+// older than this, the observation is skipped (→ honest "No current data")
+// rather than published as current. (The legacy covidLive feed froze in 2024;
+// this is what keeps a dormant feed from showing stale data as live.)
 const MAX_DATA_AGE_DAYS = Number.parseInt(process.env.PHAC_MAX_DATA_AGE_DAYS || '45', 10)
 
 // ---------------------------------------------------------------------------
@@ -78,7 +88,7 @@ const MAX_DATA_AGE_DAYS = Number.parseInt(process.env.PHAC_MAX_DATA_AGE_DAYS || 
 
 /**
  * Map PHAC's categorical level to observation status + severity. Conservative,
- * matching the NWSS writer: only High raises a tile to "elevated", severity
+ * matching the NWSS writer: only High raises a tile to "elevated"; severity
  * capped at "watch". Unknown level → null (skip, no fabrication).
  */
 export function levelToObservationFields(level) {
@@ -107,31 +117,6 @@ function isoDateOrNull(value) {
   return /^\d{4}-\d{2}-\d{2}$/.test(s) && !Number.isNaN(new Date(s).getTime()) ? s : null
 }
 
-export function canadaHostCities(doc) {
-  return (doc.hostCities || []).filter((c) => c.country === 'Canada')
-}
-
-/**
- * Highest PHAC level among a region's COVID sites in the trend snapshot.
- * Returns { level, trend, siteCount } or null.
- */
-export function rollupRegionLevel(trendRows, region) {
-  const sites = trendRows.filter(
-    (r) => r.region === region && r.measureid === COVID_MEASURE_ID && PHAC_LEVEL_RANK[r.latestLevel] !== undefined,
-  )
-  if (sites.length === 0) return null
-  let bestRank = -1
-  let bestLevel = null
-  const trends = new Set()
-  for (const s of sites) {
-    const rank = PHAC_LEVEL_RANK[s.latestLevel]
-    if (rank > bestRank) { bestRank = rank; bestLevel = s.latestLevel }
-    if (s.latestTrend) trends.add(s.latestTrend)
-  }
-  const trend = trends.size === 1 ? [...trends][0] : 'varies across sites'
-  return { level: bestLevel, trend, siteCount: sites.length }
-}
-
 /** True when `sampleDate` is older than maxAgeDays relative to runDateIso. */
 export function isStale(sampleDate, runDateIso, maxAgeDays = MAX_DATA_AGE_DAYS) {
   if (!sampleDate) return true
@@ -139,47 +124,86 @@ export function isStale(sampleDate, runDateIso, maxAgeDays = MAX_DATA_AGE_DAYS) 
   return ageDays > maxAgeDays
 }
 
-/** Latest COVID sample date for a region from the dated main file, or null. */
-export function latestRegionDate(mainRows, region) {
-  let latest = null
-  for (const r of mainRows) {
-    if (r.region !== region) continue
-    if (r.measureid && r.measureid !== COVID_MEASURE_ID) continue
-    const d = isoDateOrNull(r.Date)
-    if (d && (latest === null || d > latest)) latest = d
-  }
-  return latest
+export function canadaHostCities(doc) {
+  return (doc.hostCities || []).filter((c) => c.country === 'Canada')
 }
 
-/** Build one deterministic PHAC observation, or null if unmappable / undated. */
-export function buildObservation({ city, rollup, sampleDate, runDateIso, publish }) {
-  const fields = levelToObservationFields(rollup.level)
-  if (!fields || !sampleDate) return null
-  const siteWord = rollup.siteCount === 1 ? 'site' : 'sites'
+/**
+ * Resolve one (city, pathogen) to its current PHAC level + date. Prefers PHAC's
+ * own city-level aggregate row (`grouping == "City"`); falls back to the highest
+ * level among site rows. Returns { level, trend, weekStart, basis, siteCount }
+ * or null when there is no mappable, dated row.
+ */
+export function rollupCityPathogen(rows, phacCity, measureid) {
+  const matching = rows.filter(
+    (r) =>
+      r.city === phacCity &&
+      r.measureid === measureid &&
+      PHAC_LEVEL_RANK[r.Viral_Activity_Level] !== undefined &&
+      isoDateOrNull(r.weekStart),
+  )
+  if (matching.length === 0) return null
+
+  const cityRows = matching.filter((r) => r.grouping === 'City')
+  const pool = cityRows.length > 0 ? cityRows : matching
+  const basis = cityRows.length > 0 ? 'city-aggregate' : 'site-max'
+
+  let latestWeek = null
+  for (const r of pool) {
+    const wk = isoDateOrNull(r.weekStart)
+    if (latestWeek === null || wk > latestWeek) latestWeek = wk
+  }
+  const inWeek = pool.filter((r) => isoDateOrNull(r.weekStart) === latestWeek)
+
+  let best = null
+  for (const r of inWeek) {
+    const rank = PHAC_LEVEL_RANK[r.Viral_Activity_Level]
+    if (best === null || rank > PHAC_LEVEL_RANK[best.Viral_Activity_Level]) best = r
+  }
   return {
-    id: `auto-phac-${city.id}-${PATHOGEN.slug}-${sampleDate}`,
+    level: best.Viral_Activity_Level,
+    trend: best.latestTrend || null,
+    weekStart: latestWeek,
+    basis,
+    siteCount: inWeek.length,
+  }
+}
+
+/** Build one deterministic PHAC observation, or null if unmappable / stale. */
+export function buildObservation({ city, pathogen, rollup, runDateIso, publish }) {
+  const fields = levelToObservationFields(rollup.level)
+  if (!fields) return null
+  if (isStale(rollup.weekStart, runDateIso)) return null
+
+  const basisText =
+    rollup.basis === 'city-aggregate'
+      ? 'PHAC city-level aggregate'
+      : `highest of ${rollup.siteCount} site${rollup.siteCount === 1 ? '' : 's'}`
+  const trendText = rollup.trend ? `; trend: ${rollup.trend}` : ''
+  return {
+    id: `auto-phac-${city.id}-${pathogen.slug}-${rollup.weekStart}`,
     hostCityId: city.id,
     domain: 'respiratory',
-    pathogenOrSyndrome: PATHOGEN.display,
+    pathogenOrSyndrome: pathogen.display,
     observationType: 'wastewater',
     status: fields.status,
     severity: fields.severity,
     confidence: 'official',
-    sampleDate,
+    sampleDate: rollup.weekStart,
     sourceId: SOURCE_ID,
     sourceUrl: DASHBOARD_URL,
     lastVerified: runDateIso,
     summary:
-      `PHAC wastewater respiratory surveillance for Metro ${city.displayName}: ` +
-      `SARS-CoV-2 viral activity level "${rollup.level}" (highest among ${rollup.siteCount} ${siteWord}; ` +
-      `trend: ${rollup.trend}; data to ${sampleDate}). COVID-19 only — PHAC influenza/RSV not yet ingested.`,
+      `PHAC National Wastewater Monitoring for ${city.displayName}: ` +
+      `${pathogen.display} viral activity level "${rollup.level}" ` +
+      `(week of ${rollup.weekStart}; ${basisText}${trendText}).`,
     publicDisplayAllowed: publish === 'auto',
     provenance: 'auto-phac',
   }
 }
 
 /** Pure, idempotent transform: replaces only auto-phac obs; never touches others. */
-export function applyIngestion({ doc, trendRows, mainRows, runDateIso, publish }) {
+export function applyIngestion({ doc, rows, runDateIso, publish }) {
   const next = JSON.parse(JSON.stringify(doc))
   const written = []
   const perCity = []
@@ -189,16 +213,12 @@ export function applyIngestion({ doc, trendRows, mainRows, runDateIso, publish }
     const auto = []
 
     if (city.country === 'Canada') {
-      const region = PHAC_REGION_BY_CITY[city.id] || city.displayName
-      const rollup = rollupRegionLevel(trendRows, region)
-      if (rollup) {
-        const sampleDate = latestRegionDate(mainRows, region)
-        // Abandoned-feed guard: PHAC's covidLive feed has frozen for long
-        // stretches; never publish an old level as a current status.
-        if (!isStale(sampleDate, runDateIso)) {
-          const obs = buildObservation({ city, rollup, sampleDate, runDateIso, publish })
-          if (obs) { auto.push(obs); written.push(obs) }
-        }
+      const phacCity = PHAC_CITY_BY_ID[city.id] || city.displayName
+      for (const pathogen of PATHOGENS) {
+        const rollup = rollupCityPathogen(rows, phacCity, pathogen.measureid)
+        if (!rollup) continue
+        const obs = buildObservation({ city, pathogen, rollup, runDateIso, publish })
+        if (obs) { auto.push(obs); written.push(obs) }
       }
     }
 
@@ -230,7 +250,7 @@ function readJson(path) {
 function writeResult(result) {
   atomicWriteFileSync(
     OUTPUT_PATH,
-    JSON.stringify({ checkedAt: new Date().toISOString(), source: SOURCE_ID, ...result }, null, 2) + '\n',
+    JSON.stringify({ checkedAt: new Date().toISOString(), source: SOURCE_ID, trendUrl: TREND_URL, ...result }, null, 2) + '\n',
   )
 }
 
@@ -263,23 +283,21 @@ async function main() {
   const now = new Date()
   const runDateIso = now.toISOString().slice(0, 10)
 
-  let trendRows
-  let mainRows
+  let rows
   try {
-    trendRows = process.env.PHAC_TREND_FIXTURE ? parseCsv(readFileSync(process.env.PHAC_TREND_FIXTURE, 'utf8')) : await fetchCsv(TREND_URL)
-    mainRows = process.env.PHAC_MAIN_FIXTURE ? parseCsv(readFileSync(process.env.PHAC_MAIN_FIXTURE, 'utf8')) : await fetchCsv(MAIN_URL)
+    rows = process.env.PHAC_TREND_FIXTURE ? parseCsv(readFileSync(process.env.PHAC_TREND_FIXTURE, 'utf8')) : await fetchCsv(TREND_URL)
   } catch (error) {
     console.error(`[ingest-phac] fetch failed (fail-open, no changes): ${error.message}`)
     if (!dryRun) writeResult({ ok: false, mode: 'fetch-error', error: error.message, wrote: false, observations: 0 })
     return
   }
 
-  const { doc: nextDoc, written, perCity } = applyIngestion({ doc, trendRows, mainRows, runDateIso, publish: policy })
+  const { doc: nextDoc, written, perCity } = applyIngestion({ doc, rows, runDateIso, publish: policy })
 
   if (dryRun) {
     console.log(`[ingest-phac] DRY RUN (policy=${policy}) — would write ${written.length} observation(s):`)
     for (const o of written) {
-      console.log(`  ${o.hostCityId.padEnd(12)} ${o.status.padEnd(9)} ${o.summary.match(/"([^"]+)"/)?.[1] ?? ''} (${o.sampleDate})`)
+      console.log(`  ${o.hostCityId.padEnd(12)} ${o.pathogenOrSyndrome.padEnd(26)} ${o.status.padEnd(9)} ${o.summary.match(/"([^"]+)"/)?.[1] ?? ''} (${o.sampleDate})`)
     }
     return
   }
