@@ -610,16 +610,19 @@ try {
   function validAutoNwssObservation(dataDir, city, overrides = {}) {
     const sources = readJson(join(dataDir, 'signal-sources.json'))
     const tier1 = sources.find((s) => s.sourceTier === 1) ?? sources[0]
+    // Sentinel week (1999) so the fixture id can never collide with a real
+    // ingested observation (live NWSS weeks are current-year) when this suite
+    // runs against a data file that already contains auto-nwss observations.
     return validObservation(dataDir, city.id, {
-      id: `auto-nwss-${city.id}-sars-cov-2-2026-06-06`,
+      id: `auto-nwss-${city.id}-sars-cov-2-1999-01-01`,
       domain: 'respiratory',
       observationType: 'wastewater',
       pathogenOrSyndrome: 'SARS-CoV-2 (wastewater)',
       status: 'elevated',
       severity: 'watch',
       confidence: 'official',
-      sampleDate: '2026-06-06',
-      reportDate: '2026-06-12',
+      sampleDate: '1999-01-01',
+      reportDate: '1999-01-07',
       reportingLagDays: 6,
       sourceId: tier1.id,
       provenance: 'auto-nwss',

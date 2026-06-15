@@ -51,12 +51,10 @@ jobs:
         run: npm run ingest:nwss
 
       - name: Validate data
+        # Validates the freshly-ingested observations against the full schema +
+        # auto-nwss contract. Code-level unit suites live in ci.yml (the code
+        # gate), not here (the data-refresh gate).
         run: npm run validate:data
-
-      - name: Run validator + ingestion test suites
-        run: |
-          npm run test:validators
-          npm run test:ingest-nwss
 
       - name: Regenerate public status + API
         run: |

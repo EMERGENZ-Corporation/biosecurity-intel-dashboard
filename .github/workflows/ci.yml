@@ -29,6 +29,9 @@ jobs:
       - name: Run validator regression tests
         run: npm run test:validators
 
+      - name: Run NWSS ingestion transform tests
+        run: npm run test:ingest-nwss
+
       - name: Run news-fetch retry tests
         run: npm run test:fetch
 

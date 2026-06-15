@@ -128,6 +128,17 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 
 ## ✅ Completed
 
+## ✅ NWSS ingestion — fix first-run CI failure (fixture id collision + workflow separation) (commit pending)
+
+The first manual `workflow_dispatch` of the NWSS ingest (run 27518721040) failed — but **before the commit step, so no bad data reached main**, and it proved the live Socrata fetch + `validate:data` work against real data (latest week `2026-06-06`). Root cause: the `host-city-auto-nwss-valid` validator test hardcoded the fixture id `auto-nwss-atlanta-sars-cov-2-2026-06-06`, which is exactly the id real ingestion produces for Atlanta this week — so once the workflow populated the data file and the test copied it, the global duplicate-id check tripped. This was also a latent `ci.yml` breaker (it runs `test:validators` on every push) that would have fired the moment ingested data landed on main.
+
+Fixes:
+- `scripts/test-validate-data.mjs` — auto-nwss fixtures use a **sentinel week `1999-01-01`** that can never collide with live current-year NWSS data. Reproduced the exact failure locally (populated the data with the colliding id, suite failed → applied fix → suite passed).
+- `.github/workflows/ingest-nwss-host-cities.yml` — removed the redundant `test:validators`/`test:ingest-nwss` step. A data-refresh job validates the **data** (`validate:data` against the auto-nwss contract); code-level unit suites belong in `ci.yml` (the code gate), not the data gate.
+- `.github/workflows/ci.yml` — added `test:ingest-nwss` alongside `test:validators` so the ingester unit suite gates code changes where it belongs.
+
+**Verify:** `npm run test:validators && npm run test:ingest-nwss && npm run validate:data && npm run build` (PASS). Re-triggered the workflow on main after pushing.
+
 ## ✅ NWSS host-city ingestion — built the deterministic auto-writer (live data, one-time approval) (commit pending)
 
 Built the script the `docs/HOST-CITY-NWSS-INGESTION.md` spec describes, so the 11 US host-city tiles can show real CDC NWSS wastewater respiratory levels instead of "No current data". User directive: **minimize approvals, don't make them babysit it.** The spec's per-observation review gate (`publicDisplayAllowed:false` on every auto write → ~33 manual flips/week) was the opposite of that, so the design was changed: **the operator approves the mechanism once (merge the PR), then it runs hands-off.**
