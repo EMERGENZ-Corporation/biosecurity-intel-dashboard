@@ -67,6 +67,11 @@ export const PHAC_LEVEL_RANK = { Low: 0, Medium: 1, High: 2 }
 // Vancouver match PHAC region names exactly); override here if PHAC renames.
 const PHAC_REGION_BY_CITY = { toronto: 'Toronto', vancouver: 'Vancouver' }
 
+// Anti-stale guard — see the NWSS writer. PHAC's public covidLive feed has at
+// times frozen for long stretches; this ensures a frozen feed yields honest
+// "No current data" instead of publishing an old level as if it were current.
+const MAX_DATA_AGE_DAYS = Number.parseInt(process.env.PHAC_MAX_DATA_AGE_DAYS || '45', 10)
+
 // ---------------------------------------------------------------------------
 // Pure helpers (exported for unit testing — no network, no fs).
 // ---------------------------------------------------------------------------
@@ -127,6 +132,13 @@ export function rollupRegionLevel(trendRows, region) {
   return { level: bestLevel, trend, siteCount: sites.length }
 }
 
+/** True when `sampleDate` is older than maxAgeDays relative to runDateIso. */
+export function isStale(sampleDate, runDateIso, maxAgeDays = MAX_DATA_AGE_DAYS) {
+  if (!sampleDate) return true
+  const ageDays = (new Date(runDateIso).getTime() - new Date(sampleDate).getTime()) / 86400000
+  return ageDays > maxAgeDays
+}
+
 /** Latest COVID sample date for a region from the dated main file, or null. */
 export function latestRegionDate(mainRows, region) {
   let latest = null
@@ -181,8 +193,12 @@ export function applyIngestion({ doc, trendRows, mainRows, runDateIso, publish }
       const rollup = rollupRegionLevel(trendRows, region)
       if (rollup) {
         const sampleDate = latestRegionDate(mainRows, region)
-        const obs = buildObservation({ city, rollup, sampleDate, runDateIso, publish })
-        if (obs) { auto.push(obs); written.push(obs) }
+        // Abandoned-feed guard: PHAC's covidLive feed has frozen for long
+        // stretches; never publish an old level as a current status.
+        if (!isStale(sampleDate, runDateIso)) {
+          const obs = buildObservation({ city, rollup, sampleDate, runDateIso, publish })
+          if (obs) { auto.push(obs); written.push(obs) }
+        }
       }
     }
 

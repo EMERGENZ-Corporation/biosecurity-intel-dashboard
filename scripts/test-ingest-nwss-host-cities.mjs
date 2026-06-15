@@ -12,6 +12,7 @@ import {
   buildObservation,
   applyIngestion,
   usStates,
+  isStale,
 } from './ingest-nwss-host-cities.mjs'
 
 let failures = 0
@@ -112,6 +113,14 @@ eq(
   JSON.stringify(r1.doc),
   'idempotent: second run replaces prior auto-nwss obs, output unchanged',
 )
+
+// --- staleness guard: an abandoned feed yields no observations ---------------
+eq(isStale('2026-06-06', '2026-06-14'), false, 'recent data is not stale')
+eq(isStale('2024-06-23', '2026-06-14'), true, 'two-year-old data is stale')
+eq(isStale(null, '2026-06-14'), true, 'missing date counts as stale')
+// Same rows, but the run happens a year later → every data point is stale.
+const rStale = applyIngestion({ doc, rows, runDateIso: '2027-06-14', publish: 'auto' })
+eq(rStale.written.length, 0, 'stale feed writes no observations (honest "No current data")')
 
 if (failures > 0) {
   console.error(`[test-ingest-nwss] FAILED (${failures} assertion${failures === 1 ? '' : 's'})`)

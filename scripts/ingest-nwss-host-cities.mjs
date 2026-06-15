@@ -111,6 +111,11 @@ export const CATEGORY_RANK = {
 // How many days back to pull so we reliably capture the latest weekly release.
 const LOOKBACK_DAYS = Number.parseInt(process.env.NWSS_LOOKBACK_DAYS || '45', 10)
 const FETCH_LIMIT = Number.parseInt(process.env.NWSS_FETCH_LIMIT || '50000', 10)
+// Anti-stale guard: if the newest data point is older than this, the feed is
+// treated as abandoned and the observation is SKIPPED (→ "No current data")
+// rather than published as a current status. Generous enough not to trip on
+// normal weekly lag; the UI freshness flag handles finer-grained staleness.
+const MAX_DATA_AGE_DAYS = Number.parseInt(process.env.NWSS_MAX_DATA_AGE_DAYS || '45', 10)
 
 // ---------------------------------------------------------------------------
 // Pure helpers (exported for unit testing — no network, no fs).
@@ -134,6 +139,13 @@ function isoDateOrNull(value) {
   if (!value) return null
   const s = String(value).slice(0, 10)
   return /^\d{4}-\d{2}-\d{2}$/.test(s) && !Number.isNaN(new Date(s).getTime()) ? s : null
+}
+
+/** True when `sampleDate` is older than maxAgeDays relative to runDateIso. */
+export function isStale(sampleDate, runDateIso, maxAgeDays = MAX_DATA_AGE_DAYS) {
+  if (!sampleDate) return true
+  const ageDays = (new Date(runDateIso).getTime() - new Date(sampleDate).getTime()) / 86400000
+  return ageDays > maxAgeDays
 }
 
 /** US host cities only (state-level NWSS). Canada/Mexico are out of scope. */
@@ -242,6 +254,8 @@ export function applyIngestion({ doc, rows, runDateIso, publish }) {
       for (const pathogen of PATHOGENS) {
         const rollup = latestWeekRollup(rows, city.regionOrState, pathogen.target)
         if (!rollup) continue
+        // Abandoned-feed guard: never publish stale data as a current status.
+        if (isStale(rollup.weekEnd, runDateIso)) continue
         const obs = buildObservation({ city, pathogen, rollup, runDateIso, publish })
         if (obs) {
           auto.push(obs)

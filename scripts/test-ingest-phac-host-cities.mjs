@@ -14,6 +14,7 @@ import {
   buildObservation,
   applyIngestion,
   canadaHostCities,
+  isStale,
 } from './ingest-phac-host-cities.mjs'
 
 let failures = 0
@@ -100,6 +101,13 @@ eq(dallas.observations.length, 0, 'US city untouched by PHAC writer')
 
 const r2 = applyIngestion({ doc: r1.doc, trendRows, mainRows, runDateIso: '2026-06-15', publish: 'auto' })
 eq(JSON.stringify(r2.doc), JSON.stringify(r1.doc), 'idempotent: re-run replaces only auto-phac, output unchanged')
+
+// --- staleness guard: PHAC's frozen feed yields no observations --------------
+eq(isStale('2026-06-08', '2026-06-15'), false, 'recent data is not stale')
+eq(isStale('2024-06-23', '2026-06-15'), true, 'frozen 2024 feed is stale')
+// mainRows here date to 2026-06-08; from a 2026-09 run they are all stale.
+const rStale = applyIngestion({ doc, trendRows, mainRows, runDateIso: '2026-09-01', publish: 'auto' })
+eq(rStale.written.length, 0, 'stale PHAC feed writes no observations (honest "No current data")')
 
 if (failures > 0) {
   console.error(`[test-ingest-phac] FAILED (${failures} assertion${failures === 1 ? '' : 's'})`)

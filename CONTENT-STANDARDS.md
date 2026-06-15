@@ -180,7 +180,8 @@ These invariants are enforced by `scripts/validate-data.mjs` and two unit suites
 
 - **PHAC is Tier 2**, so `auto-phac` observations resolve `sourceId` to `phac-nwmp` (Tier ≤ 2 permitted by the validator; `auto-nwss` remains Tier 1 only). Provenance id prefix is `auto-phac-`.
 - **PHAC's own category is mapped verbatim.** PHAC publishes two CSVs: a continuous `viral_load` file (NOT used — converting a continuous load to a status would require inventing thresholds, a computed epidemiological judgement reserved for humans per §7.2) and a *trend* file carrying PHAC's own `latestLevel` (`Low`/`Medium`/`High`/`New`). Only the categorical `latestLevel` drives status: `High → elevated`, `Low`/`Medium → normal`, `New`/unmapped → **skipped**.
-- **Observations are dated from PHAC's historical file**, not the ingest date, so a stalled feed still ages to "stale" (self-healing). The trend snapshot itself is undated.
+- **Observations are dated from PHAC's historical file**, not the ingest date. The trend snapshot itself is undated.
+- **Anti-stale guard (both writers).** If the newest available data point is older than `MAX_DATA_AGE_DAYS` (default 45), the observation is **skipped** — the tile shows "No current data" rather than an old level dressed as current. This guards against an abandoned upstream feed: PHAC's public `covidLive` feed was found frozen at 2024-06, so Canada honestly shows "No current data" until PHAC's current respiratory-virus endpoint is wired. The same guard protects NWSS if CDC's feed ever stalls.
 - **SARS-CoV-2 only** for now. PHAC's influenza/RSV are in a separate program feed not yet wired; the summary states this explicitly. (Documented follow-on.)
 
 Enforced by the same validator and `npm run test:ingest-phac`.
