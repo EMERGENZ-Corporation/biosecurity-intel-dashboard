@@ -77,7 +77,7 @@ export default function SignalActionStrip({ signal }: Props) {
       </a>
 
       <a
-        href="https://www.cdc.gov/publichealthgateway/healthdirectories/healthdepartments.html"
+        href="https://www.cdc.gov/public-health-gateway/php/communications-resources/health-department-directories.html"
         target="_blank"
         rel="noopener noreferrer"
         title="CDC directory of state and territorial health departments"
