@@ -158,6 +158,22 @@ These invariants are enforced by `scripts/validate-data.mjs` and a 12-test unit 
 
 Existing curated events have no `provenance` field (treated as `"curated"` by default). The UI renders auto and curated events indistinguishably — the underlying authority and attribution are what matters to users; provenance is a maintainer concern surfaced through `automation.dataWriters` in `public/status.json`.
 
+### 4.7 Auto-ingested host-city observations (deterministic)
+
+`scripts/ingest-nwss-host-cities.mjs` is the only automated writer permitted to add observations to `src/data/host-city-biosurveillance.json`. It reads the official CDC NWSS Socrata dataset (`atcp-73re`, "Wastewater Viral Activity Level for SARS-CoV-2, Influenza A and RSV") and writes one observation per US host-city × tracked pathogen for the latest week. The contract:
+
+- **Deterministic only.** No AI. Each value is a CDC categorical activity level (`Very Low`…`Very High`) read verbatim from the official Tier 1 API and mapped through a fixed table. Any unrecognized/missing category is **skipped** — the domain stays "No current data". A missing tile is always preferred over a guessed one (§4.1/§4.2).
+- **State-level rollup, faithfully labelled.** NWSS public levels are site-level; the script reports the **highest** category among a state's monitoring sites for the latest week and says exactly that in the observation `summary` (with the site count and week). It does not claim to reproduce CDC's own aggregate.
+- **Publish policy — approved once, not per observation.** Because the data is deterministic, official, and Tier 1, re-keying it by hand adds latency, not safety. The default policy is `auto` (`publicDisplayAllowed: true` → live). The `NWSS_PUBLISH_POLICY` env (`auto` | `staged` | `off`) is set explicitly in the workflow so the choice is version-controlled; `staged` routes observations through gate G21 instead, `off` is a kill switch. This is a deliberate, documented exception to the "humans-only writes" default of §3.4 — scoped strictly to deterministic Tier 1 NWSS respiratory data.
+- **Severity capped at `watch`.** A single automated wastewater feed can raise a domain to "elevated" and a city to "watch", but never to "concern"/"action". The loudest alarm tiers still require human curation or multi-source convergence (`src/utils/hostCityBioSignals.ts`).
+- **Provenance discriminator** `provenance: "auto-nwss"` is required, plus the `auto-nwss-` id prefix, `domain: "respiratory"`, `observationType: "wastewater"`, and `confidence: "official"`.
+- **`sourceId` must hard-resolve to a Tier 1 entry** (`cdc-nwss`) in `signal-sources.json`, or the run aborts (config error, not a data gap).
+- **Never overwrites human curation.** Each run removes only prior `auto-nwss` observations and rewrites them; it never edits or deletes curated observations, city identity, `sourceIds`, or `sourceCoverageSummary`. US host cities only (Canada/Mexico have no NWSS feed).
+- **Self-healing freshness.** If the job silently stops, observations age past the freshness threshold and the UI degrades to "stale" then drops them — stale data is never shown as current. No babysitting required.
+- **Fail-open, zero-change no-commit.** Any API/parse error writes nothing (existing data is left intact); a run producing no change makes no commit (§4.4). Bot identity per §3.1.
+
+These invariants are enforced by `scripts/validate-data.mjs` and two unit suites (`scripts/test-validate-data.mjs` auto-nwss cases + `scripts/test-ingest-nwss-host-cities.mjs`) — `npm run test:validators && npm run test:ingest-nwss` in CI catches any weakening.
+
 ---
 
 ## 5. Public-Facing vs. Internal Information

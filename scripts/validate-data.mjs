@@ -483,6 +483,7 @@ const HOST_CITY_OBS_STATUS = new Set([
   'normal', 'elevated', 'increasing', 'decreasing', 'stale', 'unavailable', 'unknown',
 ])
 const HOST_CITY_COUNTRIES = new Set(['United States', 'Canada', 'Mexico'])
+const HOST_CITY_PROVENANCE = new Set(['curated', 'auto-nwss'])
 
 let hostCityBio = null
 try {
@@ -592,6 +593,36 @@ if (hostCityBio) {
             }
             if (!obs.reportDate && !obs.sampleDate) {
               errors.push(`${ol}: public observation must have reportDate or sampleDate (freshness is derived from it)`)
+            }
+          }
+          // Provenance discriminator — absent defaults to "curated". Auto-ingested
+          // NWSS observations carry a hardened contract so the deterministic
+          // writer cannot be quietly weakened (CONTENT-STANDARDS §4.7).
+          if (obs.provenance !== undefined && !HOST_CITY_PROVENANCE.has(obs.provenance)) {
+            errors.push(`${ol}: invalid provenance "${obs.provenance}"`)
+          }
+          if (obs.provenance === 'auto-nwss') {
+            if (obs.id && !String(obs.id).startsWith('auto-nwss-')) {
+              errors.push(`${ol}: auto-nwss observations must use the "auto-nwss-" id prefix`)
+            }
+            if (obs.domain && obs.domain !== 'respiratory') {
+              errors.push(`${ol}: auto-nwss observations must be domain "respiratory"; got "${obs.domain}"`)
+            }
+            if (obs.observationType && obs.observationType !== 'wastewater') {
+              errors.push(`${ol}: auto-nwss observations must be observationType "wastewater"; got "${obs.observationType}"`)
+            }
+            if (obs.severity === 'concern' || obs.severity === 'action') {
+              errors.push(`${ol}: auto-nwss severity must not exceed "watch"; got "${obs.severity}"`)
+            }
+            if (!obs.reportDate && !obs.sampleDate) {
+              errors.push(`${ol}: auto-nwss observation must have reportDate or sampleDate`)
+            }
+            // Tier 1 sourceId hard-resolve (auto data is official-source-only).
+            if (obs.sourceId && signalSourceIds.has(obs.sourceId)) {
+              const src = signalSources.find((s) => s.id === obs.sourceId)
+              if (src && src.sourceTier !== 1) {
+                errors.push(`${ol}: auto-nwss sourceId must reference a Tier 1 source; "${obs.sourceId}" is Tier ${src.sourceTier}`)
+              }
             }
           }
           // reportingLagDays must equal reportDate - sampleDate when all present.
