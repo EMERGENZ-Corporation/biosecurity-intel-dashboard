@@ -9,15 +9,6 @@
     "category": "zoonotic"
   },
   {
-    "id": "t-20260519-ecdc-update",
-    "signalId": "andes-hantavirus-mv-hondius-2026",
-    "date": "2026-05-19",
-    "title": "ECDC reports 9 confirmed, 2 probable cases",
-    "description": "ECDC updates its Andes hantavirus outbreak surveillance page to 9 confirmed cases, 2 probable cases, 0 suspected cases, and 3 deaths. ECDC notes that additional cases may still be identified because of the long incubation period, while the EU/EEA general-population risk remains very low.",
-    "sourceId": "cdc-han-528",
-    "category": "zoonotic"
-  },
-  {
     "id": "t-20260519-cdc-quarantine-orders",
     "signalId": "andes-hantavirus-mv-hondius-2026",
     "date": "2026-05-19",
@@ -41,7 +32,7 @@
     "date": "2026-05-17",
     "title": "PHAC confirms Canadian Andes hantavirus case",
     "description": "PHAC confirms by National Microbiology Laboratory testing that one Canadian MV Hondius passenger is positive for Andes hantavirus. A travelling partner tested negative, no further Canadian cases had been identified at that time, and high-risk contacts remained in isolation and monitoring.",
-    "sourceId": "cdc-han-528",
+    "sourceId": "phac-andes-media-update",
     "category": "zoonotic"
   },
   {
@@ -50,7 +41,7 @@
     "date": "2026-05-16",
     "title": "Canada confirms 12th case — British Columbia; 9th country affected",
     "description": "British Columbia confirms an Andes hantavirus case in a Canadian MV Hondius passenger — the 12th overall case and 9th country. BC Centre for Disease Control (BCCDC) and Public Health Agency of Canada (PHAC) coordinating response. No community transmission identified. Separately, a Colorado man dies of Sin Nombre hantavirus — an unrelated endemic exposure; Sin Nombre does NOT transmit person-to-person and has NO link to the cruise ship cluster.",
-    "sourceId": "cdc-han-528",
+    "sourceId": "phac-andes-media-update",
     "category": "zoonotic"
   },
   {
@@ -189,15 +180,6 @@
     "category": "zoonotic"
   },
   {
-    "id": "tl-andes-2026-05-08-cdc-han528",
-    "signalId": "andes-hantavirus-mv-hondius-2026",
-    "date": "2026-05-08",
-    "title": "CDC issues HAN 528",
-    "description": "CDC issues Health Alert Network 528 for U.S. clinical awareness, infection prevention, and exposure reporting for Andes virus.",
-    "sourceId": "cdc-han-528",
-    "category": "zoonotic"
-  },
-  {
     "id": "t-20260508",
     "signalId": "andes-hantavirus-mv-hondius-2026",
     "date": "2026-05-08",
@@ -216,15 +198,6 @@
     "category": "zoonotic"
   },
   {
-    "id": "tl-andes-2026-05-06-ecdc-rra",
-    "signalId": "andes-hantavirus-mv-hondius-2026",
-    "date": "2026-05-06",
-    "title": "ECDC Rapid Risk Assessment published",
-    "description": "ECDC publishes a Rapid Risk Assessment for the cruise-ship hantavirus cluster, recommending escalation to airborne precautions during aerosol-generating procedures.",
-    "sourceId": "ecdc-andes-rra",
-    "category": "zoonotic"
-  },
-  {
     "id": "t-20260506",
     "signalId": "andes-hantavirus-mv-hondius-2026",
     "date": "2026-05-06",
@@ -240,15 +213,6 @@
     "title": "Swiss case confirmed by Geneva University Hospitals",
     "description": "Swiss case confirmed by Geneva University Hospitals — passenger who had disembarked at Saint Helena on April 24.",
     "sourceId": "cdc-han-528",
-    "category": "zoonotic"
-  },
-  {
-    "id": "tl-andes-2026-05-04-who-don599",
-    "signalId": "andes-hantavirus-mv-hondius-2026",
-    "date": "2026-05-04",
-    "title": "WHO publishes Disease Outbreak News DON599",
-    "description": "WHO issues DON599 describing the initial Andes hantavirus cluster aboard MV Hondius and the multinational case-finding effort.",
-    "sourceId": "who-don599",
     "category": "zoonotic"
   },
   {
@@ -437,5 +401,50 @@
     "authority": "CDC",
     "link": "https://tools.cdc.gov/api/embed/downloader/download.asp?m=132608&c=765752",
     "promotedAt": "2026-06-06T04:05:16.571Z"
+  },
+  {
+    "id": "tl-yellowfever-2026-06-13-paho",
+    "signalId": "yellow-fever-colombia-2026",
+    "date": "2026-06-13",
+    "title": "Yellow fever surveillance signal added",
+    "description": "Monitoring record added for yellow fever activity in Colombia (Tolima and surrounding departments); verify current case and death figures against the specific PAHO epidemiological alert.",
+    "sourceId": "paho-yellow-fever-2026",
+    "category": "vector_borne"
+  },
+  {
+    "id": "tl-lassa-2026-06-13-ncdc",
+    "signalId": "lassa-fever-2026",
+    "date": "2026-06-13",
+    "title": "Lassa fever surveillance signal added",
+    "description": "Monitoring record added for Lassa fever clinical and laboratory readiness; verify current Nigeria case and death figures against the specific NCDC situation report.",
+    "sourceId": "ncdc-lassa-fever",
+    "category": "vhf"
+  },
+  {
+    "id": "tl-screwworm-2026-06-13-usda",
+    "signalId": "screwworm-onehealth-2026",
+    "date": "2026-06-13",
+    "title": "New World screwworm surveillance signal added",
+    "description": "Monitoring record added for New World screwworm One Health surveillance across affected U.S. and regional areas; verify current detection details against the specific USDA APHIS status update.",
+    "sourceId": "usda-aphis-screwworm-status",
+    "category": "zoonotic"
+  },
+  {
+    "id": "tl-pertussis-2026-06-12-cdc",
+    "signalId": "pertussis-us-2026",
+    "date": "2026-06-12",
+    "title": "Pertussis surveillance signal added",
+    "description": "Monitoring record added for U.S. pertussis (whooping cough) surveillance; verify current year-to-date case figures against CDC pertussis surveillance reporting.",
+    "sourceId": "cdc-pertussis-surveillance",
+    "category": "vaccine_preventable"
+  },
+  {
+    "id": "tl-fifa-2026-06-13-who",
+    "signalId": "fifa-world-cup-2026-prep",
+    "date": "2026-06-13",
+    "title": "FIFA World Cup 2026 mass-gathering preparedness signal added",
+    "description": "Monitoring record added for 2026 FIFA World Cup mass-gathering health preparedness across host countries; verify event-based surveillance and travel-importation guidance against WHO mass-gathering resources.",
+    "sourceId": "who-mass-gatherings",
+    "category": "mass_gathering"
   }
 ]
