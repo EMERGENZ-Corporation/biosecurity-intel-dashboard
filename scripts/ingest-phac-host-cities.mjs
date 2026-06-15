@@ -255,9 +255,30 @@ function writeResult(result) {
 }
 
 async function fetchCsv(url) {
-  const res = await fetch(url, { headers: { Accept: 'text/csv' } })
-  if (!res.ok) throw new Error(`PHAC HTTP ${res.status} ${res.statusText} for ${url}`)
-  return parseCsv(await res.text())
+  // canada.ca sits behind Akamai, which intermittently resets connections from
+  // datacenter/CI IPs and challenges non-browser User-Agents. A descriptive
+  // browser-style UA + a few retries with backoff makes the fetch reliable
+  // without misrepresenting who we are. Fail-open still applies if all fail.
+  const headers = {
+    Accept: 'text/csv,*/*',
+    'User-Agent':
+      'Mozilla/5.0 (compatible; EMERGENZ-biosecurity-dashboard/1.0; +https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard)',
+  }
+  const attempts = Number.parseInt(process.env.PHAC_FETCH_ATTEMPTS || '4', 10)
+  let lastError
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    try {
+      const res = await fetch(url, { headers, redirect: 'follow' })
+      if (!res.ok) throw new Error(`PHAC HTTP ${res.status} ${res.statusText} for ${url}`)
+      return parseCsv(await res.text())
+    } catch (error) {
+      lastError = error
+      const cause = error.cause ? ` (cause: ${error.cause.code || error.cause.message || error.cause})` : ''
+      console.warn(`[ingest-phac] fetch attempt ${attempt}/${attempts} failed: ${error.message}${cause}`)
+      if (attempt < attempts) await new Promise((r) => setTimeout(r, attempt * 2500))
+    }
+  }
+  throw lastError
 }
 
 async function main() {
