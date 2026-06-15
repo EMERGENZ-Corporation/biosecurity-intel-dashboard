@@ -14,8 +14,68 @@
       "eventRole": "host_city",
       "venueName": "Mercedes-Benz Stadium",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current Georgia levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-atlanta-sars-cov-2-2026-06-06",
+          "hostCityId": "atlanta",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Georgia: SARS-CoV-2 (wastewater) at \"Low\" (highest among 16 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-atlanta-influenza-a-2026-06-06",
+          "hostCityId": "atlanta",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Georgia: Influenza A (wastewater) at \"Very Low\" (highest among 16 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-atlanta-rsv-2026-06-06",
+          "hostCityId": "atlanta",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Georgia: RSV (wastewater) at \"Low\" (highest among 16 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "boston",
@@ -28,8 +88,68 @@
       "eventRole": "host_city",
       "venueName": "Gillette Stadium (Foxborough)",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current Massachusetts levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-boston-sars-cov-2-2026-06-06",
+          "hostCityId": "boston",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Massachusetts: SARS-CoV-2 (wastewater) at \"Low\" (highest among 3 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-boston-influenza-a-2026-06-06",
+          "hostCityId": "boston",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Massachusetts: Influenza A (wastewater) at \"Very Low\" (highest among 3 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-boston-rsv-2026-06-06",
+          "hostCityId": "boston",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Massachusetts: RSV (wastewater) at \"Low\" (highest among 3 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "dallas",
@@ -42,8 +162,68 @@
       "eventRole": "host_city",
       "venueName": "AT&T Stadium (Arlington)",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current Texas levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-dallas-sars-cov-2-2026-06-06",
+          "hostCityId": "dallas",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "elevated",
+          "severity": "watch",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Texas: SARS-CoV-2 (wastewater) at \"High\" (highest among 46 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-dallas-influenza-a-2026-06-06",
+          "hostCityId": "dallas",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Texas: Influenza A (wastewater) at \"Moderate\" (highest among 39 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-dallas-rsv-2026-06-06",
+          "hostCityId": "dallas",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Texas: RSV (wastewater) at \"Moderate\" (highest among 39 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "houston",
@@ -56,8 +236,68 @@
       "eventRole": "host_city",
       "venueName": "NRG Stadium",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current Texas levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-houston-sars-cov-2-2026-06-06",
+          "hostCityId": "houston",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "elevated",
+          "severity": "watch",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Texas: SARS-CoV-2 (wastewater) at \"High\" (highest among 46 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-houston-influenza-a-2026-06-06",
+          "hostCityId": "houston",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Texas: Influenza A (wastewater) at \"Moderate\" (highest among 39 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-houston-rsv-2026-06-06",
+          "hostCityId": "houston",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Texas: RSV (wastewater) at \"Moderate\" (highest among 39 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "kansas-city",
@@ -70,8 +310,68 @@
       "eventRole": "host_city",
       "venueName": "Arrowhead Stadium",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current Missouri levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-kansas-city-sars-cov-2-2026-06-06",
+          "hostCityId": "kansas-city",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Missouri: SARS-CoV-2 (wastewater) at \"Very Low\" (highest among 1 monitoring site for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-kansas-city-influenza-a-2026-06-06",
+          "hostCityId": "kansas-city",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Missouri: Influenza A (wastewater) at \"Very Low\" (highest among 1 monitoring site for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-kansas-city-rsv-2026-06-06",
+          "hostCityId": "kansas-city",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Missouri: RSV (wastewater) at \"Very Low\" (highest among 1 monitoring site for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "los-angeles",
@@ -84,8 +384,68 @@
       "eventRole": "host_city",
       "venueName": "SoFi Stadium (Inglewood)",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current California levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-los-angeles-sars-cov-2-2026-06-06",
+          "hostCityId": "los-angeles",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "elevated",
+          "severity": "watch",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for California: SARS-CoV-2 (wastewater) at \"High\" (highest among 81 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-los-angeles-influenza-a-2026-06-06",
+          "hostCityId": "los-angeles",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for California: Influenza A (wastewater) at \"Low\" (highest among 79 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-los-angeles-rsv-2026-06-06",
+          "hostCityId": "los-angeles",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for California: RSV (wastewater) at \"Moderate\" (highest among 79 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "miami",
@@ -98,8 +458,68 @@
       "eventRole": "host_city",
       "venueName": "Hard Rock Stadium (Miami Gardens)",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current Florida levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-miami-sars-cov-2-2026-06-06",
+          "hostCityId": "miami",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Florida: SARS-CoV-2 (wastewater) at \"Moderate\" (highest among 12 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-miami-influenza-a-2026-06-06",
+          "hostCityId": "miami",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Florida: Influenza A (wastewater) at \"Low\" (highest among 12 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-miami-rsv-2026-06-06",
+          "hostCityId": "miami",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "elevated",
+          "severity": "watch",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Florida: RSV (wastewater) at \"Very High\" (highest among 12 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "new-york-new-jersey",
@@ -108,12 +528,72 @@
       "regionOrState": "New Jersey",
       "metroArea": "New York–Newark–Jersey City",
       "latitude": 40.76,
-      "longitude": -74.0,
+      "longitude": -74,
       "eventRole": "host_city",
       "venueName": "MetLife Stadium (East Rutherford)",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current New Jersey / New York levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-new-york-new-jersey-sars-cov-2-2026-06-06",
+          "hostCityId": "new-york-new-jersey",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for New Jersey: SARS-CoV-2 (wastewater) at \"Low\" (highest among 25 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-new-york-new-jersey-influenza-a-2026-06-06",
+          "hostCityId": "new-york-new-jersey",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for New Jersey: Influenza A (wastewater) at \"Moderate\" (highest among 25 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-new-york-new-jersey-rsv-2026-06-06",
+          "hostCityId": "new-york-new-jersey",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for New Jersey: RSV (wastewater) at \"Moderate\" (highest among 25 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "philadelphia",
@@ -126,8 +606,68 @@
       "eventRole": "host_city",
       "venueName": "Lincoln Financial Field",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current Pennsylvania levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-philadelphia-sars-cov-2-2026-06-06",
+          "hostCityId": "philadelphia",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "elevated",
+          "severity": "watch",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Pennsylvania: SARS-CoV-2 (wastewater) at \"High\" (highest among 34 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-philadelphia-influenza-a-2026-06-06",
+          "hostCityId": "philadelphia",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Pennsylvania: Influenza A (wastewater) at \"Low\" (highest among 30 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-philadelphia-rsv-2026-06-06",
+          "hostCityId": "philadelphia",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Pennsylvania: RSV (wastewater) at \"Very Low\" (highest among 22 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "san-francisco-bay-area",
@@ -140,8 +680,68 @@
       "eventRole": "host_city",
       "venueName": "Levi's Stadium (Santa Clara)",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current California levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-san-francisco-bay-area-sars-cov-2-2026-06-06",
+          "hostCityId": "san-francisco-bay-area",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "elevated",
+          "severity": "watch",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for California: SARS-CoV-2 (wastewater) at \"High\" (highest among 81 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-san-francisco-bay-area-influenza-a-2026-06-06",
+          "hostCityId": "san-francisco-bay-area",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for California: Influenza A (wastewater) at \"Low\" (highest among 79 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-san-francisco-bay-area-rsv-2026-06-06",
+          "hostCityId": "san-francisco-bay-area",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for California: RSV (wastewater) at \"Moderate\" (highest among 79 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "seattle",
@@ -154,8 +754,68 @@
       "eventRole": "host_city",
       "venueName": "Lumen Field",
       "sourceCoverageSummary": "Covered by CDC NWSS state-level respiratory-virus wastewater surveillance (weekly viral activity levels for SARS-CoV-2, influenza A, RSV). No source-backed observation recorded yet — open the source for current Washington levels.",
-      "sourceIds": ["cdc-nwss"],
-      "observations": []
+      "sourceIds": [
+        "cdc-nwss"
+      ],
+      "observations": [
+        {
+          "id": "auto-nwss-seattle-sars-cov-2-2026-06-06",
+          "hostCityId": "seattle",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "SARS-CoV-2 (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Washington: SARS-CoV-2 (wastewater) at \"Moderate\" (highest among 26 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-seattle-influenza-a-2026-06-06",
+          "hostCityId": "seattle",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "Influenza A (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Washington: Influenza A (wastewater) at \"Very Low\" (highest among 26 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        },
+        {
+          "id": "auto-nwss-seattle-rsv-2026-06-06",
+          "hostCityId": "seattle",
+          "domain": "respiratory",
+          "pathogenOrSyndrome": "RSV (wastewater)",
+          "observationType": "wastewater",
+          "status": "normal",
+          "severity": "monitor",
+          "confidence": "official",
+          "sampleDate": "2026-06-06",
+          "sourceId": "cdc-nwss",
+          "sourceUrl": "https://data.cdc.gov/d/atcp-73re",
+          "lastVerified": "2026-06-15",
+          "summary": "CDC NWSS state-level wastewater viral activity for Washington: RSV (wastewater) at \"Very Low\" (highest among 22 monitoring sites for the week ending 2026-06-06). Open the dataset for site-level detail.",
+          "publicDisplayAllowed": true,
+          "provenance": "auto-nwss",
+          "reportDate": "2026-06-12",
+          "reportingLagDays": 6
+        }
+      ]
     },
     {
       "id": "toronto",
@@ -168,7 +828,9 @@
       "eventRole": "host_city",
       "venueName": "BMO Field",
       "sourceCoverageSummary": "Covered by the PHAC / Statistics Canada National Wastewater Monitoring Program (COVID-19, influenza, RSV, mpox; updated Tue/Fri); Toronto is a participating site. No source-backed observation recorded yet — open the source for current levels.",
-      "sourceIds": ["phac-nwmp"],
+      "sourceIds": [
+        "phac-nwmp"
+      ],
       "observations": []
     },
     {
@@ -182,7 +844,9 @@
       "eventRole": "host_city",
       "venueName": "BC Place",
       "sourceCoverageSummary": "Covered by the PHAC / Statistics Canada National Wastewater Monitoring Program (COVID-19, influenza, RSV, mpox; updated Tue/Fri); Metro Vancouver is a participating site. No source-backed observation recorded yet — open the source for current levels.",
-      "sourceIds": ["phac-nwmp"],
+      "sourceIds": [
+        "phac-nwmp"
+      ],
       "observations": []
     },
     {
