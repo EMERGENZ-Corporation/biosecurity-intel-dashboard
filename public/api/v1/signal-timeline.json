@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-18T10:09:37.309Z",
+  "generatedAt": "2026-06-18T10:42:00.736Z",
   "endpoint": "/api/v1/signal-timeline.json",
-  "count": 47,
+  "count": 48,
   "signalTimeline": [
     {
       "id": "tl-andes-2026-05-19-ecdc-update",
@@ -451,6 +451,20 @@
       "description": "Monitoring record added for 2026 FIFA World Cup mass-gathering health preparedness across host countries; verify event-based surveillance and travel-importation guidance against WHO mass-gathering resources.",
       "sourceId": "who-mass-gatherings",
       "category": "mass_gathering"
+    },
+    {
+      "id": "auto-who-cc926a7a",
+      "signalId": "ebola-bundibugyo-drc-2026",
+      "date": "2026-06-17",
+      "title": "WHO issues comprehensive guidelines on filovirus disease, including Ebola and Marburg disease",
+      "description": "As the Democratic Republic of the Congo is battling an Ebola disease outbreak caused by the Bundibugyo virus, the World Health Organization (WHO) has released its first comprehensive guidelines for the clinical management of filovirus disease which include all types of Ebola...",
+      "sourceId": "who-ebola-drc-2026-situation",
+      "category": "vhf",
+      "provenance": "auto-news-tier1",
+      "newsId": "who-cc926a7a",
+      "authority": "WHO",
+      "link": "https://www.who.int/news/item/17-06-2026-who-issues-comprehensive-guidelines-on-filovirus-disease--including-ebola-and-marburg-disease",
+      "promotedAt": "2026-06-18T10:41:58.441Z"
     }
   ]
 }
