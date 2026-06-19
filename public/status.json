@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "status": "ok",
-  "generatedAt": "2026-06-18T10:09:36.552Z",
+  "status": "degraded",
+  "generatedAt": "2026-06-19T10:15:38.352Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-13T00:00:00.000Z",
     "oldestActiveReview": "2026-06-12T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 130.1601536111111,
-    "officialCheckAgeHours": 130.1601536111111
+    "dataAgeHours": 154.26065333333332,
+    "officialCheckAgeHours": 154.26065333333332
   },
   "signals": {
     "total": 19,
@@ -83,8 +83,16 @@
         "total": 1
       }
     },
-    "staleSignalIds": [],
-    "timelineEvents": 47,
+    "staleSignalIds": [
+      "andes-hantavirus-mv-hondius-2026",
+      "ebola-bundibugyo-drc-2026",
+      "measles-us-2026",
+      "mpox-africa-clade-i-2026",
+      "avian-influenza-h5-2026",
+      "chikungunya-2026",
+      "pertussis-us-2026"
+    ],
+    "timelineEvents": 48,
     "totalMapMarkers": 144,
     "totalDetailSections": 86
   },
@@ -101,7 +109,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-18T04:34:51.000Z"
+    "newest": "2026-06-19T04:08:29.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -264,5 +272,7 @@
       }
     ]
   },
-  "staleReasons": []
+  "staleReasons": [
+    "7 signal(s) older than 168h"
+  ]
 }
