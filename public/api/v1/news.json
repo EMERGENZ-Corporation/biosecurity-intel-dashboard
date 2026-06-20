@@ -1,9 +1,429 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-20T08:43:42.514Z",
+  "generatedAt": "2026-06-20T09:30:40.554Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "google-news-24b37da3",
+      "authority": "Google News",
+      "title": "Health Ministry: Final test results of suspected Ebola case not expected for 48 hours - The Times of Israel",
+      "description": "Health Ministry: Final test results of suspected Ebola case not expected for 48 hours The Times of Israel",
+      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPOEVwNmU1VS0xa0xOcDZaekJBbG5QM1YzRnlUS0o5amJnVEJ1TWNMS2VHYW0yMHRsS0xDdGdWNVNOcy1ldV96ZTFaNzdYN1Q5NnBRYWtsWWlFblJyUXB2Z1h2YmNOdWZpdS02VFFCNTdpYlBCcUVZaWk0cUgzNC1iVmRNVGV4cm10YzRHemFkc0M4ZE5xQWZKU1YxXzJEbFdQa2djUDAwSTg0TGhFaXhqZzZNVFlscUxNY2Juai1YajNCNnQxMXdrMFNR?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 09:16:16 GMT",
+      "timestamp": 1781946976000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-f891d783",
+      "authority": "Google News",
+      "title": "Biopharma Co. Hits Regulatory Hurdle in High-Priority Bird Flu Program - Streetwise Reports",
+      "description": "Biopharma Co. Hits Regulatory Hurdle in High-Priority Bird Flu Program Streetwise Reports",
+      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPMGxCaGlrb3NmYks0LUZuUHc1T0JPeTVqUXRKOGNJd3R6Y0RmQ2pGX1RkZnJiYzNtc2xmVG93VkhQd0ljZmZFOFZuWVh5NFpvdE9vTnU4d1BoZkFBR2tDT1ppNVVOdHhqOF9RM3pZWEk1dTZsN082TENMTGg4bmw3cmJYZjJtczUyWkRWaVJlYXZZY2M0WHVBUmhPeTdlLTdWZHpaQmlCNmVraUd0aUJmMFV6OVVMVUFKRXV3S0NfOHZIYlF1V3c?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 09:00:00 GMT",
+      "timestamp": 1781946000000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-8d904c90",
+      "authority": "Google News",
+      "title": "Ebola : Healthworkers in DR Congo worry for their life amid deadly outbreak - France 24",
+      "description": "Ebola : Healthworkers in DR Congo worry for their life amid deadly outbreak France 24",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQN3VHVjNuU0ZHRmVzSTQ3dXVzc2ZScnI4QWs3bDJrMUZ2Xzh3UERScDc0MDYwTUExU2VROGNpRVdyTzRRc1d6bkdicUt4MENnYXNXaDhSZ3YxX1BzLUczVzlUODNxTW5mVGU4R05QbkVLYnNuQ00xQTRVQ0lsMHBfT1VrMU5UNVRkUWlNNno3TGx2TzdyVGc2SGZjYmdtNTdKOFhZ?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 08:59:25 GMT",
+      "timestamp": 1781945965000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-3d68e66b",
+      "authority": "Google News",
+      "title": "NZ 'well prepared' for bird flu as H5N1 detected in Australia - 1News",
+      "description": "NZ 'well prepared' for bird flu as H5N1 detected in Australia 1News",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQaloyVHFCUVVxek51ZVFqYzd3eGVVVFNuZmpLT1Q1V3I2VHhwUV9iWHJXWlZmUmx0MmZfTjF6ZUJuNXFZd1V3Mi15dS0xZnFJY19mSC0zQTJvUjVkcFg0LW9kS0FBU3NQZ3NsaGdvNG9BcDZfUjhXMWVMSXJUMFB5R2VMUjBTREF6MkhQaWlWMzQyUVppUmxHcjU1bw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 08:55:56 GMT",
+      "timestamp": 1781945756000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-c372fbc4",
+      "authority": "Google News",
+      "title": "Australia's first case of deadly H5 bird flu officially confirmed. - SMH.com.au",
+      "description": "Australia's first case of deadly H5 bird flu officially confirmed. SMH.com.au",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQek5veGMxY1drbkRYNXR1TlNQa1JDRnRMLS1MS3Z2dDlLVDQ4bnhaSi04V2hjZ3lDMURTY01vWnhSMG1SSkxfcnV2Y014Q2djekhHRnh4THJKOEtzTE5jY21OeW1YbEp5WkF4OVB4NjNlakFidVlEbVBTZ19EaC1aY3NrR25uRjk0M0dnbkhqekhHbVBrN2UtSGFlVlBpUXpTeVZ4aWl4UzJiZjFhS0pTZXpYVGtHN25f?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 08:34:13 GMT",
+      "timestamp": 1781944453000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "stat-news-91f6b7a6",
+      "authority": "STAT News",
+      "title": "Opinion: STAT readers debate blue zones, open-access publishing fees, and more",
+      "description": "Keep those letters coming!",
+      "link": "https://www.statnews.com/2026/06/20/blue-zones-real-open-access-publishing-fees-letters-to-editor/?utm_campaign=rss",
+      "pubDate": "Sat, 20 Jun 2026 08:30:00 +0000",
+      "timestamp": 1781944200000,
+      "signalIds": []
+    },
+    {
+      "id": "stat-news-1b83e8e6",
+      "authority": "STAT News",
+      "title": "Opinion: Why the space in ‘health care’ matters",
+      "description": "When STAT polled our readers on ‘health care’ vs. ‘healthcare,’ about 60% of our readers voted for one word.",
+      "link": "https://www.statnews.com/2026/06/20/healthcare-or-health-care-stat-style-guide-ap/?utm_campaign=rss",
+      "pubDate": "Sat, 20 Jun 2026 08:30:00 +0000",
+      "timestamp": 1781944200000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-f5d852e3",
+      "authority": "Google News",
+      "title": "Mourners bury a 6-month-old Ebola victim in the Congo outbreak’s third orphanage death - The Boston Globe",
+      "description": "Mourners bury a 6-month-old Ebola victim in the Congo outbreak’s third orphanage death The Boston Globe",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNaF9yLXVzQkFZQ3duWWx4WjFId05RQ3dzSXR5UGZFOHZKYnRycFdrRHNFd3lvcXZiZ1VBZ1JObTdCSDZVblRRT0ltTWxNb0lQeHhLd2ItLS1Xd1FjMVc2cElLU1N2RGxKWnI2Vk1CcncydWFmMW16YW1kSTkzVU5CdlFYOC03X3h0SXQxQUpCbw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 08:25:43 GMT",
+      "timestamp": 1781943943000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-eedc4dcf",
+      "authority": "Google News",
+      "title": "Measles vaccine warning issued amid Watford cases - Yahoo News UK",
+      "description": "Measles vaccine warning issued amid Watford cases Yahoo News UK",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOZEZDem44QXgxekQ3UGFiQm04SDlnM0N0cjVhYWpJSTlHOTZmVi15eDJhb1RuMTlYZ18zWW81X1padmdud2s2aVFOQlIwcUVtQk1CYm5zQzF5YV83c3ZESWZ0bEc5WWZoNlo0YlRPQm1zWDdGNWFXcko3eW1Vb01qUnJn?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 08:22:10 GMT",
+      "timestamp": 1781943730000,
+      "signalIds": [
+        "measles-us-2026"
+      ]
+    },
+    {
+      "id": "google-news-c9c99fba",
+      "authority": "Google News",
+      "title": "Bird flu could be catastrophic for nation's vulnerable species, experts warn - Australian Broadcasting Corporation",
+      "description": "Bird flu could be catastrophic for nation's vulnerable species, experts warn Australian Broadcasting Corporation",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQYVlqdWh6UF9VLU5rNWtQM2JGLTYzbmROZ0hPeUhmVHc4cnU5ZlpwYjB2U3J4WnVBanJvaUQ5SzJEODZDSktvRFNid2l1Q0RwRUY4RkdoUG1Tb05jbnEtWkhfWExmOGFQTFY3T1M2WTFkNWZxbGhQeDNrWF9RZ2IzRGxSa1NpNmlMZ3FYN3VMU0lnd19kMkhEYk0tQ2VWNlV0VE8wZU5VY1JjUEpIcl9DVnZpUkFWdw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 08:20:58 GMT",
+      "timestamp": 1781943658000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-d3be8cb3",
+      "authority": "Google News",
+      "title": "Mourners bury a 6-month-old Ebola victim in the Congo outbreak's third orphanage death - Northeast Mississippi Daily Journal",
+      "description": "Mourners bury a 6-month-old Ebola victim in the Congo outbreak's third orphanage death Northeast Mississippi Daily Journal",
+      "link": "https://news.google.com/rss/articles/CBMiigJBVV95cUxNR0NYeFhvTVFaeUZHT3dpSkFMNENWLTRZQlBWZ3h5aHlXaVVvN1dIU2lQWU5IRG1JMms1U3l4bWp5OFRHTUpuN0FJRnR0NllacUlxNlNrMWUweGdwam9FVHFfVEJGY2FINTY1SHc3NXUxWG0yR0RZOFlPTVRlTEx0elhVRUc3UFlfRFdZMnFYOFBrYTNtUDlTa0ZpZzhXZkpXcE9iYWFQb3EzcXhtNGt6bC15b1lFUGtPTld6SVJ1YTZ0QkJHQ25FazZaREEzQnFxZ0R0alRRUnB4ZTYycml3TjBMX0pRX3NDaUVkajR0X2RwUU1hdTY1c3pCdTJTaHVYV2lTZ3JIOXBqZw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 08:07:59 GMT",
+      "timestamp": 1781942879000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "cbc-news-c75993b1",
+      "authority": "CBC News",
+      "title": "Should everyone be on GLP-1s? What the science really tells us about cancer prevention and other benefits",
+      "description": "The laundry list of possible health benefits from GLP-1 drugs seems to get longer by the day, from cancer prevention to combating addiction. But while there’s no question these medications show immense promise beyond their use for diabetes and weight loss, science is still...",
+      "link": "https://www.cbc.ca/news/health/glp1-health-benefits-cancer-prevention-second-opinion-9.7241872?cmp=rss",
+      "pubDate": "Sat, 20 Jun 2026 04:00:00 EDT",
+      "timestamp": 1781942400000,
+      "signalIds": []
+    },
+    {
+      "id": "cbc-news-8fb68afc",
+      "authority": "CBC News",
+      "title": "It started with chills. Weeks later, he was gone",
+      "description": "Imagine working 36 years for your retirement, only for it to be cut short by a mosquito infected with West Nile virus. That is the tragic reality for an Ontario family speaking out, hoping to save lives as summer mosquito season gets underway.",
+      "link": "https://www.cbc.ca/news/canada/manitoba/west-nile-deaths-9.7240740?cmp=rss",
+      "pubDate": "Sat, 20 Jun 2026 04:00:00 EDT",
+      "timestamp": 1781942400000,
+      "signalIds": []
+    },
+    {
+      "id": "cbc-news-449881be",
+      "authority": "CBC News",
+      "title": "I always thought canes were fabulous — that is, until I needed one",
+      "description": "Ev Bishop couldn't help but feel offended when people would notice her limping or struggling to move with her bad knee. But she couldn't accept that she had a disability, or might need a cane, until a visit from friends opened her eyes to how she was limiting herself.",
+      "link": "https://www.cbc.ca/news/canada/saskatchewan/first-person-canes-disability-9.7233572?cmp=rss",
+      "pubDate": "Sat, 20 Jun 2026 04:00:00 EDT",
+      "timestamp": 1781942400000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-72e96404",
+      "authority": "Google News",
+      "title": "Fighting Ebola Means Going Door to Door to Explain It’s Real - Bloomberg.com",
+      "description": "Fighting Ebola Means Going Door to Door to Explain It’s Real Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNMHBYN3hwVmthX3hQdHltZFplc1p3TEtncXY5ZHA2OHBIcTlTZ3FZWGpjS2dHYVFOVnZUaE0wTFdLb0VOX2xnY3ktd3RsbzBzOUdRTVoyaXppc3hpWjd0Sm9CQi1IbDBzSU1IdDZvbl9YSGNHZldhaGhxc1NFbGJ6TDI1NE9hVE5IR2VEdFJTOTIyaWRmOVdndjkzREpISkVOdlAzUFR5dnlNbTJySXlpZlcxUUtxLWExdmJfRQ?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 08:00:00 GMT",
+      "timestamp": 1781942400000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-40ccf2b0",
+      "authority": "Google News",
+      "title": "Bird Flu: Highly Deadly H-5 Bird Flu Reaches Australia; Concerns Over Threats to Australian Fauna - WION",
+      "description": "Bird Flu: Highly Deadly H-5 Bird Flu Reaches Australia; Concerns Over Threats to Australian Fauna WION",
+      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNcXhxYldHandWbVZOR2xCSXBIODVSWEtiMXZuYXJaeHRVbGREaFVwa3lobnYxNHdZU2duYzBEWXlBbUZIX01lalpnbW1UQ2hDUFFINHI1RjBwYVlEZkZ6Q2xrbEdWSjZYMzdlRXFzNm5YemdFMVFZNnF1NnpJeEtsdjk4XzFyUm42cHhGb2o5T3pBczk1M1BoRU9MNUpoc0g3dkNmbnR5aVk0ZmpmanJmWnpRcG4zN0VBQ2NjM3dCQlpRbGltemROR2o5TkVGYkkxNXotdG1ka9IB3AFBVV95cUxQdUFjQjJqd2xWTDh6MlBSNV8yTDZCbFVaZnZ1enF6c1c0SWtmd21yYXpGM25JcWdYTHdlazZTZmtlUkFPT0JsdFlJcmY2RjZfTk9KakxPMlZCTThnV3hVcjdJRXpmaUJUV2xSVnFUWW1HNFdQb0VVMTZRTzl6MmVJdEwwTGpxcVVTRURZd0Nwc3NCdXNXMUtwU1dtVENzaDhJcjlaMjMwT2p6a0pmVG9zdU5xTWhfODByU1hmLWdMVkgzTVJRaFNzVndITW1rR19YcW9MRFFiRVYwa0Jt?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 07:57:00 GMT",
+      "timestamp": 1781942220000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-f0aad94d",
+      "authority": "Google News",
+      "title": "Australia confirms first case of H5N1 bird flu as virus reaches every continent - سانا",
+      "description": "Australia confirms first case of H5N1 bird flu as virus reaches every continent سانا",
+      "link": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFAtOFFVdTBkTHBXUUR3WXVaVHJTd0pLX21yaEE2cGp3ZHhYQWI3M2hOTnphVk4xb2xFa0JJTGJydkZhSHhaeFBVWlFn?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 07:50:46 GMT",
+      "timestamp": 1781941846000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-43481d1c",
+      "authority": "Google News",
+      "title": "First Suspected Ebola Case in Israel Transferred to Isolation, Health Ministry Says - Haaretz",
+      "description": "First Suspected Ebola Case in Israel Transferred to Isolation, Health Ministry Says Haaretz",
+      "link": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxQcXBfZTRXUWpEZ0tSc0RmSEdXZGZmZGJpb1MwdTJlRU1ZaVo5OHBlN3gtXzVBSklyN2J4U3BpenBOR3NZV2cycXlremtld3BZSUpwSzdwdkpNM0pzaFFTQmpBcUlyUjRDSVFtbWxqQXlPV3FOU1VpNEx1YlVwTE9IOVBkaEtmR0xOYzYybTJiWFFDejk4ZE1MeUdBeUZGVFV3LUY1anVGaHN0LWF0ZWJzclZLZjNzbFplN2NkbmE1RXJ3V1FJcExPMXY5WXNLc2NuSU9aRGxGY2MxN3I4b2h6NXlHa2FkeFZ0eGhYaHY5Q0JVTWJHb0xOag?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 07:32:00 GMT",
+      "timestamp": 1781940720000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-6804b4c8",
+      "authority": "Google News",
+      "title": "Australia pledges action on H5N1 after bird flu case confirmed - Al Jazeera",
+      "description": "Australia pledges action on H5N1 after bird flu case confirmed Al Jazeera",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNbmdRZW1YZ3lSaExJT2MtbDFWY09SMEIxN1VHZ29ZT2c3d2VleW5xbFh1QjVhN0xSS1BuTFRKOU84VnQ3TDVuSTdPZTlFZC1hX29lSGM5czMycXBlejR0aHNxTGxWT1gwYjQyMGlaTlp5ZjNOMzVXcC1sVGN1TC1PaG9JMGtZYUdhLW1IQVR1NnBkQUwxb2tCQ3hqcXdBUzJ6c2ZtYU9R0gGrAUFVX3lxTE5ZVWx4ZEFUczMtbVd4TFhlMGZJbVBwVjh0WmtFcUJKaFNoelM1NjlON1pRUjlxNU40azF6LWdvWkhMVVlSQU9oRXFpQTctY2JOVTlvX1NmZFJhZGF2aU9YemwxU1pERUJTTVAyM3Z3aE16RmRIOTBENTVlUkI5QlVWUWVpRjEwMkRLY1F5dVVhbDNlNWZNRlBfNENSZ2ZLZE5xc2RLS21ncTI1Yw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 07:29:37 GMT",
+      "timestamp": 1781940577000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-ea64d1ae",
+      "authority": "Google News",
+      "title": "Congo says 933 Ebola cases confirmed, including 245 deaths - The Mighty 790 KFGO",
+      "description": "Congo says 933 Ebola cases confirmed, including 245 deaths The Mighty 790 KFGO",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOajNVb2lfeUU3UkFOVFZTSXd6R3pOcjJZcTZ1OXY4SkZHVzRSN0ZVLTdEZ2FNOHM5YngzY0tYYWFPT0FRbW5nalludHZBYmpuUEZVejktVVVPOVpQWk1qR3Jab3FXTTVvVnRYbDdieEwzSlVBLTY5T29jajJCNG92S1hqRWs1VjNsNDVPRWJBaw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 07:27:48 GMT",
+      "timestamp": 1781940468000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-7d1f3a75",
+      "authority": "Google News",
+      "title": "75 medics among 1st people infected by Ebola in DR Congo - Anadolu Ajansı",
+      "description": "75 medics among 1st people infected by Ebola in DR Congo Anadolu Ajansı",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPdWxSaEh4Sy14bl93Vy1fTHlQX0NMU2J1SHNmM2ZPYUlvcV81dXo1REhRNDZIVWJiT0c0dnUxV3JPeFhzLVlPd0NYckFmRVNrZmtOZHh0aHZLcV9UaUYtSFpZTVVCdGIxdkExMkE0dlBIYjBQcThJWUFhbldLRGd6UzV3dGZCZFlRc3FDZFB5YTd1Rko0bUlwRFVSWWs?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 07:25:24 GMT",
+      "timestamp": 1781940324000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-1e0b5522",
+      "authority": "Google News",
+      "title": "Life or death situation - Northwest Arkansas Democrat-Gazette",
+      "description": "Life or death situation Northwest Arkansas Democrat-Gazette",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOeFZBZVh0ajlvN1lHelAyeFBMTlliVzB0d19NUGJnYndqV2pTaUlOVjVVbGctdGFqQ3UtVmRXa2IxdUZJSVVITDNXc1V6dVlWODFrRFNPZEVXNzJLWDJWcmVvUDNMWjY4UzZhNnN4cEVJdUR4bWNJQndiU01Fa3lCWUF3?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 07:25:00 GMT",
+      "timestamp": 1781940300000,
+      "signalIds": []
+    },
+    {
+      "id": "google-news-789ff269",
+      "authority": "Google News",
+      "title": "Australia Detects First H5 Bird Flu Strain, Now Found In Every Continent - Sahara Reporters",
+      "description": "Australia Detects First H5 Bird Flu Strain, Now Found In Every Continent Sahara Reporters",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOd01mQ2FqbU93SElFX2dzbEhiWi1Fd2tfQkhuNi1ydk1lN1lCNFRFd205NFJ3SjhCSEgxWHBoZjVqakpRZlFXR3JrMl9VaG05ZDRBMmNsRWxFLWoyNE40NExsd0ROX2RrZGFDenFyb2NCczRwcWxOWVJONmNrVnBkVlJTV2xUZHZvUWlVUUtTTHkwNlI0Mk1DeTNoNmxpd3JBZXloTU5zZWlIU00?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 07:13:23 GMT",
+      "timestamp": 1781939603000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-a85b6705",
+      "authority": "Google News",
+      "title": "Australia reports first detection of H5 avian influenza in wild bird - Türkiye Today",
+      "description": "Australia reports first detection of H5 avian influenza in wild bird Türkiye Today",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPdXBzLTB1bjhQaXdsanJySzNvY3dUUGgxeV9iTlNhVVRwU2pFQlNURWUybTlJZXJtdFhZS3VxQ21KX2FIU2FsLWdfa2ZLenEyMV9CSnFxTk5XN1dhUHhuWlJ4bkVBYVVFTWNnZmV2Sm9fb2pRelhJcWFZR00xeVJOYTltVW53ekU0SmdWd3picjdCcFpiU0tleWtJaDJLMDZkT0lQWndSX09CZnpJZXNjWms0VmItdw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 06:45:14 GMT",
+      "timestamp": 1781937914000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-4c9db5e6",
+      "authority": "Google News",
+      "title": "Australia reports first case of deadly case of H5 bird flu variant - A News",
+      "description": "Australia reports first case of deadly case of H5 bird flu variant A News",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQOTl5UlNid2FqdThZaUstQkR1b0tDTzE1WlF4TU1UTzZ0eUV5andEeXByV0N2bXZtajlfZFYzYXByTE9sZGFRU1BDaGJKZjF1U3hMa0RvX3BHWXYtcE83a3lYb3V1dUxWaDRYNnliUmJwUnlqVXVybDdxVnQ0VGNienVETnBNWlR0RXZCOHNVVlp1UG9nYUZTTVhOdzNJa3JwQXB2cXpkRDlSc1FhZmfSAbMBQVVfeXFMT2FMdXB4NVZnd3F3NzZIaXhCcXl5M2Z4WVp1MGRIcjRfWUxsUlFjSHdZb0Q1SWhFQjRoNExrWE5jX2E0a2lieUowa1BhcTloTGM1U01tYzZEdlowTllkSHhmcFFpMlZrXy1LYUpCcXQzakFyY0xEc2ZCa0RXR0hfQk9ab3V6Y2Uzci1vd3hRbmtJY3lRWnhzd0FvWkZjakhxeU84NlRtSk1hdHdZc3kwMU5pc2c?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 06:21:42 GMT",
+      "timestamp": 1781936502000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-25b08d66",
+      "authority": "Google News",
+      "title": "CDC adds new country to chikungunya warning list, marking the widest spread since 2005 - The Cool Down",
+      "description": "CDC adds new country to chikungunya warning list, marking the widest spread since 2005 The Cool Down",
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOS2tCV2lDZ0tkbG5qZERiOFRiY1pkM1gwd3paT2ptckEtQnMwNmVIOGdNTV8zSkVYTnZGN1l3aEt6NkZnYnEwTHpDRGlWMkNCMDVabHh5R1dkQXJFOXctMFFtWHNiaGVVUFVJaTM5ZTRPcGFLWHFqazNCaFF3Mjd3RkpQTEtHX2R1enc?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 06:13:00 GMT",
+      "timestamp": 1781935980000,
+      "signalIds": [
+        "chikungunya-2026"
+      ]
+    },
+    {
+      "id": "google-news-8ea90196",
+      "authority": "Google News",
+      "title": "Highly contagious bird flu found in Australia for the first time - Yahoo",
+      "description": "Highly contagious bird flu found in Australia for the first time Yahoo",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQeWVLdGFEUmtoRndEX2FFbGZwWDlqTzFER2RrRk9haTduMFBocmlxXzVkbGxoVElnVXNpZzRDMXBZcW9aZHNocVdGeGR1QmlHOE5ha09ZN3BiLW9kUG5DR2ltZkxiMUhUVkcxalBrM2lUbFllNUdZMEJmTGxwWUlwUHVqbktweFZCN013LTBXeDhublVJNEE?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 06:11:00 GMT",
+      "timestamp": 1781935860000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-c8796599",
+      "authority": "Google News",
+      "title": "Opinion: A chance to prevent TB, Ebola and more from reaching America - CT Insider",
+      "description": "Opinion: A chance to prevent TB, Ebola and more from reaching America CT Insider",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOd1ZQZ3JvZTd5RVZMdXozTmhYX09JbzBGdHg2S2hQWU5WSERwcnltUjdaaHdoRDZ5Z05nZVNKYlJpdV9xVTZMQlRQVHZaLW5LWGtEcF9aOGJQUEQzWEVPQ29ueUNtM1VFZUxISS1xMXdabFFqdnpnNkU5ck1td29QcE02TQ?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 06:06:54 GMT",
+      "timestamp": 1781935614000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
+      "id": "google-news-0edf7dce",
+      "authority": "Google News",
+      "title": "Australia detects first case of contagious H5 bird flu - CNA",
+      "description": "Australia detects first case of contagious H5 bird flu CNA",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOQ3RlWXYyQTJYTll0c3J1Rm04RzN3TXFBazZubWxGVTZXX0ExWlRTWTluWFEzNXVXSkVNbDNQdGozU2diZ3pWeXY1T0tiUDM5MTlDeUlfV3I1RXVVaG9NcmhsNDh5N3QxWG9HeEthczZfWTI4NzFOZVNoTjFoR3FGVGpWUVc3Y1RoYTBBclNEX214eTJiNnJhYWlUdm13QQ?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 06:03:00 GMT",
+      "timestamp": 1781935380000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-4089a124",
+      "authority": "Google News",
+      "title": "MBtv: Bird flu kills 13,000 seal pups on remote Australian island - Macau Business",
+      "description": "MBtv: Bird flu kills 13,000 seal pups on remote Australian island Macau Business",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNbHRuWUZMTlJMbXo1R3o4OFEwc09zTU1uV2JUYkpBZmV2WUduTnhydk5MZzdIMm50NzQzREdueGFzUXRNNU53SmNUYUZMWTEyTVVSRWFsRW9raklFV2pfRmhWQ2pZNElwLXFjUGF2OEtTRlJ4UkFWUnpQRVBCVENNb2ZCQ2dkakFpbjN5YkRMT2thd1Mt?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 05:52:36 GMT",
+      "timestamp": 1781934756000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-9f28b94c",
+      "authority": "Google News",
+      "title": "‘Uncertain chapter’: Deadly bird flu detected - News.com.au",
+      "description": "‘Uncertain chapter’: Deadly bird flu detected News.com.au",
+      "link": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxQV29OdWFBYl85Q01mbS1Xd3g1RXhNTEdkRFZvcERhY3Bad005aW1LWE1FclBUMTdsY3dpaWl4OC1zamV5N1NSQ3VqNFplOVVvWjZTVUkwajl4OHdzMGE1VmdRVFBOb1ktMnhqcFVEVzJWNldJTk5rM09rbWd4YnpFM2YwZmM3RklLZzhpZExOYzBTOV9UN0x0ZExfaFpnVTBZdkNvMnd1czFkeXRiaFl3VngyY2Y1RzhMVm9WQnZIVmt5Qm9YZkxIN1JqT3h5bnlqTnJjZW5zTEVGQkNVaUVLNGp6VmhteEl0VGFxUFM2Z1V2Y1R2THh1etIB_gFBVV95cUxNWlcwdk1BbWNVVFBPNjhoeVJYOFJSQUUwXzNKYlNMZzNDOG9aWHlSb1VPVVl5YU9VZzFkSFd4ZDdVT29jZ2s2WF9kZEpoNUZLZkJYeE80TW5qZXlJY0QtSUltZWt6VTZHVEZ3X1pXcEthWDJiR1BjaVYxVFJGb3ZOYnRTbjN0SFB4cnV1YkRRSDZWRFRpRWoyMmVDUVJGeE1ZNUg4UmxBZ0s3Y3RlWG9kODhvLVl2dWdqaWRnVkVhXzc1NlVyeHczTUJTV0o5dlM1YUtkYWxYdmRlcjhnekNBN3k5SDlMZXNDeW5UX05pb0FDOVBKemJPTFg3Y05JZw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 05:16:40 GMT",
+      "timestamp": 1781932600000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-9340769a",
+      "authority": "Google News",
+      "title": "Uncertainty for wildlife as killer bird flu detected - Yahoo News Australia",
+      "description": "Uncertainty for wildlife as killer bird flu detected Yahoo News Australia",
+      "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1PcGFQckdwdFhtT21rM01qbUVmaGFHUTkyWTA0UzRnNmdEOWdDcURKbGk4TGs5bDJtRHZNTmVSWFkxd3E5WW1HaV9DTGphaXdoTE82QXBxOUM4cE9aTFRON1RaREw3NVZGOVJLb3lVUTBlSVBCNnc?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 04:50:00 GMT",
+      "timestamp": 1781931000000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-f19ce5bf",
+      "authority": "Google News",
+      "title": "Australia detects first case of H5 bird flu - Punch Newspapers",
+      "description": "Australia detects first case of H5 bird flu Punch Newspapers",
+      "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE9nY0VMTFJmdlJMc3puTTREazRnM1RQeUtIZHl4cjY2aDlqTlZwdlFRN0hGUmlJSjNfblc3QnNtU2R6WUdEZHd0dXdGVGxLeGpfYWpEaV8xb2Nfb0hDQ0RHekpJelJaV1JYRmZwaXZjR0xJUQ?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 04:48:28 GMT",
+      "timestamp": 1781930908000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-bc97d01a",
+      "authority": "Google News",
+      "title": "Australia’s first case of deadly bird flu confirmed in WA, second case suspected - WAtoday",
+      "description": "Australia’s first case of deadly bird flu confirmed in WA, second case suspected WAtoday",
+      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOaDVDVUFlWWhrU2E2djhEMl9pQzd5NTktX2RUUnNOWHY5MlVPNjlJeHJVR1pVNkhJXzBaVUdlV0djNUlEaFItZk9SVkgydUZxMWhNTnV6aEl2dklnaTZlVjcyMVk5MnJSSHpSalFVdjJDM2FIanBVaThxOEtNenhORGFrRDVwZFlVWXJLZEhfLW1aOFFNR0o1QklpNTAtTEpTSl9sM3lyTlEzZXFfM3JtOFFJRDVlVjA0czRfUEo3SEU3Rm1LdVVmYnF4WG1EcVd2VzNXZUVzTXpUamlfbmNzTDl4bnZXaVNhWEE?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 04:40:27 GMT",
+      "timestamp": 1781930427000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-6ebc7a0c",
+      "authority": "Google News",
+      "title": "Close Watch: Screwworm quick spread across Texas could impact deer - Tyler Morning Telegraph",
+      "description": "Close Watch: Screwworm quick spread across Texas could impact deer Tyler Morning Telegraph",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPYnBaS1pIYjRJOXRkV0dOYmtsa1gzUm9wVDNhOWx5bjAwUmpBTDBVdHpSVXBXNnc5WGlpN21wclVHWGZMZlFRQldxdEpRT2lMRmZCWWJHaEZTaDZMbm9hbFprcjU0dnhsV1pyaERZNm5FUXFzdlp6OFBEUTBlUm9TUWdKSG41a19yVnhLT05uTjNsN0lodUF0aVBfb3dMWTMxdWc?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 04:33:40 GMT",
+      "timestamp": 1781930020000,
+      "signalIds": [
+        "screwworm-onehealth-2026"
+      ]
+    },
+    {
+      "id": "google-news-adffd3a7",
+      "authority": "Google News",
+      "title": "World Health Organization reports 75 health-care workers infected with Ebola - The Spokesman-Review",
+      "description": "World Health Organization reports 75 health-care workers infected with Ebola The Spokesman-Review",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNRDVIdDAxRE5Fc19panA4bVBiWm13SjZhdnM0ZmtZa3hpLUNEZzFLTnI2SGRNeEI1VEVpNE9rSndNWnZsUHpxRllGU21uYzNRdUc2R1o1YThKc1lndkZlWlZwQlhHVGtwbUV3XzZCMVM5MExwdjBQSE9qc0FSSmQxWWlzOHdzYjZJVTE1NFkwVlMtVVFQbko1S0FrQ3M3Zw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 04:16:29 GMT",
+      "timestamp": 1781928989000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
     {
       "id": "google-news-7968990d",
       "authority": "Google News",
@@ -50,6 +470,18 @@
       "timestamp": 1781927700000,
       "signalIds": [
         "avian-influenza-h5-2026"
+      ]
+    },
+    {
+      "id": "google-news-992f7aec",
+      "authority": "Google News",
+      "title": "DRC Ebola outbreak infects 75 medics since May, WHO says - chinadailyasia.com",
+      "description": "DRC Ebola outbreak infects 75 medics since May, WHO says chinadailyasia.com",
+      "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5fblFudGRSQnZNeG9UOWZuRDlQRnE3Yi1NRUEwTE5oRDFDLXoyZVh5X1EtMHRXcGd2NjRzQ0k3ekllTk1Yb0tVa2FDZzZMdVpzN0kyOHp1S3o?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 03:52:21 GMT",
+      "timestamp": 1781927541000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
       ]
     },
     {
@@ -170,6 +602,18 @@
       "timestamp": 1781924760000,
       "signalIds": [
         "screwworm-onehealth-2026"
+      ]
+    },
+    {
+      "id": "google-news-016c27d0",
+      "authority": "Google News",
+      "title": "First case of H5 bird flu confirmed in Australia - DW.com",
+      "description": "First case of H5 bird flu confirmed in Australia DW.com",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPX2xvRFY4VEV0Ty1HbTBpWGpBRk5LZmtZcHJfZERlRVNlNFpINm9IZDc0V2NJWWtHTXVMdVFic3hiTUFKTlhxTDdOWU5ybWNsS1JmaFFoZ3VYSWhLZEFqTWliaEdsVm5mMmRjSUQ5Y0NMc1Z1YlpUd0xvOGZVb1A0ZXEwdWRGQV900gGIAUFVX3lxTE52MUh3MEVLQjFEMDdKeDhpbVVKZkFIbDRGbTV2Q2FGbVhKQ3ItZmtSazI1NmkwQm9DQUFEQWZDbDZIQkVuR3RLWGdrUnNpLU1SbHZhbWpRMVJ6N1VLQ0FWR1g2Wk5UV2pGVGE5ZmJFanRHVFoxU0tDUExPLVloT2N3d1dRRjNXV3A?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 03:05:27 GMT",
+      "timestamp": 1781924727000,
+      "signalIds": [
+        "avian-influenza-h5-2026"
       ]
     },
     {
@@ -384,6 +828,18 @@
       "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQaXBkd0hOSUo1Nzl3eGk5VEZGM0Y2NmFBaUtHSUF5R0p6ME1HaWhyQkNoWWZMSjZEVXNXdkFFM2tWSUZncWJ5dHpzVmtMX2RJNGRmek0zZko5amgzNjIyTl9FdEVhM3hPRjdzZldxczlDUWJpTGd5bGx6bDhiN1laYS1VNUFHcUFqRmVlWkNueTfSAaQBQVVfeXFMUDVJWFZ3R0tRTDBZLTNYbll5WXRiZ1RCSi02VG9ZelMzUm16MnZiUzNScS1qNGo0b28yTloxSlRtc25NX1FEYU5CV3I5SDVzaklHbjU0b1c2RmUydmdSYVp0U01DVXVJMS11TTFreDB0eEJUM3N4R2NCOG1UTWZ2NXV6VkdiWGdtT28xME9PNlNCdnh4bE1pUjdub2w1LXktWnVUdy0?oc=5",
       "pubDate": "Sat, 20 Jun 2026 01:00:00 GMT",
       "timestamp": 1781917200000,
+      "signalIds": [
+        "screwworm-onehealth-2026"
+      ]
+    },
+    {
+      "id": "google-news-e234b662",
+      "authority": "Google News",
+      "title": "USDA battles new world screwworm outbreak across Texas - Farm Progress",
+      "description": "USDA battles new world screwworm outbreak across Texas Farm Progress",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOeDN4QWJpRGRuN05qcmJ2ZlUtM2kyRnZwQTJMZE9ZZ0lOSGkzR0RpVmdMcm9pQ2pQWnlxQ1NMUGdfNzZmc293V2lnN2E1bXUycGhTSXJFVGsyV1VPVWtaY3k5YURXaThhNnI5bWlnVGN3S21TTVo2U2lGWDF4aHphZlRacm5aZWxQeGE5UDg5dDRNYkNLR1pUdkpvaHdQZw?oc=5",
+      "pubDate": "Sat, 20 Jun 2026 00:55:46 GMT",
+      "timestamp": 1781916946000,
       "signalIds": [
         "screwworm-onehealth-2026"
       ]
@@ -965,6 +1421,18 @@
       ]
     },
     {
+      "id": "google-news-cedee825",
+      "authority": "Google News",
+      "title": "Africa CDC chief says the continent needs to invest its own funds in Ebola response, vaccine - AP News",
+      "description": "Africa CDC chief says the continent needs to invest its own funds in Ebola response, vaccine AP News",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPZEt6SEV4elVGVXBEVXhHSXpqd0ltSlN1ZkxmVWF1OWxLQXhLdFV6N2JfQUw5MVk5eENWWG1RM2s3eE81OVg2Mmt6RzBLanRWR2piSGpDeWphSDFmOHRyUnA2dUpDa0tOVlEzSXV1TERWcjBMc3hmQTZkVjRJUHRvazNya2V4UlAwT2NCdHlLZkF1Zw?oc=5",
+      "pubDate": "Fri, 19 Jun 2026 20:21:00 GMT",
+      "timestamp": 1781900460000,
+      "signalIds": [
+        "ebola-bundibugyo-drc-2026"
+      ]
+    },
+    {
       "id": "google-news-c0a92339",
       "authority": "Google News",
       "title": "The story behind the first new US screwworm case in a dog - News - VIN",
@@ -984,6 +1452,18 @@
       "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPb09DRExnNTQ4b1hLMXRkV1RyVFFHc3ZYZUNPbllkRTNzcXNPN3NsbDZkekMyc2haQ1BPQTdkRmtRZzRPQlVSMlhJODB1dlEzYXZYQXE2a1Vfd0E0QlRpTDJRck82dnZGNlBMUzRyTlRsUkJUS3k2WWdYbExxTVdVWFNXaFV6VTE4eThR?oc=5",
       "pubDate": "Fri, 19 Jun 2026 20:10:15 GMT",
       "timestamp": 1781899815000,
+      "signalIds": [
+        "screwworm-onehealth-2026"
+      ]
+    },
+    {
+      "id": "google-news-d4692418",
+      "authority": "Google News",
+      "title": "While New World screwworm isn’t in Wyoming, state ups communication on safety protocols - Wyoming Public Media",
+      "description": "While New World screwworm isn’t in Wyoming, state ups communication on safety protocols Wyoming Public Media",
+      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPSS1HQ0JSYlN2S2k2N0xhSm10UzhKcklJc0RvVGplVG5mR0NuYWQtbUplQ1QxaVB2c3NSTWJ5bXJrWUNPbDU5U216eTNUbzVaSUN2U0FDNUtaNUJORFdiSHVKeUg1NU4tTnpLTTZzcWhqa3Q4a3ZNS3JTU0x0N1R6aS10MGgzTHRaRkI0WmpuNW5KRjRsc2MyOTVsS21kVVVzWmROaDhmMmRKd1RGdjljc3VfemgxWDhjeWFxT0d2UFNUSlhjLTA2aE1NbElKSWZYNFFGWQ?oc=5",
+      "pubDate": "Fri, 19 Jun 2026 20:05:00 GMT",
+      "timestamp": 1781899500000,
       "signalIds": [
         "screwworm-onehealth-2026"
       ]
@@ -1513,6 +1993,16 @@
       "signalIds": [
         "norovirus-wastewater-2026"
       ]
+    },
+    {
+      "id": "bbc-health-8a28eaa2",
+      "authority": "BBC Health",
+      "title": "Minimum age of 11 set for UK puberty blocker trial",
+      "description": "Gender-questioning children will have to be at least 11 years old to take part in a clinical trial of puberty-blocking drugs.",
+      "link": "https://www.bbc.com/news/articles/c892p2qdjjxo?at_medium=RSS&at_campaign=rss",
+      "pubDate": "Fri, 19 Jun 2026 16:18:49 GMT",
+      "timestamp": 1781885929000,
+      "signalIds": []
     },
     {
       "id": "google-news-81820db6",
@@ -5417,489 +5907,6 @@
       "timestamp": 1781793695000,
       "signalIds": [
         "rsv-wastewater-2026"
-      ]
-    },
-    {
-      "id": "google-news-35729d38",
-      "authority": "Google News",
-      "title": "Heading to Shenandoah National Park’s Appalachian Trail? Look out for suspected norovirus - WTOP",
-      "description": "Heading to Shenandoah National Park’s Appalachian Trail? Look out for suspected norovirus WTOP",
-      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQTjVPMUlNejNpU1lPTHpNTWQ1dlJBV2dYLUE3aWJMbWV3MUdSYkN4cTZrbjVGSWZfYWdVQVo5ejh1SGlEOFEwVTJoTHZRSlFqNjF4Z3pLYllpYk02WnBYdy1URF9DelgtUVAyWS1uZnJQUGNiOEJGN29ZVEZ4VlgtenVJMU15aFhNcGtTZTR5OE9wd0FSUlFnaWQ1dEhWdldqd3pWOHpjVS15MTZrUkhVd2pRLWx4RVV1RWMw?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 14:38:58 GMT",
-      "timestamp": 1781793538000,
-      "signalIds": [
-        "norovirus-wastewater-2026"
-      ]
-    },
-    {
-      "id": "google-news-3fc296cc",
-      "authority": "Google News",
-      "title": "New protocols in place to combat screwworm - WPSD Local 6",
-      "description": "New protocols in place to combat screwworm WPSD Local 6",
-      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxObzlEazYxZEpyWVVPMUJPYjd0MGRudEJNRENIWEozNlBOMC1WaG42aHNiOGhLYXNLUTZCbHJiUVJYS0QyNGJCczU3SU9VSV9ua1plZHNzQ0Y2MUl4Zjk5eU94SGZ5ZlloUGRSak8yYTJpVW9BR0U2Sk4zQ1IzRE9RNTFiYXdVb0xLdXBKXzJUMmRMdW1xTW12enJKekg4VHhBYzlGMWdNXzZTdTN6VU44QmVrSEJsejg4bmZ5S3RB?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 14:34:46 GMT",
-      "timestamp": 1781793286000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "google-news-16c83326",
-      "authority": "Google News",
-      "title": "Rabies warning, protecting mental health treatment, measles, and a hot World Cup - Substack",
-      "description": "Rabies warning, protecting mental health treatment, measles, and a hot World Cup Substack",
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPZE9Fd0VsTG9JRzV4R3NFMTJoYk9SSWVrTzBkZHpPaUVTVWFpYmFZblpQVHVjNmxIY0trV2pfSFpYVDZPd25oTHRZNXRYN2lHUmR2OHhmaDNMUms0Z1lKTGlGN3NxWmg2SXFMVEJEbnhUcU5JR1R4ckJfQ0dSNnNjVXREdTlZcjNy?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 14:33:24 GMT",
-      "timestamp": 1781793204000,
-      "signalIds": [
-        "measles-us-2026",
-        "fifa-world-cup-2026-prep"
-      ]
-    },
-    {
-      "id": "stat-news-3032ccf3",
-      "authority": "STAT News",
-      "title": "STAT+: Shingles vaccine may lower dementia risk, new study finds",
-      "description": "Nursing home residents who received at least one dose of shingles vaccine were 24 percent less likely to develop dementia, a new study found.",
-      "link": "https://www.statnews.com/2026/06/18/shingles-vaccine-may-lower-dementia-risk-new-study/?utm_campaign=rss",
-      "pubDate": "Thu, 18 Jun 2026 14:29:30 +0000",
-      "timestamp": 1781792970000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-4748f999",
-      "authority": "Google News",
-      "title": "Authorities search for source of bird flu after infection at Federal Hill shop - The Providence Journal",
-      "description": "Authorities search for source of bird flu after infection at Federal Hill shop The Providence Journal",
-      "link": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNai1FX0w4QXR6QktHV0pPZjJnQ2FCN1dvdnF3akgzRVVkRndRVDIzWEhMMGcyLWN2WmdCeVozZGc4aTExWVVPV0J5YzNsbktCSDVEblB2V21pZUc1UTV3N0poYVFYX3BsUzczOHNSZXpKU3BfejRvdG9NV2luaUt3d3dlb3VWQkhIWGRDSi1KZnF0NnROQlo1VXR5WFIyd0NSWHFhZ0RSSVE0dlBKanAzQ1k3QU1mZEpaaUk1dlNfMzJmcDAyNGlhT21sMkxOZTJQUERTb2RCUDFXdjRONkF2VjBlQ3E3UDVPMC1Nekx3VQ?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 14:28:00 GMT",
-      "timestamp": 1781792880000,
-      "signalIds": [
-        "avian-influenza-h5-2026"
-      ]
-    },
-    {
-      "id": "google-news-4dc702ac",
-      "authority": "Google News",
-      "title": "USDA awards $105 million to New World screwworm research - Pest Management Professional",
-      "description": "USDA awards $105 million to New World screwworm research Pest Management Professional",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNdkFFMjIwS3ZYbVlrdFlWUUtHQkNCMkd4dlluWVhXYUVLejEzRU1Tc1FiY19tLWVjbEZqTng5aDdsNzdmSDhreW5vZ0M3eF9CcjROYWdfQm9DYnN6Q2dyM21mc2c1LTc2N2hwVmhDaHNxSzk3Zm1zRHp4RnJuLURrYi1GTXk?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 14:26:14 GMT",
-      "timestamp": 1781792774000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "ecdc-4d85395d",
-      "authority": "ECDC",
-      "title": "Communicable disease threats report, 13 - 18 June 2026, Week 25",
-      "description": "This issue of the ECDC Communicable Disease Threats Report (CDTR) covers the period 13-18 June, and includes updates on Ebola, West Nile virus, avian influenza, and expert deployment.",
-      "link": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-13-18-june-2026-week-25",
-      "pubDate": "Thu, 18 Jun 2026 16:25:05 +0200",
-      "timestamp": 1781792705000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026",
-        "avian-influenza-h5-2026"
-      ]
-    },
-    {
-      "id": "google-news-f7558606",
-      "authority": "Google News",
-      "title": "Scientists say current Ebola strain came from wildlife into human population - Anadolu Ajansı",
-      "description": "Scientists say current Ebola strain came from wildlife into human population Anadolu Ajansı",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQcVQ5a0JrODNtaVBJUS1qNnlLMmhSc3M1aXpXMjdZVS1hUjdVN3pGVWdLN3hOTHJ4R3Y2UW1SZ0I3ZXpzWWpNZVdwbkwxYWRPbVRGcXRVUC14ZjdjRXp2dEk4dmNzVXdPRmtnSEl6QzIwb3V3Z1JmNkMybFF0Q0hhMTQtWjcwME14MU9FM3BNeGdVcVRNWlBhX1NwSXBWMnV0WjRmeGxUUHZLb0Y1bEl4M2hhX3dZVTA?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 14:09:35 GMT",
-      "timestamp": 1781791775000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-558a11a8",
-      "authority": "Google News",
-      "title": "USDA Deputy Secretary Stephen Vaden Speaks Out on Reorganization, Screwworm, Fertilizer & Farmer Trust - American Ag Network",
-      "description": "USDA Deputy Secretary Stephen Vaden Speaks Out on Reorganization, Screwworm, Fertilizer & Farmer Trust American Ag Network",
-      "link": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPWXo4dzBHakFLbUxzMUJjRm1QblVvZWlwOW5RWEs5cnRPNnNiWGhSa3l6Q0lJOG9fODgtbkljRTduZW9KYVNRYkRxU2N3X2VnU1QycFhUU3NYNXR6aDU3Um11TC13bWlwdkNKM0JHSjRfMHpoejlWYk1HLXdhM2NNanVfMV9JTDl4eGI0YXNhRGZidVZjdHNVUVRaN0I1cmxnd0hJWldic1VCbG9ubHVmLU1PTGRBTHFFbUdfSWItUTR5TG5YcUJvOFRvMFJuUmRSTnNkbDdPSFViUDFK?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 14:00:24 GMT",
-      "timestamp": 1781791224000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-71462b3d",
-      "authority": "UKHSA",
-      "title": "High consequence infectious disease: country specific risk",
-      "description": "Listing of countries with a known occurrence of high consequence infectious disease (HCID).",
-      "link": "https://www.gov.uk/guidance/high-consequence-infectious-disease-country-specific-risk",
-      "pubDate": "2026-06-18T14:00:02Z",
-      "timestamp": 1781791202000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-644fcadf",
-      "authority": "Google News",
-      "title": "Mpox vaccine reminder following increase in cases in Northern Ireland - HSC Public Health Agency",
-      "description": "Mpox vaccine reminder following increase in cases in Northern Ireland HSC Public Health Agency",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOLXVuZ2ZSWE5DYWFqaVN5eXJxLVFPVGRUTHNUdmRodm1fUldfakliZF8zRlI1aVVXdVlBSmp5WUxER0RJS0d6bkpKZDdwR2xSRTN3aVRsZko0NEt3UF9ldnRXTnozMjZYWHM3SXdVVnpMa1h1aTk5X3ptTXFvX3ZNdVpjQ2NoSkhBbXBKa1NFdDNtUUNlczN6LUFHdFZ3d3FsNW5UdkZB?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:53:07 GMT",
-      "timestamp": 1781790787000,
-      "signalIds": [
-        "mpox-africa-clade-i-2026"
-      ]
-    },
-    {
-      "id": "africa-cdc-6c78a696",
-      "authority": "Africa CDC",
-      "title": "Ebola Bundibugyo : l’Union africaine mobilise 910 millions de dollars et appelle à une riposte immédiate en RDC et en Ouganda",
-      "description": "80 millions de dollars engagés par les États membres africains, alors qu’Africa CDC appelle à transformer les promesses en décaissements, fournitures et appui aux intervenants de première ligne Bujumbura/Addis-Abeba,...",
-      "link": "https://africacdc.org/news-item/ebola-bundibugyo-lunion-africaine-mobilise-910-millions-de-dollars-et-appelle-a-une-riposte-immediate-en-rdc-et-en/",
-      "pubDate": "Thu, 18 Jun 2026 13:51:33 +0000",
-      "timestamp": 1781790693000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-7f297c05",
-      "authority": "Google News",
-      "title": "Hesitation could hinder screwworm eradication efforts - Iowa Agribusiness Radio Network |",
-      "description": "Hesitation could hinder screwworm eradication efforts Iowa Agribusiness Radio Network |",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPc0FmRzhRNEVrTTZCZjI4TkQwekYwRi1KLTZrSG00UU05ZXpQZ0lPVjVkLVVrdG9Xc3pfVHRrQTZYcjZfa0xLb3Q5OWtNdzQ2MnJvZlFDZGI0S1ZZcEpQem9aY0xXZDJ4cmJQbWdDQVJaU2tUcnp5dndOVlNudVRoY1hHQVBxVW1qVWlscGJMVkpDV3hia3IwNHVRMA?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:37:08 GMT",
-      "timestamp": 1781789828000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "google-news-dd719e8a",
-      "authority": "Google News",
-      "title": "Shenandoah National Park warning about norovirus outbreak on Appalachian Trail - Augusta Free Press",
-      "description": "Shenandoah National Park warning about norovirus outbreak on Appalachian Trail Augusta Free Press",
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQZU1HNWNIY204RUhZdnI3Q05DXzlKM0tDUm0xbks0QTRWekhPLU82Sk5USkFyeGdxLTd1UV94RGQ1TDFQVmxWYWJmVmpOOGFFSFAtMWFfYlFadkcxTVNoZHBDR001V212bjNtUUY2SEZqQnpYdThScnAxekc1SzB0dkNPQ3doblExYmFLUEI0MFkxeVpDVjF5MmQ5eG5pa3I2MGppU3Z0RURkZ0drdTlvLWozcw?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:31:48 GMT",
-      "timestamp": 1781789508000,
-      "signalIds": [
-        "norovirus-wastewater-2026"
-      ]
-    },
-    {
-      "id": "stat-news-73d42934",
-      "authority": "STAT News",
-      "title": "STAT+: Pharmalittle: We&#8217;re reading about an FDA review of Moderna&#8217;s flu shot, J&#038;J&#8217;s focus on cancer, and more",
-      "description": "Johnson &#038; Johnson has no plans to enter the booming obesity market, opting instead to focus on diseases such as cancer",
-      "link": "https://www.statnews.com/pharmalot/2026/06/18/fda-panel-vote-moderna-flu-vaccine-jnj-cancer-drugs/?utm_campaign=rss",
-      "pubDate": "Thu, 18 Jun 2026 13:28:42 +0000",
-      "timestamp": 1781789322000,
-      "signalIds": [
-        "seasonal-influenza-2026"
-      ]
-    },
-    {
-      "id": "google-news-d7f80df7",
-      "authority": "Google News",
-      "title": "Trump announces APHIS administrator amid screwworm scrutiny - The Fence Post",
-      "description": "Trump announces APHIS administrator amid screwworm scrutiny The Fence Post",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOUUV3UFFIdnlvT2hVWWdfc0VqQkJrLTdHcGVJRW1aZ1RTVVUxTGREMHU0X0paTTZ6RmNrZlBobHJWbGJQakpxNVhRX015a0tZaWw3cUpXXzJPZlNuZ0hDeGlubEdnZ0tPOVRPYTdZNVdMRndPS0pERzdoY1NXYzdvb3B6RzRscERib1JuN0VUSDRtVFFNRlNvYzdR?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:26:30 GMT",
-      "timestamp": 1781789190000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "google-news-836316b7",
-      "authority": "Google News",
-      "title": "Health Officials Caution Fliers of Measles Exposure at LAX - MyNewsLA.com",
-      "description": "Health Officials Caution Fliers of Measles Exposure at LAX MyNewsLA.com",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPWVBteXZCZkVtSmtpTmwwQmR0U1dadGhJNVN2VGtmR2tIcVVWakRxUUN0eWZzd3FvZGlaOTVRU0J4elQzLWNWMEp3MjVxaW5hdTZRdDhYc1psc2U2LUcxeWhnaDZHX3k4WWlBSDI4WnZaRWdvV3ZQUkd0Y0hFeEp6anAwS0c4M29DeTlEaDRxSGtwM3VMcG4xd1RIcTZfM2VTWTUtZkxR?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:26:00 GMT",
-      "timestamp": 1781789160000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-bcd3be9a",
-      "authority": "Google News",
-      "title": "Several cases of norovirus reported along Appalachian Trail - Rocktown Now",
-      "description": "Several cases of norovirus reported along Appalachian Trail Rocktown Now",
-      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQdXRnWGxheU9kQWRGSlV6bTJBemJ4TGk4TDJ4WTZRelN5REJrZ05mTk41eGJVZy1oazVHQVBQR2NOWTdTc2lkNG52LXdLU2hfZzhyTEVJN1h3WTZJSjZDY3BWX2VFNTloTkd2NlZmQU13ZjUwNG9VaktBTmc5U2tKaEZjOFlsZjRQSE5Vc3JzX2p1S25qbTdQX0xLMXg?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:13:48 GMT",
-      "timestamp": 1781788428000,
-      "signalIds": [
-        "norovirus-wastewater-2026"
-      ]
-    },
-    {
-      "id": "google-news-4f0542df",
-      "authority": "Google News",
-      "title": "Enanta Pharmaceuticals stock rises on RSV drug trial plans - Investing.com",
-      "description": "Enanta Pharmaceuticals stock rises on RSV drug trial plans Investing.com",
-      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPVkNnZmM5WFBlVE1pSUNlbUd0bzhRUUpYQUI4N1RoNU1JSGh4MmVJNXkwVkJMZWgyN1BIbTdVbV9uVDFSYWVRcEZnZTEzR1JUVTlKMTVnTEJSdVpCM0RWOEM1cVc3OGxDcGZvUFdYd0pZYkVIRlo3WVFFNTR4UTNmMVc5NnVKVm9oaFMweEs3RW5MVWV3QVZwbWFVX01sbkJyZ2U2UV80eVkzaGNuX3ZjbTdLY0pjNUV3MDNJSA?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:09:58 GMT",
-      "timestamp": 1781788198000,
-      "signalIds": [
-        "rsv-wastewater-2026"
-      ]
-    },
-    {
-      "id": "stat-news-c0c527d9",
-      "authority": "STAT News",
-      "title": "How many Americans can afford high-quality health care? A new poll finds the number has fallen",
-      "description": "A new poll shows only about half of U.S. adults could afford their health care and had access to quality care last year.",
-      "link": "https://www.statnews.com/2026/06/18/how-many-americans-can-afford-their-healthcare/?utm_campaign=rss",
-      "pubDate": "Thu, 18 Jun 2026 13:08:26 +0000",
-      "timestamp": 1781788106000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-0fcffbb0",
-      "authority": "Google News",
-      "title": "A visual guide to the 2026 Ebola outbreak - The Pharmaceutical Journal",
-      "description": "A visual guide to the 2026 Ebola outbreak The Pharmaceutical Journal",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOU1c3dkJqdVI3dktpYzZ1dGRJNXFDbHBRUjB3Yno5SlVDeUZxZWJDWjYxZHgxdzNUaHFZdmZFVDF4b1ZaOGNsNEh2eGdxWFZlLUdXUnFCUjFxMmxWeW9WQ0FORXVDLVJESF9uQzhHWFV6S21Qakpqc3hlakpUNTVINnd0bkFxYUpEeklkU1BPTUVtVXR2TFhJ?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:05:16 GMT",
-      "timestamp": 1781787916000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-3f6b9fcd",
-      "authority": "Google News",
-      "title": "Norovirus outbreak suspected on Appalachian Trail - Cville Right Now",
-      "description": "Norovirus outbreak suspected on Appalachian Trail Cville Right Now",
-      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNZ2FQWXpHemw5TGk0Skt6Z0lGTEpvelhfUjFmb2VDYk5YZU5EOXlQLVd1WUEyZGdaVUZZTVJTTWtKWlRoNHBfOS1vRnNXSDdzd3ZTcGJOc2pEQWdzdURMOEQ3Y29JSW4tVExaU3RMMkNYUnZLN2VfNVhuSFlzdmlJSG80NnFiTjBqV3A5dTZia3hraEk?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:04:45 GMT",
-      "timestamp": 1781787885000,
-      "signalIds": [
-        "norovirus-wastewater-2026"
-      ]
-    },
-    {
-      "id": "google-news-f1390dcf",
-      "authority": "Google News",
-      "title": "States imposing livestock movement restrictions because of New World screwworm - DRGNews",
-      "description": "States imposing livestock movement restrictions because of New World screwworm DRGNews",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPZk92aWtla1hUbW16WWRKVDZnOG43RUtzSUdjN3AwOFBuVkhlZk5wOWd6Sm1ydzNJNlMtX1g2eXJYU3MtN2ZRU3djZzZfWmRoM0c3aWtwazhPNk53aHRmWC13THdyclNwbWFGSlFpdGxORTl0TjVBWHZOcVFKUlNETS1fUjFUVk9Xc2RPWjBUdjlvRzJEOFd6b3FB?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:03:49 GMT",
-      "timestamp": 1781787829000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-bf9ac5c4",
-      "authority": "UKHSA",
-      "title": "Research: GP out-of-hours syndromic surveillance: weekly bulletins for 2026",
-      "description": "The number of people contacting their GPs outside of surgery hours under the syndromic surveillance system.",
-      "link": "https://www.gov.uk/government/publications/gp-out-of-hours-syndromic-surveillance-weekly-bulletins-for-2026",
-      "pubDate": "2026-06-18T13:00:07Z",
-      "timestamp": 1781787607000,
-      "signalIds": []
-    },
-    {
-      "id": "ukhsa-4c440f6a",
-      "authority": "UKHSA",
-      "title": "Research: Syndromic surveillance: weekly summaries for 2026",
-      "description": "This weekly summary highlights changes in the number of people visiting GPs, going to emergency departments and calling NHS 111.",
-      "link": "https://www.gov.uk/government/publications/syndromic-surveillance-weekly-summaries-for-2026",
-      "pubDate": "2026-06-18T13:00:07Z",
-      "timestamp": 1781787607000,
-      "signalIds": []
-    },
-    {
-      "id": "ukhsa-3dd6ef43",
-      "authority": "UKHSA",
-      "title": "Research: National ambulance syndromic surveillance: weekly bulletins 2026",
-      "description": "The number of people calling ambulances each day, with results published every week under the syndromic surveillance system.",
-      "link": "https://www.gov.uk/government/publications/national-ambulance-syndromic-surveillance-weekly-bulletins-2026",
-      "pubDate": "2026-06-18T13:00:07Z",
-      "timestamp": 1781787607000,
-      "signalIds": []
-    },
-    {
-      "id": "ukhsa-76a51911",
-      "authority": "UKHSA",
-      "title": "Official Statistics: Weekly all-cause mortality surveillance: 2025 to 2026",
-      "description": "How the actual number of deaths in England compare with the expected numbers of deaths for each week.",
-      "link": "https://www.gov.uk/government/statistics/weekly-all-cause-mortality-surveillance-2025-to-2026",
-      "pubDate": "2026-06-18T13:00:07Z",
-      "timestamp": 1781787607000,
-      "signalIds": []
-    },
-    {
-      "id": "ukhsa-758acd2b",
-      "authority": "UKHSA",
-      "title": "Research: Remote health advice: weekly bulletins for 2026",
-      "description": "Summary of the number of people calling NHS 111 for health advice within England on a weekly basis under the syndromic surveillance system.",
-      "link": "https://www.gov.uk/government/publications/remote-health-advice-weekly-bulletins-for-2026",
-      "pubDate": "2026-06-18T13:00:07Z",
-      "timestamp": 1781787607000,
-      "signalIds": []
-    },
-    {
-      "id": "ukhsa-618b4bf6",
-      "authority": "UKHSA",
-      "title": "Official Statistics: National flu and COVID-19 surveillance reports: 2025 to 2026 season",
-      "description": "National influenza (flu) and COVID-19 report, monitoring COVID-19 activity, seasonal flu and other seasonal respiratory illnesses.",
-      "link": "https://www.gov.uk/government/statistics/national-flu-and-covid-19-surveillance-reports-2025-to-2026-season",
-      "pubDate": "2026-06-18T13:00:07Z",
-      "timestamp": 1781787607000,
-      "signalIds": [
-        "seasonal-influenza-2026",
-        "covid-wastewater-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-d9d41fcb",
-      "authority": "UKHSA",
-      "title": "Research: GP in-hours: weekly bulletins for 2026",
-      "description": "Monitors the number of people who visit their GP during surgery hours under the syndromic surveillance system.",
-      "link": "https://www.gov.uk/government/publications/gp-in-hours-weekly-bulletins-for-2026",
-      "pubDate": "2026-06-18T13:00:07Z",
-      "timestamp": 1781787607000,
-      "signalIds": []
-    },
-    {
-      "id": "ukhsa-53753ac5",
-      "authority": "UKHSA",
-      "title": "Research: Emergency department: weekly bulletins for 2026",
-      "description": "The number of people going to emergency departments each day, with results published every week under the syndromic surveillance system.",
-      "link": "https://www.gov.uk/government/publications/emergency-department-weekly-bulletins-for-2026",
-      "pubDate": "2026-06-18T13:00:07Z",
-      "timestamp": 1781787607000,
-      "signalIds": []
-    },
-    {
-      "id": "science-news-b2400a39",
-      "authority": "Science News",
-      "title": "The truth about brain rot, according to science",
-      "description": "Emerging research suggests overusing digital devices can be harmful, especially to mental health. But does being overly online truly rot our brains?",
-      "link": "https://www.sciencenews.org/article/brain-rot-digital-online-mental-health",
-      "pubDate": "Thu, 18 Jun 2026 13:00:00 +0000",
-      "timestamp": 1781787600000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-075b7e3a",
-      "authority": "Google News",
-      "title": "OSU Extension experts offer information on New World screwworm - Purcell Register",
-      "description": "OSU Extension experts offer information on New World screwworm Purcell Register",
-      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQY3dQb1Y5clU3Z3BtVGtqTDFZQ1RLT1plTHROeGVKWnBVODNIbHlEQnJDS1F5SmkwLUk0SGZsSXo2cWhyXzl0X2hHcl9zd1JwM2VtN2dGSkJaSDhnZzVKLWFYckdyNHpmNkw4ZFlsbWtMOVJHQmRnNmVKYnZLZ0xxRDlCQVRFMXIxNktfUWFJNG5PMFdWRmZ4c01XbVNIb3pwSm9qSjFkd01XS1Nw?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 13:00:00 GMT",
-      "timestamp": 1781787600000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "google-news-362de7fe",
-      "authority": "Google News",
-      "title": "What pet owners need to know about New World screwworm - TradingView",
-      "description": "What pet owners need to know about New World screwworm TradingView",
-      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPa2FTc2wwNXdjV25WLXJSNVpiZTlnYlJTM2tCckRSTVZ1WVloamtOT0MxZFR4ZzJsUTNrWnA5WTFoQlNSRnBmMzE0bEk2YVpnNktEakRublZ6dDhZY3FTdFhQNVVSN1EyYnFuaWlNcXREQTZGcXdDU0g4T0hQSlJYTEI3eEc4WHVaNnIwVUh1LTRYbHltSmJiOTRkbF9NdDVPNlRrUjg2NnZocFNQYmFTdDZ3TWNsWm93YktfWktHRE9udw?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 12:59:04 GMT",
-      "timestamp": 1781787544000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "google-news-c985cd82",
-      "authority": "Google News",
-      "title": "New World screwworm: Political responses won’t get the job done - Beef Magazine",
-      "description": "New World screwworm: Political responses won’t get the job done Beef Magazine",
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPeEE0bHpBaHZkVUlXcUpCSXdNMGl4T29uYTNSTXh6dllIQjJxdVRySjExMjVSYVppVHlqTldST2NDMUpsanBXdlYwZ0cyWE1PdDRBSGQydlI5RF93NUJhWWFUZ2xJWUUzbzk1cGRQNGRkMzNHZURsM3NUUTRvR2F3VVFpbmZ3RWppYnhGZV94NHVZWS1jS0tNMlRUcFlPSGU3aE0zUmgxM1lRQUUyNUM4dA?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 12:55:27 GMT",
-      "timestamp": 1781787327000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "google-news-217ae07d",
-      "authority": "Google News",
-      "title": "One more dies of suspected measles; toll since March 15 rises to 657 - The Daily Star",
-      "description": "One more dies of suspected measles; toll since March 15 rises to 657 The Daily Star",
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNTk5IRVJ0Q3pNQ1R0YWhOWlpSVC1uVHNWMVYzNTZOTmo1V0dDal8tRDgtcXZaY3pXX0VCVW1nbGpKR1JkcEs1TzdaMjBIMmR0bHZlWG5Kd2d5QVgzTVJ2Mi1ROUUwTlJ0TG9uc0QzWm1DNXR2TWNna2Zwazc1SXJKVWF2WUhna1VXVE04UkJWZmE4VUlXejF1V2hncjhKVUY4aE5GbmpUOTV6VmFmSzR5LVh3?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 12:54:25 GMT",
-      "timestamp": 1781787265000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-43d476ed",
-      "authority": "Google News",
-      "title": "From the Ground Up: Containing Screwworm Infestations - KBTX News 3",
-      "description": "From the Ground Up: Containing Screwworm Infestations KBTX News 3",
-      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQdmJxWFFhQVJPTmMtdFRNSHVUZlFRcWJEbk4zQ3ZDQUhNOW40UVpIQjZYMVJvQUFwZ083eFA1S2QwdTZKcFFjU2tXVHJfbDN4bXpaTlFPYWpTWFUxUFhSVk1IdkFtVVhJa2o0SG1Jcno3dm85Rk5rTi1RRG1rdjdXZ1V30gGWAUFVX3lxTE45TTdiY0xWSnA1dEU1MTdMNGlIUHN0dkdEM2JzQVF0aE9lUTdnMUhoaEhYN24zTkExSVlfZXo0Y2xwWVdTVzYwUkZDV0lmNENwOXd0emRmam1XZEpPVXBDc2RYZkt0c3NNUVc2b3ZicDhVS09sdDZDX2pwTmVsemJHRFNCMDlRTUNCdDNNZ0VDMndXejlFdw?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 12:42:00 GMT",
-      "timestamp": 1781786520000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
-      ]
-    },
-    {
-      "id": "google-news-2e0d8ef4",
-      "authority": "Google News",
-      "title": "Preprint: Mass mortality of southern elephant seals during multi-species outbreak of HPAI H5N1 on sub-Antarctic Heard Island - Avian Flu Diary",
-      "description": "Preprint: Mass mortality of southern elephant seals during multi-species outbreak of HPAI H5N1 on sub-Antarctic Heard Island Avian Flu Diary",
-      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOQ3Z0TmFSdDk3dHVfMTc4bzFfZXdFdmp0ZzhOOUhmcDM4QnhDcjRuRkg3clZZYTQweVBQS2xyMm9ZMThsZ2E5WFU4NXgyaWpyUmxMWl9CQUpzWnlSWVF6aVdhNkNyZV82ZzhXVndfMU1naHllV3k3QTVyTGtjN0JKTnpQS2RQdw?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 12:37:00 GMT",
-      "timestamp": 1781786220000,
-      "signalIds": [
-        "avian-influenza-h5-2026"
-      ]
-    },
-    {
-      "id": "google-news-7143b29d",
-      "authority": "Google News",
-      "title": "Enanta Pharmaceuticals Announces Advancement of its Zelicapavir Clinical Development Program for the Treatment of Respiratory Syncytial Virus (RSV) - BioSpace",
-      "description": "Enanta Pharmaceuticals Announces Advancement of its Zelicapavir Clinical Development Program for the Treatment of Respiratory Syncytial Virus (RSV) BioSpace",
-      "link": "https://news.google.com/rss/articles/CBMikwJBVV95cUxPM3I3MDRka2ljNkhadWNrNDdPLXo0V1pvT2NYRlJ3T1FmUU1SOGh2YmR1RnMtcEFjclN1eHc3dF9sb0pZZEZUQlFsd3AxTFdLeXljNFhSNWhHUkxxa0NHZGF0VkJ1ZTFUeXJxWVNWT2NKUHhVeDUwV2tVRHczVmY5aTI5NzFRczlnanNIdGVmU3BuWG5IZktFc2l4MW53M0VhMkpHT1BnelRHSlFSZENkYTVxbmk2ZWIxS1Nua2J0UXR5dVlCd3Y1VFNRWjdVR3dZRHhpaGRObFp2YjRGb192ZkZxUjJqM1VuOEJZMmZHQWU3MnU4RjVZZlpodjhxR1FuVVdqT1pzdWhkU0Z5WWtvYWJXcw?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 12:34:09 GMT",
-      "timestamp": 1781786049000,
-      "signalIds": [
-        "rsv-wastewater-2026"
-      ]
-    },
-    {
-      "id": "google-news-daa9ba8d",
-      "authority": "Google News",
-      "title": "Ebola Cases Are Increasing Faster Than Response Efforts, Health Experts Warn—What Travelers Should Know - Travel + Leisure",
-      "description": "Ebola Cases Are Increasing Faster Than Response Efforts, Health Experts Warn—What Travelers Should Know Travel + Leisure",
-      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNRFRKdUR2MktJLWVQRUtDbE9HZFA5Z2xMbVBEdkJtNWlwX2twRk45aE1ZTkwzLUtBWE4xUGdyT2djMkhNR1hTbXlnTFNxWE9PSkZNbFczNldPcDhBeXlCQWxoX1Z3LTBaLTNXM1lvVGc4Z1Nvdm1OaVBtRUJ2SGhGRWx2b3FzdnFRZlJQWl9sa1hMNVFQSGc?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 12:33:00 GMT",
-      "timestamp": 1781785980000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "ukhsa-a28ec67d",
-      "authority": "UKHSA",
-      "title": "UKHSA issues amber and yellow heat-health alerts across England",
-      "description": "An amber heat-health alert is now in place for East of England, South East, South West and London regions.",
-      "link": "https://www.gov.uk/government/news/ukhsa-issues-amber-and-yellow-heat-health-alerts-across-england",
-      "pubDate": "2026-06-18T12:10:29Z",
-      "timestamp": 1781784629000,
-      "signalIds": []
-    },
-    {
-      "id": "google-news-649b5625",
-      "authority": "Google News",
-      "title": "New World screwworm online course introduced as part of response efforts - Pet Food Processing",
-      "description": "New World screwworm online course introduced as part of response efforts Pet Food Processing",
-      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNX3JaV2hkVjJjU0hqb202QVEzRi1XYjNpWkx5Tm5DV3FLVjU3WjBuam5yM0J1MTlTby1HSGJXbEJNdUM1ZHotQnAzMVljTURJRmZ2T0xfb2o0OWJSeV9jZ2YzOWh4U3NTek9OM2dHM1VqX3FWS1NvMVh6R0x0ZmU2THR6Y0tsRXhGYWd6eDREallpZnFRVGJZNGl2OEs0SkdsWjhLdFN6ZzY4WU1GMkFaZ0NyNEJXWXU1b0JhazBR?oc=5",
-      "pubDate": "Thu, 18 Jun 2026 12:00:00 GMT",
-      "timestamp": 1781784000000,
-      "signalIds": [
-        "screwworm-onehealth-2026"
       ]
     }
   ]
