@@ -24,7 +24,7 @@ OpenAI-compatible code path.
 
 ## Why it exists
 
-EMERGENZ is applying to a **BlueDot Rapid grant** to evaluate whether US-based
+EMERGENZ is preparing a **prospective grant application** to evaluate whether US-based
 open-weight models can perform the dashboard's narrow, safety-bounded enrichment
 tasks as well as the closed Gemini dependency the pipeline currently relies on.
 The grant's funded bottleneck is **compute** (self-hosted / NIM GPU time plus
@@ -136,7 +136,7 @@ they are what exercise the prohibited-field and abstention checks.
 A successful run produces `eval/results/<timestamp>.md` showing, for each provider,
 the four-check tally across the case set, with the open-weight (Groq) provider and
 the Gemini baseline side by side. That table — even on 7 synthetic cases — is the
-"early results attached" evidence for the BlueDot application. Commit the result
+"early results attached" evidence for the grant application. Commit the result
 file; the JSON detail can stay gitignored or be committed alongside.
 
 ## Methodology caveat for the real cases (added 2026-06-19)

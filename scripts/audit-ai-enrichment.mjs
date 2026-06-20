@@ -123,7 +123,7 @@ const ALLOWED_REFERENCES = new Set([
   // to the Weval CLI. It does not write to any structured-data path.
   'scripts/run-weval.mjs',
   // evaluate-enrichment-models.mjs is the offline A/B eval harness (Groq
-  // open-weight vs Gemini baseline) for the BlueDot grant. It reads
+  // open-weight vs Gemini baseline) for a prospective grant. It reads
   // GROQ_API_KEY + GEMINI_API_KEY from the env, is READ-ONLY w.r.t. dashboard
   // data (writes only eval/results/), and is not part of the live pipeline.
   // See AI-ENRICHMENT-POLICY.md "Evaluation tooling".

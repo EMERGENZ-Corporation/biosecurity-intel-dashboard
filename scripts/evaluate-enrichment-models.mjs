@@ -11,7 +11,7 @@
  * This is NOT a replacement for scripts/run-weval.mjs. Weval remains the formal,
  * judge-based monthly baseline. This harness exists to produce a one-page pass/fail
  * comparison quickly and for free (hosted free tiers / local models), as the "early
- * result" artifact for the BlueDot Rapid grant and for day-to-day iteration.
+ * result" artifact for a prospective grant application and for day-to-day iteration.
  *
  * It is READ-ONLY w.r.t. dashboard data: it never writes src/data/, public/, or
  * /api/v1/. Output lands only in eval/results/. Providers with a missing API key

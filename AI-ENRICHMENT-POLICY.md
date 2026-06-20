@@ -48,8 +48,8 @@ authorities, clinical reviewers, source licenses, or the source registry.
   **evaluation harness** (not part of the live pipeline) comparing a US-based
   open-weight model served via **Groq** (`GROQ_API_KEY`, default
   `llama-3.3-70b-versatile`) against the production **Gemini** baseline
-  (`GEMINI_API_KEY`) on the enrichment task's safety checks, for the BlueDot
-  Rapid grant. It is READ-ONLY w.r.t. dashboard data: output lands only in
+  (`GEMINI_API_KEY`) on the enrichment task's safety checks, for a
+  prospective grant application. It is READ-ONLY w.r.t. dashboard data: output lands only in
   `eval/results/` (the `.md` summary may be committed as the grant artifact;
   the verbose `.json` is gitignored). It is CLI-only, fails open on a missing
   key (provider skipped), and never exposes keys via `VITE_`. The prompt it
