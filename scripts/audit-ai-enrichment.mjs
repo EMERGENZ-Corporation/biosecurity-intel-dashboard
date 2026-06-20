@@ -101,6 +101,10 @@ const LIVE_KEY_PATTERNS = [
   /\bBRIGHTDATA_API_KEY\b/i,
   /\bBRD_API_KEY\b/i,
   /\bWEB_UNLOCKER\b/i,
+  // Groq is an offline EVAL-only provider (scripts/evaluate-enrichment-models.mjs).
+  // Governed here so a stray Groq key reference outside the allowlisted eval tool
+  // fails the audit, same as any other AI provider key.
+  /\bGROQ_API_KEY\b/i,
 ]
 
 const CLIENT_EXPOSED_KEY_PATTERN = /\bVITE_[A-Z0-9_]*(GEMINI|GOOGLE_GENERATIVE|BRIGHT|BRD|UNLOCKER)[A-Z0-9_]*\b/i
@@ -118,6 +122,12 @@ const ALLOWED_REFERENCES = new Set([
   // run-weval.mjs reads GEMINI_API_KEY from the environment to pass through
   // to the Weval CLI. It does not write to any structured-data path.
   'scripts/run-weval.mjs',
+  // evaluate-enrichment-models.mjs is the offline A/B eval harness (Groq
+  // open-weight vs Gemini baseline) for the BlueDot grant. It reads
+  // GROQ_API_KEY + GEMINI_API_KEY from the env, is READ-ONLY w.r.t. dashboard
+  // data (writes only eval/results/), and is not part of the live pipeline.
+  // See AI-ENRICHMENT-POLICY.md "Evaluation tooling".
+  'scripts/evaluate-enrichment-models.mjs',
   'scripts/generate-status.mjs',
   'scripts/audit-autonomy.mjs',
   'scripts/audit-ai-enrichment.mjs',

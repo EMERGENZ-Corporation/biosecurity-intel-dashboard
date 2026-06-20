@@ -1,0 +1,170 @@
+[
+  {
+    "id": "real-measles_us",
+    "description": "Real src/data/news.json item (authority: Google News). Known dashboard tag = measles-us-2026.",
+    "newsItem": {
+      "title": "COLUMN: Measles making the most of parents’ illogical choices - Your Oregon News",
+      "summary": "COLUMN: Measles making the most of parents’ illogical choices Your Oregon News",
+      "publisher": "Google News",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMWVJWFB3TUd6R3BjSUh4SHFEeHdpSEgwSTRWR0E2VkIzcTJyazVsdzd0RkZHVGswZGlOaW9GRG1XZlpxaVlOQXp3WDNNWkQ0NjdQZVR2ZUlPSGI4LWdNUkM2d2h0T3BtcnNYajV0dmU0SkJYem5Dc0VoZXhNdWdzN1NzTEhqam95N3cyaXAzVWRHalZkRmxiVG92dE8xNUU?oc=5",
+      "publishedAt": "Fri, 19 Jun 2026 15:37:52 GMT"
+    },
+    "existingSignals": [
+      {
+        "signalId": "measles-us-2026",
+        "label": "Measles — United States"
+      },
+      {
+        "signalId": "mpox-africa-clade-i-2026",
+        "label": "Mpox — clade I, Africa & travel-linked importations"
+      },
+      {
+        "signalId": "avian-influenza-h5-2026",
+        "label": "Avian influenza — H5/H9N2 zoonotic signals"
+      }
+    ],
+    "expect": {
+      "signalId": "measles-us-2026"
+    }
+  },
+  {
+    "id": "real-ebola_bundibugyo_drc",
+    "description": "Real src/data/news.json item (authority: Google News). Known dashboard tag = ebola-bundibugyo-drc-2026.",
+    "newsItem": {
+      "title": "Congo Ebola - TelegraphHerald.com",
+      "summary": "Congo Ebola TelegraphHerald.com",
+      "publisher": "Google News",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNWHoyNDFFS0NfaTFNWUtHeDZZQVZMN3hVMzNtVFhtaUl4a0tvTlJnZk5sdGMwREpvVTBIWUNRbnMtcUNZb0NvZGVkWXZKeGZ3bElkaHlsc1V2OWYtWndXMVAtTjc4MWhTSGNDMmNxbHpMZVRmQ25LZ3NGekVVdFI3b21WMkd2MVE4MG45eWZ6ZU1DMnFxNzNJWm52YVg?oc=5",
+      "publishedAt": "Fri, 19 Jun 2026 19:22:37 GMT"
+    },
+    "existingSignals": [
+      {
+        "signalId": "ebola-bundibugyo-drc-2026",
+        "label": "Ebola disease — Bundibugyo virus, Democratic Republic of the Congo"
+      },
+      {
+        "signalId": "measles-us-2026",
+        "label": "Measles — United States"
+      },
+      {
+        "signalId": "mpox-africa-clade-i-2026",
+        "label": "Mpox — clade I, Africa & travel-linked importations"
+      }
+    ],
+    "expect": {
+      "signalId": "ebola-bundibugyo-drc-2026"
+    }
+  },
+  {
+    "id": "real-mpox_africa_clade_i",
+    "description": "Real src/data/news.json item (authority: Google News). Known dashboard tag = mpox-africa-clade-i-2026.",
+    "newsItem": {
+      "title": "Berkeley: City Brings Free Mpox Vaccines To Bathhouse Ahead Of Pride - SFGATE",
+      "summary": "Berkeley: City Brings Free Mpox Vaccines To Bathhouse Ahead Of Pride SFGATE",
+      "publisher": "Google News",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNdEJBNTF4QUVCZWdma0pLbFU4cEN3T3dhd3N3cFNMLW1jTGxoRE1lN2VGVDB4dVQwZGkyYkx1c3BDbGVxQlRYRm42UExlU2ZhNTZDaV82ZEtrMGtyejB0b0lKTjI0NUdGVUwxSTFpTUlfdGpwV1B5Yk95dkFBdGpVSElGdDRxdENLYXNZbkQzbkJUUkNpYjZjUFVoS01zdVhZ?oc=5",
+      "publishedAt": "Fri, 19 Jun 2026 15:19:31 GMT"
+    },
+    "existingSignals": [
+      {
+        "signalId": "mpox-africa-clade-i-2026",
+        "label": "Mpox — clade I, Africa & travel-linked importations"
+      },
+      {
+        "signalId": "avian-influenza-h5-2026",
+        "label": "Avian influenza — H5/H9N2 zoonotic signals"
+      },
+      {
+        "signalId": "cholera-africa-2026",
+        "label": "Cholera — sub-Saharan Africa, including Republic of Congo"
+      }
+    ],
+    "expect": {
+      "signalId": "mpox-africa-clade-i-2026"
+    }
+  },
+  {
+    "id": "real-cholera_africa",
+    "description": "Real src/data/news.json item (authority: Google News). Known dashboard tag = cholera-africa-2026.",
+    "newsItem": {
+      "title": "10,000 infected in major cholera outbreak in northern Nigeria - Yahoo",
+      "summary": "10,000 infected in major cholera outbreak in northern Nigeria Yahoo",
+      "publisher": "Google News",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOeDBMZjJEcmhyZDMwcWFMVkJpenRac0ZqdVZOS01tZDZYOGdXa3J5TDlxeDlFLURidzkyWXBhTVdrbVlHNlBLdWlWMGtVMGppVmtiLVQ0S3l0azBzZjIwcTZRTUZPdi0xVTJVbDlCd0d6ZmtKdG44YnBfdWxJT2dSVUpaUUVUWEh3RzV2MnZxaw?oc=5",
+      "publishedAt": "Fri, 19 Jun 2026 15:21:04 GMT"
+    },
+    "existingSignals": [
+      {
+        "signalId": "cholera-africa-2026",
+        "label": "Cholera — sub-Saharan Africa, including Republic of Congo"
+      },
+      {
+        "signalId": "seasonal-influenza-2026",
+        "label": "Seasonal influenza — Northern Hemisphere late season"
+      },
+      {
+        "signalId": "covid-wastewater-2026",
+        "label": "COVID-19 — wastewater & respiratory surveillance"
+      }
+    ],
+    "expect": {
+      "signalId": "cholera-africa-2026"
+    }
+  },
+  {
+    "id": "real-avian_influenza_h5",
+    "description": "Real src/data/news.json item (authority: Google News). Known dashboard tag = avian-influenza-h5-2026.",
+    "newsItem": {
+      "title": "How H5N1 bird flu hid unrecognized for weeks in dairy cattle - EurekAlert!",
+      "summary": "How H5N1 bird flu hid unrecognized for weeks in dairy cattle EurekAlert!",
+      "publisher": "Google News",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE13amVWanNEMThyQ2VwSkRGZFkwY1RVNGsxZ1RiZHRHZE9qTUJjdlBTcmJtUU9ZZTFfQW1FakltZTJ4Q201UmdYRC1Mb253anRNQzJrT1dkdzBCWDh2?oc=5",
+      "publishedAt": "Fri, 19 Jun 2026 18:39:48 GMT"
+    },
+    "existingSignals": [
+      {
+        "signalId": "avian-influenza-h5-2026",
+        "label": "Avian influenza — H5/H9N2 zoonotic signals"
+      },
+      {
+        "signalId": "cholera-africa-2026",
+        "label": "Cholera — sub-Saharan Africa, including Republic of Congo"
+      },
+      {
+        "signalId": "seasonal-influenza-2026",
+        "label": "Seasonal influenza — Northern Hemisphere late season"
+      }
+    ],
+    "expect": {
+      "signalId": "avian-influenza-h5-2026"
+    }
+  },
+  {
+    "id": "real-screwworm_onehealth",
+    "description": "Real src/data/news.json item (authority: Google News). Known dashboard tag = screwworm-onehealth-2026.",
+    "newsItem": {
+      "title": "Llano County declares screwworm disaster declaration - highlandernews.com",
+      "summary": "Llano County declares screwworm disaster declaration highlandernews.com",
+      "publisher": "Google News",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPc0p1UndXTHByWW5IRHR4VWtyRUFzdFNfaGtWUlE4QmJQTXh6ZUNHX1BaclBSYVo1dE5fUmZDUTh0eWdlVDN2QUFwZnE0ckpfam1QcUd0cGQyZ1JlakFJR1ZESzFBSzc5dEJDN0ZPLUlHN2Z6d25EMGZDQXlGVW0wS2ExdDdVYUplWFRIV3B0aHNNX3VycjUxS0piSkY?oc=5",
+      "publishedAt": "Fri, 19 Jun 2026 19:49:32 GMT"
+    },
+    "existingSignals": [
+      {
+        "signalId": "screwworm-onehealth-2026",
+        "label": "New World screwworm — active cases and sterile fly dispersal zone"
+      },
+      {
+        "signalId": "fifa-world-cup-2026-prep",
+        "label": "FIFA World Cup 2026 — mass-gathering preparedness"
+      },
+      {
+        "signalId": "pertussis-us-2026",
+        "label": "Pertussis (whooping cough) — United States"
+      }
+    ],
+    "expect": {
+      "signalId": "screwworm-onehealth-2026"
+    }
+  }
+]

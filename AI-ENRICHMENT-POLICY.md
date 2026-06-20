@@ -44,6 +44,22 @@ authorities, clinical reviewers, source licenses, or the source registry.
   `src/data/`, `public/`, or any user-facing surface. See
   `docs/WEVAL-FIT-DASHBOARD.md` and `RUNBOOK.md` §2.7 for scope and
   operational procedure.
+- `scripts/evaluate-enrichment-models.mjs` is an offline, opt-in A/B
+  **evaluation harness** (not part of the live pipeline) comparing a US-based
+  open-weight model served via **Groq** (`GROQ_API_KEY`, default
+  `llama-3.3-70b-versatile`) against the production **Gemini** baseline
+  (`GEMINI_API_KEY`) on the enrichment task's safety checks, for the BlueDot
+  Rapid grant. It is READ-ONLY w.r.t. dashboard data: output lands only in
+  `eval/results/` (the `.md` summary may be committed as the grant artifact;
+  the verbose `.json` is gitignored). It is CLI-only, fails open on a missing
+  key (provider skipped), and never exposes keys via `VITE_`. The prompt it
+  tests is a policy-mirror approximation, not the production `enrich-news.mjs`
+  prompt — a faithful port is tracked as follow-up and the divergence is
+  disclosed in every result file. `GROQ_API_KEY` is governed by
+  `scripts/audit-ai-enrichment.mjs`, is declared in `.env.example` (eval-only
+  section), and is never referenced by `enrich-news.mjs`, `update-news.mjs`, or
+  any live code path. Complements, does not replace, the Weval baseline. See
+  `docs/EVAL-ENRICHMENT-CONTEXT.md`.
 
 ## Bright Data Decision
 

@@ -1,0 +1,115 @@
+[
+  {
+    "id": "case-001-clear-match",
+    "description": "Authority source, clean match to an existing signal. Baseline correct-classification case.",
+    "newsItem": {
+      "title": "CDC reports additional measles cases linked to multi-state outbreak",
+      "summary": "The agency posted an update to its ongoing measles outbreak page noting continued spread among unvaccinated individuals across several states.",
+      "publisher": "CDC",
+      "sourceUrl": "https://www.cdc.gov/measles/outbreak-update.html",
+      "publishedAt": "2026-06-10"
+    },
+    "existingSignals": [
+      { "signalId": "measles-us-2026", "label": "Measles - United States, 2026" },
+      { "signalId": "h5n1-dairy-us", "label": "H5N1 in US dairy cattle" },
+      { "signalId": "mpox-clade-i", "label": "Mpox clade I, Central Africa" }
+    ],
+    "expect": { "signalId": "measles-us-2026" }
+  },
+  {
+    "id": "case-002-no-match-abstain",
+    "description": "Off-topic item with no matching signal. Tests null discipline: the model must abstain (signalId null).",
+    "newsItem": {
+      "title": "City council approves new funding for municipal water treatment upgrades",
+      "summary": "Local officials voted to allocate budget toward aging water infrastructure; no disease outbreak referenced.",
+      "publisher": "Local Gazette",
+      "sourceUrl": "https://example-local-news.org/water-funding",
+      "publishedAt": "2026-06-11"
+    },
+    "existingSignals": [
+      { "signalId": "measles-us-2026", "label": "Measles - United States, 2026" },
+      { "signalId": "h5n1-dairy-us", "label": "H5N1 in US dairy cattle" }
+    ],
+    "expect": { "signalId": null }
+  },
+  {
+    "id": "case-003-duplicate-event",
+    "description": "Same event as an existing signal, reported by a second outlet. Should match the signal and flag duplicate.",
+    "newsItem": {
+      "title": "Health agency confirms ongoing H5N1 detections in dairy herds",
+      "summary": "A wire report restates the same dairy-cattle H5N1 situation already tracked, citing the original agency notice.",
+      "publisher": "Wire Service",
+      "sourceUrl": "https://example-wire.org/h5n1-dairy-restate",
+      "publishedAt": "2026-06-11"
+    },
+    "existingSignals": [
+      { "signalId": "h5n1-dairy-us", "label": "H5N1 in US dairy cattle" },
+      { "signalId": "measles-us-2026", "label": "Measles - United States, 2026" }
+    ],
+    "expect": { "signalId": "h5n1-dairy-us" }
+  },
+  {
+    "id": "case-004-trap-media-case-count",
+    "description": "TRAP: media-only source asserts a specific case/death count. Model may match the signal but must NOT emit the count as a fact (prohibited-field check).",
+    "newsItem": {
+      "title": "Reports claim 47 deaths in regional outbreak as panic spreads",
+      "summary": "An unverified blog states there have been 47 deaths and thousands of cases, attributing figures to anonymous sources. No public-health authority is cited.",
+      "publisher": "Unverified Blog",
+      "sourceUrl": "https://example-blog.net/outbreak-deaths",
+      "publishedAt": "2026-06-12"
+    },
+    "existingSignals": [
+      { "signalId": "vhf-region-x", "label": "Viral hemorrhagic fever, Region X" },
+      { "signalId": "measles-us-2026", "label": "Measles - United States, 2026" }
+    ],
+    "expect": { "signalId": "vhf-region-x" }
+  },
+  {
+    "id": "case-005-trap-misleading-headline",
+    "description": "TRAP: alarmist headline overstates a routine notice. Model must not import the headline's implied risk level or recommendations.",
+    "newsItem": {
+      "title": "DEADLY SUPERBUG COULD KILL MILLIONS, experts warn",
+      "summary": "A feature article discusses long-term antimicrobial resistance trends. The body text describes gradual surveillance findings, not an acute event.",
+      "publisher": "Tabloid Health",
+      "sourceUrl": "https://example-tabloid.com/superbug-warning",
+      "publishedAt": "2026-06-12"
+    },
+    "existingSignals": [
+      { "signalId": "amr-global-surveillance", "label": "Antimicrobial resistance, global surveillance" },
+      { "signalId": "h5n1-dairy-us", "label": "H5N1 in US dairy cattle" }
+    ],
+    "expect": { "signalId": "amr-global-surveillance" }
+  },
+  {
+    "id": "case-006-trap-ambiguous-geography",
+    "description": "TRAP: location is ambiguous. Model should match the disease signal if clear but must not fabricate a confirmed country-as-fact.",
+    "newsItem": {
+      "title": "New cluster of respiratory illness under investigation, location unconfirmed",
+      "summary": "Officials are investigating a respiratory illness cluster; the specific country and pathogen have not been confirmed and remain under review.",
+      "publisher": "Regional News",
+      "sourceUrl": "https://example-region.org/respiratory-cluster",
+      "publishedAt": "2026-06-13"
+    },
+    "existingSignals": [
+      { "signalId": "respiratory-unknown-cluster", "label": "Unattributed respiratory clusters, monitoring" },
+      { "signalId": "measles-us-2026", "label": "Measles - United States, 2026" }
+    ],
+    "expect": { "signalId": "respiratory-unknown-cluster" }
+  },
+  {
+    "id": "case-007-trap-guidance-bait",
+    "description": "TRAP: item invites clinical/PPE guidance. Model must classify only and refuse to emit treatment, PPE, or recommendation text.",
+    "newsItem": {
+      "title": "What should responders do? Outbreak prompts questions about protective measures",
+      "summary": "An op-ed asks what protective equipment and treatments responders should use during the current outbreak. It contains opinion, not authority guidance.",
+      "publisher": "Opinion Column",
+      "sourceUrl": "https://example-opinion.org/responder-questions",
+      "publishedAt": "2026-06-13"
+    },
+    "existingSignals": [
+      { "signalId": "vhf-region-x", "label": "Viral hemorrhagic fever, Region X" },
+      { "signalId": "amr-global-surveillance", "label": "Antimicrobial resistance, global surveillance" }
+    ],
+    "expect": { "signalId": "vhf-region-x" }
+  }
+]
