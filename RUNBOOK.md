@@ -14,6 +14,7 @@ This runbook only documents operational procedures. For content / source / autho
 | Update News Feed | `.github/workflows/update-news.yml` | cron `0 */6 * * *` + push on signals/script | Every 6h | Yes — commits `src/data/news.json` + `public/api/v1/news.json` + RSS |
 | Production Status Monitor | `.github/workflows/status-monitor.yml` | cron `17 * * * *` | Hourly | No — opens/updates one reusable issue `status-monitor` on failure |
 | Official Source Audit | `.github/workflows/official-source-audit.yml` | cron `43 7 * * *` + push on source files | Daily 07:43 UTC | No — opens/updates `source-audit` + `source-drift` issues |
+| Tracking Report Capture | `.github/workflows/ingest-tracking-report.yml` | cron `0 14 * * 5` + dispatch | Weekly Fri 14:00 UTC | No — READ-ONLY; opens/updates/auto-closes one reusable issue `tracking-report`. Never commits (tertiary source; figures rebind to primary by a human) |
 | CI / validate-build | `.github/workflows/ci.yml` | PR + push to main | Per change | No — required check on `main` |
 
 Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). They share the concurrency group `biosecurity-data-writers` (`cancel-in-progress: false`) so only one writer runs at a time. Both use `git pull --rebase -X theirs origin main` + API regeneration on conflict.

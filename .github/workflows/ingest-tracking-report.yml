@@ -1,0 +1,180 @@
+name: Capture Pandemic Center Tracking Report
+
+# Weekly READ-ONLY capture of the Brown Pandemic Center Tracking Report
+# (pandemics.sph.brown.edu/our-work/tracking-report). It fetches the current
+# issue, diffs it against the live signals, and surfaces — for a human — which
+# signals look stale relative to the issue and whether the issue covers a topic
+# the dashboard does not yet track.
+#
+# It NEVER writes curated data. The Tracking Report is a TERTIARY aggregator;
+# its figures must be re-verified against each disease's PRIMARY source before a
+# human enters them into a curated field (CONTENT-STANDARDS §2/§3.4; AGENTS.md
+# "bind figures to primary sources, not the newsletter"). Unlike the PHAC/NWSS
+# wastewater ingesters, this workflow makes no commit — its only product is a
+# reused GitHub issue that opens when a new issue outruns the signals and closes
+# itself when the signals catch up.
+
+on:
+  schedule:
+    # Friday 14:00 UTC — the Tracking Report publishes weekly (mid/late week), so
+    # Friday reliably catches the latest issue. Stateless + idempotent, so this
+    # can safely be bumped to daily ('0 14 * * *') if quicker detection is wanted.
+    - cron: '0 14 * * 5'
+  workflow_dispatch:
+
+concurrency:
+  group: tracking-report-capture
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Capture latest Tracking Report
+        # Report-only and fail-open: a flaky upstream fetch must not fail the job
+        # or nag a human. The script always exits 0 and writes the result artifact.
+        run: npm run ingest:tracking-report
+
+      - name: Reconcile tracking-report issue
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs')
+            const marker = '<!-- emergenz-tracking-report -->'
+            const title = '[TRACKING REPORT] New issue not yet reflected in signals'
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+
+            let result
+            try {
+              result = JSON.parse(fs.readFileSync('ingest-tracking-report-result.json', 'utf8'))
+            } catch (error) {
+              core.warning(`No tracking-report result artifact to read: ${error.message}`)
+              return
+            }
+
+            // Transient fetch failures fail open (ok:true, status:fetch-error):
+            // log for visibility but do not open/clutter an issue.
+            if (result.status === 'fetch-error') {
+              core.warning(`Tracking Report fetch failed (fail-open, no changes): ${result.error || 'unknown'}`)
+              return
+            }
+
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'tracking-report',
+                color: '1D76DB',
+                description: 'Brown Pandemic Center Tracking Report weekly capture',
+              })
+            } catch (error) {
+              if (error.status !== 422) throw error
+            }
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'tracking-report',
+              per_page: 20,
+            })
+            const existing = issues.find((i) => i.title === title || i.body?.includes(marker))
+
+            const issueLink = result.issue?.url ? `[${result.issue.title || 'current issue'}](${result.issue.url})` : 'the current issue'
+
+            // Caught up → close any open issue and stop.
+            if (result.ok) {
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  body: [
+                    `Caught up — the signals have been re-verified at/after ${issueLink} (${result.issue?.date || 'date n/a'}). No human action due.`,
+                    `Checked at: \`${result.checkedAt}\``,
+                    `Run: ${runUrl}`,
+                  ].join('\n'),
+                })
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  state: 'closed',
+                })
+              }
+              return
+            }
+
+            // Action due → build the body.
+            const lines = [
+              marker,
+              '## New Tracking Report issue to reconcile',
+              '',
+              `**Issue:** ${issueLink} — published **${result.issue?.date || 'date could not be parsed'}**.`,
+              `**Archive:** ${result.issue?.archiveUrl || 'https://pandemics.sph.brown.edu/newsletter-archive'}`,
+              '',
+              '> ⚠️ The Tracking Report is a **tertiary aggregator**. Re-verify each figure against the disease\'s **primary source** (WHO DON, CDC, Africa CDC, …) before entering it into a curated field — do **not** transcribe newsletter numbers. (CONTENT-STANDARDS §2/§3.4; AGENTS.md)',
+              '',
+            ]
+
+            if (result.needsHuman?.length) {
+              lines.push(`### Signals to re-verify (${result.needsHuman.length})`)
+              for (const item of result.needsHuman) {
+                lines.push(`- **[${item.severity}] ${item.title}**`)
+                lines.push(`  - ${item.recommendedAction?.summary || ''}`)
+                if (item.recommendedAction?.file) {
+                  lines.push(`  - \`${item.recommendedAction.file}\`${item.recommendedAction.field ? ` · \`${item.recommendedAction.field}\`` : ''}`)
+                }
+              }
+              lines.push('')
+            }
+
+            if (result.watch?.length) {
+              lines.push(`### Watch (informational — may include false positives)`)
+              for (const item of result.watch) {
+                lines.push(`- ${item.title}`)
+              }
+              lines.push('')
+            }
+
+            lines.push(`Checked at: \`${result.checkedAt}\``)
+            lines.push(`Run: ${runUrl}`)
+            lines.push('')
+            lines.push('_Auto-generated by the EMERGENZ Tracking Report capture. This issue is reused to prevent alert spam, and closes automatically once the signals are re-verified at/after the issue date._')
+
+            const body = lines.join('\n')
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['tracking-report'],
+              })
+            }

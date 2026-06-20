@@ -489,6 +489,7 @@ const MONITOR_ARTIFACTS = [
   { id: 'official-source-drift', path: 'official-source-drift-result.json', issueLabel: 'source-drift' },
   { id: 'news-pipeline', path: 'update-news-result.json', issueLabel: 'news-pipeline' },
   { id: 'weval-baseline', path: 'weval-run-result.json', issueLabel: 'weval-pipeline' },
+  { id: 'tracking-report-capture', path: 'ingest-tracking-report-result.json', issueLabel: 'tracking-report' },
 ]
 
 function collectMonitors() {
