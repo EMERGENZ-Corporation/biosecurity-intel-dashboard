@@ -154,7 +154,24 @@ function buildUserPrompt(c) {
 
 // ---------------------------------------------------------------------------
 // Provider call (OpenAI-compatible)
+//
+// Retries TRANSIENT failures — HTTP 429 (free-tier rate limit) and 5xx, plus
+// network errors (the occasional dropped connection) — with backoff, so a free
+// tier or a flaky link doesn't leave holes in the comparison table. It honors a
+// `Retry-After` header or Google's `retryDelay` hint when present, else uses
+// escalating backoff. Non-transient failures (e.g. 401/400 auth) are NOT retried
+// — they fail fast as a recorded row, never a crash. Retries: EVAL_RETRIES (4).
 // ---------------------------------------------------------------------------
+const RETRIES = Math.max(1, Number(process.env.EVAL_RETRIES || 4));
+
+function retryWaitMs(res, errText, attempt) {
+  const retryAfter = res?.headers?.get?.("retry-after");
+  if (retryAfter && /^\d+$/.test(retryAfter)) return Math.min(Number(retryAfter) * 1000, 60000);
+  const hint = String(errText || "").match(/retryDelay"?\s*:\s*"?(\d+)s/i);
+  if (hint) return Math.min((Number(hint[1]) + 1) * 1000, 60000);
+  return Math.min(8000 * attempt, 45000); // 8s, 16s, 24s, ...
+}
+
 async function callProvider(provider, c) {
   const key = process.env[provider.apiKeyEnv];
   const url = `${provider.baseUrl}/chat/completions`;
@@ -168,27 +185,47 @@ async function callProvider(provider, c) {
   };
   if (provider.jsonMode) body.response_format = { type: "json_object" };
 
-  const started = Date.now();
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${key}`,
-      },
-      body: JSON.stringify(body),
-    });
-    const latencyMs = Date.now() - started;
-    if (!res.ok) {
+  let lastError = "unknown error";
+  for (let attempt = 1; attempt <= RETRIES; attempt++) {
+    const started = Date.now();
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${key}`,
+        },
+        body: JSON.stringify(body),
+      });
+      const latencyMs = Date.now() - started;
+      if (res.ok) {
+        const data = await res.json();
+        const text = data?.choices?.[0]?.message?.content ?? "";
+        return { ok: true, latencyMs, text };
+      }
       const errText = (await res.text()).slice(0, 300);
-      return { ok: false, latencyMs, error: `HTTP ${res.status}: ${errText}` };
+      lastError = `HTTP ${res.status}: ${errText}`;
+      const transient = res.status === 429 || res.status >= 500;
+      if (transient && attempt < RETRIES) {
+        const wait = retryWaitMs(res, errText, attempt);
+        console.warn(`  [retry] ${provider.name} HTTP ${res.status}; waiting ${Math.round(wait / 1000)}s (attempt ${attempt}/${RETRIES})`);
+        await sleep(wait);
+        continue;
+      }
+      return { ok: false, latencyMs, error: lastError };
+    } catch (err) {
+      // Network-level failure (dropped connection, DNS, etc.) — retry.
+      lastError = String(err?.message || err);
+      if (attempt < RETRIES) {
+        const wait = Math.min(4000 * attempt, 20000);
+        console.warn(`  [retry] ${provider.name} ${lastError}; waiting ${Math.round(wait / 1000)}s (attempt ${attempt}/${RETRIES})`);
+        await sleep(wait);
+        continue;
+      }
+      return { ok: false, latencyMs: Date.now() - started, error: lastError };
     }
-    const data = await res.json();
-    const text = data?.choices?.[0]?.message?.content ?? "";
-    return { ok: true, latencyMs, text };
-  } catch (err) {
-    return { ok: false, latencyMs: Date.now() - started, error: String(err?.message || err) };
   }
+  return { ok: false, latencyMs: 0, error: lastError };
 }
 
 // ---------------------------------------------------------------------------

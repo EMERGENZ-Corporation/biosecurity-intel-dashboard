@@ -147,6 +147,8 @@ User supplied a 3-file bundle (`EVAL-ENRICHMENT-CONTEXT.md`, `evaluate-enrichmen
 
 **Verify:** `audit:ai-enrichment` OK (106 files); harness smoke-tested end-to-end with a dummy key (all 13 cases load, live calls made, 401s recorded as failed rows not crashes, both artifacts written) then smoke output deleted; `validate:data` + `test:validators` + `audit:autonomy` + `build` all PASS. **To produce the grant artifact:** `GROQ_API_KEY=… GEMINI_API_KEY=… npm run eval:enrichment` locally → commit the `eval/results/<timestamp>.md`. Follow-up: faithful `enrich-news.mjs` prompt port.
 
+**Follow-up (commit pending):** added transient-retry to `callProvider` — HTTP 429 (Gemini free-tier rate limit) + 5xx + network errors retry with backoff (honors `Retry-After` / Google `retryDelay`, else 8/16/24s; `EVAL_RETRIES` overrides, default 4); auth/4xx fail fast (verified: dummy-key 401 run finishes in ~1s, no retry storm). This lets a free-tier run complete without holes. Also removed 4 stale/aborted result artifacts from `eval/results/` (a key-error run, placeholder-key run, and two rate-limited partial runs) so only the clean local re-run remains.
+
 ## ✅ Tracking Report weekly capture pipeline + license reconciliation confirmed (commit 863010e)
 
 User gave the June 11 2026 Brown Pandemic Center Tracking Report (Mailchimp) URL and asked to (1) ensure all of its data is captured, (2) ensure Bright Data **or another method** captures the newsletter **weekly**, and (3) reconcile the license version against the README. User directive: maximally hands-off, "do not want to babysit you."
