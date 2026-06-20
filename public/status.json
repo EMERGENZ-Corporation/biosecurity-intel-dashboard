@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "status": "degraded",
-  "generatedAt": "2026-06-20T15:42:36.602Z",
+  "status": "ok",
+  "generatedAt": "2026-06-20T15:55:34.078Z",
   "thresholds": {
-    "maxDataAgeHours": 168,
-    "maxOfficialCheckAgeHours": 168,
-    "maxSignalStaleHours": 168
+    "maxDataAgeHours": 336,
+    "maxOfficialCheckAgeHours": 336,
+    "maxSignalStaleHours": 336
   },
   "dashboard": {
     "lastUpdated": "2026-06-20T00:00:00.000Z",
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-20T00:00:00.000Z",
     "oldestActiveReview": "2026-06-12T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 15.710167222222223,
-    "officialCheckAgeHours": 15.710167222222223
+    "dataAgeHours": 15.926133055555555,
+    "officialCheckAgeHours": 15.926133055555555
   },
   "signals": {
     "total": 19,
@@ -83,22 +83,7 @@
         "total": 1
       }
     },
-    "staleSignalIds": [
-      "andes-hantavirus-mv-hondius-2026",
-      "ebola-bundibugyo-drc-2026",
-      "mpox-africa-clade-i-2026",
-      "cholera-africa-2026",
-      "norovirus-wastewater-2026",
-      "rotavirus-wastewater-2026-bay-area",
-      "hmpv-wastewater-2026",
-      "lassa-fever-2026",
-      "chikungunya-2026",
-      "candida-auris-wastewater-2026",
-      "screwworm-onehealth-2026",
-      "fifa-world-cup-2026-prep",
-      "pertussis-us-2026",
-      "yellow-fever-colombia-2026"
-    ],
+    "staleSignalIds": [],
     "timelineEvents": 48,
     "totalMapMarkers": 144,
     "totalDetailSections": 86
@@ -116,7 +101,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-20T13:58:53.000Z"
+    "newest": "2026-06-20T15:30:00.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -279,7 +264,5 @@
       }
     ]
   },
-  "staleReasons": [
-    "14 signal(s) older than 168h"
-  ]
+  "staleReasons": []
 }

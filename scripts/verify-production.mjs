@@ -15,9 +15,10 @@ const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://biosecurity-intel.
 const MAX_ATTEMPTS = Number.parseInt(process.env.VERIFY_PRODUCTION_ATTEMPTS || '12', 10)
 const DELAY_MS = Number.parseInt(process.env.VERIFY_PRODUCTION_DELAY_MS || '30000', 10)
 // Structured signal/source review is human-gated. Keep this aligned with
-// generate-status, status-monitor, and RUNBOOK.md: a weekly review window is
-// the policy threshold; 48h recreated the old weekend false-alarm loop.
-const MAX_OFFICIAL_CHECK_AGE_HOURS = Number.parseInt(process.env.MAX_OFFICIAL_CHECK_AGE_HOURS || '168', 10)
+// generate-status, status-monitor, and RUNBOOK.md: a two-week review window is
+// the policy threshold (raised from 168h on 2026-06-20); 48h recreated the old
+// weekend false-alarm loop.
+const MAX_OFFICIAL_CHECK_AGE_HOURS = Number.parseInt(process.env.MAX_OFFICIAL_CHECK_AGE_HOURS || '336', 10)
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))

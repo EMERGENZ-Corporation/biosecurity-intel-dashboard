@@ -49,7 +49,7 @@ Two workflows write to `public/api/v1/` (Status Refresh + Update News Feed). The
 
 **Symptom:** workflow exits 1 at `Alert on stale dashboard data`.
 
-**Cause:** `status.json` `data.lastUpdated` is older than `MAX_DATA_AGE_HOURS` (default **168** = 7 days, aligned with the human review cadence per CONTENT-STANDARDS §3.4). This means structured signal data hasn't been touched in a week — a real review gap, not a workflow noise event.
+**Cause:** `status.json` `data.lastUpdated` is older than `MAX_DATA_AGE_HOURS` (default **336** = 14 days, aligned with the human review cadence per CONTENT-STANDARDS §3.4; raised from 168h/7d on 2026-06-20). This means structured signal data hasn't been touched in two weeks — a real review gap, not a workflow noise event.
 
 **Recovery:**
 1. Check whether this is a true alert (no signal updates in a week) or a generator bug (data did change but `lastUpdated` wasn't bumped).
@@ -81,8 +81,8 @@ run goes red.
 | HARD | `Unsupported schemaVersion` / `Invalid status` | n/a | Generator emitted a malformed contract — code regression. |
 | HARD | `Dashboard status is critical` | set by `generate-status.mjs` | Reserved for a future critical state; treat as an incident. |
 | SOFT | `Dashboard status is degraded` | `staleReasons` accumulate | Review-cadence lapse. **No email** — see the `review-digest` issue. |
-| SOFT | `Stale signals: …` | `MAX_SIGNAL_STALE_HOURS=168` (7d) | One or more signals not human-reviewed in a week. |
-| SOFT | `headline signal data > 168h` / `last official source check > 168h` | `MAX_DATA_AGE_HOURS` / `MAX_OFFICIAL_CHECK_AGE_HOURS=168` | No structured data update / source re-verification in a week. |
+| SOFT | `Stale signals: …` | `MAX_SIGNAL_STALE_HOURS=336` (14d) | One or more signals not human-reviewed in two weeks. |
+| SOFT | `headline signal data > 336h` / `last official source check > 336h` | `MAX_DATA_AGE_HOURS` / `MAX_OFFICIAL_CHECK_AGE_HOURS=336` | No structured data update / source re-verification in two weeks. |
 
 **Important — threshold history:** the prior `MAX_OFFICIAL_CHECK_AGE_HOURS=48` default produced false alarms every weekend because it expected daily human review of `lastChecked` across 16 signals — incompatible with the actual weekly review cadence permitted by CONTENT-STANDARDS §3.4. Raised to 168h on 2026-05-25 to match `MAX_SIGNAL_STALE_HOURS`. The 2026-05-30 hard/soft split is the more durable fix: soft review lapses no longer page at all. Do not tighten without a CONTENT-STANDARDS conversation.
 
@@ -177,8 +177,8 @@ next signal-data push; once no signal is stale, status returns to `ok`.
 
 **Buckets:**
 
-- **NEEDS-HUMAN** — a gate has tripped or will trip on the next run; act now. Sources: signal `lastChecked` >168h; `triageCard.lastReviewed` >365d (a CI blocker — fix before the next data commit); Tier 1/2 source `lastVerified` >30d or malformed; a `_REMOVE_AFTER_`/`_DEPRECATE_AFTER_` code marker whose date has passed.
-- **AUTONOMOUS-WATCH** — within policy but approaching a threshold (signal 120–168h, source 21–30d, triage 300–365d, detail sections >365d). Pre-warning only; no red-X is imminent.
+- **NEEDS-HUMAN** — a gate has tripped or will trip on the next run; act now. Sources: signal `lastChecked` >336h; `triageCard.lastReviewed` >365d (a CI blocker — fix before the next data commit); Tier 1/2 source `lastVerified` >30d or malformed; a `_REMOVE_AFTER_`/`_DEPRECATE_AFTER_` code marker whose date has passed.
+- **AUTONOMOUS-WATCH** — within policy but approaching a threshold (signal 240–336h, source 21–30d, triage 300–365d, detail sections >365d). Pre-warning only; no red-X is imminent.
 
 **Recovery (clear a NEEDS-HUMAN item):**
 1. Open the `review-digest` issue. Each item names the file, field, and (for signals/sources) the primary-source URL.

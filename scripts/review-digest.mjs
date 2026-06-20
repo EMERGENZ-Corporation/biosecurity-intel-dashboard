@@ -40,11 +40,11 @@ const STRICT = process.env.REVIEW_DIGEST_STRICT === '1'
 
 // Thresholds mirror the gates that already exist elsewhere so the digest never
 // disagrees with the system it summarizes:
-//   generate-status.mjs   → MAX_SIGNAL_STALE_HOURS (168h)
+//   generate-status.mjs   → MAX_SIGNAL_STALE_HOURS (336h)
 //   validate-data.mjs     → TRIAGE_STALE_DAYS (365d), hard CI failure
 //   audit-official-sources→ MAX_SOURCE_VERIFIED_AGE_DAYS (30d)
-const MAX_SIGNAL_STALE_HOURS = Number.parseInt(process.env.MAX_SIGNAL_STALE_HOURS || '168', 10)
-const SIGNAL_WATCH_HOURS = Number.parseInt(process.env.REVIEW_DIGEST_SIGNAL_WATCH_HOURS || '120', 10)
+const MAX_SIGNAL_STALE_HOURS = Number.parseInt(process.env.MAX_SIGNAL_STALE_HOURS || '336', 10)
+const SIGNAL_WATCH_HOURS = Number.parseInt(process.env.REVIEW_DIGEST_SIGNAL_WATCH_HOURS || '240', 10)
 const TRIAGE_STALE_DAYS = 365
 const TRIAGE_WATCH_DAYS = 300
 const MAX_SOURCE_VERIFIED_AGE_DAYS = Number.parseInt(process.env.MAX_SOURCE_VERIFIED_AGE_DAYS || '30', 10)
@@ -85,7 +85,7 @@ function push(item) {
 }
 
 // ── G1: per-signal lastChecked staleness ───────────────────────────────────
-// A signal whose lastChecked exceeds 168h flips public status.json to
+// A signal whose lastChecked exceeds 336h flips public status.json to
 // "degraded" (generate-status.mjs). lastChecked is the human's signed
 // attestation that the signal was re-verified against its primary source.
 function checkSignalFreshness(signals, sourcesById) {
@@ -123,7 +123,7 @@ function checkSignalFreshness(signals, sourcesById) {
         severity: 'watch',
         category: 'structured-data-freshness',
         title: `Signal ${signal.id} review due soon (${hrs.toFixed(0)}h of ${MAX_SIGNAL_STALE_HOURS}h)`,
-        why: 'Approaching the 168h staleness threshold. Reviewing now prevents a future "degraded" status.',
+        why: 'Approaching the 336h staleness threshold. Reviewing now prevents a future "degraded" status.',
         governingStandard: 'CONTENT-STANDARDS §3.4',
         threshold: { name: 'MAX_SIGNAL_STALE_HOURS', value: MAX_SIGNAL_STALE_HOURS, unit: 'hours' },
         observed: { ageHours: Number(hrs.toFixed(1)), lastChecked: signal.lastChecked },

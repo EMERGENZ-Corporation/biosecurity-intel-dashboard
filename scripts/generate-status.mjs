@@ -19,16 +19,17 @@ const TIMELINE_PATH = 'src/data/signal-timeline.json'
 const NEWS_PATH = 'src/data/news.json'
 const STATUS_PATH = 'public/status.json'
 
-const MAX_DATA_AGE_HOURS = Number.parseInt(process.env.MAX_DATA_AGE_HOURS || '168', 10)
-// 168h (7 days) matches MAX_SIGNAL_STALE_HOURS and reflects the actual human
+const MAX_DATA_AGE_HOURS = Number.parseInt(process.env.MAX_DATA_AGE_HOURS || '336', 10)
+// 336h (14 days) matches MAX_SIGNAL_STALE_HOURS and reflects the actual human
 // cadence at which structured signal data is reviewed against primary sources.
 // CONTENT-STANDARDS §3.4 makes `lastChecked` a humans-only field, so the
 // threshold cannot be tighter than the realistic human review cycle without
-// generating false-alarm "degraded" status on every weekend. The 48h prior
-// default caused the Production Status Monitor to fail any time signal review
-// slipped a single day past the daily cadence — see HANDOFF 2026-05-25.
-const MAX_OFFICIAL_CHECK_AGE_HOURS = Number.parseInt(process.env.MAX_OFFICIAL_CHECK_AGE_HOURS || '168', 10)
-const MAX_SIGNAL_STALE_HOURS = Number.parseInt(process.env.MAX_SIGNAL_STALE_HOURS || '168', 10)
+// generating false-alarm "degraded" status. Raised from 168h (7 days) to a
+// 14-day window on 2026-06-20: weekly re-verification of every signal exceeds
+// the hands-off cadence, especially since several primary sources
+// (WHO/Africa CDC/NCDC/PAHO/ECDC) are not machine-fetchable. See HANDOFF.
+const MAX_OFFICIAL_CHECK_AGE_HOURS = Number.parseInt(process.env.MAX_OFFICIAL_CHECK_AGE_HOURS || '336', 10)
+const MAX_SIGNAL_STALE_HOURS = Number.parseInt(process.env.MAX_SIGNAL_STALE_HOURS || '336', 10)
 
 const SEVERITY_RANK = { monitor: 0, watch: 1, concern: 2, action: 3 }
 

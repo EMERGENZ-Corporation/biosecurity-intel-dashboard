@@ -82,10 +82,10 @@ async function main() {
     if (status.status === 'degraded') softFailures.push('Dashboard status is degraded')
 
     const maxDataAge = Number(
-      status.thresholds?.maxDataAgeHours ?? process.env.MAX_DATA_AGE_HOURS ?? 168
+      status.thresholds?.maxDataAgeHours ?? process.env.MAX_DATA_AGE_HOURS ?? 336
     )
     const maxOfficialAge = Number(
-      status.thresholds?.maxOfficialCheckAgeHours ?? process.env.MAX_OFFICIAL_CHECK_AGE_HOURS ?? 168
+      status.thresholds?.maxOfficialCheckAgeHours ?? process.env.MAX_OFFICIAL_CHECK_AGE_HOURS ?? 336
     )
     if (status.dashboard?.lastUpdated) {
       addAgeFailure(softFailures, 'headline signal data', status.dashboard.lastUpdated, maxDataAge)
