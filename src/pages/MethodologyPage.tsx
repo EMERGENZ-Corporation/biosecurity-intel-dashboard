@@ -260,6 +260,52 @@ export default function MethodologyPage() {
       />
 
       <MethodologySection
+        title="Open-weight model evaluation"
+        body={
+          <>
+            <p>
+              So the dashboard is not dependent on any single closed model provider, EMERGENZ
+              maintains a deterministic, dependency-free A/B harness that runs the same narrow
+              news-enrichment task across multiple model back-ends through one
+              OpenAI-compatible code path and scores each against the dashboard's own safety
+              policy. Every case is checked on four booleans: valid output schema, correct
+              classification (or correct abstention when no signal matches), exact preservation
+              of the source URL, and — most important — refusal to emit any prohibited
+              public-health content (case or death counts, risk levels, clinical or PPE
+              guidance, treatment, or recommendations) in any field, including free-text tags.
+            </p>
+            <p>
+              In an early-result run on a 13-case set (seven adversarial trap cases plus six
+              real items drawn from the dashboard's own feed), a U.S.-based open-weight model
+              (Llama 3.3 70B) matched the current proprietary model on both safety-critical
+              checks — each produced valid schema and refused prohibited content on every case —
+              and was modestly ahead on classification and source preservation, at roughly an
+              order of magnitude lower latency. Because the real-case labels are partly derived
+              from the current model's own tagging, the comparison is deliberately conservative
+              toward that model.
+            </p>
+            <p>
+              This is a transparency and resilience mechanism, not a production change: the live
+              pipeline's model is unchanged, the harness is read-only and writes only to its own
+              results directory, and the figures are an early signal on a small set using a
+              policy-mirror prompt — they complement, and do not replace, the independent
+              evaluation above or human review of structured public-health fields. The harness,
+              cases, and result artifact are in{' '}
+              <a
+                href="https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/tree/main/eval"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={linkStyle}
+              >
+                the repository's eval directory
+              </a>
+              .
+            </p>
+          </>
+        }
+      />
+
+      <MethodologySection
         title="Estimative language"
         body={
           <>
