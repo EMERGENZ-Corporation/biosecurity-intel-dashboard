@@ -144,6 +144,8 @@ Per user decision ("do 1, defer 2"): the 168h (weekly) source-review gate fired 
 
 **Result:** regenerated — `status: ok`, `staleReasons: []`, `thresholds.maxSignalStaleHours: 336`. The 14 held signals (06-12/06-13) are now within window, so the degraded badge + stale-data alarm clear and won't recur for two weeks. **Verify:** `npm run generate:status` → `status=ok`; `validate:data` PASS; no operative `168` remains (grep) — only historical "raised from 168h" comments.
 
+**CI follow-up (commit pending):** `audit-autonomy.mjs` also *pins* the monitor's guard strings (`MAX_OFFICIAL_CHECK_AGE_HOURS: 168` / `MAX_DATA_AGE_HOURS: 168`) — the 168→336 change missed those, so `1e8f694`'s CI `validate-build` failed at `audit:autonomy` ("missing workflow guard ... 168"). Updated the pinned expectations to `336`. Lesson: run the **full** ci.yml cadence (incl. `audit:autonomy`) before pushing threshold changes, not just `validate:data`. Now the whole cadence — `test:validators` / `test:ingest-nwss` / `test:ingest-phac` / `test:fetch` / `test:gate` / `audit:autonomy` / `audit:ai-enrichment` / `validate:data` / `build` — passes locally.
+
 ## ✅ Source re-verification to clear the lapsed 168h freshness gate (commit pending)
 
 **Trigger:** the daily `Status Refresh` workflow (`update-data.yml`) failed at `verify:production` — `lastOfficialSourceCheck 176.9h old (max 168h)`. NOT caused by any code change this session: `validate:data`, `generate:status`, `generate:api`, and the commit all succeeded; only the freshness gate tripped. `lastOfficialSourceCheck = max(signal.lastChecked)`; the freshest was 2026-06-13, so as of the 06-20 08:43Z run it crossed the intentional 168h (weekly) human-review threshold. Same recurring cadence lapse as 2026-06-12.
