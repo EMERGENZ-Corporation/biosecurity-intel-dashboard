@@ -1411,7 +1411,7 @@
     "confidence": "official",
     "trend": "increasing",
     "status": "active",
-    "summary": "CDC confirmed 2,312 measles cases in 2026 as of June 11 — the highest US annual total since 1991 — representing 30 outbreaks with 93% of cases outbreak-associated. The 2026 total has already surpassed the full-year 2025 total (2,074 cases). Weekly new cases are 42 (7 states; down from 52 the prior week), suggesting a modest deceleration. No deaths reported in 2026. U.S. kindergartener MMR coverage has declined to 92.5% (from 95.2% in 2019–2020), leaving approximately 286,000 kindergarteners unvaccinated — the structural driver of sustained outbreak activity.",
+    "summary": "CDC confirmed 2,104 measles cases in 2026 as of June 18 — the highest US annual total since 1991 — across 41 jurisdictions and 30 outbreaks, with 93% of cases outbreak-associated. The 2026 total has surpassed the full-year 2025 total (2,074 cases). No deaths reported in 2026. U.S. kindergartener MMR coverage has declined to 92.5% (from 95.2% in 2019–2020), leaving approximately 286,000 kindergarteners unvaccinated — the structural driver of sustained outbreak activity.",
     "operationalRelevance": "EMS and emergency departments should screen for measles in any febrile patient with rash, particularly in unvaccinated populations and clusters. Airborne precautions are required; one infected person in a waiting room can expose every subsequent patient for two hours. Confirm two-dose MMR status for healthcare staff.",
     "whyItMatters": "Measles can spread rapidly in undervaccinated communities and healthcare settings. Continued regional surveillance helps identify immunity gaps and protect elimination status.",
     "primarySourceId": "cdc-measles-data",
@@ -1421,8 +1421,8 @@
       "cdc-han",
       "paho-epi-alerts"
     ],
-    "lastUpdated": "2026-05-30T00:00:00.000Z",
-    "lastChecked": "2026-06-12T00:00:00.000Z",
+    "lastUpdated": "2026-06-20T00:00:00.000Z",
+    "lastChecked": "2026-06-20T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "measles-tx-gaines",
@@ -1614,11 +1614,11 @@
       "sourceAuthority": "CDC HAN",
       "updatedAt": "2026-05-20"
     },
-    "currentSituation": "CDC confirmed 1,983 measles cases YTD as of May 28, 2026, across 40 jurisdictions in 30 discrete outbreaks. Ninety-three percent of cases are outbreak-associated; 9 cases involved international visitors to the U.S. No measles deaths have been reported in 2026. National kindergartener MMR vaccine coverage declined to 92.5% (2024–2025 school year), with an estimated 286,000 unvaccinated kindergarteners representing the principal immunity gap driving ongoing outbreaks.",
+    "currentSituation": "CDC confirmed 2,104 measles cases YTD as of June 18, 2026, across 41 jurisdictions in 30 discrete outbreaks. Ninety-three percent of cases are outbreak-associated (1,957 of 2,104); 11 cases involved international visitors to the U.S. No measles deaths have been reported in 2026. National kindergartener MMR vaccine coverage declined to 92.5% (2024–2025 school year), with an estimated 286,000 unvaccinated kindergarteners representing the principal immunity gap driving ongoing outbreaks.",
     "metrics": [
       {
-        "label": "Confirmed US cases YTD (as of June 11, 2026)",
-        "value": 2312,
+        "label": "Confirmed US cases YTD (as of June 18, 2026)",
+        "value": 2104,
         "sourceId": "cdc-measles-data"
       },
       {
@@ -1628,7 +1628,7 @@
       },
       {
         "label": "US jurisdictions with cases",
-        "value": 40,
+        "value": 41,
         "sourceId": "cdc-measles-data"
       }
     ],
@@ -2111,7 +2111,7 @@
       "cdc-han"
     ],
     "lastUpdated": "2026-06-05T00:00:00.000Z",
-    "lastChecked": "2026-06-12T00:00:00.000Z",
+    "lastChecked": "2026-06-20T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "h5-tx-dairy",
@@ -2808,7 +2808,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastChecked": "2026-06-20T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "flu-us-cdc",
@@ -2996,7 +2996,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastChecked": "2026-06-20T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "covid-us-boston",
@@ -3429,7 +3429,7 @@
       "cdc-respiratory-viruses"
     ],
     "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastChecked": "2026-06-20T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "rsv-us-atlanta",

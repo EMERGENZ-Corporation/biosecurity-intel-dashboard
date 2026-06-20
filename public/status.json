@@ -1,20 +1,20 @@
 {
   "schemaVersion": 2,
   "status": "degraded",
-  "generatedAt": "2026-06-20T13:57:59.204Z",
+  "generatedAt": "2026-06-20T15:39:51.778Z",
   "thresholds": {
     "maxDataAgeHours": 168,
     "maxOfficialCheckAgeHours": 168,
     "maxSignalStaleHours": 168
   },
   "dashboard": {
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
-    "lastOfficialSourceCheck": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-06-20T00:00:00.000Z",
+    "lastChecked": "2026-06-20T00:00:00.000Z",
+    "lastOfficialSourceCheck": "2026-06-20T00:00:00.000Z",
     "oldestActiveReview": "2026-06-12T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 181.96644555555557,
-    "officialCheckAgeHours": 181.96644555555557
+    "dataAgeHours": 15.664382777777778,
+    "officialCheckAgeHours": 15.664382777777778
   },
   "signals": {
     "total": 19,
@@ -86,15 +86,10 @@
     "staleSignalIds": [
       "andes-hantavirus-mv-hondius-2026",
       "ebola-bundibugyo-drc-2026",
-      "measles-us-2026",
       "mpox-africa-clade-i-2026",
-      "avian-influenza-h5-2026",
       "cholera-africa-2026",
-      "seasonal-influenza-2026",
-      "covid-wastewater-2026",
       "norovirus-wastewater-2026",
       "rotavirus-wastewater-2026-bay-area",
-      "rsv-wastewater-2026",
       "hmpv-wastewater-2026",
       "lassa-fever-2026",
       "chikungunya-2026",
@@ -121,7 +116,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-20T09:16:16.000Z"
+    "newest": "2026-06-20T13:58:53.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -285,8 +280,6 @@
     ]
   },
   "staleReasons": [
-    "19 signal(s) older than 168h",
-    "Headline data 182.0h old",
-    "Last source check 182.0h old"
+    "14 signal(s) older than 168h"
   ]
 }
