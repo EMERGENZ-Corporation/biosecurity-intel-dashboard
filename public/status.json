@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "status": "ok",
-  "generatedAt": "2026-06-25T08:49:45.643Z",
+  "status": "degraded",
+  "generatedAt": "2026-06-26T08:52:36.933Z",
   "thresholds": {
     "maxDataAgeHours": 336,
     "maxOfficialCheckAgeHours": 336,
@@ -13,8 +13,8 @@
     "lastOfficialSourceCheck": "2026-06-20T00:00:00.000Z",
     "oldestActiveReview": "2026-06-12T00:00:00.000Z",
     "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 128.82934555555556,
-    "officialCheckAgeHours": 128.82934555555556
+    "dataAgeHours": 152.87692611111112,
+    "officialCheckAgeHours": 152.87692611111112
   },
   "signals": {
     "total": 19,
@@ -83,7 +83,13 @@
         "total": 1
       }
     },
-    "staleSignalIds": [],
+    "staleSignalIds": [
+      "andes-hantavirus-mv-hondius-2026",
+      "ebola-bundibugyo-drc-2026",
+      "mpox-africa-clade-i-2026",
+      "chikungunya-2026",
+      "pertussis-us-2026"
+    ],
     "timelineEvents": 49,
     "totalMapMarkers": 144,
     "totalDetailSections": 86
@@ -101,7 +107,7 @@
   },
   "news": {
     "total": 500,
-    "newest": "2026-06-25T03:37:00.000Z"
+    "newest": "2026-06-26T03:19:00.000Z"
   },
   "automation": {
     "mode": "autonomous-with-review-gates",
@@ -264,5 +270,7 @@
       }
     ]
   },
-  "staleReasons": []
+  "staleReasons": [
+    "5 signal(s) older than 336h"
+  ]
 }
