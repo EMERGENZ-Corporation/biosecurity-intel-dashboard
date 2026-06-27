@@ -1,9 +1,39 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-26T20:01:29.177Z",
+  "generatedAt": "2026-06-27T04:04:35.484Z",
   "endpoint": "/api/v1/news.json",
   "count": 500,
   "news": [
+    {
+      "id": "npr-256e15b5",
+      "authority": "NPR",
+      "title": "5 million have dropped ACA insurance after Trump and the GOP let prices skyrocket",
+      "description": "The number of people who signed up for a health plan and then didn't pay their premium fell much more sharply than it has in years past. Trump officials blame fraud. Health policy experts blame costs.",
+      "link": "https://www.npr.org/2026/06/26/nx-s1-5860746/aca-health-insurance-subsidies-rates-premiums",
+      "pubDate": "Fri, 26 Jun 2026 18:54:23 -0400",
+      "timestamp": 1782514463000,
+      "signalIds": []
+    },
+    {
+      "id": "abc-news-fc37461c",
+      "authority": "ABC News",
+      "title": "New Mexico opens criminal probe of DEA after agents allowed fentanyl shipments to hit streets",
+      "description": "New Mexico's attorney general has opened a criminal investigation into claims that the U.S. Drug Enforcement Administration allowed hundreds of thousands of fentanyl pills to reach the streets",
+      "link": "https://abcnews.com/Health/wireStory/new-mexico-opens-criminal-probe-dea-after-agents-134258509",
+      "pubDate": "Fri, 26 Jun 2026 17:53:49 -0400",
+      "timestamp": 1782510829000,
+      "signalIds": []
+    },
+    {
+      "id": "nbc-news-5db92d3a",
+      "authority": "NBC News",
+      "title": "Senators call for the military healthcare program to cover autism therapy as a basic benefit",
+      "description": "Sens. Kirsten Gillibrand and Eric Schmitt issued a letter Friday to Pentagon leadership calling for the military healthcare program to cover autism therapy as a basic benefit.",
+      "link": "https://www.nbcnews.com/health/health-news/military-healthcare-program-autism-therapy-benefit-gillibrand-schmitt-rcna351978",
+      "pubDate": "Fri, 26 Jun 2026 21:26:02 GMT",
+      "timestamp": 1782509162000,
+      "signalIds": []
+    },
     {
       "id": "google-news-61b214d8",
       "authority": "Google News",
@@ -5767,42 +5797,6 @@
       "timestamp": 1782333859000,
       "signalIds": [
         "avian-influenza-h5-2026"
-      ]
-    },
-    {
-      "id": "google-news-00cbecc4",
-      "authority": "Google News",
-      "title": "Measles case detected at Phoenix Sky Harbor Airport; 16th in Maricopa County - Yahoo",
-      "description": "Measles case detected at Phoenix Sky Harbor Airport; 16th in Maricopa County Yahoo",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOZ3M3bEkxZXBrYzZiMkpnNE12a0pXNUhOWjdlV3BacmdhWXpzVEdwbWRwamZLSzQyVnh3aE9HSi01WGZPalNTYnVueHZ5ZEV4ZUhiX24xeVNhWUV3SGdIYmoxMHZ0NzlGOEs2elZzTkNOYzZzMVJzMFI5a2dzLXpJeTYybm9kUS1WZnpFNGNEMWwydVFVSXVv?oc=5",
-      "pubDate": "Wed, 24 Jun 2026 20:43:19 GMT",
-      "timestamp": 1782333799000,
-      "signalIds": [
-        "measles-us-2026"
-      ]
-    },
-    {
-      "id": "google-news-1fa44740",
-      "authority": "Google News",
-      "title": "Trials of two Ebola treatments to start in DRC next week: WHO - Medical Xpress",
-      "description": "Trials of two Ebola treatments to start in DRC next week: WHO Medical Xpress",
-      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOeUZCWjV6aU5td3RhMW5rb1VOSGdvYmxqRkZiX1lJYmRGV2xMLVdpb2ZaS1MyMnlhQTBfemV3c09QMFIxdlM4M2ZGczhaSG5lMWx1Z1l4b0JjMHZBRWJxSHZaMlEyWW1LSjczRFRjcXBNeHlXTnNQZ3JUejdjRElYRk93?oc=5",
-      "pubDate": "Wed, 24 Jun 2026 20:40:05 GMT",
-      "timestamp": 1782333605000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
-      ]
-    },
-    {
-      "id": "google-news-0fb4f178",
-      "authority": "Google News",
-      "title": "Distrust, Political Violence, and False Narratives Harm Ebola Relief Efforts - American Community Media",
-      "description": "Distrust, Political Violence, and False Narratives Harm Ebola Relief Efforts American Community Media",
-      "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPdTlPQXg3dzRLVE83bUFaVmhCLWpfOERBN1o1QS1tem1uR2s1N3hFZk5GWm1hQkZnZGdSXzVzYVVoajMwaEpOTnJqai1CS0pJZnA3YmRnQ2VfcGZFdW5OcERDanp2cXpjbUh5SE5VU01oUWZZeXJobGFoT25SYWtNMDZBMW81eWYtbC0yMjd4SXpvY3ZRMWRqa0twc0l3RHJWN1dOWUxEWmdlcXBlVnhob3I1QUw5RjJLelRYMkY0TGxWRFllSWdxZkJnNXg?oc=5",
-      "pubDate": "Wed, 24 Jun 2026 20:39:54 GMT",
-      "timestamp": 1782333594000,
-      "signalIds": [
-        "ebola-bundibugyo-drc-2026"
       ]
     }
   ]
