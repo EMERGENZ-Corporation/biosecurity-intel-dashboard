@@ -278,19 +278,23 @@ export default function MethodologyPage() {
               In an early-result run on a 13-case set (seven adversarial trap cases plus six
               real items drawn from the dashboard's own feed), a U.S.-based open-weight model
               (Llama 3.3 70B) matched the current proprietary model on both safety-critical
-              checks — each produced valid schema and refused prohibited content on every case —
-              and was modestly ahead on classification and source preservation, at roughly an
-              order of magnitude lower latency. Because the real-case labels are partly derived
-              from the current model's own tagging, the comparison is deliberately conservative
-              toward that model.
+              checks — each produced valid schema and emitted no prohibited content on every
+              case — and was modestly ahead on classification and source preservation, at
+              roughly an order of magnitude lower latency. Because the real-case labels are
+              partly derived from the current model's own tagging, the comparison is
+              deliberately conservative toward that model.
             </p>
             <p>
               This is a transparency and resilience mechanism, not a production change: the live
               pipeline's model is unchanged, the harness is read-only and writes only to its own
               results directory, and the figures are an early signal on a small set using a
               policy-mirror prompt — they complement, and do not replace, the independent
-              evaluation above or human review of structured public-health fields. The harness,
-              cases, and result artifact are in{' '}
+              evaluation above or human review of structured public-health fields. To keep the
+              comparison honest and reproducible, the harness records, for each case, the
+              mechanism behind every result — the model's own output versus a provider-side
+              safety filter, which is never counted as model behavior — and binds each result to
+              the exact model snapshot and run date in the result file. The harness, cases, and
+              result artifact are in{' '}
               <a
                 href="https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/tree/main/eval"
                 target="_blank"

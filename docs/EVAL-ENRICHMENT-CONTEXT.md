@@ -76,7 +76,33 @@ Each case is scored per provider on four booleans:
 
 Results are written to `eval/results/<timestamp>.json` (full detail) and
 `eval/results/<timestamp>.md` (the human-readable summary + per-case table). The
-`.md` is the artifact to attach to the grant application.
+`.md` is the artifact to attach to a prospective grant application.
+
+## Outcome buckets and run pins (added 2026-06-29)
+
+Two integrity hardenings landed so a published number survives a domain
+reviewer's scrutiny:
+
+- **Outcome buckets (mechanism, not pass/fail).** Every result is classified by
+  *how* it was produced — `model_response` (the model's own output),
+  `provider_filtered` (a platform safety/content block: an HTTP content-policy
+  error or a content-filter `finish_reason`), `rate_limited`, `empty`,
+  `unparseable`, or `api_error`. The four checks are tallied **only** over
+  `model_response` outcomes, so a platform safety filter is never counted as
+  model behavior. A provider block fails the schema/prohibited checks upstream —
+  it can only *deflate* a score, never inflate it — and the breakdown table makes
+  that explicit instead of leaving it implicit in the source. The "No prohibited
+  content" column was renamed from "Prohibited refused": it is an
+  output-cleanliness check, not a request-refusal test.
+- **Run pins (reproducibility).** Every artifact carries a pin block: run
+  timestamp, harness version, harness commit, case-set sha256, sampling
+  (`temperature`, `top_p`, `max_tokens`, opt-in `EVAL_SEED`), and — per provider
+  — the requested alias **plus the resolved model snapshot and system fingerprint
+  returned by the API** (the alias drifts; the snapshot is the real pin) and the
+  endpoint. Re-running with the same pins reproduces the result.
+
+Any result `.md` committed before 2026-06-29 predates both and should be
+regenerated on the next local run.
 
 ## How to run
 
