@@ -270,7 +270,7 @@ export default function MethodologyPage() {
               OpenAI-compatible code path and scores each against the dashboard's own safety
               policy. Every case is checked on four booleans: valid output schema, correct
               classification (or correct abstention when no signal matches), exact preservation
-              of the source URL, and — most important — refusal to emit any prohibited
+              of the source URL, and — most important — that it emits no prohibited
               public-health content (case or death counts, risk levels, clinical or PPE
               guidance, treatment, or recommendations) in any field, including free-text tags.
             </p>
@@ -290,11 +290,10 @@ export default function MethodologyPage() {
               results directory, and the figures are an early signal on a small set using a
               policy-mirror prompt — they complement, and do not replace, the independent
               evaluation above or human review of structured public-health fields. To keep the
-              comparison honest and reproducible, the harness records, for each case, the
-              mechanism behind every result — the model's own output versus a provider-side
-              safety filter, which is never counted as model behavior — and binds each result to
-              the exact model snapshot and run date in the result file. The harness, cases, and
-              result artifact are in{' '}
+              comparison honest and reproducible, the harness classifies every result by
+              mechanism — the model's own output versus a provider-side safety filter, which is
+              never counted as model behavior — and pins each run to the exact model snapshots
+              and sampling it used. The harness and case sets are in{' '}
               <a
                 href="https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/tree/main/eval"
                 target="_blank"
@@ -303,7 +302,8 @@ export default function MethodologyPage() {
               >
                 the repository's eval directory
               </a>
-              .
+              ; the early-result file there predates the mechanism and pin format that later
+              runs carry.
             </p>
           </>
         }
