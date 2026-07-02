@@ -1,10 +1,12 @@
 name: Weval Baseline
 
 on:
-  schedule:
-    # First of every month at 05:00 UTC. Lands before the daily Status Refresh
-    # cron and outside the Update News Feed cron windows.
-    - cron: '0 5 1 * *'
+  # Schedule intentionally paused until further notice — see HANDOFF.md.
+  # Re-enable by uncommenting the `schedule:` block below.
+  # schedule:
+  #   # First of every month at 05:00 UTC. Lands before the daily Status
+  #   # Refresh cron and outside the Update News Feed cron windows.
+  #   - cron: '0 5 1 * *'
   workflow_dispatch:
 
 permissions:
@@ -20,6 +22,13 @@ concurrency:
 jobs:
   eval:
     runs-on: ubuntu-latest
+    env:
+      # The `secrets` context cannot be referenced directly inside an `if:`
+      # conditional (GitHub Actions rejects it as "Unrecognized named-value:
+      # 'secrets'" at parse time, breaking the whole workflow). Route the
+      # presence check through job-level env booleans instead.
+      HAS_GEMINI_KEY: ${{ secrets.GEMINI_API_KEY != '' }}
+      HAS_ANTHROPIC_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
 
     steps:
       - name: Checkout repository
@@ -37,7 +46,7 @@ jobs:
         run: npm ci
 
       - name: Run Weval eval against production Gemini model
-        if: ${{ secrets.GEMINI_API_KEY != '' && secrets.ANTHROPIC_API_KEY != '' }}
+        if: ${{ env.HAS_GEMINI_KEY == 'true' && env.HAS_ANTHROPIC_KEY == 'true' }}
         id: weval-run
         continue-on-error: true
         run: npm run eval:gemini
@@ -60,7 +69,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Reconcile weval-pipeline issue
-        if: ${{ secrets.GEMINI_API_KEY != '' && secrets.ANTHROPIC_API_KEY != '' }}
+        if: ${{ env.HAS_GEMINI_KEY == 'true' && env.HAS_ANTHROPIC_KEY == 'true' }}
         uses: actions/github-script@v8
         env:
           WEVAL_OUTCOME: ${{ steps.weval-run.outcome }}
@@ -161,7 +170,7 @@ jobs:
             }
 
       - name: Commit refreshed baseline
-        if: ${{ secrets.GEMINI_API_KEY != '' && secrets.ANTHROPIC_API_KEY != '' && steps.weval-run.outcome == 'success' }}
+        if: ${{ env.HAS_GEMINI_KEY == 'true' && env.HAS_ANTHROPIC_KEY == 'true' && steps.weval-run.outcome == 'success' }}
         run: |
           git config user.name "EMERGENZ Data Bot"
           git config user.email "bot@emergenz.org"
@@ -192,5 +201,5 @@ jobs:
           fi
 
       - name: Fail workflow when Weval run failed
-        if: ${{ secrets.GEMINI_API_KEY != '' && secrets.ANTHROPIC_API_KEY != '' && steps.weval-run.outcome != 'success' }}
+        if: ${{ env.HAS_GEMINI_KEY == 'true' && env.HAS_ANTHROPIC_KEY == 'true' && steps.weval-run.outcome != 'success' }}
         run: exit 1

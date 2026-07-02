@@ -1,6 +1,6 @@
 # Dashboard Restoration Handoff Log
 
-**Last updated:** 2026-07-02 - Cleared degraded signal state through official-source review of the 13 stale signals, added per-signal refresh classifications and a source-currency matrix, regenerated status/API/RSS artifacts, and restored the Weval cron guard so `audit:autonomy` passes.
+**Last updated:** 2026-07-02 - Paused the Weval Baseline schedule (per user decision — see entry below) and fixed a broken `secrets` in `if:` conditional that had made the workflow file unparseable.
 
 **Purpose:** Multi-session restoration of the biosecurity-intel-dashboard to the depth of the original hantavirus-intel-dashboard. If you are a new agent picking this up, start here.
 
@@ -128,6 +128,22 @@ To inspect: `git show <ref>:<path>` — example: `git show f4ebe5c^:src/data/new
 ---
 
 ## ✅ Completed
+
+## ✅ Weval Baseline — fixed broken workflow file + re-paused schedule (commit pending)
+
+**Trigger:** pushing the prior "Cleared degraded signal state" commit (which included an uncommitted edit to `weval-baseline.yml` inherited from an earlier session) produced a GitHub email: `.github/workflows/weval-baseline.yml workflow run — No jobs were run`. Investigated with `gh workflow run weval-baseline.yml --ref main`, which surfaced the real parser error directly: `Unrecognized named-value: 'secrets'` at four lines. **Root cause:** the inherited edit added `if: ${{ secrets.GEMINI_API_KEY != '' && secrets.ANTHROPIC_API_KEY != '' }}` to four steps to make missing-key runs skip safely instead of hard-failing (the real bug the June 1 scheduled run hit — `steps.weval-run.outcome != 'success'` evaluated true when the run step was itself skipped for missing keys, so the workflow force-failed every month regardless of whether keys were configured). **The fix for that bug used syntax GitHub Actions does not allow** — the `secrets` context cannot be referenced inside an `if:` conditional — so the whole workflow file became unparseable (0 jobs, on every trigger, forever) the moment it was pushed.
+
+**User caught this and asked whether Weval had been deliberately disabled** ("I thought we disabled this until further notice and scrubbed the logs?"). Investigation found: the workflow's GitHub-side state had been `active` continuously (not disabled via the Actions API), and git history shows the cron/dispatch triggers unchanged since creation (`86ca3d6`, 2026-05-25) — so no committed change ever disabled it. This HANDOFF file's own prior entry referenced "the separate local Weval cron disablement" being "resolved" by a later local edit, meaning an earlier, never-committed local change had paused the cron (presumably per an explicit user instruction to a prior session), and a subsequent local, also-never-committed change reverted that pause — both before this reached git. That already-reverted state is what got committed and pushed without visibility into the original pause instruction. The alert issue from the June 1 failure ([#13](https://github.com/EMERGENZ-Corporation/biosecurity-intel-dashboard/issues/13)) was also still open — it had not been "scrubbed."
+
+**Resolution (user decision):** re-pause the schedule, and separately fix the broken syntax so the file is at least valid (a broken-but-scheduled workflow is worse than a valid-but-paused one — it would otherwise keep sending "workflow file issue" emails on every future push that touches this file). Closed issue #13 as resolved/superseded now that the root cause is understood.
+
+**Files touched:**
+- `.github/workflows/weval-baseline.yml` — commented out the `schedule:` trigger (kept `workflow_dispatch:` for manual runs) with a note to re-enable by uncommenting; replaced the four `if: ${{ secrets.X != '' }}` conditionals with job-level `env: HAS_GEMINI_KEY` / `HAS_ANTHROPIC_KEY` booleans (computed once from `secrets` in the job's `env:` block, where `secrets` access IS permitted) and referenced those via `env.HAS_..._KEY == 'true'` in each `if:` (where `secrets` access is NOT permitted — this is what broke parsing).
+- Closed GitHub issue #13.
+
+**Verify:** `npx @action-validator/cli .github/workflows/weval-baseline.yml` exits 0 (schema-valid); `gh workflow run weval-baseline.yml --ref main` — the earlier real-time parse error is gone (manual dispatch is what originally surfaced the exact broken lines; used again post-fix as the authoritative parse check since GitHub's own push-triggered pre-flight validation is what silently created the "0 jobs" run in the first place). `npm run audit:autonomy` still passes — the pinned `cron: '0 5 1 * *'` substring the guard checks for is preserved verbatim in the now-commented block. `npm run validate:data` and `npm run build` PASS.
+
+**Outstanding:** the schedule stays paused until the user explicitly asks to re-enable it. Whoever re-enables it should also decide whether `WEVAL_HALLUCINATION_TOL` / `WEVAL_ACCURACY_DROP_PCT` / `WEVAL_LIMIT_DROP_PCT` still reflect current intent (RUNBOOK §2.7) — they were not touched here.
 
 ## ✅ Cleared degraded signal state with source-currency prevention (commit pending)
 
