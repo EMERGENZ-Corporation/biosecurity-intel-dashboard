@@ -27,7 +27,7 @@
     "primary": true,
     "url": "https://www.ecdc.europa.eu/en/infectious-disease-topics/hantavirus-infection/surveillance-and-updates/andes-hantavirus-outbreak",
     "publicationDate": "2026-05-19",
-    "lastVerified": "2026-06-12",
+    "lastVerified": "2026-05-22",
     "domains": [
       "zoonotic",
       "travel"
@@ -307,7 +307,7 @@
     "sourceType": "surveillance-dashboard",
     "primary": true,
     "url": "https://africacdc.org",
-    "lastVerified": "2026-05-25",
+    "lastVerified": "2026-05-22",
     "domains": [
       "vhf",
       "vaccine_preventable",
@@ -366,7 +366,7 @@
     "sourceType": "wastewater",
     "primary": true,
     "url": "https://www.cdc.gov/nwss/",
-    "lastVerified": "2026-06-20T00:00:00.000Z",
+    "lastVerified": "2026-07-02",
     "domains": [
       "environmental",
       "respiratory",
@@ -383,7 +383,7 @@
     "sourceType": "wastewater",
     "primary": true,
     "url": "https://data.wastewaterscan.org/",
-    "lastVerified": "2026-05-25",
+    "lastVerified": "2026-07-02",
     "domains": [
       "environmental",
       "respiratory",
@@ -402,7 +402,7 @@
     "sourceType": "outbreak-news",
     "primary": true,
     "url": "https://www.paho.org/en/epidemiological-alerts-and-updates",
-    "lastVerified": "2026-06-12",
+    "lastVerified": "2026-07-02",
     "domains": [
       "vaccine_preventable",
       "vector_borne",
@@ -563,7 +563,7 @@
     "primary": true,
     "sourceTier": 1,
     "url": "https://www.who.int/activities/managing-health-risks-during-mass-gatherings",
-    "lastVerified": "2026-05-25",
+    "lastVerified": "2026-07-02",
     "domains": [
       "mass_gathering",
       "travel"
@@ -578,7 +578,7 @@
     "primary": true,
     "sourceTier": 2,
     "url": "https://www.aphis.usda.gov/livestock-poultry-disease/stop-screwworm/current-status",
-    "lastVerified": "2026-05-22",
+    "lastVerified": "2026-07-02",
     "domains": [
       "zoonotic"
     ]
@@ -711,11 +711,11 @@
     "id": "ncdc-lassa-fever",
     "authority": "NCDC",
     "authorityFull": "Nigeria Centre for Disease Control and Prevention",
-    "title": "NCDC — Lassa Fever",
-    "sourceType": "health-advisory",
+    "title": "NCDC Lassa Fever Situation Reports",
+    "sourceType": "expert-weekly-report",
     "primary": true,
-    "url": "https://ncdc.gov.ng/diseases/factsheet/47",
-    "lastVerified": "2026-05-30",
+    "url": "https://ncdc.gov.ng/diseases/sitreps/?cat=5&name=An%20update%20of%20Lassa%20fever%20outbreak%20in%20Nigeria",
+    "lastVerified": "2026-07-02",
     "domains": [
       "vhf"
     ],
@@ -745,7 +745,7 @@
     "sourceType": "expert-weekly-report",
     "primary": true,
     "url": "https://www.who.int/publications/m/item/multi-country-outbreak-of-mpox--external-situation-report--65---30-april-2026",
-    "lastVerified": "2026-06-12",
+    "lastVerified": "2026-07-02",
     "domains": [
       "zoonotic"
     ],
@@ -775,7 +775,7 @@
     "sourceType": "surveillance-dashboard",
     "primary": true,
     "url": "https://www.cdc.gov/pertussis/php/surveillance/index.html",
-    "lastVerified": "2026-06-12",
+    "lastVerified": "2026-07-02",
     "domains": [
       "vaccine_preventable",
       "respiratory"
@@ -791,12 +791,167 @@
     "sourceType": "health-advisory",
     "primary": true,
     "url": "https://www.paho.org/en/news/13-3-2026-paho-reports-sustained-yellow-fever-transmission-parts-south-america",
-    "lastVerified": "2026-06-05",
+    "lastVerified": "2026-07-02",
     "publicationDate": "2026-03-13",
     "domains": [
       "vector_borne"
     ],
     "sourceTier": 2,
-    "notes": "PAHO 13 Mar 2026 yellow-fever epidemiological alert. Backs the Tolima 2024–2026 cumulative figures (153 confirmed / 62 deaths, CFR ~41%). More recent national (Colombia INS) counts may be higher; verify against the latest PAHO/INS update before treating as confirmed."
+    "notes": "PAHO 13 Mar 2026 yellow-fever epidemiological alert. Backs the accessible regional figures used in the signal: 34 confirmed human cases and 15 deaths in Bolivia, Colombia, Peru, and Venezuela during epidemiological weeks 1–7 of 2026. Department-level Tolima figures require PAHO/INS re-verification before publication."
+  },
+  {
+    "id": "cdc-cyclosporiasis-surveillance-2026",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Surveillance of Cyclosporiasis — 2026 U.S.-acquired cases",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.cdc.gov/cyclosporiasis/php/surveillance/index.html",
+    "lastVerified": "2026-07-02",
+    "publicationDate": "2026-07-01",
+    "domains": [
+      "enteric"
+    ],
+    "geography": [
+      "United States"
+    ],
+    "sourceTier": 1,
+    "notes": "CDC current-season cyclosporiasis surveillance. Counts are preliminary, include U.S.-acquired cases since May 1, 2026, and explicitly state there is no evidence of a single multistate Cyclospora outbreak linking all cases as of the June 16 count."
+  },
+  {
+    "id": "fda-core-foodborne-outbreaks-2026",
+    "authority": "FDA",
+    "authorityFull": "U.S. Food and Drug Administration",
+    "title": "FDA CORE Investigations of Foodborne Illness Outbreaks — Cyclospora active investigations",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/investigations-foodborne-illness-outbreaks",
+    "lastVerified": "2026-07-02",
+    "publicationDate": "2026-07-01",
+    "domains": [
+      "enteric"
+    ],
+    "geography": [
+      "United States"
+    ],
+    "sourceTier": 1,
+    "notes": "FDA CORE active-investigation table showed Cyclospora references 1381 and 1375 with product not yet identified; FDA traceback and sampling were initiated. Use for traceback/food-safety investigation status, not clinical guidance."
+  },
+  {
+    "id": "fda-cyclospora-pathogen",
+    "authority": "FDA",
+    "authorityFull": "U.S. Food and Drug Administration",
+    "title": "FDA Cyclospora cayetanensis foodborne pathogen page",
+    "sourceType": "health-advisory",
+    "primary": false,
+    "url": "https://www.fda.gov/food/foodborne-pathogens/cyclospora",
+    "lastVerified": "2026-07-02",
+    "domains": [
+      "enteric"
+    ],
+    "geography": [
+      "United States"
+    ],
+    "sourceTier": 1,
+    "notes": "FDA background page for Cyclospora cayetanensis and food-safety investigation context. Pair with CDC surveillance and FDA CORE before updating structured signal facts."
+  },
+  {
+    "id": "cdc-powassan-current-year-2026",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Powassan Virus Disease — Current Year Data",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.cdc.gov/powassan/data-maps/current-year-data.html",
+    "lastVerified": "2026-07-02",
+    "publicationDate": "2026-06-30",
+    "domains": [
+      "vector_borne"
+    ],
+    "geography": [
+      "United States"
+    ],
+    "sourceTier": 1,
+    "notes": "CDC current-year Powassan disease data page. CDC labels current-year data preliminary and updates it every 1–2 weeks during June–December; state and local health departments may have more current data."
+  },
+  {
+    "id": "cdc-powassan-data-maps",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC Powassan Virus Disease — Data and Maps",
+    "sourceType": "surveillance-dashboard",
+    "primary": true,
+    "url": "https://www.cdc.gov/powassan/data-maps/index.html",
+    "lastVerified": "2026-07-02",
+    "publicationDate": "2026-06-03",
+    "domains": [
+      "vector_borne"
+    ],
+    "geography": [
+      "United States"
+    ],
+    "sourceTier": 1,
+    "notes": "CDC background surveillance page for Powassan virus disease; CDC notes cases are rare but increasing and occur primarily in the Northeast and Great Lakes regions."
+  },
+  {
+    "id": "cdc-powassan-about",
+    "authority": "CDC",
+    "authorityFull": "U.S. Centers for Disease Control and Prevention",
+    "title": "CDC About Powassan Virus Disease",
+    "sourceType": "health-advisory",
+    "primary": false,
+    "url": "https://www.cdc.gov/powassan/about/index.html",
+    "lastVerified": "2026-07-02",
+    "publicationDate": "2026-06-23",
+    "domains": [
+      "vector_borne"
+    ],
+    "geography": [
+      "United States"
+    ],
+    "sourceTier": 1,
+    "notes": "CDC overview for Powassan virus disease and transmission. Use only for background context; current-year counts come from the CDC current-year data page."
+  },
+  {
+    "id": "state-embassy-kampala-alert-feed",
+    "authority": "U.S. Embassy Kampala",
+    "authorityFull": "U.S. Department of State — U.S. Embassy in Uganda",
+    "title": "U.S. Embassy Kampala Alert Feed",
+    "sourceType": "health-advisory",
+    "primary": false,
+    "url": "https://ug.usembassy.gov/category/alert/feed/",
+    "lastVerified": "2026-07-02",
+    "domains": [
+      "vhf",
+      "travel"
+    ],
+    "geography": [
+      "Uganda"
+    ],
+    "sourceTier": 1,
+    "notes": "Official operational sentinel for Embassy health/security alerts. Can trigger discovery, travel/operational watch, and cross-border review, but cannot write case counts or replace WHO/CDC/MOH/Africa CDC epidemiologic sources."
+  },
+  {
+    "id": "state-embassy-kampala-health-alert-2026-06-29",
+    "authority": "U.S. Embassy Kampala",
+    "authorityFull": "U.S. Department of State — U.S. Embassy in Uganda",
+    "title": "Health Alert: U.S. Embassy Kampala, June 29, 2026",
+    "sourceType": "health-advisory",
+    "primary": false,
+    "url": "https://ug.usembassy.gov/health-alert-health-alert-u-s-embassy-kampala-june-29-2026/",
+    "lastVerified": "2026-07-02",
+    "publicationDate": "2026-06-29",
+    "domains": [
+      "vhf",
+      "travel"
+    ],
+    "geography": [
+      "Uganda",
+      "Kampala"
+    ],
+    "sourceTier": 1,
+    "knownBlocked": true,
+    "knownBlockedReason": "The direct Embassy alert page can return HTTP 403 to automated fetchers while the RSS feed and WordPress JSON fallback remain the automation path (verified 2026-07-02). Treat 403 on this page as known-blocked, not as loss of the source lane.",
+    "notes": "Official Embassy health-alert page supplied by the operator. Automated fetches may need the category RSS feed or WordPress JSON fallback; treat as operational/travel sentinel only, not as sole epidemiologic confirmation."
   }
 ]

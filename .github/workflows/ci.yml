@@ -35,6 +35,9 @@ jobs:
       - name: Run PHAC ingestion transform tests
         run: npm run test:ingest-phac
 
+      - name: Run signal-discovery parser and safety tests
+        run: npm run test:signal-discovery
+
       - name: Run news-fetch retry tests
         run: npm run test:fetch
 

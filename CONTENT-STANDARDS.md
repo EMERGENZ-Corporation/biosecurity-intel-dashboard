@@ -187,6 +187,21 @@ These invariants are enforced by `scripts/validate-data.mjs` and two unit suites
 
 Enforced by the same validator and `npm run test:ingest-phac` (which exercises current + stale + malformed CSV fixtures under `scripts/fixtures/`).
 
+### 4.9 Official operational sentinels and signal discovery
+
+`scripts/discover-signals.mjs` is the only automated scanner permitted to create internal `signal-candidates.json` proposals from official signal-discovery lanes. It scans Tier 1/2 epidemiologic sources and official operational sentinels, then reconciles approval-required findings through the reusable `signal-discovery` GitHub issue. It does not use AI and it does not publish clinical guidance.
+
+- **Official epidemiologic sources can support structured candidates.** CDC, FDA, WHO, MOH, and Africa CDC source lanes may support low-risk deterministic monitor/watch candidates when the source is registered in `signal-sources.json` and allowed by `src/data/signal-discovery-policy.json`.
+- **Official operational sentinels are bounded.** U.S. Department of State and U.S. Embassy alerts are official government sources for travel, security, operational posture, and cross-border review. They can trigger discovery, watch-level operational alerting, and a human review issue.
+- **Operational sentinels cannot write case counts.** Embassy/State-only findings must not overwrite case counts, deaths, disease identity, clinical guidance, or public-health risk levels. Epidemiologic facts require corroboration by WHO, CDC, MOH, FDA, or Africa CDC as appropriate.
+- **Auto-published discoveries are capped at `watch`.** Any severity above `watch`, unsupported count change, non-primary claim, clinical text, PPE/isolation/treatment text, or triage-card change must stage for approval.
+- **Internal diagnostics stay internal.** Source-lane fetch health and parser diagnostics belong in `signal-candidates.json` and the GitHub issue context, not in public dashboard UI.
+- **Every signal carries a refresh classification.** `signals.json` must set `refreshClassification` to one of:
+  - `auto-writable` — a deterministic Tier 1/2 source can safely update structured facts, but only inside a tested writer contract and only at `watch` or lower unless a human approves.
+  - `auto-checkable-human-reviewed` — automation may check/stage source currency, but structured facts, geography, summaries, markers, and sections remain human-reviewed before publication.
+  - `manual-only` — prose/PDF/high-consequence sources require human review before changing structured facts, geography, summaries, markers, sections, or source attribution.
+- **Source-currency matrix is prevention, not masking.** The matrix must not hide stale data. A signal clears stale status only after primary-source review, a deterministic writer refresh, or an explicit staged-review finding that leaves the signal stale.
+
 ---
 
 ## 5. Public-Facing vs. Internal Information

@@ -1,3 +1,6 @@
+# Private workflow notes (not committed)
+.weval-disabled-note.md
+
 # Logs
 logs
 *.log
@@ -21,6 +24,7 @@ promote-timeline-result.json
 ingest-nwss-result.json
 ingest-phac-result.json
 ingest-tracking-report-result.json
+signal-candidates.json
 weval-run-result.json
 autonomy-audit-result.json
 ai-enrichment-audit-result.json

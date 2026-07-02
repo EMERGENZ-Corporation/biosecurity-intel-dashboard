@@ -93,6 +93,8 @@ const SIGNAL_KEYWORDS = {
   'fifa-world-cup-2026-prep': ['world cup', 'fifa'],
   'pertussis-us-2026': ['pertussis', 'whooping cough'],
   'yellow-fever-colombia-2026': ['yellow fever'],
+  'cyclospora-us-2026': ['cyclospora', 'cyclosporiasis'],
+  'powassan-us-2026': ['powassan', 'powassan virus'],
 }
 
 // Broad disease lexicon for best-effort "uncovered topic" detection: terms that,
@@ -106,6 +108,7 @@ const DISEASE_LEXICON = [
   'nipah', 'oropouche', 'polio', 'poliovirus', 'diphtheria', 'anthrax', 'plague',
   'rabies', 'malaria', 'tuberculosis', 'west nile', 'crimean-congo', 'rift valley',
   'hepatitis', 'legionella', 'listeria', 'salmonella', 'e. coli', 'shigella',
+  'cyclospora', 'cyclosporiasis', 'powassan',
 ]
 
 const MONTHS = {

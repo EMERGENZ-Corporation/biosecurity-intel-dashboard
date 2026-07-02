@@ -1,33 +1,33 @@
 {
   "schemaVersion": 2,
-  "status": "degraded",
-  "generatedAt": "2026-07-01T09:32:13.427Z",
+  "status": "ok",
+  "generatedAt": "2026-07-02T05:44:50.937Z",
   "thresholds": {
     "maxDataAgeHours": 336,
     "maxOfficialCheckAgeHours": 336,
     "maxSignalStaleHours": 336
   },
   "dashboard": {
-    "lastUpdated": "2026-06-20T00:00:00.000Z",
-    "lastChecked": "2026-06-20T00:00:00.000Z",
-    "lastOfficialSourceCheck": "2026-06-20T00:00:00.000Z",
-    "oldestActiveReview": "2026-06-12T00:00:00.000Z",
-    "oldestActiveUpdate": "2026-05-30T00:00:00.000Z",
-    "dataAgeHours": 273.53706305555556,
-    "officialCheckAgeHours": 273.53706305555556
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
+    "lastOfficialSourceCheck": "2026-07-02T00:00:00.000Z",
+    "oldestActiveReview": "2026-06-20T00:00:00.000Z",
+    "oldestActiveUpdate": "2026-03-13T00:00:00.000Z",
+    "dataAgeHours": 5.7474825,
+    "officialCheckAgeHours": 5.7474825
   },
   "signals": {
-    "total": 19,
-    "active": 17,
+    "total": 21,
+    "active": 19,
     "highestSeverity": "action",
     "byCategory": {
       "zoonotic": 4,
       "vhf": 2,
       "vaccine_preventable": 2,
-      "enteric": 1,
+      "enteric": 2,
       "respiratory": 1,
       "environmental": 5,
-      "vector_borne": 2,
+      "vector_borne": 3,
       "amr_fungal": 1,
       "mass_gathering": 1
     },
@@ -53,9 +53,9 @@
         "total": 3
       },
       "enteric": {
-        "primary": 1,
+        "primary": 2,
         "linked": 1,
-        "total": 2
+        "total": 3
       },
       "respiratory": {
         "primary": 1,
@@ -68,9 +68,9 @@
         "total": 5
       },
       "vector_borne": {
-        "primary": 2,
+        "primary": 3,
         "linked": 0,
-        "total": 2
+        "total": 3
       },
       "amr_fungal": {
         "primary": 1,
@@ -83,44 +83,33 @@
         "total": 1
       }
     },
-    "staleSignalIds": [
-      "andes-hantavirus-mv-hondius-2026",
-      "ebola-bundibugyo-drc-2026",
-      "mpox-africa-clade-i-2026",
-      "cholera-africa-2026",
-      "norovirus-wastewater-2026",
-      "rotavirus-wastewater-2026-bay-area",
-      "hmpv-wastewater-2026",
-      "lassa-fever-2026",
-      "chikungunya-2026",
-      "candida-auris-wastewater-2026",
-      "screwworm-onehealth-2026",
-      "fifa-world-cup-2026-prep",
-      "pertussis-us-2026",
-      "yellow-fever-colombia-2026"
-    ],
+    "byRefreshClassification": {
+      "manual-only": 6,
+      "auto-checkable-human-reviewed": 15
+    },
+    "staleSignalIds": [],
     "timelineEvents": 50,
-    "totalMapMarkers": 144,
-    "totalDetailSections": 86
+    "totalMapMarkers": 147,
+    "totalDetailSections": 90
   },
   "sources": {
-    "total": 48,
-    "primary": 38,
-    "secondary": 10,
+    "total": 56,
+    "primary": 42,
+    "secondary": 14,
     "byTier": {
       "tier2": 14,
-      "tier1": 27,
+      "tier1": 35,
       "tier3": 4,
       "tier4": 3
     }
   },
   "news": {
     "total": 500,
-    "newest": "2026-07-01T04:16:28.000Z"
+    "newest": "2026-07-01T19:44:24.000Z"
   },
   "automation": {
-    "mode": "autonomous-with-review-gates",
-    "publicSummary": "News, public API, RSS, status, production monitoring, and official-source review alerts are scheduled. Structured signal facts, clinical text, and public-health guidance remain review-gated.",
+    "mode": "assisted-pipeline-with-review-gates",
+    "publicSummary": "News, public API, RSS, status, production monitoring, official-source review alerts, official signal discovery, and the source-currency matrix are scheduled. Structured signal facts, clinical text, and public-health guidance remain review-gated.",
     "dataWriters": [
       {
         "id": "news-feed",
@@ -208,6 +197,23 @@
         ]
       },
       {
+        "id": "signal-discovery",
+        "cadence": "Daily",
+        "workflow": "Official Signal Discovery",
+        "writes": [
+          "internal signal-candidates.json artifact",
+          "reusable signal-discovery issue when approval is required"
+        ],
+        "guardrails": [
+          "Scans official Tier 1/2 and official operational lanes: FDA CORE, CDC cyclosporiasis/Powassan, WHO Bundibugyo, Africa CDC, and U.S. Embassy Kampala alerts",
+          "Carries a per-signal source-currency matrix: auto-writable, auto-checkable-human-reviewed, or manual-only",
+          "Low-risk deterministic discoveries are capped at \"watch\"",
+          "Embassy/State alerts are official operational sentinels, but cannot write epidemiologic case/death counts",
+          "Clinical guidance, severity above watch, unsupported count changes, and non-primary claims stage for GitHub issue approval",
+          "Source-lane health stays in the internal artifact and issue context, not on the public dashboard"
+        ]
+      },
+      {
         "id": "status-api-refresh",
         "cadence": "Daily and on source data changes",
         "workflow": "Status Refresh",
@@ -228,6 +234,11 @@
         "id": "structured-signal-data",
         "mode": "manual-review-required",
         "reason": "Case counts, risk levels, geography, and source-backed signal facts require Tier 1/2 verification before publication."
+      },
+      {
+        "id": "official-operational-sentinels",
+        "mode": "bounded-auto-discovery",
+        "reason": "State Department and U.S. Embassy alerts can trigger operational review and watch-level discovery, but cannot overwrite disease identity or case/death counts without WHO/CDC/MOH/Africa CDC corroboration."
       },
       {
         "id": "clinical-and-operational-guidance",
@@ -266,6 +277,12 @@
         "action": "Fingerprints Tier 1/2 source pages and flags changed or unreadable pages for manual review."
       },
       {
+        "id": "official-signal-discovery",
+        "cadence": "Daily",
+        "workflow": "Official Signal Discovery",
+        "action": "Scans official source lanes for missing monitored signals and stages approval-required candidates in one reusable signal-discovery issue."
+      },
+      {
         "id": "autonomy-regression-audit",
         "cadence": "On CI push and pull request",
         "workflow": "CI",
@@ -279,7 +296,5 @@
       }
     ]
   },
-  "staleReasons": [
-    "14 signal(s) older than 336h"
-  ]
+  "staleReasons": []
 }

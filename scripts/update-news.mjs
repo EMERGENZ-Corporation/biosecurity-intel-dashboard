@@ -79,7 +79,8 @@ const SIGNAL_KEYWORD_OVERRIDES = {
   ],
   'ebola-bundibugyo-drc-2026': [
     'ebola', 'bundibugyo', 'ebolavirus', 'ebola drc', 'ebola uganda', 'evd',
-    'ebola hemorrhagic', 'ebola outbreak',
+    'ebola hemorrhagic', 'ebola outbreak', 'kampala ebola', 'wakiso ebola',
+    'bundibugyo virus disease',
   ],
   'measles-us-2026': [
     'measles', 'measles outbreak', 'rubeola', 'measles case', 'measles vaccination',
@@ -135,6 +136,14 @@ const SIGNAL_KEYWORD_OVERRIDES = {
   'yellow-fever-colombia-2026': [
     'yellow fever', 'fiebre amarilla', 'yellow fever colombia', 'yellow fever tolima',
     'yellow fever outbreak',
+  ],
+  'cyclospora-us-2026': [
+    'cyclospora', 'cyclosporiasis', 'cyclospora outbreak', 'cyclospora investigation',
+    'fda core cyclospora', 'cyclospora traceback', 'cyclospora cayetanensis',
+  ],
+  'powassan-us-2026': [
+    'powassan', 'powassan virus', 'powassan disease', 'powassan virus disease',
+    'tickborne arbovirus', 'arboviral disease',
   ],
 }
 

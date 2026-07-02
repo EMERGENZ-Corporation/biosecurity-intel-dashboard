@@ -46,6 +46,7 @@ const SIGNAL_SEVERITIES = new Set(['monitor', 'watch', 'concern', 'action'])
 const SIGNAL_CONFIDENCES = new Set(['official', 'corroborated', 'emerging', 'unverified'])
 const SIGNAL_TRENDS = new Set(['increasing', 'stable', 'decreasing', 'unknown'])
 const SIGNAL_STATUSES = new Set(['active', 'monitoring', 'resolved'])
+const SIGNAL_REFRESH_CLASSIFICATIONS = new Set(['auto-writable', 'auto-checkable-human-reviewed', 'manual-only'])
 const MARKER_TYPES = new Set([
   'case_confirmed',
   'death',
@@ -220,7 +221,7 @@ signals.forEach((signal, index) => {
   const label = `signals[${index}] (${signal.id ?? 'no-id'})`
   requireFields(signal, [
     'id', 'name', 'category', 'geography', 'severity', 'confidence', 'trend', 'status',
-    'summary', 'operationalRelevance', 'primarySourceId', 'sourceIds', 'lastUpdated', 'lastChecked',
+    'refreshClassification', 'summary', 'operationalRelevance', 'primarySourceId', 'sourceIds', 'lastUpdated', 'lastChecked',
   ], label)
   if (signal.category && !THREAT_CATEGORIES.has(signal.category)) {
     errors.push(`${label}: invalid category "${signal.category}"`)
@@ -251,6 +252,9 @@ signals.forEach((signal, index) => {
   }
   if (signal.status && !SIGNAL_STATUSES.has(signal.status)) {
     errors.push(`${label}: invalid status "${signal.status}"`)
+  }
+  if (signal.refreshClassification && !SIGNAL_REFRESH_CLASSIFICATIONS.has(signal.refreshClassification)) {
+    errors.push(`${label}: invalid refreshClassification "${signal.refreshClassification}"`)
   }
   if (!Array.isArray(signal.geography) || signal.geography.length === 0) {
     errors.push(`${label}: geography must be a non-empty array`)
@@ -725,7 +729,7 @@ if (status) {
   }
   if (status.automation) {
     requireFields(status.automation, ['mode', 'publicSummary', 'dataWriters', 'reviewGates', 'monitors'], 'status.automation')
-    if (status.automation.mode !== 'autonomous-with-review-gates') {
+    if (status.automation.mode !== 'assisted-pipeline-with-review-gates') {
       errors.push(`status.automation.mode invalid: ${status.automation.mode}`)
     }
     for (const field of ['dataWriters', 'reviewGates', 'monitors']) {

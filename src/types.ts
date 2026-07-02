@@ -33,6 +33,10 @@ export type SignalSeverity = 'monitor' | 'watch' | 'concern' | 'action'
 export type SignalConfidence = 'official' | 'corroborated' | 'emerging' | 'unverified'
 export type SignalTrend = 'increasing' | 'stable' | 'decreasing' | 'unknown'
 export type SignalStatus = 'active' | 'monitoring' | 'resolved'
+export type SignalRefreshClassification =
+  | 'auto-writable'
+  | 'auto-checkable-human-reviewed'
+  | 'manual-only'
 
 export interface SignalMetric {
   label: string
@@ -323,6 +327,13 @@ export interface Signal {
   confidence: SignalConfidence
   trend: SignalTrend
   status: SignalStatus
+  /**
+   * Source-currency lane for future refresh work.
+   * auto-writable = deterministic Tier 1/2 source can safely update structured facts.
+   * auto-checkable-human-reviewed = automation may stage/check source currency, but a human reviews before write.
+   * manual-only = prose/PDF/high-consequence source review stays human-led.
+   */
+  refreshClassification: SignalRefreshClassification
   summary: string
   operationalRelevance: string
   whyItMatters?: string
@@ -416,6 +427,7 @@ export interface StatusSignalSummary {
   highestSeverity: SignalSeverity | null
   byCategory: Partial<Record<ThreatCategory, number>>
   byDomain?: Partial<Record<ThreatCategory, { primary: number; linked: number; total: number }>>
+  byRefreshClassification?: Partial<Record<SignalRefreshClassification, number>>
   staleSignalIds: string[]
 }
 

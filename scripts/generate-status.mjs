@@ -68,6 +68,15 @@ function domainCounts(signals) {
   return counts
 }
 
+function refreshClassificationCounts(signals) {
+  const counts = {}
+  for (const signal of signals) {
+    const key = signal.refreshClassification || 'unclassified'
+    counts[key] = (counts[key] ?? 0) + 1
+  }
+  return counts
+}
+
 function readJsonOptional(path) {
   try { return JSON.parse(readFileSync(path, 'utf8')) } catch { return null }
 }
@@ -124,9 +133,9 @@ function main() {
 
   const status = staleReasons.length === 0 ? 'ok' : 'degraded'
   const automation = {
-    mode: 'autonomous-with-review-gates',
+    mode: 'assisted-pipeline-with-review-gates',
     publicSummary:
-      'News, public API, RSS, status, production monitoring, and official-source review alerts are scheduled. Structured signal facts, clinical text, and public-health guidance remain review-gated.',
+      'News, public API, RSS, status, production monitoring, official-source review alerts, official signal discovery, and the source-currency matrix are scheduled. Structured signal facts, clinical text, and public-health guidance remain review-gated.',
     dataWriters: [
       {
         id: 'news-feed',
@@ -197,6 +206,20 @@ function main() {
         ],
       },
       {
+        id: 'signal-discovery',
+        cadence: 'Daily',
+        workflow: 'Official Signal Discovery',
+        writes: ['internal signal-candidates.json artifact', 'reusable signal-discovery issue when approval is required'],
+        guardrails: [
+          'Scans official Tier 1/2 and official operational lanes: FDA CORE, CDC cyclosporiasis/Powassan, WHO Bundibugyo, Africa CDC, and U.S. Embassy Kampala alerts',
+          'Carries a per-signal source-currency matrix: auto-writable, auto-checkable-human-reviewed, or manual-only',
+          'Low-risk deterministic discoveries are capped at "watch"',
+          'Embassy/State alerts are official operational sentinels, but cannot write epidemiologic case/death counts',
+          'Clinical guidance, severity above watch, unsupported count changes, and non-primary claims stage for GitHub issue approval',
+          'Source-lane health stays in the internal artifact and issue context, not on the public dashboard',
+        ],
+      },
+      {
         id: 'status-api-refresh',
         cadence: 'Daily and on source data changes',
         workflow: 'Status Refresh',
@@ -213,6 +236,11 @@ function main() {
         id: 'structured-signal-data',
         mode: 'manual-review-required',
         reason: 'Case counts, risk levels, geography, and source-backed signal facts require Tier 1/2 verification before publication.',
+      },
+      {
+        id: 'official-operational-sentinels',
+        mode: 'bounded-auto-discovery',
+        reason: 'State Department and U.S. Embassy alerts can trigger operational review and watch-level discovery, but cannot overwrite disease identity or case/death counts without WHO/CDC/MOH/Africa CDC corroboration.',
       },
       {
         id: 'clinical-and-operational-guidance',
@@ -249,6 +277,12 @@ function main() {
         cadence: 'Daily',
         workflow: 'Official Source Audit',
         action: 'Fingerprints Tier 1/2 source pages and flags changed or unreadable pages for manual review.',
+      },
+      {
+        id: 'official-signal-discovery',
+        cadence: 'Daily',
+        workflow: 'Official Signal Discovery',
+        action: 'Scans official source lanes for missing monitored signals and stages approval-required candidates in one reusable signal-discovery issue.',
       },
       {
         id: 'autonomy-regression-audit',
@@ -289,6 +323,7 @@ function main() {
       highestSeverity: highestSeverity(activeSignals),
       byCategory: categoryCounts(signals),
       byDomain: domainCounts(signals),
+      byRefreshClassification: refreshClassificationCounts(signals),
       staleSignalIds,
       timelineEvents: timeline.length,
       totalMapMarkers: signals.reduce((sum, s) => sum + (Array.isArray(s.mapMarkers) ? s.mapMarkers.length : 0), 0),

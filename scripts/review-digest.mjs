@@ -107,7 +107,12 @@ function checkSignalFreshness(signals, sourcesById) {
         why: 'Per-signal lastChecked exceeds MAX_SIGNAL_STALE_HOURS, which sets public status.json to "degraded". lastChecked is a humans-only field (CONTENT-STANDARDS §3.4) attesting the signal was verified against its primary source.',
         governingStandard: 'CONTENT-STANDARDS §3.4; RUNBOOK §2.4',
         threshold: { name: 'MAX_SIGNAL_STALE_HOURS', value: MAX_SIGNAL_STALE_HOURS, unit: 'hours' },
-        observed: { ageHours: Number(hrs.toFixed(1)), lastChecked: signal.lastChecked, signalSeverity: signal.severity },
+        observed: {
+          ageHours: Number(hrs.toFixed(1)),
+          lastChecked: signal.lastChecked,
+          signalSeverity: signal.severity,
+          refreshClassification: signal.refreshClassification || 'unclassified',
+        },
         recommendedAction: {
           summary: 'Re-verify this signal against its primary source, then bump lastChecked (and lastUpdated only if a fact changed).',
           file: `${DATA_DIR}/signals.json`,
@@ -126,7 +131,11 @@ function checkSignalFreshness(signals, sourcesById) {
         why: 'Approaching the 336h staleness threshold. Reviewing now prevents a future "degraded" status.',
         governingStandard: 'CONTENT-STANDARDS §3.4',
         threshold: { name: 'MAX_SIGNAL_STALE_HOURS', value: MAX_SIGNAL_STALE_HOURS, unit: 'hours' },
-        observed: { ageHours: Number(hrs.toFixed(1)), lastChecked: signal.lastChecked },
+        observed: {
+          ageHours: Number(hrs.toFixed(1)),
+          lastChecked: signal.lastChecked,
+          refreshClassification: signal.refreshClassification || 'unclassified',
+        },
         recommendedAction: {
           summary: 'Re-verify against the primary source and bump lastChecked within the next ~2 days.',
           file: `${DATA_DIR}/signals.json`,

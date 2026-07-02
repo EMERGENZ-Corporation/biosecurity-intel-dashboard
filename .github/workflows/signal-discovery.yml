@@ -1,0 +1,166 @@
+name: Official Signal Discovery
+
+on:
+  schedule:
+    # Daily at 08:13 UTC, staggered after status refresh and official-source audit.
+    # Guardrail sources: FDA CORE; CDC Powassan; U.S. Embassy Kampala RSS
+    # https://ug.usembassy.gov/category/alert/feed/
+    - cron: '13 8 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/data/signals.json'
+      - 'src/data/signal-sources.json'
+      - 'src/data/signal-discovery-policy.json'
+      - 'scripts/discover-signals.mjs'
+      - 'scripts/test-signal-discovery.mjs'
+      - '.github/workflows/signal-discovery.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run signal-discovery parser tests
+        run: npm run test:signal-discovery
+
+      - name: Scan official signal lanes
+        run: npm run discover:signals
+        env:
+          SIGNAL_DISCOVERY_OUTPUT: signal-candidates.json
+
+      - name: Upload signal candidates artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: signal-candidates
+          path: signal-candidates.json
+          if-no-files-found: error
+
+      - name: Reconcile signal discovery issue
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs')
+            const marker = '<!-- emergenz-signal-discovery -->'
+            const title = '[SIGNAL DISCOVERY] Candidate signals need review'
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            const result = JSON.parse(fs.readFileSync('signal-candidates.json', 'utf8'))
+
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'signal-discovery',
+                color: '5319E7',
+                description: 'Official-source signal discovery candidates staged for human review',
+              })
+            } catch (error) {
+              if (error.status !== 422) throw error
+            }
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'signal-discovery',
+              per_page: 20,
+            })
+            const existing = issues.find((issue) =>
+              issue.title === title || issue.body?.includes(marker)
+            )
+
+            if (!result.actionRequired) {
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  body: [
+                    'Signal discovery recovered or all candidates are already covered by policy.',
+                    `Checked at: \`${result.checkedAt}\``,
+                    `Candidates: ${result.counts?.candidates ?? 0}`,
+                    `Run: ${runUrl}`,
+                  ].join('\n'),
+                })
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  state: 'closed',
+                })
+              }
+              return
+            }
+
+            const approval = (result.candidates || []).filter((candidate) => candidate.safety?.requiresApproval)
+            const lines = [
+              marker,
+              '## Signal discovery candidates need approval',
+              '',
+              `Status: \`${result.status}\``,
+              `Checked at: \`${result.checkedAt}\``,
+              `Candidates: ${result.counts?.candidates ?? 0}; approval required: ${approval.length}`,
+              '',
+              '> The scanner only stages candidates here. Low-risk deterministic Tier 1/2 detections are capped at `watch`; clinical guidance, count changes without a primary source, and Embassy/State-only epidemiologic claims require approval.',
+              '',
+            ]
+
+            for (const candidate of approval) {
+              lines.push(`### ${candidate.title}`)
+              lines.push(`- Signal: \`${candidate.signalId}\``)
+              lines.push(`- Classification: \`${candidate.classification}\``)
+              lines.push(`- Requested severity: \`${candidate.safety?.requestedSeverity || candidate.requestedSeverity || 'unknown'}\``)
+              lines.push(`- Can write counts: \`${candidate.safety?.canWriteCounts ? 'yes' : 'no'}\``)
+              lines.push(`- Proposed action: ${candidate.proposedAction}`)
+              if (candidate.sourceIds?.length) lines.push(`- Source IDs: ${candidate.sourceIds.map((id) => `\`${id}\``).join(', ')}`)
+              lines.push('')
+            }
+
+            const unhealthy = (result.sourceLaneHealth || []).filter((lane) => !lane.ok)
+            if (unhealthy.length > 0) {
+              lines.push('### Source lane fetch warnings')
+              for (const lane of unhealthy) {
+                lines.push(`- \`${lane.id}\`: ${lane.error || 'unknown error'} (${lane.url})`)
+              }
+              lines.push('')
+            }
+
+            lines.push(`Run: ${runUrl}`)
+            lines.push('')
+            lines.push('_Auto-generated by Official Signal Discovery. Diagnostics remain internal and are attached as the `signal-candidates.json` artifact._')
+
+            const body = lines.join('\n')
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['signal-discovery'],
+              })
+            }

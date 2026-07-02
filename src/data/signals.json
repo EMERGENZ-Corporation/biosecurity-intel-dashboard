@@ -20,10 +20,10 @@
     "confidence": "official",
     "trend": "stable",
     "status": "active",
-    "summary": "Andes hantavirus cluster linked to a South America–Antarctica expedition cruise aboard MV Hondius. 13 reported cases (12 confirmed, 1 probable) and 3 deaths across multiple countries, with multinational case-finding and post-exposure monitoring continuing.",
+    "summary": "ECDC reports an Andes hantavirus cluster linked to the MV Hondius expedition cruise, with 13 total reported cases (12 confirmed and 1 probable) and 3 deaths as of 17 June 2026.",
     "operationalRelevance": "Long incubation (up to 6 weeks) means travelers and returning expedition staff can present in jurisdictions far from the source. EMS and emergency departments handling unexplained respiratory failure in returning travelers should consider hantavirus pulmonary syndrome and use airborne precautions during aerosol-generating procedures.",
     "whyItMatters": "Andes virus is the only hantavirus with documented person-to-person transmission. The Radboud UMC quarantine event after an incorrect blood-sampling procedure shows healthcare worker exposure is a real operational risk if PPE and specimen handling deviate from protocol.",
-    "currentSituation": "ECDC, WHO, CDC, and PHAC continue active surveillance and have issued aligned guidance. WHO global risk remains LOW; ECDC risk for the EU/EEA remains VERY LOW. CDC issued HAN 528 for clinical awareness in the United States.",
+    "currentSituation": "ECDC updated the outbreak page on 17 June 2026 and reported that some contacts had completed quarantine while others were expected to do so in the coming days. Based on currently available information, ECDC assessed the likelihood of additional cases related to this event as very low and the risk to the general EU/EEA population as very low.",
     "geographyNotes": "Source exposure occurred aboard MV Hondius. Confirmed and probable cases have been reported across passengers' home countries; ongoing monitoring spans 11 US states and several EU/EEA member states.",
     "metrics": [
       {
@@ -859,8 +859,8 @@
       "phac-andes-media-update",
       "euronews-radboud-quarantine"
     ],
-    "lastUpdated": "2026-05-30T00:00:00.000Z",
-    "lastChecked": "2026-06-12T00:00:00.000Z",
+    "lastUpdated": "2026-06-17T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "riskAssessments": [
       {
         "authority": "WHO",
@@ -945,11 +945,12 @@
         "relationship": "Argentina and Chile, both World Cup co-hosts, are the primary endemic zone for Andes hantavirus. International visitors with no prior exposure or awareness are at elevated risk near rural fan facilities during the tournament.",
         "type": "geographic-overlap"
       }
-    ]
+    ],
+    "refreshClassification": "manual-only"
   },
   {
     "id": "ebola-bundibugyo-drc-2026",
-    "name": "Ebola disease — Bundibugyo virus, Democratic Republic of the Congo",
+    "name": "Ebola disease — Bundibugyo virus, Democratic Republic of the Congo & Uganda",
     "category": "vhf",
     "operationalLenses": [
       "travel"
@@ -961,14 +962,16 @@
       "Ituri Province",
       "Bunia",
       "Mongwalu",
-      "Rwampara"
+      "Rwampara",
+      "Kampala",
+      "Wakiso"
     ],
     "severity": "action",
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with cross-border spread to Uganda. As of June 11, 2026 (Brown Pandemic Center Tracking Report, sourcing WHO), the DRC has reported 635 confirmed cases and 127 confirmed deaths (CFR ~20%), across 25 affected health zones in Ituri, North Kivu, and South Kivu. Uganda has reported 19 confirmed cases (2 confirmed deaths, 1 probable death) — a total of at least 654 cases and 130 deaths across both countries. Contact-tracing compliance is above 80% in North/South Kivu but only 43% in Ituri. Nakivale refugee camp (Southwest Uganda, population ~150,000) identified 13 suspected cases, all quarantined. The regional response has escalated: Uganda border health measures, a contested US-supported quarantine/care arrangement in Kenya, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts. These figures are updated from WHO-derived reporting and are subject to retrospective revision — verify the latest WHO situation report before operational use.",
-    "operationalRelevance": "Filovirus outbreaks demand strict isolation, source-control PPE, and contact tracing. Healthcare preparedness teams should review travel-history screening, airport and port-of-entry coordination, and laboratory specimen pathways for suspected viral hemorrhagic fever.",
+    "summary": "WHO has declared the Bundibugyo ebolavirus outbreak in the Democratic Republic of the Congo, with cross-border spread to Uganda. As of June 11, 2026 (Brown Pandemic Center Tracking Report, sourcing WHO), the DRC has reported 635 confirmed cases and 127 confirmed deaths (CFR ~20%), across 25 affected health zones in Ituri, North Kivu, and South Kivu. Uganda has reported 19 confirmed cases (2 confirmed deaths, 1 probable death) — a total of at least 654 cases and 130 deaths across both countries. Contact-tracing compliance is above 80% in North/South Kivu but only 43% in Ituri. Nakivale refugee camp (Southwest Uganda, population ~150,000) identified 13 suspected cases, all quarantined. The regional response has escalated: Uganda border health measures, a contested US-supported quarantine/care arrangement in Kenya, a Brazilian investigation of possible imported cases, and accelerated multi-candidate vaccine efforts. These figures are updated from WHO-derived reporting and are subject to retrospective revision — verify the latest WHO situation report before operational use. U.S. Embassy Kampala/State Department health alerts are now monitored as official operational sentinels for travel and cross-border posture, but they do not overwrite WHO/CDC/MOH/Africa CDC epidemiologic counts by themselves. Current official disease tracking remains Bundibugyo Ebola; Marburg references are treated as disambiguation or staged candidates unless corroborated by primary public-health authorities.",
+    "operationalRelevance": "Filovirus outbreaks demand strict isolation, source-control PPE, contact tracing, and cross-border operational monitoring. Healthcare preparedness teams should review travel-history screening, airport and port-of-entry coordination, laboratory specimen pathways for suspected viral hemorrhagic fever, and State Department/U.S. Embassy alert changes for Uganda operations.",
     "whyItMatters": "Bundibugyo virus has caused multiple regional outbreaks since 2007 with case-fatality rates around 30–40%. Cross-border movement in eastern DRC, Uganda, and South Sudan elevates the risk of geographic spread; no licensed vaccine specific to Bundibugyo is currently available.",
     "geographyNotes": "Regional monitoring focuses on DRC and neighbouring countries where cross-border movement can affect surveillance and preparedness. Health-zone-level claims require a specific current outbreak report.",
     "metrics": [
@@ -1084,6 +1087,21 @@
             "url": "https://www.nbcnews.com/world/africa/brazil-investigates-possible-ebola-cases-outbreak-congo-drc-rcna347819"
           }
         ]
+      },
+      {
+        "id": "ebola-ug-kampala-embassy-sentinel",
+        "lat": 0.3476,
+        "lng": 32.5825,
+        "type": "monitoring_site",
+        "severity": "watch",
+        "label": "Kampala — U.S. Embassy operational health-alert sentinel",
+        "description": "Official State Department/U.S. Embassy alerts are monitored for operational posture and travel/security changes. They do not independently write case counts without WHO/CDC/MOH/Africa CDC corroboration.",
+        "sources": [
+          {
+            "label": "U.S. Embassy Kampala alert feed",
+            "url": "https://ug.usembassy.gov/category/alert/feed/"
+          }
+        ]
       }
     ],
     "primarySourceId": "who-ebola-drc-2026-situation",
@@ -1093,10 +1111,12 @@
       "who-disease-outbreak-news",
       "africa-cdc-outbreaks",
       "cdc-current-outbreaks",
-      "brown-pandemic-center"
+      "brown-pandemic-center",
+      "state-embassy-kampala-alert-feed",
+      "state-embassy-kampala-health-alert-2026-06-29"
     ],
-    "lastUpdated": "2026-06-12T00:00:00.000Z",
-    "lastChecked": "2026-06-12T00:00:00.000Z",
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "detailSections": [
       {
         "id": "clinical-profile",
@@ -1199,7 +1219,7 @@
       {
         "id": "operational-guidance",
         "title": "Operational guidance",
-        "bodyMarkdown": "Ebolavirus outbreaks are reported in real time by WHO Disease Outbreak News and Africa CDC. Active surveillance includes ring-vaccination campaigns where rVSV-ZEBOV is matched to the strain, cross-border case-finding, and Ebola Treatment Unit (ETU) deployment.\n\nReturning travelers from active outbreak zones presenting with febrile illness within 21 days of departure should be triaged using standard EVD screening (fever, exposure history, contact with known/suspected case). Specimen handling requires BSL-4 containment for confirmatory testing; coordinate with state public health lab and CDC Emergency Operations Center (770-488-7100) prior to collection.\n\nOperational priorities include early isolation, contact tracing, safe burials, and community engagement. Verify ETU locations, transport protocols, and PPE supply chains against your agency's biosafety SOP before deployment.",
+        "bodyMarkdown": "Ebolavirus outbreaks are reported in real time by WHO Disease Outbreak News and Africa CDC. Active surveillance includes ring-vaccination campaigns where rVSV-ZEBOV is matched to the strain, cross-border case-finding, and Ebola Treatment Unit (ETU) deployment.\n\nReturning travelers from active outbreak zones presenting with febrile illness within 21 days of departure should be triaged using standard EVD screening (fever, exposure history, contact with known/suspected case). Specimen handling requires BSL-4 containment for confirmatory testing; coordinate with state public health lab and CDC Emergency Operations Center (770-488-7100) prior to collection.\n\nOperational priorities include early isolation, contact tracing, safe burials, and community engagement. Verify ETU locations, transport protocols, and PPE supply chains against your agency's biosafety SOP before deployment.\n\nMonitor U.S. Embassy Kampala and State Department health/security alerts as official operational sentinels for Uganda travel posture, border operations, and U.S.-citizen guidance. Embassy-only alerts can trigger review and watch status, but must not overwrite case counts, fatality counts, or disease identity without corroboration from WHO, CDC, Ministry of Health, or Africa CDC. Marburg mentions are treated as disambiguation unless primary public-health authorities confirm a Marburg outbreak.",
         "attribution": {
           "authority": "WHO",
           "documentTitle": "WHO Disease Outbreak News",
@@ -1218,9 +1238,15 @@
             "documentTitle": "CDC Current Outbreaks",
             "date": "2026-05-19",
             "url": "https://www.cdc.gov/outbreaks/"
+          },
+          {
+            "authority": "U.S. Embassy Kampala",
+            "documentTitle": "U.S. Embassy Kampala Alert Feed",
+            "date": "2026-07-02",
+            "url": "https://ug.usembassy.gov/category/alert/feed/"
           }
         ],
-        "lastReviewed": "2026-05-20"
+        "lastReviewed": "2026-07-02"
       }
     ],
     "riskAssessments": [
@@ -1250,6 +1276,13 @@
         "description": "US importation risk monitoring",
         "url": "https://www.cdc.gov/outbreaks/",
         "asOf": "2026-05-20"
+      },
+      {
+        "authority": "U.S. Embassy Kampala",
+        "label": "Operational Sentinel",
+        "description": "Health and security alerts monitored for Uganda posture; not a primary epidemiologic count source",
+        "url": "https://ug.usembassy.gov/category/alert/feed/",
+        "asOf": "2026-07-02"
       }
     ],
     "hcwAlert": {
@@ -1283,6 +1316,12 @@
         "threshold": "≥3 staff infections traceable to a single ETU within 30 days",
         "escalateTo": "action",
         "rationale": "Indicates PPE protocol failure or IPC breakdown. Historical outbreaks have collapsed when ETU-staff transmission was unaddressed."
+      },
+      {
+        "trigger": "Embassy or State Department operational alert changes",
+        "threshold": "U.S. Embassy Kampala or State Department issues a new health/security alert materially changing Uganda travel, border, or healthcare operations for filovirus response",
+        "escalateTo": "watch",
+        "rationale": "State/Embassy alerts are official operational sentinels and can trigger review, but epidemiologic facts require WHO/CDC/MOH/Africa CDC corroboration."
       }
     ],
     "currentSituation": "As of June 11, 2026, the Bundibugyo ebolavirus outbreak has expanded substantially. The DRC reports 635 confirmed cases (up from 344 the prior week) and 127 confirmed deaths across 25 health zones in Ituri, North Kivu, and South Kivu — a CFR of approximately 20%. Contact-tracing compliance remains strong in North/South Kivu (>80%) but lags in Ituri (43%), the most active front. Uganda reports 19 confirmed cases (2 confirmed deaths, 1 probable death); Nakivale refugee camp in Southwest Uganda (population ~150,000) has quarantined 13 suspected cases identified June 11. The American physician treated in Germany has recovered. No licensed vaccine specific to Bundibugyo virus is available; multi-candidate accelerated trials are ongoing. The response has escalated regionally: Uganda border health measures, a contested US-supported Ebola care/quarantine arrangement in Kenya, and a Brazilian investigation of possible imported cases (unconfirmed). These figures are WHO-derived and subject to retrospective revision — verify the latest WHO situation report before operational briefing. Source: Brown Pandemic Center Tracking Report, June 11, 2026 (WHO primary).",
@@ -1393,7 +1432,8 @@
       "sourceTitle": "Ebola — Information for Healthcare Providers",
       "sourceUrl": "https://www.cdc.gov/vhf/ebola/clinicians/index.html",
       "lastReviewed": "2026-05-23"
-    }
+    },
+    "refreshClassification": "manual-only"
   },
   {
     "id": "measles-us-2026",
@@ -1735,7 +1775,8 @@
       "sourceTitle": "Measles (Rubeola) — Clinical Overview for Healthcare Providers",
       "sourceUrl": "https://www.cdc.gov/measles/hcp/clinical-overview/index.html",
       "lastReviewed": "2026-05-23"
-    }
+    },
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "mpox-africa-clade-i-2026",
@@ -1754,7 +1795,7 @@
     "confidence": "corroborated",
     "trend": "stable",
     "status": "active",
-    "summary": "Mpox clade I and travel-linked importation monitoring remain operationally significant for clinical recognition, specimen routing, and laboratory clade differentiation. Madagascar reports 3,241 total cases (1,976 confirmed) and 7 deaths as of June 9, up 6.5% since May 31. Mauritius confirmed its first locally acquired mpox case (June 4, 2026). Reunion reports 15 total 2026 cases (3 new, including 2 locally acquired and 1 imported from Madagascar — presumed clade Ib). Hong Kong reports 2 new cases linked to a sauna cluster (5 epidemiologically connected). Pakistan (Lahore) has 54 cumulative cases (predominantly clade Ib). Verify current country-level trends and any importation details against specific Africa CDC, WHO, or CDC updates before publication.",
+    "summary": "WHO external situation report #65 remains the registered WHO snapshot for the multi-country mpox outbreak: global epidemiology is current through 31 March 2026, Africa through 19 April 2026, and operational response updates through 22 April 2026. Use current WHO or Africa CDC updates before changing country-level counts or importation details.",
     "operationalRelevance": "Clinicians should consider mpox in compatible rash illnesses with relevant travel or contact history. Confirm specimen pathways for orthopoxvirus PCR and laboratory clade differentiation; isolate suspected cases per CDC interim guidance.",
     "whyItMatters": "Clade I has historically been associated with higher severity than clade IIb. Detection in non-endemic jurisdictions raises importation and clinical-readiness implications.",
     "primarySourceId": "who-mpox-sitrep",
@@ -1766,8 +1807,8 @@
       "cdc-han",
       "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-12T00:00:00.000Z",
-    "lastChecked": "2026-06-12T00:00:00.000Z",
+    "lastUpdated": "2026-04-30T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "mpox-drc-equateur",
@@ -2082,7 +2123,8 @@
       "sourceTitle": "Mpox — Clinical Recognition",
       "sourceUrl": "https://www.cdc.gov/poxvirus/mpox/clinicians/clinical-recognition.html",
       "lastReviewed": "2026-05-23"
-    }
+    },
+    "refreshClassification": "manual-only"
   },
   {
     "id": "avian-influenza-h5-2026",
@@ -2499,7 +2541,8 @@
       "sourceTitle": "H5N1 Bird Flu — Clinical Care Guidance for Healthcare Providers",
       "sourceUrl": "https://www.cdc.gov/bird-flu/hcp/clinical-care/",
       "lastReviewed": "2026-05-23"
-    }
+    },
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "cholera-africa-2026",
@@ -2518,17 +2561,17 @@
     "confidence": "corroborated",
     "trend": "decreasing",
     "status": "active",
-    "summary": "Africa CDC reported 40,707 cholera cases continent-wide from January 1 through May 14, 2026 — a 65% year-over-year decline compared to the same period in 2025. Despite the overall volume decrease, case fatality ratios remain elevated in conflict-affected and low-healthcare-access settings. Sudan, Ethiopia, Somalia, Mozambique, Malawi, and Zimbabwe continue reporting active transmission.",
+    "summary": "Cholera remains an active sub-Saharan Africa monitoring signal. The reviewed Africa CDC source lane is the current official outbreak/intelligence entry point; specific country and continent-wide counts should stay staged until verified against the latest Africa CDC or WHO primary report.",
     "operationalRelevance": "Humanitarian, public health, and EMS preparedness teams supporting affected regions should plan for WASH-driven case surges, oral rehydration capacity, and cross-border transmission. Travel medicine clinicians should review cholera vaccination recommendations for high-risk travelers.",
     "whyItMatters": "Cholera spread is tightly coupled to WASH conditions, climate shocks, and population movement. Cross-border transmission risk requires current country-level verification.",
-    "primarySourceId": "africa-cdc-ei-weekly",
+    "primarySourceId": "africa-cdc-outbreaks",
     "sourceIds": [
       "africa-cdc-ei-weekly",
       "africa-cdc-outbreaks",
       "who-disease-outbreak-news"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "cholera-ng-borno",
@@ -2536,7 +2579,7 @@
         "lng": 13.1603,
         "type": "outbreak_zone",
         "severity": "action",
-        "label": "Nigeria — Borno State (7,800 cases; 160% weekly spike, June 9)"
+        "label": "Nigeria — Borno State cholera activity under review"
       },
       {
         "id": "cholera-sd-khartoum",
@@ -2750,14 +2793,7 @@
         "asOf": "2026-05-20"
       }
     ],
-    "currentSituation": "Africa CDC epidemic intelligence recorded 40,707 cholera cases across the continent from January 1 through May 14, 2026, representing a 65% year-over-year decline from the same period in 2025 (Africa CDC Weekly Epidemic Intelligence; Brown Pandemic Center Tracking Report, May 21, 2026). Despite declining continental volume, acute surges continue in specific settings. Nigeria's Borno State reported 7,800 cases as of June 9, 2026 — a 160% increase from approximately 3,000 the prior week — linked to a contaminated community dam; 74 deaths (Nigeria CDC, Brown Pandemic Center, June 11, 2026). Sudan reports 124,000 cases and 3,500+ deaths across all 18 states for 2024-early 2026. Active outbreak settings include Sudan (Khartoum conflict zone), Ethiopia, Somalia, Mozambique, Malawi, Zambia, and Zimbabwe. Case fatality ratios remain disproportionately elevated in conflict-affected and WASH-constrained settings.",
-    "metrics": [
-      {
-        "label": "Africa-wide cases (Jan 1–May 14, 2026)",
-        "value": 40707,
-        "sourceId": "africa-cdc-ei-weekly"
-      }
-    ],
+    "currentSituation": "The prior continent-wide and Borno-specific figures were not source-confirmed in the accessible official page body during the 2 July review. The signal now preserves the active monitoring posture without publishing unsupported current counts.",
     "relatedSignals": [
       {
         "signalId": "screwworm-onehealth-2026",
@@ -2780,7 +2816,8 @@
         "evidence": "Sudan, Somalia, and eastern DRC — among the highest-burden settings — are experiencing active conflict that disrupts passive case reporting systems. Cases in displaced populations and informal settlements are historically under-counted. If surveillance capacity declined proportionally with case counts, the apparent 65% reduction may overstate real improvement. This framing supports maintaining response capacity rather than scaling back based on the headline number.",
         "disposition": "active"
       }
-    ]
+    ],
+    "refreshClassification": "manual-only"
   },
   {
     "id": "seasonal-influenza-2026",
@@ -2971,7 +3008,8 @@
         "relationship": "Mass gatherings are recognized amplifiers of seasonal influenza. The June–July 2026 World Cup tournament, held across three countries with millions of international visitors, creates conditions for inter-continental strain importation and accelerated spread in host communities.",
         "type": "shared-context"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "covid-wastewater-2026",
@@ -3181,7 +3219,8 @@
         "relationship": "H5 influenza A genetic material is detectable in wastewater; WastewaterSCAN and USDA APHIS have piloted wastewater surveillance for H5 at poultry processing sites. Influenza A wastewater signals (covid-wastewater tracker) provide early indication of H5 community circulation.",
         "type": "pandemic-precursor"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "norovirus-wastewater-2026",
@@ -3195,7 +3234,7 @@
     "confidence": "official",
     "trend": "stable",
     "status": "active",
-    "summary": "Norovirus wastewater concentrations remain elevated in parts of the U.S. through late spring. Verify regional trend at WastewaterSCAN and CDC NWSS dashboards. Live nationwide concentration trends: data.wastewaterscan.org/tracker (WastewaterSCAN — Stanford/Emory/Verily, CC BY-NC 4.0).",
+    "summary": "Norovirus is tracked through WastewaterSCAN and related wastewater dashboards as a community situational-awareness signal. The current trend should be read from the live dashboard before publishing regional directionality or concentration claims.",
     "operationalRelevance": "Healthcare and long-term care facilities should maintain enhanced cleaning, outbreak detection, and contact precautions during elevated community signal periods.",
     "whyItMatters": "Norovirus drives outbreaks in long-term care, schools, and cruise environments; wastewater trends provide a regional lead indicator.",
     "primarySourceId": "wastewaterscan",
@@ -3203,8 +3242,8 @@
       "wastewaterscan",
       "cdc-nwss"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "noro-us-stanford",
@@ -3338,7 +3377,8 @@
         ],
         "lastReviewed": "2026-05-20"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "rotavirus-wastewater-2026-bay-area",
@@ -3355,7 +3395,7 @@
     "confidence": "official",
     "trend": "increasing",
     "status": "active",
-    "summary": "WastewaterSCAN (Stanford/Emory/Verily) is detecting rising rotavirus concentrations across San Francisco Bay Area wastewater sites since March 2026, with notably elevated signal in Gilroy. Live regional trends: data.wastewaterscan.org/tracker (WastewaterSCAN, CC BY-NC 4.0).",
+    "summary": "Rotavirus wastewater activity is tracked through WastewaterSCAN as a regional situational-awareness signal. The live dashboard should be reviewed before publishing Bay Area directionality, site-specific concentration, or severity claims.",
     "operationalRelevance": "Pediatric EDs, daycare operators, and long-term-care facilities in the Bay Area should reinforce hand hygiene, environmental disinfection, and dehydration assessment readiness during elevated wastewater periods. Verify the latest regional trend at the WastewaterSCAN dashboard before operational use.",
     "whyItMatters": "Rotavirus is a leading cause of severe pediatric gastroenteritis globally; before routine infant vaccination in the US, it caused significant pediatric hospitalizations annually. Wastewater surveillance provides a community-level lead indicator that can precede clinical case reports.",
     "primarySourceId": "wastewaterscan",
@@ -3363,8 +3403,8 @@
       "wastewaterscan",
       "cdc-nwss"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "rota-bay-stanford",
@@ -3404,7 +3444,8 @@
         ],
         "lastReviewed": "2026-05-28"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "rsv-wastewater-2026",
@@ -3563,7 +3604,8 @@
         ],
         "lastReviewed": "2026-05-20"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "hmpv-wastewater-2026",
@@ -3577,7 +3619,7 @@
     "confidence": "official",
     "trend": "stable",
     "status": "active",
-    "summary": "hMPV wastewater concentrations are tracked through WastewaterSCAN and provide a regional indicator of community circulation; clinical detection is limited where multiplex respiratory panels are not in routine use. Live nationwide concentration trends: data.wastewaterscan.org/tracker (WastewaterSCAN — Stanford/Emory/Verily, CC BY-NC 4.0).",
+    "summary": "Human metapneumovirus wastewater activity is tracked through WastewaterSCAN and respiratory surveillance context. The live dashboard should be reviewed before publishing current regional directionality or concentration claims.",
     "operationalRelevance": "Clinicians evaluating severe lower respiratory illness in young children or immunocompromised patients should consider hMPV alongside RSV and influenza.",
     "whyItMatters": "hMPV is under-recognized clinically; wastewater integration helps regional preparedness despite limited bedside diagnostics.",
     "primarySourceId": "wastewaterscan",
@@ -3585,8 +3627,8 @@
       "wastewaterscan",
       "cdc-nwss"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "hmpv-us-cambridge",
@@ -3714,7 +3756,8 @@
         ],
         "lastReviewed": "2026-05-20"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "lassa-fever-2026",
@@ -3732,7 +3775,7 @@
     "confidence": "corroborated",
     "trend": "stable",
     "status": "active",
-    "summary": "Lassa fever remains a persistent West Africa VHF monitoring priority, especially in Nigeria and surrounding endemic areas. Nigeria CDC reported 829 total cases (208 confirmed deaths) through epidemiological week 21, 2026. In a positive development, the LASSARAB Phase 1 vaccine trial (University of Maryland) is showing promising antibody production in 54 volunteers. Verify current epidemiological figures against Nigeria NCDC, Africa CDC, or WHO reports before publication.",
+    "summary": "Nigeria CDC reported 855 confirmed Lassa fever cases and 214 confirmed-case deaths cumulatively through epidemiological week 23 (1-7 June 2026), affecting 23 states and 109 LGAs.",
     "operationalRelevance": "Clinicians evaluating febrile illness in returning travelers from West Africa should consider Lassa; coordinate with public health for specimen handling and ribavirin treatment guidance.",
     "whyItMatters": "Lassa is a persistent high-burden VHF with seasonal peaks and limited countermeasures; healthcare worker infections continue to be reported.",
     "primarySourceId": "ncdc-lassa-fever",
@@ -3742,8 +3785,8 @@
       "who-disease-outbreak-news",
       "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-06-07T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "lassa-ng-edo",
@@ -3916,13 +3959,13 @@
     ],
     "metrics": [
       {
-        "label": "Nigeria total cases, 2026 through EW21 (Nigeria CDC)",
-        "value": 829,
+        "label": "Nigeria confirmed cases, 2026 through EW23",
+        "value": 855,
         "sourceId": "ncdc-lassa-fever"
       },
       {
-        "label": "Nigeria confirmed deaths, 2026 through EW21",
-        "value": 208,
+        "label": "Nigeria confirmed deaths, 2026 through EW23",
+        "value": 214,
         "sourceId": "ncdc-lassa-fever"
       }
     ],
@@ -4049,7 +4092,8 @@
       "sourceTitle": "Lassa Fever — Information for Healthcare Workers",
       "sourceUrl": "https://www.cdc.gov/vhf/lassa/healthcare-workers/",
       "lastReviewed": "2026-05-23"
-    }
+    },
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "chikungunya-2026",
@@ -4069,7 +4113,7 @@
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "Chikungunya surveillance remains active across parts of the Americas and other mosquito-active regions. A notable new focus is French Guiana, with 513 confirmed cases through June 2026, prompting a CDC Level 2 Travel Health Notice (June 4, 2026). Brazil reports 86,970 total cases (32,691 confirmed) through mid-2026. Verify current country burden and case totals against specific PAHO or WHO updates before publication.",
+    "summary": "Chikungunya remains under PAHO/WHO epidemiological-alert monitoring for the Americas and other mosquito-active regions. Country-level burdens and travel notices should be refreshed only from the latest PAHO, WHO, CDC, or national public-health source before publication.",
     "operationalRelevance": "Travel medicine clinicians and EMS systems in mosquito-active regions should plan for chikungunya in symptomatic returning travelers; review vaccination recommendations for at-risk populations.",
     "whyItMatters": "Chikungunya causes acute and prolonged arthralgia disproportionately affecting older adults and can stress outpatient capacity in outbreak regions.",
     "primarySourceId": "paho-epi-alerts",
@@ -4077,8 +4121,8 @@
       "paho-epi-alerts",
       "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-12T00:00:00.000Z",
-    "lastChecked": "2026-06-12T00:00:00.000Z",
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "chikv-br-mg",
@@ -4246,7 +4290,8 @@
         "url": "https://wwwnc.cdc.gov/travel/notices",
         "asOf": "2026-06-04"
       }
-    ]
+    ],
+    "refreshClassification": "manual-only"
   },
   {
     "id": "candida-auris-wastewater-2026",
@@ -4260,7 +4305,7 @@
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "C. auris wastewater and clinical surveillance can complement one another for healthcare preparedness. Treat wastewater detections as situational-awareness signals and verify current state-level details against CDC NWSS, WastewaterSCAN, or local public health reporting before publication. Live nationwide concentration trends: data.wastewaterscan.org/tracker (WastewaterSCAN — Stanford/Emory/Verily, CC BY-NC 4.0).",
+    "summary": "C. auris remains an operational healthcare-associated and wastewater situational-awareness signal. CDC describes C. auris as an emerging fungus that can cause severe, often multidrug-resistant infections and spread in healthcare facilities; wastewater detections should be interpreted alongside CDC tracking and local public-health reporting.",
     "operationalRelevance": "Infection control teams should review C. auris screening, isolation, and environmental cleaning protocols, particularly in long-term acute care hospitals and skilled nursing facilities in affected regions.",
     "whyItMatters": "C. auris persists on healthcare surfaces, resists multiple antifungals, and can drive invasive disease in vulnerable patients. Wastewater detection should be interpreted alongside clinical surveillance.",
     "primarySourceId": "cdc-nwss",
@@ -4269,8 +4314,8 @@
       "wastewaterscan",
       "cdc-current-outbreaks"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "cauris-us-ny",
@@ -4421,7 +4466,8 @@
       "sourceUrl": "https://www.cdc.gov/outbreaks/",
       "sourceAuthority": "CDC",
       "updatedAt": "2026-05-20"
-    }
+    },
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "screwworm-onehealth-2026",
@@ -4441,7 +4487,7 @@
     "confidence": "corroborated",
     "trend": "increasing",
     "status": "active",
-    "summary": "New World screwworm is now confirmed in the United States, with 7 active cases as of June 11, 2026. A first-ever detection in New Mexico was confirmed June 7 (Lea County dog); a Texas case was confirmed in Zavala County on June 3. Central America and Mexico report a combined 185,000+ cases. Canada's CFIA halted US livestock imports from affected regions on June 5. Combined US+regional case trajectory is increasing. USDA APHIS and animal-health partners continue preparedness, surveillance, and sterile-fly release operations. Verify current detections, trade restrictions, and dispersal-zone details against the APHIS current-status page and WOAH WAHIS.",
+    "summary": "USDA APHIS maintains a current-status page and confirmed-detections dashboard for New World screwworm in the United States, Mexico, and Central America. The current-status page was last modified 1 July 2026; the confirmed-detections dashboard is the source of record for animal and wild-fly detections.",
     "operationalRelevance": "Veterinary, agricultural, and border-preparedness teams should maintain detection and response posture. Clinicians at the U.S. southern border should be aware of rare but possible myiasis in travelers and ranch workers.",
     "whyItMatters": "Screwworm resurgence has economic and public health implications across the human-animal interface and can disrupt livestock movement and food security. Confirmed US cases for the first time since eradication in 1966 represent a significant sentinel event.",
     "primarySourceId": "usda-aphis-screwworm-status",
@@ -4450,8 +4496,8 @@
       "woah-wahis",
       "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-07-01T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "screw-pa",
@@ -4494,20 +4540,12 @@
         "label": "US southern border, Texas — APHIS surveillance"
       },
       {
-        "id": "screw-us-tx-zavala",
-        "lat": 28.8692,
-        "lng": -99.7582,
+        "id": "screw-us-tx-la-salle",
+        "lat": 28.3516,
+        "lng": -99.0987,
         "type": "animal_detection",
         "severity": "action",
-        "label": "Zavala County, Texas — confirmed US case (June 3, 2026)"
-      },
-      {
-        "id": "screw-us-nm-lea",
-        "lat": 32.7395,
-        "lng": -103.3739,
-        "type": "animal_detection",
-        "severity": "action",
-        "label": "Lea County, New Mexico — first confirmed NM case (dog, June 7, 2026)"
+        "label": "La Salle County, Texas — APHIS-reported confirmed case (June 9, 2026 news item)"
       },
       {
         "id": "screw-usda-aphis",
@@ -4635,7 +4673,9 @@
         "url": "https://wahis.woah.org/",
         "asOf": "2026-05-20"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed",
+    "currentSituation": "APHIS states that all southern ports of entry are currently closed to livestock trade and links to confirmed-detection and state infested-zone resources. Specific active-case counts should be read from the APHIS dashboard or state animal-health pages before publication."
   },
   {
     "id": "fifa-world-cup-2026-prep",
@@ -4654,7 +4694,7 @@
     "confidence": "corroborated",
     "trend": "stable",
     "status": "monitoring",
-    "summary": "Mass-gathering preparedness for the 2026 FIFA World Cup should emphasize event-based surveillance, travel-linked importation monitoring, and venue medical planning across host countries. This record is a preparedness signal, not an outbreak assertion.",
+    "summary": "Mass-gathering preparedness for the 2026 FIFA World Cup emphasizes event-based surveillance, travel-linked importation monitoring, and venue medical planning across host countries. This record is a preparedness signal, not an outbreak assertion.",
     "operationalRelevance": "Local EMS, emergency management, and public health teams in host cities should coordinate movement-aware surveillance, syndromic-surveillance integration, and clinical readiness across venues, transit hubs, and accommodations.",
     "whyItMatters": "Mass gatherings amplify the introduction and spread of infectious diseases via concentrated mobility. Cross-border coordination is required for effective surveillance and response.",
     "primarySourceId": "who-mass-gatherings",
@@ -4663,8 +4703,8 @@
       "paho-epi-alerts",
       "cdc-current-outbreaks"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "fifa-us-metlife",
@@ -4839,7 +4879,9 @@
         "relationship": "Argentina and Chile are co-hosting World Cup matches. Both countries are in the Andes hantavirus endemic zone. Large outdoor gatherings and rural venue surroundings (fan zones, camping areas) create rodent-exposure risk for attendees unfamiliar with Andes virus prevention protocols.",
         "type": "geographic-overlap"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed",
+    "currentSituation": "WHO describes mass-gathering health-risk management as planning with Member States and partners. The signal stays in monitoring posture and should not be used to imply a current outbreak at FIFA venues."
   },
   {
     "id": "pertussis-us-2026",
@@ -4856,7 +4898,7 @@
     "confidence": "official",
     "trend": "stable",
     "status": "monitoring",
-    "summary": "Pertussis is a nationally notifiable vaccine-preventable respiratory disease tracked by CDC through the National Notifiable Diseases Surveillance System (NNDSS). 2026 cumulative cases reached 5,134 (through week ending May 30), with 43 new cases that week — an 87% increase from 23 the prior week — indicating the post-peak deceleration has reversed. California leads with 759 cumulative cases; Washington (348) and Ohio (300) follow. Verify current weekly counts against CDC NNDSS before publication; provisional figures are subject to reporting lag and state-level revision.",
+    "summary": "CDC reports that preliminary 2026 U.S. pertussis cases are lower than the same period in 2025 and that CDC tracks pertussis through NNDSS. Current cumulative weekly counts are provisional and should be read from CDC/NNDSS tables before publication.",
     "operationalRelevance": "EMS and emergency clinicians should consider pertussis in patients (especially infants and the under-vaccinated) with paroxysmal cough, post-tussive emesis, or apnea, and apply droplet precautions. Infants under 1 year are at highest risk of severe disease and death; verify Tdap status for pregnant patients and close contacts.",
     "whyItMatters": "Pertussis is endemic and cyclical; resurgence years are driven by waning immunity and falling DTaP/Tdap coverage. Infant mortality is the primary harm, and the coverage erosion it shares with measles makes vaccine-preventable disease a sustained surveillance priority.",
     "primarySourceId": "cdc-pertussis-surveillance",
@@ -4865,8 +4907,8 @@
       "cdc-current-outbreaks",
       "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-12T00:00:00.000Z",
-    "lastChecked": "2026-06-12T00:00:00.000Z",
+    "lastUpdated": "2026-04-28T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "detailSections": [
       {
         "id": "clinical-profile",
@@ -4901,13 +4943,6 @@
         "lastReviewed": "2026-06-05"
       }
     ],
-    "metrics": [
-      {
-        "label": "Confirmed US cases YTD (through week ending May 30, 2026)",
-        "value": 5134,
-        "sourceId": "cdc-pertussis-surveillance"
-      }
-    ],
     "riskAssessments": [
       {
         "authority": "CDC",
@@ -4916,7 +4951,8 @@
         "url": "https://www.cdc.gov/pertussis/php/surveillance/index.html",
         "asOf": "2026-06-05"
       }
-    ]
+    ],
+    "refreshClassification": "auto-checkable-human-reviewed"
   },
   {
     "id": "yellow-fever-colombia-2026",
@@ -4938,7 +4974,7 @@
     "confidence": "corroborated",
     "trend": "stable",
     "status": "active",
-    "summary": "PAHO reports sustained yellow fever transmission across parts of South America, with cases expanding beyond traditional Amazonian risk zones. The department of Tolima, Colombia — where human cases had not been seen in over a century — is the current epicenter and concentrates the highest case and death counts in the country. Transmission is driven overwhelmingly by unvaccinated individuals. As of the week of June 11, the Colombia outbreak has stabilized with no new cases or deaths reported in the most recent week (Brown Pandemic Center, June 11 2026). CDC has issued Level 2 Travel Health Notices for Colombia and Venezuela. Verify current national figures against PAHO and Colombia's Instituto Nacional de Salud (INS) before publication; counts are revised as cases are laboratory-confirmed.",
+    "summary": "PAHO reported sustained yellow fever transmission in parts of South America, including areas beyond traditional Amazonian risk zones such as Sao Paulo state in Brazil and Tolima department in Colombia. During the first seven weeks of 2026, 34 human cases and 15 deaths were confirmed across Bolivia, Colombia, Peru, and Venezuela.",
     "operationalRelevance": "Travel-medicine and emergency clinicians should verify yellow fever vaccination status in patients with compatible illness (fever, jaundice, hemorrhage) and recent exposure in affected areas of South America, and counsel travelers to endemic or outbreak zones to receive yellow fever vaccine at least 10 days before travel. The yellow fever vaccine is a single dose providing lifelong protection for most people.",
     "whyItMatters": "Yellow fever is a vaccine-preventable viral hemorrhagic fever with a high case-fatality rate among those who progress to severe (toxic-phase) disease. Expansion outside historical risk zones into unvaccinated populations, and detection in periurban areas, raises the risk of larger outbreaks and of importation by unvaccinated travelers.",
     "primarySourceId": "paho-yellow-fever-2026",
@@ -4948,8 +4984,8 @@
       "who-disease-outbreak-news",
       "brown-pandemic-center"
     ],
-    "lastUpdated": "2026-06-13T00:00:00.000Z",
-    "lastChecked": "2026-06-13T00:00:00.000Z",
+    "lastUpdated": "2026-03-13T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
     "mapMarkers": [
       {
         "id": "yf-co-tolima",
@@ -5002,16 +5038,16 @@
         "lastReviewed": "2026-06-05"
       }
     ],
-    "currentSituation": "PAHO's 13 March 2026 epidemiological alert reported sustained yellow fever transmission in parts of South America, with the department of Tolima, Colombia, the epicenter of the country's outbreak. The alert cited 25 confirmed human cases and 13 deaths in Tolima for epidemiological weeks 1–7 of 2026 (CFR ~52%) — a population that had not seen human yellow fever cases in over a century. PAHO emphasized geographic expansion beyond traditional Amazonian risk zones (including São Paulo state, Brazil) and that the vast majority of cases occurred in unvaccinated individuals. As of the week of June 11, the Brown Pandemic Center Tracking Report notes the Colombia outbreak has stabilized with no new cases or deaths reported in the most recent week. CDC has issued Level 2 Travel Health Notices for both Colombia and Venezuela. Colombia has intensified vaccination campaigns, vector control, and risk communication in affected municipalities; verify current case totals against PAHO or Colombia INS before operational use.",
+    "currentSituation": "PAHO classified the public-health risk in the Americas as high in May 2025 and stated on 13 March 2026 that the current situation maintained a similar level of risk. Country and department-level counts should be refreshed from PAHO or national health authorities before operational use.",
     "metrics": [
       {
-        "label": "Tolima confirmed cases, 2026 EW1–7 (PAHO, 13 Mar 2026 alert)",
-        "value": 25,
+        "label": "Americas confirmed human cases, 2026 EW1-7",
+        "value": 34,
         "sourceId": "paho-yellow-fever-2026"
       },
       {
-        "label": "Tolima deaths, 2026 EW1–7 (CFR ~52%, PAHO 13 Mar 2026 alert)",
-        "value": 13,
+        "label": "Americas deaths, 2026 EW1-7",
+        "value": 15,
         "sourceId": "paho-yellow-fever-2026"
       }
     ],
@@ -5037,6 +5073,282 @@
         "url": "https://wwwnc.cdc.gov/travel/notices",
         "asOf": "2026-06-11"
       }
-    ]
+    ],
+    "refreshClassification": "manual-only"
+  },
+  {
+    "id": "cyclospora-us-2026",
+    "name": "Cyclospora foodborne investigations — United States",
+    "category": "enteric",
+    "pathogen": "Cyclospora cayetanensis",
+    "geography": [
+      "United States"
+    ],
+    "severity": "watch",
+    "confidence": "official",
+    "trend": "increasing",
+    "status": "active",
+    "summary": "CDC reports 145 U.S.-acquired cyclosporiasis cases with illness onset from May 1 through June 16, 2026, including 20 hospitalizations, zero deaths, and reports from 17 states. CDC explicitly states there is not currently evidence of a single multistate Cyclospora outbreak linking all cases; FDA CORE separately lists two active Cyclospora traceback investigations with the product not yet identified. This signal is capped at watch until an official source identifies a common vehicle or a wider multistate cluster.",
+    "operationalRelevance": "Foodborne Cyclospora investigations can generate rapid traceback, recall, restaurant/retail, and public-health notification work once a vehicle is identified. The dashboard tracks official CDC surveillance and FDA CORE investigation status, not clinical treatment guidance.",
+    "whyItMatters": "Cyclospora case counts rise during the May–August U.S. season, and produce-linked clusters can cross jurisdictions before a food vehicle is identified. Early visibility helps operators separate broad surveillance activity from outbreak-linked recall or traceback signals.",
+    "geographyNotes": "CDC reports U.S.-acquired cases by state of residence; FDA CORE outbreak references do not identify a product or geography until traceback supports publication.",
+    "metrics": [
+      {
+        "label": "CDC U.S.-acquired cases as of June 16, 2026",
+        "value": 145,
+        "sourceId": "cdc-cyclosporiasis-surveillance-2026",
+        "asOf": "2026-06-16"
+      },
+      {
+        "label": "Hospitalizations among cases with information",
+        "value": 20,
+        "sourceId": "cdc-cyclosporiasis-surveillance-2026",
+        "asOf": "2026-06-16"
+      },
+      {
+        "label": "States reporting U.S.-acquired cases",
+        "value": 17,
+        "sourceId": "cdc-cyclosporiasis-surveillance-2026",
+        "asOf": "2026-06-16"
+      },
+      {
+        "label": "FDA CORE Cyclospora investigation references tracked",
+        "value": 2,
+        "sourceId": "fda-core-foodborne-outbreaks-2026",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "mapMarkers": [
+      {
+        "id": "cyclospora-us-national-surveillance",
+        "lat": 39.8283,
+        "lng": -98.5795,
+        "type": "monitoring_site",
+        "severity": "watch",
+        "label": "United States — CDC cyclosporiasis surveillance and FDA CORE traceback monitoring",
+        "description": "National surveillance signal; not a single outbreak zone. CDC reports U.S.-acquired seasonal cases while FDA CORE lists active Cyclospora traceback investigations with product not yet identified.",
+        "sources": [
+          {
+            "label": "CDC Surveillance of Cyclosporiasis",
+            "url": "https://www.cdc.gov/cyclosporiasis/php/surveillance/index.html"
+          },
+          {
+            "label": "FDA CORE outbreak investigations",
+            "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/investigations-foodborne-illness-outbreaks"
+          }
+        ]
+      }
+    ],
+    "primarySourceId": "cdc-cyclosporiasis-surveillance-2026",
+    "sourceIds": [
+      "cdc-cyclosporiasis-surveillance-2026",
+      "fda-core-foodborne-outbreaks-2026",
+      "fda-cyclospora-pathogen"
+    ],
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Treat the current Cyclospora entry as an official surveillance and traceback watch, not a confirmed single multistate outbreak. CDC reports a 2026 U.S.-acquired seasonal case count and says investigations are ongoing to identify potential clusters and sources; FDA CORE lists two Cyclospora investigation references with product not yet identified. Public updates should wait for CDC/FDA confirmation of a linked vehicle, recall, or named exposure setting before changing geography, severity, or operational recommendations.\n\nEmbargo internal speculation about produce items until an official source names a product or firm. If FDA issues a recall, outbreak advisory, or product attribution, bind the dashboard update directly to that FDA/CDC source and preserve the CORE reference number in the note.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "Surveillance of Cyclosporiasis",
+          "date": "2026-07-01",
+          "url": "https://www.cdc.gov/cyclosporiasis/php/surveillance/index.html"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "FDA",
+            "documentTitle": "Investigations of Foodborne Illness Outbreaks",
+            "date": "2026-07-01",
+            "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/investigations-foodborne-illness-outbreaks"
+          }
+        ],
+        "lastReviewed": "2026-07-02"
+      },
+      {
+        "id": "surveillance-limits",
+        "title": "Surveillance limits",
+        "bodyMarkdown": "CDC labels the 2026 cyclosporiasis figures as surveillance counts and notes the true number of illnesses is likely higher than reported because some patients recover without medical care or testing. The state map reflects where patients lived, not necessarily where exposure occurred. Case counts may not match NNDSS tables exactly, and state health departments may hold more granular cluster information before national pages are updated.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "Surveillance of Cyclosporiasis",
+          "date": "2026-07-01",
+          "url": "https://www.cdc.gov/cyclosporiasis/php/surveillance/index.html"
+        },
+        "lastReviewed": "2026-07-02"
+      }
+    ],
+    "watchIndicators": [
+      {
+        "trigger": "Official food vehicle identified",
+        "threshold": "FDA or CDC names a product, firm, retail/restaurant exposure, or recall tied to Cyclospora cases",
+        "escalateTo": "concern",
+        "rationale": "A named vehicle changes this from broad seasonal surveillance to actionable food-safety operations."
+      },
+      {
+        "trigger": "CDC confirms a linked multistate outbreak",
+        "threshold": "CDC states that cases are epidemiologically linked across multiple states or issues a dedicated outbreak advisory",
+        "escalateTo": "concern",
+        "rationale": "CDC currently says there is no evidence of a single multistate outbreak linking all cases."
+      },
+      {
+        "trigger": "Case severity changes materially",
+        "threshold": "Official hospitalization or death signal departs from current CDC surveillance pattern",
+        "escalateTo": "watch",
+        "rationale": "Cyclospora usually drives traceback and notification work more than acute fatality risk, but severity changes should prompt source review."
+      }
+    ],
+    "relatedSignals": [
+      {
+        "signalId": "norovirus-wastewater-2026",
+        "relationship": "Both are enteric surveillance signals where broad activity must be separated from confirmed source-linked outbreaks before operational escalation.",
+        "type": "shared-context"
+      }
+    ],
+    "currentSituation": "As of the CDC July 1, 2026 update, 145 U.S.-acquired cases had been reported with illness onset from May 1 through June 16, 2026; 20 were hospitalized and no deaths were reported. FDA CORE lists Cyclospora references 1381 and 1375 as active investigations with product not yet identified. CDC says there is currently no evidence of a single multistate Cyclospora outbreak linking all cases.",
+    "refreshClassification": "auto-checkable-human-reviewed"
+  },
+  {
+    "id": "powassan-us-2026",
+    "name": "Powassan virus disease — United States seasonal surveillance",
+    "category": "vector_borne",
+    "pathogen": "Powassan virus",
+    "geography": [
+      "United States",
+      "Northeast United States",
+      "Great Lakes region"
+    ],
+    "severity": "monitor",
+    "confidence": "official",
+    "trend": "increasing",
+    "status": "active",
+    "summary": "CDC current-year Powassan disease surveillance is now tracked as a monitor-level vector-borne signal. CDC describes Powassan cases as rare but increasing, occurring primarily in the Northeast and Great Lakes regions, and labels current-year data preliminary with updates every 1–2 weeks during June–December. This signal watches the official CDC surveillance lane without inferring outbreak status from seasonal tick activity alone.",
+    "operationalRelevance": "Powassan is a tickborne arbovirus with seasonal visibility during warm-weather tick exposure periods. Monitoring supports situational awareness for travel, outdoor-event, and regional health-alert review while keeping public signal severity capped unless official surveillance or state alerts justify escalation.",
+    "whyItMatters": "Powassan disease is nationally notifiable and can cause severe neuroinvasive disease, but case counts are typically low. The practical need is current-source monitoring, not outbreak forecasting.",
+    "geographyNotes": "CDC describes the main U.S. geographic concentration as the Northeast and Great Lakes regions. State and local health departments may publish more current local data than the CDC national page.",
+    "metrics": [
+      {
+        "label": "CDC current-year update cadence",
+        "value": "Every 1–2 weeks during June–December",
+        "sourceId": "cdc-powassan-current-year-2026",
+        "asOf": "2026-06-30"
+      },
+      {
+        "label": "CDC surveillance status",
+        "value": "Nationally notifiable arboviral disease",
+        "sourceId": "cdc-powassan-data-maps",
+        "asOf": "2026-06-03"
+      },
+      {
+        "label": "Primary U.S. geography described by CDC",
+        "value": "Northeast and Great Lakes regions",
+        "sourceId": "cdc-powassan-data-maps",
+        "asOf": "2026-06-03"
+      }
+    ],
+    "mapMarkers": [
+      {
+        "id": "powassan-northeast-us",
+        "lat": 43,
+        "lng": -72.7,
+        "type": "vector_zone",
+        "severity": "monitor",
+        "label": "Northeast U.S. — CDC-described Powassan concentration region",
+        "sources": [
+          {
+            "label": "CDC Powassan data and maps",
+            "url": "https://www.cdc.gov/powassan/data-maps/index.html"
+          }
+        ]
+      },
+      {
+        "id": "powassan-great-lakes",
+        "lat": 44.5,
+        "lng": -86.5,
+        "type": "vector_zone",
+        "severity": "monitor",
+        "label": "Great Lakes region — CDC-described Powassan concentration region",
+        "sources": [
+          {
+            "label": "CDC Powassan data and maps",
+            "url": "https://www.cdc.gov/powassan/data-maps/index.html"
+          }
+        ]
+      }
+    ],
+    "primarySourceId": "cdc-powassan-current-year-2026",
+    "sourceIds": [
+      "cdc-powassan-current-year-2026",
+      "cdc-powassan-data-maps",
+      "cdc-powassan-about"
+    ],
+    "lastUpdated": "2026-07-02T00:00:00.000Z",
+    "lastChecked": "2026-07-02T00:00:00.000Z",
+    "detailSections": [
+      {
+        "id": "operational-guidance",
+        "title": "Operational guidance",
+        "bodyMarkdown": "Use Powassan as a monitor-level seasonal surveillance lane unless CDC or a state health department publishes a specific cluster, unusual geographic expansion, or operational advisory. CDC current-year data are preliminary and updated every 1–2 weeks during June through December; state and local health departments may be ahead of the national page.\n\nThe dashboard should not infer outbreak status from tick season, media reports, or individual severe cases alone. Escalation requires official surveillance movement, a state health advisory, or CDC language that changes the national posture.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "Powassan Virus Disease Current Year Data",
+          "date": "2026-06-30",
+          "url": "https://www.cdc.gov/powassan/data-maps/current-year-data.html"
+        },
+        "additionalAttributions": [
+          {
+            "authority": "CDC",
+            "documentTitle": "Powassan Virus Disease Data and Maps",
+            "date": "2026-06-03",
+            "url": "https://www.cdc.gov/powassan/data-maps/index.html"
+          }
+        ],
+        "lastReviewed": "2026-07-02"
+      },
+      {
+        "id": "surveillance-limits",
+        "title": "Surveillance limits",
+        "bodyMarkdown": "CDC notes that current-year Powassan data are preliminary and reported by state and territorial health departments. National pages may lag local advisories, and the geographic pattern is better interpreted at the regional or state level than as a national outbreak signal. Published dashboard updates should preserve this uncertainty and link users back to CDC or the relevant state health department.",
+        "attribution": {
+          "authority": "CDC",
+          "documentTitle": "Powassan Virus Disease Current Year Data",
+          "date": "2026-06-30",
+          "url": "https://www.cdc.gov/powassan/data-maps/current-year-data.html"
+        },
+        "lastReviewed": "2026-07-02"
+      }
+    ],
+    "watchIndicators": [
+      {
+        "trigger": "Official state or CDC cluster alert",
+        "threshold": "CDC or a state health department reports a cluster or material increase above expected seasonal activity",
+        "escalateTo": "watch",
+        "rationale": "Powassan is rare; clustered activity or official advisory language changes the operational posture."
+      },
+      {
+        "trigger": "Geographic expansion",
+        "threshold": "Official reports show cases in a new or unusual jurisdiction with plausible local exposure",
+        "escalateTo": "watch",
+        "rationale": "Range or exposure-pattern shifts matter more than isolated national counts."
+      },
+      {
+        "trigger": "Operational health advisory",
+        "threshold": "State, CDC, or local health authority issues a clinician/public alert specific to Powassan",
+        "escalateTo": "watch",
+        "rationale": "Advisory issuance indicates local health-system relevance even when national counts remain low."
+      }
+    ],
+    "relatedSignals": [
+      {
+        "signalId": "chikungunya-2026",
+        "relationship": "Both are vector-borne surveillance lanes where official geographic expansion and seasonal exposure context determine escalation.",
+        "type": "shared-context"
+      }
+    ],
+    "currentSituation": "CDC updated the Powassan current-year data page on June 30, 2026 and states that current-season data are updated every 1–2 weeks during June–December. CDC describes cases as rare but increasing and primarily reported from the Northeast and Great Lakes regions.",
+    "refreshClassification": "auto-checkable-human-reviewed"
   }
 ]

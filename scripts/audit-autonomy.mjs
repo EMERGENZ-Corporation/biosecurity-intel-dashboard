@@ -29,6 +29,8 @@ const REQUIRED_PACKAGE_SCRIPTS = [
   'monitor:status',
   'review:digest',
   'verify:production',
+  'discover:signals',
+  'test:signal-discovery',
 ]
 
 const WORKFLOW_CHECKS = [
@@ -101,6 +103,20 @@ const WORKFLOW_CHECKS = [
       "cron: '30 6 * * *'",
       'npm run review:digest',
       'review-digest',
+    ],
+  },
+  {
+    id: 'signal-discovery',
+    path: '.github/workflows/signal-discovery.yml',
+    requiredText: [
+      "cron: '13 8 * * *'",
+      'npm run test:signal-discovery',
+      'npm run discover:signals',
+      'signal-candidates.json',
+      'signal-discovery',
+      'FDA CORE',
+      'Powassan',
+      'ug.usembassy.gov/category/alert/feed/',
     ],
   },
   {
@@ -183,8 +199,8 @@ function checkPublicContract(errors) {
 
   const status = readJson('public/status.json')
   if (status.schemaVersion !== 2) pushMissing(errors, 'status.json', `schemaVersion must be 2; got ${status.schemaVersion}`)
-  if (status.automation?.mode !== 'autonomous-with-review-gates') {
-    pushMissing(errors, 'status.json', 'automation.mode must be "autonomous-with-review-gates"')
+  if (status.automation?.mode !== 'assisted-pipeline-with-review-gates') {
+    pushMissing(errors, 'status.json', 'automation.mode must be "assisted-pipeline-with-review-gates"')
   }
   if (!Array.isArray(status.automation?.dataWriters) || status.automation.dataWriters.length < 3) {
     pushMissing(errors, 'status.json', 'automation.dataWriters must describe the scheduled public writers')
@@ -195,11 +211,17 @@ function checkPublicContract(errors) {
   if (!status.automation?.dataWriters?.some((writer) => writer.id === 'auto-timeline-promote')) {
     pushMissing(errors, 'status.json', 'automation.dataWriters must include auto-timeline-promote')
   }
+  if (!status.automation?.dataWriters?.some((writer) => writer.id === 'signal-discovery')) {
+    pushMissing(errors, 'status.json', 'automation.dataWriters must include signal-discovery')
+  }
   if (!Array.isArray(status.automation?.reviewGates) || status.automation.reviewGates.length < 2) {
     pushMissing(errors, 'status.json', 'automation.reviewGates must describe non-autonomous clinical/structured-data boundaries')
   }
   if (!Array.isArray(status.automation?.monitors) || status.automation.monitors.length < 3) {
     pushMissing(errors, 'status.json', 'automation.monitors must describe production/source monitoring')
+  }
+  if (!status.automation?.monitors?.some((monitor) => monitor.id === 'official-signal-discovery')) {
+    pushMissing(errors, 'status.json', 'automation.monitors must include official-signal-discovery')
   }
 }
 
@@ -210,6 +232,7 @@ function checkContentStandards(errors) {
     'Tier 3 and 4 sources populate news feeds only',
     'Clinical guidance is manually curated only',
     'Never show pipeline diagnostics publicly',
+    'Official operational sentinels',
   ]
   for (const text of required) {
     if (!standards.includes(text)) pushMissing(errors, 'CONTENT-STANDARDS.md', `missing standard "${text}"`)

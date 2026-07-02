@@ -1,0 +1,523 @@
+{
+  "schemaVersion": 1,
+  "mode": "assisted-pipeline-with-review-gates",
+  "outputArtifact": "signal-candidates.json",
+  "defaultMaxAutoSeverity": "watch",
+  "killSwitches": {
+    "enabled": true,
+    "envVar": "SIGNAL_DISCOVERY_DISABLED",
+    "disableValue": "1"
+  },
+  "sourceLanes": [
+    {
+      "id": "fda-core-foodborne",
+      "sourceId": "fda-core-foodborne-outbreaks-2026",
+      "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/investigations-foodborne-illness-outbreaks",
+      "tier": 1,
+      "role": "primary-epidemiologic",
+      "maxAutoSeverity": "watch",
+      "canWriteCounts": true
+    },
+    {
+      "id": "cdc-cyclosporiasis-surveillance",
+      "sourceId": "cdc-cyclosporiasis-surveillance-2026",
+      "url": "https://www.cdc.gov/cyclosporiasis/php/surveillance/index.html",
+      "tier": 1,
+      "role": "primary-epidemiologic",
+      "maxAutoSeverity": "watch",
+      "canWriteCounts": true
+    },
+    {
+      "id": "cdc-powassan-current-year",
+      "sourceId": "cdc-powassan-current-year-2026",
+      "url": "https://www.cdc.gov/powassan/data-maps/current-year-data.html",
+      "tier": 1,
+      "role": "primary-epidemiologic",
+      "maxAutoSeverity": "watch",
+      "canWriteCounts": true
+    },
+    {
+      "id": "who-bundibugyo-situation",
+      "sourceId": "who-ebola-drc-2026-situation",
+      "url": "https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026",
+      "tier": 1,
+      "role": "primary-epidemiologic",
+      "maxAutoSeverity": "watch",
+      "canWriteCounts": false
+    },
+    {
+      "id": "who-disease-outbreak-news",
+      "sourceId": "who-disease-outbreak-news",
+      "url": "https://www.who.int/emergencies/disease-outbreak-news",
+      "tier": 1,
+      "role": "primary-epidemiologic",
+      "maxAutoSeverity": "watch",
+      "canWriteCounts": false
+    },
+    {
+      "id": "africa-cdc-epidemic-intelligence",
+      "sourceId": "africa-cdc-outbreaks",
+      "url": "https://africacdc.org",
+      "tier": 2,
+      "role": "primary-epidemiologic",
+      "maxAutoSeverity": "watch",
+      "canWriteCounts": true
+    },
+    {
+      "id": "state-embassy-kampala-alert-feed",
+      "sourceId": "state-embassy-kampala-alert-feed",
+      "url": "https://ug.usembassy.gov/category/alert/feed/",
+      "fallbackUrls": [
+        "https://ug.usembassy.gov/wp-json/wp/v2/posts?categories=31&per_page=10",
+        "https://ug.usembassy.gov/health-alert-health-alert-u-s-embassy-kampala-june-29-2026/"
+      ],
+      "tier": 1,
+      "role": "official-operational-sentinel",
+      "maxAutoSeverity": "watch",
+      "canWriteCounts": false
+    }
+  ],
+  "signals": {
+    "cyclospora-us-2026": {
+      "aliases": [
+        "cyclospora",
+        "cyclosporiasis",
+        "Cyclospora cayetanensis",
+        "FDA CORE",
+        "CORE 1375",
+        "CORE 1381"
+      ],
+      "allowedSourceIds": [
+        "cdc-cyclosporiasis-surveillance-2026",
+        "fda-core-foodborne-outbreaks-2026",
+        "fda-cyclospora-pathogen"
+      ],
+      "autoPublishEligible": true,
+      "maxAutoSeverity": "watch",
+      "blockedFields": [
+        "triageCard",
+        "treatment",
+        "diagnosis",
+        "caseDefinition"
+      ]
+    },
+    "powassan-us-2026": {
+      "aliases": [
+        "powassan",
+        "powassan virus",
+        "tickborne arbovirus",
+        "arboviral disease"
+      ],
+      "allowedSourceIds": [
+        "cdc-powassan-current-year-2026",
+        "cdc-powassan-data-maps",
+        "cdc-powassan-about"
+      ],
+      "autoPublishEligible": true,
+      "maxAutoSeverity": "watch",
+      "blockedFields": [
+        "triageCard",
+        "treatment",
+        "diagnosis",
+        "caseDefinition"
+      ]
+    },
+    "ebola-bundibugyo-drc-2026": {
+      "aliases": [
+        "ebola",
+        "bundibugyo",
+        "bundibugyo virus",
+        "bundibugyo ebola",
+        "uganda",
+        "kampala",
+        "wakiso"
+      ],
+      "disambiguationAliases": [
+        "marburg",
+        "marburg virus",
+        "filovirus"
+      ],
+      "allowedSourceIds": [
+        "who-ebola-drc-2026-situation",
+        "who-don-ebola-bundibugyo-drc-2026",
+        "africa-cdc-outbreaks",
+        "cdc-current-outbreaks",
+        "state-embassy-kampala-alert-feed",
+        "state-embassy-kampala-health-alert-2026-06-29"
+      ],
+      "autoPublishEligible": false,
+      "maxAutoSeverity": "action",
+      "operationalSentinelSourceIds": [
+        "state-embassy-kampala-alert-feed",
+        "state-embassy-kampala-health-alert-2026-06-29"
+      ],
+      "sentinelCannotWriteCounts": true
+    }
+  },
+  "approvalRules": [
+    "Any new or changed clinical, diagnostic, PPE, isolation, treatment, or triage-card text requires human approval.",
+    "Any automatic signal creation or update above watch requires human approval.",
+    "Any Embassy/State-only claim can create an operational candidate but cannot write epidemiologic case/death counts.",
+    "Any unsupported case-count change stages for approval until corroborated by WHO, CDC, MOH, FDA, or Africa CDC as appropriate.",
+    "Tier 3 media can suggest candidates only; it cannot write structured signal facts."
+  ],
+  "sourceCurrencyMatrix": [
+    {
+      "signalId": "andes-hantavirus-mv-hondius-2026",
+      "primarySourceId": "ecdc-andes-surveillance",
+      "refreshClassification": "manual-only",
+      "sourceCurrencyAction": "manual review required before changing structured facts, geography, summaries, sections, or source attribution",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "ECDC/WHO/CDC prose and guidance pages; complex travel/contact geography stays human-led."
+    },
+    {
+      "signalId": "ebola-bundibugyo-drc-2026",
+      "primarySourceId": "who-ebola-drc-2026-situation",
+      "refreshClassification": "manual-only",
+      "sourceCurrencyAction": "manual review required before changing structured facts, geography, summaries, sections, or source attribution",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "High-consequence VHF signal; WHO/Africa CDC/MOH facts only, Embassy/State operational sentinels cannot write counts."
+    },
+    {
+      "signalId": "measles-us-2026",
+      "primarySourceId": "cdc-measles-data",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC static surveillance page can be checked automatically; case-count writes remain human-reviewed until a deterministic parser is approved."
+    },
+    {
+      "signalId": "mpox-africa-clade-i-2026",
+      "primarySourceId": "who-mpox-sitrep",
+      "refreshClassification": "manual-only",
+      "sourceCurrencyAction": "manual review required before changing structured facts, geography, summaries, sections, or source attribution",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "WHO/Africa CDC situation reports and country updates require human review before structured changes."
+    },
+    {
+      "signalId": "avian-influenza-h5-2026",
+      "primarySourceId": "cdc-h5-situation",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC situation page can be checked automatically; H5/H9N2 structured changes require human review."
+    },
+    {
+      "signalId": "cholera-africa-2026",
+      "primarySourceId": "africa-cdc-outbreaks",
+      "refreshClassification": "manual-only",
+      "sourceCurrencyAction": "manual review required before changing structured facts, geography, summaries, sections, or source attribution",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "Africa CDC/WHO prose and PDF-style outbreak reports stage for review; no unattended continent/country count writes."
+    },
+    {
+      "signalId": "seasonal-influenza-2026",
+      "primarySourceId": "cdc-fluview",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC respiratory/FluView structured sources are a candidate for a future deterministic auto-refresh writer; no such writer is deployed yet, so changes stage for human review."
+    },
+    {
+      "signalId": "covid-wastewater-2026",
+      "primarySourceId": "cdc-nwss",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC NWSS structured source family is a candidate for a future deterministic auto-refresh writer with anti-stale guards; no such writer is deployed yet, so changes stage for human review."
+    },
+    {
+      "signalId": "norovirus-wastewater-2026",
+      "primarySourceId": "wastewaterscan",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "WastewaterSCAN dashboard/API can be checked automatically, but public trend claims need human review until a licensed deterministic writer exists."
+    },
+    {
+      "signalId": "rotavirus-wastewater-2026-bay-area",
+      "primarySourceId": "wastewaterscan",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "WastewaterSCAN dashboard/API can be checked automatically, but site/regional trend claims need human review until a licensed deterministic writer exists."
+    },
+    {
+      "signalId": "rsv-wastewater-2026",
+      "primarySourceId": "cdc-nwss",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC NWSS structured source family is a candidate for a future deterministic auto-refresh writer with anti-stale guards; no such writer is deployed yet, so changes stage for human review."
+    },
+    {
+      "signalId": "hmpv-wastewater-2026",
+      "primarySourceId": "wastewaterscan",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "WastewaterSCAN dashboard/API can be checked automatically, but public trend claims need human review until a licensed deterministic writer exists."
+    },
+    {
+      "signalId": "lassa-fever-2026",
+      "primarySourceId": "ncdc-lassa-fever",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "NCDC situation-report index is checkable, but PDF extraction and VHF counts stage for human review."
+    },
+    {
+      "signalId": "chikungunya-2026",
+      "primarySourceId": "paho-epi-alerts",
+      "refreshClassification": "manual-only",
+      "sourceCurrencyAction": "manual review required before changing structured facts, geography, summaries, sections, or source attribution",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "PAHO/WHO prose alerts and national bulletins require human review before structured count/geography changes."
+    },
+    {
+      "signalId": "candida-auris-wastewater-2026",
+      "primarySourceId": "cdc-nwss",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC/WastewaterSCAN source family can be checked automatically; wastewater-to-healthcare interpretation stays human-reviewed."
+    },
+    {
+      "signalId": "screwworm-onehealth-2026",
+      "primarySourceId": "usda-aphis-screwworm-status",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "USDA APHIS dashboard/state animal-health pages are checkable, but WAF/dashboard details stage for human review."
+    },
+    {
+      "signalId": "fifa-world-cup-2026-prep",
+      "primarySourceId": "who-mass-gatherings",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "Preparedness-only signal; automation may check official mass-gathering/travel source currency but cannot assert outbreak status."
+    },
+    {
+      "signalId": "pertussis-us-2026",
+      "primarySourceId": "cdc-pertussis-surveillance",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC/NNDSS structured data is a candidate for a future deterministic auto-refresh writer with provisional-data labeling; no such writer is deployed yet, so changes stage for human review."
+    },
+    {
+      "signalId": "yellow-fever-colombia-2026",
+      "primarySourceId": "paho-yellow-fever-2026",
+      "refreshClassification": "manual-only",
+      "sourceCurrencyAction": "manual review required before changing structured facts, geography, summaries, sections, or source attribution",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "PAHO/INS prose alerts require human review before structured country or department count changes."
+    },
+    {
+      "signalId": "cyclospora-us-2026",
+      "primarySourceId": "cdc-cyclosporiasis-surveillance-2026",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC/FDA structured current-season and CORE sources are a candidate for a future deterministic watch-level auto-refresh writer; no such writer is deployed yet, so changes stage for human review."
+    },
+    {
+      "signalId": "powassan-us-2026",
+      "primarySourceId": "cdc-powassan-current-year-2026",
+      "refreshClassification": "auto-checkable-human-reviewed",
+      "sourceCurrencyAction": "auto-check source currency and stage proposed changes for human review; do not write structured facts unattended",
+      "canAutoWriteStructuredFacts": false,
+      "humanReviewRequiredFor": [
+        "case counts",
+        "death counts",
+        "geography",
+        "summary/currentSituation",
+        "mapMarkers",
+        "sections",
+        "clinical/diagnostic/PPE/triage text"
+      ],
+      "notes": "CDC current-year data page is a candidate for a future deterministic watch-level auto-refresh writer; no such writer is deployed yet, so changes stage for human review."
+    }
+  ]
+}
